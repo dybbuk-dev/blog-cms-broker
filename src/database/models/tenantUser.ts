@@ -35,6 +35,13 @@ export default function (sequelize, DataTypes) {
             return value;
           },
         },
+        get() {
+          return SequelizeArrayUtils.toJSON(
+            this,
+            'roles',
+            [],
+          );
+        },
       },
       invitationToken: {
         type: DataTypes.STRING(255),

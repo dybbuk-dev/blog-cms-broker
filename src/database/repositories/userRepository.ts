@@ -960,11 +960,7 @@ export default class UserRepository {
     delete user.tenants;
 
     const status = tenantUser ? tenantUser.status : null;
-    const roles = tenantUser
-      ? typeof tenantUser.roles === 'string'
-        ? JSON.parse(tenantUser.roles)
-        : tenantUser.roles
-      : [];
+    const roles = tenantUser ? tenantUser.roles : [];
 
     // If the user is only invited,
     // tenant members can only see its email

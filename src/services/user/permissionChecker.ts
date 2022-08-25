@@ -119,10 +119,6 @@ export default class PermissionChecker {
       return [];
     }
 
-    if (typeof tenant.roles === 'string') {
-      return JSON.parse(tenant.roles);
-    }
-
     return tenant.roles;
   }
 

@@ -10,6 +10,22 @@ export default class SequelizeArrayUtils {
       : DataTypes.ARRAY(DataTypes.TEXT);
   }
 
+  static toJSON(obj, fieldName, defaultJSON = {}) {
+    if (
+      !obj ||
+      !obj.dataValues ||
+      !fieldName ||
+      !obj.dataValues[fieldName]
+    ) {
+      return defaultJSON;
+    }
+    const originalValue = obj.dataValues[fieldName];
+    if (getConfig().DATABASE_DIALECT === 'mysql') {
+      return JSON.parse(originalValue);
+    }
+    return originalValue;
+  }
+
   static filter(tableName, fieldName, filterValue) {
     const filterValueAsArray = Array.isArray(filterValue)
       ? filterValue

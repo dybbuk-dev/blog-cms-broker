@@ -22,8 +22,6 @@ export default class TenantUserRepository {
         transaction,
       });
 
-    tenantUser.roles = JSON.parse(tenantUser.roles);
-
     return tenantUser;
   }
 
