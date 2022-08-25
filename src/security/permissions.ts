@@ -92,7 +92,11 @@ class Permissions {
       },
       userAutocomplete: {
         id: 'userAutocomplete',
-        allowedRoles: [roles.admin, roles.custom],
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
         allowedPlans: [
           plans.free,
           plans.growth,
@@ -101,7 +105,7 @@ class Permissions {
       },
       auditLogRead: {
         id: 'auditLogRead',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.manager],
         allowedPlans: [
           plans.free,
           plans.growth,
@@ -110,7 +114,11 @@ class Permissions {
       },
       muiEdit: {
         id: 'muiEdit',
-        allowedRoles: [roles.admin, roles.custom],
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
         allowedPlans: [
           plans.free,
           plans.growth,
@@ -119,7 +127,7 @@ class Permissions {
       },
       settingsEdit: {
         id: 'settingsEdit',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.manager],
         allowedPlans: [
           plans.free,
           plans.growth,
@@ -128,64 +136,6 @@ class Permissions {
         allowedStorage: [
           storage.settingsBackgroundImages,
           storage.settingsLogos,
-        ],
-      },
-
-      noteImport: {
-        id: 'noteImport',
-        allowedRoles: [roles.admin],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      noteCreate: {
-        id: 'noteCreate',
-        allowedRoles: [roles.admin],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-        allowedStorage: [],
-      },
-      noteEdit: {
-        id: 'noteEdit',
-        allowedRoles: [roles.admin],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-        allowedStorage: [],
-      },
-      noteDestroy: {
-        id: 'noteDestroy',
-        allowedRoles: [roles.admin],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-        allowedStorage: [],
-      },
-      noteRead: {
-        id: 'noteRead',
-        allowedRoles: [roles.admin, roles.custom],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      noteAutocomplete: {
-        id: 'noteAutocomplete',
-        allowedRoles: [roles.admin, roles.custom],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
         ],
       },
 

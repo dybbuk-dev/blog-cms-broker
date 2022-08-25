@@ -225,6 +225,10 @@ const en = {
       label: 'Admin',
       description: 'Full access to all resources',
     },
+    manager: {
+      label: 'Manager',
+      description: 'Manager role access',
+    },
     custom: {
       label: 'Custom Role',
       description: 'Custom role access',

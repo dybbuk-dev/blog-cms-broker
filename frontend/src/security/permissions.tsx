@@ -92,7 +92,11 @@ class Permissions {
       },
       userAutocomplete: {
         id: 'userAutocomplete',
-        allowedRoles: [roles.admin, roles.custom],
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
         allowedPlans: [
           plans.free,
           plans.growth,
@@ -101,7 +105,7 @@ class Permissions {
       },
       auditLogRead: {
         id: 'auditLogRead',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.manager],
         allowedPlans: [
           plans.free,
           plans.growth,
@@ -110,7 +114,7 @@ class Permissions {
       },
       settingsEdit: {
         id: 'settingsEdit',
-        allowedRoles: [roles.admin],
+        allowedRoles: [roles.admin, roles.manager],
         allowedPlans: [
           plans.free,
           plans.growth,
