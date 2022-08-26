@@ -6,6 +6,7 @@ import plan from 'src/modules/plan/planReducers';
 import user from 'src/modules/user/userReducers';
 import auditLog from 'src/modules/auditLog/auditLogReducers';
 import settings from 'src/modules/settings/settingsReducers';
+import navigation from 'src/modules/navigation/navigationReducers';
 import product from 'src/modules/product/productReducers';
 import productCategory from 'src/modules/productCategory/productCategoryReducers';
 import { combineReducers } from 'redux';
@@ -24,4 +25,5 @@ export default (history) =>
     settings,
     product,
     productCategory,
+    navigation,
   });
