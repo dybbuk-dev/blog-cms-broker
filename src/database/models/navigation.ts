@@ -37,7 +37,6 @@ export default function (sequelize) {
         type: DataTypes.STRING(15),
         allowNull: false,
         validate: {
-          notEmpty: true,
           len: [0, 15],
         },
       },
@@ -69,7 +68,6 @@ export default function (sequelize) {
         type: DataTypes.CHAR(39),
         allowNull: false,
         validate: {
-          notEmpty: true,
           len: [0, 39],
         },
       },

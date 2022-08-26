@@ -40,7 +40,7 @@ function NavigationViewItem(props) {
             underline="hover"
             size="large"
           >
-            {record.name}
+            {record.title}
           </MDButton>
         </MDBox>
       );
@@ -53,7 +53,7 @@ function NavigationViewItem(props) {
           fontWeight="regular"
           mr={1}
         >
-          {record.name}
+          {record.title}
         </MDTypography>
       </MDBox>
     );

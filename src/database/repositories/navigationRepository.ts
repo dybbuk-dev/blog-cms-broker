@@ -30,6 +30,9 @@ class NavigationRepository {
       {
         ...lodash.pick(data, this.ALL_FIELDS),
         parent_id: data.parent_id || null,
+        target: data.target ?? '',
+        type: data.type ?? 0,
+        ip: '',
       },
       {
         transaction,
@@ -69,6 +72,9 @@ class NavigationRepository {
       {
         ...lodash.pick(data, this.ALL_FIELDS),
         parent_id: data.parent_id || null,
+        target: data.target ?? '',
+        type: data.type ?? 0,
+        ip: '',
       },
       {
         transaction,

@@ -123,6 +123,16 @@ function NavigationListTable(props) {
                 {' '}
               </DataTableHeadCell>
               <DataTableHeadCell
+                onClick={() => doChangeSort('id')}
+                sorted={
+                  sorter.field === 'id'
+                    ? sorter.order
+                    : 'none'
+                }
+              >
+                {i18n('entities.navigation.fields.id')}
+              </DataTableHeadCell>
+              <DataTableHeadCell
                 onClick={() => doChangeSort('name')}
                 sorted={
                   sorter.field === 'name'
@@ -131,6 +141,16 @@ function NavigationListTable(props) {
                 }
               >
                 {i18n('entities.navigation.fields.name')}
+              </DataTableHeadCell>
+              <DataTableHeadCell
+                onClick={() => doChangeSort('link')}
+                sorted={
+                  sorter.field === 'link'
+                    ? sorter.order
+                    : 'none'
+                }
+              >
+                {i18n('entities.navigation.fields.link')}
               </DataTableHeadCell>
             </TableRow>
           </MDBox>
@@ -217,7 +237,13 @@ function NavigationListTable(props) {
                     </MDBox>
                   </DataTableBodyCell>
                   <DataTableBodyCell>
+                    {row.id}
+                  </DataTableBodyCell>
+                  <DataTableBodyCell>
                     {row.name}
+                  </DataTableBodyCell>
+                  <DataTableBodyCell>
+                    {row.link}
                   </DataTableBodyCell>
                 </TableRow>
               ))}
