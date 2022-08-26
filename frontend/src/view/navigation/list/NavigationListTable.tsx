@@ -121,9 +121,6 @@ function NavigationListTable(props) {
                   />
                 )}
               </DataTableHeadCell>
-              <DataTableHeadCell sorted={false} width="0">
-                {' '}
-              </DataTableHeadCell>
               <DataTableHeadCell
                 onClick={() => doChangeSort('id')}
                 sorted={
@@ -131,6 +128,7 @@ function NavigationListTable(props) {
                     ? sorter.order
                     : 'none'
                 }
+                align="right"
               >
                 {i18n('entities.navigation.fields.id')}
               </DataTableHeadCell>
@@ -159,8 +157,14 @@ function NavigationListTable(props) {
                   'entities.navigation.fields.activated',
                 )}
               </DataTableHeadCell>
-              <DataTableHeadCell sorted={false}>
+              <DataTableHeadCell
+                sorted={false}
+                align="right"
+              >
                 {i18n('entities.navigation.fields.sort')}
+              </DataTableHeadCell>
+              <DataTableHeadCell sorted={false} width="0">
+                {' '}
               </DataTableHeadCell>
             </TableRow>
           </MDBox>
@@ -201,52 +205,7 @@ function NavigationListTable(props) {
                       size="small"
                     />
                   </DataTableBodyCell>
-                  <DataTableBodyCell>
-                    <MDBox
-                      display="flex"
-                      justifyContent="flex-end"
-                    >
-                      <Tooltip title={i18n('common.view')}>
-                        <IconButton
-                          component={Link}
-                          color={sidenavColor}
-                          to={`/navigation/${row.id}`}
-                        >
-                          <SearchIcon />
-                        </IconButton>
-                      </Tooltip>
-                      {hasPermissionToEdit && (
-                        <Tooltip
-                          title={i18n('common.edit')}
-                        >
-                          <IconButton
-                            color={sidenavColor}
-                            component={Link}
-                            to={`/navigation/${row.id}/edit`}
-                          >
-                            <EditIcon />
-                          </IconButton>
-                        </Tooltip>
-                      )}
-                      {hasPermissionToDestroy && (
-                        <Tooltip
-                          title={i18n('common.destroy')}
-                        >
-                          <IconButton
-                            color={sidenavColor}
-                            onClick={() =>
-                              doOpenDestroyConfirmModal(
-                                row.id,
-                              )
-                            }
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </Tooltip>
-                      )}
-                    </MDBox>
-                  </DataTableBodyCell>
-                  <DataTableBodyCell>
+                  <DataTableBodyCell align="right">
                     {row.id}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
@@ -295,8 +254,53 @@ function NavigationListTable(props) {
                       />
                     ))}
                   </DataTableBodyCell>
-                  <DataTableBodyCell>
+                  <DataTableBodyCell align="right">
                     {row.sort}
+                  </DataTableBodyCell>
+                  <DataTableBodyCell>
+                    <MDBox
+                      display="flex"
+                      justifyContent="flex-end"
+                    >
+                      <Tooltip title={i18n('common.view')}>
+                        <IconButton
+                          component={Link}
+                          color={sidenavColor}
+                          to={`/navigation/${row.id}`}
+                        >
+                          <SearchIcon />
+                        </IconButton>
+                      </Tooltip>
+                      {hasPermissionToEdit && (
+                        <Tooltip
+                          title={i18n('common.edit')}
+                        >
+                          <IconButton
+                            color={sidenavColor}
+                            component={Link}
+                            to={`/navigation/${row.id}/edit`}
+                          >
+                            <EditIcon />
+                          </IconButton>
+                        </Tooltip>
+                      )}
+                      {hasPermissionToDestroy && (
+                        <Tooltip
+                          title={i18n('common.destroy')}
+                        >
+                          <IconButton
+                            color={sidenavColor}
+                            onClick={() =>
+                              doOpenDestroyConfirmModal(
+                                row.id,
+                              )
+                            }
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        </Tooltip>
+                      )}
+                    </MDBox>
                   </DataTableBodyCell>
                 </TableRow>
               ))}

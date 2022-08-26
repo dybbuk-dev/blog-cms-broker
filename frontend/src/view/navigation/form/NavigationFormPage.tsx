@@ -59,16 +59,18 @@ function NavigationFormPage(props) {
           {initLoading && <Spinner />}
 
           {dispatched && !initLoading && (
-            <NavigationForm
-              saveLoading={saveLoading}
-              initLoading={initLoading}
-              record={record}
-              isEditing={isEditing}
-              onSubmit={doSubmit}
-              onCancel={() =>
-                getHistory().push('/navigation')
-              }
-            />
+            <MDBox p={3}>
+              <NavigationForm
+                saveLoading={saveLoading}
+                initLoading={initLoading}
+                record={record}
+                isEditing={isEditing}
+                onSubmit={doSubmit}
+                onCancel={() =>
+                  getHistory().push('/navigation')
+                }
+              />
+            </MDBox>
           )}
         </MDBox>
       </Card>

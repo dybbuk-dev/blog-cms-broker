@@ -114,9 +114,6 @@ function UserTable() {
                   />
                 )}
               </DataTableHeadCell>
-              <DataTableHeadCell sorted={false} width="0">
-                {' '}
-              </DataTableHeadCell>
               <DataTableHeadCell sorted={false}>
                 {i18n('user.fields.avatars')}
               </DataTableHeadCell>
@@ -145,6 +142,9 @@ function UserTable() {
               </DataTableHeadCell>
               <DataTableHeadCell sorted={false}>
                 {i18n('user.fields.status')}
+              </DataTableHeadCell>
+              <DataTableHeadCell sorted={false} width="0">
+                {' '}
               </DataTableHeadCell>
             </TableRow>
           </MDBox>
@@ -184,6 +184,36 @@ function UserTable() {
                       }
                       size="small"
                     />
+                  </DataTableBodyCell>
+                  <DataTableBodyCell>
+                    <Avatar
+                      src={
+                        row.avatars && row.avatars.length
+                          ? row.avatars[0].downloadUrl
+                          : undefined
+                      }
+                      alt={row.email}
+                    />
+                  </DataTableBodyCell>
+                  <DataTableBodyCell>
+                    {row.email}
+                  </DataTableBodyCell>
+                  <DataTableBodyCell>
+                    {row.fullName}
+                  </DataTableBodyCell>
+                  <DataTableBodyCell>
+                    {row.roles.map((roleId) => (
+                      <MDBadgeDot
+                        key={roleId}
+                        badgeContent={Roles.labelOf(roleId)}
+                        color={sidenavColor}
+                        variant="contained"
+                        container
+                      />
+                    ))}
+                  </DataTableBodyCell>
+                  <DataTableBodyCell>
+                    <UserStatusView value={row.status} />
                   </DataTableBodyCell>
                   <DataTableBodyCell>
                     <MDBox
@@ -227,36 +257,6 @@ function UserTable() {
                         </Tooltip>
                       )}
                     </MDBox>
-                  </DataTableBodyCell>
-                  <DataTableBodyCell>
-                    <Avatar
-                      src={
-                        row.avatars && row.avatars.length
-                          ? row.avatars[0].downloadUrl
-                          : undefined
-                      }
-                      alt={row.email}
-                    />
-                  </DataTableBodyCell>
-                  <DataTableBodyCell>
-                    {row.email}
-                  </DataTableBodyCell>
-                  <DataTableBodyCell>
-                    {row.fullName}
-                  </DataTableBodyCell>
-                  <DataTableBodyCell>
-                    {row.roles.map((roleId) => (
-                      <MDBadgeDot
-                        key={roleId}
-                        badgeContent={Roles.labelOf(roleId)}
-                        color={sidenavColor}
-                        variant="contained"
-                        container
-                      />
-                    ))}
-                  </DataTableBodyCell>
-                  <DataTableBodyCell>
-                    <UserStatusView value={row.status} />
                   </DataTableBodyCell>
                 </TableRow>
               ))}

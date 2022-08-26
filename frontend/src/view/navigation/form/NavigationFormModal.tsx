@@ -38,7 +38,7 @@ function NavigationFormModal(props) {
     <Dialog
       open={true}
       onClose={doClose}
-      maxWidth="md"
+      maxWidth="lg"
       fullWidth={true}
     >
       <DialogTitle>
@@ -46,7 +46,7 @@ function NavigationFormModal(props) {
           display="flex"
           justifyContent="space-between"
         >
-          <MDTypography>
+          <MDTypography fontWeight="bold">
             {i18n('entities.navigation.new.title')}
           </MDTypography>
           <IconButton
@@ -59,12 +59,14 @@ function NavigationFormModal(props) {
         </MDBox>
       </DialogTitle>
       <DialogContent>
-        <NavigationForm
-          saveLoading={saveLoading}
-          onSubmit={doSubmit}
-          onCancel={doClose}
-          modal
-        />
+        <MDBox p={3}>
+          <NavigationForm
+            saveLoading={saveLoading}
+            onSubmit={doSubmit}
+            onCancel={doClose}
+            modal
+          />
+        </MDBox>
       </DialogContent>
     </Dialog>,
     (document as any).getElementById('modal-root'),

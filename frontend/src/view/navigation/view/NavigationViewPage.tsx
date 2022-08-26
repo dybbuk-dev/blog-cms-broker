@@ -35,10 +35,12 @@ function NavigationPage() {
             </MDTypography>
             <NavigationViewToolbar match={match} />
           </MDBox>
-          <NavigationView
-            loading={loading}
-            record={record}
-          />
+          <MDBox p={3}>
+            <NavigationView
+              loading={loading}
+              record={record}
+            />
+          </MDBox>
         </MDBox>
       </Card>
     </>

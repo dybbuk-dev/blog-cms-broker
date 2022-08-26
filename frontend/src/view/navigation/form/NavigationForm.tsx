@@ -117,7 +117,7 @@ function NavigationForm(props) {
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <Grid spacing={2} container>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item md={6} xs={12}>
               <NavigationAutocompleteFormItem
                 name="parent"
                 label={i18n(
@@ -129,7 +129,8 @@ function NavigationForm(props) {
                 fullWidth
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item md={6} xs={12}></Grid>
+            <Grid item md={6} xs={12}>
               <InputFormItem
                 name="name"
                 label={i18n(
@@ -140,7 +141,7 @@ function NavigationForm(props) {
                 autoFocus
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item md={6} xs={12}>
               <InputFormItem
                 name="link"
                 label={i18n(
@@ -150,7 +151,7 @@ function NavigationForm(props) {
                 required={true}
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item md={6} xs={12}>
               <InputFormItem
                 name="title"
                 label={i18n(
@@ -160,7 +161,7 @@ function NavigationForm(props) {
                 required={true}
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item md={6} xs={12}>
               <SelectFormItem
                 name="target"
                 label={i18n(
@@ -177,31 +178,7 @@ function NavigationForm(props) {
                 variant="standard"
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <CheckboxFormItem
-                name="activated"
-                label={i18n(
-                  'entities.navigation.fields.activated',
-                )}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <CheckboxFormItem
-                name="show_user_logged_in"
-                label={i18n(
-                  'entities.navigation.fields.show_user_logged_in',
-                )}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
-              <CheckboxFormItem
-                name="show_in_navigation"
-                label={i18n(
-                  'entities.navigation.fields.show_in_navigation',
-                )}
-              />
-            </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item md={6} xs={12}>
               <InputNumberFormItem
                 name="type"
                 label={i18n(
@@ -210,13 +187,37 @@ function NavigationForm(props) {
                 variant="standard"
               />
             </Grid>
-            <Grid item lg={7} md={8} sm={12} xs={12}>
+            <Grid item md={6} xs={12}>
               <InputNumberFormItem
                 name="sort"
                 label={i18n(
                   'entities.navigation.fields.sort',
                 )}
                 variant="standard"
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <CheckboxFormItem
+                name="activated"
+                label={i18n(
+                  'entities.navigation.fields.activated',
+                )}
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <CheckboxFormItem
+                name="show_user_logged_in"
+                label={i18n(
+                  'entities.navigation.fields.show_user_logged_in',
+                )}
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <CheckboxFormItem
+                name="show_in_navigation"
+                label={i18n(
+                  'entities.navigation.fields.show_in_navigation',
+                )}
               />
             </Grid>
           </Grid>

@@ -282,7 +282,7 @@ class NavigationRepository {
         offset: offset ? Number(offset) : undefined,
         order: orderBy
           ? [orderBy.split('_')]
-          : [['created', 'DESC']],
+          : [['id', 'DESC']],
         transaction:
           SequelizeRepository.getTransaction(options),
       });

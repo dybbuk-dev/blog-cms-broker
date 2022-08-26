@@ -11,13 +11,13 @@ function NavigationView(props) {
 
     return (
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid item md={6} xs={12}>
           <TextViewItem
             label={i18n('entities.navigation.fields.id')}
             value={record.id}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item md={6} xs={12}>
           <NavigationViewItem
             label={i18n(
               'entities.navigation.fields.parent',
@@ -25,25 +25,25 @@ function NavigationView(props) {
             value={record.parent}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item md={6} xs={12}>
           <TextViewItem
             label={i18n('entities.navigation.fields.name')}
             value={record.name}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item md={6} xs={12}>
           <TextViewItem
             label={i18n('entities.navigation.fields.link')}
             value={record.link}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item md={6} xs={12}>
           <TextViewItem
             label={i18n('entities.navigation.fields.title')}
             value={record.title}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item md={6} xs={12}>
           <TextViewItem
             label={i18n(
               'entities.navigation.fields.target',
@@ -51,15 +51,19 @@ function NavigationView(props) {
             value={record.target}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item md={6} xs={12}>
           <TextViewItem
-            label={i18n(
-              'entities.navigation.fields.target',
-            )}
-            value={record.target}
+            label={i18n('entities.navigation.fields.type')}
+            value={record.type}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item md={6} xs={12}>
+          <TextViewItem
+            label={i18n('entities.navigation.fields.sort')}
+            value={record.sort}
+          />
+        </Grid>
+        <Grid item md={6} xs={12}>
           <CheckboxViewItem
             label={i18n(
               'entities.navigation.fields.activated',
@@ -67,7 +71,7 @@ function NavigationView(props) {
             checked={record.activated}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item md={6} xs={12}>
           <CheckboxViewItem
             label={i18n(
               'entities.navigation.fields.show_user_logged_in',
@@ -75,18 +79,12 @@ function NavigationView(props) {
             checked={record.show_user_logged_in}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item md={6} xs={12}>
           <CheckboxViewItem
             label={i18n(
               'entities.navigation.fields.show_in_navigation',
             )}
             checked={record.show_in_navigation}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextViewItem
-            label={i18n('entities.navigation.fields.type')}
-            value={record.type}
           />
         </Grid>
       </Grid>
