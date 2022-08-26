@@ -20,9 +20,9 @@ function NavigationView(props) {
         <Grid item xs={12}>
           <NavigationViewItem
             label={i18n(
-              'entities.navigation.fields.parent_id',
+              'entities.navigation.fields.parent',
             )}
-            value={record.parent_id}
+            value={record.parent}
           />
         </Grid>
         <Grid item xs={12}>

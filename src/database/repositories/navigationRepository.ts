@@ -19,7 +19,7 @@ class NavigationRepository {
     'show_user_logged_in',
     'show_in_navigation',
     'type',
-    'parent_id',
+    'parent',
   ];
 
   static async create(data, options: IRepositoryOptions) {
@@ -29,7 +29,7 @@ class NavigationRepository {
     const record = await options.database.navigation.create(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
-        parent_id: data.parent_id || null,
+        parent_id: data.parent || null,
         target: data.target ?? '',
         type: data.type ?? 0,
         ip: '',
@@ -71,7 +71,7 @@ class NavigationRepository {
     record = await record.update(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
-        parent_id: data.parent_id || null,
+        parent_id: data.parent || null,
         target: data.target ?? '',
         type: data.type ?? 0,
         ip: '',
@@ -232,9 +232,9 @@ class NavigationRepository {
         }
       }
 
-      if (filter.parent_id) {
+      if (filter.parent) {
         whereAnd.push({
-          ['parent_id']: filter.parent_id,
+          ['parent_id']: filter.parent,
         });
       }
 

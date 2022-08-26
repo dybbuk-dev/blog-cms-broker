@@ -99,7 +99,7 @@ const en = {
         show_user_logged_in: 'Show when user is logged in',
         show_in_navigation: 'Show in the navigation',
         type: 'Type',
-        parent_id: 'Parent Navigation',
+        parent: 'Parent Navigation',
       },
       enumerators: {
         target: {

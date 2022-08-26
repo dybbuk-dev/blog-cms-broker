@@ -21,8 +21,8 @@ import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 
 const schema = yup.object().shape({
-  parent_id: yupFormSchemas.relationToOne(
-    i18n('entities.navigation.fields.parent_id'),
+  parent: yupFormSchemas.relationToOne(
+    i18n('entities.navigation.fields.parent'),
     {},
   ),
   name: yupFormSchemas.string(
@@ -90,7 +90,7 @@ function NavigationForm(props) {
       show_user_logged_in: record.show_user_logged_in,
       show_in_navigation: record.show_in_navigation,
       type: record.type ?? 0,
-      parent_id: record.parent_id,
+      parent: record.parent,
     };
   });
 
@@ -119,9 +119,9 @@ function NavigationForm(props) {
           <Grid spacing={2} container>
             <Grid item lg={7} md={8} sm={12} xs={12}>
               <NavigationAutocompleteFormItem
-                name="parent_id"
+                name="parent"
                 label={i18n(
-                  'entities.navigation.fields.parent_id',
+                  'entities.navigation.fields.parent',
                 )}
                 required={false}
                 showCreate={true}

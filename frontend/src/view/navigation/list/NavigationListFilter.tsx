@@ -33,8 +33,8 @@ const schema = yup.object().shape({
   idRange: yupFilterSchemas.integerRange(
     i18n('entities.navigation.fields.idRange'),
   ),
-  parent_id: yupFilterSchemas.relationToOne(
-    i18n('entities.navigation.fields.parent_id'),
+  parent: yupFilterSchemas.relationToOne(
+    i18n('entities.navigation.fields.parent'),
   ),
   name: yupFilterSchemas.string(
     i18n('entities.navigation.fields.name'),
@@ -61,7 +61,7 @@ const emptyValues = {
   name: null,
   title: null,
   link: null,
-  parent_id: null,
+  parent: null,
   activated: null,
   show_user_logged_in: null,
   show_in_navigation: null,
@@ -72,8 +72,8 @@ const previewRenders = {
     label: i18n('entities.navigation.fields.idRange'),
     render: filterRenders.decimalRange(),
   },
-  parent_id: {
-    label: i18n('entities.navigation.fields.parent_id'),
+  parent: {
+    label: i18n('entities.navigation.fields.parent'),
     render: filterRenders.relationToOne(),
   },
   name: {
@@ -187,9 +187,9 @@ function NavigationListFilter(props) {
                 </Grid>
                 <Grid item lg={6} xs={12}>
                   <NavigationAutocompleteFormItem
-                    name="parent_id"
+                    name="parent"
                     label={i18n(
-                      'entities.navigation.fields.parent_id',
+                      'entities.navigation.fields.parent',
                     )}
                     variant="standard"
                     fullWidth

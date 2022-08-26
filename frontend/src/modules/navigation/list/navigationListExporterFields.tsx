@@ -8,8 +8,8 @@ export default [
     render: exporterRenders.decimal(),
   },
   // {
-  //   name: 'parent_id',
-  //   label: i18n('entities.navigation.fields.parent_id'),
+  //   name: 'parent',
+  //   label: i18n('entities.navigation.fields.parent'),
   //   render: exporterRenders.relationToOne(),
   // },
   {

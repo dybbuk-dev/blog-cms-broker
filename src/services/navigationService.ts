@@ -17,9 +17,9 @@ export default class NavigationService {
       );
 
     try {
-      data.parent_id =
+      data.parent =
         await NavigationRepository.filterIdInTenant(
-          data.parent_id,
+          data.parent,
           { ...this.options, transaction },
         );
 
@@ -58,9 +58,9 @@ export default class NavigationService {
       );
 
     try {
-      data.parent_id =
+      data.parent =
         await NavigationRepository.filterIdInTenant(
-          data.parent_id,
+          data.parent,
           { ...this.options, transaction },
         );
 
