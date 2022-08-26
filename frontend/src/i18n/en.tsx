@@ -54,6 +54,9 @@ const en = {
   },
 
   collapses: {
+    routes: {
+      menu: 'Routes',
+    },
     marketplace: {
       menu: 'Marketplace',
     },

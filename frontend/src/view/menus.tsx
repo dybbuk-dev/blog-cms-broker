@@ -23,6 +23,19 @@ const menus = [
   },
 
   {
+    name: i18n('collapses.routes.menu'),
+    key: 'routes',
+    icon: <Icon fontSize="medium">signpost</Icon>,
+    collapse: [
+      {
+        path: '/navigation',
+        permissionRequired: permissions.navigationRead,
+        name: i18n('entities.navigation.menu'),
+      },
+    ],
+  },
+
+  {
     name: i18n('collapses.marketplace.menu'),
     key: 'marketplace',
     icon: <Icon fontSize="medium">store_front</Icon>,

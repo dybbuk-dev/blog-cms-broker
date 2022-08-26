@@ -172,6 +172,82 @@ const privateRoutes = [
     permissionRequired: permissions.settingsEdit,
   },
 
+  /**
+   * ! Routes Collapse
+   */
+  {
+    path: '/routes',
+    collapseName: 'routes',
+    i18n: 'collapses.routes.menu',
+    parent: '/',
+    redirect: '/navigation',
+    permissionRequired: null,
+    virtual: true,
+  },
+
+  /**
+   * !! Navigation routes start
+   */
+  {
+    path: '/navigation',
+    collapseName: 'routes',
+    i18n: 'entities.navigation.menu',
+    parent: '/routes',
+    loader: () =>
+      import('src/view/navigation/list/NavigationListPage'),
+    permissionRequired: permissions.navigationRead,
+    exact: true,
+  },
+
+  {
+    path: '/navigation/new',
+    collapseName: 'routes',
+    i18n: 'entities.navigation.new.title',
+    parent: '/navigation',
+    loader: () =>
+      import('src/view/navigation/form/NavigationFormPage'),
+    permissionRequired: permissions.navigationCreate,
+    exact: true,
+  },
+
+  {
+    path: '/navigation/importer',
+    collapseName: 'routes',
+    i18n: 'entities.navigation.importer.title',
+    parent: '/navigation',
+    loader: () =>
+      import(
+        'src/view/navigation/importer/NavigationImporterPage'
+      ),
+    permissionRequired: permissions.navigationImport,
+    exact: true,
+  },
+
+  {
+    path: '/navigation/:id/edit',
+    collapseName: 'routes',
+    i18n: 'entities.navigation.edit.title',
+    parent: '/navigation',
+    loader: () =>
+      import('src/view/navigation/form/NavigationFormPage'),
+    permissionRequired: permissions.navigationEdit,
+    exact: true,
+  },
+
+  {
+    path: '/navigation/:id',
+    collapseName: 'routes',
+    i18n: 'entities.navigation.view.title',
+    parent: '/navigation',
+    loader: () =>
+      import('src/view/navigation/view/NavigationViewPage'),
+    permissionRequired: permissions.navigationRead,
+    exact: true,
+  },
+  /**
+   * !! Navigation routes end
+   */
+
   {
     path: '/marketplace',
     collapseName: 'marketplace',
