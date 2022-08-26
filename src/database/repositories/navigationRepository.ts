@@ -22,6 +22,26 @@ class NavigationRepository {
     'parent',
   ];
 
+  static TYPES = [
+    'NONE',
+    'FOREX_SCHOOL',
+    'FOREX_STRATEGY',
+    'DOWNLOADS',
+    'NEWS',
+    'OFFERS',
+    'MOST_READ',
+  ];
+
+  static getTypeIndex(type) {
+    if (!type) {
+      return 0;
+    }
+    const index = this.TYPES.indexOf(
+      type.toString().toUpperCase(),
+    );
+    return index < 0 ? 0 : index;
+  }
+
   static async create(data, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
@@ -31,7 +51,7 @@ class NavigationRepository {
         ...lodash.pick(data, this.ALL_FIELDS),
         parent_id: data.parent || null,
         target: data.target ?? '',
-        type: data.type ?? 0,
+        type: this.getTypeIndex(data.type),
         ip: '',
       },
       {
@@ -73,7 +93,7 @@ class NavigationRepository {
         ...lodash.pick(data, this.ALL_FIELDS),
         parent_id: data.parent || null,
         target: data.target ?? '',
-        type: data.type ?? 0,
+        type: this.getTypeIndex(data.type),
         ip: '',
       },
       {
@@ -252,9 +272,9 @@ class NavigationRepository {
         },
       );
 
-      if (filter.type !== null) {
+      if (filter.type) {
         whereAnd.push({
-          type: filter.type,
+          type: this.getTypeIndex(filter.type),
         });
       }
 

@@ -10,13 +10,26 @@ export default class SequelizeArrayUtils {
       : DataTypes.ARRAY(DataTypes.TEXT);
   }
 
-  static toJSON(obj, fieldName, defaultJSON = {}) {
-    if (
+  static invalid(obj, fieldName) {
+    return (
       !obj ||
       !obj.dataValues ||
       !fieldName ||
       !obj.dataValues[fieldName]
-    ) {
+    );
+  }
+
+  static indexToValue(obj, fieldName, values: any[] = []) {
+    if (this.invalid(obj, fieldName) || !values) {
+      return null;
+    }
+    return (
+      values[Number(obj.dataValues[fieldName])] ?? null
+    );
+  }
+
+  static toJSON(obj, fieldName, defaultJSON = {}) {
+    if (this.invalid(obj, fieldName)) {
       return defaultJSON;
     }
     const originalValue = obj.dataValues[fieldName];

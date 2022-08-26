@@ -1,4 +1,6 @@
 import { DataTypes } from 'sequelize';
+import NavigationRepository from '../repositories/navigationRepository';
+import SequelizeArrayUtils from '../utils/sequelizeArrayUtils';
 
 export default function (sequelize) {
   const navigation = sequelize.define(
@@ -63,6 +65,13 @@ export default function (sequelize) {
       type: {
         type: DataTypes.TINYINT.UNSIGNED,
         allowNull: false,
+        get() {
+          return SequelizeArrayUtils.indexToValue(
+            this,
+            'type',
+            NavigationRepository.TYPES,
+          );
+        },
       },
       ip: {
         type: DataTypes.CHAR(39),

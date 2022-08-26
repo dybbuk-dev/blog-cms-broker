@@ -54,7 +54,9 @@ function NavigationView(props) {
         <Grid item md={6} xs={12}>
           <TextViewItem
             label={i18n('entities.navigation.fields.type')}
-            value={record.type}
+            value={i18n(
+              `entities.navigation.enumerators.type.${record.type}`,
+            )}
           />
         </Grid>
         <Grid item md={6} xs={12}>

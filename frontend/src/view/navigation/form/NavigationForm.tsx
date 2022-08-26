@@ -90,7 +90,7 @@ function NavigationForm(props) {
       activated: record.activated,
       show_user_logged_in: record.show_user_logged_in,
       show_in_navigation: record.show_in_navigation,
-      type: record.type ?? 0,
+      type: record.type ?? 'NONE',
       parent: record.parent,
     };
   });
