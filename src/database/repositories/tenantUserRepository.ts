@@ -143,7 +143,7 @@ export default class TenantUserRepository {
       );
     }
 
-    let { roles: existingRoles } = tenantUser;
+    let { roles: existingRoles } = tenantUser.dataValues;
 
     let newRoles = [] as Array<string>;
 
