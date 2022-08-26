@@ -1,3 +1,5 @@
+import { i18n } from 'src/i18n';
+
 export function getUserNameOrEmailPrefix(user) {
   if (!user || !(user instanceof Object)) {
     return null;
@@ -18,3 +20,14 @@ export function getUserAvatar(user) {
 
   return user.avatars[0].downloadUrl;
 }
+
+export const filterBooleanOptions = [
+  {
+    value: true,
+    label: i18n('common.yes'),
+  },
+  {
+    value: false,
+    label: i18n('common.no'),
+  },
+];

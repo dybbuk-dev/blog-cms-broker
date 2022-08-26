@@ -52,9 +52,9 @@ export default [
   },
   {
     name: 'sort',
-    label: i18n('entities.navigation.fields.category'),
+    label: i18n('entities.navigation.fields.sort'),
     schema: schemas.integer(
-      i18n('entities.navigation.fields.category'),
+      i18n('entities.navigation.fields.sort'),
       {
         required: true,
         min: 0,
@@ -101,12 +101,12 @@ export default [
       },
     ),
   },
-  {
-    name: 'parent_id',
-    label: i18n('entities.navigation.fields.parent_id'),
-    schema: schemas.integer(
-      i18n('entities.navigation.fields.parent_id'),
-      {},
-    ),
-  },
+  // {
+  //   name: 'parent_id',
+  //   label: i18n('entities.navigation.fields.parent_id'),
+  //   schema: schemas.integer(
+  //     i18n('entities.navigation.fields.parent_id'),
+  //     {},
+  //   ),
+  // },
 ];

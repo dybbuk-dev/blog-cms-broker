@@ -24,21 +24,85 @@ import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import MDButton from 'src/mui/components/MDButton';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
+import NavigationAutocompleteFormItem from 'src/view/navigation/autocomplete/NavigationAutocompleteFormItem';
+import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
+import { filterBooleanOptions } from 'src/modules/utils';
 
 const schema = yup.object().shape({
+  idRange: yupFilterSchemas.integerRange(
+    i18n('entities.navigation.fields.idRange'),
+  ),
+  parent_id: yupFilterSchemas.relationToOne(
+    i18n('entities.navigation.fields.parent_id'),
+  ),
   name: yupFilterSchemas.string(
     i18n('entities.navigation.fields.name'),
+  ),
+  title: yupFilterSchemas.string(
+    i18n('entities.navigation.fields.title'),
+  ),
+  link: yupFilterSchemas.string(
+    i18n('entities.navigation.fields.link'),
+  ),
+  activated: yupFilterSchemas.boolean(
+    i18n('entities.navigation.fields.activated'),
+  ),
+  show_user_logged_in: yupFilterSchemas.boolean(
+    i18n('entities.navigation.fields.show_user_logged_in'),
+  ),
+  show_in_navigation: yupFilterSchemas.boolean(
+    i18n('entities.navigation.fields.show_in_navigation'),
   ),
 });
 
 const emptyValues = {
+  idRange: [],
   name: null,
+  title: null,
+  link: null,
+  parent_id: null,
+  activated: null,
+  show_user_logged_in: null,
+  show_in_navigation: null,
 };
 
 const previewRenders = {
+  idRange: {
+    label: i18n('entities.navigation.fields.idRange'),
+    render: filterRenders.decimalRange(),
+  },
+  parent_id: {
+    label: i18n('entities.navigation.fields.parent_id'),
+    render: filterRenders.relationToOne(),
+  },
   name: {
     label: i18n('entities.navigation.fields.name'),
     render: filterRenders.generic(),
+  },
+  title: {
+    label: i18n('entities.navigation.fields.title'),
+    render: filterRenders.generic(),
+  },
+  link: {
+    label: i18n('entities.navigation.fields.link'),
+    render: filterRenders.generic(),
+  },
+  activated: {
+    label: i18n('entities.navigation.fields.activated'),
+    render: filterRenders.boolean(),
+  },
+  show_user_logged_in: {
+    label: i18n(
+      'entities.navigation.fields.show_user_logged_in',
+    ),
+    render: filterRenders.boolean(),
+  },
+  show_in_navigation: {
+    label: i18n(
+      'entities.navigation.fields.show_in_navigation',
+    ),
+    render: filterRenders.boolean(),
   },
 };
 
@@ -113,11 +177,78 @@ function NavigationListFilter(props) {
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <Grid container spacing={2}>
                 <Grid item lg={6} xs={12}>
+                  <InputNumberRangeFormItem
+                    name="idRange"
+                    label={i18n(
+                      'entities.navigation.fields.idRange',
+                    )}
+                    variant="standard"
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <NavigationAutocompleteFormItem
+                    name="parent_id"
+                    label={i18n(
+                      'entities.navigation.fields.parent_id',
+                    )}
+                    variant="standard"
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
                   <InputFormItem
                     name="name"
                     label={i18n(
                       'entities.navigation.fields.name',
                     )}
+                    variant="standard"
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <InputFormItem
+                    name="title"
+                    label={i18n(
+                      'entities.navigation.fields.title',
+                    )}
+                    variant="standard"
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <InputFormItem
+                    name="link"
+                    label={i18n(
+                      'entities.navigation.fields.link',
+                    )}
+                    variant="standard"
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <SelectFormItem
+                    name="activated"
+                    label={i18n(
+                      'entities.navigation.fields.activated',
+                    )}
+                    options={filterBooleanOptions}
+                    variant="standard"
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <SelectFormItem
+                    name="show_user_logged_in"
+                    label={i18n(
+                      'entities.navigation.fields.show_user_logged_in',
+                    )}
+                    options={filterBooleanOptions}
+                    variant="standard"
+                  />
+                </Grid>
+                <Grid item lg={6} xs={12}>
+                  <SelectFormItem
+                    name="show_in_navigation"
+                    label={i18n(
+                      'entities.navigation.fields.show_in_navigation',
+                    )}
+                    options={filterBooleanOptions}
                     variant="standard"
                   />
                 </Grid>

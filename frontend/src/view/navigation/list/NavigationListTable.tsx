@@ -12,6 +12,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import MaterialLink from '@mui/material/Link';
 import { i18n } from 'src/i18n';
 import navigationSelectors from 'src/modules/navigation/navigationSelectors';
 import destroyActions from 'src/modules/navigation/destroy/navigationDestroyActions';
@@ -26,6 +27,7 @@ import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
 import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
+import MDBadgeDot from 'src/mui/components/MDBadgeDot';
 
 function NavigationListTable(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -152,6 +154,14 @@ function NavigationListTable(props) {
               >
                 {i18n('entities.navigation.fields.link')}
               </DataTableHeadCell>
+              <DataTableHeadCell sorted={false}>
+                {i18n(
+                  'entities.navigation.fields.activated',
+                )}
+              </DataTableHeadCell>
+              <DataTableHeadCell sorted={false}>
+                {i18n('entities.navigation.fields.sort')}
+              </DataTableHeadCell>
             </TableRow>
           </MDBox>
           <TableBody>
@@ -240,10 +250,53 @@ function NavigationListTable(props) {
                     {row.id}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
-                    {row.name}
+                    <MDTypography
+                      display="block"
+                      variant="button"
+                      width="200px"
+                      whiteSpace="break-spaces"
+                    >
+                      {row.name}
+                    </MDTypography>
                   </DataTableBodyCell>
                   <DataTableBodyCell>
-                    {row.link}
+                    <MaterialLink
+                      component={Link}
+                      to={row.link}
+                    >
+                      <MDTypography
+                        display="block"
+                        variant="button"
+                        width="200px"
+                        whiteSpace="break-spaces"
+                      >
+                        {row.name}
+                      </MDTypography>
+                    </MaterialLink>
+                  </DataTableBodyCell>
+                  <DataTableBodyCell>
+                    {[
+                      'activated',
+                      'show_user_logged_in',
+                      'show_in_navigation',
+                    ].map((field) => (
+                      <MDBadgeDot
+                        key={field}
+                        badgeContent={i18n(
+                          `entities.navigation.fields.${field}`,
+                        )}
+                        color={
+                          Boolean(row[field])
+                            ? 'info'
+                            : 'error'
+                        }
+                        variant="contained"
+                        container
+                      />
+                    ))}
+                  </DataTableBodyCell>
+                  <DataTableBodyCell>
+                    {row.sort}
                   </DataTableBodyCell>
                 </TableRow>
               ))}

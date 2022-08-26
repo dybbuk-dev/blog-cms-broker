@@ -204,9 +204,37 @@ class NavigationRepository {
     ];
 
     if (filter) {
-      if (filter.id) {
+      if (filter.idRange) {
+        const [start, end] = filter.idRange;
+
+        if (
+          start !== undefined &&
+          start !== null &&
+          start !== ''
+        ) {
+          whereAnd.push({
+            id: {
+              [Op.gte]: start,
+            },
+          });
+        }
+
+        if (
+          end !== undefined &&
+          end !== null &&
+          end !== ''
+        ) {
+          whereAnd.push({
+            id: {
+              [Op.lte]: end,
+            },
+          });
+        }
+      }
+
+      if (filter.parent_id) {
         whereAnd.push({
-          ['id']: filter.id,
+          ['parent_id']: filter.parent_id,
         });
       }
 
@@ -224,33 +252,24 @@ class NavigationRepository {
         },
       );
 
-      if (filter.createdRange) {
-        const [start, end] = filter.createdRange;
-
+      [
+        'activated',
+        'show_user_logged_in',
+        'show_in_navigation',
+      ].forEach((field) => {
         if (
-          start !== undefined &&
-          start !== null &&
-          start !== ''
+          filter[field] === true ||
+          filter[field] === 'true' ||
+          filter[field] === false ||
+          filter[field] === 'false'
         ) {
           whereAnd.push({
-            ['created']: {
-              [Op.gte]: start,
-            },
+            [field]:
+              filter[field] === true ||
+              filter[field] === 'true',
           });
         }
-
-        if (
-          end !== undefined &&
-          end !== null &&
-          end !== ''
-        ) {
-          whereAnd.push({
-            ['created']: {
-              [Op.lte]: end,
-            },
-          });
-        }
-      }
+      });
     }
 
     const where = { [Op.and]: whereAnd };
@@ -281,7 +300,11 @@ class NavigationRepository {
     limit,
     options: IRepositoryOptions,
   ) {
-    let whereAnd: Array<any> = [];
+    let whereAnd: Array<any> = [
+      {
+        ['parent_id']: null,
+      },
+    ];
 
     if (query) {
       whereAnd.push({

@@ -131,7 +131,7 @@ class Permissions {
        */
       navigationImport: {
         id: 'navigationImport',
-        allowedRoles: [roles.admin, roles.manager],
+        allowedRoles: [],
         allowedPlans: [
           plans.free,
           plans.growth,

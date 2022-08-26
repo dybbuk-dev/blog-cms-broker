@@ -89,6 +89,7 @@ const en = {
       },
       fields: {
         id: 'Id',
+        idRange: 'Id #',
         name: 'Surname',
         link: 'Link',
         title: 'Title',

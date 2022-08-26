@@ -5,50 +5,50 @@ export default [
   {
     name: 'id',
     label: i18n('entities.navigation.fields.id'),
+    render: exporterRenders.decimal(),
   },
+  // {
+  //   name: 'parent_id',
+  //   label: i18n('entities.navigation.fields.parent_id'),
+  //   render: exporterRenders.relationToOne(),
+  // },
   {
-    name: 'reference',
-    label: i18n('entities.navigation.fields.reference'),
+    name: 'name',
+    label: i18n('entities.navigation.fields.name'),
   },
   {
     name: 'title',
     label: i18n('entities.navigation.fields.title'),
   },
   {
-    name: 'description',
-    label: i18n('entities.navigation.fields.description'),
+    name: 'link',
+    label: i18n('entities.navigation.fields.link'),
   },
   {
-    name: 'category',
-    label: i18n('entities.navigation.fields.category'),
-    render: exporterRenders.relationToOne(),
+    name: 'target',
+    label: i18n('entities.navigation.fields.target'),
   },
   {
-    name: 'website',
-    label: i18n('entities.navigation.fields.website'),
+    name: 'sort',
+    label: i18n('entities.navigation.fields.sort'),
   },
   {
-    name: 'logo',
-    label: i18n('entities.navigation.fields.logo'),
-    render: exporterRenders.filesOrImages(),
+    name: 'activated',
+    label: i18n('entities.navigation.fields.activated'),
+    render: exporterRenders.boolean(),
   },
   {
-    name: 'rating',
-    label: i18n('entities.navigation.fields.rating'),
-    render: exporterRenders.decimal(),
+    name: 'show_user_logged_in',
+    label: i18n(
+      'entities.navigation.fields.show_user_logged_in',
+    ),
+    render: exporterRenders.boolean(),
   },
   {
-    name: 'popularity',
-    label: i18n('entities.navigation.fields.popularity'),
-  },
-  {
-    name: 'createdAt',
-    label: i18n('entities.navigation.fields.createdAt'),
-    render: exporterRenders.datetime(),
-  },
-  {
-    name: 'updatedAt',
-    label: i18n('entities.navigation.fields.updatedAt'),
-    render: exporterRenders.datetime(),
+    name: 'show_in_navigation',
+    label: i18n(
+      'entities.navigation.fields.show_in_navigation',
+    ),
+    render: exporterRenders.boolean(),
   },
 ];

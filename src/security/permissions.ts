@@ -140,11 +140,11 @@ class Permissions {
       },
 
       /**
-       * ! Navigation Permissions
+       * ? Navigation Permissions Start
        */
       navigationImport: {
         id: 'navigationImport',
-        allowedRoles: [roles.admin, roles.manager],
+        allowedRoles: [],
         allowedPlans: [
           plans.free,
           plans.growth,
@@ -204,6 +204,9 @@ class Permissions {
           plans.enterprise,
         ],
       },
+      /**
+       * ! Navigation Permissions End
+       */
 
       productImport: {
         id: 'productImport',
