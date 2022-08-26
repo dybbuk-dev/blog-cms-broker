@@ -330,7 +330,7 @@ class NavigationRepository {
 
     await AuditLogRepository.log(
       {
-        entityName: 'product',
+        entityName: 'navigation',
         entityId: record.id,
         action,
         values,
