@@ -19,31 +19,38 @@ function CustomViewItem(props) {
 
   return (
     <MDBox
-      pt={2}
+      pt={props.hiddenLabel ? 0 : 2}
       sx={{
         position: 'relative',
       }}
     >
-      <MDTypography
-        variant="caption"
-        color={darkMode ? 'text' : 'secondary'}
-        fontWeight="regular"
-        sx={{
-          lineHeight: 1,
-          position: 'absolute',
-          top: 0,
-        }}
-      >
-        {props.label}
-      </MDTypography>
+      {!props.hiddenLabel && (
+        <MDTypography
+          variant="caption"
+          color={darkMode ? 'text' : 'secondary'}
+          fontWeight="regular"
+          sx={{
+            lineHeight: 1,
+            position: 'absolute',
+            top: 0,
+          }}
+        >
+          {props.label}
+        </MDTypography>
+      )}
       {props.render(props.value)}
     </MDBox>
   );
 }
 
+CustomViewItem.defaultProps = {
+  hiddenLabel: false,
+};
+
 CustomViewItem.propTypes = {
   label: PropTypes.string,
   value: PropTypes.any,
+  hiddenLabel: PropTypes.bool,
   render: PropTypes.func,
 };
 

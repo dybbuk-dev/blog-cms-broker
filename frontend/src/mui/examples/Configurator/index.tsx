@@ -16,19 +16,15 @@ Coded by www.creative-tim.com
 import { useState, useEffect } from 'react';
 
 // react-github-btn
-import GitHubButton from 'react-github-btn';
 
 // @mui material components
 import Divider from '@mui/material/Divider';
 import Switch from '@mui/material/Switch';
 import IconButton from '@mui/material/IconButton';
-import Link from '@mui/material/Link';
 import Icon from '@mui/material/Icon';
 import { Theme } from '@mui/material/styles';
 
 // @mui icons
-import TwitterIcon from '@mui/icons-material/Twitter';
-import FacebookIcon from '@mui/icons-material/Facebook';
 
 // Material Dashboard 2 PRO React TS components
 import MDBox from 'src/mui/components/MDBox';
@@ -44,8 +40,6 @@ import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 
 import { useDispatch } from 'react-redux';
 import { i18n } from 'src/i18n';
-
-import Scrollbar from 'react-smooth-scrollbar-z';
 
 function Configurator(): JSX.Element {
   const dispatch = useDispatch();
@@ -119,8 +113,8 @@ function Configurator(): JSX.Element {
         whiteSidenav: true,
       }),
     );
-    dispatch(muiActions.doWhiteSidenav(true));
     dispatch(muiActions.doTransparentSidenav(false));
+    dispatch(muiActions.doWhiteSidenav(true));
   };
   const handleDarkSidenav = () => {
     dispatch(
@@ -129,8 +123,8 @@ function Configurator(): JSX.Element {
         transparentSidenav: false,
       }),
     );
-    dispatch(muiActions.doWhiteSidenav(false));
     dispatch(muiActions.doTransparentSidenav(false));
+    dispatch(muiActions.doWhiteSidenav(false));
   };
   const handleMiniSidenav = () => {
     window.innerWidth >= 1200 &&

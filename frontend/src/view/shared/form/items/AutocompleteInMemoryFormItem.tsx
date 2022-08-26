@@ -46,6 +46,7 @@ function AutocompleteInMemoryFormItem(props) {
     variant,
     fullWidth,
     renderOption,
+    renderInput,
   } = props;
 
   const originalValue = watch(name);
@@ -205,6 +206,23 @@ function AutocompleteInMemoryFormItem(props) {
     externalErrorMessage,
   );
 
+  const fnRenderInput = renderInput
+    ? renderInput
+    : (params) => (
+        <MDInput
+          {...params}
+          required={required}
+          margin={margin}
+          variant={variant}
+          size={size}
+          InputLabelProps={{
+            shrink: shrink,
+          }}
+          label={label}
+          autoFocus={autoFocus || undefined}
+        />
+      );
+
   useEffect(() => {
     if (props.onChange) {
       props.onChange(
@@ -233,20 +251,7 @@ function AutocompleteInMemoryFormItem(props) {
           }}
           getOptionLabel={(option) => option.label ?? ''}
           renderOption={renderOption}
-          renderInput={(params) => (
-            <MDInput
-              {...params}
-              required={required}
-              margin={margin}
-              variant={variant}
-              size={size}
-              InputLabelProps={{
-                shrink: shrink,
-              }}
-              label={label}
-              autoFocus={autoFocus || undefined}
-            />
-          )}
+          renderInput={fnRenderInput}
           loadingText={i18n('autocomplete.loading')}
           noOptionsText={i18n('autocomplete.noOptions')}
           onBlur={() => props.onBlur && props.onBlur(null)}
@@ -314,6 +319,7 @@ AutocompleteInMemoryFormItem.propTypes = {
   margin: PropTypes.string,
   fullWidth: PropTypes.bool,
   renderOption: PropTypes.func,
+  renderInput: PropTypes.func,
 };
 
 export default AutocompleteInMemoryFormItem;

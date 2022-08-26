@@ -1,12 +1,13 @@
+import PropTypes from 'prop-types';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
-import Color from 'color';
-import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
+import InputFormItem from 'src/view/shared/form/items/InputFormItem';
+import EnumColorBadgeViewItem from 'src/view/shared/view/EnumColorBadgeViewItem';
 
-function ColorScoreFormItem(props) {
+function EnumColorBadgeFormItem(props) {
   const { darkMode } = selectMuiSettings();
-  const { name, label, value, valueLabel, color } = props;
+  const { name, value, label } = props;
   return (
     <MDBox
       pt={2}
@@ -26,18 +27,7 @@ function ColorScoreFormItem(props) {
       >
         {label}
       </MDTypography>
-      <MDTypography
-        variant="button"
-        fontWeight="regular"
-        textTransform="capitalize"
-        color={Color(color).isDark() ? 'white' : 'black'}
-        backgroundColor={color ?? 'transparent'}
-        px={2}
-        py={0.5}
-        borderRadius={1}
-      >
-        {valueLabel ?? value}
-      </MDTypography>
+      <EnumColorBadgeViewItem {...props} label={null} />
       <MDBox display="none">
         <InputFormItem name={name} value={value} />
       </MDBox>
@@ -45,4 +35,13 @@ function ColorScoreFormItem(props) {
   );
 }
 
-export default ColorScoreFormItem;
+EnumColorBadgeFormItem.propsType = {
+  colors: PropTypes.array.isRequired,
+  enums: PropTypes.array.isRequired,
+  i18nPrefix: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+};
+
+export default EnumColorBadgeFormItem;

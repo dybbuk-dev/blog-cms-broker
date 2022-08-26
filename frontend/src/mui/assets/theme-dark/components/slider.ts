@@ -14,9 +14,9 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 PRO React TS Base Styles
-import colors from 'src/mui/assets/theme/base/colors';
-import borders from 'src/mui/assets/theme/base/borders';
-import boxShadows from 'src/mui/assets/theme/base/boxShadows';
+import colors from 'src/mui/assets/theme-dark/base/colors';
+import borders from 'src/mui/assets/theme-dark/base/borders';
+import boxShadows from 'src/mui/assets/theme-dark/base/boxShadows';
 
 // Material Dashboard 2 PRO React TS Helper Functions
 import pxToRem from 'src/mui/assets/theme/functions/pxToRem';
@@ -46,11 +46,10 @@ const slider: Types = {
     rail: {
       background: grey[200],
       borderRadius: borderRadius.sm,
-      opacity: 1,
+      opacity: 0.5,
     },
 
     track: {
-      background: info.main,
       position: 'relative',
       border: 'none',
       borderRadius: borderRadius.lg,
@@ -60,10 +59,8 @@ const slider: Types = {
     thumb: {
       width: pxToRem(14),
       height: pxToRem(14),
-      backgroundColor: white.main,
       zIndex: 10,
       boxShadow: sliderBoxShadow.thumb,
-      border: `${borderWidth[1]} solid ${info.main}`,
       transition: 'all 200ms linear',
 
       '&:hover': {

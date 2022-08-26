@@ -25,6 +25,7 @@ function TextAreaFormItem(props) {
     shrink,
     fullWidth,
     value,
+    rows,
   } = props;
 
   const {
@@ -74,7 +75,7 @@ function TextAreaFormItem(props) {
         }}
         disabled={disabled}
         multiline
-        rows={4}
+        rows={rows}
       />
       {errorMessage && (
         <MDBox mt={0.75}>
@@ -116,6 +117,7 @@ TextAreaFormItem.propTypes = {
   shrink: PropTypes.bool,
   fullWidth: PropTypes.bool,
   value: PropTypes.string,
+  rows: PropTypes.number,
 };
 
 export default TextAreaFormItem;

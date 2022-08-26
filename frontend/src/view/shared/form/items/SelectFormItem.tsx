@@ -13,6 +13,8 @@ function SelectFormItem(props) {
     label,
     name,
     hint,
+    renderOption,
+    renderInput,
     options,
     required,
     mode,
@@ -125,6 +127,20 @@ function SelectFormItem(props) {
     props.onChange && props.onChange(data.value);
   };
 
+  const defaultRenderInput = (params) => (
+    <MDInput
+      {...params}
+      required={required}
+      margin={margin}
+      variant={variant}
+      size={size}
+      InputLabelProps={{
+        shrink: shrink,
+      }}
+      label={label}
+    />
+  );
+
   return (
     <>
       <Autocomplete
@@ -138,19 +154,8 @@ function SelectFormItem(props) {
         onChange={(event: any, newValue: any) => {
           handleSelect(newValue);
         }}
-        renderInput={(params) => (
-          <MDInput
-            {...params}
-            required={required}
-            margin={margin}
-            variant={variant}
-            size={size}
-            InputLabelProps={{
-              shrink: shrink,
-            }}
-            label={label}
-          />
-        )}
+        renderOption={renderOption}
+        renderInput={renderInput ?? defaultRenderInput}
         loadingText={i18n('autocomplete.loading')}
         noOptionsText={i18n('autocomplete.noOptions')}
       />
@@ -189,6 +194,8 @@ SelectFormItem.propTypes = {
   size: PropTypes.string,
   shrink: PropTypes.bool,
   margin: PropTypes.string,
+  renderOption: PropTypes.func,
+  renderInput: PropTypes.func,
 };
 
 export default SelectFormItem;

@@ -493,7 +493,12 @@ function Menu({
                 display="block"
                 fontSize="1.1rem"
                 fontWeight="regular"
-                color="white"
+                color={
+                  (transparentSidenav && !darkMode) ||
+                  whiteSidenav
+                    ? 'black'
+                    : 'white'
+                }
                 overflow="hidden"
                 textOverflow="ellipsis"
                 maxWidth="100%"

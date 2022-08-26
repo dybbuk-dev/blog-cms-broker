@@ -7,23 +7,25 @@ function NoViewItem(props) {
   const { darkMode } = selectMuiSettings();
   return (
     <MDBox
-      pt={2}
+      pt={props.hiddenLabel ? 0 : 2}
       sx={{
         position: 'relative',
       }}
     >
-      <MDTypography
-        variant="caption"
-        color={darkMode ? 'text' : 'secondary'}
-        fontWeight="regular"
-        sx={{
-          lineHeight: 1,
-          position: 'absolute',
-          top: 0,
-        }}
-      >
-        {props.label}
-      </MDTypography>
+      {!props.hiddenLabel && (
+        <MDTypography
+          variant="caption"
+          color={darkMode ? 'text' : 'secondary'}
+          fontWeight="regular"
+          sx={{
+            lineHeight: 1,
+            position: 'absolute',
+            top: 0,
+          }}
+        >
+          {props.label}
+        </MDTypography>
+      )}
       <MDTypography
         variant="button"
         fontWeight="regular"

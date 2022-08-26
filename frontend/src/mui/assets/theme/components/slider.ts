@@ -52,11 +52,10 @@ const slider: Types = {
     rail: {
       background: grey[200],
       borderRadius: borderRadius.sm,
-      opacity: 1,
+      opacity: 0.5,
     },
 
     track: {
-      background: info.main,
       position: 'relative',
       border: 'none',
       borderRadius: borderRadius.lg,
@@ -66,10 +65,8 @@ const slider: Types = {
     thumb: {
       width: pxToRem(14),
       height: pxToRem(14),
-      backgroundColor: white.main,
       zIndex: 10,
       boxShadow: sliderBoxShadow.thumb,
-      border: `${borderWidth[1]} solid ${info.main}`,
       transition: 'all 200ms linear',
 
       '&:hover': {
