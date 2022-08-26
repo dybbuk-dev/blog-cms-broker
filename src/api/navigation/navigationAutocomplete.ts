@@ -6,7 +6,7 @@ import NavigationService from '../../services/navigationService';
 export default async (req, res, next) => {
   try {
     new PermissionChecker(req).validateHas(
-      Permissions.values.productAutocomplete,
+      Permissions.values.navigationAutocomplete,
     );
 
     const payload = await new NavigationService(

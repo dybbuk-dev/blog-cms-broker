@@ -6,7 +6,7 @@ import NavigationService from '../../services/navigationService';
 export default async (req, res, next) => {
   try {
     new PermissionChecker(req).validateHas(
-      Permissions.values.productEdit,
+      Permissions.values.navigationEdit,
     );
 
     const payload = await new NavigationService(req).update(

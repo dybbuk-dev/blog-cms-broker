@@ -6,7 +6,7 @@ import NavigationService from '../../services/navigationService';
 export default async (req, res, next) => {
   try {
     new PermissionChecker(req).validateHas(
-      Permissions.values.productCreate,
+      Permissions.values.navigationCreate,
     );
 
     const payload = await new NavigationService(req).create(

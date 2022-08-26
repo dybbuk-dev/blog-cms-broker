@@ -6,7 +6,7 @@ import NavigationService from '../../services/navigationService';
 export default async (req, res, next) => {
   try {
     new PermissionChecker(req).validateHas(
-      Permissions.values.productDestroy,
+      Permissions.values.navigationDestroy,
     );
 
     await new NavigationService(req).destroyAll(
