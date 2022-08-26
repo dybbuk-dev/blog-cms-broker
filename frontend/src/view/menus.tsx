@@ -36,27 +36,6 @@ const menus = [
   },
 
   {
-    name: i18n('collapses.marketplace.menu'),
-    key: 'marketplace',
-    icon: <Icon fontSize="medium">store_front</Icon>,
-    collapse: [
-      {
-        path: '/product',
-        permissionRequired: permissions.productRead,
-        name: i18n('entities.product.menu'),
-        icon: <InventoryIcon />,
-      },
-
-      {
-        path: '/product-category',
-        permissionRequired: permissions.productCategoryRead,
-        name: i18n('entities.productCategory.menu'),
-        icon: <Icon>category</Icon>,
-      },
-    ],
-  },
-
-  {
     name: i18n('settings.menu'),
     key: 'settings',
     icon: <Icon fontSize="medium">settings</Icon>,

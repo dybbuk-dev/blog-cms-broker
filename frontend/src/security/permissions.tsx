@@ -127,7 +127,7 @@ class Permissions {
       },
 
       /**
-       * ! Navigation Permissions
+       * ? Navigation Permissions Start
        */
       navigationImport: {
         id: 'navigationImport',
@@ -191,122 +191,9 @@ class Permissions {
           plans.enterprise,
         ],
       },
-
-      productImport: {
-        id: 'productImport',
-        allowedRoles: [roles.admin],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      productCreate: {
-        id: 'productCreate',
-        allowedRoles: [roles.admin],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-        allowedStorage: [storage.productLogo],
-      },
-      productEdit: {
-        id: 'productEdit',
-        allowedRoles: [roles.admin],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-        allowedStorage: [storage.productLogo],
-      },
-      productDestroy: {
-        id: 'productDestroy',
-        allowedRoles: [roles.admin],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-        allowedStorage: [storage.productLogo],
-      },
-      productRead: {
-        id: 'productRead',
-        allowedRoles: [roles.admin, roles.custom],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      productAutocomplete: {
-        id: 'productAutocomplete',
-        allowedRoles: [roles.admin, roles.custom],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-
-      productCategoryImport: {
-        id: 'productCategoryImport',
-        allowedRoles: [roles.admin],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      productCategoryCreate: {
-        id: 'productCategoryCreate',
-        allowedRoles: [roles.admin],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-        allowedStorage: [],
-      },
-      productCategoryEdit: {
-        id: 'productCategoryEdit',
-        allowedRoles: [roles.admin],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-        allowedStorage: [],
-      },
-      productCategoryDestroy: {
-        id: 'productCategoryDestroy',
-        allowedRoles: [roles.admin],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-        allowedStorage: [],
-      },
-      productCategoryRead: {
-        id: 'productCategoryRead',
-        allowedRoles: [roles.admin, roles.custom],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      productCategoryAutocomplete: {
-        id: 'productCategoryAutocomplete',
-        allowedRoles: [roles.admin, roles.custom],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
+      /**
+       * ? Navigation Permissions End
+       */
     };
   }
 
