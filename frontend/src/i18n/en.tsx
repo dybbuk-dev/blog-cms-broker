@@ -105,6 +105,15 @@ const en = {
         target: {
           _blank: 'New Window',
         },
+        type: {
+          '0': 'None',
+          '1': 'Forex School',
+          '2': 'Forex Strategy',
+          '3': 'Downloads',
+          '4': 'News',
+          '5': 'Offers',
+          '6': 'Most Read',
+        },
       },
       placeholders: {},
       hints: {},

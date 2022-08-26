@@ -19,6 +19,7 @@ import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import NavigationAutocompleteFormItem from 'src/view/navigation/autocomplete/NavigationAutocompleteFormItem';
 import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
+import { navigationTypeOptions } from 'src/modules/navigation/navigationUtils';
 
 const schema = yup.object().shape({
   parent: yupFormSchemas.relationToOne(
@@ -179,11 +180,12 @@ function NavigationForm(props) {
               />
             </Grid>
             <Grid item md={6} xs={12}>
-              <InputNumberFormItem
+              <SelectFormItem
                 name="type"
                 label={i18n(
                   'entities.navigation.fields.type',
                 )}
+                options={navigationTypeOptions}
                 variant="standard"
               />
             </Grid>

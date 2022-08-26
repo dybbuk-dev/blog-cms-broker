@@ -252,6 +252,12 @@ class NavigationRepository {
         },
       );
 
+      if (filter.type !== null) {
+        whereAnd.push({
+          type: filter.type,
+        });
+      }
+
       [
         'activated',
         'show_user_logged_in',

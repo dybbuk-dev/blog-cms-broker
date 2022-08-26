@@ -28,6 +28,7 @@ import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRang
 import NavigationAutocompleteFormItem from 'src/view/navigation/autocomplete/NavigationAutocompleteFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import { filterBooleanOptions } from 'src/modules/utils';
+import { navigationTypeOptions } from 'src/modules/navigation/navigationUtils';
 
 const schema = yup.object().shape({
   idRange: yupFilterSchemas.integerRange(
@@ -44,6 +45,9 @@ const schema = yup.object().shape({
   ),
   link: yupFilterSchemas.string(
     i18n('entities.navigation.fields.link'),
+  ),
+  type: yupFilterSchemas.string(
+    i18n('entities.navigation.fields.type'),
   ),
   activated: yupFilterSchemas.boolean(
     i18n('entities.navigation.fields.activated'),
@@ -62,6 +66,7 @@ const emptyValues = {
   title: null,
   link: null,
   parent: null,
+  type: null,
   activated: null,
   show_user_logged_in: null,
   show_in_navigation: null,
@@ -87,6 +92,12 @@ const previewRenders = {
   link: {
     label: i18n('entities.navigation.fields.link'),
     render: filterRenders.generic(),
+  },
+  type: {
+    label: i18n('entities.navigation.fields.type'),
+    render: filterRenders.enumerator(
+      'entities.navigation.enumerators.type',
+    ),
   },
   activated: {
     label: i18n('entities.navigation.fields.activated'),
@@ -222,7 +233,17 @@ function NavigationListFilter(props) {
                     variant="standard"
                   />
                 </Grid>
-                <Grid item lg={6} xs={12}>
+                <Grid item md={6} xs={12}>
+                  <SelectFormItem
+                    name="type"
+                    label={i18n(
+                      'entities.navigation.fields.type',
+                    )}
+                    options={navigationTypeOptions}
+                    variant="standard"
+                  />
+                </Grid>
+                <Grid item lg={4} xs={12}>
                   <SelectFormItem
                     name="activated"
                     label={i18n(
@@ -232,7 +253,7 @@ function NavigationListFilter(props) {
                     variant="standard"
                   />
                 </Grid>
-                <Grid item lg={6} xs={12}>
+                <Grid item lg={4} xs={12}>
                   <SelectFormItem
                     name="show_user_logged_in"
                     label={i18n(
@@ -242,7 +263,7 @@ function NavigationListFilter(props) {
                     variant="standard"
                   />
                 </Grid>
-                <Grid item lg={6} xs={12}>
+                <Grid item lg={4} xs={12}>
                   <SelectFormItem
                     name="show_in_navigation"
                     label={i18n(
