@@ -90,8 +90,6 @@ require('./file').default(routes);
 require('./user').default(routes);
 require('./settings').default(routes);
 require('./navigation').default(routes);
-require('./product').default(routes);
-require('./productCategory').default(routes);
 
 // Loads the Tenant if the :tenantId param is passed
 routes.param('tenantId', tenantMiddleware);

@@ -91,18 +91,9 @@ const en = {
   },
 
   entities: {
-    product: {
+    navigation: {
       errors: {
-        unique: {
-          reference: 'Ref # must be unique',
-        },
-      },
-    },
-    productCategory: {
-      errors: {
-        unique: {
-          name: 'Name must be unique',
-        },
+        unique: {},
       },
     },
   },
