@@ -60,6 +60,59 @@ const en = {
   },
 
   entities: {
+    navigation: {
+      name: 'navigation',
+      label: 'Navigations',
+      menu: 'Navigations',
+      exporterFileName: 'navigation_export',
+      list: {
+        menu: 'Navigations',
+        title: 'Navigations',
+      },
+      create: {
+        success: 'Navigation successfully saved',
+      },
+      update: {
+        success: 'Navigation successfully saved',
+      },
+      destroy: {
+        success: 'Navigation successfully deleted',
+      },
+      destroyAll: {
+        success: 'Navigation(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Navigation',
+      },
+      fields: {
+        id: 'id',
+        name: 'name',
+        link: 'link',
+        title: 'title',
+        target: 'target',
+        sort: 'sort',
+        activated: 'activated',
+        show_user_logged_in: 'show_user_logged_in',
+        show_in_navigation: 'show_in_navigation',
+        type: 'type',
+        parent_id: 'parent_id',
+      },
+      enumerators: {},
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Navigation',
+      },
+      view: {
+        title: 'View Navigation',
+      },
+      importer: {
+        title: 'Import Navigations',
+        fileName: 'navigation_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
+
     product: {
       name: 'product',
       label: 'Products',
