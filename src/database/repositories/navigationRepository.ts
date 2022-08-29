@@ -332,7 +332,12 @@ class NavigationRepository {
   ) {
     let whereAnd: Array<any> = [
       {
-        ['parent_id']: null,
+        ['parent_id']: {
+          [Op.is]: null,
+        },
+        ['title']: {
+          [Op.ne]: '',
+        },
       },
     ];
 
