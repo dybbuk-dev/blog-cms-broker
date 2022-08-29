@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import PropTypes from 'prop-types';
 import { i18n } from 'src/i18n';
 import { Box } from '@mui/material';
@@ -7,6 +8,8 @@ import ColorBadge, {
 } from 'src/view/shared/components/ColorBadge';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import MDInput from 'src/mui/components/MDInput';
+import { useRef } from 'react';
+import MDBox from 'src/mui/components/MDBox';
 
 export function generateColorBadgeSelectOptions(
   values,
@@ -62,30 +65,47 @@ function ColorBadgeSelectFormItem(props) {
       (option) =>
         option.label === params?.inputProps?.value,
     );
-    const color = option?.color;
     return (
-      <MDInput
-        {...params}
-        required={required}
-        margin={margin}
-        variant={variant}
-        size={size}
-        InputLabelProps={{
-          shrink: shrink,
-        }}
-        label={label}
-        sx={{
-          '& input': {
-            backgroundColor: getColorBadgeBack(color),
-            padding: '4px 10px !important',
-            color: getColorBadgeFore(color),
-            letterSpacing: '1px',
-            textTransform: 'uppercase',
-            fontWeight: 500,
-            borderRadius: '4px',
-          },
-        }}
-      />
+      <>
+        {option && (
+          <MDBox
+            display="block"
+            position="absolute"
+            mt={2.2}
+          >
+            <ColorBadge
+              label={option.label}
+              color={option.color}
+            />
+          </MDBox>
+        )}
+        <MDInput
+          {...params}
+          required={required}
+          margin={margin}
+          variant={variant}
+          size={size}
+          InputLabelProps={{
+            shrink: shrink,
+          }}
+          label={label}
+          sx={{
+            '& input': {
+              padding: `${
+                option ? '6px' : '4px'
+              } 10px !important`,
+              color: option
+                ? 'transparent !important'
+                : null,
+              fontSize: option ? '0.75rem' : null,
+              letterSpacing: '1px',
+              textTransform: 'uppercase',
+              fontWeight: 500,
+              borderRadius: '4px',
+            },
+          }}
+        />
+      </>
     );
   };
 

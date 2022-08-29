@@ -75,7 +75,7 @@ function TextAreaFormItem(props) {
         }}
         disabled={disabled}
         multiline
-        rows={rows}
+        rows={rows ?? 4}
       />
       {errorMessage && (
         <MDBox mt={0.75}>

@@ -15,6 +15,7 @@ function SelectFormItem(props) {
     hint,
     renderOption,
     renderInput,
+    renderTags,
     options,
     required,
     mode,
@@ -145,9 +146,9 @@ function SelectFormItem(props) {
     <>
       <Autocomplete
         multiple={mode === 'multiple'}
-        isOptionEqualToValue={(option, value) => {
-          return option.value === value.value;
-        }}
+        isOptionEqualToValue={(option, value) =>
+          option.value === value.value
+        }
         disablePortal={mode !== 'multiple'}
         value={value()}
         options={options}
@@ -156,6 +157,7 @@ function SelectFormItem(props) {
         }}
         renderOption={renderOption}
         renderInput={renderInput ?? defaultRenderInput}
+        renderTags={renderTags}
         loadingText={i18n('autocomplete.loading')}
         noOptionsText={i18n('autocomplete.noOptions')}
       />
@@ -196,6 +198,8 @@ SelectFormItem.propTypes = {
   margin: PropTypes.string,
   renderOption: PropTypes.func,
   renderInput: PropTypes.func,
+  renderTags: PropTypes.func,
+  singleValue: PropTypes.bool,
 };
 
 export default SelectFormItem;

@@ -406,6 +406,7 @@ function Configurator(): JSX.Element {
           <Switch
             checked={fixedNavbar}
             onChange={handleFixedNavbar}
+            color={sidenavColor}
           />
         </MDBox>
         <Divider />
@@ -422,6 +423,7 @@ function Configurator(): JSX.Element {
           <Switch
             checked={miniSidenav}
             onChange={handleMiniSidenav}
+            color={sidenavColor}
           />
         </MDBox>
         <Divider />
@@ -438,6 +440,7 @@ function Configurator(): JSX.Element {
           <Switch
             checked={darkMode}
             onChange={handleDarkMode}
+            color={sidenavColor}
           />
         </MDBox>
         {/* <Divider />

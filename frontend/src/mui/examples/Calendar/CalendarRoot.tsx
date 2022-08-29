@@ -120,6 +120,10 @@ export default styled(Box)(
         backgroundColor: darkMode ? grey[700] : grey[200],
       },
 
+      '.fc .fc-list-event:hover td': {
+        backgroundColor: 'transparent',
+      },
+
       '& .fc-scrollgrid-section.fc-scrollgrid-section-header > td':
         {
           border: 'none',
@@ -146,9 +150,15 @@ export default styled(Box)(
       '& .fc-daygrid-event': {
         margin: `${pxToRem(0.5)} ${pxToRem(2)}`,
         borderWidth: '2px',
+        borderStyle: 'solid',
         borderRadius: pxToRem(5.6),
         fontSize: size.sm,
         fontWeight: fontWeightMedium,
+      },
+
+      '& .fc-timegrid-event': {
+        borderWidth: '2px',
+        borderStyle: 'solid',
       },
 
       '& .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events':
@@ -205,68 +215,138 @@ export default styled(Box)(
         color: darkMode ? white.main : dark.main,
       },
 
-      '& .event-primary': {
+      '& .event-primary, .event-primary:hover': {
         backgroundImage: linearGradient(
           gradients.primary.main,
           gradients.primary.state,
         ),
+        borderColor: 'transparent',
         '& *': { color: white.main },
       },
 
-      '& .event-secondary': {
+      '& .event-secondary, .event-secondary:hover': {
         backgroundImage: linearGradient(
           gradients.secondary.main,
           gradients.secondary.state,
         ),
+        borderColor: 'transparent',
         '& *': { color: white.main },
       },
 
-      '& .event-info': {
+      '& .event-info, .event-info:hover': {
         backgroundImage: linearGradient(
           gradients.info.main,
           gradients.info.state,
         ),
+        borderColor: 'transparent',
         '& *': { color: white.main },
       },
 
-      '& .event-success': {
+      '& .event-success, .event-success:hover': {
         backgroundImage: linearGradient(
           gradients.success.main,
           gradients.success.state,
         ),
+        borderColor: 'transparent',
         '& *': { color: white.main },
       },
 
-      '& .event-warning': {
+      '& .event-success-not-in-time, .event-success-not-in-time:hover':
+        {
+          backgroundImage: linearGradient(
+            gradients.success.main,
+            gradients.success.state,
+          ),
+          borderColor: 'red',
+          '& *': { color: white.main },
+        },
+
+      '& .event-success-overdue, .event-success-overdue:hover':
+        {
+          backgroundImage: linearGradient(
+            gradients.success.main,
+            gradients.success.state,
+          ),
+          borderColor: 'orange',
+          '& *': { color: white.main },
+        },
+
+      '& .event-warning, .event-warning:hover': {
         backgroundImage: linearGradient(
           gradients.warning.main,
           gradients.warning.state,
         ),
+        borderColor: 'transparent',
         '& *': { color: white.main },
       },
 
-      '& .event-error': {
+      '& .event-error, .event-error:hover': {
         backgroundImage: linearGradient(
           gradients.error.main,
           gradients.error.state,
         ),
+        borderColor: 'transparent',
         '& *': { color: white.main },
       },
 
-      '& .event-light': {
+      '& .event-light, .event-light:hover': {
         backgroundImage: linearGradient(
           gradients.light.main,
           gradients.light.state,
         ),
+        borderColor: 'transparent',
 
         '& *': { color: dark.main },
       },
 
-      '& .event-dark': {
+      '& .event-dark, .event-dark:hover': {
         backgroundImage: linearGradient(
           gradients.dark.main,
           gradients.dark.state,
         ),
+        borderColor: 'transparent',
+        '& *': { color: white.main },
+      },
+
+      '& .event-red, .event-red:hover': {
+        backgroundColor: '#ea4335',
+        borderColor: '#ea4335',
+        '& *': { color: white.main },
+      },
+
+      '& .event-orange, .event-orange:hover': {
+        backgroundColor: '#ff7b25',
+        borderColor: '#ff7b25',
+        '& *': { color: white.main },
+      },
+
+      '& .event-yellow, .event-yellow:hover': {
+        backgroundColor: '#feb236',
+        borderColor: '#feb236',
+        '& *': { color: white.main },
+      },
+
+      '& .event-green, .event-green:hover': {
+        backgroundColor: '#4CAF50',
+        borderColor: '#4CAF50',
+        '& *': { color: white.main },
+      },
+
+      '& .event-blue, .event-blue:hover': {
+        backgroundColor: '#1A73E8',
+        borderColor: '#1A73E8',
+        '& *': { color: white.main },
+      },
+
+      '& .event-indigo, .event-indigo:hover': {
+        backgroundColor: '#3f51b5',
+        borderColor: '#3f51b5',
+        '& *': { color: white.main },
+      },
+
+      '& .event-violet, .event-violet:hover': {
+        backgroundColor: '#9c27b0',
+        borderColor: '#9c27b0',
         '& *': { color: white.main },
       },
     };

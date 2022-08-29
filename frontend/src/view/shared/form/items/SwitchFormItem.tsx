@@ -10,6 +10,7 @@ import {
   Switch,
 } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 
 function SwitchFormItem(props) {
   const {
@@ -19,6 +20,8 @@ function SwitchFormItem(props) {
     required,
     externalErrorMessage,
   } = props;
+
+  const { sidenavColor } = selectMuiSettings();
 
   const {
     register,
@@ -62,6 +65,7 @@ function SwitchFormItem(props) {
               props.onBlur && props.onBlur(null)
             }
             inputRef={register}
+            color={sidenavColor}
           />
         }
         label={label}

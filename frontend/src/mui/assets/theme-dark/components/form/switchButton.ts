@@ -21,7 +21,6 @@ import boxShadows from 'src/mui/assets/theme-dark/base/boxShadows';
 // Material Dashboard 2 PRO React TS Helper Functions
 // import rgba from "src/mui/assets/theme-dark/functions/rgba";
 import pxToRem from 'src/mui/assets/theme-dark/functions/pxToRem';
-import linearGradient from 'src/mui/assets/theme-dark/functions/linearGradient';
 
 const { white, gradients, grey, transparent } = colors;
 const { borderWidth } = borders;
@@ -37,15 +36,11 @@ const switchButton: Types = {
 
   styleOverrides: {
     switchBase: {
-      color: gradients.dark.main,
-
       '&:hover': {
         backgroundColor: transparent.main,
       },
 
       '&.Mui-checked': {
-        color: gradients.dark.main,
-
         '&:hover': {
           backgroundColor: transparent.main,
         },
@@ -55,21 +50,12 @@ const switchButton: Types = {
         },
 
         '& + .MuiSwitch-track': {
-          backgroundColor: `${gradients.dark.main} !important`,
-          borderColor: `${gradients.dark.main} !important`,
           opacity: 1,
         },
       },
 
       '&.Mui-disabled + .MuiSwitch-track': {
         opacity: '0.3 !important',
-      },
-
-      '&.Mui-focusVisible .MuiSwitch-thumb': {
-        backgroundImage: linearGradient(
-          gradients.info.main,
-          gradients.info.state,
-        ),
       },
     },
 
@@ -83,7 +69,6 @@ const switchButton: Types = {
       width: pxToRem(32),
       height: pxToRem(15),
       backgroundColor: grey[400],
-      border: `${borderWidth[1]} solid ${grey[400]}`,
       opacity: 1,
     },
 

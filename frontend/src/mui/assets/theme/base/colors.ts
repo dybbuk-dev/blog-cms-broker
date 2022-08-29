@@ -19,6 +19,17 @@ Coded by www.creative-tim.com
  * You can customized the colors for the entire Material Dashboard 2 PRO React TSUI Dashboard PRO Material using thie file.
  */
 
+/** Importing for VOR Custom Colours */
+import {
+  yellow,
+  orange,
+  red,
+  purple,
+  green,
+  lightGreen,
+  grey,
+} from '@mui/material/colors';
+
 // types
 interface ColorsTypes {
   main: string;
@@ -83,6 +94,29 @@ interface Types {
   error: ColorsTypes | any;
   light: ColorsTypes | any;
   dark: ColorsTypes | any;
+
+  /**VOR CUSTOM COLOURS */
+  critical: ColorsTypes | any;
+  high: ColorsTypes | any;
+  medium: ColorsTypes | any;
+  low: ColorsTypes | any;
+  none: ColorsTypes | any;
+
+  backlog: ColorsTypes | any;
+  todo: ColorsTypes | any;
+  inprogress: ColorsTypes | any;
+  /**complete: ColorsTypes | any;*/
+
+  /**active: ColorsTypes | any;*/
+  inactive: ColorsTypes | any;
+
+  open: ColorsTypes | any;
+  acceptance: ColorsTypes | any;
+  avoidance: ColorsTypes | any;
+  mitigation: ColorsTypes | any;
+  /**remediation: ColorsTypes | any;*/
+  transfer: ColorsTypes | any;
+
   grey:
     | {
         [key: string | number]: string;
@@ -186,8 +220,10 @@ const colors: Types = {
   },
 
   success: {
-    main: '#4CAF50',
-    focus: '#67bb6a',
+    /**  main: '#4CAF50',
+    focus: '#67bb6a',*/
+    main: '#66BB6A',
+    focus: '#43A047',
   },
 
   warning: {
@@ -220,6 +256,95 @@ const colors: Types = {
     700: '#495057',
     800: '#343a40',
     900: '#212529',
+  },
+
+  /**
+   * VOR CUSTOM COLOURS
+   */
+
+  critical: {
+    main: red['A700'],
+    focus: red['A700'],
+  },
+
+  high: {
+    main: red[300],
+    focus: red[300],
+  },
+
+  medium: {
+    main: yellow[900],
+    focus: yellow[900],
+  },
+
+  low: {
+    main: yellow['A700'],
+    focus: yellow['A700'],
+  },
+
+  none: {
+    main: '#1A73E8',
+    focus: '#1662C4',
+  },
+
+  backlog: {
+    main: grey[500],
+    focus: grey[500],
+  },
+
+  todo: {
+    main: '#1A73E8',
+    focus: '#1662C4',
+  },
+
+  inprogress: {
+    main: purple[300],
+    focus: purple[300],
+  },
+
+  /**complete: {
+    main: green[700],
+    focus: green[700],
+  }, 
+
+  active: {
+    main: green[700],
+    focus: green[700],
+  },*/
+
+  inactive: {
+    main: grey[500],
+    focus: grey[500],
+  },
+
+  open: {
+    main: grey[500],
+    focus: grey[500],
+  },
+
+  acceptance: {
+    main: lightGreen[300],
+    focus: lightGreen[300],
+  },
+
+  avoidance: {
+    main: lightGreen[300],
+    focus: lightGreen[300],
+  },
+
+  mitigation: {
+    main: lightGreen[300],
+    focus: lightGreen[300],
+  },
+
+  /**remediation: {
+    main: green[700],
+    focus: green[700],
+  },**/
+
+  transfer: {
+    main: lightGreen[300],
+    focus: lightGreen[300],
   },
 
   gradients: {

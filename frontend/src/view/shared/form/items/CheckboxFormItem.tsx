@@ -10,8 +10,11 @@ import {
   Switch,
 } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 
 export function CheckboxFormItem(props) {
+  const { sidenavColor } = selectMuiSettings();
+
   const {
     label,
     name,
@@ -62,6 +65,7 @@ export function CheckboxFormItem(props) {
               props.onBlur && props.onBlur(null)
             }
             inputRef={register}
+            color={sidenavColor}
           />
         }
         label={label}

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import Color from 'color';
 import MDTypography from 'src/mui/components/MDTypography';
+import MDBox from 'src/mui/components/MDBox';
 
 export function getColorBadgeFore(color) {
   if (!color) {
@@ -19,26 +20,30 @@ export function getColorBadgeBack(color) {
 function ColorBadge(props) {
   const { color, label } = props;
   return (
-    <MDTypography
-      variant="caption"
-      fontWeight="bold"
-      backgroundColor={getColorBadgeBack(color)}
-      px={1}
-      py={0.75}
-      borderRadius={1}
-      textTransform="uppercase"
-      letterSpacing={1}
-      sx={{
-        color: getColorBadgeFore(color),
-      }}
-    >
-      {label}
-    </MDTypography>
+    <MDBox lineHeight={1}>
+      <MDTypography
+        display="inline-block"
+        variant="caption"
+        backgroundColor={getColorBadgeBack(color)}
+        px={1}
+        py={0.75}
+        fontWeight="bold"
+        borderRadius={1}
+        m={0}
+        textTransform="uppercase"
+        letterSpacing={1}
+        sx={{
+          color: getColorBadgeFore(color),
+        }}
+      >
+        {label}
+      </MDTypography>
+    </MDBox>
   );
 }
 
 ColorBadge.propTypes = {
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
   label: PropTypes.string.isRequired,
 };
 
