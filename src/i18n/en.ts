@@ -96,6 +96,11 @@ const en = {
         unique: {},
       },
     },
+    category: {
+      errors: {
+        unique: {},
+      },
+    },
   },
 };
 
