@@ -7,11 +7,11 @@ export default [
     label: i18n('entities.navigation.fields.id'),
     render: exporterRenders.decimal(),
   },
-  // {
-  //   name: 'parent',
-  //   label: i18n('entities.navigation.fields.parent'),
-  //   render: exporterRenders.relationToOne(),
-  // },
+  {
+    name: 'parent',
+    label: i18n('entities.navigation.fields.parent'),
+    render: exporterRenders.relationToOne('name'),
+  },
   {
     name: 'name',
     label: i18n('entities.navigation.fields.name'),
