@@ -32,6 +32,11 @@ const menus = [
         permissionRequired: permissions.navigationRead,
         name: i18n('entities.navigation.menu'),
       },
+      {
+        path: '/category',
+        permissionRequired: permissions.categoryRead,
+        name: i18n('entities.category.menu'),
+      },
     ],
   },
 

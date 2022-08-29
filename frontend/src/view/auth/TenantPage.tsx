@@ -1,28 +1,23 @@
-import MaterialLink from '@mui/material/Link';
 import { i18n } from 'src/i18n';
 import actions from 'src/modules/auth/authActions';
 import selectors from 'src/modules/auth/authSelectors';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import TenantNewForm from 'src/view/auth/TenantNewForm';
 import TenantSelectForm from 'src/view/auth/TenantSelectForm';
 
 // @mui material components
 import Card from '@mui/material/Card';
-import Checkbox from '@mui/material/Checkbox';
 
 // Material Dashboard 2 PRO React TS components
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
-import MDInput from 'src/mui/components/MDInput';
-import MDButton from 'src/mui/components/MDButton';
 
 // Authentication layout components
 import CoverLayout from 'src/mui/layouts/authentication/components/CoverLayout';
 
 // Images
 import bgImage from 'src/mui/assets/images/bg-sign-up-cover.jpeg';
-import MDAvatar from 'src/mui/components/MDAvatar';
 import { BrandLogo } from 'src/assets/resources';
 
 import { Link } from 'react-router-dom';
@@ -71,19 +66,10 @@ function TenantPage(): JSX.Element {
           <MDBox
             display="flex"
             justifyContent="center"
-            pt={3}
+            py={2}
           >
             <BrandLogo width="80%" />
           </MDBox>
-          <MDTypography
-            display="block"
-            variant="button"
-            color="white"
-            mt={2}
-            fontSize="small"
-          >
-            Enter your email and password to register
-          </MDTypography>
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
           {view === 'form' ? (

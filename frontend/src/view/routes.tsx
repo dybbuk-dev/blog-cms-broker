@@ -247,6 +247,69 @@ const privateRoutes = [
   /**
    * !! Navigation routes end
    */
+
+  /**
+   * !! Category routes start
+   */
+  {
+    path: '/category',
+    collapseName: 'routes',
+    i18n: 'entities.category.menu',
+    parent: '/routes',
+    loader: () =>
+      import('src/view/category/list/CategoryListPage'),
+    permissionRequired: permissions.categoryRead,
+    exact: true,
+  },
+
+  {
+    path: '/category/new',
+    collapseName: 'routes',
+    i18n: 'entities.category.new.title',
+    parent: '/category',
+    loader: () =>
+      import('src/view/category/form/CategoryFormPage'),
+    permissionRequired: permissions.categoryCreate,
+    exact: true,
+  },
+
+  {
+    path: '/category/importer',
+    collapseName: 'routes',
+    i18n: 'entities.category.importer.title',
+    parent: '/category',
+    loader: () =>
+      import(
+        'src/view/category/importer/CategoryImporterPage'
+      ),
+    permissionRequired: permissions.categoryImport,
+    exact: true,
+  },
+
+  {
+    path: '/category/:id/edit',
+    collapseName: 'routes',
+    i18n: 'entities.category.edit.title',
+    parent: '/category',
+    loader: () =>
+      import('src/view/category/form/CategoryFormPage'),
+    permissionRequired: permissions.categoryEdit,
+    exact: true,
+  },
+
+  {
+    path: '/category/:id',
+    collapseName: 'routes',
+    i18n: 'entities.category.view.title',
+    parent: '/category',
+    loader: () =>
+      import('src/view/category/view/CategoryViewPage'),
+    permissionRequired: permissions.categoryRead,
+    exact: true,
+  },
+  /**
+   * !! Category routes end
+   */
 ].filter(Boolean);
 
 const publicRoutes = [
