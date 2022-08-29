@@ -19,6 +19,7 @@ import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import CategoryAutocompleteFormItem from 'src/view/category/autocomplete/CategoryAutocompleteFormItem';
 import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
+import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(
@@ -63,6 +64,23 @@ const schema = yup.object().shape({
       max: 255,
     },
   ),
+
+  teaser: yupFormSchemas.string(
+    i18n('entities.category.fields.teaser'),
+    {
+      required: true,
+    },
+  ),
+
+  description: yupFormSchemas.string(
+    i18n('entities.category.fields.description'),
+    {
+      required: true,
+      min: 1,
+      max: 255,
+    },
+  ),
+
   target: yupFormSchemas.enumerator(
     i18n('entities.category.fields.target'),
     {
@@ -94,6 +112,8 @@ function CategoryForm(props) {
       title: record.title,
       author_name: record.author_name,
       author_link: record.author_link,
+      teaser: record.teaser,
+      description: record.description,
       target: record.target,
       sort: record.sort ?? 0,
       activated: record.activated,
@@ -174,6 +194,23 @@ function CategoryForm(props) {
                 )}
                 variant="standard"
                 required={true}
+              />
+            </Grid>
+            <Grid item md={6} xs={12}></Grid>
+            <Grid item md={12} xs={12}>
+              <TextAreaFormItem
+                name="teaser"
+                label={i18n(
+                  'entities.category.fields.teaser'
+                )}
+              />
+            </Grid>
+            <Grid item md={12} xs={12}>
+              <TextAreaFormItem
+                name="description"
+                label={i18n(
+                  'entities.category.fields.description'
+                )}
               />
             </Grid>
             <Grid item md={6} xs={12}>

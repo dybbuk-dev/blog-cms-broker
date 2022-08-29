@@ -4,11 +4,11 @@ import TextViewItem from 'src/view/shared/view/TextViewItem';
 import { Grid } from '@mui/material';
 import CheckboxViewItem from 'src/view/shared/view/CheckboxViewItem';
 import CategoryViewItem from 'src/view/category/view/CategoryViewItem';
+import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
 
 function CategoryView(props) {
   const renderView = () => {
     const { record } = props;
-
     return (
       <Grid container spacing={2}>
         <Grid item md={6} xs={12}>
@@ -49,6 +49,26 @@ function CategoryView(props) {
               'entities.category.fields.author_link',
             )}
             value={record.author_link}
+          />
+        </Grid>
+        <Grid item lg={6} md={6} sm={12} xs={12}>
+          <TextAreaFormItem
+            name="teaser"
+            label={i18n(
+              'entities.category.fields.teaser',
+            )}
+            variant="standard"
+            fullWidth
+          />
+        </Grid>
+        <Grid item lg={6} md={6} sm={12} xs={12}>
+          <TextAreaFormItem
+            name="description"
+            label={i18n(
+              'entities.category.fields.description',
+            )}
+            variant="standard"
+            fullWidth
           />
         </Grid>
         <Grid item md={6} xs={12}>

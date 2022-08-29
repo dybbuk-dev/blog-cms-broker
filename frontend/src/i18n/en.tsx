@@ -161,6 +161,8 @@ const en = {
         title: 'Title',
         author_name: 'Author Name',
         author_link: 'Author link',
+        teaser: 'Teaser',
+        description: 'Description',
         target: 'Target',
         sort: 'Sort',
         activated: 'Activated',
