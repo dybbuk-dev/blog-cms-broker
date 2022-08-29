@@ -36,6 +36,7 @@ import BasicLayout from 'src/mui/layouts/authentication/components/BasicLayout';
 import bgImage from 'src/mui/assets/images/bg-sign-in-basic.jpeg';
 import { FormControlLabel } from '@mui/material';
 import { BrandLogo } from 'src/assets/resources';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 
 const schema = yup.object().shape({
   email: yupFormSchemas.string(i18n('user.fields.email'), {
@@ -55,6 +56,8 @@ const schema = yup.object().shape({
 function SigninPage(): JSX.Element {
   const dispatch = useDispatch();
   const location = useLocation();
+
+  const { sidenavColor } = selectMuiSettings();
 
   const { socialErrorCode } = queryString.parse(
     location.search,
@@ -169,6 +172,7 @@ function SigninPage(): JSX.Element {
                       name={'rememberMe'}
                       defaultChecked={true}
                       inputRef={form.register}
+                      color={sidenavColor}
                     />
                   }
                   label={i18n('user.fields.rememberMe')}
