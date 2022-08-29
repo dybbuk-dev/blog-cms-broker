@@ -29,6 +29,10 @@ export default [
     label: i18n('entities.navigation.fields.target'),
   },
   {
+    name: 'type',
+    label: i18n('entities.navigation.fields.type'),
+  },
+  {
     name: 'sort',
     label: i18n('entities.navigation.fields.sort'),
   },

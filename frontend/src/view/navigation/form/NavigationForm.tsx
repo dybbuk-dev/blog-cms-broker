@@ -68,10 +68,10 @@ const schema = yup.object().shape({
     i18n('entities.navigation.fields.show_in_navigation'),
     {},
   ),
-  type: yupFormSchemas.integer(
+  type: yupFormSchemas.enumerator(
     i18n('entities.navigation.fields.type'),
     {
-      min: 0,
+      options: navigationEnumerators.type,
     },
   ),
 });

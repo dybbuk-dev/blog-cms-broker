@@ -5,6 +5,7 @@ import { IRepositoryOptions } from './IRepositoryOptions';
 import AuditLogRepository from './auditLogRepository';
 import SequelizeRepository from './sequelizeRepository';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
+import moment from 'moment';
 
 const Op = Sequelize.Op;
 
@@ -53,6 +54,8 @@ class NavigationRepository {
         target: data.target ?? '',
         type: this.getTypeIndex(data.type),
         ip: '',
+        created: moment(),
+        modified: moment(),
       },
       {
         transaction,
@@ -94,6 +97,7 @@ class NavigationRepository {
         parent_id: data.parent || null,
         target: data.target ?? '',
         type: this.getTypeIndex(data.type),
+        modified: moment(),
         ip: '',
       },
       {
