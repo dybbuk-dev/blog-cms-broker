@@ -129,6 +129,63 @@ const en = {
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },
     },
+    category: {
+      name: 'categorie',
+      label: 'All Categories',
+      menu: 'Categories',
+      exporterFileName: 'categorie_export',
+      list: {
+        menu: 'Categories',
+        title: 'Categories',
+      },
+      create: {
+        success: 'Category successfully saved',
+      },
+      update: {
+        success: 'Category successfully saved',
+      },
+      destroy: {
+        success: 'Category successfully deleted',
+      },
+      destroyAll: {
+        success: 'Categorie(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Category',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        name: 'Surname',
+        link: 'Link',
+        title: 'Title',
+        author_name: 'Author Name',
+        author_link: 'Author link',
+        target: 'Target',
+        sort: 'Sort',
+        activated: 'Activated',
+        show_in_navigation: 'Show in navigation',
+        show_in_footer: 'Show in the footer',
+      },
+      enumerators: {
+        target: {
+          _blank: 'New Window',
+        },
+      },
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Category',
+      },
+      view: {
+        title: 'View Category',
+      },
+      importer: {
+        title: 'Import Categories',
+        fileName: 'categorie_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
   },
 
   auth: {

@@ -7,6 +7,7 @@ import user from 'src/modules/user/userReducers';
 import auditLog from 'src/modules/auditLog/auditLogReducers';
 import settings from 'src/modules/settings/settingsReducers';
 import navigation from 'src/modules/navigation/navigationReducers';
+import category from 'src/modules/category/categoryReducers';
 import { combineReducers } from 'redux';
 import mui from 'src/modules/mui/muiReducers';
 
@@ -22,4 +23,5 @@ export default (history) =>
     auditLog,
     settings,
     navigation,
+    category,
   });
