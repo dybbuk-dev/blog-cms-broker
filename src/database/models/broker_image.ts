@@ -1,15 +1,15 @@
 import { DataTypes } from 'sequelize';
 
 export default function (sequelize) {
-  const broker_certificate_image = sequelize.define(
-    'broker_certificate_image',
+  const broker_image = sequelize.define(
+    'broker_image',
     {
       id: {
         type: DataTypes.BIGINT.UNSIGNED,
         autoIncrement: true,
         primaryKey: true,
       },
-      broker_certificate_id: {
+      broker_id: {
         type: DataTypes.BIGINT.UNSIGNED,
         allowNull: true,
       },
@@ -78,17 +78,14 @@ export default function (sequelize) {
     },
   );
 
-  broker_certificate_image.associate = (models) => {
-    models.broker_certificate_image.belongsTo(
-      models.broker_certificate,
-      {
-        constraints: true,
-        foreignKey: 'broker_certificate_id',
-        onDelete: 'NO ACTION',
-        onUpdate: 'NO ACTION',
-      },
-    );
+  broker_image.associate = (models) => {
+    models.broker_image.belongsTo(models.broker, {
+      constraints: true,
+      foreignKey: 'broker_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
+    });
   };
 
-  return broker_certificate_image;
+  return broker_image;
 }
