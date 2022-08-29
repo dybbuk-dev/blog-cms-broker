@@ -130,7 +130,7 @@ function collapseIconBox(theme: Theme, ownerState: any) {
 
     '& svg, svg g, span.MuiIcon-root': {
       color:
-        transparentSidenav || whiteSidenav
+        (transparentSidenav && !darkMode) || whiteSidenav
           ? dark.main
           : white.main,
     },
