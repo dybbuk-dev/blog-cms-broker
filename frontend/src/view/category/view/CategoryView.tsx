@@ -3,8 +3,7 @@ import { i18n } from 'src/i18n';
 import TextViewItem from 'src/view/shared/view/TextViewItem';
 import { Grid } from '@mui/material';
 import CheckboxViewItem from 'src/view/shared/view/CheckboxViewItem';
-import CategoryViewItem from 'src/view/category/view/CategoryViewItem';
-import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
+import HtmlViewItem from 'src/view/shared/view/HtmlViewItem';
 
 function CategoryView(props) {
   const renderView = () => {
@@ -51,24 +50,18 @@ function CategoryView(props) {
             value={record.author_link}
           />
         </Grid>
-        <Grid item lg={6} md={6} sm={12} xs={12}>
-          <TextAreaFormItem
-            name="teaser"
-            label={i18n(
-              'entities.category.fields.teaser',
-            )}
-            variant="standard"
-            fullWidth
+        <Grid item xs={12}>
+          <HtmlViewItem
+            label={i18n('entities.category.fields.teaser')}
+            value={record.teaser}
           />
         </Grid>
-        <Grid item lg={6} md={6} sm={12} xs={12}>
-          <TextAreaFormItem
-            name="description"
+        <Grid item xs={12}>
+          <HtmlViewItem
             label={i18n(
               'entities.category.fields.description',
             )}
-            variant="standard"
-            fullWidth
+            value={record.description}
           />
         </Grid>
         <Grid item md={6} xs={12}>

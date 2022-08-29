@@ -57,7 +57,7 @@ function HtmlEditorFormItem({
           toolbar: [
             ['bold', 'italic', 'underline', 'strike'],
             [{ list: 'ordered' }, { list: 'bullet' }],
-            ['link'],
+            ['link', 'image'],
             ['clean'],
           ],
         }}
@@ -69,6 +69,7 @@ function HtmlEditorFormItem({
           'list',
           'bullet',
           'link',
+          'image',
         ]}
       />
       <MDBox display="none">

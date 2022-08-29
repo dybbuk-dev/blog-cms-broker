@@ -20,6 +20,7 @@ import CategoryAutocompleteFormItem from 'src/view/category/autocomplete/Categor
 import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
+import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(
@@ -196,21 +197,22 @@ function CategoryForm(props) {
                 required={true}
               />
             </Grid>
-            <Grid item md={6} xs={12}></Grid>
             <Grid item md={12} xs={12}>
-              <TextAreaFormItem
+              <HtmlEditorFormItem
                 name="teaser"
                 label={i18n(
-                  'entities.category.fields.teaser'
+                  'entities.category.fields.teaser',
                 )}
+                value={initialValues.teaser}
               />
             </Grid>
             <Grid item md={12} xs={12}>
-              <TextAreaFormItem
+              <HtmlEditorFormItem
                 name="description"
                 label={i18n(
-                  'entities.category.fields.description'
+                  'entities.category.fields.description',
                 )}
+                value={initialValues.description}
               />
             </Grid>
             <Grid item md={6} xs={12}>

@@ -7,11 +7,6 @@ export default [
     label: i18n('entities.category.fields.id'),
     render: exporterRenders.decimal(),
   },
-  // {
-  //   name: 'parent',
-  //   label: i18n('entities.category.fields.parent'),
-  //   render: exporterRenders.relationToOne(),
-  // },
   {
     name: 'name',
     label: i18n('entities.category.fields.name'),
@@ -23,11 +18,6 @@ export default [
   {
     name: 'link',
     label: i18n('entities.category.fields.link'),
-  },
-  {
-    name: 'author_id',
-    label: i18n('entities.category.fields.author_id'),
-    render: exporterRenders.decimal(),
   },
   {
     name: 'author_name',
