@@ -5,53 +5,31 @@ import { IRepositoryOptions } from './IRepositoryOptions';
 import AuditLogRepository from './auditLogRepository';
 import SequelizeRepository from './sequelizeRepository';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
-import CategoryDescriptionRepository from './categoryDescriptionRepository';
 
 const Op = Sequelize.Op;
 
-class CategoryRepository {
-  static ALL_FIELDS = [
-    'name',
-    'link',
-    'title',
-    'author_id',
-    'author_name',
-    'author_link',
-    'target',
-    'sort',
-    'activated',
-    'show_in_navigation',
-    'show_in_footer',
-  ];
+class CategoryDescriptionRepository {
+  static ALL_FIELDS = ['teaser', 'description'];
 
-  static async create(data, options: IRepositoryOptions) {
+  static async create(
+    created_id,
+    data,
+    options: IRepositoryOptions,
+  ) {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    const record = await options.database.category.create(
-      {
-        ...lodash.pick(data, this.ALL_FIELDS),
-        target: data.target ?? '',
-        ip: '',
-      },
-      {
-        transaction,
-      },
-    );
-    if (record.id) {
-      await CategoryDescriptionRepository.create(
-        record.id,
-        data,
-        options,
+    const record =
+      await options.database.category_description.create(
+        {
+          ...lodash.pick(data, this.ALL_FIELDS),
+          id: created_id,
+          ip: '',
+        },
+        {
+          transaction,
+        },
       );
-    }
-
-    await this._createAuditLog(
-      AuditLogRepository.CREATE,
-      record,
-      data,
-      options,
-    );
 
     return this.findById(record.id, options);
   }
@@ -64,12 +42,13 @@ class CategoryRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    let record = await options.database.category.findOne({
-      where: {
-        id,
-      },
-      transaction,
-    });
+    let record =
+      await options.database.category_description.findOne({
+        where: {
+          id,
+        },
+        transaction,
+      });
 
     if (!record) {
       throw new Error404();
@@ -78,27 +57,11 @@ class CategoryRepository {
     record = await record.update(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
-        target: data.target ?? '',
         ip: '',
       },
       {
         transaction,
       },
-    );
-
-    if (record) {
-      await CategoryDescriptionRepository.update(
-        id,
-        data,
-        options,
-      );
-    }
-
-    await this._createAuditLog(
-      AuditLogRepository.UPDATE,
-      record,
-      data,
-      options,
     );
 
     return this.findById(record.id, options);
@@ -108,17 +71,13 @@ class CategoryRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    await CategoryDescriptionRepository.destroy(
-      id,
-      options,
-    );
-
-    let record = await options.database.category.findOne({
-      where: {
-        id,
-      },
-      transaction,
-    });
+    let record =
+      await options.database.category_description.findOne({
+        where: {
+          id,
+        },
+        transaction,
+      });
 
     if (!record) {
       throw new Error404();
@@ -127,38 +86,19 @@ class CategoryRepository {
     await record.destroy({
       transaction,
     });
-
-    await this._createAuditLog(
-      AuditLogRepository.DELETE,
-      record,
-      record,
-      options,
-    );
   }
 
   static async findById(id, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    const record = await options.database.category.findOne({
-      where: {
-        id,
-      },
-      transaction,
-    });
-
-    const description_record =
+    const record =
       await options.database.category_description.findOne({
         where: {
           id,
         },
         transaction,
       });
-    record.dataValues = {
-      ...record.dataValues,
-      teaser: description_record.teaser,
-      description: description_record.description,
-    };
 
     if (!record) {
       throw new Error404();
@@ -192,12 +132,11 @@ class CategoryRepository {
       },
     };
 
-    const records = await options.database.category.findAll(
-      {
+    const records =
+      await options.database.category_description.findAll({
         attributes: ['id'],
         where,
-      },
-    );
+      });
 
     return records.map((record) => record.id);
   }
@@ -206,7 +145,7 @@ class CategoryRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    return options.database.category.count({
+    return options.database.category_description.count({
       where: {
         ...filter,
       },
@@ -249,41 +188,15 @@ class CategoryRepository {
         }
       }
 
-      [
-        'name',
-        'link',
-        'title',
-        'target',
-        'author_name',
-        'author_link',
-      ].forEach((field) => {
+      ['teaser', 'description'].forEach((field) => {
         if (filter[field]) {
           whereAnd.push(
             SequelizeFilterUtils.ilikeIncludes(
-              'category',
+              'category_description',
               field,
               filter[field],
             ),
           );
-        }
-      });
-
-      [
-        'activated',
-        'show_in_navigation',
-        'show_in_footer',
-      ].forEach((field) => {
-        if (
-          filter[field] === true ||
-          filter[field] === 'true' ||
-          filter[field] === false ||
-          filter[field] === 'false'
-        ) {
-          whereAnd.push({
-            [field]:
-              filter[field] === true ||
-              filter[field] === 'true',
-          });
         }
       });
     }
@@ -291,16 +204,18 @@ class CategoryRepository {
     const where = { [Op.and]: whereAnd };
 
     let { rows, count } =
-      await options.database.category.findAndCountAll({
-        where,
-        limit: limit ? Number(limit) : undefined,
-        offset: offset ? Number(offset) : undefined,
-        order: orderBy
-          ? [orderBy.split('_')]
-          : [['id', 'DESC']],
-        transaction:
-          SequelizeRepository.getTransaction(options),
-      });
+      await options.database.category_description.findAndCountAll(
+        {
+          where,
+          limit: limit ? Number(limit) : undefined,
+          offset: offset ? Number(offset) : undefined,
+          order: orderBy
+            ? [orderBy.split('_')]
+            : [['id', 'DESC']],
+          transaction:
+            SequelizeRepository.getTransaction(options),
+        },
+      );
 
     rows = await this._fillWithRelationsAndFilesForRows(
       rows,
@@ -323,8 +238,8 @@ class CategoryRepository {
           { ['id']: query },
           {
             [Op.and]: SequelizeFilterUtils.ilikeIncludes(
-              'category',
-              'title',
+              'category_description',
+              'description',
               query,
             ),
           },
@@ -334,44 +249,17 @@ class CategoryRepository {
 
     const where = { [Op.and]: whereAnd };
 
-    const records = await options.database.category.findAll(
-      {
-        attributes: ['id', 'title'],
+    const records =
+      await options.database.category_description.findAll({
+        attributes: ['id', 'description'],
         where,
         limit: limit ? Number(limit) : undefined,
-        order: [['title', 'ASC']],
-      },
-    );
+        order: [['id', 'ASC']],
+      });
 
     return records.map((record) => ({
       id: record.id,
-      label: record.title,
     }));
-  }
-
-  static async _createAuditLog(
-    action,
-    record,
-    data,
-    options: IRepositoryOptions,
-  ) {
-    let values = {};
-
-    if (data) {
-      values = {
-        ...record.get({ plain: true }),
-      };
-    }
-
-    await AuditLogRepository.log(
-      {
-        entityName: 'category',
-        entityId: record.id,
-        action,
-        values,
-      },
-      options,
-    );
   }
 
   static async _fillWithRelationsAndFilesForRows(
@@ -406,4 +294,4 @@ class CategoryRepository {
   }
 }
 
-export default CategoryRepository;
+export default CategoryDescriptionRepository;

@@ -1,7 +1,7 @@
 import Error400 from '../errors/Error400';
 import SequelizeRepository from '../database/repositories/sequelizeRepository';
 import { IServiceOptions } from './IServiceOptions';
-import categoryRepository from '../database/repositories/categoryRepository';
+import CategoryRepository from '../database/repositories/categoryRepository';
 
 export default class categoryService {
   options: IServiceOptions;
@@ -17,7 +17,7 @@ export default class categoryService {
       );
 
     try {
-      const record = await categoryRepository.create(data, {
+      const record = await CategoryRepository.create(data, {
         ...this.options,
         transaction,
       });
@@ -49,7 +49,7 @@ export default class categoryService {
       );
 
     try {
-      const record = await categoryRepository.update(
+      const record = await CategoryRepository.update(
         id,
         data,
         {
@@ -86,7 +86,7 @@ export default class categoryService {
 
     try {
       for (const id of ids) {
-        await categoryRepository.destroy(id, {
+        await CategoryRepository.destroy(id, {
           ...this.options,
           transaction,
         });
@@ -104,11 +104,11 @@ export default class categoryService {
   }
 
   async findById(id) {
-    return categoryRepository.findById(id, this.options);
+    return CategoryRepository.findById(id, this.options);
   }
 
   async findAllAutocomplete(search, limit) {
-    return categoryRepository.findAllAutocomplete(
+    return CategoryRepository.findAllAutocomplete(
       search,
       limit,
       this.options,
@@ -116,7 +116,7 @@ export default class categoryService {
   }
 
   async findAndCountAll(args) {
-    return categoryRepository.findAndCountAll(
+    return CategoryRepository.findAndCountAll(
       args,
       this.options,
     );
@@ -146,7 +146,7 @@ export default class categoryService {
   }
 
   async _isImportHashExistent(importHash) {
-    const count = await categoryRepository.count(
+    const count = await CategoryRepository.count(
       {
         importHash,
       },
