@@ -209,6 +209,75 @@ class Permissions {
        */
 
       /**
+       * ? Broker Permissions Start
+       */
+      brokerImport: {
+        id: 'brokerImport',
+        allowedRoles: [],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerCreate: {
+        id: 'brokerCreate',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerEdit: {
+        id: 'brokerEdit',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerDestroy: {
+        id: 'brokerDestroy',
+        allowedRoles: [roles.admin],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerRead: {
+        id: 'brokerRead',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerAutocomplete: {
+        id: 'brokerAutocomplete',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      /**
+       * ! Broker Permissions End
+       */
+
+      /**
        * ? category Permissions Start
        */
       categoryImport: {
