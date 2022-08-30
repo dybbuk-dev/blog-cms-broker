@@ -15,8 +15,6 @@ class CategoryRepository {
     'link',
     'title',
     'author_id',
-    'author_name',
-    'author_link',
     'target',
     'sort',
     'activated',
@@ -32,6 +30,7 @@ class CategoryRepository {
       {
         ...lodash.pick(data, this.ALL_FIELDS),
         target: data.target ?? '',
+        author_id: data.author || '',
         ip: '',
       },
       {
@@ -79,6 +78,7 @@ class CategoryRepository {
       {
         ...lodash.pick(data, this.ALL_FIELDS),
         target: data.target ?? '',
+        author_id: data.author,
         ip: '',
       },
       {
@@ -139,11 +139,17 @@ class CategoryRepository {
   static async findById(id, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
-
+    const include = [
+      {
+        model: options.database.author,
+        as: 'author',
+      },
+    ];
     const record = await options.database.category.findOne({
       where: {
         id,
       },
+      include,
       transaction,
     });
 
@@ -218,6 +224,12 @@ class CategoryRepository {
     { filter, limit = 0, offset = 0, orderBy = '' },
     options: IRepositoryOptions,
   ) {
+    const include = [
+      {
+        model: options.database.author,
+        as: 'author',
+      },
+    ];
     let whereAnd: Array<any> = [];
 
     if (filter) {
@@ -293,6 +305,7 @@ class CategoryRepository {
     let { rows, count } =
       await options.database.category.findAndCountAll({
         where,
+        include,
         limit: limit ? Number(limit) : undefined,
         offset: offset ? Number(offset) : undefined,
         order: orderBy
@@ -315,7 +328,13 @@ class CategoryRepository {
     limit,
     options: IRepositoryOptions,
   ) {
-    let whereAnd: Array<any> = [];
+    let whereAnd: Array<any> = [
+      {
+        ['name']: {
+          [Op.ne]: '',
+        },
+      },
+    ];
 
     if (query) {
       whereAnd.push({
@@ -323,8 +342,8 @@ class CategoryRepository {
           { ['id']: query },
           {
             [Op.and]: SequelizeFilterUtils.ilikeIncludes(
-              'category',
-              'title',
+              'author',
+              'name',
               query,
             ),
           },
@@ -334,18 +353,16 @@ class CategoryRepository {
 
     const where = { [Op.and]: whereAnd };
 
-    const records = await options.database.category.findAll(
-      {
-        attributes: ['id', 'title'],
-        where,
-        limit: limit ? Number(limit) : undefined,
-        order: [['title', 'ASC']],
-      },
-    );
+    const records = await options.database.author.findAll({
+      attributes: ['id', 'name'],
+      where,
+      limit: limit ? Number(limit) : undefined,
+      order: [['name', 'ASC']],
+    });
 
     return records.map((record) => ({
       id: record.id,
-      label: record.title,
+      label: record.name,
     }));
   }
 

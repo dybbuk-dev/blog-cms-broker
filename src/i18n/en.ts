@@ -91,6 +91,11 @@ const en = {
   },
 
   entities: {
+    author: {
+      errors: {
+        unique: {},
+      },
+    },
     navigation: {
       errors: {
         unique: {},

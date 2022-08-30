@@ -9,49 +9,21 @@ import moment from 'moment';
 
 const Op = Sequelize.Op;
 
-class NavigationRepository {
+class AuthorRepository {
   static ALL_FIELDS = [
     'name',
     'link',
-    'title',
-    'target',
-    'sort',
-    'activated',
-    'show_user_logged_in',
-    'show_in_navigation',
-    'type',
+    'image',
+    'description',
   ];
-
-  static TYPES = [
-    'NONE',
-    'FOREX_SCHOOL',
-    'FOREX_STRATEGY',
-    'DOWNLOADS',
-    'NEWS',
-    'OFFERS',
-    'MOST_READ',
-  ];
-
-  static getTypeIndex(type) {
-    if (!type) {
-      return 0;
-    }
-    const index = this.TYPES.indexOf(
-      type.toString().toUpperCase(),
-    );
-    return index < 0 ? 0 : index;
-  }
 
   static async create(data, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    const record = await options.database.navigation.create(
+    const record = await options.database.author.create(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
-        parent_id: data.parent || null,
-        target: data.target ?? '',
-        type: this.getTypeIndex(data.type),
         ip: '',
         created: moment(),
         modified: moment(),
@@ -79,7 +51,7 @@ class NavigationRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    let record = await options.database.navigation.findOne({
+    let record = await options.database.author.findOne({
       where: {
         id,
       },
@@ -93,9 +65,6 @@ class NavigationRepository {
     record = await record.update(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
-        parent_id: data.parent || null,
-        target: data.target ?? '',
-        type: this.getTypeIndex(data.type),
         modified: moment(),
         ip: '',
       },
@@ -118,7 +87,7 @@ class NavigationRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    let record = await options.database.navigation.findOne({
+    let record = await options.database.author.findOne({
       where: {
         id,
       },
@@ -145,21 +114,12 @@ class NavigationRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    const include = [
-      {
-        model: options.database.navigation,
-        as: 'parent',
+    const record = await options.database.author.findOne({
+      where: {
+        id,
       },
-    ];
-
-    const record =
-      await options.database.navigation.findOne({
-        where: {
-          id,
-        },
-        include,
-        transaction,
-      });
+      transaction,
+    });
 
     if (!record) {
       throw new Error404();
@@ -193,11 +153,10 @@ class NavigationRepository {
       },
     };
 
-    const records =
-      await options.database.navigation.findAll({
-        attributes: ['id'],
-        where,
-      });
+    const records = await options.database.author.findAll({
+      attributes: ['id'],
+      where,
+    });
 
     return records.map((record) => record.id);
   }
@@ -206,7 +165,7 @@ class NavigationRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    return options.database.navigation.count({
+    return options.database.author.count({
       where: {
         ...filter,
       },
@@ -219,12 +178,6 @@ class NavigationRepository {
     options: IRepositoryOptions,
   ) {
     let whereAnd: Array<any> = [];
-    let include = [
-      {
-        model: options.database.navigation,
-        as: 'parent',
-      },
-    ];
 
     if (filter) {
       if (filter.idRange) {
@@ -255,18 +208,12 @@ class NavigationRepository {
         }
       }
 
-      if (filter.parent) {
-        whereAnd.push({
-          ['parent_id']: filter.parent,
-        });
-      }
-
-      ['name', 'link', 'title', 'target'].forEach(
+      ['name', 'link', 'image', 'description'].forEach(
         (field) => {
           if (filter[field]) {
             whereAnd.push(
               SequelizeFilterUtils.ilikeIncludes(
-                'navigation',
+                'author',
                 field,
                 filter[field],
               ),
@@ -274,39 +221,13 @@ class NavigationRepository {
           }
         },
       );
-
-      if (filter.type) {
-        whereAnd.push({
-          type: this.getTypeIndex(filter.type),
-        });
-      }
-
-      [
-        'activated',
-        'show_user_logged_in',
-        'show_in_navigation',
-      ].forEach((field) => {
-        if (
-          filter[field] === true ||
-          filter[field] === 'true' ||
-          filter[field] === false ||
-          filter[field] === 'false'
-        ) {
-          whereAnd.push({
-            [field]:
-              filter[field] === true ||
-              filter[field] === 'true',
-          });
-        }
-      });
     }
 
     const where = { [Op.and]: whereAnd };
 
     let { rows, count } =
-      await options.database.navigation.findAndCountAll({
+      await options.database.author.findAndCountAll({
         where,
-        include,
         limit: limit ? Number(limit) : undefined,
         offset: offset ? Number(offset) : undefined,
         order: orderBy
@@ -329,16 +250,7 @@ class NavigationRepository {
     limit,
     options: IRepositoryOptions,
   ) {
-    let whereAnd: Array<any> = [
-      {
-        ['parent_id']: {
-          [Op.is]: null,
-        },
-        ['title']: {
-          [Op.ne]: '',
-        },
-      },
-    ];
+    let whereAnd: Array<any> = [];
 
     if (query) {
       whereAnd.push({
@@ -346,8 +258,8 @@ class NavigationRepository {
           { ['id']: query },
           {
             [Op.and]: SequelizeFilterUtils.ilikeIncludes(
-              'navigation',
-              'title',
+              'author',
+              'name',
               query,
             ),
           },
@@ -357,17 +269,16 @@ class NavigationRepository {
 
     const where = { [Op.and]: whereAnd };
 
-    const records =
-      await options.database.navigation.findAll({
-        attributes: ['id', 'title'],
-        where,
-        limit: limit ? Number(limit) : undefined,
-        order: [['title', 'ASC']],
-      });
+    const records = await options.database.author.findAll({
+      attributes: ['id', 'name'],
+      where,
+      limit: limit ? Number(limit) : undefined,
+      order: [['name', 'ASC']],
+    });
 
     return records.map((record) => ({
       id: record.id,
-      label: record.title,
+      label: record.name,
     }));
   }
 
@@ -387,7 +298,7 @@ class NavigationRepository {
 
     await AuditLogRepository.log(
       {
-        entityName: 'navigation',
+        entityName: 'author',
         entityId: record.id,
         action,
         values,
@@ -428,4 +339,4 @@ class NavigationRepository {
   }
 }
 
-export default NavigationRepository;
+export default AuthorRepository;

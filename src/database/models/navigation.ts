@@ -11,6 +11,10 @@ export default function (sequelize) {
         autoIncrement: true,
         primaryKey: true,
       },
+      parent_id: {
+        type: DataTypes.BIGINT.UNSIGNED,
+        allowNull: true,
+      },
       name: {
         type: DataTypes.STRING(255),
         allowNull: false,
@@ -123,9 +127,7 @@ export default function (sequelize) {
     models.navigation.belongsTo(models.navigation, {
       as: 'parent',
       constraints: true,
-      foreignKey: {
-        allowNull: true,
-      },
+      foreignKey: 'parent_id',
       onDelete: 'NO ACTION',
       onUpdate: 'NO ACTION',
     });

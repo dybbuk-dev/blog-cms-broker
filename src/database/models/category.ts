@@ -110,6 +110,15 @@ export default function (sequelize) {
       paranoid: true,
     },
   );
+  category.associate = (models) => {
+    models.category.belongsTo(models.author, {
+      as: 'author',
+      constraints: true,
+      foreignKey: 'author_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
+    });
+  };
 
   return category;
 }

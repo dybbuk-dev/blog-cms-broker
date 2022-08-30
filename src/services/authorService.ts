@@ -1,9 +1,9 @@
 import Error400 from '../errors/Error400';
 import SequelizeRepository from '../database/repositories/sequelizeRepository';
 import { IServiceOptions } from './IServiceOptions';
-import CategoryRepository from '../database/repositories/categoryRepository';
+import AuthorRepository from '../database/repositories/authorRepository';
 
-export default class CategoryService {
+export default class AuthorService {
   options: IServiceOptions;
 
   constructor(options) {
@@ -17,7 +17,7 @@ export default class CategoryService {
       );
 
     try {
-      const record = await CategoryRepository.create(data, {
+      const record = await AuthorRepository.create(data, {
         ...this.options,
         transaction,
       });
@@ -35,7 +35,7 @@ export default class CategoryService {
       SequelizeRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'category',
+        'author',
       );
 
       throw error;
@@ -49,7 +49,7 @@ export default class CategoryService {
       );
 
     try {
-      const record = await CategoryRepository.update(
+      const record = await AuthorRepository.update(
         id,
         data,
         {
@@ -71,7 +71,7 @@ export default class CategoryService {
       SequelizeRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'category',
+        'author',
       );
 
       throw error;
@@ -86,7 +86,7 @@ export default class CategoryService {
 
     try {
       for (const id of ids) {
-        await CategoryRepository.destroy(id, {
+        await AuthorRepository.destroy(id, {
           ...this.options,
           transaction,
         });
@@ -104,11 +104,11 @@ export default class CategoryService {
   }
 
   async findById(id) {
-    return CategoryRepository.findById(id, this.options);
+    return AuthorRepository.findById(id, this.options);
   }
 
   async findAllAutocomplete(search, limit) {
-    return CategoryRepository.findAllAutocomplete(
+    return AuthorRepository.findAllAutocomplete(
       search,
       limit,
       this.options,
@@ -116,7 +116,7 @@ export default class CategoryService {
   }
 
   async findAndCountAll(args) {
-    return CategoryRepository.findAndCountAll(
+    return AuthorRepository.findAndCountAll(
       args,
       this.options,
     );
@@ -146,7 +146,7 @@ export default class CategoryService {
   }
 
   async _isImportHashExistent(importHash) {
-    const count = await CategoryRepository.count(
+    const count = await AuthorRepository.count(
       {
         importHash,
       },
