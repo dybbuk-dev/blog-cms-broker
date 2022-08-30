@@ -173,6 +173,67 @@ const privateRoutes = [
   },
 
   /**
+   * !! Broker routes start
+   */
+  {
+    path: '/broker',
+    collapseName: 'broker',
+    i18n: 'entities.broker.menu',
+    parent: '/',
+    loader: () =>
+      import('src/view/broker/list/BrokerListPage'),
+    permissionRequired: permissions.brokerRead,
+    exact: true,
+  },
+
+  {
+    path: '/broker/new',
+    collapseName: 'broker',
+    i18n: 'entities.broker.new.title',
+    parent: '/broker',
+    loader: () =>
+      import('src/view/broker/form/BrokerFormPage'),
+    permissionRequired: permissions.brokerCreate,
+    exact: true,
+  },
+
+  {
+    path: '/broker/importer',
+    collapseName: 'broker',
+    i18n: 'entities.broker.importer.title',
+    parent: '/broker',
+    loader: () =>
+      import('src/view/broker/importer/BrokerImporterPage'),
+    permissionRequired: permissions.brokerImport,
+    exact: true,
+  },
+
+  {
+    path: '/broker/:id/edit',
+    collapseName: 'broker',
+    i18n: 'entities.broker.edit.title',
+    parent: '/broker',
+    loader: () =>
+      import('src/view/broker/form/BrokerFormPage'),
+    permissionRequired: permissions.brokerEdit,
+    exact: true,
+  },
+
+  {
+    path: '/broker/:id',
+    collapseName: 'broker',
+    i18n: 'entities.broker.view.title',
+    parent: '/broker',
+    loader: () =>
+      import('src/view/broker/view/BrokerViewPage'),
+    permissionRequired: permissions.brokerRead,
+    exact: true,
+  },
+  /**
+   * !! Broker routes end
+   */
+
+  /**
    * ! Routes Collapse
    */
   {
