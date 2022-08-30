@@ -234,6 +234,68 @@ const privateRoutes = [
    */
 
   /**
+   * ? Author start
+   */
+
+  {
+    path: '/author',
+    collapseName: 'author',
+    i18n: 'collapses.author.menu',
+    parent: '/',
+    loader: () =>
+      import('src/view/author/list/AuthorListPage'),
+    permissionRequired: permissions.authorRead,
+    exact: true,
+  },
+  {
+    path: '/author/new',
+    collapseName: 'author',
+    i18n: 'entities.author.new.title',
+    parent: '/author',
+    loader: () =>
+      import('src/view/author/form/AuthorFormPage'),
+    permissionRequired: permissions.authorCreate,
+    exact: true,
+  },
+
+  {
+    path: '/author/importer',
+    collapseName: 'author',
+    i18n: 'entities.author.importer.title',
+    parent: '/author',
+    loader: () =>
+      import('src/view/author/importer/AuthorImporterPage'),
+    permissionRequired: permissions.authorImport,
+    exact: true,
+  },
+
+  {
+    path: '/author/:id/edit',
+    collapseName: 'author',
+    i18n: 'entities.author.edit.title',
+    parent: '/author',
+    loader: () =>
+      import('src/view/author/form/AuthorFormPage'),
+    permissionRequired: permissions.authorEdit,
+    exact: true,
+  },
+
+  {
+    path: '/author/:id',
+    collapseName: 'author',
+    i18n: 'entities.author.view.title',
+    parent: '/author',
+    loader: () =>
+      import('src/view/author/view/AuthorViewPage'),
+    permissionRequired: permissions.authorRead,
+    exact: true,
+  },
+
+  /**
+   * ! Author end
+   */
+
+  /**
    * ! Routes Collapse
    */
   {

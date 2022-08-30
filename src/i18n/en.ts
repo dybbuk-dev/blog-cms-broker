@@ -96,6 +96,11 @@ const en = {
         unique: {},
       },
     },
+    author: {
+      errors: {
+        unique: {},
+      },
+    },
     navigation: {
       errors: {
         unique: {},

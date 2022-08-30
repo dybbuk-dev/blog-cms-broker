@@ -4,6 +4,7 @@ import TextViewItem from 'src/view/shared/view/TextViewItem';
 import { Grid } from '@mui/material';
 import CheckboxViewItem from 'src/view/shared/view/CheckboxViewItem';
 import HtmlViewItem from 'src/view/shared/view/HtmlViewItem';
+import AuthorViewItem from 'src/view/author/view/AuthorViewItem';
 
 function CategoryView(props) {
   const renderView = () => {
@@ -35,19 +36,9 @@ function CategoryView(props) {
           />
         </Grid>
         <Grid item md={6} xs={12}>
-          <TextViewItem
-            label={i18n(
-              'entities.category.fields.author_name',
-            )}
+          <AuthorViewItem
+            label={i18n('entities.category.fields.author')}
             value={record.author_name}
-          />
-        </Grid>
-        <Grid item md={6} xs={12}>
-          <TextViewItem
-            label={i18n(
-              'entities.category.fields.author_link',
-            )}
-            value={record.author_link}
           />
         </Grid>
         <Grid item xs={12}>

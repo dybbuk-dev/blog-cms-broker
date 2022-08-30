@@ -35,6 +35,7 @@ export default function (sequelize) {
       },
       description: {
         type: DataTypes.TEXT,
+        allowNull: false,
       },
       ip: {
         type: DataTypes.CHAR(39),
@@ -55,11 +56,12 @@ export default function (sequelize) {
       },
     },
     {
+      indexes: [],
       underscored: true,
       timestamps: false,
       paranoid: true,
     },
   );
-
+  author.associate = (models) => {};
   return author;
 }

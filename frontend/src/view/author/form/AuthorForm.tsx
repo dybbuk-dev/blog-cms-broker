@@ -14,9 +14,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import MDButton from 'src/mui/components/MDButton';
-import categoryEnumerators from '../../../modules/category/categoryEnumerators';
+import authorEnumerators from '../../../modules/author/authorEnumerators';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
-import CategoryAutocompleteFormItem from 'src/view/category/autocomplete/CategoryAutocompleteFormItem';
+import AuthorAutocompleteFormItem from 'src/view/author/autocomplete/AuthorAutocompleteFormItem';
 import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
@@ -24,7 +24,7 @@ import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(
-    i18n('entities.category.fields.name'),
+    i18n('entities.author.fields.name'),
     {
       required: true,
       min: 1,
@@ -32,63 +32,32 @@ const schema = yup.object().shape({
     },
   ),
   link: yupFormSchemas.string(
-    i18n('entities.category.fields.link'),
+    i18n('entities.author.fields.link'),
     {
       required: true,
       min: 1,
       max: 255,
     },
   ),
-  title: yupFormSchemas.string(
-    i18n('entities.category.fields.title'),
+  image: yupFormSchemas.string(
+    i18n('entities.author.fields.image'),
     {
       required: true,
       min: 1,
       max: 255,
     },
   ),
-  author: yupFormSchemas.relationToOne(
-    i18n('entities.category.fields.author'),
-    {},
-  ),
-
-  teaser: yupFormSchemas.string(
-    i18n('entities.category.fields.teaser'),
-    {
-      required: true,
-    },
-  ),
-
   description: yupFormSchemas.string(
-    i18n('entities.category.fields.description'),
+    i18n('entities.author.fields.description'),
     {
       required: true,
       min: 1,
       max: 255,
     },
-  ),
-
-  target: yupFormSchemas.enumerator(
-    i18n('entities.category.fields.target'),
-    {
-      options: categoryEnumerators.target,
-    },
-  ),
-  activated: yupFormSchemas.boolean(
-    i18n('entities.category.fields.activated'),
-    {},
-  ),
-  show_in_navigation: yupFormSchemas.boolean(
-    i18n('entities.category.fields.show_in_navigation'),
-    {},
-  ),
-  show_in_footer: yupFormSchemas.boolean(
-    i18n('entities.category.fields.show_in_footer'),
-    {},
   ),
 });
 
-function CategoryForm(props) {
+function AuthorForm(props) {
   const { sidenavColor } = selectMuiSettings();
   const [initialValues] = useState(() => {
     const record = props.record || {};
@@ -96,15 +65,8 @@ function CategoryForm(props) {
     return {
       name: record.name,
       link: record.link,
-      title: record.title,
-      author: record.author,
-      teaser: record.teaser,
+      image: record.image,
       description: record.description,
-      target: record.target,
-      sort: record.sort ?? 0,
-      activated: record.activated,
-      show_in_navigation: record.show_in_navigation,
-      show_in_footer: record.show_in_footer,
     };
   });
 
@@ -134,9 +96,7 @@ function CategoryForm(props) {
             <Grid item md={6} xs={12}>
               <InputFormItem
                 name="name"
-                label={i18n(
-                  'entities.category.fields.name',
-                )}
+                label={i18n('entities.author.fields.name')}
                 variant="standard"
                 required={true}
                 autoFocus
@@ -145,100 +105,26 @@ function CategoryForm(props) {
             <Grid item md={6} xs={12}>
               <InputFormItem
                 name="link"
-                label={i18n(
-                  'entities.category.fields.link',
-                )}
+                label={i18n('entities.author.fields.link')}
                 variant="standard"
                 required={true}
               />
             </Grid>
             <Grid item md={6} xs={12}>
               <InputFormItem
-                name="title"
-                label={i18n(
-                  'entities.category.fields.title',
-                )}
+                name="image"
+                label={i18n('entities.author.fields.image')}
                 variant="standard"
                 required={true}
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <CategoryAutocompleteFormItem
-                name="author"
-                label={i18n(
-                  'entities.category.fields.author',
-                )}
-                required={false}
-                variant="standard"
-                fullWidth
-              />
-            </Grid>
-            <Grid item md={12} xs={12}>
-              <HtmlEditorFormItem
-                name="teaser"
-                label={i18n(
-                  'entities.category.fields.teaser',
-                )}
-                value={initialValues.teaser}
               />
             </Grid>
             <Grid item md={12} xs={12}>
               <HtmlEditorFormItem
                 name="description"
                 label={i18n(
-                  'entities.category.fields.description',
+                  'entities.author.fields.description',
                 )}
                 value={initialValues.description}
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <SelectFormItem
-                name="target"
-                label={i18n(
-                  'entities.category.fields.target',
-                )}
-                options={categoryEnumerators.target.map(
-                  (value) => ({
-                    value,
-                    label: i18n(
-                      `entities.category.enumerators.target.${value}`,
-                    ),
-                  }),
-                )}
-                variant="standard"
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <InputNumberFormItem
-                name="sort"
-                label={i18n(
-                  'entities.category.fields.sort',
-                )}
-                variant="standard"
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <CheckboxFormItem
-                name="activated"
-                label={i18n(
-                  'entities.category.fields.activated',
-                )}
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <CheckboxFormItem
-                name="show_in_navigation"
-                label={i18n(
-                  'entities.category.fields.show_in_navigation',
-                )}
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <CheckboxFormItem
-                name="show_in_footer"
-                label={i18n(
-                  'entities.category.fields.show_in_footer',
-                )}
               />
             </Grid>
           </Grid>
@@ -293,4 +179,4 @@ function CategoryForm(props) {
   );
 }
 
-export default CategoryForm;
+export default AuthorForm;

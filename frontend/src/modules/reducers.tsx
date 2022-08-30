@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 import auditLog from 'src/modules/auditLog/auditLogReducers';
 import auth from 'src/modules/auth/authReducers';
+import author from 'src/modules/author/authorReducers';
 import broker from 'src/modules/broker/brokerReducers';
 import category from 'src/modules/category/categoryReducers';
 import layout from 'src/modules/layout/layoutReducers';
@@ -17,6 +18,7 @@ export default (history) =>
     router: connectRouter(history),
     auditLog,
     auth,
+    author,
     broker,
     category,
     layout,

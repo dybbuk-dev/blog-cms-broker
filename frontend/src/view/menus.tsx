@@ -29,6 +29,13 @@ const menus = [
   },
 
   {
+    path: '/author',
+    name: i18n('author.menu'),
+    permissionRequired: permissions.authorRead,
+    icon: <Icon fontSize="medium">portrait</Icon>,
+  },
+
+  {
     name: i18n('collapses.routes.menu'),
     key: 'routes',
     icon: <Icon fontSize="medium">signpost</Icon>,
