@@ -20,7 +20,6 @@ class NavigationRepository {
     'show_user_logged_in',
     'show_in_navigation',
     'type',
-    'parent',
   ];
 
   static TYPES = [

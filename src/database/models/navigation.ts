@@ -125,6 +125,7 @@ export default function (sequelize) {
 
   navigation.associate = (models) => {
     models.navigation.belongsTo(models.navigation, {
+      as: 'parent',
       constraints: true,
       foreignKey: 'parent_id',
       onDelete: 'NO ACTION',
