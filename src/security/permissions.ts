@@ -278,7 +278,7 @@ class Permissions {
        */
 
       /**
-       * ? category Permissions Start
+       * ? Category Permissions Start
        */
       categoryImport: {
         id: 'categoryImport',
@@ -343,7 +343,7 @@ class Permissions {
         ],
       },
       /**
-       * ! category Permissions End
+       * ! Category Permissions End
        */
     };
   }
