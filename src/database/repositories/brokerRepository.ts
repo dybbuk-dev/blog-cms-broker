@@ -128,8 +128,8 @@ class BrokerRepository {
 
     const include = [
       {
-        model: options.database.broker,
-        as: 'parent',
+        model: options.database.navigation,
+        as: 'navigation',
       },
     ];
 
@@ -200,8 +200,8 @@ class BrokerRepository {
     let whereAnd: Array<any> = [];
     let include = [
       {
-        model: options.database.broker,
-        as: 'parent',
+        model: options.database.navigation,
+        as: 'navigation',
       },
     ];
 

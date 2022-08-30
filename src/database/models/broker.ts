@@ -129,12 +129,14 @@ export default function (sequelize) {
 
   broker.associate = (models) => {
     models.broker.belongsTo(models.navigation, {
+      as: 'navigation',
       constraints: true,
       foreignKey: 'navigation_id',
       onDelete: 'NO ACTION',
       onUpdate: 'NO ACTION',
     });
     models.broker.belongsTo(models.author, {
+      as: 'author',
       constraints: true,
       foreignKey: 'author_id',
       onDelete: 'NO ACTION',
