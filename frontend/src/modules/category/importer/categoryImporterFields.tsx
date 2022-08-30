@@ -80,12 +80,12 @@ export default [
     ),
   },
   {
-    name: 'show_in_category',
+    name: 'show_in_navigation',
     label: i18n(
-      'entities.category.fields.show_in_category',
+      'entities.category.fields.show_in_navigation',
     ),
     schema: schemas.boolean(
-      i18n('entities.category.fields.show_in_category'),
+      i18n('entities.category.fields.show_in_navigation'),
       {},
     ),
   },

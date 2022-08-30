@@ -9,8 +9,8 @@ import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { i18n } from 'src/i18n';
-import actions from 'src/modules/category/list/categoryListActions';
-import selectors from 'src/modules/category/list/categoryListSelectors';
+import actions from 'src/modules/author/list/authorListActions';
+import selectors from 'src/modules/author/list/authorListSelectors';
 import yupFilterSchemas from 'src/modules/shared/yup/yupFilterSchemas';
 import FilterWrapper, {
   FilterButtons,
@@ -25,94 +25,44 @@ import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import MDButton from 'src/mui/components/MDButton';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
-import CategoryAutocompleteFormItem from 'src/view/category/autocomplete/CategoryAutocompleteFormItem';
+import AuthorAutocompleteFormItem from 'src/view/author/autocomplete/AuthorAutocompleteFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import { filterBooleanOptions } from 'src/modules/utils';
 
 const schema = yup.object().shape({
   idRange: yupFilterSchemas.integerRange(
-    i18n('entities.category.fields.idRange'),
+    i18n('entities.author.fields.idRange'),
   ),
   name: yupFilterSchemas.string(
-    i18n('entities.category.fields.name'),
-  ),
-  title: yupFilterSchemas.string(
-    i18n('entities.category.fields.title'),
+    i18n('entities.author.fields.name'),
   ),
   link: yupFilterSchemas.string(
-    i18n('entities.category.fields.link'),
-  ),
-  author_name: yupFilterSchemas.string(
-    i18n('entities.category.fields.author_name'),
-  ),
-  author_link: yupFilterSchemas.string(
-    i18n('entities.category.fields.author_link'),
-  ),
-  activated: yupFilterSchemas.boolean(
-    i18n('entities.category.fields.activated'),
-  ),
-  show_in_navigation: yupFilterSchemas.boolean(
-    i18n('entities.category.fields.show_in_navigation'),
-  ),
-  show_in_footer: yupFilterSchemas.boolean(
-    i18n('entities.category.fields.show_in_footer'),
+    i18n('entities.author.fields.link'),
   ),
 });
 
 const emptyValues = {
   idRange: [],
   name: null,
-  title: null,
   link: null,
-  author_name: null,
-  author_link: null,
-  activated: null,
-  show_in_navigation: null,
-  show_in_footer: null,
 };
 
 const previewRenders = {
   idRange: {
-    label: i18n('entities.category.fields.idRange'),
+    label: i18n('entities.author.fields.idRange'),
     render: filterRenders.decimalRange(),
   },
   name: {
-    label: i18n('entities.category.fields.name'),
-    render: filterRenders.generic(),
-  },
-  title: {
-    label: i18n('entities.category.fields.title'),
+    label: i18n('entities.author.fields.name'),
     render: filterRenders.generic(),
   },
   link: {
-    label: i18n('entities.category.fields.link'),
+    label: i18n('entities.author.fields.link'),
     render: filterRenders.generic(),
-  },
-  author_name: {
-    label: i18n('entities.category.fields.author_name'),
-    render: filterRenders.generic(),
-  },
-  author_link: {
-    label: i18n('entities.category.fields.author_link'),
-    render: filterRenders.generic(),
-  },
-  activated: {
-    label: i18n('entities.category.fields.activated'),
-    render: filterRenders.boolean(),
-  },
-  show_in_navigation: {
-    label: i18n(
-      'entities.category.fields.show_in_navigation',
-    ),
-    render: filterRenders.boolean(),
-  },
-  show_in_footer: {
-    label: i18n('entities.category.fields.show_in_footer'),
-    render: filterRenders.boolean(),
   },
 };
 
-function CategoryListFilter(props) {
+function AuthorListFilter(props) {
   const { sidenavColor } = selectMuiSettings();
   const rawFilter = useSelector(selectors.selectRawFilter);
   const dispatch = useDispatch();
@@ -186,7 +136,7 @@ function CategoryListFilter(props) {
                   <InputNumberRangeFormItem
                     name="idRange"
                     label={i18n(
-                      'entities.category.fields.idRange',
+                      'entities.author.fields.idRange',
                     )}
                     variant="standard"
                   />
@@ -195,16 +145,7 @@ function CategoryListFilter(props) {
                   <InputFormItem
                     name="name"
                     label={i18n(
-                      'entities.category.fields.name',
-                    )}
-                    variant="standard"
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputFormItem
-                    name="title"
-                    label={i18n(
-                      'entities.category.fields.title',
+                      'entities.author.fields.name',
                     )}
                     variant="standard"
                   />
@@ -213,49 +154,8 @@ function CategoryListFilter(props) {
                   <InputFormItem
                     name="link"
                     label={i18n(
-                      'entities.category.fields.link',
+                      'entities.author.fields.link',
                     )}
-                    variant="standard"
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <CategoryAutocompleteFormItem
-                    name="author"
-                    label={i18n(
-                      'entities.category.fields.author',
-                    )}
-                    variant="standard"
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}></Grid>
-                <Grid item lg={4} xs={12}>
-                  <SelectFormItem
-                    name="activated"
-                    label={i18n(
-                      'entities.category.fields.activated',
-                    )}
-                    options={filterBooleanOptions}
-                    variant="standard"
-                  />
-                </Grid>
-                <Grid item lg={4} xs={12}>
-                  <SelectFormItem
-                    name="show_in_navigation"
-                    label={i18n(
-                      'entities.category.fields.show_in_navigation',
-                    )}
-                    options={filterBooleanOptions}
-                    variant="standard"
-                  />
-                </Grid>
-                <Grid item lg={4} xs={12}>
-                  <SelectFormItem
-                    name="show_in_footer"
-                    label={i18n(
-                      'entities.category.fields.show_in_footer',
-                    )}
-                    options={filterBooleanOptions}
                     variant="standard"
                   />
                 </Grid>
@@ -293,4 +193,4 @@ function CategoryListFilter(props) {
   );
 }
 
-export default CategoryListFilter;
+export default AuthorListFilter;

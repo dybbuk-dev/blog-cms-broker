@@ -130,10 +130,10 @@ const en = {
       },
     },
     category: {
-      name: 'categorie',
+      name: 'category',
       label: 'All Categories',
       menu: 'Categories',
-      exporterFileName: 'categorie_export',
+      exporterFileName: 'category_export',
       list: {
         menu: 'Categories',
         title: 'Categories',
@@ -159,8 +159,7 @@ const en = {
         name: 'Surname',
         link: 'Link',
         title: 'Title',
-        author_name: 'Author Name',
-        author_link: 'Author link',
+        author: 'Author',
         teaser: 'Teaser',
         description: 'Description',
         target: 'Target',
@@ -184,7 +183,53 @@ const en = {
       },
       importer: {
         title: 'Import Categories',
-        fileName: 'categorie_import_template',
+        fileName: 'category_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
+    author: {
+      name: 'author',
+      label: 'All Authors',
+      menu: 'Authors',
+      exporterFileName: 'author_export',
+      list: {
+        menu: 'Authors',
+        title: 'Authors',
+      },
+      create: {
+        success: 'Author successfully saved',
+      },
+      update: {
+        success: 'Author successfully saved',
+      },
+      destroy: {
+        success: 'Author successfully deleted',
+      },
+      destroyAll: {
+        success: 'Author(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Author',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        name: 'Surname',
+        link: 'Link',
+        image: 'Image',
+        description: 'Description',
+      },
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Author',
+      },
+      view: {
+        title: 'View Author',
+      },
+      importer: {
+        title: 'Import Authors',
+        fileName: 'author_import_template',
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },
     },
@@ -325,6 +370,10 @@ const en = {
       userNotFound: 'User not found',
       revokingOwnPermission: `You can't revoke your own admin permission`,
     },
+  },
+
+  author: {
+    menu: 'Authors',
   },
 
   tenant: {

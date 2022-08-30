@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { i18n } from 'src/i18n';
-import NavigationForm from 'src/view/navigation/form/NavigationForm';
-import NavigationService from 'src/modules/navigation/navigationService';
+import AuthorForm from 'src/view/author/form/AuthorForm';
+import AuthorService from 'src/modules/author/authorService';
 import Errors from 'src/modules/shared/error/errors';
 import {
   Dialog,
@@ -14,14 +14,14 @@ import CloseIcon from '@mui/icons-material/Close';
 import MDTypography from 'src/mui/components/MDTypography';
 import MDBox from 'src/mui/components/MDBox';
 
-function NavigationFormModal(props) {
+function AuthorFormModal(props) {
   const [saveLoading, setSaveLoading] = useState(false);
 
   const doSubmit = async (_, data) => {
     try {
       setSaveLoading(true);
-      const { id } = await NavigationService.create(data);
-      const record = await NavigationService.find(id);
+      const { id } = await AuthorService.create(data);
+      const record = await AuthorService.find(id);
       setSaveLoading(false);
       props.onSuccess(record);
     } catch (error) {
@@ -48,7 +48,7 @@ function NavigationFormModal(props) {
           justifyContent="space-between"
         >
           <MDTypography fontWeight="bold">
-            {i18n('entities.navigation.new.title')}
+            {i18n('entities.author.new.title')}
           </MDTypography>
           <IconButton
             color="secondary"
@@ -61,7 +61,7 @@ function NavigationFormModal(props) {
       </DialogTitle>
       <DialogContent>
         <MDBox p={3}>
-          <NavigationForm
+          <AuthorForm
             saveLoading={saveLoading}
             onSubmit={doSubmit}
             onCancel={doClose}
@@ -74,4 +74,4 @@ function NavigationFormModal(props) {
   );
 }
 
-export default NavigationFormModal;
+export default AuthorFormModal;
