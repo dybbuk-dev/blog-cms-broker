@@ -23,6 +23,13 @@ const menus = [
   },
 
   {
+    path: '/broker',
+    name: i18n('entities.broker.menu'),
+    permissionRequired: permissions.brokerRead,
+    icon: <Icon fontSize="medium">badge</Icon>,
+  },
+
+  {
     name: i18n('collapses.routes.menu'),
     key: 'routes',
     icon: <Icon fontSize="medium">signpost</Icon>,

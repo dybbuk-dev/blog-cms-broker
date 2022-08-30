@@ -22,6 +22,7 @@ function CategoryFormModal(props) {
       setSaveLoading(true);
       const { id } = await CategoryService.create(data);
       const record = await CategoryService.find(id);
+      setSaveLoading(false);
       props.onSuccess(record);
     } catch (error) {
       Errors.handle(error);

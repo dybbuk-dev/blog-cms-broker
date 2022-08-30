@@ -57,12 +57,67 @@ const en = {
     routes: {
       menu: 'Routes',
     },
-    marketplace: {
-      menu: 'Marketplace',
-    },
   },
 
   entities: {
+    broker: {
+      name: 'broker',
+      label: 'All Brokers',
+      menu: 'Brokers',
+      exporterFileName: 'broker_export',
+      list: {
+        menu: 'Brokers',
+        title: 'Brokers',
+      },
+      create: {
+        success: 'Broker successfully saved',
+      },
+      update: {
+        success: 'Broker successfully saved',
+      },
+      destroy: {
+        success: 'Broker successfully deleted',
+      },
+      destroyAll: {
+        success: 'Broker(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Broker',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        navigation: 'Main Navigation',
+        name: 'Surname',
+        name_normalized: 'Name normalized',
+        activated: 'Activated',
+        is_broker: 'Is Broker',
+        is_compareable: 'Show in comparison list',
+        top_broker: 'Top Broker',
+        top_binary_broker: 'Top Binary Broker',
+        top_forex_broker: 'Top Forex Signal Provider',
+        featured_broker: 'Featured Broker',
+        pdf: 'Download PDF',
+        author: 'Author',
+        author_name: 'Author Name',
+        author_link: 'Author link',
+      },
+      enumerators: {},
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Broker',
+      },
+      view: {
+        title: 'View Broker',
+      },
+      importer: {
+        title: 'Import Brokers',
+        fileName: 'broker_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
+
     navigation: {
       name: 'navigation',
       label: 'Navigations',
@@ -129,11 +184,12 @@ const en = {
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },
     },
+
     category: {
-      name: 'categorie',
+      name: 'category',
       label: 'All Categories',
       menu: 'Categories',
-      exporterFileName: 'categorie_export',
+      exporterFileName: 'category_export',
       list: {
         menu: 'Categories',
         title: 'Categories',
@@ -148,7 +204,7 @@ const en = {
         success: 'Category successfully deleted',
       },
       destroyAll: {
-        success: 'Categorie(s) successfully deleted',
+        success: 'Category(s) successfully deleted',
       },
       edit: {
         title: 'Edit Category',
@@ -184,7 +240,7 @@ const en = {
       },
       importer: {
         title: 'Import Categories',
-        fileName: 'categorie_import_template',
+        fileName: 'category_import_template',
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },
     },
