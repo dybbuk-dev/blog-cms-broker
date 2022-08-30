@@ -36,10 +36,7 @@ function AuthorPage() {
             <AuthorViewToolbar match={match} />
           </MDBox>
           <MDBox p={3}>
-            <AuthorView
-              loading={loading}
-              record={record}
-            />
+            <AuthorView loading={loading} record={record} />
           </MDBox>
         </MDBox>
       </Card>

@@ -34,7 +34,7 @@ export default function (sequelize) {
         },
       },
       description: {
-        type: DataTypes.TEXT(),
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       ip: {
@@ -62,14 +62,6 @@ export default function (sequelize) {
       paranoid: true,
     },
   );
-  author.associate = (models) => {
-    // models.category.belongsTo(models.author, {
-    //   as: 'author',
-    //   constraints: true,
-    //   foreignKey: 'author_id',
-    //   onDelete: 'NO ACTION',
-    //   onUpdate: 'NO ACTION',
-    // });
-  };
+  author.associate = (models) => {};
   return author;
 }

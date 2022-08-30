@@ -84,6 +84,7 @@ authSocial(app, routes);
 require('./auditLog').default(routes);
 require('./auth').default(routes);
 require('./author').default(routes);
+require('./broker').default(routes);
 require('./category').default(routes);
 require('./file').default(routes);
 require('./mui').default(routes);

@@ -112,11 +112,7 @@ const authorListActions = {
         getState(),
       );
       dispatch(
-        authorListActions.doFetch(
-          filter,
-          rawFilter,
-          true,
-        ),
+        authorListActions.doFetch(filter, rawFilter, true),
       );
     },
 

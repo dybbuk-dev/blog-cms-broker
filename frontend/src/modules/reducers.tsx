@@ -3,6 +3,7 @@ import { connectRouter } from 'connected-react-router';
 import auditLog from 'src/modules/auditLog/auditLogReducers';
 import auth from 'src/modules/auth/authReducers';
 import author from 'src/modules/author/authorReducers';
+import broker from 'src/modules/broker/brokerReducers';
 import category from 'src/modules/category/categoryReducers';
 import layout from 'src/modules/layout/layoutReducers';
 import mui from 'src/modules/mui/muiReducers';
@@ -18,6 +19,7 @@ export default (history) =>
     auditLog,
     auth,
     author,
+    broker,
     category,
     layout,
     mui,

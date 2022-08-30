@@ -96,9 +96,7 @@ function AuthorForm(props) {
             <Grid item md={6} xs={12}>
               <InputFormItem
                 name="name"
-                label={i18n(
-                  'entities.author.fields.name',
-                )}
+                label={i18n('entities.author.fields.name')}
                 variant="standard"
                 required={true}
                 autoFocus
@@ -107,9 +105,7 @@ function AuthorForm(props) {
             <Grid item md={6} xs={12}>
               <InputFormItem
                 name="link"
-                label={i18n(
-                  'entities.author.fields.link',
-                )}
+                label={i18n('entities.author.fields.link')}
                 variant="standard"
                 required={true}
               />
@@ -117,9 +113,7 @@ function AuthorForm(props) {
             <Grid item md={6} xs={12}>
               <InputFormItem
                 name="image"
-                label={i18n(
-                  'entities.author.fields.image',
-                )}
+                label={i18n('entities.author.fields.image')}
                 variant="standard"
                 required={true}
               />

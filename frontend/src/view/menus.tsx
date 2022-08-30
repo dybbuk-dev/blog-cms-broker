@@ -2,7 +2,6 @@ import Permissions from 'src/security/permissions';
 import { i18n } from 'src/i18n';
 import config from 'src/config';
 import { Icon } from '@mui/material';
-import InventoryIcon from '@mui/icons-material/Inventory';
 
 const permissions = Permissions.values;
 
@@ -20,6 +19,13 @@ const menus = [
     name: i18n('user.menu'),
     permissionRequired: permissions.userRead,
     icon: <Icon fontSize="medium">person</Icon>,
+  },
+
+  {
+    path: '/broker',
+    name: i18n('entities.broker.menu'),
+    permissionRequired: permissions.brokerRead,
+    icon: <Icon fontSize="medium">badge</Icon>,
   },
 
   {

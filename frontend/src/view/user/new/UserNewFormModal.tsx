@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { i18n } from 'src/i18n';
 import UserNewForm from 'src/view/user/new/UserNewForm';
@@ -13,7 +13,6 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 
 function UserNewFormModal(props) {
   const [saveLoading, setSaveLoading] = useState(false);
@@ -31,7 +30,7 @@ function UserNewFormModal(props) {
         1,
         0,
       );
-
+      setSaveLoading(false);
       props.onSuccess(rows[0]);
     } catch (error) {
       Errors.handle(error);

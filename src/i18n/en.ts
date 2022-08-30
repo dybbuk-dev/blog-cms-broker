@@ -91,6 +91,11 @@ const en = {
   },
 
   entities: {
+    broker: {
+      errors: {
+        unique: {},
+      },
+    },
     author: {
       errors: {
         unique: {},

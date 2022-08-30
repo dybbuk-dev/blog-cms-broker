@@ -209,7 +209,76 @@ class Permissions {
        */
 
       /**
-       * ? category Permissions Start
+       * ? Broker Permissions Start
+       */
+      brokerImport: {
+        id: 'brokerImport',
+        allowedRoles: [],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerCreate: {
+        id: 'brokerCreate',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerEdit: {
+        id: 'brokerEdit',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerDestroy: {
+        id: 'brokerDestroy',
+        allowedRoles: [roles.admin],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerRead: {
+        id: 'brokerRead',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerAutocomplete: {
+        id: 'brokerAutocomplete',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      /**
+       * ! Broker Permissions End
+       */
+
+      /**
+       * ? Category Permissions Start
        */
       categoryImport: {
         id: 'categoryImport',
@@ -274,11 +343,11 @@ class Permissions {
         ],
       },
       /**
-       * ! category Permissions End
+       * ! Category Permissions End
        */
 
       /**
-       * ? author Permissions Start
+       * ? Author Permissions Start
        */
       authorImport: {
         id: 'authorImport',
@@ -343,7 +412,7 @@ class Permissions {
         ],
       },
       /**
-       * ! author Permissions End
+       * ! Author Permissions End
        */
     };
   }
