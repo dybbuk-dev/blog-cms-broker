@@ -129,6 +129,7 @@ function NavigationListTable(props) {
                     : 'none'
                 }
                 align="right"
+                width="0"
               >
                 {i18n('entities.navigation.fields.id')}
               </DataTableHeadCell>

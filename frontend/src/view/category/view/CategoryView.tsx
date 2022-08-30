@@ -38,7 +38,7 @@ function CategoryView(props) {
         <Grid item md={6} xs={12}>
           <AuthorViewItem
             label={i18n('entities.category.fields.author')}
-            value={record.author_name}
+            value={record.author}
           />
         </Grid>
         <Grid item xs={12}>

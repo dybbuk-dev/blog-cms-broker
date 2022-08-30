@@ -129,6 +129,7 @@ function AuthorListTable(props) {
                     : 'none'
                 }
                 align="right"
+                width="0"
               >
                 {i18n('entities.author.fields.id')}
               </DataTableHeadCell>

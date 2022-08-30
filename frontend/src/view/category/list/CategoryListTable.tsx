@@ -1,15 +1,14 @@
-import { Box, TableContainer } from '@mui/material';
+import { TableContainer } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Tooltip from '@mui/material/Tooltip';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import SearchIcon from '@mui/icons-material/Search';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import MaterialLink from '@mui/material/Link';
@@ -129,6 +128,7 @@ function CategoryListTable(props) {
                     : 'none'
                 }
                 align="right"
+                width="0"
               >
                 {i18n('entities.category.fields.id')}
               </DataTableHeadCell>

@@ -57,12 +57,173 @@ const en = {
     routes: {
       menu: 'Routes',
     },
-    marketplace: {
-      menu: 'Marketplace',
-    },
   },
 
   entities: {
+    author: {
+      name: 'author',
+      label: 'All Authors',
+      menu: 'Authors',
+      exporterFileName: 'author_export',
+      list: {
+        menu: 'Authors',
+        title: 'Authors',
+      },
+      create: {
+        success: 'Author successfully saved',
+      },
+      update: {
+        success: 'Author successfully saved',
+      },
+      destroy: {
+        success: 'Author successfully deleted',
+      },
+      destroyAll: {
+        success: 'Author(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Author',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        name: 'Surname',
+        link: 'Link',
+        image: 'Image',
+        description: 'Description',
+      },
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Author',
+      },
+      view: {
+        title: 'View Author',
+      },
+      importer: {
+        title: 'Import Authors',
+        fileName: 'author_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
+
+    broker: {
+      name: 'broker',
+      label: 'All Brokers',
+      menu: 'Brokers',
+      exporterFileName: 'broker_export',
+      list: {
+        menu: 'Brokers',
+        title: 'Brokers',
+      },
+      create: {
+        success: 'Broker successfully saved',
+      },
+      update: {
+        success: 'Broker successfully saved',
+      },
+      destroy: {
+        success: 'Broker successfully deleted',
+      },
+      destroyAll: {
+        success: 'Broker(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Broker',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        navigation: 'Main Navigation',
+        name: 'Surname',
+        name_normalized: 'Name normalized',
+        activated: 'Activated',
+        is_broker: 'Is Broker',
+        is_compareable: 'Show in comparison list',
+        top_broker: 'Top Broker',
+        top_binary_broker: 'Top Binary Broker',
+        top_forex_broker: 'Top Forex Signal Provider',
+        featured_broker: 'Featured Broker',
+        pdf: 'Download PDF',
+        author: 'Author',
+        author_name: 'Author Name',
+        author_link: 'Author link',
+      },
+      enumerators: {},
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Broker',
+      },
+      view: {
+        title: 'View Broker',
+      },
+      importer: {
+        title: 'Import Brokers',
+        fileName: 'broker_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
+
+    category: {
+      name: 'category',
+      label: 'All Categories',
+      menu: 'Categories',
+      exporterFileName: 'category_export',
+      list: {
+        menu: 'Categories',
+        title: 'Categories',
+      },
+      create: {
+        success: 'Category successfully saved',
+      },
+      update: {
+        success: 'Category successfully saved',
+      },
+      destroy: {
+        success: 'Category successfully deleted',
+      },
+      destroyAll: {
+        success: 'Category(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Category',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        name: 'Surname',
+        link: 'Link',
+        title: 'Title',
+        author: 'Author',
+        teaser: 'Teaser',
+        description: 'Description',
+        target: 'Target',
+        sort: 'Sort',
+        activated: 'Activated',
+        show_in_navigation: 'Show in navigation',
+        show_in_footer: 'Show in the footer',
+      },
+      enumerators: {
+        target: {
+          _blank: 'New Window',
+        },
+      },
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Category',
+      },
+      view: {
+        title: 'View Category',
+      },
+      importer: {
+        title: 'Import Categories',
+        fileName: 'category_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
+
     navigation: {
       name: 'navigation',
       label: 'Navigations',
@@ -126,110 +287,6 @@ const en = {
       importer: {
         title: 'Import Navigations',
         fileName: 'navigation_import_template',
-        hint: 'Files/Images columns must be the URLs of the files separated by space.',
-      },
-    },
-    category: {
-      name: 'category',
-      label: 'All Categories',
-      menu: 'Categories',
-      exporterFileName: 'category_export',
-      list: {
-        menu: 'Categories',
-        title: 'Categories',
-      },
-      create: {
-        success: 'Category successfully saved',
-      },
-      update: {
-        success: 'Category successfully saved',
-      },
-      destroy: {
-        success: 'Category successfully deleted',
-      },
-      destroyAll: {
-        success: 'Categorie(s) successfully deleted',
-      },
-      edit: {
-        title: 'Edit Category',
-      },
-      fields: {
-        id: 'Id',
-        idRange: 'Id #',
-        name: 'Surname',
-        link: 'Link',
-        title: 'Title',
-        author: 'Author',
-        teaser: 'Teaser',
-        description: 'Description',
-        target: 'Target',
-        sort: 'Sort',
-        activated: 'Activated',
-        show_in_navigation: 'Show in navigation',
-        show_in_footer: 'Show in the footer',
-      },
-      enumerators: {
-        target: {
-          _blank: 'New Window',
-        },
-      },
-      placeholders: {},
-      hints: {},
-      new: {
-        title: 'New Category',
-      },
-      view: {
-        title: 'View Category',
-      },
-      importer: {
-        title: 'Import Categories',
-        fileName: 'category_import_template',
-        hint: 'Files/Images columns must be the URLs of the files separated by space.',
-      },
-    },
-    author: {
-      name: 'author',
-      label: 'All Authors',
-      menu: 'Authors',
-      exporterFileName: 'author_export',
-      list: {
-        menu: 'Authors',
-        title: 'Authors',
-      },
-      create: {
-        success: 'Author successfully saved',
-      },
-      update: {
-        success: 'Author successfully saved',
-      },
-      destroy: {
-        success: 'Author successfully deleted',
-      },
-      destroyAll: {
-        success: 'Author(s) successfully deleted',
-      },
-      edit: {
-        title: 'Edit Author',
-      },
-      fields: {
-        id: 'Id',
-        idRange: 'Id #',
-        name: 'Surname',
-        link: 'Link',
-        image: 'Image',
-        description: 'Description',
-      },
-      placeholders: {},
-      hints: {},
-      new: {
-        title: 'New Author',
-      },
-      view: {
-        title: 'View Author',
-      },
-      importer: {
-        title: 'Import Authors',
-        fileName: 'author_import_template',
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },
     },

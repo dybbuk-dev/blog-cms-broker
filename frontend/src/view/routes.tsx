@@ -172,9 +172,7 @@ const privateRoutes = [
     permissionRequired: permissions.settingsEdit,
   },
 
-  /**
-   * !! Broker routes start
-   */
+  // #region Broker
   {
     path: '/broker',
     collapseName: 'broker',
@@ -229,14 +227,9 @@ const privateRoutes = [
     permissionRequired: permissions.brokerRead,
     exact: true,
   },
-  /**
-   * !! Broker routes end
-   */
+  // #endregion
 
-  /**
-   * ? Author start
-   */
-
+  // #region Author
   {
     path: '/author',
     collapseName: 'author',
@@ -290,14 +283,9 @@ const privateRoutes = [
     permissionRequired: permissions.authorRead,
     exact: true,
   },
+  // #endregion
 
-  /**
-   * ! Author end
-   */
-
-  /**
-   * ! Routes Collapse
-   */
+  // #region Routes
   {
     path: '/routes',
     collapseName: 'routes',
@@ -308,9 +296,7 @@ const privateRoutes = [
     virtual: true,
   },
 
-  /**
-   * !! Navigation routes start
-   */
+  // #region Navigation
   {
     path: '/navigation',
     collapseName: 'routes',
@@ -367,13 +353,9 @@ const privateRoutes = [
     permissionRequired: permissions.navigationRead,
     exact: true,
   },
-  /**
-   * !! Navigation routes end
-   */
+  // #endregion
 
-  /**
-   * !! Category routes start
-   */
+  // #region Category
   {
     path: '/category',
     collapseName: 'routes',
@@ -430,9 +412,9 @@ const privateRoutes = [
     permissionRequired: permissions.categoryRead,
     exact: true,
   },
-  /**
-   * !! Category routes end
-   */
+  // #endregion
+
+  // #endregion
 ].filter(Boolean);
 
 const publicRoutes = [

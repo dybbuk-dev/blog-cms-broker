@@ -9,6 +9,7 @@ const plans = Plans.values;
 class Permissions {
   static get values() {
     return {
+      // #region _BASE_
       tenantEdit: {
         id: 'tenantEdit',
         allowedRoles: [roles.admin],
@@ -138,217 +139,9 @@ class Permissions {
           storage.settingsLogos,
         ],
       },
+      // #endregion
 
-      /**
-       * ? Navigation Permissions Start
-       */
-      navigationImport: {
-        id: 'navigationImport',
-        allowedRoles: [],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      navigationCreate: {
-        id: 'navigationCreate',
-        allowedRoles: [roles.admin, roles.manager],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      navigationEdit: {
-        id: 'navigationEdit',
-        allowedRoles: [roles.admin, roles.manager],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      navigationDestroy: {
-        id: 'navigationDestroy',
-        allowedRoles: [roles.admin],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      navigationRead: {
-        id: 'navigationRead',
-        allowedRoles: [
-          roles.admin,
-          roles.manager,
-          roles.custom,
-        ],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      navigationAutocomplete: {
-        id: 'navigationAutocomplete',
-        allowedRoles: [
-          roles.admin,
-          roles.manager,
-          roles.custom,
-        ],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      /**
-       * ! Navigation Permissions End
-       */
-
-      /**
-       * ? Broker Permissions Start
-       */
-      brokerImport: {
-        id: 'brokerImport',
-        allowedRoles: [],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      brokerCreate: {
-        id: 'brokerCreate',
-        allowedRoles: [roles.admin, roles.manager],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      brokerEdit: {
-        id: 'brokerEdit',
-        allowedRoles: [roles.admin, roles.manager],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      brokerDestroy: {
-        id: 'brokerDestroy',
-        allowedRoles: [roles.admin],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      brokerRead: {
-        id: 'brokerRead',
-        allowedRoles: [
-          roles.admin,
-          roles.manager,
-          roles.custom,
-        ],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      brokerAutocomplete: {
-        id: 'brokerAutocomplete',
-        allowedRoles: [
-          roles.admin,
-          roles.manager,
-          roles.custom,
-        ],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      /**
-       * ! Broker Permissions End
-       */
-
-      /**
-       * ? Category Permissions Start
-       */
-      categoryImport: {
-        id: 'categoryImport',
-        allowedRoles: [],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      categoryCreate: {
-        id: 'categoryCreate',
-        allowedRoles: [roles.admin, roles.manager],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      categoryEdit: {
-        id: 'categoryEdit',
-        allowedRoles: [roles.admin, roles.manager],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      categoryDestroy: {
-        id: 'categoryDestroy',
-        allowedRoles: [roles.admin],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      categoryRead: {
-        id: 'categoryRead',
-        allowedRoles: [
-          roles.admin,
-          roles.manager,
-          roles.custom,
-        ],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      categoryAutocomplete: {
-        id: 'categoryAutocomplete',
-        allowedRoles: [
-          roles.admin,
-          roles.manager,
-          roles.custom,
-        ],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      /**
-       * ! Category Permissions End
-       */
-
-      /**
-       * ? Author Permissions Start
-       */
+      // #region Author
       authorImport: {
         id: 'authorImport',
         allowedRoles: [],
@@ -411,9 +204,202 @@ class Permissions {
           plans.enterprise,
         ],
       },
-      /**
-       * ! Author Permissions End
-       */
+      // #endregion
+
+      // #region Broker
+      brokerImport: {
+        id: 'brokerImport',
+        allowedRoles: [],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerCreate: {
+        id: 'brokerCreate',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerEdit: {
+        id: 'brokerEdit',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerDestroy: {
+        id: 'brokerDestroy',
+        allowedRoles: [roles.admin],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerRead: {
+        id: 'brokerRead',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerAutocomplete: {
+        id: 'brokerAutocomplete',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      // #endregion
+
+      // #region Category
+      categoryImport: {
+        id: 'categoryImport',
+        allowedRoles: [],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      categoryCreate: {
+        id: 'categoryCreate',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      categoryEdit: {
+        id: 'categoryEdit',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      categoryDestroy: {
+        id: 'categoryDestroy',
+        allowedRoles: [roles.admin],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      categoryRead: {
+        id: 'categoryRead',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      categoryAutocomplete: {
+        id: 'categoryAutocomplete',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      // #endregion
+
+      // #region Navigation
+      navigationImport: {
+        id: 'navigationImport',
+        allowedRoles: [],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      navigationCreate: {
+        id: 'navigationCreate',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      navigationEdit: {
+        id: 'navigationEdit',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      navigationDestroy: {
+        id: 'navigationDestroy',
+        allowedRoles: [roles.admin],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      navigationRead: {
+        id: 'navigationRead',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      navigationAutocomplete: {
+        id: 'navigationAutocomplete',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      // #endregion
     };
   }
 

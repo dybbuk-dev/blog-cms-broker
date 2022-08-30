@@ -1,7 +1,7 @@
-import Permissions from 'src/security/permissions';
 import { i18n } from 'src/i18n';
-import config from 'src/config';
 import { Icon } from '@mui/material';
+import config from 'src/config';
+import Permissions from 'src/security/permissions';
 
 const permissions = Permissions.values;
 
@@ -22,17 +22,17 @@ const menus = [
   },
 
   {
+    path: '/author',
+    name: i18n('author.menu'),
+    permissionRequired: permissions.authorRead,
+    icon: <Icon fontSize="medium">recent_actors</Icon>,
+  },
+
+  {
     path: '/broker',
     name: i18n('entities.broker.menu'),
     permissionRequired: permissions.brokerRead,
     icon: <Icon fontSize="medium">badge</Icon>,
-  },
-
-  {
-    path: '/author',
-    name: i18n('author.menu'),
-    permissionRequired: permissions.authorRead,
-    icon: <Icon fontSize="medium">portrait</Icon>,
   },
 
   {
