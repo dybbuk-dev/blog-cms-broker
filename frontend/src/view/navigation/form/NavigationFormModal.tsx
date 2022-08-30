@@ -22,6 +22,7 @@ function NavigationFormModal(props) {
       setSaveLoading(true);
       const { id } = await NavigationService.create(data);
       const record = await NavigationService.find(id);
+      setSaveLoading(false);
       props.onSuccess(record);
     } catch (error) {
       Errors.handle(error);
