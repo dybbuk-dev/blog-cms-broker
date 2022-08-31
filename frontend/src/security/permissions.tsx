@@ -259,6 +259,71 @@ class Permissions {
       // #endregion
 
       // #region Category
+      affiliateLinkImport: {
+        id: 'affiliateLinkImport',
+        allowedRoles: [],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      affiliateLinkCreate: {
+        id: 'affiliateLinkCreate',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      affiliateLinkEdit: {
+        id: 'affiliateLinkEdit',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      affiliateLinkDestroy: {
+        id: 'affiliateLinkDestroy',
+        allowedRoles: [roles.admin],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      affiliateLinkRead: {
+        id: 'affiliateLinkRead',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      affiliateLinkAutocomplete: {
+        id: 'affiliateLinkAutocomplete',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      // #endregion
+
+      // #region Category
       categoryImport: {
         id: 'categoryImport',
         allowedRoles: [],

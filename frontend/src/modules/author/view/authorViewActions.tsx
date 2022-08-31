@@ -2,7 +2,7 @@ import AuthorService from 'src/modules/author/authorService';
 import Errors from 'src/modules/shared/error/errors';
 import { getHistory } from 'src/modules/store';
 
-const prefix = 'NAVIGATION_VIEW';
+const prefix = 'AUTHOR_VIEW';
 
 const authorViewActions = {
   FIND_STARTED: `${prefix}_FIND_STARTED`,

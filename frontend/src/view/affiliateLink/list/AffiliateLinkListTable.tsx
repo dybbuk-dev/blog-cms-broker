@@ -1,24 +1,23 @@
-import { Box, TableContainer } from '@mui/material';
+import { TableContainer } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Tooltip from '@mui/material/Tooltip';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import SearchIcon from '@mui/icons-material/Search';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import MaterialLink from '@mui/material/Link';
 import { i18n } from 'src/i18n';
-import authorSelectors from 'src/modules/author/authorSelectors';
-import destroyActions from 'src/modules/author/destroy/authorDestroyActions';
-import destroySelectors from 'src/modules/author/destroy/authorDestroySelectors';
-import actions from 'src/modules/author/list/authorListActions';
-import selectors from 'src/modules/author/list/authorListSelectors';
+import affiliateLinkSelectors from 'src/modules/affiliateLink/affiliateLinkSelectors';
+import destroyActions from 'src/modules/affiliateLink/destroy/affiliateLinkDestroyActions';
+import destroySelectors from 'src/modules/affiliateLink/destroy/affiliateLinkDestroySelectors';
+import actions from 'src/modules/affiliateLink/list/affiliateLinkListActions';
+import selectors from 'src/modules/affiliateLink/list/affiliateLinkListSelectors';
 import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
 import Pagination from 'src/view/shared/table/Pagination';
 import Spinner from 'src/view/shared/Spinner';
@@ -27,9 +26,8 @@ import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
 import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
-import MDBadgeDot from 'src/mui/components/MDBadgeDot';
 
-function AuthorListTable(props) {
+function AffiliateLinkListTable(props) {
   const { sidenavColor } = selectMuiSettings();
   const [recordIdToDestroy, setRecordIdToDestroy] =
     useState(null);
@@ -56,10 +54,10 @@ function AuthorListTable(props) {
     selectors.selectIsAllSelected,
   );
   const hasPermissionToEdit = useSelector(
-    authorSelectors.selectPermissionToEdit,
+    affiliateLinkSelectors.selectPermissionToEdit,
   );
   const hasPermissionToDestroy = useSelector(
-    authorSelectors.selectPermissionToDestroy,
+    affiliateLinkSelectors.selectPermissionToDestroy,
   );
 
   const doOpenDestroyConfirmModal = (id) => {
@@ -131,27 +129,7 @@ function AuthorListTable(props) {
                 align="right"
                 width="0"
               >
-                {i18n('entities.author.fields.id')}
-              </DataTableHeadCell>
-              <DataTableHeadCell
-                onClick={() => doChangeSort('image')}
-                sorted={
-                  sorter.field === 'link'
-                    ? sorter.order
-                    : 'none'
-                }
-              >
-                {i18n('entities.author.fields.image')}
-              </DataTableHeadCell>
-              <DataTableHeadCell
-                onClick={() => doChangeSort('name')}
-                sorted={
-                  sorter.field === 'name'
-                    ? sorter.order
-                    : 'none'
-                }
-              >
-                {i18n('entities.author.fields.name')}
+                {i18n('entities.affiliateLink.fields.id')}
               </DataTableHeadCell>
               <DataTableHeadCell
                 onClick={() => doChangeSort('link')}
@@ -161,7 +139,19 @@ function AuthorListTable(props) {
                     : 'none'
                 }
               >
-                {i18n('entities.author.fields.link')}
+                {i18n('entities.affiliateLink.fields.link')}
+              </DataTableHeadCell>
+              <DataTableHeadCell
+                onClick={() => doChangeSort('display_hash')}
+                sorted={
+                  sorter.field === 'display_hash'
+                    ? sorter.order
+                    : 'none'
+                }
+              >
+                {i18n(
+                  'entities.affiliateLink.fields.display_hash',
+                )}
               </DataTableHeadCell>
               <DataTableHeadCell sorted={false} width="0">
                 {' '}
@@ -209,18 +199,12 @@ function AuthorListTable(props) {
                     {row.id}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
-                    {row.image}
-                  </DataTableBodyCell>
-                  <DataTableBodyCell>
-                    {row.name}
-                  </DataTableBodyCell>
-                  <DataTableBodyCell>
-                    <MaterialLink
-                      component={Link}
-                      to={row.link}
-                    >
+                    <MaterialLink href={row.link}>
                       {row.link}
                     </MaterialLink>
+                  </DataTableBodyCell>
+                  <DataTableBodyCell>
+                    {row.display_hash}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
                     <MDBox
@@ -231,7 +215,7 @@ function AuthorListTable(props) {
                         <IconButton
                           component={Link}
                           color={sidenavColor}
-                          to={`/author/${row.id}`}
+                          to={`/affiliate-link/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>
@@ -243,7 +227,7 @@ function AuthorListTable(props) {
                           <IconButton
                             color={sidenavColor}
                             component={Link}
-                            to={`/author/${row.id}/edit`}
+                            to={`/affiliate-link/${row.id}/edit`}
                           >
                             <EditIcon />
                           </IconButton>
@@ -294,4 +278,4 @@ function AuthorListTable(props) {
   );
 }
 
-export default AuthorListTable;
+export default AffiliateLinkListTable;

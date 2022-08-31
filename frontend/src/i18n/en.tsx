@@ -54,6 +54,9 @@ const en = {
   },
 
   collapses: {
+    affiliateLink: {
+      menu: 'Affiliate links',
+    },
     routes: {
       menu: 'Routes',
     },
@@ -103,6 +106,58 @@ const en = {
       importer: {
         title: 'Import Authors',
         fileName: 'author_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
+
+    affiliateLink: {
+      name: 'affiliateLink',
+      label: 'All Affiliate links',
+      menu: 'Affiliate links',
+      exporterFileName: 'affiliateLink_export',
+      list: {
+        menu: 'Affiliate links',
+        title: 'Affiliate links',
+      },
+      create: {
+        success: 'Affiliate link successfully saved',
+      },
+      update: {
+        success: 'Affiliate link successfully saved',
+      },
+      destroy: {
+        success: 'Affiliate link successfully deleted',
+      },
+      destroyAll: {
+        success: 'Affiliate link(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Affiliate link',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        hash: 'Hash',
+        link: 'Link',
+        display_hash: 'Display Hash',
+        meta_info: 'Meta Info',
+      },
+      enumerators: {
+        target: {
+          _blank: 'New Window',
+        },
+      },
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Affiliate link',
+      },
+      view: {
+        title: 'View Affiliate link',
+      },
+      importer: {
+        title: 'Import Affiliate links',
+        fileName: 'affiliateLink_import_template',
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },
     },

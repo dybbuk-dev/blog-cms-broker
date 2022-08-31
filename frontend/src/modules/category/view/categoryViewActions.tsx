@@ -2,7 +2,7 @@ import CategoryService from 'src/modules/category/categoryService';
 import Errors from 'src/modules/shared/error/errors';
 import { getHistory } from 'src/modules/store';
 
-const prefix = 'NAVIGATION_VIEW';
+const prefix = 'CATEGORY_VIEW';
 
 const categoryViewActions = {
   FIND_STARTED: `${prefix}_FIND_STARTED`,

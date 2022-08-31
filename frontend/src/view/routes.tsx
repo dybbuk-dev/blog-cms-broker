@@ -285,6 +285,85 @@ const privateRoutes = [
   },
   // #endregion
 
+  // #region Affiliate link
+  {
+    path: '/affiliate-link',
+    collapseName: 'affiliateLink',
+    i18n: 'collapses.affiliateLink.menu',
+    parent: '/',
+    redirect: '/affiliate-link',
+    permissionRequired: null,
+    virtual: true,
+  },
+
+  // #region Affiliate links
+  {
+    path: '/affiliate-link',
+    collapseName: 'affiliateLink',
+    i18n: 'entities.affiliateLink.menu',
+    parent: '/affiliate-link',
+    loader: () =>
+      import(
+        'src/view/affiliateLink/list/AffiliateLinkListPage'
+      ),
+    permissionRequired: permissions.affiliateLinkRead,
+    exact: true,
+  },
+  {
+    path: '/affiliate-link/new',
+    collapseName: 'affiliateLink',
+    i18n: 'entities.affiliateLink.new.title',
+    parent: '/affiliate-link',
+    loader: () =>
+      import(
+        'src/view/affiliateLink/form/AffiliateLinkFormPage'
+      ),
+    permissionRequired: permissions.affiliateLinkCreate,
+    exact: true,
+  },
+
+  {
+    path: '/affiliate-link/importer',
+    collapseName: 'affiliateLink',
+    i18n: 'entities.affiliateLink.importer.title',
+    parent: '/affiliate-link',
+    loader: () =>
+      import(
+        'src/view/affiliateLink/importer/AffiliateLinkImporterPage'
+      ),
+    permissionRequired: permissions.affiliateLinkImport,
+    exact: true,
+  },
+
+  {
+    path: '/affiliate-link/:id/edit',
+    collapseName: 'affiliateLink',
+    i18n: 'entities.affiliateLink.edit.title',
+    parent: '/affiliate-link',
+    loader: () =>
+      import(
+        'src/view/affiliateLink/form/AffiliateLinkFormPage'
+      ),
+    permissionRequired: permissions.affiliateLinkEdit,
+    exact: true,
+  },
+
+  {
+    path: '/affiliate-link/:id',
+    collapseName: 'affiliateLink',
+    i18n: 'entities.affiliateLink.view.title',
+    parent: '/affiliate-link',
+    loader: () =>
+      import(
+        'src/view/affiliateLink/view/AffiliateLinkViewPage'
+      ),
+    permissionRequired: permissions.affiliateLinkRead,
+    exact: true,
+  },
+  // #endregion
+
+  // #endregion
+
   // #region Routes
   {
     path: '/routes',

@@ -3,6 +3,7 @@ import { connectRouter } from 'connected-react-router';
 import auditLog from 'src/modules/auditLog/auditLogReducers';
 import auth from 'src/modules/auth/authReducers';
 import author from 'src/modules/author/authorReducers';
+import affiliateLink from 'src/modules/affiliateLink/affiliateLinkReducers';
 import broker from 'src/modules/broker/brokerReducers';
 import category from 'src/modules/category/categoryReducers';
 import layout from 'src/modules/layout/layoutReducers';
@@ -16,6 +17,7 @@ import user from 'src/modules/user/userReducers';
 export default (history) =>
   combineReducers({
     router: connectRouter(history),
+    affiliateLink,
     auditLog,
     auth,
     author,
