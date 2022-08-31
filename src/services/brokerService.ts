@@ -2,12 +2,29 @@ import Error400 from '../errors/Error400';
 import SequelizeRepository from '../database/repositories/sequelizeRepository';
 import { IServiceOptions } from './IServiceOptions';
 import BrokerRepository from '../database/repositories/brokerRepository';
+import NavigationRepository from '../database/repositories/navigationRepository';
+import AuthorRepository from '../database/repositories/authorRepository';
 
 export default class BrokerService {
   options: IServiceOptions;
 
   constructor(options) {
     this.options = options;
+  }
+
+  async _withRelatedData(data, transaction) {
+    return {
+      ...data,
+      navigation:
+        await NavigationRepository.filterIdInTenant(
+          data.navigation,
+          { ...this.options, transaction },
+        ),
+      author: await AuthorRepository.filterIdInTenant(
+        data.author,
+        { ...this.options, transaction },
+      ),
+    };
   }
 
   async create(data) {
@@ -17,15 +34,13 @@ export default class BrokerService {
       );
 
     try {
-      data.parent = await BrokerRepository.filterIdInTenant(
-        data.parent,
-        { ...this.options, transaction },
+      const record = await BrokerRepository.create(
+        await this._withRelatedData(data, transaction),
+        {
+          ...this.options,
+          transaction,
+        },
       );
-
-      const record = await BrokerRepository.create(data, {
-        ...this.options,
-        transaction,
-      });
 
       await SequelizeRepository.commitTransaction(
         transaction,
@@ -54,14 +69,9 @@ export default class BrokerService {
       );
 
     try {
-      data.parent = await BrokerRepository.filterIdInTenant(
-        data.parent,
-        { ...this.options, transaction },
-      );
-
       const record = await BrokerRepository.update(
         id,
-        data,
+        await this._withRelatedData(data, transaction),
         {
           ...this.options,
           transaction,

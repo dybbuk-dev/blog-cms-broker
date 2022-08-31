@@ -25,6 +25,26 @@ class BrokerRepository {
     'author_link',
   ];
 
+  static _relatedData(data) {
+    return {
+      navigation_id: data.navigation || null,
+      author_id: data.author || null,
+    };
+  }
+
+  static includes(options: IRepositoryOptions) {
+    return [
+      {
+        model: options.database.navigation,
+        as: 'navigation',
+      },
+      {
+        model: options.database.author,
+        as: 'author',
+      },
+    ];
+  }
+
   static async create(data, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
@@ -32,8 +52,7 @@ class BrokerRepository {
     const record = await options.database.broker.create(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
-        navigation_id: data.navigation || null,
-        author_id: data.author || null,
+        ...this._relatedData(data),
         ip: '',
         created: moment(),
         modified: moment(),
@@ -75,8 +94,7 @@ class BrokerRepository {
     record = await record.update(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
-        navigation_id: data.navigation || null,
-        author_id: data.author || null,
+        ...this._relatedData(data),
         ip: '',
         modified: moment(),
       },
@@ -126,12 +144,7 @@ class BrokerRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    const include = [
-      {
-        model: options.database.navigation,
-        as: 'navigation',
-      },
-    ];
+    const include = this.includes(options);
 
     const record = await options.database.broker.findOne({
       where: {
@@ -198,12 +211,7 @@ class BrokerRepository {
     options: IRepositoryOptions,
   ) {
     let whereAnd: Array<any> = [];
-    let include = [
-      {
-        model: options.database.navigation,
-        as: 'navigation',
-      },
-    ];
+    let include = this.includes(options);
 
     if (filter) {
       if (filter.idRange) {

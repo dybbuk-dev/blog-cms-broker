@@ -331,10 +331,10 @@ class NavigationRepository {
   ) {
     let whereAnd: Array<any> = [
       {
-        ['parent_id']: {
+        parent_id: {
           [Op.is]: null,
         },
-        ['title']: {
+        title: {
           [Op.ne]: '',
         },
       },
@@ -362,7 +362,10 @@ class NavigationRepository {
         attributes: ['id', 'title'],
         where,
         limit: limit ? Number(limit) : undefined,
-        order: [['title', 'ASC']],
+        order: [
+          ['sort', 'ASC'],
+          ['title', 'ASC'],
+        ],
       });
 
     return records.map((record) => ({
