@@ -53,7 +53,7 @@ class BrokerRepository {
       {
         ...lodash.pick(data, this.ALL_FIELDS),
         ...this._relatedData(data),
-        ip: '',
+        ip: data.ip ?? '',
         created: moment(),
         modified: moment(),
       },
@@ -95,7 +95,7 @@ class BrokerRepository {
       {
         ...lodash.pick(data, this.ALL_FIELDS),
         ...this._relatedData(data),
-        ip: '',
+        ip: data.ip ?? '',
         modified: moment(),
       },
       {

@@ -55,7 +55,7 @@ export default class BrokerService {
       SequelizeRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'product',
+        'broker',
       );
 
       throw error;
@@ -91,7 +91,7 @@ export default class BrokerService {
       SequelizeRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'product',
+        'broker',
       );
 
       throw error;

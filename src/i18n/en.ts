@@ -93,7 +93,9 @@ const en = {
   entities: {
     broker: {
       errors: {
-        unique: {},
+        unique: {
+          name_normalized: 'Name Normalized must be unique',
+        },
       },
     },
     author: {
