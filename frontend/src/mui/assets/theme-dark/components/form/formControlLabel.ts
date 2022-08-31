@@ -21,7 +21,7 @@ import typography from 'src/mui/assets/theme-dark/base/typography';
 import pxToRem from 'src/mui/assets/theme-dark/functions/pxToRem';
 
 const { white } = colors;
-const { size, fontWeightBold } = typography;
+const { size, fontWeightRegular } = typography;
 
 // types
 type Types = any;
@@ -37,7 +37,7 @@ const formControlLabel: Types = {
     label: {
       display: 'inline-block',
       fontSize: size.sm,
-      fontWeight: fontWeightBold,
+      fontWeight: fontWeightRegular,
       color: white.main,
       lineHeight: 1,
       transform: `translateY(${pxToRem(1)})`,
