@@ -6,6 +6,7 @@ import NavigationRepository from '../database/repositories/navigationRepository'
 import AuthorRepository from '../database/repositories/authorRepository';
 import BrokersCategoryRepository from '../database/repositories/brokersCategoryRepository';
 import CategoryRepository from '../database/repositories/categoryRepository';
+import BrokerMetasRepository from '../database/repositories/brokerMetasRepository';
 
 export default class BrokerService {
   options: IServiceOptions;
@@ -30,6 +31,29 @@ export default class BrokerService {
   }
 
   async _updateRelatedData(id, data, transaction) {
+    // #region Broker Meta
+    const metaId =
+      await BrokerMetasRepository.filterIdInTenant(id, {
+        ...this.options,
+        transaction,
+      });
+    if (metaId) {
+      await BrokerMetasRepository.update(id, data, {
+        ...this.options,
+        transaction,
+      });
+    } else {
+      await BrokerMetasRepository.create(
+        {
+          ...data,
+          id: id,
+        },
+        { ...this.options, transaction },
+      );
+    }
+    // #endregion
+
+    // #region Broker's Categories
     await BrokersCategoryRepository.destroyByBroker(id, {
       ...this.options,
       transaction,
@@ -51,6 +75,7 @@ export default class BrokerService {
         { ...this.options, transaction },
       );
     }
+    // #endregion
   }
 
   async create(data) {

@@ -6,66 +6,56 @@ import AuditLogRepository from './auditLogRepository';
 import SequelizeRepository from './sequelizeRepository';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import moment from 'moment';
-import BrokersCategoryRepository from './brokersCategoryRepository';
 
 const Op = Sequelize.Op;
 
-class BrokerRepository {
+class BrokerMetasRepository {
   static ALL_FIELDS = [
-    'name',
-    'name_normalized',
-    'activated',
-    'is_broker',
-    'is_compareable',
-    'top_broker',
-    'top_binary_broker',
-    'top_forex_broker',
-    'featured_broker',
-    'pdf',
-    'author_name',
-    'author_link',
+    'id',
+    'homepage',
+    'homepage_title',
+    'homepage_impression',
+    'broker_type',
+    'description',
+    'teaser',
+    'demo_url',
+    'account_url',
+    'maximum_leverage',
+    'minimum_deposit',
+    'minimum_deposit_short',
+    'custodian_fees',
+    'mobile_trading',
+    'phone_order',
+    'licensed_broker',
+    'withholding_tax',
+    'scalping_allowed',
   ];
 
   static _relatedData(data) {
-    return {
-      navigation_id: data.navigation || null,
-      author_id: data.author || null,
-    };
+    return {};
   }
 
   static includes(options: IRepositoryOptions) {
-    return [
-      {
-        model: options.database.navigation,
-        as: 'navigation',
-      },
-      {
-        model: options.database.author,
-        as: 'author',
-      },
-      {
-        model: options.database.broker_metas,
-        as: 'meta',
-      },
-    ];
+    return [];
   }
 
   static async create(data, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    const record = await options.database.broker.create(
-      {
-        ...lodash.pick(data, this.ALL_FIELDS),
-        ...this._relatedData(data),
-        ip: data.ip ?? '',
-        created: moment(),
-        modified: moment(),
-      },
-      {
-        transaction,
-      },
-    );
+    const record =
+      await options.database.broker_metas.create(
+        {
+          ...lodash.pick(data, this.ALL_FIELDS),
+          ...this._relatedData(data),
+          ip: data.ip ?? '',
+          created: moment(),
+          modified: moment(),
+        },
+        {
+          transaction,
+        },
+      );
 
     await this._createAuditLog(
       AuditLogRepository.CREATE,
@@ -85,12 +75,13 @@ class BrokerRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    let record = await options.database.broker.findOne({
-      where: {
-        id,
-      },
-      transaction,
-    });
+    let record =
+      await options.database.broker_metas.findOne({
+        where: {
+          id,
+        },
+        transaction,
+      });
 
     if (!record) {
       throw new Error404();
@@ -122,12 +113,13 @@ class BrokerRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    let record = await options.database.broker.findOne({
-      where: {
-        id,
-      },
-      transaction,
-    });
+    let record =
+      await options.database.broker_metas.findOne({
+        where: {
+          id,
+        },
+        transaction,
+      });
 
     if (!record) {
       throw new Error404();
@@ -151,13 +143,14 @@ class BrokerRepository {
 
     const include = this.includes(options);
 
-    const record = await options.database.broker.findOne({
-      where: {
-        id,
-      },
-      include,
-      transaction,
-    });
+    const record =
+      await options.database.broker_metas.findOne({
+        where: {
+          id,
+        },
+        include,
+        transaction,
+      });
 
     if (!record) {
       throw new Error404();
@@ -191,10 +184,11 @@ class BrokerRepository {
       },
     };
 
-    const records = await options.database.broker.findAll({
-      attributes: ['id'],
-      where,
-    });
+    const records =
+      await options.database.broker_metas.findAll({
+        attributes: ['id'],
+        where,
+      });
 
     return records.map((record) => record.id);
   }
@@ -203,7 +197,7 @@ class BrokerRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    return options.database.broker.count({
+    return options.database.broker_metas.count({
       where: {
         ...filter,
       },
@@ -247,17 +241,11 @@ class BrokerRepository {
         }
       }
 
-      if (filter.parent) {
-        whereAnd.push({
-          ['parent_id']: filter.parent,
-        });
-      }
-
-      ['name', 'name_normalized'].forEach((field) => {
+      [].forEach((field) => {
         if (filter[field]) {
           whereAnd.push(
             SequelizeFilterUtils.ilikeIncludes(
-              'broker',
+              'broker_metas',
               field,
               filter[field],
             ),
@@ -265,16 +253,7 @@ class BrokerRepository {
         }
       });
 
-      [
-        'activated',
-        'is_broker',
-        'is_compareable',
-        'top_broker',
-        'top_binary_broker',
-        'top_forex_broker',
-        'featured_broker',
-        'pdf',
-      ].forEach((field) => {
+      [].forEach((field) => {
         if (
           filter[field] === true ||
           filter[field] === 'true' ||
@@ -293,7 +272,7 @@ class BrokerRepository {
     const where = { [Op.and]: whereAnd };
 
     let { rows, count } =
-      await options.database.broker.findAndCountAll({
+      await options.database.broker_metas.findAndCountAll({
         where,
         include,
         limit: limit ? Number(limit) : undefined,
@@ -313,43 +292,6 @@ class BrokerRepository {
     return { rows, count };
   }
 
-  static async findAllAutocomplete(
-    query,
-    limit,
-    options: IRepositoryOptions,
-  ) {
-    let whereAnd: Array<any> = [];
-
-    if (query) {
-      whereAnd.push({
-        [Op.or]: [
-          { ['id']: query },
-          {
-            [Op.and]: SequelizeFilterUtils.ilikeIncludes(
-              'broker',
-              'name',
-              query,
-            ),
-          },
-        ],
-      });
-    }
-
-    const where = { [Op.and]: whereAnd };
-
-    const records = await options.database.broker.findAll({
-      attributes: ['id', 'name'],
-      where,
-      limit: limit ? Number(limit) : undefined,
-      order: [['name', 'ASC']],
-    });
-
-    return records.map((record) => ({
-      id: record.id,
-      label: record.name,
-    }));
-  }
-
   static async _createAuditLog(
     action,
     record,
@@ -366,7 +308,7 @@ class BrokerRepository {
 
     await AuditLogRepository.log(
       {
-        entityName: 'broker',
+        entityName: 'broker_metas',
         entityId: record.id,
         action,
         values,
@@ -403,20 +345,8 @@ class BrokerRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    const { rows: categories } =
-      await BrokersCategoryRepository.findAndCountAll(
-        {
-          filter: {
-            broker_id: output.id,
-          },
-        },
-        options,
-      );
-
-    output.categories = categories;
-
     return output;
   }
 }
 
-export default BrokerRepository;
+export default BrokerMetasRepository;

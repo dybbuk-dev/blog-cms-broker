@@ -142,6 +142,10 @@ export default function (sequelize) {
       onDelete: 'NO ACTION',
       onUpdate: 'NO ACTION',
     });
+    models.broker.hasOne(models.broker_metas, {
+      as: 'meta',
+      foreignKey: 'id',
+    });
   };
 
   return broker;
