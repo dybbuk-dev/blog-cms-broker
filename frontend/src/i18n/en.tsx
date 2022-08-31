@@ -155,9 +155,7 @@ const en = {
         // #endregion
       },
       tabs: {
-        base: 'Base',
-        logo: 'Logo',
-        metadata: 'Metadata',
+        broker: 'Broker',
         overview: 'Overview',
         characteristics: 'Characteristics',
         platform: 'Platform',

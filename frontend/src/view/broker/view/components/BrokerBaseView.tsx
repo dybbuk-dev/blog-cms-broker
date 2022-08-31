@@ -1,6 +1,7 @@
 import { Grid } from '@mui/material';
 import { i18n } from 'src/i18n';
 import AuthorViewItem from 'src/view/author/view/AuthorViewItem';
+import CategoryViewItem from 'src/view/category/view/CategoryViewItem';
 import NavigationViewItem from 'src/view/navigation/view/NavigationViewItem';
 import CheckboxViewItem from 'src/view/shared/view/CheckboxViewItem';
 import TextViewItem from 'src/view/shared/view/TextViewItem';
@@ -39,6 +40,22 @@ function BrokerBaseView(props) {
         <AuthorViewItem
           label={i18n('entities.broker.fields.author')}
           value={record.author}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <CategoryViewItem
+          label={i18n('entities.broker.fields.categories')}
+          value={record.categories.map((v) => v.category)}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <CategoryViewItem
+          label={i18n(
+            'entities.broker.fields.categories_in_top_lists',
+          )}
+          value={record.categories
+            .filter((v) => v.show_in_top_listings)
+            .map((v) => v.category)}
         />
       </Grid>
       <Grid item lg={4} md={6} xs={12}>

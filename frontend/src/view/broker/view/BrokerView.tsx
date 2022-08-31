@@ -24,33 +24,27 @@ function BrokerView(props) {
           <BrokerBaseView {...props} />
         </TabPanel>
         <TabPanel value={tabValue} index={1}>
-          Logo
-        </TabPanel>
-        <TabPanel value={tabValue} index={2}>
-          Metadata
-        </TabPanel>
-        <TabPanel value={tabValue} index={3}>
           Overview
         </TabPanel>
-        <TabPanel value={tabValue} index={4}>
+        <TabPanel value={tabValue} index={2}>
           Characteristics
         </TabPanel>
-        <TabPanel value={tabValue} index={5}>
+        <TabPanel value={tabValue} index={3}>
           Platform
         </TabPanel>
-        <TabPanel value={tabValue} index={6}>
+        <TabPanel value={tabValue} index={4}>
           Markets
         </TabPanel>
-        <TabPanel value={tabValue} index={7}>
+        <TabPanel value={tabValue} index={5}>
           Spreads
         </TabPanel>
-        <TabPanel value={tabValue} index={8}>
+        <TabPanel value={tabValue} index={6}>
           Service
         </TabPanel>
-        <TabPanel value={tabValue} index={9}>
+        <TabPanel value={tabValue} index={7}>
           Test
         </TabPanel>
-        <TabPanel value={tabValue} index={10}>
+        <TabPanel value={tabValue} index={8}>
           Old
         </TabPanel>
       </>

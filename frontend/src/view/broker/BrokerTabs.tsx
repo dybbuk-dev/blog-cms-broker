@@ -10,9 +10,7 @@ interface BrokerTabsProps {
 function BrokerTabs(props: BrokerTabsProps) {
   const { orientation, value, onChange } = props;
   const tabLabels = [
-    'base',
-    'logo',
-    'metadata',
+    'broker',
     'overview',
     'characteristics',
     'platform',
