@@ -28,12 +28,6 @@ function BrokerForm(props) {
       name_normalized: record.name_normalized,
       navigation: record.navigation || {},
       author: record.author || {},
-      categories: (record.categories || []).map(
-        (v) => v.category || {},
-      ),
-      categories_in_top_lists: (record.categories || [])
-        .filter((v) => v.show_in_top_listings)
-        .map((v) => v.category || {}),
       activated: record.activated,
       is_broker: record.is_broker,
       is_compareable: record.is_compareable,
@@ -42,6 +36,36 @@ function BrokerForm(props) {
       top_forex_broker: record.top_forex_broker,
       featured_broker: record.featured_broker,
       pdf: record.pdf,
+      // #endregion
+
+      // #region Broker's Categories
+      categories: (record.categories || []).map(
+        (v) => v.category || {},
+      ),
+      categories_in_top_lists: (record.categories || [])
+        .filter((v) => v.show_in_top_listings)
+        .map((v) => v.category || {}),
+      // #endregion
+
+      // #region Broker Meta
+      homepage: record.meta?.homepage,
+      homepage_title: record.meta?.homepage_title,
+      homepage_impression: record.meta?.homepage_impression,
+      broker_type: record.meta?.broker_type,
+      description: record.meta?.description,
+      teaser: record.meta?.teaser,
+      demo_url: record.meta?.demo_url,
+      account_url: record.meta?.account_url,
+      maximum_leverage: record.meta?.maximum_leverage,
+      minimum_deposit: record.meta?.minimum_deposit,
+      minimum_deposit_short:
+        record.meta?.minimum_deposit_short,
+      custodian_fees: record.meta?.custodian_fees,
+      mobile_trading: record.meta?.mobile_trading,
+      phone_order: record.meta?.phone_order,
+      licensed_broker: record.meta?.licensed_broker,
+      withholding_tax: record.meta?.withholding_tax,
+      scalping_allowed: record.meta?.scalping_allowed,
       // #endregion
     };
   });

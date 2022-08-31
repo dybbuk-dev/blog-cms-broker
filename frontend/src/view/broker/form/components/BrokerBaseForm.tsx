@@ -1,21 +1,97 @@
-import { Grid } from '@mui/material';
+import { Card, Grid } from '@mui/material';
 import { i18n } from 'src/i18n';
+import MDBox from 'src/mui/components/MDBox';
+import MDTypography from 'src/mui/components/MDTypography';
 import AuthorAutocompleteFormItem from 'src/view/author/autocomplete/AuthorAutocompleteFormItem';
 import CategoryAutocompleteFormItem from 'src/view/category/autocomplete/CategoryAutocompleteFormItem';
 import NavigationAutocompleteFormItem from 'src/view/navigation/autocomplete/NavigationAutocompleteFormItem';
 import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
+import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
 
 function BrokerBaseForm(props) {
   return (
     <Grid spacing={2} container>
+      <Grid item xs={12} mb={3}>
+        <Card>
+          <MDBox p={3}>
+            <Grid spacing={2} container>
+              <Grid item xs={12}>
+                <MDTypography variant="h5" color="text">
+                  {i18n('entities.broker.fields.metadata')}
+                </MDTypography>
+              </Grid>
+              <Grid item md={6} xs={12}>
+                <InputFormItem
+                  name="demo_url"
+                  label={i18n(
+                    'entities.broker.fields.demo_url',
+                  )}
+                  variant="standard"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item md={6} xs={12}>
+                <InputFormItem
+                  name="account_url"
+                  label={i18n(
+                    'entities.broker.fields.account_url',
+                  )}
+                  variant="standard"
+                />
+              </Grid>
+              <Grid item md={6} xs={12}>
+                <InputFormItem
+                  name="maximum_leverage"
+                  label={i18n(
+                    'entities.broker.fields.maximum_leverage',
+                  )}
+                  variant="standard"
+                />
+              </Grid>
+              <Grid item md={6} xs={12}>
+                <InputFormItem
+                  name="minimum_deposit_short"
+                  label={i18n(
+                    'entities.broker.fields.minimum_deposit_short',
+                  )}
+                  variant="standard"
+                />
+              </Grid>
+              <Grid item md={4} xs={12}>
+                <CheckboxFormItem
+                  name="custodian_fees"
+                  label={i18n(
+                    'entities.broker.fields.custodian_fees',
+                  )}
+                />
+              </Grid>
+              <Grid item md={4} xs={12}>
+                <CheckboxFormItem
+                  name="mobile_trading"
+                  label={i18n(
+                    'entities.broker.fields.mobile_trading',
+                  )}
+                />
+              </Grid>
+              <Grid item md={4} xs={12}>
+                <CheckboxFormItem
+                  name="phone_order"
+                  label={i18n(
+                    'entities.broker.fields.phone_order',
+                  )}
+                />
+              </Grid>
+            </Grid>
+          </MDBox>
+        </Card>
+      </Grid>
       <Grid item md={6} xs={12}>
         <InputFormItem
           name="name"
           label={i18n('entities.broker.fields.name')}
           variant="standard"
           required={true}
-          autoFocus
         />
       </Grid>
       <Grid item md={6} xs={12}>
@@ -126,6 +202,16 @@ function BrokerBaseForm(props) {
         <CheckboxFormItem
           name="pdf"
           label={i18n('entities.broker.fields.pdf')}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <TextAreaFormItem
+          name="homepage_impression"
+          label={i18n(
+            'entities.broker.fields.homepage_impression',
+          )}
+          variant="standard"
+          fullWidth
         />
       </Grid>
     </Grid>

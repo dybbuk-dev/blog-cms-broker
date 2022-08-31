@@ -3,7 +3,46 @@ import * as yup from 'yup';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 
 const schema = yup.object().shape({
-  // #region Base
+  // #region Broker
+  // #region Broker Metadata
+  demo_url: yupFormSchemas.string(
+    i18n('entities.broker.fields.demo_url'),
+    {
+      min: 0,
+      max: 255,
+    },
+  ),
+  account_url: yupFormSchemas.string(
+    i18n('entities.broker.fields.account_url'),
+    {
+      min: 0,
+      max: 255,
+    },
+  ),
+  maximum_leverage: yupFormSchemas.string(
+    i18n('entities.broker.fields.maximum_leverage'),
+    {
+      min: 0,
+      max: 255,
+    },
+  ),
+  minimum_deposit_short: yupFormSchemas.string(
+    i18n('entities.broker.fields.minimum_deposit_short'),
+    {
+      min: 0,
+      max: 255,
+    },
+  ),
+  custodian_fees: yupFormSchemas.boolean(
+    i18n('entities.broker.fields.custodian_fees'),
+  ),
+  mobile_trading: yupFormSchemas.boolean(
+    i18n('entities.broker.fields.mobile_trading'),
+  ),
+  phone_order: yupFormSchemas.boolean(
+    i18n('entities.broker.fields.phone_order'),
+  ),
+  // #endregion
   navigation: yupFormSchemas.relationToOne(
     i18n('entities.broker.fields.navigation'),
     {},
@@ -12,6 +51,7 @@ const schema = yup.object().shape({
     i18n('entities.broker.fields.author'),
     {},
   ),
+  // #region Broker's Categories
   categories: yupFormSchemas.relationToMany(
     i18n('entities.broker.fields.categories'),
     {},
@@ -20,6 +60,7 @@ const schema = yup.object().shape({
     i18n('entities.broker.fields.categories_in_top_lists'),
     {},
   ),
+  // #endregion
   name: yupFormSchemas.string(
     i18n('entities.broker.fields.name'),
     {

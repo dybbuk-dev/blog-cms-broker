@@ -132,15 +132,12 @@ const en = {
         title: 'Edit Broker',
       },
       fields: {
-        // #region Base
+        // #region Broker
         id: 'Id',
         idRange: 'Id #',
         navigation: 'Main Navigation',
         name: 'Surname',
         name_normalized: 'Name normalized',
-        categories: 'Categories',
-        categories_in_top_lists:
-          'Show in top lists of these categories',
         activated: 'Activated',
         is_broker: 'Is Broker',
         is_compareable: 'Show in comparison list',
@@ -152,6 +149,34 @@ const en = {
         author: 'Author',
         author_name: 'Author Name',
         author_link: 'Author link',
+        // #endregion
+
+        // #region Broker's Categories
+        categories: 'Categories',
+        categories_in_top_lists:
+          'Show in top lists of these categories',
+        // #endregion
+
+        // #region Broker Metadata
+        metadata: 'Metadata',
+        homepage: 'Homepage',
+        homepage_title: 'homepage_title',
+        homepage_impression: 'Impression script',
+        broker_type: 'broker_type',
+        description: 'description',
+        teaser: 'teaser',
+        demo_url: 'Demo account',
+        account_url: 'Live Account',
+        maximum_leverage: 'Maximum Leverage',
+        minimum_deposit: 'minimum_deposit',
+        minimum_deposit_short:
+          'Minimum deposit (short for overview)',
+        custodian_fees: 'Custody Fees',
+        mobile_trading: 'Mobile trading',
+        phone_order: 'Telephone trading',
+        licensed_broker: 'licensed_broker',
+        withholding_tax: 'withholding_tax',
+        scalping_allowed: 'scalping_allowed',
         // #endregion
       },
       tabs: {
