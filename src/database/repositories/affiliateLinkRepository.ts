@@ -248,7 +248,17 @@ class AffiliateLinkRepository {
           limit: limit ? Number(limit) : undefined,
           offset: offset ? Number(offset) : undefined,
           order: orderBy
-            ? [orderBy.split('_')]
+            ? [
+                [
+                  orderBy.substring(
+                    0,
+                    orderBy.lastIndexOf('_'),
+                  ),
+                  orderBy.substring(
+                    orderBy.lastIndexOf('_') + 1,
+                  ),
+                ],
+              ]
             : [['id', 'DESC']],
           transaction:
             SequelizeRepository.getTransaction(options),
