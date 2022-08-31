@@ -30,7 +30,7 @@ class CategoryRepository {
       {
         ...lodash.pick(data, this.ALL_FIELDS),
         target: data.target ?? '',
-        author_id: data.author || '',
+        author_id: data.author ?? null,
         ip: '',
       },
       {
@@ -78,7 +78,7 @@ class CategoryRepository {
       {
         ...lodash.pick(data, this.ALL_FIELDS),
         target: data.target ?? '',
-        author_id: data.author,
+        author_id: data.author ?? null,
         ip: '',
       },
       {
@@ -342,7 +342,7 @@ class CategoryRepository {
           { ['id']: query },
           {
             [Op.and]: SequelizeFilterUtils.ilikeIncludes(
-              'author',
+              'category',
               'name',
               query,
             ),
@@ -353,12 +353,14 @@ class CategoryRepository {
 
     const where = { [Op.and]: whereAnd };
 
-    const records = await options.database.author.findAll({
-      attributes: ['id', 'name'],
-      where,
-      limit: limit ? Number(limit) : undefined,
-      order: [['name', 'ASC']],
-    });
+    const records = await options.database.category.findAll(
+      {
+        attributes: ['id', 'name'],
+        where,
+        limit: limit ? Number(limit) : undefined,
+        order: [['name', 'ASC']],
+      },
+    );
 
     return records.map((record) => ({
       id: record.id,

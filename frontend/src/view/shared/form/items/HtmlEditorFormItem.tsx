@@ -1,9 +1,11 @@
+import $ from 'jquery';
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import MDBox from 'src/mui/components/MDBox';
 import MDEditor from 'src/mui/components/MDEditor';
 import MDTypography from 'src/mui/components/MDTypography';
+import FormErrors from 'src/view/shared/form/formErrors';
 import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
 
 interface HtmlEditorFormItemProps {
@@ -11,6 +13,7 @@ interface HtmlEditorFormItemProps {
   label: string;
   value?: string;
   required?: boolean;
+  externalErrorMessage?: string;
 }
 
 function HtmlEditorFormItem({
@@ -18,15 +21,28 @@ function HtmlEditorFormItem({
   label,
   value,
   required,
+  externalErrorMessage,
 }: HtmlEditorFormItemProps) {
-  const { setValue } = useFormContext();
+  const {
+    setValue,
+    errors,
+    formState: { touched, isSubmitted },
+  } = useFormContext();
+  const errorMessage = FormErrors.errorMessage(
+    name,
+    errors,
+    touched,
+    isSubmitted,
+    externalErrorMessage,
+  );
   const { darkMode } = selectMuiSettings();
   const [editorValue, setEditorValue] = useState(
     value ?? '',
   );
   const onChangeEditor = (newVal) => {
     setEditorValue(newVal);
-    setValue(name, newVal, {
+    const isEmpty = $(newVal).text().trim() === '';
+    setValue(name, isEmpty ? '' : newVal, {
       shouldValidate: true,
       shouldDirty: true,
     });
@@ -48,7 +64,7 @@ function HtmlEditorFormItem({
           top: 0,
         }}
       >
-        {label}
+        {`${label}${required ? ' *' : ''}`}
       </MDTypography>
       <MDEditor
         value={editorValue}
@@ -72,6 +88,18 @@ function HtmlEditorFormItem({
           'image',
         ]}
       />
+      {errorMessage && (
+        <MDBox mt={0.75}>
+          <MDTypography
+            component="div"
+            variant="caption"
+            color="error"
+            fontWeight="regular"
+          >
+            {errorMessage}
+          </MDTypography>
+        </MDBox>
+      )}
       <MDBox display="none">
         <TextAreaFormItem
           name={name}
