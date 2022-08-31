@@ -1,4 +1,3 @@
-import { Grid } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import SaveIcon from '@mui/icons-material/Save';
 import UndoIcon from '@mui/icons-material/Undo';
@@ -8,73 +7,11 @@ import FormWrapper, {
   FormButtons,
 } from 'src/view/shared/styles/FormWrapper';
 import { useForm, FormProvider } from 'react-hook-form';
-import * as yup from 'yup';
-import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
-import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import MDButton from 'src/mui/components/MDButton';
-import brokerEnumerators from '../../../modules/broker/brokerEnumerators';
-import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
-import BrokerAutocompleteFormItem from 'src/view/broker/autocomplete/BrokerAutocompleteFormItem';
-import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
-import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
-import NavigationAutocompleteFormItem from 'src/view/navigation/autocomplete/NavigationAutocompleteFormItem';
-
-const schema = yup.object().shape({
-  navigation: yupFormSchemas.relationToOne(
-    i18n('entities.broker.fields.navigation'),
-    {},
-  ),
-  name: yupFormSchemas.string(
-    i18n('entities.broker.fields.name'),
-    {
-      required: true,
-      min: 1,
-      max: 255,
-    },
-  ),
-  name_normalized: yupFormSchemas.string(
-    i18n('entities.broker.fields.name_normalized'),
-    {
-      required: true,
-      min: 1,
-      max: 255,
-    },
-  ),
-  activated: yupFormSchemas.boolean(
-    i18n('entities.broker.fields.activated'),
-    {},
-  ),
-  is_broker: yupFormSchemas.boolean(
-    i18n('entities.broker.fields.is_broker'),
-    {},
-  ),
-  is_compareable: yupFormSchemas.boolean(
-    i18n('entities.broker.fields.is_compareable'),
-    {},
-  ),
-  top_broker: yupFormSchemas.boolean(
-    i18n('entities.broker.fields.top_broker'),
-    {},
-  ),
-  top_binary_broker: yupFormSchemas.boolean(
-    i18n('entities.broker.fields.top_binary_broker'),
-    {},
-  ),
-  top_forex_broker: yupFormSchemas.boolean(
-    i18n('entities.broker.fields.top_forex_broker'),
-    {},
-  ),
-  featured_broker: yupFormSchemas.boolean(
-    i18n('entities.broker.fields.featured_broker'),
-    {},
-  ),
-  pdf: yupFormSchemas.boolean(
-    i18n('entities.broker.fields.pdf'),
-    {},
-  ),
-});
+import BrokerBaseForm from 'src/view/broker/form/components/BrokerBaseForm';
+import schema from 'src/view/broker/form/schemas/FormSchema';
 
 function BrokerForm(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -82,16 +19,20 @@ function BrokerForm(props) {
     const record = props.record || {};
 
     return {
+      // #region Base
       name: record.name,
-      link: record.link,
-      title: record.title,
-      target: record.target,
-      sort: record.sort ?? 0,
+      navigation: record.navigation,
+      name_normalized: record.name_normalized,
       activated: record.activated,
-      show_user_logged_in: record.show_user_logged_in,
-      show_in_broker: record.show_in_broker,
-      type: record.type ?? 'NONE',
-      parent: record.parent,
+      is_broker: record.is_broker,
+      is_compareable: record.is_compareable,
+      top_broker: record.top_broker,
+      top_binary_broker: record.top_binary_broker,
+      top_forex_broker: record.top_forex_broker,
+      featured_broker: record.featured_broker,
+      pdf: record.pdf,
+      author: record.author,
+      // #endregion
     };
   });
 
@@ -117,102 +58,7 @@ function BrokerForm(props) {
     <FormWrapper>
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <Grid spacing={2} container>
-            <Grid item md={6} xs={12}>
-              <InputFormItem
-                name="name"
-                label={i18n('entities.broker.fields.name')}
-                variant="standard"
-                required={true}
-                autoFocus
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <NavigationAutocompleteFormItem
-                name="navigation"
-                label={i18n(
-                  'entities.broker.fields.navigation',
-                )}
-                required={true}
-                showCreate={true}
-                variant="standard"
-                fullWidth
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <InputFormItem
-                name="name_normalized"
-                label={i18n(
-                  'entities.broker.fields.name_normalized',
-                )}
-                variant="standard"
-                required={true}
-              />
-            </Grid>
-            <Grid item md={6} xs={12}></Grid>
-            <Grid item lg={4} md={6} xs={12}>
-              <CheckboxFormItem
-                name="activated"
-                label={i18n(
-                  'entities.broker.fields.activated',
-                )}
-              />
-            </Grid>
-            <Grid item lg={4} md={6} xs={12}>
-              <CheckboxFormItem
-                name="is_broker"
-                label={i18n(
-                  'entities.broker.fields.is_broker',
-                )}
-              />
-            </Grid>
-            <Grid item lg={4} md={6} xs={12}>
-              <CheckboxFormItem
-                name="is_compareable"
-                label={i18n(
-                  'entities.broker.fields.is_compareable',
-                )}
-              />
-            </Grid>
-            <Grid item lg={4} md={6} xs={12}>
-              <CheckboxFormItem
-                name="top_broker"
-                label={i18n(
-                  'entities.broker.fields.top_broker',
-                )}
-              />
-            </Grid>
-            <Grid item lg={4} md={6} xs={12}>
-              <CheckboxFormItem
-                name="top_binary_broker"
-                label={i18n(
-                  'entities.broker.fields.top_binary_broker',
-                )}
-              />
-            </Grid>
-            <Grid item lg={4} md={6} xs={12}>
-              <CheckboxFormItem
-                name="top_forex_broker"
-                label={i18n(
-                  'entities.broker.fields.top_forex_broker',
-                )}
-              />
-            </Grid>
-            <Grid item lg={4} md={6} xs={12}>
-              <CheckboxFormItem
-                name="featured_broker"
-                label={i18n(
-                  'entities.broker.fields.featured_broker',
-                )}
-              />
-            </Grid>
-            <Grid item lg={4} md={6} xs={12}>
-              <CheckboxFormItem
-                name="pdf"
-                label={i18n('entities.broker.fields.pdf')}
-              />
-            </Grid>
-          </Grid>
+          <BrokerBaseForm />
           <FormButtons
             style={{
               flexDirection: modal

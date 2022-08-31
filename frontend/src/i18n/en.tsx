@@ -132,6 +132,7 @@ const en = {
         title: 'Edit Broker',
       },
       fields: {
+        // #region Base
         id: 'Id',
         idRange: 'Id #',
         navigation: 'Main Navigation',
@@ -148,6 +149,7 @@ const en = {
         author: 'Author',
         author_name: 'Author Name',
         author_link: 'Author link',
+        // #endregion
       },
       enumerators: {},
       placeholders: {},

@@ -192,14 +192,8 @@ function BrokerListTable(props) {
                     {row.id}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
-                    <MDTypography
-                      display="block"
-                      variant="button"
-                      whiteSpace="break-spaces"
-                    >
-                      {row.name}
-                      <br />({row.name_normalized})
-                    </MDTypography>
+                    {row.name}
+                    <br />({row.name_normalized})
                   </DataTableBodyCell>
                   <DataTableBodyCell>
                     {[
