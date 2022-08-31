@@ -12,9 +12,13 @@ import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import MDButton from 'src/mui/components/MDButton';
 import BrokerBaseForm from 'src/view/broker/form/components/BrokerBaseForm';
 import schema from 'src/view/broker/form/schemas/FormSchema';
+import MDBox from 'src/mui/components/MDBox';
+import TabPanel from 'src/view/shared/tab/TabPanel';
+import BrokerTabs from 'src/view/broker/BrokerTabs';
 
 function BrokerForm(props) {
   const { sidenavColor } = selectMuiSettings();
+
   const [initialValues] = useState(() => {
     const record = props.record || {};
 
@@ -54,11 +58,51 @@ function BrokerForm(props) {
 
   const { saveLoading, modal } = props;
 
+  const [tabValue, setTabValue] = useState(0);
+
+  const handleSetTabValue = (event: any, newValue: any) =>
+    setTabValue(newValue);
+
   return (
     <FormWrapper>
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <BrokerBaseForm />
+          <MDBox mb={3}>
+            <BrokerTabs
+              value={tabValue}
+              onChange={handleSetTabValue}
+            />
+          </MDBox>
+          <TabPanel value={tabValue} index={0}>
+            <BrokerBaseForm />
+          </TabPanel>
+          <TabPanel value={tabValue} index={1}>
+            Metadata
+          </TabPanel>
+          <TabPanel value={tabValue} index={2}>
+            Overview
+          </TabPanel>
+          <TabPanel value={tabValue} index={3}>
+            Characteristics
+          </TabPanel>
+          <TabPanel value={tabValue} index={4}>
+            Platform
+          </TabPanel>
+          <TabPanel value={tabValue} index={5}>
+            Markets
+          </TabPanel>
+          <TabPanel value={tabValue} index={6}>
+            Spreads
+          </TabPanel>
+          <TabPanel value={tabValue} index={7}>
+            Service
+          </TabPanel>
+          <TabPanel value={tabValue} index={8}>
+            Test
+          </TabPanel>
+          <TabPanel value={tabValue} index={9}>
+            Old
+          </TabPanel>
           <FormButtons
             style={{
               flexDirection: modal

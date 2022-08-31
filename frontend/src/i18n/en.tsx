@@ -151,6 +151,18 @@ const en = {
         author_link: 'Author link',
         // #endregion
       },
+      tabs: {
+        base: 'Base',
+        metadata: 'Metadata',
+        overview: 'Overview',
+        characteristics: 'Characteristics',
+        platform: 'Platform',
+        markets: 'Markets',
+        spreads: 'Spreads',
+        service: 'Service',
+        test: 'Test',
+        old: 'Old',
+      },
       enumerators: {},
       placeholders: {},
       hints: {},

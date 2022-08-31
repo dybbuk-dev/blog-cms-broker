@@ -59,7 +59,7 @@ function BrokerFormPage(props) {
           {initLoading && <Spinner />}
 
           {dispatched && !initLoading && (
-            <MDBox p={3}>
+            <MDBox p={3} pt={0}>
               <BrokerForm
                 saveLoading={saveLoading}
                 initLoading={initLoading}
