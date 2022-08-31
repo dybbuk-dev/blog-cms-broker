@@ -1,6 +1,7 @@
 import { Grid } from '@mui/material';
 import { i18n } from 'src/i18n';
 import AuthorAutocompleteFormItem from 'src/view/author/autocomplete/AuthorAutocompleteFormItem';
+import CategoryAutocompleteFormItem from 'src/view/category/autocomplete/CategoryAutocompleteFormItem';
 import NavigationAutocompleteFormItem from 'src/view/navigation/autocomplete/NavigationAutocompleteFormItem';
 import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
@@ -44,6 +45,30 @@ function BrokerBaseForm(props) {
           required={false}
           showCreate={true}
           variant="standard"
+          fullWidth
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <CategoryAutocompleteFormItem
+          name="categories"
+          label={i18n('entities.broker.fields.categories')}
+          required={false}
+          showCreate={true}
+          variant="standard"
+          mode="multiple"
+          fullWidth
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <CategoryAutocompleteFormItem
+          name="categories_in_top_lists"
+          label={i18n(
+            'entities.broker.fields.categories_in_top_lists',
+          )}
+          required={false}
+          showCreate={true}
+          variant="standard"
+          mode="multiple"
           fullWidth
         />
       </Grid>

@@ -4,6 +4,8 @@ import { IServiceOptions } from './IServiceOptions';
 import BrokerRepository from '../database/repositories/brokerRepository';
 import NavigationRepository from '../database/repositories/navigationRepository';
 import AuthorRepository from '../database/repositories/authorRepository';
+import BrokersCategoryRepository from '../database/repositories/brokersCategoryRepository';
+import CategoryRepository from '../database/repositories/categoryRepository';
 
 export default class BrokerService {
   options: IServiceOptions;
@@ -27,6 +29,30 @@ export default class BrokerService {
     };
   }
 
+  async _updateRelatedData(id, data, transaction) {
+    await BrokersCategoryRepository.destroyByBroker(id, {
+      ...this.options,
+      transaction,
+    });
+    const categories_in_top_lists =
+      data.categories_in_top_lists || [];
+    for (const category of data.categories || []) {
+      await BrokersCategoryRepository.create(
+        {
+          broker: id,
+          category:
+            await CategoryRepository.filterIdInTenant(
+              category,
+              { ...this.options, transaction },
+            ),
+          show_in_top_listings:
+            categories_in_top_lists.includes(category),
+        },
+        { ...this.options, transaction },
+      );
+    }
+  }
+
   async create(data) {
     const transaction =
       await SequelizeRepository.createTransaction(
@@ -40,6 +66,12 @@ export default class BrokerService {
           ...this.options,
           transaction,
         },
+      );
+
+      await this._updateRelatedData(
+        record.id,
+        data,
+        transaction,
       );
 
       await SequelizeRepository.commitTransaction(
@@ -76,6 +108,12 @@ export default class BrokerService {
           ...this.options,
           transaction,
         },
+      );
+
+      await this._updateRelatedData(
+        record.id,
+        data,
+        transaction,
       );
 
       await SequelizeRepository.commitTransaction(

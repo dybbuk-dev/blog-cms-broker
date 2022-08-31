@@ -25,8 +25,15 @@ function BrokerForm(props) {
     return {
       // #region Base
       name: record.name,
-      navigation: record.navigation,
       name_normalized: record.name_normalized,
+      navigation: record.navigation || {},
+      author: record.author || {},
+      categories: (record.categories || []).map(
+        (v) => v.category || {},
+      ),
+      categories_in_top_lists: (record.categories || [])
+        .filter((v) => v.show_in_top_listings)
+        .map((v) => v.category || {}),
       activated: record.activated,
       is_broker: record.is_broker,
       is_compareable: record.is_compareable,
@@ -35,7 +42,6 @@ function BrokerForm(props) {
       top_forex_broker: record.top_forex_broker,
       featured_broker: record.featured_broker,
       pdf: record.pdf,
-      author: record.author,
       // #endregion
     };
   });
@@ -67,42 +73,47 @@ function BrokerForm(props) {
     <FormWrapper>
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <MDBox mb={3}>
+          <MDBox>
             <BrokerTabs
               value={tabValue}
               onChange={handleSetTabValue}
             />
           </MDBox>
-          <TabPanel value={tabValue} index={0}>
-            <BrokerBaseForm />
-          </TabPanel>
-          <TabPanel value={tabValue} index={1}>
-            Metadata
-          </TabPanel>
-          <TabPanel value={tabValue} index={2}>
-            Overview
-          </TabPanel>
-          <TabPanel value={tabValue} index={3}>
-            Characteristics
-          </TabPanel>
-          <TabPanel value={tabValue} index={4}>
-            Platform
-          </TabPanel>
-          <TabPanel value={tabValue} index={5}>
-            Markets
-          </TabPanel>
-          <TabPanel value={tabValue} index={6}>
-            Spreads
-          </TabPanel>
-          <TabPanel value={tabValue} index={7}>
-            Service
-          </TabPanel>
-          <TabPanel value={tabValue} index={8}>
-            Test
-          </TabPanel>
-          <TabPanel value={tabValue} index={9}>
-            Old
-          </TabPanel>
+          <MDBox py={3}>
+            <TabPanel value={tabValue} index={0}>
+              <BrokerBaseForm />
+            </TabPanel>
+            <TabPanel value={tabValue} index={1}>
+              Logo
+            </TabPanel>
+            <TabPanel value={tabValue} index={2}>
+              Metadata
+            </TabPanel>
+            <TabPanel value={tabValue} index={3}>
+              Overview
+            </TabPanel>
+            <TabPanel value={tabValue} index={4}>
+              Characteristics
+            </TabPanel>
+            <TabPanel value={tabValue} index={5}>
+              Platform
+            </TabPanel>
+            <TabPanel value={tabValue} index={6}>
+              Markets
+            </TabPanel>
+            <TabPanel value={tabValue} index={7}>
+              Spreads
+            </TabPanel>
+            <TabPanel value={tabValue} index={8}>
+              Service
+            </TabPanel>
+            <TabPanel value={tabValue} index={9}>
+              Test
+            </TabPanel>
+            <TabPanel value={tabValue} index={10}>
+              Old
+            </TabPanel>
+          </MDBox>
           <FormButtons
             style={{
               flexDirection: modal

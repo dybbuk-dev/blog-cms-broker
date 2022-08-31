@@ -6,6 +6,7 @@ import AuditLogRepository from './auditLogRepository';
 import SequelizeRepository from './sequelizeRepository';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import moment from 'moment';
+import BrokersCategoryRepository from './brokersCategoryRepository';
 
 const Op = Sequelize.Op;
 
@@ -397,6 +398,18 @@ class BrokerRepository {
 
     const transaction =
       SequelizeRepository.getTransaction(options);
+
+    const { rows: categories } =
+      await BrokersCategoryRepository.findAndCountAll(
+        {
+          filter: {
+            broker_id: output.id,
+          },
+        },
+        options,
+      );
+
+    output.categories = categories;
 
     return output;
   }

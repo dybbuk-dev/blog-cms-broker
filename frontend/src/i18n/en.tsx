@@ -138,6 +138,9 @@ const en = {
         navigation: 'Main Navigation',
         name: 'Surname',
         name_normalized: 'Name normalized',
+        categories: 'Categories',
+        categories_in_top_lists:
+          'Show in top lists of these categories',
         activated: 'Activated',
         is_broker: 'Is Broker',
         is_compareable: 'Show in comparison list',
@@ -153,6 +156,7 @@ const en = {
       },
       tabs: {
         base: 'Base',
+        logo: 'Logo',
         metadata: 'Metadata',
         overview: 'Overview',
         characteristics: 'Characteristics',

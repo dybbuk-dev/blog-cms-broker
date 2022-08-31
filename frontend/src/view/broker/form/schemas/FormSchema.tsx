@@ -12,6 +12,14 @@ const schema = yup.object().shape({
     i18n('entities.broker.fields.author'),
     {},
   ),
+  categories: yupFormSchemas.relationToMany(
+    i18n('entities.broker.fields.categories'),
+    {},
+  ),
+  categories_in_top_lists: yupFormSchemas.relationToMany(
+    i18n('entities.broker.fields.categories_in_top_lists'),
+    {},
+  ),
   name: yupFormSchemas.string(
     i18n('entities.broker.fields.name'),
     {
