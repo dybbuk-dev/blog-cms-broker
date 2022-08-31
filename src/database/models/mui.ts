@@ -67,7 +67,6 @@ export default function (sequelize) {
         },
       ],
       timestamps: true,
-      paranoid: true,
     },
   );
 

@@ -107,7 +107,6 @@ export default function (sequelize) {
       ],
       underscored: true,
       timestamps: false,
-      paranoid: true,
     },
   );
   category.associate = (models) => {
