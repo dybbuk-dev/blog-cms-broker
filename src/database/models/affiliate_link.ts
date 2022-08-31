@@ -1,15 +1,18 @@
 import { DataTypes } from 'sequelize';
 
 export default function (sequelize) {
-  const author = sequelize.define(
-    'author',
+  const affiliate_link = sequelize.define(
+    'affiliate_link',
     {
       id: {
         type: DataTypes.BIGINT.UNSIGNED,
         autoIncrement: true,
         primaryKey: true,
+        validate: {
+          len: [0, 29],
+        },
       },
-      name: {
+      hash: {
         type: DataTypes.STRING(255),
         allowNull: false,
         defaultValue: '',
@@ -27,19 +30,19 @@ export default function (sequelize) {
           len: [0, 255],
         },
       },
-      image: {
+      display_hash: {
         type: DataTypes.STRING(255),
-        allowNull: false,
-        defaultValue: '',
+        allowNull: true,
         validate: {
-          notEmpty: true,
           len: [0, 255],
         },
       },
-      description: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-        defaultValue: '',
+      meta_info: {
+        type: DataTypes.STRING(255),
+        allowNull: true,
+        validate: {
+          len: [0, 255],
+        },
       },
       ip: {
         type: DataTypes.CHAR(39),
@@ -61,12 +64,25 @@ export default function (sequelize) {
       },
     },
     {
-      indexes: [],
+      indexes: [
+        {
+          fields: ['hash'],
+          name: 'hash',
+        },
+      ],
       underscored: true,
       timestamps: false,
-      paranoid: true,
     },
   );
-  author.associate = (models) => {};
-  return author;
+  affiliate_link.associate = (models) => {
+    // models.affiliate_link.belongsTo(models.affiliate_link_heartbeat, {
+    //   as: 'affiliate_link_heartbeat',
+    //   constraints: true,
+    //   foreignKey: 'affiliate_id',
+    //   onDelete: 'NO ACTION',
+    //   onUpdate: 'NO ACTION',
+    // });
+  };
+
+  return affiliate_link;
 }

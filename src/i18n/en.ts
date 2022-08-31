@@ -101,6 +101,11 @@ const en = {
         unique: {},
       },
     },
+    affiliateLink: {
+      errors: {
+        unique: {},
+      },
+    },
     navigation: {
       errors: {
         unique: {},

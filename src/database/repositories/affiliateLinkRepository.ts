@@ -5,45 +5,32 @@ import { IRepositoryOptions } from './IRepositoryOptions';
 import AuditLogRepository from './auditLogRepository';
 import SequelizeRepository from './sequelizeRepository';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
-import CategoryDescriptionRepository from './categoryDescriptionRepository';
 
 const Op = Sequelize.Op;
 
-class CategoryRepository {
+class AffiliateLinkRepository {
   static ALL_FIELDS = [
-    'name',
+    'hash',
     'link',
-    'title',
-    'author_id',
-    'target',
-    'sort',
-    'activated',
-    'show_in_navigation',
-    'show_in_footer',
+    'display_hash',
+    'meta_info',
   ];
 
   static async create(data, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    const record = await options.database.category.create(
-      {
-        ...lodash.pick(data, this.ALL_FIELDS),
-        target: data.target ?? '',
-        author_id: data.author ?? null,
-        ip: '',
-      },
-      {
-        transaction,
-      },
-    );
-    if (record.id) {
-      await CategoryDescriptionRepository.create(
-        record.id,
-        data,
-        options,
+    const record =
+      await options.database.affiliate_link.create(
+        {
+          ...lodash.pick(data, this.ALL_FIELDS),
+          meta_info: data.meta_info ?? null,
+          ip: '',
+        },
+        {
+          transaction,
+        },
       );
-    }
 
     await this._createAuditLog(
       AuditLogRepository.CREATE,
@@ -63,12 +50,13 @@ class CategoryRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    let record = await options.database.category.findOne({
-      where: {
-        id,
-      },
-      transaction,
-    });
+    let record =
+      await options.database.affiliate_link.findOne({
+        where: {
+          id,
+        },
+        transaction,
+      });
 
     if (!record) {
       throw new Error404();
@@ -77,22 +65,13 @@ class CategoryRepository {
     record = await record.update(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
-        target: data.target ?? '',
-        author_id: data.author ?? null,
+        meta_info: data.meta_info ?? null,
         ip: '',
       },
       {
         transaction,
       },
     );
-
-    if (record) {
-      await CategoryDescriptionRepository.update(
-        id,
-        data,
-        options,
-      );
-    }
 
     await this._createAuditLog(
       AuditLogRepository.UPDATE,
@@ -108,17 +87,13 @@ class CategoryRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    await CategoryDescriptionRepository.destroy(
-      id,
-      options,
-    );
-
-    let record = await options.database.category.findOne({
-      where: {
-        id,
-      },
-      transaction,
-    });
+    let record =
+      await options.database.affiliate_link.findOne({
+        where: {
+          id,
+        },
+        transaction,
+      });
 
     if (!record) {
       throw new Error404();
@@ -140,31 +115,19 @@ class CategoryRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
     const include = [
-      {
-        model: options.database.author,
-        as: 'author',
-      },
+      // {
+      //   model: options.database.author,
+      //   as: 'author',
+      // },
     ];
-    const record = await options.database.category.findOne({
-      where: {
-        id,
-      },
-      include,
-      transaction,
-    });
-
-    const description_record =
-      await options.database.category_description.findOne({
+    const record =
+      await options.database.affiliate_link.findOne({
         where: {
           id,
         },
+        include,
         transaction,
       });
-    record.dataValues = {
-      ...record.dataValues,
-      teaser: description_record.teaser,
-      description: description_record.description,
-    };
 
     if (!record) {
       throw new Error404();
@@ -198,12 +161,11 @@ class CategoryRepository {
       },
     };
 
-    const records = await options.database.category.findAll(
-      {
+    const records =
+      await options.database.affiliate_link.findAll({
         attributes: ['id'],
         where,
-      },
-    );
+      });
 
     return records.map((record) => record.id);
   }
@@ -212,7 +174,7 @@ class CategoryRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    return options.database.category.count({
+    return options.database.affiliate_link.count({
       where: {
         ...filter,
       },
@@ -225,10 +187,10 @@ class CategoryRepository {
     options: IRepositoryOptions,
   ) {
     const include = [
-      {
-        model: options.database.author,
-        as: 'author',
-      },
+      // {
+      //   model: options.database.author,
+      //   as: 'author',
+      // },
     ];
     let whereAnd: Array<any> = [];
 
@@ -261,59 +223,37 @@ class CategoryRepository {
         }
       }
 
-      [
-        'name',
-        'link',
-        'title',
-        'target',
-        'author_name',
-        'author_link',
-      ].forEach((field) => {
-        if (filter[field]) {
-          whereAnd.push(
-            SequelizeFilterUtils.ilikeIncludes(
-              'category',
-              field,
-              filter[field],
-            ),
-          );
-        }
-      });
-
-      [
-        'activated',
-        'show_in_navigation',
-        'show_in_footer',
-      ].forEach((field) => {
-        if (
-          filter[field] === true ||
-          filter[field] === 'true' ||
-          filter[field] === false ||
-          filter[field] === 'false'
-        ) {
-          whereAnd.push({
-            [field]:
-              filter[field] === true ||
-              filter[field] === 'true',
-          });
-        }
-      });
+      ['hash', 'link', 'display_hash', 'meta_info'].forEach(
+        (field) => {
+          if (filter[field]) {
+            whereAnd.push(
+              SequelizeFilterUtils.ilikeIncludes(
+                'affiliate_link',
+                field,
+                filter[field],
+              ),
+            );
+          }
+        },
+      );
     }
 
     const where = { [Op.and]: whereAnd };
 
     let { rows, count } =
-      await options.database.category.findAndCountAll({
-        where,
-        include,
-        limit: limit ? Number(limit) : undefined,
-        offset: offset ? Number(offset) : undefined,
-        order: orderBy
-          ? [orderBy.split('_')]
-          : [['id', 'DESC']],
-        transaction:
-          SequelizeRepository.getTransaction(options),
-      });
+      await options.database.affiliate_link.findAndCountAll(
+        {
+          where,
+          include,
+          limit: limit ? Number(limit) : undefined,
+          offset: offset ? Number(offset) : undefined,
+          order: orderBy
+            ? [orderBy.split('_')]
+            : [['id', 'DESC']],
+          transaction:
+            SequelizeRepository.getTransaction(options),
+        },
+      );
 
     rows = await this._fillWithRelationsAndFilesForRows(
       rows,
@@ -327,46 +267,7 @@ class CategoryRepository {
     query,
     limit,
     options: IRepositoryOptions,
-  ) {
-    let whereAnd: Array<any> = [
-      {
-        ['name']: {
-          [Op.ne]: '',
-        },
-      },
-    ];
-
-    if (query) {
-      whereAnd.push({
-        [Op.or]: [
-          { ['id']: query },
-          {
-            [Op.and]: SequelizeFilterUtils.ilikeIncludes(
-              'category',
-              'name',
-              query,
-            ),
-          },
-        ],
-      });
-    }
-
-    const where = { [Op.and]: whereAnd };
-
-    const records = await options.database.category.findAll(
-      {
-        attributes: ['id', 'name'],
-        where,
-        limit: limit ? Number(limit) : undefined,
-        order: [['name', 'ASC']],
-      },
-    );
-
-    return records.map((record) => ({
-      id: record.id,
-      label: record.name,
-    }));
-  }
+  ) {}
 
   static async _createAuditLog(
     action,
@@ -384,7 +285,7 @@ class CategoryRepository {
 
     await AuditLogRepository.log(
       {
-        entityName: 'category',
+        entityName: 'affiliate link',
         entityId: record.id,
         action,
         values,
@@ -425,4 +326,4 @@ class CategoryRepository {
   }
 }
 
-export default CategoryRepository;
+export default AffiliateLinkRepository;
