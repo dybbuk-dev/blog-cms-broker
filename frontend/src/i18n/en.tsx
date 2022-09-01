@@ -216,7 +216,7 @@ const en = {
         metadata: 'Metadata',
         homepage: 'Homepage',
         homepage_title: 'homepage_title',
-        homepage_impression: 'Impression script',
+        homepage_impression: 'Impression Script',
         broker_type: 'Broker Type',
         description: 'description',
         teaser: 'Teaser Text',

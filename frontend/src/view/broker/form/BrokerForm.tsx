@@ -16,6 +16,7 @@ import MDBox from 'src/mui/components/MDBox';
 import TabPanel from 'src/view/shared/tab/TabPanel';
 import BrokerTabs from 'src/view/broker/BrokerTabs';
 import BrokerOverviewForm from 'src/view/broker/form/components/BrokerOverviewForm';
+import BrokerCharacteristicsForm from 'src/view/broker/form/components/BrokerCharacteristicsForm';
 
 function BrokerForm(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -136,7 +137,7 @@ function BrokerForm(props) {
               <BrokerOverviewForm {...props} />
             </TabPanel>
             <TabPanel value={tabValue} index={2}>
-              Characteristics
+              <BrokerCharacteristicsForm {...props} />
             </TabPanel>
             <TabPanel value={tabValue} index={3}>
               Platform

@@ -45,20 +45,16 @@ const schema = yup.object().shape({
   // #endregion
   navigation: yupFormSchemas.relationToOne(
     i18n('entities.broker.fields.navigation'),
-    {},
   ),
   author: yupFormSchemas.relationToOne(
     i18n('entities.broker.fields.author'),
-    {},
   ),
   // #region Broker's Categories
   categories: yupFormSchemas.relationToMany(
     i18n('entities.broker.fields.categories'),
-    {},
   ),
   categories_in_top_lists: yupFormSchemas.relationToMany(
     i18n('entities.broker.fields.categories_in_top_lists'),
-    {},
   ),
   // #endregion
   name: yupFormSchemas.string(
@@ -79,35 +75,38 @@ const schema = yup.object().shape({
   ),
   activated: yupFormSchemas.boolean(
     i18n('entities.broker.fields.activated'),
-    {},
   ),
   is_broker: yupFormSchemas.boolean(
     i18n('entities.broker.fields.is_broker'),
-    {},
   ),
   is_compareable: yupFormSchemas.boolean(
     i18n('entities.broker.fields.is_compareable'),
-    {},
   ),
   top_broker: yupFormSchemas.boolean(
     i18n('entities.broker.fields.top_broker'),
-    {},
   ),
   top_binary_broker: yupFormSchemas.boolean(
     i18n('entities.broker.fields.top_binary_broker'),
-    {},
   ),
   top_forex_broker: yupFormSchemas.boolean(
     i18n('entities.broker.fields.top_forex_broker'),
-    {},
   ),
   featured_broker: yupFormSchemas.boolean(
     i18n('entities.broker.fields.featured_broker'),
-    {},
   ),
   pdf: yupFormSchemas.boolean(
     i18n('entities.broker.fields.pdf'),
-    {},
+  ),
+  // #endregion
+
+  // #region Characteristics
+  homepage: yupFormSchemas.string(
+    i18n('entities.broker.fields.homepage'),
+    {
+      required: true,
+      min: 0,
+      max: 255,
+    },
   ),
   // #endregion
 });
