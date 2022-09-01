@@ -34,25 +34,32 @@ class BrokerRepository {
     };
   }
 
-  static includes(options: IRepositoryOptions) {
+  static includes(
+    options: IRepositoryOptions,
+    metaOnly = false,
+  ) {
     return [
-      {
-        model: options.database.navigation,
-        as: 'navigation',
-      },
-      {
-        model: options.database.author,
-        as: 'author',
-      },
       {
         model: options.database.broker_metas,
         as: 'meta',
       },
-      {
+      !metaOnly && {
+        model: options.database.navigation,
+        as: 'navigation',
+      },
+      !metaOnly && {
+        model: options.database.author,
+        as: 'author',
+      },
+      !metaOnly && {
         model: options.database.broker_upside,
         as: 'upsides',
       },
-    ];
+      !metaOnly && {
+        model: options.database.broker_regulatory_authority,
+        as: 'regulatory_authorities',
+      },
+    ].filter(Boolean);
   }
 
   static async create(data, options: IRepositoryOptions) {
@@ -221,7 +228,7 @@ class BrokerRepository {
     options: IRepositoryOptions,
   ) {
     let whereAnd: Array<any> = [];
-    let include = this.includes(options);
+    let include = this.includes(options, true);
 
     if (filter) {
       if (filter.idRange) {

@@ -1,6 +1,5 @@
 import lodash from 'lodash';
 import Sequelize from 'sequelize';
-import Error400 from '../../errors/Error400';
 import SequelizeArrayUtils from '../utils/sequelizeArrayUtils';
 import { IRepositoryOptions } from './IRepositoryOptions';
 import SequelizeRepository from './sequelizeRepository';
@@ -9,6 +8,7 @@ const Op = Sequelize.Op;
 
 class BrokerUpsideRepository {
   static ALL_FIELDS = ['type', 'text'];
+  static NOT_EMPTY_FIELDS = ['text'];
   static TYPES = ['UPSIDE', 'DOWNSIDE'];
 
   static _getTypeIndex(type) {
@@ -19,12 +19,12 @@ class BrokerUpsideRepository {
   }
 
   static _relatedData(data, options) {
-    if (!data.text || data.text === '') {
-      throw new Error400(
-        options.language,
-        'entities.broker_upside.errors.notEmpty.text',
-      );
-    }
+    SequelizeRepository.handleNotEmptyField(
+      data,
+      this.NOT_EMPTY_FIELDS,
+      options.language,
+      'broker_upside',
+    );
     return {
       type: this._getTypeIndex(data.type),
       broker_id: data.broker || null,
