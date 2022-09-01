@@ -150,6 +150,13 @@ export default function (sequelize) {
       as: 'upsides',
       foreignKey: 'broker_id',
     });
+    models.broker.hasMany(
+      models.broker_regulatory_authority,
+      {
+        as: 'regulatory_authorities',
+        foreignKey: 'broker_id',
+      },
+    );
   };
 
   return broker;

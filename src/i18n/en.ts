@@ -101,7 +101,15 @@ const en = {
     broker_upside: {
       errors: {
         notEmpty: {
-          text: 'Text could not be empty',
+          text: 'Demo Account Text is required',
+        },
+      },
+    },
+    broker_regulatory_authority: {
+      errors: {
+        notEmpty: {
+          name: 'Regulatory Authority Name is required',
+          url: 'Regulatory Authority URL is required',
         },
       },
     },

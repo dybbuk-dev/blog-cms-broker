@@ -20,9 +20,7 @@ function BrokerOverviewForm(props) {
       <Grid item xs={12}>
         <GroupFormItem
           name="upsides"
-          label={i18n(
-            'entities.broker.fields.demo_account',
-          )}
+          label={i18n('entities.broker.fields.upsides')}
           groupInputTemplates={[
             {
               input: SelectFormItem,
@@ -30,7 +28,8 @@ function BrokerOverviewForm(props) {
               label: i18n(
                 'entities.broker.fields.upside.type',
               ),
-              xs: 6,
+              md: 6,
+              xs: 12,
               defaultValue: '',
               options: brokerEnumerators.upside.type.map(
                 (value) => ({
@@ -47,8 +46,52 @@ function BrokerOverviewForm(props) {
               label: i18n(
                 'entities.broker.fields.upside.text',
               ),
-              xs: 6,
+              md: 6,
+              xs: 12,
               defaultValue: '',
+              required: true,
+            },
+          ]}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <GroupFormItem
+          name="regulatory_authorities"
+          label={i18n(
+            'entities.broker.fields.regulatory_authorities',
+          )}
+          groupInputTemplates={[
+            {
+              input: InputFormItem,
+              name: 'name',
+              label: i18n(
+                'entities.broker.fields.regulatory_authority.name',
+              ),
+              md: 6,
+              xs: 12,
+              defaultValue: '',
+              required: true,
+            },
+            {
+              input: InputFormItem,
+              name: 'abbreviation',
+              label: i18n(
+                'entities.broker.fields.regulatory_authority.abbreviation',
+              ),
+              md: 6,
+              xs: 12,
+              defaultValue: '',
+              required: true,
+            },
+            {
+              input: InputFormItem,
+              name: 'url',
+              label: i18n(
+                'entities.broker.fields.regulatory_authority.url',
+              ),
+              xs: 12,
+              defaultValue: '',
+              required: true,
             },
           ]}
         />

@@ -72,6 +72,10 @@ function BrokerForm(props) {
       // #region Broker Upside
       upsides: record.upsides,
       // #endregion
+
+      // #region Broker Regulatory Authority
+      regulatory_authorities: record.regulatory_authorities,
+      // #endregion
     };
   });
 

@@ -273,6 +273,10 @@ function GroupFormItem(props) {
   );
 }
 
+GroupFormItem.defaultProps = {
+  groupInputTemplates: [],
+};
+
 GroupFormItem.propTypes = {
   groupInputTemplates: PropTypes.array.isRequired,
   label: PropTypes.string,

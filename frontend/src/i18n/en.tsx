@@ -234,11 +234,20 @@ const en = {
         scalping_allowed: 'scalping_allowed',
         // #endregion
 
-        demo_account: 'Demo Account',
         // #region Upside
+        upsides: 'Demo Account',
         upside: {
           type: 'Type',
           text: 'Text',
+        },
+        // #endregion
+
+        // #region Regulatory Authority
+        regulatory_authorities: 'Regulatory Authorities',
+        regulatory_authority: {
+          name: 'Surname',
+          abbreviation: 'Abbreviation',
+          url: 'Homepage',
         },
         // #endregion
       },

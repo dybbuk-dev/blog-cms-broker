@@ -8,6 +8,7 @@ import BrokersCategoryRepository from '../database/repositories/brokersCategoryR
 import CategoryRepository from '../database/repositories/categoryRepository';
 import BrokerMetaRepository from '../database/repositories/brokerMetaRepository';
 import BrokerUpsideRepository from '../database/repositories/brokerUpsideRepository';
+import BrokerRegulatoryAuthorityRepository from '../database/repositories/brokerRegulatoryAuthorityRepository';
 
 export default class BrokerService {
   options: IServiceOptions;
@@ -17,16 +18,17 @@ export default class BrokerService {
   }
 
   async _withRelatedData(data, transaction) {
+    const options = { ...this.options, transaction };
     return {
       ...data,
       navigation:
         await NavigationRepository.filterIdInTenant(
           data.navigation,
-          { ...this.options, transaction },
+          options,
         ),
       author: await AuthorRepository.filterIdInTenant(
         data.author,
-        { ...this.options, transaction },
+        options,
       ),
     };
   }
@@ -35,23 +37,21 @@ export default class BrokerService {
    * ! Update Broker Meta
    */
   async _updateBrokerMeta(id, data, transaction) {
+    const options = { ...this.options, transaction };
     const metaId =
-      await BrokerMetaRepository.filterIdInTenant(id, {
-        ...this.options,
-        transaction,
-      });
+      await BrokerMetaRepository.filterIdInTenant(
+        id,
+        options,
+      );
     if (metaId) {
-      await BrokerMetaRepository.update(id, data, {
-        ...this.options,
-        transaction,
-      });
+      await BrokerMetaRepository.update(id, data, options);
     } else {
       await BrokerMetaRepository.create(
         {
           ...data,
           id: id,
         },
-        { ...this.options, transaction },
+        options,
       );
     }
   }
@@ -60,10 +60,11 @@ export default class BrokerService {
    * ! Update Broker's Categories
    */
   async _updateBrokersCategories(id, data, transaction) {
-    await BrokersCategoryRepository.destroyByBroker(id, {
-      ...this.options,
-      transaction,
-    });
+    const options = { ...this.options, transaction };
+    await BrokersCategoryRepository.destroyByBroker(
+      id,
+      options,
+    );
     const categories_in_top_lists =
       data.categories_in_top_lists || [];
     for (const category of data.categories || []) {
@@ -73,12 +74,12 @@ export default class BrokerService {
           category:
             await CategoryRepository.filterIdInTenant(
               category,
-              { ...this.options, transaction },
+              options,
             ),
           show_in_top_listings:
             categories_in_top_lists.includes(category),
         },
-        { ...this.options, transaction },
+        options,
       );
     }
   }
@@ -87,10 +88,11 @@ export default class BrokerService {
    * ! Update Broker Upside
    */
   async _updateBrokerUpside(id, data, transaction) {
-    await BrokerUpsideRepository.destroyByBroker(id, {
-      ...this.options,
-      transaction,
-    });
+    const options = { ...this.options, transaction };
+    await BrokerUpsideRepository.destroyByBroker(
+      id,
+      options,
+    );
     const upsides = data.upsides || [];
     for (const upside of upsides) {
       await BrokerUpsideRepository.create(
@@ -99,7 +101,34 @@ export default class BrokerService {
           broker: id,
           ip: data.ip || '',
         },
-        { ...this.options, transaction },
+        options,
+      );
+    }
+  }
+
+  /**
+   * ! Update Broker Regulatory Authority
+   */
+  async _updateBrokerRegulatoryAuthority(
+    id,
+    data,
+    transaction,
+  ) {
+    const options = { ...this.options, transaction };
+    await BrokerRegulatoryAuthorityRepository.destroyByBroker(
+      id,
+      options,
+    );
+    const regulatoryAuthorities =
+      data.regulatory_authorities || [];
+    for (const regulatoryAuthority of regulatoryAuthorities) {
+      await BrokerRegulatoryAuthorityRepository.create(
+        {
+          ...regulatoryAuthority,
+          broker: id,
+          ip: data.ip || '',
+        },
+        options,
       );
     }
   }
@@ -115,6 +144,11 @@ export default class BrokerService {
       transaction,
     );
     await this._updateBrokerUpside(id, data, transaction);
+    await this._updateBrokerRegulatoryAuthority(
+      id,
+      data,
+      transaction,
+    );
   }
 
   async create(data) {
