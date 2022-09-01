@@ -24,6 +24,7 @@ export default function (sequelize) {
       name_normalized: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        unique: true,
         validate: {
           notEmpty: true,
           len: [0, 255],
@@ -98,16 +99,12 @@ export default function (sequelize) {
     {
       indexes: [
         {
-          unique: true,
-          fields: ['name_normalized'],
-        },
-        {
+          name: 'activated',
           fields: ['activated'],
         },
       ],
       underscored: true,
       timestamps: false,
-      paranoid: true,
     },
   );
 

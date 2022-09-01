@@ -187,6 +187,7 @@ const en = {
         title: 'Edit Broker',
       },
       fields: {
+        // #region Broker
         id: 'Id',
         idRange: 'Id #',
         navigation: 'Main Navigation',
@@ -203,8 +204,63 @@ const en = {
         author: 'Author',
         author_name: 'Author Name',
         author_link: 'Author link',
+        // #endregion
+
+        // #region Broker's Categories
+        categories: 'Categories',
+        categories_in_top_lists:
+          'Show in top lists of these categories',
+        // #endregion
+
+        // #region Broker Metadata
+        metadata: 'Metadata',
+        homepage: 'Homepage',
+        homepage_title: 'homepage_title',
+        homepage_impression: 'Impression script',
+        broker_type: 'broker_type',
+        description: 'description',
+        teaser: 'Teaser Text',
+        demo_url: 'Demo account',
+        account_url: 'Live Account',
+        maximum_leverage: 'Maximum Leverage',
+        minimum_deposit: 'minimum_deposit',
+        minimum_deposit_short:
+          'Minimum deposit (short for overview)',
+        custodian_fees: 'Custody Fees',
+        mobile_trading: 'Mobile trading',
+        phone_order: 'Telephone trading',
+        licensed_broker: 'licensed_broker',
+        withholding_tax: 'withholding_tax',
+        scalping_allowed: 'scalping_allowed',
+        // #endregion
+
+        demo_account: 'Demo Account',
+        // #region Upside
+        upside: {
+          type: 'Type',
+          text: 'Text',
+        },
+        // #endregion
       },
-      enumerators: {},
+      tabs: {
+        broker: 'Broker',
+        overview: 'Overview',
+        characteristics: 'Characteristics',
+        platform: 'Platform',
+        markets: 'Markets',
+        spreads: 'Spreads',
+        service: 'Service',
+        test: 'Test',
+        old: 'Old',
+      },
+      enumerators: {
+        upside: {
+          type: {
+            UPSIDE: 'Upside',
+            DOWNSIDE: 'Downside',
+          },
+        },
+      },
       placeholders: {},
       hints: {},
       new: {

@@ -119,7 +119,6 @@ export default function (sequelize) {
       ],
       underscored: true,
       timestamps: false,
-      paranoid: true,
     },
   );
 

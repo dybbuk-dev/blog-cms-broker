@@ -43,7 +43,6 @@ export default function (sequelize) {
       indexes: [],
       underscored: true,
       timestamps: false,
-      paranoid: true,
     },
   );
 

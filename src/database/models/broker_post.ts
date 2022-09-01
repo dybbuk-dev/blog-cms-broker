@@ -91,18 +91,19 @@ export default function (sequelize) {
     {
       indexes: [
         {
+          name: 'created',
           fields: ['created'],
         },
         {
           fields: ['deleted', 'spam', 'review_required'],
         },
         {
+          name: 'rating',
           fields: ['rating'],
         },
       ],
       underscored: true,
       timestamps: false,
-      paranoid: true,
     },
   );
 

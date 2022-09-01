@@ -24,7 +24,6 @@ export default function (sequelize, DataTypes) {
     },
     {
       timestamps: true,
-      paranoid: true,
     },
   );
 

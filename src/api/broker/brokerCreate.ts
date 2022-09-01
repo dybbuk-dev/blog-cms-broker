@@ -9,9 +9,10 @@ export default async (req, res, next) => {
       Permissions.values.brokerCreate,
     );
 
-    const payload = await new BrokerService(req).create(
-      req.body.data,
-    );
+    const payload = await new BrokerService(req).create({
+      ...req.body.data,
+      ip: req.ip,
+    });
 
     await ApiResponseHandler.success(req, res, payload);
   } catch (error) {

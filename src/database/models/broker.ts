@@ -1,4 +1,5 @@
 import { DataTypes } from 'sequelize';
+import { i18n } from '../../i18n';
 
 export default function (sequelize) {
   const broker = sequelize.define(
@@ -24,6 +25,7 @@ export default function (sequelize) {
       name_normalized: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        unique: true,
         validate: {
           notEmpty: true,
           len: [0, 255],
@@ -108,22 +110,20 @@ export default function (sequelize) {
     {
       indexes: [
         {
-          unique: true,
-          fields: ['name_normalized'],
-        },
-        {
+          name: 'navigation_id',
           fields: ['navigation_id'],
         },
         {
+          name: 'top_broker',
           fields: ['top_broker'],
         },
         {
+          name: 'activated',
           fields: ['activated'],
         },
       ],
       underscored: true,
       timestamps: false,
-      paranoid: true,
     },
   );
 
@@ -141,6 +141,14 @@ export default function (sequelize) {
       foreignKey: 'author_id',
       onDelete: 'NO ACTION',
       onUpdate: 'NO ACTION',
+    });
+    models.broker.hasOne(models.broker_metas, {
+      as: 'meta',
+      foreignKey: 'id',
+    });
+    models.broker.hasMany(models.broker_upside, {
+      as: 'upsides',
+      foreignKey: 'broker_id',
     });
   };
 

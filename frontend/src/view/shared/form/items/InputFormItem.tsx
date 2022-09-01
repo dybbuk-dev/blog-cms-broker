@@ -75,6 +75,7 @@ export function InputFormItem(props) {
           name,
         }}
         disabled={disabled}
+        value={value}
       />
       {errorMessage && (
         <MDBox mt={0.75}>

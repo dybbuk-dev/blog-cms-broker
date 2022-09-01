@@ -140,10 +140,14 @@ function BrokerListTable(props) {
                     ? sorter.order
                     : 'none'
                 }
+                width="0"
               >
                 {i18n('entities.broker.fields.name')}
               </DataTableHeadCell>
               <DataTableHeadCell sorted={false}>
+                {i18n('entities.broker.fields.homepage')}
+              </DataTableHeadCell>
+              <DataTableHeadCell sorted={false} width="0">
                 {i18n('entities.broker.fields.activated')}
               </DataTableHeadCell>
               <DataTableHeadCell sorted={false} width="0">
@@ -192,14 +196,16 @@ function BrokerListTable(props) {
                     {row.id}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
-                    <MDTypography
-                      display="block"
-                      variant="button"
-                      whiteSpace="break-spaces"
+                    {row.name}
+                    <br />({row.name_normalized})
+                  </DataTableBodyCell>
+                  <DataTableBodyCell>
+                    <MaterialLink
+                      href={row.meta?.homepage}
+                      target="_blank"
                     >
-                      {row.name}
-                      <br />({row.name_normalized})
-                    </MDTypography>
+                      {row.meta?.homepage}
+                    </MaterialLink>
                   </DataTableBodyCell>
                   <DataTableBodyCell>
                     {[

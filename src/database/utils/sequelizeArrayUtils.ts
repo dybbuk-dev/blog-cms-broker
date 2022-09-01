@@ -11,12 +11,7 @@ export default class SequelizeArrayUtils {
   }
 
   static invalid(obj, fieldName) {
-    return (
-      !obj ||
-      !obj.dataValues ||
-      !fieldName ||
-      !obj.dataValues[fieldName]
-    );
+    return !obj || !obj.dataValues || !fieldName;
   }
 
   static indexToValue(obj, fieldName, values: any[] = []) {

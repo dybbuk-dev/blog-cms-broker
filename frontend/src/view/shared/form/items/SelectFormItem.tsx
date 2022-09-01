@@ -26,6 +26,7 @@ function SelectFormItem(props) {
     shrink,
     margin,
     variant,
+    value: defaultValue,
   } = props;
 
   const {
@@ -52,16 +53,17 @@ function SelectFormItem(props) {
 
   const value = () => {
     const { mode } = props;
+    const realValue = defaultValue || originalValue;
     if (mode === 'multiple') {
-      return valueMultiple();
+      return valueMultiple(realValue);
     } else {
-      return valueOne();
+      return valueOne(realValue);
     }
   };
 
-  const valueMultiple = () => {
-    if (originalValue) {
-      return originalValue.map((value) =>
+  const valueMultiple = (values) => {
+    if (values) {
+      return values.map((value) =>
         options.find((option) => option.value === value),
       );
     }
@@ -69,12 +71,12 @@ function SelectFormItem(props) {
     return [];
   };
 
-  const valueOne = () => {
+  const valueOne = (value) => {
     const { options } = props;
 
-    if (originalValue != null) {
+    if (value != null) {
       return options.find(
-        (option) => option.value === originalValue,
+        (option) => option.value === value,
       );
     }
 
@@ -199,7 +201,7 @@ SelectFormItem.propTypes = {
   renderOption: PropTypes.func,
   renderInput: PropTypes.func,
   renderTags: PropTypes.func,
-  singleValue: PropTypes.bool,
+  value: PropTypes.any,
 };
 
 export default SelectFormItem;

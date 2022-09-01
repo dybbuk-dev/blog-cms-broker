@@ -12,6 +12,7 @@ export default function (sequelize) {
       homepage: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        defaultValue: '',
         validate: {
           len: [0, 255],
         },
@@ -27,19 +28,27 @@ export default function (sequelize) {
       homepage_impression: {
         type: DataTypes.TEXT,
         allowNull: true,
+        defaultValue: '',
       },
       broker_type: {
         type: DataTypes.TINYINT.UNSIGNED,
         allowNull: false,
+        defaultValue: 0,
       },
       description: {
         type: DataTypes.TEXT,
         allowNull: false,
+        defaultValue: '',
       },
-      teaser: { type: DataTypes.TEXT, allowNull: false },
+      teaser: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        defaultValue: '',
+      },
       demo_url: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        defaultValue: '',
         validate: {
           len: [0, 255],
         },
@@ -47,6 +56,7 @@ export default function (sequelize) {
       account_url: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        defaultValue: '',
         validate: {
           len: [0, 255],
         },
@@ -54,6 +64,7 @@ export default function (sequelize) {
       maximum_leverage: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        defaultValue: '',
         validate: {
           len: [0, 255],
         },
@@ -61,6 +72,7 @@ export default function (sequelize) {
       minimum_deposit: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        defaultValue: '',
         validate: {
           len: [0, 255],
         },
@@ -68,6 +80,7 @@ export default function (sequelize) {
       minimum_deposit_short: {
         type: DataTypes.STRING(50),
         allowNull: false,
+        defaultValue: '',
         validate: {
           len: [0, 50],
         },
@@ -75,22 +88,27 @@ export default function (sequelize) {
       custodian_fees: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       mobile_trading: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       phone_order: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       licensed_broker: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       withholding_tax: {
         type: DataTypes.TINYINT.UNSIGNED,
         allowNull: false,
+        defaultValue: 0,
       },
       scalping_allowed: {
         type: DataTypes.BOOLEAN,
@@ -100,6 +118,7 @@ export default function (sequelize) {
       ip: {
         type: DataTypes.CHAR(39),
         allowNull: false,
+        defaultValue: '',
         validate: {
           len: [0, 39],
         },
@@ -119,7 +138,6 @@ export default function (sequelize) {
       indexes: [],
       underscored: true,
       timestamps: false,
-      paranoid: true,
     },
   );
 

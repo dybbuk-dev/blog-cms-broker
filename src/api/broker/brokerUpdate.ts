@@ -11,7 +11,10 @@ export default async (req, res, next) => {
 
     const payload = await new BrokerService(req).update(
       req.params.id,
-      req.body.data,
+      {
+        ...req.body.data,
+        ip: req.ip,
+      },
     );
 
     await ApiResponseHandler.success(req, res, payload);

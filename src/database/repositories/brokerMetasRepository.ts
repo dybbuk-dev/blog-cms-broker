@@ -6,61 +6,56 @@ import AuditLogRepository from './auditLogRepository';
 import SequelizeRepository from './sequelizeRepository';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import moment from 'moment';
-import { orderByUtils } from '../utils/orderByUtils';
 
 const Op = Sequelize.Op;
 
-class NavigationRepository {
+class BrokerMetasRepository {
   static ALL_FIELDS = [
-    'name',
-    'link',
-    'title',
-    'target',
-    'sort',
-    'activated',
-    'show_user_logged_in',
-    'show_in_navigation',
-    'type',
+    'id',
+    'homepage',
+    'homepage_title',
+    'homepage_impression',
+    'broker_type',
+    'description',
+    'teaser',
+    'demo_url',
+    'account_url',
+    'maximum_leverage',
+    'minimum_deposit',
+    'minimum_deposit_short',
+    'custodian_fees',
+    'mobile_trading',
+    'phone_order',
+    'licensed_broker',
+    'withholding_tax',
+    'scalping_allowed',
   ];
 
-  static TYPES = [
-    'NONE',
-    'FOREX_SCHOOL',
-    'FOREX_STRATEGY',
-    'DOWNLOADS',
-    'NEWS',
-    'OFFERS',
-    'MOST_READ',
-  ];
+  static _relatedData(data) {
+    return {};
+  }
 
-  static getTypeIndex(type) {
-    if (!type) {
-      return 0;
-    }
-    const index = this.TYPES.indexOf(
-      type.toString().toUpperCase(),
-    );
-    return index < 0 ? 0 : index;
+  static includes(options: IRepositoryOptions) {
+    return [];
   }
 
   static async create(data, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    const record = await options.database.navigation.create(
-      {
-        ...lodash.pick(data, this.ALL_FIELDS),
-        parent_id: data.parent || null,
-        target: data.target ?? '',
-        type: this.getTypeIndex(data.type),
-        ip: '',
-        created: moment(),
-        modified: moment(),
-      },
-      {
-        transaction,
-      },
-    );
+    const record =
+      await options.database.broker_metas.create(
+        {
+          ...lodash.pick(data, this.ALL_FIELDS),
+          ...this._relatedData(data),
+          ip: data.ip ?? '',
+          created: moment(),
+          modified: moment(),
+        },
+        {
+          transaction,
+        },
+      );
 
     await this._createAuditLog(
       AuditLogRepository.CREATE,
@@ -80,12 +75,13 @@ class NavigationRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    let record = await options.database.navigation.findOne({
-      where: {
-        id,
-      },
-      transaction,
-    });
+    let record =
+      await options.database.broker_metas.findOne({
+        where: {
+          id,
+        },
+        transaction,
+      });
 
     if (!record) {
       throw new Error404();
@@ -94,11 +90,9 @@ class NavigationRepository {
     record = await record.update(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
-        parent_id: data.parent || null,
-        target: data.target ?? '',
-        type: this.getTypeIndex(data.type),
+        ...this._relatedData(data),
+        ip: data.ip ?? '',
         modified: moment(),
-        ip: '',
       },
       {
         transaction,
@@ -119,12 +113,13 @@ class NavigationRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    let record = await options.database.navigation.findOne({
-      where: {
-        id,
-      },
-      transaction,
-    });
+    let record =
+      await options.database.broker_metas.findOne({
+        where: {
+          id,
+        },
+        transaction,
+      });
 
     if (!record) {
       throw new Error404();
@@ -146,15 +141,10 @@ class NavigationRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    const include = [
-      {
-        model: options.database.navigation,
-        as: 'parent',
-      },
-    ];
+    const include = this.includes(options);
 
     const record =
-      await options.database.navigation.findOne({
+      await options.database.broker_metas.findOne({
         where: {
           id,
         },
@@ -195,7 +185,7 @@ class NavigationRepository {
     };
 
     const records =
-      await options.database.navigation.findAll({
+      await options.database.broker_metas.findAll({
         attributes: ['id'],
         where,
       });
@@ -207,7 +197,7 @@ class NavigationRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    return options.database.navigation.count({
+    return options.database.broker_metas.count({
       where: {
         ...filter,
       },
@@ -220,12 +210,7 @@ class NavigationRepository {
     options: IRepositoryOptions,
   ) {
     let whereAnd: Array<any> = [];
-    let include = [
-      {
-        model: options.database.navigation,
-        as: 'parent',
-      },
-    ];
+    let include = this.includes(options);
 
     if (filter) {
       if (filter.idRange) {
@@ -256,37 +241,19 @@ class NavigationRepository {
         }
       }
 
-      if (filter.parent) {
-        whereAnd.push({
-          ['parent_id']: filter.parent,
-        });
-      }
+      [].forEach((field) => {
+        if (filter[field]) {
+          whereAnd.push(
+            SequelizeFilterUtils.ilikeIncludes(
+              'broker_metas',
+              field,
+              filter[field],
+            ),
+          );
+        }
+      });
 
-      ['name', 'link', 'title', 'target'].forEach(
-        (field) => {
-          if (filter[field]) {
-            whereAnd.push(
-              SequelizeFilterUtils.ilikeIncludes(
-                'navigation',
-                field,
-                filter[field],
-              ),
-            );
-          }
-        },
-      );
-
-      if (filter.type) {
-        whereAnd.push({
-          type: this.getTypeIndex(filter.type),
-        });
-      }
-
-      [
-        'activated',
-        'show_user_logged_in',
-        'show_in_navigation',
-      ].forEach((field) => {
+      [].forEach((field) => {
         if (
           filter[field] === true ||
           filter[field] === 'true' ||
@@ -305,13 +272,13 @@ class NavigationRepository {
     const where = { [Op.and]: whereAnd };
 
     let { rows, count } =
-      await options.database.navigation.findAndCountAll({
+      await options.database.broker_metas.findAndCountAll({
         where,
         include,
         limit: limit ? Number(limit) : undefined,
         offset: offset ? Number(offset) : undefined,
         order: orderBy
-          ? [orderByUtils(orderBy)]
+          ? [orderBy.split('_')]
           : [['id', 'DESC']],
         transaction:
           SequelizeRepository.getTransaction(options),
@@ -323,56 +290,6 @@ class NavigationRepository {
     );
 
     return { rows, count };
-  }
-
-  static async findAllAutocomplete(
-    query,
-    limit,
-    options: IRepositoryOptions,
-  ) {
-    let whereAnd: Array<any> = [
-      {
-        parent_id: {
-          [Op.is]: null,
-        },
-        title: {
-          [Op.ne]: '',
-        },
-      },
-    ];
-
-    if (query) {
-      whereAnd.push({
-        [Op.or]: [
-          { ['id']: query },
-          {
-            [Op.and]: SequelizeFilterUtils.ilikeIncludes(
-              'navigation',
-              'title',
-              query,
-            ),
-          },
-        ],
-      });
-    }
-
-    const where = { [Op.and]: whereAnd };
-
-    const records =
-      await options.database.navigation.findAll({
-        attributes: ['id', 'title'],
-        where,
-        limit: limit ? Number(limit) : undefined,
-        order: [
-          ['sort', 'ASC'],
-          ['title', 'ASC'],
-        ],
-      });
-
-    return records.map((record) => ({
-      id: record.id,
-      label: record.title,
-    }));
   }
 
   static async _createAuditLog(
@@ -391,7 +308,7 @@ class NavigationRepository {
 
     await AuditLogRepository.log(
       {
-        entityName: 'navigation',
+        entityName: 'broker_metas',
         entityId: record.id,
         action,
         values,
@@ -432,4 +349,4 @@ class NavigationRepository {
   }
 }
 
-export default NavigationRepository;
+export default BrokerMetasRepository;

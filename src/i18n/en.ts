@@ -93,7 +93,16 @@ const en = {
   entities: {
     broker: {
       errors: {
-        unique: {},
+        unique: {
+          name_normalized: 'Name Normalized must be unique',
+        },
+      },
+    },
+    broker_upside: {
+      errors: {
+        notEmpty: {
+          text: 'Text could not be empty',
+        },
       },
     },
     author: {

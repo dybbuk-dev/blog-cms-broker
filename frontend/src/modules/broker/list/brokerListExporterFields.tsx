@@ -2,6 +2,7 @@ import { i18n } from 'src/i18n';
 import exporterRenders from 'src/modules/shared/exporter/exporterRenders';
 
 export default [
+  // #region Base
   {
     name: 'id',
     label: i18n('entities.broker.fields.id'),
@@ -10,6 +11,11 @@ export default [
   {
     name: 'navigation',
     label: i18n('entities.broker.fields.navigation'),
+    render: exporterRenders.relationToOne('name'),
+  },
+  {
+    name: 'author',
+    label: i18n('entities.broker.fields.author'),
     render: exporterRenders.relationToOne('name'),
   },
   {
@@ -60,4 +66,5 @@ export default [
     label: i18n('entities.broker.fields.pdf'),
     render: exporterRenders.boolean(),
   },
+  // #endregion
 ];

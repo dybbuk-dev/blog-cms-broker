@@ -33,7 +33,13 @@ function AuditLogTable(props) {
   const { sidenavColor } = selectMuiSettings();
 
   const doOpenSelectdValues = (values) => {
-    const data = JSON.stringify(values, null, 2);
+    const data = JSON.stringify(
+      typeof values === 'string'
+        ? JSON.parse(values)
+        : values,
+      null,
+      2,
+    );
     const jsonWindow = (window as any).open(
       '',
       '_blank',

@@ -10,7 +10,7 @@ export default function (sequelize) {
       },
       category_id: {
         type: DataTypes.BIGINT.UNSIGNED,
-        allowNull: true,
+        primaryKey: true,
       },
       show_in_top_listings: {
         type: DataTypes.BOOLEAN,
@@ -22,18 +22,19 @@ export default function (sequelize) {
       indexes: [],
       underscored: true,
       timestamps: false,
-      paranoid: true,
     },
   );
 
   brokers_category.associate = (models) => {
     models.brokers_category.belongsTo(models.broker, {
+      as: 'broker',
       constraints: true,
       foreignKey: 'broker_id',
       onDelete: 'NO ACTION',
       onUpdate: 'NO ACTION',
     });
     models.brokers_category.belongsTo(models.category, {
+      as: 'category',
       constraints: true,
       foreignKey: 'category_id',
       onDelete: 'NO ACTION',

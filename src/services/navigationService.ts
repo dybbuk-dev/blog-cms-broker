@@ -44,7 +44,7 @@ export default class NavigationService {
       SequelizeRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'product',
+        'navigation',
       );
 
       throw error;
@@ -86,7 +86,7 @@ export default class NavigationService {
       SequelizeRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'product',
+        'navigation',
       );
 
       throw error;

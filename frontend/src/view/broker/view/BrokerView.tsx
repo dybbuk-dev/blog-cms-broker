@@ -1,103 +1,53 @@
+import { useState } from 'react';
+import MDBox from 'src/mui/components/MDBox';
+import BrokerTabs from 'src/view/broker/BrokerTabs';
+import BrokerBaseView from 'src/view/broker/view/components/BrokerBaseView';
 import Spinner from 'src/view/shared/Spinner';
-import { i18n } from 'src/i18n';
-import TextViewItem from 'src/view/shared/view/TextViewItem';
-import { Grid } from '@mui/material';
-import CheckboxViewItem from 'src/view/shared/view/CheckboxViewItem';
-import NavigationViewItem from 'src/view/navigation/view/NavigationViewItem';
+import TabPanel from 'src/view/shared/tab/TabPanel';
 
 function BrokerView(props) {
-  const renderView = () => {
-    const { record } = props;
+  const [tabValue, setTabValue] = useState(0);
 
+  const handleSetTabValue = (event: any, newValue: any) =>
+    setTabValue(newValue);
+
+  const renderView = () => {
     return (
-      <Grid container spacing={2}>
-        <Grid item md={6} xs={12}>
-          <TextViewItem
-            label={i18n('entities.broker.fields.id')}
-            value={record.id}
+      <>
+        <MDBox mb={3}>
+          <BrokerTabs
+            value={tabValue}
+            onChange={handleSetTabValue}
           />
-        </Grid>
-        <Grid item md={6} xs={12}>
-          <NavigationViewItem
-            label={i18n(
-              'entities.broker.fields.navigation',
-            )}
-            value={record.navigation}
-          />
-        </Grid>
-        <Grid item md={6} xs={12}>
-          <TextViewItem
-            label={i18n('entities.broker.fields.name')}
-            value={record.name}
-          />
-        </Grid>
-        <Grid item md={6} xs={12}>
-          <TextViewItem
-            label={i18n(
-              'entities.broker.fields.name_normalized',
-            )}
-            value={record.name_normalized}
-          />
-        </Grid>
-        <Grid item lg={4} md={6} xs={12}>
-          <CheckboxViewItem
-            label={i18n('entities.broker.fields.activated')}
-            checked={record.activated}
-          />
-        </Grid>
-        <Grid item lg={4} md={6} xs={12}>
-          <CheckboxViewItem
-            label={i18n('entities.broker.fields.is_broker')}
-            checked={record.is_broker}
-          />
-        </Grid>
-        <Grid item lg={4} md={6} xs={12}>
-          <CheckboxViewItem
-            label={i18n(
-              'entities.broker.fields.is_compareable',
-            )}
-            checked={record.is_compareable}
-          />
-        </Grid>
-        <Grid item lg={4} md={6} xs={12}>
-          <CheckboxViewItem
-            label={i18n(
-              'entities.broker.fields.top_broker',
-            )}
-            checked={record.top_broker}
-          />
-        </Grid>
-        <Grid item lg={4} md={6} xs={12}>
-          <CheckboxViewItem
-            label={i18n(
-              'entities.broker.fields.top_binary_broker',
-            )}
-            checked={record.top_binary_broker}
-          />
-        </Grid>
-        <Grid item lg={4} md={6} xs={12}>
-          <CheckboxViewItem
-            label={i18n(
-              'entities.broker.fields.top_forex_broker',
-            )}
-            checked={record.top_forex_broker}
-          />
-        </Grid>
-        <Grid item lg={4} md={6} xs={12}>
-          <CheckboxViewItem
-            label={i18n(
-              'entities.broker.fields.featured_broker',
-            )}
-            checked={record.featured_broker}
-          />
-        </Grid>
-        <Grid item lg={4} md={6} xs={12}>
-          <CheckboxViewItem
-            label={i18n('entities.broker.fields.pdf')}
-            checked={record.pdf}
-          />
-        </Grid>
-      </Grid>
+        </MDBox>
+        <TabPanel value={tabValue} index={0}>
+          <BrokerBaseView {...props} />
+        </TabPanel>
+        <TabPanel value={tabValue} index={1}>
+          Overview
+        </TabPanel>
+        <TabPanel value={tabValue} index={2}>
+          Characteristics
+        </TabPanel>
+        <TabPanel value={tabValue} index={3}>
+          Platform
+        </TabPanel>
+        <TabPanel value={tabValue} index={4}>
+          Markets
+        </TabPanel>
+        <TabPanel value={tabValue} index={5}>
+          Spreads
+        </TabPanel>
+        <TabPanel value={tabValue} index={6}>
+          Service
+        </TabPanel>
+        <TabPanel value={tabValue} index={7}>
+          Test
+        </TabPanel>
+        <TabPanel value={tabValue} index={8}>
+          Old
+        </TabPanel>
+      </>
     );
   };
 
