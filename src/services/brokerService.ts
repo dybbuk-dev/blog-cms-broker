@@ -9,6 +9,7 @@ import CategoryRepository from '../database/repositories/categoryRepository';
 import BrokerMetaRepository from '../database/repositories/brokerMetaRepository';
 import BrokerUpsideRepository from '../database/repositories/brokerUpsideRepository';
 import BrokerRegulatoryAuthorityRepository from '../database/repositories/brokerRegulatoryAuthorityRepository';
+import BrokerDepositGuaranteeRepository from '../database/repositories/brokerDepositGuaranteeRepository';
 
 export default class BrokerService {
   options: IServiceOptions;
@@ -94,10 +95,10 @@ export default class BrokerService {
       options,
     );
     const upsides = data.upsides || [];
-    for (const upside of upsides) {
+    for (const item of upsides) {
       await BrokerUpsideRepository.create(
         {
-          ...upside,
+          ...item,
           broker: id,
           ip: data.ip || '',
         },
@@ -121,10 +122,36 @@ export default class BrokerService {
     );
     const regulatoryAuthorities =
       data.regulatory_authorities || [];
-    for (const regulatoryAuthority of regulatoryAuthorities) {
+    for (const item of regulatoryAuthorities) {
       await BrokerRegulatoryAuthorityRepository.create(
         {
-          ...regulatoryAuthority,
+          ...item,
+          broker: id,
+          ip: data.ip || '',
+        },
+        options,
+      );
+    }
+  }
+
+  /**
+   * ! Update Broker Deposit Guarantee
+   */
+  async _updateBrokerDepositGuarantee(
+    id,
+    data,
+    transaction,
+  ) {
+    const options = { ...this.options, transaction };
+    await BrokerDepositGuaranteeRepository.destroyByBroker(
+      id,
+      options,
+    );
+    const depositGuarantees = data.deposit_guarantees || [];
+    for (const item of depositGuarantees) {
+      await BrokerDepositGuaranteeRepository.create(
+        {
+          ...item,
           broker: id,
           ip: data.ip || '',
         },
@@ -145,6 +172,11 @@ export default class BrokerService {
     );
     await this._updateBrokerUpside(id, data, transaction);
     await this._updateBrokerRegulatoryAuthority(
+      id,
+      data,
+      transaction,
+    );
+    await this._updateBrokerDepositGuarantee(
       id,
       data,
       transaction,

@@ -250,6 +250,15 @@ const en = {
           url: 'Homepage',
         },
         // #endregion
+
+        // #region Deposit Guarantee
+        deposit_guarantees: 'Deposit Guarantees',
+        deposit_guarantee: {
+          name: 'Surname',
+          url: 'Homepage',
+          text: 'Free Text',
+        },
+        // #endregion
       },
       tabs: {
         broker: 'Broker',

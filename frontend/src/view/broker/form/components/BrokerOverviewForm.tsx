@@ -94,6 +94,46 @@ function BrokerOverviewForm(props) {
           ]}
         />
       </Grid>
+      <Grid item xs={12}>
+        <GroupFormItem
+          name="deposit_guarantees"
+          label={i18n(
+            'entities.broker.fields.deposit_guarantees',
+          )}
+          groupInputTemplates={[
+            {
+              input: InputFormItem,
+              name: 'name',
+              label: i18n(
+                'entities.broker.fields.deposit_guarantee.name',
+              ),
+              md: 6,
+              xs: 12,
+              defaultValue: '',
+              required: true,
+            },
+            {
+              input: InputFormItem,
+              name: 'url',
+              label: i18n(
+                'entities.broker.fields.deposit_guarantee.url',
+              ),
+              md: 6,
+              xs: 12,
+              defaultValue: '',
+            },
+            {
+              input: InputFormItem,
+              name: 'text',
+              label: i18n(
+                'entities.broker.fields.deposit_guarantee.text',
+              ),
+              xs: 12,
+              defaultValue: '',
+            },
+          ]}
+        />
+      </Grid>
       <Grid item md={6} xs={12}>
         <SelectFormItem
           name="broker_type"

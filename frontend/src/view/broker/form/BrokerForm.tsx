@@ -76,6 +76,10 @@ function BrokerForm(props) {
       // #region Broker Regulatory Authority
       regulatory_authorities: record.regulatory_authorities,
       // #endregion
+
+      // #region Broker Deposit Guarantee
+      deposit_guarantees: record.deposit_guarantees,
+      // #endregion
     };
   });
 

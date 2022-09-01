@@ -59,6 +59,10 @@ class BrokerRepository {
         model: options.database.broker_regulatory_authority,
         as: 'regulatory_authorities',
       },
+      !metaOnly && {
+        model: options.database.broker_deposit_guarantee,
+        as: 'deposit_guarantees',
+      },
     ].filter(Boolean);
   }
 

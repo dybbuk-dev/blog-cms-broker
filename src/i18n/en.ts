@@ -109,7 +109,13 @@ const en = {
       errors: {
         notEmpty: {
           name: 'Regulatory Authority Name is required',
-          url: 'Regulatory Authority URL is required',
+        },
+      },
+    },
+    broker_deposit_guarantee: {
+      errors: {
+        notEmpty: {
+          name: 'Deposit Guarantee Name is required',
         },
       },
     },
