@@ -5,45 +5,31 @@ import { IRepositoryOptions } from './IRepositoryOptions';
 import AuditLogRepository from './auditLogRepository';
 import SequelizeRepository from './sequelizeRepository';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
-import CategoryDescriptionRepository from './categoryDescriptionRepository';
 import { orderByUtils } from '../utils/orderByUtils';
 
 const Op = Sequelize.Op;
 
-class CategoryRepository {
-  static ALL_FIELDS = [
-    'name',
-    'link',
-    'title',
-    'author_id',
-    'target',
-    'sort',
-    'activated',
-    'show_in_navigation',
-    'show_in_footer',
-  ];
-
-  static async create(data, options: IRepositoryOptions) {
+class NewsImageRepository {
+  static ALL_FIELDS = ['teaser_link', 'teaser_title'];
+  static async create(
+    created_id,
+    data,
+    options: IRepositoryOptions,
+  ) {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    const record = await options.database.category.create(
+    const record = await options.database.news_image.create(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
-        target: data.target ?? '',
-        author_id: data.author ?? null,
+        id: created_id,
+        link: data.teaser_link ?? '',
+        link_title: data.teaser_title ?? '',
         ip: '',
       },
       {
         transaction,
       },
-    );
-
-    await this._createAuditLog(
-      AuditLogRepository.CREATE,
-      record,
-      data,
-      options,
     );
 
     return this.findById(record.id, options);
@@ -57,7 +43,7 @@ class CategoryRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    let record = await options.database.category.findOne({
+    let record = await options.database.news_image.findOne({
       where: {
         id,
       },
@@ -71,28 +57,13 @@ class CategoryRepository {
     record = await record.update(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
-        target: data.target ?? '',
-        author_id: data.author ?? null,
+        link: data.teaser_link,
+        link_title: data.teaser_title,
         ip: '',
       },
       {
         transaction,
       },
-    );
-
-    if (record) {
-      await CategoryDescriptionRepository.update(
-        id,
-        data,
-        options,
-      );
-    }
-
-    await this._createAuditLog(
-      AuditLogRepository.UPDATE,
-      record,
-      data,
-      options,
     );
 
     return this.findById(record.id, options);
@@ -102,12 +73,7 @@ class CategoryRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    await CategoryDescriptionRepository.destroy(
-      id,
-      options,
-    );
-
-    let record = await options.database.category.findOne({
+    let record = await options.database.news_image.findOne({
       where: {
         id,
       },
@@ -121,44 +87,19 @@ class CategoryRepository {
     await record.destroy({
       transaction,
     });
-
-    await this._createAuditLog(
-      AuditLogRepository.DELETE,
-      record,
-      record,
-      options,
-    );
   }
 
   static async findById(id, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
-    const include = [
-      {
-        model: options.database.author,
-        as: 'author',
-      },
-    ];
-    const record = await options.database.category.findOne({
-      where: {
-        id,
-      },
-      include,
-      transaction,
-    });
 
-    const description_record =
-      await options.database.category_description.findOne({
+    const record =
+      await options.database.news_image.findOne({
         where: {
           id,
         },
         transaction,
       });
-    record.dataValues = {
-      ...record.dataValues,
-      teaser: description_record.teaser,
-      description: description_record.description,
-    };
 
     if (!record) {
       throw new Error404();
@@ -192,12 +133,11 @@ class CategoryRepository {
       },
     };
 
-    const records = await options.database.category.findAll(
-      {
+    const records =
+      await options.database.news_image.findAll({
         attributes: ['id'],
         where,
-      },
-    );
+      });
 
     return records.map((record) => record.id);
   }
@@ -206,7 +146,7 @@ class CategoryRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    return options.database.category.count({
+    return options.database.news_image.count({
       where: {
         ...filter,
       },
@@ -218,12 +158,6 @@ class CategoryRepository {
     { filter, limit = 0, offset = 0, orderBy = '' },
     options: IRepositoryOptions,
   ) {
-    const include = [
-      {
-        model: options.database.author,
-        as: 'author',
-      },
-    ];
     let whereAnd: Array<any> = [];
 
     if (filter) {
@@ -255,51 +189,26 @@ class CategoryRepository {
         }
       }
 
-      [
-        'name',
-        'link',
-        'title',
-        'target',
-        'author_name',
-        'author_link',
-      ].forEach((field) => {
-        if (filter[field]) {
-          whereAnd.push(
-            SequelizeFilterUtils.ilikeIncludes(
-              'category',
-              field,
-              filter[field],
-            ),
-          );
-        }
-      });
-
-      [
-        'activated',
-        'show_in_navigation',
-        'show_in_footer',
-      ].forEach((field) => {
-        if (
-          filter[field] === true ||
-          filter[field] === 'true' ||
-          filter[field] === false ||
-          filter[field] === 'false'
-        ) {
-          whereAnd.push({
-            [field]:
-              filter[field] === true ||
-              filter[field] === 'true',
-          });
-        }
-      });
+      ['link', 'link_title', 'filename'].forEach(
+        (field) => {
+          if (filter[field]) {
+            whereAnd.push(
+              SequelizeFilterUtils.ilikeIncludes(
+                'news_image',
+                field,
+                filter[field],
+              ),
+            );
+          }
+        },
+      );
     }
 
     const where = { [Op.and]: whereAnd };
 
     let { rows, count } =
-      await options.database.category.findAndCountAll({
+      await options.database.news_image.findAndCountAll({
         where,
-        include,
         limit: limit ? Number(limit) : undefined,
         offset: offset ? Number(offset) : undefined,
         order: orderBy
@@ -322,13 +231,7 @@ class CategoryRepository {
     limit,
     options: IRepositoryOptions,
   ) {
-    let whereAnd: Array<any> = [
-      {
-        ['name']: {
-          [Op.ne]: '',
-        },
-      },
-    ];
+    let whereAnd: Array<any> = [];
 
     if (query) {
       whereAnd.push({
@@ -336,8 +239,8 @@ class CategoryRepository {
           { ['id']: query },
           {
             [Op.and]: SequelizeFilterUtils.ilikeIncludes(
-              'category',
-              'name',
+              'news_image',
+              'description',
               query,
             ),
           },
@@ -347,44 +250,17 @@ class CategoryRepository {
 
     const where = { [Op.and]: whereAnd };
 
-    const records = await options.database.category.findAll(
-      {
-        attributes: ['id', 'name'],
+    const records =
+      await options.database.news_image.findAll({
+        attributes: ['id', 'description'],
         where,
         limit: limit ? Number(limit) : undefined,
-        order: [['name', 'ASC']],
-      },
-    );
+        order: [['id', 'ASC']],
+      });
 
     return records.map((record) => ({
       id: record.id,
-      label: record.name,
     }));
-  }
-
-  static async _createAuditLog(
-    action,
-    record,
-    data,
-    options: IRepositoryOptions,
-  ) {
-    let values = {};
-
-    if (data) {
-      values = {
-        ...record.get({ plain: true }),
-      };
-    }
-
-    await AuditLogRepository.log(
-      {
-        entityName: 'category',
-        entityId: record.id,
-        action,
-        values,
-      },
-      options,
-    );
   }
 
   static async _fillWithRelationsAndFilesForRows(
@@ -419,4 +295,4 @@ class CategoryRepository {
   }
 }
 
-export default CategoryRepository;
+export default NewsImageRepository;

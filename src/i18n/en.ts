@@ -130,6 +130,11 @@ const en = {
         unique: {},
       },
     },
+    news: {
+      errors: {
+        unique: {},
+      },
+    },
   },
 };
 

@@ -91,6 +91,7 @@ require('./category').default(routes);
 require('./file').default(routes);
 require('./mui').default(routes);
 require('./navigation').default(routes);
+require('./news').default(routes);
 require('./plan').default(routes);
 require('./settings').default(routes);
 require('./tenant').default(routes);

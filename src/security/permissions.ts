@@ -530,6 +530,71 @@ class Permissions {
         ],
       },
       // #endregion
+
+      // #region News
+      newsImport: {
+        id: 'newsImport',
+        allowedRoles: [],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      newsCreate: {
+        id: 'newsCreate',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      newsEdit: {
+        id: 'newsEdit',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      newsDestroy: {
+        id: 'newsDestroy',
+        allowedRoles: [roles.admin],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      newsRead: {
+        id: 'newsRead',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      newsAutocomplete: {
+        id: 'newsAutocomplete',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      // #endregion
     };
   }
 
