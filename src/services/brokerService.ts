@@ -6,7 +6,7 @@ import NavigationRepository from '../database/repositories/navigationRepository'
 import AuthorRepository from '../database/repositories/authorRepository';
 import BrokersCategoryRepository from '../database/repositories/brokersCategoryRepository';
 import CategoryRepository from '../database/repositories/categoryRepository';
-import BrokerMetasRepository from '../database/repositories/brokerMetasRepository';
+import BrokerMetaRepository from '../database/repositories/brokerMetaRepository';
 import BrokerUpsideRepository from '../database/repositories/brokerUpsideRepository';
 
 export default class BrokerService {
@@ -36,17 +36,17 @@ export default class BrokerService {
    */
   async _updateBrokerMeta(id, data, transaction) {
     const metaId =
-      await BrokerMetasRepository.filterIdInTenant(id, {
+      await BrokerMetaRepository.filterIdInTenant(id, {
         ...this.options,
         transaction,
       });
     if (metaId) {
-      await BrokerMetasRepository.update(id, data, {
+      await BrokerMetaRepository.update(id, data, {
         ...this.options,
         transaction,
       });
     } else {
-      await BrokerMetasRepository.create(
+      await BrokerMetaRepository.create(
         {
           ...data,
           id: id,

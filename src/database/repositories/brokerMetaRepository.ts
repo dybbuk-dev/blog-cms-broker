@@ -9,7 +9,7 @@ import moment from 'moment';
 
 const Op = Sequelize.Op;
 
-class BrokerMetasRepository {
+class BrokerMetaRepository {
   static ALL_FIELDS = [
     'id',
     'homepage',
@@ -29,6 +29,20 @@ class BrokerMetasRepository {
     'licensed_broker',
     'withholding_tax',
     'scalping_allowed',
+  ];
+
+  static BROKER_TYPES = [
+    '',
+    'ECN',
+    'MT4',
+    'MM',
+    'ECN_AND_MT4',
+    'MM_AND_MT4',
+    'DMA',
+    'STP',
+    'STP_AND_MT4',
+    'MARKET_MAKER_AND_STP',
+    'BITCOIN_EXCHANGE',
   ];
 
   static _relatedData(data) {
@@ -349,4 +363,4 @@ class BrokerMetasRepository {
   }
 }
 
-export default BrokerMetasRepository;
+export default BrokerMetaRepository;
