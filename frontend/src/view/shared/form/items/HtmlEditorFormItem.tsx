@@ -1,12 +1,11 @@
 import $ from 'jquery';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import MDBox from 'src/mui/components/MDBox';
 import MDEditor from 'src/mui/components/MDEditor';
 import MDTypography from 'src/mui/components/MDTypography';
 import FormErrors from 'src/view/shared/form/formErrors';
-import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
 
 interface HtmlEditorFormItemProps {
   name: string;
@@ -27,7 +26,10 @@ function HtmlEditorFormItem({
     setValue,
     errors,
     formState: { touched, isSubmitted },
+    watch,
+    register,
   } = useFormContext();
+
   const errorMessage = FormErrors.errorMessage(
     name,
     errors,
@@ -35,10 +37,17 @@ function HtmlEditorFormItem({
     isSubmitted,
     externalErrorMessage,
   );
+
   const { darkMode } = selectMuiSettings();
+
   const [editorValue, setEditorValue] = useState(
-    value ?? '',
+    value || watch(name) || '',
   );
+
+  useEffect(() => {
+    register({ name });
+  }, [register, name]);
+
   const onChangeEditor = (newVal) => {
     setEditorValue(newVal);
     const isEmpty = $(newVal).text().trim() === '';
@@ -47,6 +56,7 @@ function HtmlEditorFormItem({
       shouldDirty: true,
     });
   };
+
   return (
     <MDBox
       pt={2}
@@ -100,15 +110,6 @@ function HtmlEditorFormItem({
           </MDTypography>
         </MDBox>
       )}
-      <MDBox display="none">
-        <TextAreaFormItem
-          name={name}
-          label={label}
-          required={required ?? false}
-          variant="standard"
-          fullWidth
-        />
-      </MDBox>
     </MDBox>
   );
 }

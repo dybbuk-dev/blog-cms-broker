@@ -15,7 +15,6 @@ function BrokerOverviewForm(props) {
         <HtmlEditorFormItem
           name="teaser"
           label={i18n('entities.broker.fields.teaser')}
-          value={record.meta.teaser}
         />
       </Grid>
       <Grid item xs={12}>

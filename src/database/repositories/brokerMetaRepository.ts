@@ -55,6 +55,11 @@ class BrokerMetaRepository {
 
   static _relatedData(data) {
     return {
+      demo_url: data.demo_url ?? '',
+      account_url: data.account_url ?? '',
+      maximum_leverage: data.maximum_leverage ?? '',
+      minimum_deposit_short:
+        data.minimum_deposit_short ?? '',
       broker_type: this._getBrokerTypeIndex(
         data.broker_type,
       ),
