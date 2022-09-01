@@ -217,7 +217,7 @@ const en = {
         homepage: 'Homepage',
         homepage_title: 'homepage_title',
         homepage_impression: 'Impression script',
-        broker_type: 'broker_type',
+        broker_type: 'Broker Type',
         description: 'description',
         teaser: 'Teaser Text',
         demo_url: 'Demo account',
@@ -258,6 +258,22 @@ const en = {
           type: {
             UPSIDE: 'Upside',
             DOWNSIDE: 'Downside',
+          },
+        },
+        meta: {
+          broker_type: {
+            ECN: 'ECN Broker',
+            MT4: 'MetaTrader Broker',
+            MM: 'Market Maker',
+            ECN_AND_MT4: 'ECN Broker (MT4)',
+            MM_AND_MT4: 'Market Maker (MT4)',
+            DMA: 'DMA Broker',
+            STP: 'STP Broker',
+            STP_AND_MT4: 'STP Broker (MT4)',
+            MARKET_MAKER_AND_STP:
+              'Market Maker / STP Broker',
+            BITCOIN_EXCHANGE:
+              'Exchange for bitcoin and cryptocurrencies',
           },
         },
       },

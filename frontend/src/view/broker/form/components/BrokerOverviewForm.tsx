@@ -53,6 +53,21 @@ function BrokerOverviewForm(props) {
           ]}
         />
       </Grid>
+      <Grid item md={6} xs={12}>
+        <SelectFormItem
+          name="broker_type"
+          label={i18n('entities.broker.fields.broker_type')}
+          options={brokerEnumerators.meta.broker_type.map(
+            (value) => ({
+              value,
+              label: i18n(
+                `entities.broker.enumerators.meta.broker_type.${value}`,
+              ),
+            }),
+          )}
+          variant="standard"
+        />
+      </Grid>
     </Grid>
   );
 }

@@ -6,6 +6,7 @@ import AuditLogRepository from './auditLogRepository';
 import SequelizeRepository from './sequelizeRepository';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import moment from 'moment';
+import SequelizeArrayUtils from '../utils/sequelizeArrayUtils';
 
 const Op = Sequelize.Op;
 
@@ -32,7 +33,7 @@ class BrokerMetaRepository {
   ];
 
   static BROKER_TYPES = [
-    '',
+    null,
     'ECN',
     'MT4',
     'MM',
@@ -45,8 +46,19 @@ class BrokerMetaRepository {
     'BITCOIN_EXCHANGE',
   ];
 
+  static _getBrokerTypeIndex(type) {
+    return SequelizeArrayUtils.valueToIndex(
+      type,
+      this.BROKER_TYPES,
+    );
+  }
+
   static _relatedData(data) {
-    return {};
+    return {
+      broker_type: this._getBrokerTypeIndex(
+        data.broker_type,
+      ),
+    };
   }
 
   static includes(options: IRepositoryOptions) {

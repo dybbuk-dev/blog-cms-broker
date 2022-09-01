@@ -1,6 +1,7 @@
 import lodash from 'lodash';
 import Sequelize from 'sequelize';
 import Error400 from '../../errors/Error400';
+import SequelizeArrayUtils from '../utils/sequelizeArrayUtils';
 import { IRepositoryOptions } from './IRepositoryOptions';
 import SequelizeRepository from './sequelizeRepository';
 
@@ -11,8 +12,10 @@ class BrokerUpsideRepository {
   static TYPES = ['UPSIDE', 'DOWNSIDE'];
 
   static _getTypeIndex(type) {
-    const index = this.TYPES.indexOf(type);
-    return index < 0 ? 0 : index;
+    return SequelizeArrayUtils.valueToIndex(
+      type,
+      this.TYPES,
+    );
   }
 
   static _relatedData(data, options) {

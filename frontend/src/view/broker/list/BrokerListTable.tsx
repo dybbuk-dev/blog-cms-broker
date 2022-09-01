@@ -148,6 +148,9 @@ function BrokerListTable(props) {
                 {i18n('entities.broker.fields.homepage')}
               </DataTableHeadCell>
               <DataTableHeadCell sorted={false} width="0">
+                {i18n('entities.broker.fields.broker_type')}
+              </DataTableHeadCell>
+              <DataTableHeadCell sorted={false} width="0">
                 {i18n('entities.broker.fields.activated')}
               </DataTableHeadCell>
               <DataTableHeadCell sorted={false} width="0">
@@ -206,6 +209,22 @@ function BrokerListTable(props) {
                     >
                       {row.meta?.homepage}
                     </MaterialLink>
+                  </DataTableBodyCell>
+                  <DataTableBodyCell>
+                    {row.meta?.broker_type && (
+                      <MDTypography
+                        display="block"
+                        variant="caption"
+                        width="100px"
+                        whiteSpace="break-spaces"
+                        fontWeight="regular"
+                        color="text"
+                      >
+                        {i18n(
+                          `entities.broker.enumerators.meta.broker_type.${row.meta?.broker_type}`,
+                        )}
+                      </MDTypography>
+                    )}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
                     {[
