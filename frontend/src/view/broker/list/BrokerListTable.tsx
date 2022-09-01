@@ -204,8 +204,11 @@ function BrokerListTable(props) {
                   </DataTableBodyCell>
                   <DataTableBodyCell>
                     <MaterialLink
+                      display="block"
                       href={row.meta?.homepage}
                       target="_blank"
+                      width="300px"
+                      whiteSpace="break-spaces"
                     >
                       {row.meta?.homepage}
                     </MaterialLink>
