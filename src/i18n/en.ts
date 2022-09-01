@@ -129,7 +129,7 @@ const en = {
     broker_spread: {
       errors: {
         notEmpty: {
-          name: 'Spread Name is required',
+          spread: 'Spread is required',
         },
       },
     },
