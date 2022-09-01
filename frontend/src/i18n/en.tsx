@@ -231,7 +231,7 @@ const en = {
         phone_order: 'Telephone trading',
         licensed_broker: 'licensed_broker',
         withholding_tax: 'withholding_tax',
-        scalping_allowed: 'scalping_allowed',
+        scalping_allowed: 'Scalping Allowed',
         // #endregion
 
         // #region Upside

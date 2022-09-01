@@ -248,6 +248,14 @@ function BrokerOverviewForm(props) {
           ]}
         />
       </Grid>
+      <Grid item xs={12}>
+        <CheckboxFormItem
+          name="scalping_allowed"
+          label={i18n(
+            'entities.broker.fields.scalping_allowed',
+          )}
+        />
+      </Grid>
     </Grid>
   );
 }
