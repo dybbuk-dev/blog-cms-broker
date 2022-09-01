@@ -259,6 +259,14 @@ const en = {
           text: 'Free Text',
         },
         // #endregion
+
+        // #region Certificate
+        certificates: 'Certificates',
+        certificate: {
+          name: 'Surname',
+          url: 'Homepage',
+        },
+        // #endregion
       },
       tabs: {
         broker: 'Broker',

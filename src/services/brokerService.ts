@@ -10,6 +10,7 @@ import BrokerMetaRepository from '../database/repositories/brokerMetaRepository'
 import BrokerUpsideRepository from '../database/repositories/brokerUpsideRepository';
 import BrokerRegulatoryAuthorityRepository from '../database/repositories/brokerRegulatoryAuthorityRepository';
 import BrokerDepositGuaranteeRepository from '../database/repositories/brokerDepositGuaranteeRepository';
+import BrokerCertificateRepository from '../database/repositories/brokerCertificateRepository';
 
 export default class BrokerService {
   options: IServiceOptions;
@@ -68,7 +69,8 @@ export default class BrokerService {
     );
     const categories_in_top_lists =
       data.categories_in_top_lists || [];
-    for (const category of data.categories || []) {
+    const items = data.categories || [];
+    for (const category of items) {
       await BrokersCategoryRepository.create(
         {
           broker: id,
@@ -94,8 +96,8 @@ export default class BrokerService {
       id,
       options,
     );
-    const upsides = data.upsides || [];
-    for (const item of upsides) {
+    const items = data.upsides || [];
+    for (const item of items) {
       await BrokerUpsideRepository.create(
         {
           ...item,
@@ -120,9 +122,8 @@ export default class BrokerService {
       id,
       options,
     );
-    const regulatoryAuthorities =
-      data.regulatory_authorities || [];
-    for (const item of regulatoryAuthorities) {
+    const items = data.regulatory_authorities || [];
+    for (const item of items) {
       await BrokerRegulatoryAuthorityRepository.create(
         {
           ...item,
@@ -147,9 +148,31 @@ export default class BrokerService {
       id,
       options,
     );
-    const depositGuarantees = data.deposit_guarantees || [];
-    for (const item of depositGuarantees) {
+    const items = data.deposit_guarantees || [];
+    for (const item of items) {
       await BrokerDepositGuaranteeRepository.create(
+        {
+          ...item,
+          broker: id,
+          ip: data.ip || '',
+        },
+        options,
+      );
+    }
+  }
+
+  /**
+   * ! Update Broker Certificate
+   */
+  async _updateBrokerCertificate(id, data, transaction) {
+    const options = { ...this.options, transaction };
+    await BrokerCertificateRepository.destroyByBroker(
+      id,
+      options,
+    );
+    const items = data.certificates || [];
+    for (const item of items) {
+      await BrokerCertificateRepository.create(
         {
           ...item,
           broker: id,
@@ -177,6 +200,11 @@ export default class BrokerService {
       transaction,
     );
     await this._updateBrokerDepositGuarantee(
+      id,
+      data,
+      transaction,
+    );
+    await this._updateBrokerCertificate(
       id,
       data,
       transaction,

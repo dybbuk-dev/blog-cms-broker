@@ -134,6 +134,37 @@ function BrokerOverviewForm(props) {
           ]}
         />
       </Grid>
+      <Grid item xs={12}>
+        <GroupFormItem
+          name="certificates"
+          label={i18n(
+            'entities.broker.fields.certificates',
+          )}
+          groupInputTemplates={[
+            {
+              input: InputFormItem,
+              name: 'name',
+              label: i18n(
+                'entities.broker.fields.certificate.name',
+              ),
+              md: 6,
+              xs: 12,
+              defaultValue: '',
+              required: true,
+            },
+            {
+              input: InputFormItem,
+              name: 'url',
+              label: i18n(
+                'entities.broker.fields.certificate.url',
+              ),
+              md: 6,
+              xs: 12,
+              defaultValue: '',
+            },
+          ]}
+        />
+      </Grid>
       <Grid item md={6} xs={12}>
         <SelectFormItem
           name="broker_type"

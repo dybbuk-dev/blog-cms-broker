@@ -161,6 +161,10 @@ export default function (sequelize) {
       as: 'deposit_guarantees',
       foreignKey: 'broker_id',
     });
+    models.broker.hasMany(models.broker_certificate, {
+      as: 'certificates',
+      foreignKey: 'broker_id',
+    });
   };
 
   return broker;

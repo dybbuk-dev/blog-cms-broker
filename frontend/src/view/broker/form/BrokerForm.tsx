@@ -80,6 +80,10 @@ function BrokerForm(props) {
       // #region Broker Deposit Guarantee
       deposit_guarantees: record.deposit_guarantees,
       // #endregion
+
+      // #region Broker Certificate
+      certificates: record.certificates,
+      // #endregion
     };
   });
 

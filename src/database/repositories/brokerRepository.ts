@@ -63,6 +63,10 @@ class BrokerRepository {
         model: options.database.broker_deposit_guarantee,
         as: 'deposit_guarantees',
       },
+      !metaOnly && {
+        model: options.database.broker_certificate,
+        as: 'certificates',
+      },
     ].filter(Boolean);
   }
 

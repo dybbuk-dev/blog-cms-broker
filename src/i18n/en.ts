@@ -119,6 +119,13 @@ const en = {
         },
       },
     },
+    broker_certificate: {
+      errors: {
+        notEmpty: {
+          name: 'Certificate Name is required',
+        },
+      },
+    },
     author: {
       errors: {
         unique: {},
