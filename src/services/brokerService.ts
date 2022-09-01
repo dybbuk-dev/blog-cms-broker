@@ -14,6 +14,7 @@ import BrokerCertificateRepository from '../database/repositories/brokerCertific
 import BrokerSpreadRepository from '../database/repositories/brokerSpreadRepository';
 import BrokerFeatureRepository from '../database/repositories/brokerFeatureRepository';
 import BrokerPhoneRepository from '../database/repositories/brokerPhoneRepository';
+import BrokerFaxRepository from '../database/repositories/brokerFaxRepository';
 
 export default class BrokerService {
   options: IServiceOptions;
@@ -253,6 +254,25 @@ export default class BrokerService {
   }
 
   /**
+   * ! Update Broker Fax
+   */
+  async _updateBrokerFax(id, data, transaction) {
+    const options = { ...this.options, transaction };
+    await BrokerFaxRepository.destroyByBroker(id, options);
+    const items = [data.fax].filter(Boolean);
+    for (const item of items) {
+      await BrokerFaxRepository.create(
+        {
+          fax: item,
+          broker: id,
+          ip: data.ip || '',
+        },
+        options,
+      );
+    }
+  }
+
+  /**
    * * Update Related Broker's Data
    */
   async _updateRelatedData(id, data, transaction) {
@@ -281,6 +301,7 @@ export default class BrokerService {
     await this._updateBrokerSpread(id, data, transaction);
     await this._updateBrokerFeature(id, data, transaction);
     await this._updateBrokerPhone(id, data, transaction);
+    await this._updateBrokerFax(id, data, transaction);
   }
 
   async create(data) {

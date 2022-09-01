@@ -288,6 +288,10 @@ const en = {
         // #region Phone
         phone: 'Phone',
         // #endregion
+
+        // #region Fax
+        fax: 'Fax',
+        // #endregion
       },
       tabs: {
         broker: 'Broker',

@@ -14,10 +14,17 @@ function BrokerCharacteristicsForm(props) {
           required
         />
       </Grid>
-      <Grid item xs={12}>
+      <Grid item md={6} xs={12}>
         <InputFormItem
           name="phone"
           label={i18n('entities.broker.fields.phone')}
+          variant="standard"
+        />
+      </Grid>
+      <Grid item md={6} xs={12}>
+        <InputFormItem
+          name="fax"
+          label={i18n('entities.broker.fields.fax')}
           variant="standard"
         />
       </Grid>

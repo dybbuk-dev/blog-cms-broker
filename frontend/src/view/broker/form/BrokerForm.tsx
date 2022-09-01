@@ -94,8 +94,12 @@ function BrokerForm(props) {
       features: record.features,
       // #endregion
 
-      // #region Broker Feature
+      // #region Broker Phone
       phone: record.phone?.phone,
+      // #endregion
+
+      // #region Broker Fax
+      fax: record.fax?.fax,
       // #endregion
     };
   });

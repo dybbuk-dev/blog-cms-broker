@@ -119,6 +119,16 @@ const schema = yup.object().shape({
   ),
   // #endregion
 
+  // #region Fax
+  fax: yupFormSchemas.string(
+    i18n('entities.broker.fields.fax'),
+    {
+      min: 0,
+      max: 255,
+    },
+  ),
+  // #endregion
+
   // #endregion
 });
 

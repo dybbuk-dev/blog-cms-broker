@@ -142,9 +142,12 @@ const en = {
     },
     broker_phone: {
       errors: {
-        notEmpty: {
-          phone: 'Phone is required',
-        },
+        notEmpty: {},
+      },
+    },
+    broker_fax: {
+      errors: {
+        notEmpty: {},
       },
     },
     author: {

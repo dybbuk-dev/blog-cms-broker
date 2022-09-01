@@ -79,6 +79,10 @@ class BrokerRepository {
         model: options.database.broker_phone,
         as: 'phone',
       },
+      !metaOnly && {
+        model: options.database.broker_fax,
+        as: 'fax',
+      },
     ].filter(Boolean);
   }
 
