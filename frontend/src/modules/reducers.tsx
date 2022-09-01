@@ -8,6 +8,7 @@ import broker from 'src/modules/broker/brokerReducers';
 import category from 'src/modules/category/categoryReducers';
 import layout from 'src/modules/layout/layoutReducers';
 import mui from 'src/modules/mui/muiReducers';
+import news from 'src/modules/news/newsReducers';
 import navigation from 'src/modules/navigation/navigationReducers';
 import plan from 'src/modules/plan/planReducers';
 import settings from 'src/modules/settings/settingsReducers';
@@ -27,6 +28,7 @@ export default (history) =>
     layout,
     mui,
     navigation,
+    news,
     plan,
     settings,
     tenant,

@@ -73,6 +73,13 @@ const menus = [
   },
 
   {
+    path: '/news',
+    name: i18n('entities.news.menu'),
+    permissionRequired: permissions.newsRead,
+    icon: <Icon fontSize="medium">unsubscribe</Icon>,
+  },
+
+  {
     name: i18n('settings.menu'),
     key: 'settings',
     icon: <Icon fontSize="medium">settings</Icon>,
