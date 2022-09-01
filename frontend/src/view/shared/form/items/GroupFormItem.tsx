@@ -224,6 +224,15 @@ function GroupFormItem(props) {
                       <ClearIcon />
                     </IconButton>
                   </MDBox>
+                  <MDBox mr={2}>
+                    <MDTypography
+                      variant="button"
+                      color="text"
+                      fontWeight="regular"
+                    >
+                      {idx + 1}.
+                    </MDTypography>
+                  </MDBox>
                   <MDBox width="100%">
                     <Grid spacing={2} container>
                       {groupInputTemplates.map(
