@@ -11,6 +11,7 @@ import BrokerUpsideRepository from '../database/repositories/brokerUpsideReposit
 import BrokerRegulatoryAuthorityRepository from '../database/repositories/brokerRegulatoryAuthorityRepository';
 import BrokerDepositGuaranteeRepository from '../database/repositories/brokerDepositGuaranteeRepository';
 import BrokerCertificateRepository from '../database/repositories/brokerCertificateRepository';
+import BrokerSpreadRepository from '../database/repositories/brokerSpreadRepository';
 
 export default class BrokerService {
   options: IServiceOptions;
@@ -184,6 +185,28 @@ export default class BrokerService {
   }
 
   /**
+   * ! Update Broker Spread
+   */
+  async _updateBrokerSpread(id, data, transaction) {
+    const options = { ...this.options, transaction };
+    await BrokerSpreadRepository.destroyByBroker(
+      id,
+      options,
+    );
+    const items = data.spreads || [];
+    for (const item of items) {
+      await BrokerSpreadRepository.create(
+        {
+          ...item,
+          broker: id,
+          ip: data.ip || '',
+        },
+        options,
+      );
+    }
+  }
+
+  /**
    * * Update Related Broker's Data
    */
   async _updateRelatedData(id, data, transaction) {
@@ -209,6 +232,7 @@ export default class BrokerService {
       data,
       transaction,
     );
+    await this._updateBrokerSpread(id, data, transaction);
   }
 
   async create(data) {

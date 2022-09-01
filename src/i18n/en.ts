@@ -126,6 +126,13 @@ const en = {
         },
       },
     },
+    broker_spread: {
+      errors: {
+        notEmpty: {
+          name: 'Spread Name is required',
+        },
+      },
+    },
     author: {
       errors: {
         unique: {},

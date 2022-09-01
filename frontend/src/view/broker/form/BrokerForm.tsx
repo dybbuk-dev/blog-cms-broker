@@ -84,6 +84,10 @@ function BrokerForm(props) {
       // #region Broker Certificate
       certificates: record.certificates,
       // #endregion
+
+      // #region Broker Spread
+      spreads: record.spreads,
+      // #endregion
     };
   });
 

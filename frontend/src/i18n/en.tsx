@@ -267,6 +267,15 @@ const en = {
           url: 'Homepage',
         },
         // #endregion
+
+        // #region Spread
+        spreads: 'Spreads',
+        spread: {
+          spread: 'Spread',
+          url: 'Homepage',
+          primary: 'Primary Spread',
+        },
+        // #endregion
       },
       tabs: {
         broker: 'Broker',

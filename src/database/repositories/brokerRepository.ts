@@ -67,6 +67,10 @@ class BrokerRepository {
         model: options.database.broker_certificate,
         as: 'certificates',
       },
+      !metaOnly && {
+        model: options.database.broker_spread,
+        as: 'spreads',
+      },
     ].filter(Boolean);
   }
 
