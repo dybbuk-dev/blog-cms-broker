@@ -176,7 +176,6 @@ function CategoryForm(props) {
                 label={i18n(
                   'entities.category.fields.teaser',
                 )}
-                required={true}
                 value={initialValues.teaser}
                 required={true}
               />
@@ -187,7 +186,6 @@ function CategoryForm(props) {
                 label={i18n(
                   'entities.category.fields.description',
                 )}
-                required={true}
                 value={initialValues.description}
                 required={true}
               />

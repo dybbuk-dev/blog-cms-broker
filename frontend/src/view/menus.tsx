@@ -30,8 +30,8 @@ const menus = [
 
   {
     name: i18n('collapses.affiliateLink.menu'),
-    key: 'affiliateLink',
-    icon: <Icon fontSize="medium">diversity_2</Icon>,
+    key: 'affiliateLinks',
+    icon: <Icon fontSize="medium">share</Icon>,
     collapse: [
       {
         path: '/affiliate-link',
