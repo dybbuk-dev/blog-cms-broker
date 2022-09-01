@@ -10,7 +10,9 @@ import Error403 from '../../errors/Error403';
  * The directory where the files should be uploaded.
  * Change this to a persisted folder.
  */
-const UPLOAD_DIR = os.tmpdir();
+
+const UPLOAD_DIR =
+  getConfig().FILE_STORAGE_PATH || os.tmpdir();
 
 export default class LocalFileStorage {
   /**
