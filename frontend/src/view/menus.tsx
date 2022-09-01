@@ -31,18 +31,19 @@ const menus = [
   {
     name: i18n('collapses.affiliateLink.menu'),
     key: 'affiliateLink',
-    icon: <Icon fontSize="medium">signpost</Icon>,
+    icon: <Icon fontSize="medium">diversity_2</Icon>,
     collapse: [
       {
         path: '/affiliate-link',
         permissionRequired: permissions.affiliateLinkRead,
         name: i18n('entities.affiliateLink.menu'),
       },
-      //     // {
-      //     //   path: '/category',
-      //     //   permissionRequired: permissions.categoryRead,
-      //     //   name: i18n('entities.category.menu'),
-      //     // },
+      {
+        path: '/tracking-parameter',
+        permissionRequired:
+          permissions.trackingParameterRead,
+        name: i18n('entities.trackingParameter.menu'),
+      },
     ],
   },
 

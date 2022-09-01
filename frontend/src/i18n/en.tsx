@@ -63,53 +63,6 @@ const en = {
   },
 
   entities: {
-    author: {
-      name: 'author',
-      label: 'All Authors',
-      menu: 'Authors',
-      exporterFileName: 'author_export',
-      list: {
-        menu: 'Authors',
-        title: 'Authors',
-      },
-      create: {
-        success: 'Author successfully saved',
-      },
-      update: {
-        success: 'Author successfully saved',
-      },
-      destroy: {
-        success: 'Author successfully deleted',
-      },
-      destroyAll: {
-        success: 'Author(s) successfully deleted',
-      },
-      edit: {
-        title: 'Edit Author',
-      },
-      fields: {
-        id: 'Id',
-        idRange: 'Id #',
-        name: 'Surname',
-        link: 'Link',
-        image: 'Image',
-        description: 'Description',
-      },
-      placeholders: {},
-      hints: {},
-      new: {
-        title: 'New Author',
-      },
-      view: {
-        title: 'View Author',
-      },
-      importer: {
-        title: 'Import Authors',
-        fileName: 'author_import_template',
-        hint: 'Files/Images columns must be the URLs of the files separated by space.',
-      },
-    },
-
     affiliateLink: {
       name: 'affiliateLink',
       label: 'All Affiliate links',
@@ -158,6 +111,53 @@ const en = {
       importer: {
         title: 'Import Affiliate links',
         fileName: 'affiliateLink_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
+
+    author: {
+      name: 'author',
+      label: 'All Authors',
+      menu: 'Authors',
+      exporterFileName: 'author_export',
+      list: {
+        menu: 'Authors',
+        title: 'Authors',
+      },
+      create: {
+        success: 'Author successfully saved',
+      },
+      update: {
+        success: 'Author successfully saved',
+      },
+      destroy: {
+        success: 'Author successfully deleted',
+      },
+      destroyAll: {
+        success: 'Author(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Author',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        name: 'Surname',
+        link: 'Link',
+        image: 'Image',
+        description: 'Description',
+      },
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Author',
+      },
+      view: {
+        title: 'View Author',
+      },
+      importer: {
+        title: 'Import Authors',
+        fileName: 'author_import_template',
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },
     },
@@ -342,6 +342,53 @@ const en = {
       importer: {
         title: 'Import Navigations',
         fileName: 'navigation_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
+
+    trackingParameter: {
+      name: 'trackingParameter',
+      label: 'All Tracking Parameters',
+      menu: 'Tracking Parameters',
+      exporterFileName: 'trackingParameter_export',
+      list: {
+        menu: 'Tracking Parameters',
+        title: 'Tracking Parameters',
+      },
+      create: {
+        success: 'Tracking Parameter successfully saved',
+      },
+      update: {
+        success: 'Tracking Parameter successfully saved',
+      },
+      destroy: {
+        success: 'Tracking Parameter successfully deleted',
+      },
+      destroyAll: {
+        success:
+          'Tracking Parameter(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Tracking Parameter',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        param: 'Parameter',
+        value: 'Value',
+        example: 'Example',
+      },
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Tracking Parameter',
+      },
+      view: {
+        title: 'View Tracking Parameter',
+      },
+      importer: {
+        title: 'Import Tracking Parameters',
+        fileName: 'trackingParameter_import_template',
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },
     },

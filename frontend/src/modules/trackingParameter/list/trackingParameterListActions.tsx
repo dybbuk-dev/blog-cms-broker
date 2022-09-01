@@ -1,13 +1,13 @@
-import AuthorService from 'src/modules/author/authorService';
-import selectors from 'src/modules/author/list/authorListSelectors';
+import TrackingParameterService from 'src/modules/trackingParameter/trackingParameterService';
+import selectors from 'src/modules/trackingParameter/list/trackingParameterListSelectors';
 import { i18n } from 'src/i18n';
-import exporterFields from 'src/modules/author/list/authorListExporterFields';
+import exporterFields from 'src/modules/trackingParameter/list/trackingParameterListExporterFields';
 import Errors from 'src/modules/shared/error/errors';
 import Exporter from 'src/modules/shared/exporter/exporter';
 
-const prefix = 'AUTHOR_LIST';
+const prefix = 'TRACKING_PARAMETER_LIST';
 
-const authorListActions = {
+const trackingParameterListActions = {
   FETCH_STARTED: `${prefix}_FETCH_STARTED`,
   FETCH_SUCCESS: `${prefix}_FETCH_SUCCESS`,
   FETCH_ERROR: `${prefix}_FETCH_ERROR`,
@@ -26,29 +26,29 @@ const authorListActions = {
 
   doClearAllSelected() {
     return {
-      type: authorListActions.CLEAR_ALL_SELECTED,
+      type: trackingParameterListActions.CLEAR_ALL_SELECTED,
     };
   },
 
   doToggleAllSelected() {
     return {
-      type: authorListActions.TOGGLE_ALL_SELECTED,
+      type: trackingParameterListActions.TOGGLE_ALL_SELECTED,
     };
   },
 
   doToggleOneSelected(id) {
     return {
-      type: authorListActions.TOGGLE_ONE_SELECTED,
+      type: trackingParameterListActions.TOGGLE_ONE_SELECTED,
       payload: id,
     };
   },
 
   doReset: () => async (dispatch) => {
     dispatch({
-      type: authorListActions.RESETED,
+      type: trackingParameterListActions.RESETED,
     });
 
-    dispatch(authorListActions.doFetch());
+    dispatch(trackingParameterListActions.doFetch());
   },
 
   doExport: () => async (dispatch, getState) => {
@@ -58,11 +58,11 @@ const authorListActions = {
       }
 
       dispatch({
-        type: authorListActions.EXPORT_STARTED,
+        type: trackingParameterListActions.EXPORT_STARTED,
       });
 
       const filter = selectors.selectFilter(getState());
-      const response = await AuthorService.list(
+      const response = await TrackingParameterService.list(
         filter,
         selectors.selectOrderBy(getState()),
         null,
@@ -71,17 +71,17 @@ const authorListActions = {
 
       new Exporter(
         exporterFields,
-        i18n('entities.author.exporterFileName'),
+        i18n('entities.trackingParameter.exporterFileName'),
       ).transformAndExportAsExcelFile(response.rows);
 
       dispatch({
-        type: authorListActions.EXPORT_SUCCESS,
+        type: trackingParameterListActions.EXPORT_SUCCESS,
       });
     } catch (error) {
       Errors.handle(error);
 
       dispatch({
-        type: authorListActions.EXPORT_ERROR,
+        type: trackingParameterListActions.EXPORT_ERROR,
       });
     }
   },
@@ -89,20 +89,24 @@ const authorListActions = {
   doChangePagination:
     (pagination) => async (dispatch, getState) => {
       dispatch({
-        type: authorListActions.PAGINATION_CHANGED,
+        type: trackingParameterListActions.PAGINATION_CHANGED,
         payload: pagination,
       });
 
-      dispatch(authorListActions.doFetchCurrentFilter());
+      dispatch(
+        trackingParameterListActions.doFetchCurrentFilter(),
+      );
     },
 
   doChangeSort: (sorter) => async (dispatch, getState) => {
     dispatch({
-      type: authorListActions.SORTER_CHANGED,
+      type: trackingParameterListActions.SORTER_CHANGED,
       payload: sorter,
     });
 
-    dispatch(authorListActions.doFetchCurrentFilter());
+    dispatch(
+      trackingParameterListActions.doFetchCurrentFilter(),
+    );
   },
 
   doFetchCurrentFilter:
@@ -112,7 +116,11 @@ const authorListActions = {
         getState(),
       );
       dispatch(
-        authorListActions.doFetch(filter, rawFilter, true),
+        trackingParameterListActions.doFetch(
+          filter,
+          rawFilter,
+          true,
+        ),
       );
     },
 
@@ -121,19 +129,20 @@ const authorListActions = {
     async (dispatch, getState) => {
       try {
         dispatch({
-          type: authorListActions.FETCH_STARTED,
+          type: trackingParameterListActions.FETCH_STARTED,
           payload: { filter, rawFilter, keepPagination },
         });
 
-        const response = await AuthorService.list(
-          filter,
-          selectors.selectOrderBy(getState()),
-          selectors.selectLimit(getState()),
-          selectors.selectOffset(getState()),
-        );
+        const response =
+          await TrackingParameterService.list(
+            filter,
+            selectors.selectOrderBy(getState()),
+            selectors.selectLimit(getState()),
+            selectors.selectOffset(getState()),
+          );
 
         dispatch({
-          type: authorListActions.FETCH_SUCCESS,
+          type: trackingParameterListActions.FETCH_SUCCESS,
           payload: {
             rows: response.rows,
             count: response.count,
@@ -143,10 +152,10 @@ const authorListActions = {
         Errors.handle(error);
 
         dispatch({
-          type: authorListActions.FETCH_ERROR,
+          type: trackingParameterListActions.FETCH_ERROR,
         });
       }
     },
 };
 
-export default authorListActions;
+export default trackingParameterListActions;

@@ -12,6 +12,7 @@ import navigation from 'src/modules/navigation/navigationReducers';
 import plan from 'src/modules/plan/planReducers';
 import settings from 'src/modules/settings/settingsReducers';
 import tenant from 'src/modules/tenant/tenantReducers';
+import trackingParameter from 'src/modules/trackingParameter/trackingParameterReducers';
 import user from 'src/modules/user/userReducers';
 
 export default (history) =>
@@ -29,5 +30,6 @@ export default (history) =>
     plan,
     settings,
     tenant,
+    trackingParameter,
     user,
   });

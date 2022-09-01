@@ -258,7 +258,7 @@ class Permissions {
       },
       // #endregion
 
-      // #region Category
+      // #region Affiliate Link
       affiliateLinkImport: {
         id: 'affiliateLinkImport',
         allowedRoles: [],
@@ -310,6 +310,71 @@ class Permissions {
       },
       affiliateLinkAutocomplete: {
         id: 'affiliateLinkAutocomplete',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      // #endregion
+
+      // #region Tracking Parameter
+      trackingParameterImport: {
+        id: 'trackingParameterImport',
+        allowedRoles: [],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      trackingParameterCreate: {
+        id: 'trackingParameterCreate',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      trackingParameterEdit: {
+        id: 'trackingParameterEdit',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      trackingParameterDestroy: {
+        id: 'trackingParameterDestroy',
+        allowedRoles: [roles.admin],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      trackingParameterRead: {
+        id: 'trackingParameterRead',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      trackingParameterAutocomplete: {
+        id: 'trackingParameterAutocomplete',
         allowedRoles: [
           roles.admin,
           roles.manager,

@@ -287,8 +287,8 @@ const privateRoutes = [
 
   // #region Affiliate link
   {
-    path: '/affiliate-link',
-    collapseName: 'affiliateLink',
+    path: '/affiliate-links',
+    collapseName: 'affiliateLinks',
     i18n: 'collapses.affiliateLink.menu',
     parent: '/',
     redirect: '/affiliate-link',
@@ -299,9 +299,9 @@ const privateRoutes = [
   // #region Affiliate links
   {
     path: '/affiliate-link',
-    collapseName: 'affiliateLink',
+    collapseName: 'affiliateLinks',
     i18n: 'entities.affiliateLink.menu',
-    parent: '/affiliate-link',
+    parent: '/affiliate-links',
     loader: () =>
       import(
         'src/view/affiliateLink/list/AffiliateLinkListPage'
@@ -311,9 +311,9 @@ const privateRoutes = [
   },
   {
     path: '/affiliate-link/new',
-    collapseName: 'affiliateLink',
+    collapseName: 'affiliateLinks',
     i18n: 'entities.affiliateLink.new.title',
-    parent: '/affiliate-link',
+    parent: '/affiliate-links',
     loader: () =>
       import(
         'src/view/affiliateLink/form/AffiliateLinkFormPage'
@@ -324,9 +324,9 @@ const privateRoutes = [
 
   {
     path: '/affiliate-link/importer',
-    collapseName: 'affiliateLink',
+    collapseName: 'affiliateLinks',
     i18n: 'entities.affiliateLink.importer.title',
-    parent: '/affiliate-link',
+    parent: '/affiliate-links',
     loader: () =>
       import(
         'src/view/affiliateLink/importer/AffiliateLinkImporterPage'
@@ -337,9 +337,9 @@ const privateRoutes = [
 
   {
     path: '/affiliate-link/:id/edit',
-    collapseName: 'affiliateLink',
+    collapseName: 'affiliateLinks',
     i18n: 'entities.affiliateLink.edit.title',
-    parent: '/affiliate-link',
+    parent: '/affiliate-links',
     loader: () =>
       import(
         'src/view/affiliateLink/form/AffiliateLinkFormPage'
@@ -350,14 +350,80 @@ const privateRoutes = [
 
   {
     path: '/affiliate-link/:id',
-    collapseName: 'affiliateLink',
+    collapseName: 'affiliateLinks',
     i18n: 'entities.affiliateLink.view.title',
-    parent: '/affiliate-link',
+    parent: '/affiliate-links',
     loader: () =>
       import(
         'src/view/affiliateLink/view/AffiliateLinkViewPage'
       ),
     permissionRequired: permissions.affiliateLinkRead,
+    exact: true,
+  },
+  // #endregion
+
+  // #region Tracking Parameter
+  {
+    path: '/tracking-parameter',
+    collapseName: 'affiliateLinks',
+    i18n: 'entities.trackingParameter.menu',
+    parent: '/affiliate-links',
+    loader: () =>
+      import(
+        'src/view/trackingParameter/list/TrackingParameterListPage'
+      ),
+    permissionRequired: permissions.trackingParameterRead,
+    exact: true,
+  },
+  {
+    path: '/tracking-parameter/new',
+    collapseName: 'affiliateLinks',
+    i18n: 'entities.trackingParameter.new.title',
+    parent: '/affiliate-links',
+    loader: () =>
+      import(
+        'src/view/trackingParameter/form/TrackingParameterFormPage'
+      ),
+    permissionRequired: permissions.trackingParameterCreate,
+    exact: true,
+  },
+
+  {
+    path: '/tracking-parameter/importer',
+    collapseName: 'affiliateLinks',
+    i18n: 'entities.trackingParameter.importer.title',
+    parent: '/affiliate-links',
+    loader: () =>
+      import(
+        'src/view/trackingParameter/importer/TrackingParameterImporterPage'
+      ),
+    permissionRequired: permissions.trackingParameterImport,
+    exact: true,
+  },
+
+  {
+    path: '/tracking-parameter/:id/edit',
+    collapseName: 'affiliateLinks',
+    i18n: 'entities.trackingParameter.edit.title',
+    parent: '/affiliate-links',
+    loader: () =>
+      import(
+        'src/view/trackingParameter/form/TrackingParameterFormPage'
+      ),
+    permissionRequired: permissions.trackingParameterEdit,
+    exact: true,
+  },
+
+  {
+    path: '/tracking-parameter/:id',
+    collapseName: 'affiliateLinks',
+    i18n: 'entities.trackingParameter.view.title',
+    parent: '/affiliate-links',
+    loader: () =>
+      import(
+        'src/view/trackingParameter/view/TrackingParameterViewPage'
+      ),
+    permissionRequired: permissions.trackingParameterRead,
     exact: true,
   },
   // #endregion

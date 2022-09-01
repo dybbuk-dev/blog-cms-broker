@@ -5,7 +5,7 @@ import fields from 'src/modules/author/importer/authorImporterFields';
 import { i18n } from 'src/i18n';
 
 const authorImporterActions = importerActions(
-  'NAVIGATION_IMPORTER',
+  'AUTHOR_IMPORTER',
   selectors,
   AuthorService.import,
   fields,

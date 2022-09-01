@@ -1,12 +1,12 @@
-import AuthorService from 'src/modules/author/authorService';
+import TrackingParameterService from 'src/modules/trackingParameter/trackingParameterService';
 import Errors from 'src/modules/shared/error/errors';
 import Message from 'src/view/shared/message';
 import { getHistory } from 'src/modules/store';
 import { i18n } from 'src/i18n';
 
-const prefix = 'AUTHOR_FORM';
+const prefix = 'TRACKING_PARAMETER_FORM';
 
-const authorFormActions = {
+const trackingParameterFormActions = {
   INIT_STARTED: `${prefix}_INIT_STARTED`,
   INIT_SUCCESS: `${prefix}_INIT_SUCCESS`,
   INIT_ERROR: `${prefix}_INIT_ERROR`,
@@ -22,7 +22,7 @@ const authorFormActions = {
   doInit: (id) => async (dispatch) => {
     try {
       dispatch({
-        type: authorFormActions.INIT_STARTED,
+        type: trackingParameterFormActions.INIT_STARTED,
       });
 
       let record = {};
@@ -30,46 +30,46 @@ const authorFormActions = {
       const isEdit = Boolean(id);
 
       if (isEdit) {
-        record = await AuthorService.find(id);
+        record = await TrackingParameterService.find(id);
       }
 
       dispatch({
-        type: authorFormActions.INIT_SUCCESS,
+        type: trackingParameterFormActions.INIT_SUCCESS,
         payload: record,
       });
     } catch (error) {
       Errors.handle(error);
 
       dispatch({
-        type: authorFormActions.INIT_ERROR,
+        type: trackingParameterFormActions.INIT_ERROR,
       });
 
-      getHistory().push('/author');
+      getHistory().push('/tracking-parameter');
     }
   },
 
   doCreate: (values) => async (dispatch) => {
     try {
       dispatch({
-        type: authorFormActions.CREATE_STARTED,
+        type: trackingParameterFormActions.CREATE_STARTED,
       });
 
-      await AuthorService.create(values);
+      await TrackingParameterService.create(values);
 
       dispatch({
-        type: authorFormActions.CREATE_SUCCESS,
+        type: trackingParameterFormActions.CREATE_SUCCESS,
       });
 
       Message.success(
-        i18n('entities.author.create.success'),
+        i18n('entities.trackingParameter.create.success'),
       );
 
-      getHistory().push('/author');
+      getHistory().push('/tracking-parameter');
     } catch (error) {
       Errors.handle(error);
 
       dispatch({
-        type: authorFormActions.CREATE_ERROR,
+        type: trackingParameterFormActions.CREATE_ERROR,
       });
     }
   },
@@ -77,28 +77,28 @@ const authorFormActions = {
   doUpdate: (id, values) => async (dispatch, getState) => {
     try {
       dispatch({
-        type: authorFormActions.UPDATE_STARTED,
+        type: trackingParameterFormActions.UPDATE_STARTED,
       });
 
-      await AuthorService.update(id, values);
+      await TrackingParameterService.update(id, values);
 
       dispatch({
-        type: authorFormActions.UPDATE_SUCCESS,
+        type: trackingParameterFormActions.UPDATE_SUCCESS,
       });
 
       Message.success(
-        i18n('entities.author.update.success'),
+        i18n('entities.trackingParameter.update.success'),
       );
 
-      getHistory().push('/author');
+      getHistory().push('/tracking-parameter');
     } catch (error) {
       Errors.handle(error);
 
       dispatch({
-        type: authorFormActions.UPDATE_ERROR,
+        type: trackingParameterFormActions.UPDATE_ERROR,
       });
     }
   },
 };
 
-export default authorFormActions;
+export default trackingParameterFormActions;
