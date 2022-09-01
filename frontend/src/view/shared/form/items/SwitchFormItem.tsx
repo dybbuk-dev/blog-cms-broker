@@ -31,6 +31,11 @@ function SwitchFormItem(props) {
     watch,
   } = useFormContext();
 
+  const checked =
+    props.value === undefined || props.value === null
+      ? watch(name) || false
+      : props.value;
+
   useEffect(() => {
     register({ name });
   }, [register, name]);
@@ -52,7 +57,7 @@ function SwitchFormItem(props) {
           <Switch
             id={name}
             name={name}
-            checked={watch(name) || false}
+            checked={checked}
             onChange={(e) => {
               setValue(name, Boolean(e.target.checked), {
                 shouldValidate: true,
