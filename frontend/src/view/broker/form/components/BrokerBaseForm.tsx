@@ -10,6 +10,7 @@ import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
 
 function BrokerBaseForm(props) {
+  const { record } = props;
   return (
     <Grid spacing={2} container>
       <Grid item xs={12} mb={3}>
@@ -17,7 +18,11 @@ function BrokerBaseForm(props) {
           <MDBox p={3}>
             <Grid spacing={2} container>
               <Grid item xs={12}>
-                <MDTypography variant="h5" color="text">
+                <MDTypography
+                  variant="h5"
+                  color="text"
+                  textTransform="capitalize"
+                >
                   {i18n('entities.broker.fields.metadata')}
                 </MDTypography>
               </Grid>

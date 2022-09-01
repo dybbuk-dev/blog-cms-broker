@@ -1,4 +1,6 @@
 import { DataTypes } from 'sequelize';
+import BrokerUpsideRepository from '../repositories/brokerUpsideRepository';
+import SequelizeArrayUtils from '../utils/sequelizeArrayUtils';
 
 export default function (sequelize) {
   const broker_upside = sequelize.define(
@@ -12,15 +14,24 @@ export default function (sequelize) {
       broker_id: {
         type: DataTypes.BIGINT.UNSIGNED,
         allowNull: true,
+        defaultValue: null,
       },
       type: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.TINYINT,
         allowNull: false,
-        defaultValue: false,
+        defaultValue: 0,
+        get() {
+          return SequelizeArrayUtils.indexToValue(
+            this,
+            'type',
+            BrokerUpsideRepository.TYPES,
+          );
+        },
       },
       text: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        defaultValue: '',
         validate: {
           notEmpty: true,
           len: [0, 255],
@@ -29,6 +40,7 @@ export default function (sequelize) {
       ip: {
         type: DataTypes.CHAR(39),
         allowNull: false,
+        defaultValue: '',
         validate: {
           len: [0, 39],
         },

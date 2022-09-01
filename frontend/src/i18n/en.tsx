@@ -164,7 +164,7 @@ const en = {
         homepage_impression: 'Impression script',
         broker_type: 'broker_type',
         description: 'description',
-        teaser: 'teaser',
+        teaser: 'Teaser Text',
         demo_url: 'Demo account',
         account_url: 'Live Account',
         maximum_leverage: 'Maximum Leverage',
@@ -178,6 +178,14 @@ const en = {
         withholding_tax: 'withholding_tax',
         scalping_allowed: 'scalping_allowed',
         // #endregion
+
+        demo_account: 'Demo Account',
+        // #region Upside
+        upside: {
+          type: 'Type',
+          text: 'Text',
+        },
+        // #endregion
       },
       tabs: {
         broker: 'Broker',
@@ -190,7 +198,14 @@ const en = {
         test: 'Test',
         old: 'Old',
       },
-      enumerators: {},
+      enumerators: {
+        upside: {
+          type: {
+            UPSIDE: 'Upside',
+            DOWNSIDE: 'Downside',
+          },
+        },
+      },
       placeholders: {},
       hints: {},
       new: {

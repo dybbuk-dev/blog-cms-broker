@@ -47,6 +47,10 @@ class BrokerRepository {
         model: options.database.broker_metas,
         as: 'meta',
       },
+      {
+        model: options.database.broker_upside,
+        as: 'upsides',
+      },
     ];
   }
 

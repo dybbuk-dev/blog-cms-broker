@@ -15,6 +15,7 @@ import schema from 'src/view/broker/form/schemas/FormSchema';
 import MDBox from 'src/mui/components/MDBox';
 import TabPanel from 'src/view/shared/tab/TabPanel';
 import BrokerTabs from 'src/view/broker/BrokerTabs';
+import BrokerOverviewForm from 'src/view/broker/form/components/BrokerOverviewForm';
 
 function BrokerForm(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -67,6 +68,10 @@ function BrokerForm(props) {
       withholding_tax: record.meta?.withholding_tax,
       scalping_allowed: record.meta?.scalping_allowed,
       // #endregion
+
+      // #region Broker Upside
+      upsides: record.upsides,
+      // #endregion
     };
   });
 
@@ -105,10 +110,10 @@ function BrokerForm(props) {
           </MDBox>
           <MDBox py={3}>
             <TabPanel value={tabValue} index={0}>
-              <BrokerBaseForm />
+              <BrokerBaseForm {...props} />
             </TabPanel>
             <TabPanel value={tabValue} index={1}>
-              Overview
+              <BrokerOverviewForm {...props} />
             </TabPanel>
             <TabPanel value={tabValue} index={2}>
               Characteristics

@@ -7,6 +7,7 @@ import AuthorRepository from '../database/repositories/authorRepository';
 import BrokersCategoryRepository from '../database/repositories/brokersCategoryRepository';
 import CategoryRepository from '../database/repositories/categoryRepository';
 import BrokerMetasRepository from '../database/repositories/brokerMetasRepository';
+import BrokerUpsideRepository from '../database/repositories/brokerUpsideRepository';
 
 export default class BrokerService {
   options: IServiceOptions;
@@ -30,8 +31,10 @@ export default class BrokerService {
     };
   }
 
-  async _updateRelatedData(id, data, transaction) {
-    // #region Broker Meta
+  /**
+   * ! Update Broker Meta
+   */
+  async _updateBrokerMeta(id, data, transaction) {
     const metaId =
       await BrokerMetasRepository.filterIdInTenant(id, {
         ...this.options,
@@ -51,9 +54,12 @@ export default class BrokerService {
         { ...this.options, transaction },
       );
     }
-    // #endregion
+  }
 
-    // #region Broker's Categories
+  /**
+   * ! Update Broker's Categories
+   */
+  async _updateBrokersCategories(id, data, transaction) {
     await BrokersCategoryRepository.destroyByBroker(id, {
       ...this.options,
       transaction,
@@ -75,7 +81,40 @@ export default class BrokerService {
         { ...this.options, transaction },
       );
     }
-    // #endregion
+  }
+
+  /**
+   * ! Update Broker Upside
+   */
+  async _updateBrokerUpside(id, data, transaction) {
+    await BrokerUpsideRepository.destroyByBroker(id, {
+      ...this.options,
+      transaction,
+    });
+    const upsides = data.upsides || [];
+    for (const upside of upsides) {
+      await BrokerUpsideRepository.create(
+        {
+          ...upside,
+          broker: id,
+          ip: data.ip || '',
+        },
+        { ...this.options, transaction },
+      );
+    }
+  }
+
+  /**
+   * * Update Related Broker's Data
+   */
+  async _updateRelatedData(id, data, transaction) {
+    await this._updateBrokerMeta(id, data, transaction);
+    await this._updateBrokersCategories(
+      id,
+      data,
+      transaction,
+    );
+    await this._updateBrokerUpside(id, data, transaction);
   }
 
   async create(data) {

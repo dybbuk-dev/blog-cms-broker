@@ -98,6 +98,13 @@ const en = {
         },
       },
     },
+    broker_upside: {
+      errors: {
+        notEmpty: {
+          text: 'Text could not be empty',
+        },
+      },
+    },
     author: {
       errors: {
         unique: {},

@@ -110,6 +110,9 @@ const schema = yup.object().shape({
     {},
   ),
   // #endregion
+  upside: yupFormSchemas.generic(
+    i18n('entities.broker.fields.demo_account'),
+  ),
 });
 
 export default schema;

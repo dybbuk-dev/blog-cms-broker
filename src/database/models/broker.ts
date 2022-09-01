@@ -146,6 +146,10 @@ export default function (sequelize) {
       as: 'meta',
       foreignKey: 'id',
     });
+    models.broker.hasMany(models.broker_upside, {
+      as: 'upsides',
+      foreignKey: 'broker_id',
+    });
   };
 
   return broker;
