@@ -19,7 +19,6 @@ export default function (sequelize) {
         allowNull: false,
         defaultValue: '',
         validate: {
-          notEmpty: true,
           len: [0, 255],
         },
       },

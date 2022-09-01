@@ -7,7 +7,7 @@ const Op = Sequelize.Op;
 
 class BrokerPhoneRepository {
   static ALL_FIELDS = ['phone'];
-  static NOT_EMPTY_FIELDS = ['phone'];
+  static NOT_EMPTY_FIELDS = [];
 
   static _relatedData(data, options) {
     SequelizeRepository.handleNotEmptyField(
@@ -17,6 +17,7 @@ class BrokerPhoneRepository {
       'broker_phone',
     );
     return {
+      phone: data.phone || '',
       broker_id: data.broker || null,
       ip: data.ip || '',
     };

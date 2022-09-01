@@ -19,7 +19,6 @@ function BrokerCharacteristicsForm(props) {
           name="phone"
           label={i18n('entities.broker.fields.phone')}
           variant="standard"
-          required
         />
       </Grid>
     </Grid>

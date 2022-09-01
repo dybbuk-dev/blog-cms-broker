@@ -113,7 +113,6 @@ const schema = yup.object().shape({
   phone: yupFormSchemas.string(
     i18n('entities.broker.fields.phone'),
     {
-      required: true,
       min: 0,
       max: 255,
     },

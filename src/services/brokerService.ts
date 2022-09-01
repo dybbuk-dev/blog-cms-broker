@@ -239,7 +239,7 @@ export default class BrokerService {
       id,
       options,
     );
-    const items = [data.phone];
+    const items = [data.phone].filter(Boolean);
     for (const item of items) {
       await BrokerPhoneRepository.create(
         {
