@@ -54,12 +54,67 @@ const en = {
   },
 
   collapses: {
+    affiliateLink: {
+      menu: 'Affiliate links',
+    },
     routes: {
       menu: 'Routes',
     },
   },
 
   entities: {
+    affiliateLink: {
+      name: 'affiliateLink',
+      label: 'All Affiliate links',
+      menu: 'Affiliate links',
+      exporterFileName: 'affiliateLink_export',
+      list: {
+        menu: 'Affiliate links',
+        title: 'Affiliate links',
+      },
+      create: {
+        success: 'Affiliate link successfully saved',
+      },
+      update: {
+        success: 'Affiliate link successfully saved',
+      },
+      destroy: {
+        success: 'Affiliate link successfully deleted',
+      },
+      destroyAll: {
+        success: 'Affiliate link(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Affiliate link',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        hash: 'Hash',
+        link: 'Link',
+        display_hash: 'Display Hash',
+        meta_info: 'Meta Info',
+      },
+      enumerators: {
+        target: {
+          _blank: 'New Window',
+        },
+      },
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Affiliate link',
+      },
+      view: {
+        title: 'View Affiliate link',
+      },
+      importer: {
+        title: 'Import Affiliate links',
+        fileName: 'affiliateLink_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
+
     author: {
       name: 'author',
       label: 'All Authors',
@@ -287,6 +342,53 @@ const en = {
       importer: {
         title: 'Import Navigations',
         fileName: 'navigation_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
+
+    trackingParameter: {
+      name: 'trackingParameter',
+      label: 'All Tracking Parameters',
+      menu: 'Tracking Parameters',
+      exporterFileName: 'trackingParameter_export',
+      list: {
+        menu: 'Tracking Parameters',
+        title: 'Tracking Parameters',
+      },
+      create: {
+        success: 'Tracking Parameter successfully saved',
+      },
+      update: {
+        success: 'Tracking Parameter successfully saved',
+      },
+      destroy: {
+        success: 'Tracking Parameter successfully deleted',
+      },
+      destroyAll: {
+        success:
+          'Tracking Parameter(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Tracking Parameter',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        param: 'Parameter',
+        value: 'Value',
+        example: 'Example',
+      },
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Tracking Parameter',
+      },
+      view: {
+        title: 'View Tracking Parameter',
+      },
+      importer: {
+        title: 'Import Tracking Parameters',
+        fileName: 'trackingParameter_import_template',
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },
     },

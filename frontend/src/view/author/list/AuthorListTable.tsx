@@ -209,38 +209,17 @@ function AuthorListTable(props) {
                     {row.id}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
-                    <MDTypography
-                      display="block"
-                      variant="button"
-                      width="200px"
-                      whiteSpace="break-spaces"
-                    >
-                      {row.image}
-                    </MDTypography>
+                    {row.image}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
-                    <MDTypography
-                      display="block"
-                      variant="button"
-                      width="200px"
-                      whiteSpace="break-spaces"
-                    >
-                      {row.name}
-                    </MDTypography>
+                    {row.name}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
                     <MaterialLink
                       component={Link}
                       to={row.link}
                     >
-                      <MDTypography
-                        display="block"
-                        variant="button"
-                        width="200px"
-                        whiteSpace="break-spaces"
-                      >
-                        {row.link}
-                      </MDTypography>
+                      {row.link}
                     </MaterialLink>
                   </DataTableBodyCell>
                   <DataTableBodyCell>

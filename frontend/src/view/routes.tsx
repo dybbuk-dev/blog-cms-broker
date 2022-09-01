@@ -285,6 +285,151 @@ const privateRoutes = [
   },
   // #endregion
 
+  // #region Affiliate link
+  {
+    path: '/affiliate-links',
+    collapseName: 'affiliateLinks',
+    i18n: 'collapses.affiliateLink.menu',
+    parent: '/',
+    redirect: '/affiliate-link',
+    permissionRequired: null,
+    virtual: true,
+  },
+
+  // #region Affiliate links
+  {
+    path: '/affiliate-link',
+    collapseName: 'affiliateLinks',
+    i18n: 'entities.affiliateLink.menu',
+    parent: '/affiliate-links',
+    loader: () =>
+      import(
+        'src/view/affiliateLink/list/AffiliateLinkListPage'
+      ),
+    permissionRequired: permissions.affiliateLinkRead,
+    exact: true,
+  },
+  {
+    path: '/affiliate-link/new',
+    collapseName: 'affiliateLinks',
+    i18n: 'entities.affiliateLink.new.title',
+    parent: '/affiliate-links',
+    loader: () =>
+      import(
+        'src/view/affiliateLink/form/AffiliateLinkFormPage'
+      ),
+    permissionRequired: permissions.affiliateLinkCreate,
+    exact: true,
+  },
+
+  {
+    path: '/affiliate-link/importer',
+    collapseName: 'affiliateLinks',
+    i18n: 'entities.affiliateLink.importer.title',
+    parent: '/affiliate-links',
+    loader: () =>
+      import(
+        'src/view/affiliateLink/importer/AffiliateLinkImporterPage'
+      ),
+    permissionRequired: permissions.affiliateLinkImport,
+    exact: true,
+  },
+
+  {
+    path: '/affiliate-link/:id/edit',
+    collapseName: 'affiliateLinks',
+    i18n: 'entities.affiliateLink.edit.title',
+    parent: '/affiliate-links',
+    loader: () =>
+      import(
+        'src/view/affiliateLink/form/AffiliateLinkFormPage'
+      ),
+    permissionRequired: permissions.affiliateLinkEdit,
+    exact: true,
+  },
+
+  {
+    path: '/affiliate-link/:id',
+    collapseName: 'affiliateLinks',
+    i18n: 'entities.affiliateLink.view.title',
+    parent: '/affiliate-links',
+    loader: () =>
+      import(
+        'src/view/affiliateLink/view/AffiliateLinkViewPage'
+      ),
+    permissionRequired: permissions.affiliateLinkRead,
+    exact: true,
+  },
+  // #endregion
+
+  // #region Tracking Parameter
+  {
+    path: '/tracking-parameter',
+    collapseName: 'affiliateLinks',
+    i18n: 'entities.trackingParameter.menu',
+    parent: '/affiliate-links',
+    loader: () =>
+      import(
+        'src/view/trackingParameter/list/TrackingParameterListPage'
+      ),
+    permissionRequired: permissions.trackingParameterRead,
+    exact: true,
+  },
+  {
+    path: '/tracking-parameter/new',
+    collapseName: 'affiliateLinks',
+    i18n: 'entities.trackingParameter.new.title',
+    parent: '/affiliate-links',
+    loader: () =>
+      import(
+        'src/view/trackingParameter/form/TrackingParameterFormPage'
+      ),
+    permissionRequired: permissions.trackingParameterCreate,
+    exact: true,
+  },
+
+  {
+    path: '/tracking-parameter/importer',
+    collapseName: 'affiliateLinks',
+    i18n: 'entities.trackingParameter.importer.title',
+    parent: '/affiliate-links',
+    loader: () =>
+      import(
+        'src/view/trackingParameter/importer/TrackingParameterImporterPage'
+      ),
+    permissionRequired: permissions.trackingParameterImport,
+    exact: true,
+  },
+
+  {
+    path: '/tracking-parameter/:id/edit',
+    collapseName: 'affiliateLinks',
+    i18n: 'entities.trackingParameter.edit.title',
+    parent: '/affiliate-links',
+    loader: () =>
+      import(
+        'src/view/trackingParameter/form/TrackingParameterFormPage'
+      ),
+    permissionRequired: permissions.trackingParameterEdit,
+    exact: true,
+  },
+
+  {
+    path: '/tracking-parameter/:id',
+    collapseName: 'affiliateLinks',
+    i18n: 'entities.trackingParameter.view.title',
+    parent: '/affiliate-links',
+    loader: () =>
+      import(
+        'src/view/trackingParameter/view/TrackingParameterViewPage'
+      ),
+    permissionRequired: permissions.trackingParameterRead,
+    exact: true,
+  },
+  // #endregion
+
+  // #endregion
+
   // #region Routes
   {
     path: '/routes',

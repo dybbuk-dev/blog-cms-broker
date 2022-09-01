@@ -6,6 +6,7 @@ import AuditLogRepository from './auditLogRepository';
 import SequelizeRepository from './sequelizeRepository';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import CategoryDescriptionRepository from './categoryDescriptionRepository';
+import { orderByUtils } from '../utils/orderByUtils';
 
 const Op = Sequelize.Op;
 
@@ -30,7 +31,7 @@ class CategoryRepository {
       {
         ...lodash.pick(data, this.ALL_FIELDS),
         target: data.target ?? '',
-        author_id: data.author || '',
+        author_id: data.author ?? null,
         ip: '',
       },
       {
@@ -78,7 +79,7 @@ class CategoryRepository {
       {
         ...lodash.pick(data, this.ALL_FIELDS),
         target: data.target ?? '',
-        author_id: data.author,
+        author_id: data.author ?? null,
         ip: '',
       },
       {
@@ -309,7 +310,7 @@ class CategoryRepository {
         limit: limit ? Number(limit) : undefined,
         offset: offset ? Number(offset) : undefined,
         order: orderBy
-          ? [orderBy.split('_')]
+          ? [orderByUtils(orderBy)]
           : [['id', 'DESC']],
         transaction:
           SequelizeRepository.getTransaction(options),
@@ -342,7 +343,7 @@ class CategoryRepository {
           { ['id']: query },
           {
             [Op.and]: SequelizeFilterUtils.ilikeIncludes(
-              'author',
+              'category',
               'name',
               query,
             ),
@@ -353,12 +354,14 @@ class CategoryRepository {
 
     const where = { [Op.and]: whereAnd };
 
-    const records = await options.database.author.findAll({
-      attributes: ['id', 'name'],
-      where,
-      limit: limit ? Number(limit) : undefined,
-      order: [['name', 'ASC']],
-    });
+    const records = await options.database.category.findAll(
+      {
+        attributes: ['id', 'name'],
+        where,
+        limit: limit ? Number(limit) : undefined,
+        order: [['name', 'ASC']],
+      },
+    );
 
     return records.map((record) => ({
       id: record.id,

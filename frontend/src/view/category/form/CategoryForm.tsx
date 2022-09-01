@@ -16,11 +16,10 @@ import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import MDButton from 'src/mui/components/MDButton';
 import categoryEnumerators from '../../../modules/category/categoryEnumerators';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
-import CategoryAutocompleteFormItem from 'src/view/category/autocomplete/CategoryAutocompleteFormItem';
 import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
-import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
 import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
+import AuthorAutocompleteFormItem from 'src/view/author/autocomplete/AuthorAutocompleteFormItem';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(
@@ -163,7 +162,7 @@ function CategoryForm(props) {
               />
             </Grid>
             <Grid item md={6} xs={12}>
-              <CategoryAutocompleteFormItem
+              <AuthorAutocompleteFormItem
                 name="author"
                 label={i18n(
                   'entities.category.fields.author',
@@ -180,6 +179,7 @@ function CategoryForm(props) {
                   'entities.category.fields.teaser',
                 )}
                 value={initialValues.teaser}
+                required={true}
               />
             </Grid>
             <Grid item md={12} xs={12}>
@@ -189,6 +189,7 @@ function CategoryForm(props) {
                   'entities.category.fields.description',
                 )}
                 value={initialValues.description}
+                required={true}
               />
             </Grid>
             <Grid item md={6} xs={12}>

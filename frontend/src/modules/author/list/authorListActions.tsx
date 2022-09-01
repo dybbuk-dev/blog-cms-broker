@@ -5,7 +5,7 @@ import exporterFields from 'src/modules/author/list/authorListExporterFields';
 import Errors from 'src/modules/shared/error/errors';
 import Exporter from 'src/modules/shared/exporter/exporter';
 
-const prefix = 'NAVIGATION_LIST';
+const prefix = 'AUTHOR_LIST';
 
 const authorListActions = {
   FETCH_STARTED: `${prefix}_FETCH_STARTED`,
