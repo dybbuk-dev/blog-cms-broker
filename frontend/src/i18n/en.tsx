@@ -218,7 +218,7 @@ const en = {
         homepage_title: 'homepage_title',
         homepage_impression: 'Impression Script',
         broker_type: 'Broker Type',
-        description: 'description',
+        description: 'Description',
         teaser: 'Teaser Text',
         demo_url: 'Demo account',
         account_url: 'Live Account',

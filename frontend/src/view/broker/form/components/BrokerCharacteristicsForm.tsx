@@ -1,5 +1,6 @@
 import { Grid } from '@mui/material';
 import { i18n } from 'src/i18n';
+import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 
 function BrokerCharacteristicsForm(props) {
@@ -33,6 +34,12 @@ function BrokerCharacteristicsForm(props) {
           name="fax"
           label={i18n('entities.broker.fields.fax')}
           variant="standard"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <HtmlEditorFormItem
+          name="description"
+          label={i18n('entities.broker.fields.description')}
         />
       </Grid>
     </Grid>
