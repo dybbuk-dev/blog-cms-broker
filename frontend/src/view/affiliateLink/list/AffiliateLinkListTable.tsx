@@ -203,7 +203,7 @@ function AffiliateLinkListTable(props) {
                       <MDTypography
                         display="block"
                         variant="button"
-                        width="100%"
+                        width="600px"
                         whiteSpace="break-spaces"
                       >
                         {row.link}
