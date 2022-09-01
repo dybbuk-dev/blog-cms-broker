@@ -106,6 +106,11 @@ const en = {
         unique: {},
       },
     },
+    trackingParameters: {
+      errors: {
+        unique: {},
+      },
+    },
     navigation: {
       errors: {
         unique: {},

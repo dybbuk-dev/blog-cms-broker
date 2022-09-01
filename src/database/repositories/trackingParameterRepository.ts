@@ -9,23 +9,18 @@ import { orderByUtils } from '../utils/orderByUtils';
 
 const Op = Sequelize.Op;
 
-class AffiliateLinkRepository {
-  static ALL_FIELDS = [
-    'hash',
-    'link',
-    'display_hash',
-    'meta_info',
-  ];
+class TrackingParameterRepository {
+  static ALL_FIELDS = ['param', 'value'];
 
   static async create(data, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
     const record =
-      await options.database.affiliate_link.create(
+      await options.database.affiliate_tracking_identifier.create(
         {
           ...lodash.pick(data, this.ALL_FIELDS),
-          meta_info: data.meta_info ?? null,
+          value: data.value ?? null,
           ip: '',
         },
         {
@@ -52,12 +47,14 @@ class AffiliateLinkRepository {
       SequelizeRepository.getTransaction(options);
 
     let record =
-      await options.database.affiliate_link.findOne({
-        where: {
-          id,
+      await options.database.affiliate_tracking_identifier.findOne(
+        {
+          where: {
+            id,
+          },
+          transaction,
         },
-        transaction,
-      });
+      );
 
     if (!record) {
       throw new Error404();
@@ -66,7 +63,7 @@ class AffiliateLinkRepository {
     record = await record.update(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
-        meta_info: data.meta_info ?? null,
+        value: data.value ?? null,
         ip: '',
       },
       {
@@ -89,12 +86,14 @@ class AffiliateLinkRepository {
       SequelizeRepository.getTransaction(options);
 
     let record =
-      await options.database.affiliate_link.findOne({
-        where: {
-          id,
+      await options.database.affiliate_tracking_identifier.findOne(
+        {
+          where: {
+            id,
+          },
+          transaction,
         },
-        transaction,
-      });
+      );
 
     if (!record) {
       throw new Error404();
@@ -122,13 +121,15 @@ class AffiliateLinkRepository {
       // },
     ];
     const record =
-      await options.database.affiliate_link.findOne({
-        where: {
-          id,
+      await options.database.affiliate_tracking_identifier.findOne(
+        {
+          where: {
+            id,
+          },
+          include,
+          transaction,
         },
-        include,
-        transaction,
-      });
+      );
 
     if (!record) {
       throw new Error404();
@@ -163,10 +164,12 @@ class AffiliateLinkRepository {
     };
 
     const records =
-      await options.database.affiliate_link.findAll({
-        attributes: ['id'],
-        where,
-      });
+      await options.database.affiliate_tracking_identifier.findAll(
+        {
+          attributes: ['id'],
+          where,
+        },
+      );
 
     return records.map((record) => record.id);
   }
@@ -175,12 +178,14 @@ class AffiliateLinkRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    return options.database.affiliate_link.count({
-      where: {
-        ...filter,
+    return options.database.affiliate_tracking_identifier.count(
+      {
+        where: {
+          ...filter,
+        },
+        transaction,
       },
-      transaction,
-    });
+    );
   }
 
   static async findAndCountAll(
@@ -224,24 +229,22 @@ class AffiliateLinkRepository {
         }
       }
 
-      ['hash', 'link', 'display_hash', 'meta_info'].forEach(
-        (field) => {
-          if (filter[field]) {
-            whereAnd.push(
-              SequelizeFilterUtils.ilikeIncludes(
-                'affiliate_link',
-                field,
-                filter[field],
-              ),
-            );
-          }
-        },
-      );
+      ['param', 'value'].forEach((field) => {
+        if (filter[field]) {
+          whereAnd.push(
+            SequelizeFilterUtils.ilikeIncludes(
+              'affiliate_tracking_identifier',
+              field,
+              filter[field],
+            ),
+          );
+        }
+      });
     }
 
     const where = { [Op.and]: whereAnd };
     let { rows, count } =
-      await options.database.affiliate_link.findAndCountAll(
+      await options.database.affiliate_tracking_identifier.findAndCountAll(
         {
           where,
           include,
@@ -285,7 +288,7 @@ class AffiliateLinkRepository {
 
     await AuditLogRepository.log(
       {
-        entityName: 'affiliate link',
+        entityName: 'tracking parameter',
         entityId: record.id,
         action,
         values,
@@ -326,4 +329,4 @@ class AffiliateLinkRepository {
   }
 }
 
-export default AffiliateLinkRepository;
+export default TrackingParameterRepository;

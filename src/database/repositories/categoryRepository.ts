@@ -6,6 +6,7 @@ import AuditLogRepository from './auditLogRepository';
 import SequelizeRepository from './sequelizeRepository';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import CategoryDescriptionRepository from './categoryDescriptionRepository';
+import { orderByUtils } from '../utils/orderByUtils';
 
 const Op = Sequelize.Op;
 
@@ -309,7 +310,7 @@ class CategoryRepository {
         limit: limit ? Number(limit) : undefined,
         offset: offset ? Number(offset) : undefined,
         order: orderBy
-          ? [orderBy.split('_')]
+          ? [orderByUtils(orderBy)]
           : [['id', 'DESC']],
         transaction:
           SequelizeRepository.getTransaction(options),

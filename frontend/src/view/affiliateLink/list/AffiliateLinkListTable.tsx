@@ -200,7 +200,14 @@ function AffiliateLinkListTable(props) {
                   </DataTableBodyCell>
                   <DataTableBodyCell>
                     <MaterialLink href={row.link}>
-                      {row.link}
+                      <MDTypography
+                        display="block"
+                        variant="button"
+                        width="100%"
+                        whiteSpace="break-spaces"
+                      >
+                        {row.link}
+                      </MDTypography>
                     </MaterialLink>
                   </DataTableBodyCell>
                   <DataTableBodyCell>
