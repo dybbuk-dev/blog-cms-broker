@@ -284,6 +284,10 @@ const en = {
           url: 'Homepage',
         },
         // #endregion
+
+        // #region Phone
+        phone: 'Phone',
+        // #endregion
       },
       tabs: {
         broker: 'Broker',

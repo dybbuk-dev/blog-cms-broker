@@ -14,6 +14,14 @@ function BrokerCharacteristicsForm(props) {
           required
         />
       </Grid>
+      <Grid item xs={12}>
+        <InputFormItem
+          name="phone"
+          label={i18n('entities.broker.fields.phone')}
+          variant="standard"
+          required
+        />
+      </Grid>
     </Grid>
   );
 }

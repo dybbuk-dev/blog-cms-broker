@@ -140,6 +140,13 @@ const en = {
         },
       },
     },
+    broker_phone: {
+      errors: {
+        notEmpty: {
+          phone: 'Phone is required',
+        },
+      },
+    },
     author: {
       errors: {
         unique: {},

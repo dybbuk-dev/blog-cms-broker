@@ -13,6 +13,7 @@ import BrokerDepositGuaranteeRepository from '../database/repositories/brokerDep
 import BrokerCertificateRepository from '../database/repositories/brokerCertificateRepository';
 import BrokerSpreadRepository from '../database/repositories/brokerSpreadRepository';
 import BrokerFeatureRepository from '../database/repositories/brokerFeatureRepository';
+import BrokerPhoneRepository from '../database/repositories/brokerPhoneRepository';
 
 export default class BrokerService {
   options: IServiceOptions;
@@ -230,6 +231,28 @@ export default class BrokerService {
   }
 
   /**
+   * ! Update Broker Phone
+   */
+  async _updateBrokerPhone(id, data, transaction) {
+    const options = { ...this.options, transaction };
+    await BrokerPhoneRepository.destroyByBroker(
+      id,
+      options,
+    );
+    const items = [data.phone];
+    for (const item of items) {
+      await BrokerPhoneRepository.create(
+        {
+          phone: item,
+          broker: id,
+          ip: data.ip || '',
+        },
+        options,
+      );
+    }
+  }
+
+  /**
    * * Update Related Broker's Data
    */
   async _updateRelatedData(id, data, transaction) {
@@ -257,6 +280,7 @@ export default class BrokerService {
     );
     await this._updateBrokerSpread(id, data, transaction);
     await this._updateBrokerFeature(id, data, transaction);
+    await this._updateBrokerPhone(id, data, transaction);
   }
 
   async create(data) {

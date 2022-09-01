@@ -12,10 +12,12 @@ export default function (sequelize) {
       broker_id: {
         type: DataTypes.BIGINT.UNSIGNED,
         allowNull: true,
+        defaultValue: null,
       },
       phone: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        defaultValue: '',
         validate: {
           notEmpty: true,
           len: [0, 255],
@@ -24,6 +26,7 @@ export default function (sequelize) {
       ip: {
         type: DataTypes.CHAR(39),
         allowNull: false,
+        defaultValue: '',
         validate: {
           len: [0, 39],
         },
@@ -48,6 +51,7 @@ export default function (sequelize) {
 
   broker_phone.associate = (models) => {
     models.broker_phone.belongsTo(models.broker, {
+      as: 'broker',
       constraints: true,
       foreignKey: 'broker_id',
       onDelete: 'NO ACTION',

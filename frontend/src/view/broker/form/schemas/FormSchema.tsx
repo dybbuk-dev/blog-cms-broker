@@ -108,6 +108,18 @@ const schema = yup.object().shape({
       max: 255,
     },
   ),
+
+  // #region Phone
+  phone: yupFormSchemas.string(
+    i18n('entities.broker.fields.phone'),
+    {
+      required: true,
+      min: 0,
+      max: 255,
+    },
+  ),
+  // #endregion
+
   // #endregion
 });
 

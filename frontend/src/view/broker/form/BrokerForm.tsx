@@ -93,6 +93,10 @@ function BrokerForm(props) {
       // #region Broker Feature
       features: record.features,
       // #endregion
+
+      // #region Broker Feature
+      phone: record.phone?.phone,
+      // #endregion
     };
   });
 
