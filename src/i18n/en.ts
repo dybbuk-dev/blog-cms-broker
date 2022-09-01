@@ -150,6 +150,11 @@ const en = {
         notEmpty: {},
       },
     },
+    broker_email: {
+      errors: {
+        notEmpty: {},
+      },
+    },
     author: {
       errors: {
         unique: {},

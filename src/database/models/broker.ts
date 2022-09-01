@@ -181,6 +181,10 @@ export default function (sequelize) {
       as: 'fax',
       foreignKey: 'broker_id',
     });
+    models.broker.hasOne(models.broker_email, {
+      as: 'email',
+      foreignKey: 'broker_id',
+    });
   };
 
   return broker;

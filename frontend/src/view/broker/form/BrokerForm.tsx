@@ -101,6 +101,10 @@ function BrokerForm(props) {
       // #region Broker Fax
       fax: record.fax?.fax,
       // #endregion
+
+      // #region Broker Email
+      email: record.email?.email,
+      // #endregion
     };
   });
 

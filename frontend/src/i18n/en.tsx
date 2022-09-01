@@ -292,6 +292,10 @@ const en = {
         // #region Fax
         fax: 'Fax',
         // #endregion
+
+        // #region Email
+        email: 'Email',
+        // #endregion
       },
       tabs: {
         broker: 'Broker',

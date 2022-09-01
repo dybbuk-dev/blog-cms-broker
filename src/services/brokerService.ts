@@ -15,6 +15,7 @@ import BrokerSpreadRepository from '../database/repositories/brokerSpreadReposit
 import BrokerFeatureRepository from '../database/repositories/brokerFeatureRepository';
 import BrokerPhoneRepository from '../database/repositories/brokerPhoneRepository';
 import BrokerFaxRepository from '../database/repositories/brokerFaxRepository';
+import BrokerEmailRepository from '../database/repositories/brokerEmailRepository';
 
 export default class BrokerService {
   options: IServiceOptions;
@@ -273,6 +274,28 @@ export default class BrokerService {
   }
 
   /**
+   * ! Update Broker Email
+   */
+  async _updateBrokerEmail(id, data, transaction) {
+    const options = { ...this.options, transaction };
+    await BrokerEmailRepository.destroyByBroker(
+      id,
+      options,
+    );
+    const items = [data.email].filter(Boolean);
+    for (const item of items) {
+      await BrokerEmailRepository.create(
+        {
+          email: item,
+          broker: id,
+          ip: data.ip || '',
+        },
+        options,
+      );
+    }
+  }
+
+  /**
    * * Update Related Broker's Data
    */
   async _updateRelatedData(id, data, transaction) {
@@ -302,6 +325,7 @@ export default class BrokerService {
     await this._updateBrokerFeature(id, data, transaction);
     await this._updateBrokerPhone(id, data, transaction);
     await this._updateBrokerFax(id, data, transaction);
+    await this._updateBrokerEmail(id, data, transaction);
   }
 
   async create(data) {

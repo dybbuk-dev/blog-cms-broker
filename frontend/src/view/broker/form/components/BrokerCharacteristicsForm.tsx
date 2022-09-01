@@ -6,12 +6,19 @@ function BrokerCharacteristicsForm(props) {
   const { record } = props;
   return (
     <Grid spacing={2} container>
-      <Grid item xs={12}>
+      <Grid item md={6} xs={12}>
         <InputFormItem
           name="homepage"
           label={i18n('entities.broker.fields.homepage')}
           variant="standard"
           required
+        />
+      </Grid>
+      <Grid item md={6} xs={12}>
+        <InputFormItem
+          name="email"
+          label={i18n('entities.broker.fields.email')}
+          variant="standard"
         />
       </Grid>
       <Grid item md={6} xs={12}>

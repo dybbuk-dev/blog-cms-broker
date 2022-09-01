@@ -83,6 +83,10 @@ class BrokerRepository {
         model: options.database.broker_fax,
         as: 'fax',
       },
+      !metaOnly && {
+        model: options.database.broker_email,
+        as: 'email',
+      },
     ].filter(Boolean);
   }
 
