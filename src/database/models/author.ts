@@ -12,6 +12,7 @@ export default function (sequelize) {
       name: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        defaultValue: '',
         validate: {
           notEmpty: true,
           len: [0, 255],
@@ -20,6 +21,7 @@ export default function (sequelize) {
       link: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        defaultValue: '',
         validate: {
           notEmpty: true,
           len: [0, 255],
@@ -28,6 +30,7 @@ export default function (sequelize) {
       image: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        defaultValue: '',
         validate: {
           notEmpty: true,
           len: [0, 255],
@@ -36,10 +39,12 @@ export default function (sequelize) {
       description: {
         type: DataTypes.TEXT,
         allowNull: false,
+        defaultValue: '',
       },
       ip: {
         type: DataTypes.CHAR(39),
         allowNull: false,
+        defaultValue: '',
         validate: {
           len: [0, 39],
         },

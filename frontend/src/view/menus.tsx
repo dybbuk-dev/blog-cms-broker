@@ -29,6 +29,25 @@ const menus = [
   },
 
   {
+    name: i18n('collapses.affiliateLink.menu'),
+    key: 'affiliateLink',
+    icon: <Icon fontSize="medium">diversity_2</Icon>,
+    collapse: [
+      {
+        path: '/affiliate-link',
+        permissionRequired: permissions.affiliateLinkRead,
+        name: i18n('entities.affiliateLink.menu'),
+      },
+      {
+        path: '/tracking-parameter',
+        permissionRequired:
+          permissions.trackingParameterRead,
+        name: i18n('entities.trackingParameter.menu'),
+      },
+    ],
+  },
+
+  {
     path: '/broker',
     name: i18n('entities.broker.menu'),
     permissionRequired: permissions.brokerRead,

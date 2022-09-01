@@ -178,6 +178,7 @@ function CategoryForm(props) {
                 )}
                 required={true}
                 value={initialValues.teaser}
+                required={true}
               />
             </Grid>
             <Grid item md={12} xs={12}>
@@ -188,6 +189,7 @@ function CategoryForm(props) {
                 )}
                 required={true}
                 value={initialValues.description}
+                required={true}
               />
             </Grid>
             <Grid item md={6} xs={12}>

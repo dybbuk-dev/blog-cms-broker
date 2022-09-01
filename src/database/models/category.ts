@@ -81,6 +81,7 @@ export default function (sequelize) {
       ip: {
         type: DataTypes.CHAR(39),
         allowNull: false,
+        defaultValue: '',
         validate: {
           len: [0, 39],
         },

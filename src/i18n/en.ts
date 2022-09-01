@@ -110,6 +110,16 @@ const en = {
         unique: {},
       },
     },
+    affiliateLink: {
+      errors: {
+        unique: {},
+      },
+    },
+    trackingParameters: {
+      errors: {
+        unique: {},
+      },
+    },
     navigation: {
       errors: {
         unique: {},
