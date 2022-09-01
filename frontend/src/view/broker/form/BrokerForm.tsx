@@ -88,6 +88,10 @@ function BrokerForm(props) {
       // #region Broker Spread
       spreads: record.spreads,
       // #endregion
+
+      // #region Broker Feature
+      features: record.features,
+      // #endregion
     };
   });
 

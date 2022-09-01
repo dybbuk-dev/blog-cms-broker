@@ -276,6 +276,14 @@ const en = {
           primary: 'Primary Spread',
         },
         // #endregion
+
+        // #region Spread
+        features: 'Specialties',
+        feature: {
+          feature: 'Special Feature',
+          url: 'Homepage',
+        },
+        // #endregion
       },
       tabs: {
         broker: 'Broker',

@@ -133,6 +133,13 @@ const en = {
         },
       },
     },
+    broker_feature: {
+      errors: {
+        notEmpty: {
+          feature: 'Special Feature is required',
+        },
+      },
+    },
     author: {
       errors: {
         unique: {},
