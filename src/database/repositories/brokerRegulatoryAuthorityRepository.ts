@@ -7,7 +7,7 @@ const Op = Sequelize.Op;
 
 class BrokerRegulatoryAuthorityRepository {
   static ALL_FIELDS = ['name', 'abbreviation', 'url'];
-  static NOT_EMPTY_FIELDS = ['name', 'url'];
+  static NOT_EMPTY_FIELDS = ['name'];
 
   static _relatedData(data, options) {
     SequelizeRepository.handleNotEmptyField(

@@ -81,7 +81,6 @@ function BrokerOverviewForm(props) {
               md: 6,
               xs: 12,
               defaultValue: '',
-              required: true,
             },
             {
               input: InputFormItem,
@@ -91,7 +90,6 @@ function BrokerOverviewForm(props) {
               ),
               xs: 12,
               defaultValue: '',
-              required: true,
             },
           ]}
         />
