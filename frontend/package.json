@@ -69,6 +69,7 @@
     "react-hook-form": "6.14.0",
     "react-images-viewer": "1.7.1",
     "react-is": "18.2.0",
+    "react-lazy-load": "^4.0.1",
     "react-number-format": "^4.9.3",
     "react-quill": "^2.0.0",
     "react-redux": "7.2.2",
