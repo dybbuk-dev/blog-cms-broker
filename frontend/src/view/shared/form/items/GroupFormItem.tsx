@@ -49,6 +49,7 @@ function GroupInputFormItem(props) {
         variant={variant}
         onChange={onGroupInputChange}
         {...rest}
+        unregister
       />
     </Grid>
   );

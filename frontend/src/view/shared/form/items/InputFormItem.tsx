@@ -51,7 +51,7 @@ export function InputFormItem(props) {
         type={type}
         label={label}
         required={required}
-        inputRef={register}
+        inputRef={props.unregister ? null : register}
         onChange={(event) => {
           props.onChange &&
             props.onChange(event.target.value);

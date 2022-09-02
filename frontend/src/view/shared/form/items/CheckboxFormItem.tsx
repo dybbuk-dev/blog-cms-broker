@@ -37,7 +37,9 @@ export function CheckboxFormItem(props) {
       : props.value;
 
   useEffect(() => {
-    register({ name });
+    if (!props.unregister) {
+      register({ name });
+    }
   }, [register, name]);
 
   const errorMessage = FormErrors.errorMessage(
@@ -69,7 +71,7 @@ export function CheckboxFormItem(props) {
             onBlur={() =>
               props.onBlur && props.onBlur(null)
             }
-            inputRef={register}
+            inputRef={props.unregister ? null : register}
             color={sidenavColor}
           />
         }

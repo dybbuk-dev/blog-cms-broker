@@ -52,7 +52,9 @@ function SelectFormItem(props) {
   );
 
   useEffect(() => {
-    register({ name });
+    if (!props.unregister) {
+      register({ name });
+    }
     handleSelect(value());
   }, [register, name]);
 
