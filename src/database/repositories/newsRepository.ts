@@ -167,6 +167,8 @@ class NewsRepository {
         news_image == null ? '' : news_image.link,
       teaser_title:
         news_image == null ? '' : news_image.link_title,
+      teaser_upload:
+        news_image == null ? '' : news_image.filename,
     };
 
     if (!record) {

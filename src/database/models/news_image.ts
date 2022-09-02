@@ -42,7 +42,7 @@ export default function (sequelize) {
         },
       },
       width: {
-        type: DataTypes.INTEGER(),
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
         validate: {

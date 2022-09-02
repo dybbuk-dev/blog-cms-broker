@@ -71,6 +71,14 @@ function NewsView(props) {
             <Grid item md={12} xs={12}>
               <TextViewItem
                 label={i18n(
+                  'entities.news.fields.teaser_upload',
+                )}
+                value={record.teaser_upload}
+              />
+            </Grid>
+            <Grid item md={12} xs={12}>
+              <TextViewItem
+                label={i18n(
                   'entities.news.fields.teaser_link',
                 )}
                 value={record.teaser_link}

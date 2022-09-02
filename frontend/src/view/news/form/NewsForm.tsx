@@ -68,6 +68,18 @@ const schema = yup.object().shape({
     i18n('entities.news.fields.teaser'),
     {},
   ),
+  teaser_upload: yupFormSchemas.string(
+    i18n('entities.news.fields.teaser_upload'),
+    {},
+  ),
+  teaser_link: yupFormSchemas.string(
+    i18n('entites.news.fields.teaser_link'),
+    {},
+  ),
+  teaser_title: yupFormSchemas.string(
+    i18n('entites.news.fields.teaser_title'),
+    {},
+  ),
   body: yupFormSchemas.string(
     i18n('entities.news.fields.body'),
     {
@@ -106,6 +118,7 @@ function NewsForm(props) {
       name: record.name,
       title: record.title,
       teaser: record.teaser,
+      teaser_upload: record.teaser_upload,
       teaser_link: record.teaser_link,
       teaser_title: record.teaser_title,
       body: record.body,
@@ -202,6 +215,15 @@ function NewsForm(props) {
           </MDBox>
           <MDBox p={3}>
             <Grid spacing={2} container>
+              <Grid item md={12} xs={12}>
+                <InputFormItem
+                  name="teaser_upload"
+                  label={i18n(
+                    'entities.news.fields.teaser_upload',
+                  )}
+                  variant="standard"
+                />
+              </Grid>
               <Grid item md={12} xs={12}>
                 <InputFormItem
                   name="teaser_link"

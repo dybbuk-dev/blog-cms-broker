@@ -10,7 +10,7 @@ import { orderByUtils } from '../utils/orderByUtils';
 const Op = Sequelize.Op;
 
 class NewsImageRepository {
-  static ALL_FIELDS = ['teaser_link', 'teaser_title'];
+  static ALL_FIELDS = [];
   static async create(
     created_id,
     data,
@@ -25,6 +25,11 @@ class NewsImageRepository {
         id: created_id,
         link: data.teaser_link ?? '',
         link_title: data.teaser_title ?? '',
+        filename: data.teaser_upload ?? '',
+        mimetype: '',
+        width: 0,
+        height: 0,
+        optimized: true,
         ip: '',
       },
       {
@@ -57,8 +62,13 @@ class NewsImageRepository {
     record = await record.update(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
-        link: data.teaser_link,
-        link_title: data.teaser_title,
+        link: data.teaser_link ?? '',
+        link_title: data.teaser_title ?? '',
+        filename: data.teaser_upload ?? '',
+        mimetype: '',
+        width: 0,
+        height: 0,
+        optimized: true,
         ip: '',
       },
       {
@@ -100,7 +110,12 @@ class NewsImageRepository {
         },
         transaction,
       });
-
+    if (record) {
+      record.dataValues = {
+        ...record.dataValues,
+        teaser_upload: record.dataValues.filename,
+      };
+    }
     if (!record) {
       throw new Error404();
     }
