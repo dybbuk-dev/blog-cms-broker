@@ -1,10 +1,12 @@
 import { Grid, InputAdornment } from '@mui/material';
 import { i18n } from 'src/i18n';
+import brokerEnumerators from 'src/modules/broker/brokerEnumerators';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import BrokerCheckboxFormInput from 'src/view/broker/form/components/BrokerCheckboxFormInput';
 import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
 import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
+import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import FieldSetViewItem from 'src/view/shared/view/FieldSetViewItem';
 
 function BrokerCharacteristicsForm(props) {
@@ -165,6 +167,71 @@ function BrokerCharacteristicsForm(props) {
         <BrokerCheckboxFormInput
           {...props}
           name="office_in_germany"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <BrokerCheckboxFormInput
+          {...props}
+          name="regulation_and_deposit_security"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <BrokerCheckboxFormInput
+          {...props}
+          name="segregated_accounts"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <InputFormItem
+          name="minimum_deposit"
+          label={i18n(
+            'entities.broker.fields.minimum_deposit',
+          )}
+          variant="standard"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <BrokerCheckboxFormInput {...props} name="bonus" />
+      </Grid>
+      <Grid item xs={12}>
+        <BrokerCheckboxFormInput
+          {...props}
+          name="account_currencies"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <BrokerCheckboxFormInput
+          {...props}
+          name="posibilities_for_withdrawals"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <BrokerCheckboxFormInput
+          {...props}
+          name="reserve_liabiliry"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <BrokerCheckboxFormInput
+          {...props}
+          name="interest_on_deposit"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <SelectFormItem
+          name="withholding_tax"
+          label={i18n(
+            'entities.broker.fields.withholding_tax',
+          )}
+          options={brokerEnumerators.meta.withholding_tax.map(
+            (value) => ({
+              value,
+              label: i18n(
+                `entities.broker.enumerators.meta.withholding_tax.${value}`,
+              ),
+            }),
+          )}
+          variant="standard"
         />
       </Grid>
     </Grid>

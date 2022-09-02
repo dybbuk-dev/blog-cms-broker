@@ -223,7 +223,7 @@ const en = {
         demo_url: 'Demo account',
         account_url: 'Live Account',
         maximum_leverage: 'Maximum Leverage',
-        minimum_deposit: 'minimum_deposit',
+        minimum_deposit: 'Minimum Deposit',
         minimum_deposit_short:
           'Minimum deposit (short for overview)',
         custodian_fees: 'Custody Fees',
@@ -387,16 +387,19 @@ const en = {
             'minimal_ordersize_stocks',
           company: 'company',
           office_in_germany: 'Office in Germany',
-          bonus: 'bonus',
+          bonus: 'Bonus',
           regulation_and_deposit_security:
-            'regulation_and_deposit_security',
-          reserve_liabiliry: 'reserve_liabiliry',
-          interest_on_deposit: 'interest_on_deposit',
+            'Regulation And Deposit Insurance',
+          reserve_liabiliry:
+            'Obligation to make additional payments',
+          interest_on_deposit:
+            'Interest on account deposit',
           witholding_tax: 'witholding_tax',
-          segregated_accounts: 'segregated_accounts',
-          account_currencies: 'account_currencies',
+          segregated_accounts:
+            'Customer funds separated (segregated accounts)',
+          account_currencies: 'Account Currencies',
           posibilities_for_withdrawals:
-            'posibilities_for_withdrawals',
+            'Opportunities for deposits and withdrawals',
         },
         // #endregion
       },
@@ -432,6 +435,12 @@ const en = {
               'Market Maker / STP Broker',
             BITCOIN_EXCHANGE:
               'Exchange for bitcoin and cryptocurrencies',
+          },
+          withholding_tax: {
+            WITHHOLDING_TAX_1:
+              'Withheld directly by the broker',
+            WITHHOLDING_TAX_2:
+              'Must be paid by the customer himself',
           },
         },
         checkbox: {

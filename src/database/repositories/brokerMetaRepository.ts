@@ -46,10 +46,23 @@ class BrokerMetaRepository {
     'BITCOIN_EXCHANGE',
   ];
 
+  static WITHHOLDING_TAXES = [
+    null,
+    'WITHHOLDING_TAX_1',
+    'WITHHOLDING_TAX_2',
+  ];
+
   static _getBrokerTypeIndex(type) {
     return SequelizeArrayUtils.valueToIndex(
       type,
       this.BROKER_TYPES,
+    );
+  }
+
+  static _getWithHoldingTax(type) {
+    return SequelizeArrayUtils.valueToIndex(
+      type,
+      this.WITHHOLDING_TAXES,
     );
   }
 
@@ -60,6 +73,9 @@ class BrokerMetaRepository {
       maximum_leverage: data.maximum_leverage ?? '',
       minimum_deposit_short:
         data.minimum_deposit_short ?? '',
+      withholding_tax: this._getWithHoldingTax(
+        data.withholding_tax,
+      ),
       broker_type: this._getBrokerTypeIndex(
         data.broker_type,
       ),
