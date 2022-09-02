@@ -3,6 +3,7 @@ import { i18n } from 'src/i18n';
 import brokerEnumerators from 'src/modules/broker/brokerEnumerators';
 import BrokerCheckboxFormInput from 'src/view/broker/form/components/BrokerCheckboxFormInput';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
+import FieldSetViewItem from 'src/view/shared/view/FieldSetViewItem';
 
 function BrokerPlatformForm(props) {
   const { record } = props;
@@ -93,20 +94,26 @@ function BrokerPlatformForm(props) {
         />
       </Grid>
       <Grid item xs={12}>
-        <SelectFormItem
-          name="order_types"
+        <FieldSetViewItem
           label={i18n('entities.broker.fields.order_types')}
-          options={brokerEnumerators.order_type.type.map(
-            (value) => ({
-              value,
-              label: i18n(
-                `entities.broker.enumerators.order_type.type.${value}`,
-              ),
-            }),
-          )}
-          variant="standard"
-          mode="multiple"
-        />
+        >
+          <SelectFormItem
+            name="order_types"
+            label={i18n(
+              'entities.broker.fields.order_types',
+            )}
+            options={brokerEnumerators.order_type.type.map(
+              (value) => ({
+                value,
+                label: i18n(
+                  `entities.broker.enumerators.order_type.type.${value}`,
+                ),
+              }),
+            )}
+            variant="standard"
+            mode="multiple"
+          />
+        </FieldSetViewItem>
       </Grid>
       <Grid item xs={12}>
         <BrokerCheckboxFormInput

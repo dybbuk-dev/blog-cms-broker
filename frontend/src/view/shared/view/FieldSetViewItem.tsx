@@ -17,7 +17,7 @@ function FieldSetViewItem(props) {
                 alignItems="center"
               >
                 <MDTypography
-                  variant="h5"
+                  variant="h6"
                   color="text"
                   textTransform="capitalize"
                   mr={2}

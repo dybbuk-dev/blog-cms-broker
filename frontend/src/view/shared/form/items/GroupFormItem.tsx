@@ -115,11 +115,11 @@ function GroupFormItem(props) {
   const [curValue, setCurValue] = useState(originalValue);
 
   const updateGroupValue = (newValue) => {
-    setCurValue(newValue);
     setValue(realGroupName, newValue, {
       shouldValidate: true,
       shouldDirty: true,
     });
+    setCurValue(newValue);
   };
 
   useEffect(() => {
@@ -160,9 +160,10 @@ function GroupFormItem(props) {
   };
 
   const clearGroupValue = (index) => {
-    const newValue = [...curValue];
-    newValue.splice(index, 1);
-    updateGroupValue(newValue);
+    updateGroupValue([
+      ...curValue.slice(0, index),
+      ...curValue.slice(index + 1),
+    ]);
   };
 
   const onChange = ({ name, index, args }) => {
@@ -197,7 +198,7 @@ function GroupFormItem(props) {
                 </MDBox>
                 {label && (
                   <MDTypography
-                    variant="h5"
+                    variant="h6"
                     color="text"
                     textTransform="capitalize"
                   >
