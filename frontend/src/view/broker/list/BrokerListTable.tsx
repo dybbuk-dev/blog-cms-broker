@@ -255,7 +255,7 @@ function BrokerListTable(props) {
                       display="flex"
                       justifyContent="flex-end"
                     >
-                      <Tooltip title={i18n('common.view')}>
+                      {/* <Tooltip title={i18n('common.view')}>
                         <IconButton
                           component={Link}
                           color={sidenavColor}
@@ -263,7 +263,7 @@ function BrokerListTable(props) {
                         >
                           <SearchIcon />
                         </IconButton>
-                      </Tooltip>
+                      </Tooltip> */}
                       {hasPermissionToEdit && (
                         <Tooltip
                           title={i18n('common.edit')}
