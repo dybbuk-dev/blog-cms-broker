@@ -402,6 +402,69 @@ const en = {
       },
     },
 
+    news: {
+      name: 'news',
+      label: 'News',
+      menu: 'News',
+      exporterFileName: 'news_export',
+      list: {
+        menu: 'News',
+        title: 'News',
+      },
+      create: {
+        success: 'News successfully saved',
+      },
+      update: {
+        success: 'News successfully saved',
+      },
+      destroy: {
+        success: 'News successfully deleted',
+      },
+      destroyAll: {
+        success: 'News(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit News',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        link: 'Link',
+        meta_description: 'Meta Description',
+        meta_keywords: 'Meta Keywords',
+        name: 'Surname',
+        title: 'Title',
+        teaser: 'Teaser',
+        body: 'Body',
+        target: 'Target',
+        teaser_link: 'Teaser link',
+        teaser_title: 'Teaser link title',
+        sort: 'Sort',
+        activated: 'Activated',
+        pdf: 'PDF',
+        frontpage: 'Front Page',
+        created: 'Created',
+      },
+      enumerators: {
+        target: {
+          _blank: 'New Window',
+        },
+      },
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New News',
+      },
+      view: {
+        title: 'View News',
+      },
+      importer: {
+        title: 'Import News',
+        fileName: 'news_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
+
     trackingParameter: {
       name: 'trackingParameter',
       label: 'All Tracking Parameters',

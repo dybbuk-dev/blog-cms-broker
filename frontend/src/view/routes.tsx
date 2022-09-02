@@ -560,6 +560,58 @@ const privateRoutes = [
   // #endregion
 
   // #endregion
+
+  // #region news
+  {
+    path: '/news',
+    collapseName: 'news',
+    i18n: 'entities.news.menu',
+    parent: '/',
+    loader: () => import('src/view/news/list/NewsListPage'),
+    permissionRequired: permissions.newsRead,
+    exact: true,
+  },
+  {
+    path: '/news/new',
+    collapseName: 'news',
+    i18n: 'entities.news.new.title',
+    parent: '/news',
+    loader: () => import('src/view/news/form/NewsFormPage'),
+    permissionRequired: permissions.newsCreate,
+    exact: true,
+  },
+
+  {
+    path: '/news/importer',
+    collapseName: 'news',
+    i18n: 'entities.news.importer.title',
+    parent: '/news',
+    loader: () =>
+      import('src/view/news/importer/NewsImporterPage'),
+    permissionRequired: permissions.newsImport,
+    exact: true,
+  },
+
+  {
+    path: '/news/:id/edit',
+    collapseName: 'news',
+    i18n: 'entities.news.edit.title',
+    parent: '/news',
+    loader: () => import('src/view/news/form/NewsFormPage'),
+    permissionRequired: permissions.newsEdit,
+    exact: true,
+  },
+
+  {
+    path: '/news/:id',
+    collapseName: 'news',
+    i18n: 'entities.news.view.title',
+    parent: '/news',
+    loader: () => import('src/view/news/view/NewsViewPage'),
+    permissionRequired: permissions.newsRead,
+    exact: true,
+  },
+  // #endregion
 ].filter(Boolean);
 
 const publicRoutes = [
