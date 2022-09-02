@@ -639,7 +639,7 @@ const privateRoutes = [
     path: '/promotion/new',
     collapseName: 'promotion',
     i18n: 'entities.promotion.new.title',
-    parent: '/promotions',
+    parent: '/promotion',
     loader: () =>
       import('src/view/promotion/form/PromotionFormPage'),
     permissionRequired: permissions.promotionCreate,
@@ -650,7 +650,7 @@ const privateRoutes = [
     path: '/promotion/importer',
     collapseName: 'promotion',
     i18n: 'entities.promotion.importer.title',
-    parent: '/promotions',
+    parent: '/promotion',
     loader: () =>
       import(
         'src/view/promotion/importer/PromotionImporterPage'
@@ -663,7 +663,7 @@ const privateRoutes = [
     path: '/promotion/:id/edit',
     collapseName: 'promotion',
     i18n: 'entities.promotion.edit.title',
-    parent: '/promotions',
+    parent: '/promotion',
     loader: () =>
       import('src/view/promotion/form/PromotionFormPage'),
     permissionRequired: permissions.promotionEdit,
@@ -674,7 +674,7 @@ const privateRoutes = [
     path: '/promotion/:id',
     collapseName: 'promotion',
     i18n: 'entities.promotion.view.title',
-    parent: '/promotions',
+    parent: '/promotion',
     loader: () =>
       import('src/view/promotion/view/PromotionViewPage'),
     permissionRequired: permissions.promotionRead,
