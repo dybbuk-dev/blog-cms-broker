@@ -38,6 +38,8 @@ function GroupInputFormItem(props) {
       });
   };
 
+  const extraProps = { ...rest, forceValue: true };
+
   return (
     <Grid xl={xl} lg={lg} md={md} sm={sm} xs={xs} item>
       <GroupInput
@@ -48,7 +50,7 @@ function GroupInputFormItem(props) {
         value={value}
         variant={variant}
         onChange={onGroupInputChange}
-        {...rest}
+        {...extraProps}
       />
     </Grid>
   );
@@ -116,11 +118,11 @@ function GroupFormItem(props) {
   const [curValue, setCurValue] = useState(originalValue);
 
   const updateGroupValue = (newValue) => {
+    setCurValue(newValue);
     setValue(realGroupName, newValue, {
       shouldValidate: false,
       shouldDirty: true,
     });
-    setCurValue(newValue);
   };
 
   useEffect(() => {

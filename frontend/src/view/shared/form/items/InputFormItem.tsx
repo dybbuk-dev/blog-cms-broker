@@ -93,7 +93,7 @@ export function InputFormItem(props) {
           name,
         }}
         disabled={disabled}
-        value={curValue}
+        value={props.forceValue ? value : curValue}
       />
       {errorMessage && (
         <MDBox mt={0.75}>

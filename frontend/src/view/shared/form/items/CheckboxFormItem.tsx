@@ -60,7 +60,9 @@ export function CheckboxFormItem(props) {
           <Switch
             id={name}
             name={name}
-            checked={checked}
+            checked={
+              props.forceValue ? props.value : checked
+            }
             onChange={(e) => {
               setChecked(Boolean(e.target.checked));
               setValue(name, Boolean(e.target.checked), {

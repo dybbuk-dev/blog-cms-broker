@@ -65,7 +65,6 @@ function AutocompleteInMemoryFormItem(props) {
 
   useEffect(() => {
     register({ name });
-    handleSelect(value());
   }, [register, name]);
 
   useEffect(() => {

@@ -49,17 +49,19 @@ function SelectFormItem(props) {
 
   const originalValue = defaultValues[name];
 
-  const [realValue, setRealValue] = useState(
+  const [curValue, setCurValue] = useState(
     defaultValue || originalValue,
   );
 
   useEffect(() => {
     register({ name });
-    handleSelect(value());
   }, [register, name]);
 
   const value = () => {
     const { mode } = props;
+    const realValue = props.forceValue
+      ? defaultValue
+      : curValue;
     if (mode === 'multiple') {
       return valueMultiple(realValue);
     } else {
@@ -81,8 +83,9 @@ function SelectFormItem(props) {
     const { options } = props;
 
     if (value != null) {
-      return options.find(
-        (option) => option.value === value,
+      return (
+        options.find((option) => option.value === value) ||
+        null
       );
     }
 
@@ -100,7 +103,7 @@ function SelectFormItem(props) {
 
   const handleSelectMultiple = (values) => {
     if (!values) {
-      setRealValue([]);
+      setCurValue([]);
       setValue(name, [], {
         shouldValidate: false,
         shouldDirty: true,
@@ -113,7 +116,7 @@ function SelectFormItem(props) {
       .map((data) => (data ? data.value : data))
       .filter((value) => value != null);
 
-    setRealValue(newValue);
+    setCurValue(newValue);
     setValue(name, newValue, {
       shouldValidate: false,
       shouldDirty: true,
@@ -123,7 +126,7 @@ function SelectFormItem(props) {
 
   const handleSelectOne = (data) => {
     if (!data) {
-      setRealValue(null);
+      setCurValue(null);
       setValue(name, null, {
         shouldValidate: false,
         shouldDirty: true,
@@ -132,7 +135,7 @@ function SelectFormItem(props) {
       return;
     }
 
-    setRealValue(data.value);
+    setCurValue(data.value);
     setValue(name, data.value, {
       shouldValidate: false,
       shouldDirty: true,
