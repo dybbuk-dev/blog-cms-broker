@@ -1,7 +1,7 @@
 import CloseIcon from '@mui/icons-material/Close';
 import SaveIcon from '@mui/icons-material/Save';
 import UndoIcon from '@mui/icons-material/Undo';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { i18n } from 'src/i18n';
 import FormWrapper, {
   FormButtons,
@@ -18,6 +18,11 @@ import BrokerTabs from 'src/view/broker/BrokerTabs';
 import BrokerOverviewForm from 'src/view/broker/form/components/BrokerOverviewForm';
 import BrokerCharacteristicsForm from 'src/view/broker/form/components/BrokerCharacteristicsForm';
 import BrokerPlatformForm from 'src/view/broker/form/components/BrokerPlatformForm';
+import BrokerMarketsForm from 'src/view/broker/form/components/BrokerMarketsForm';
+import BrokerSpreadsForm from 'src/view/broker/form/components/BrokerSpreadsForm';
+import BrokerServiceForm from 'src/view/broker/form/components/BrokerServiceForm';
+import BrokerTestForm from 'src/view/broker/form/components/BrokerTestForm';
+import BrokerOldForm from 'src/view/broker/form/components/BrokerOldForm';
 
 function BrokerForm(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -176,19 +181,19 @@ function BrokerForm(props) {
               <BrokerPlatformForm {...props} />
             </TabPanel>
             <TabPanel value={tabValue} index={4}>
-              Markets
+              <BrokerMarketsForm {...props} />
             </TabPanel>
             <TabPanel value={tabValue} index={5}>
-              Spreads
+              <BrokerSpreadsForm {...props} />
             </TabPanel>
             <TabPanel value={tabValue} index={6}>
-              Service
+              <BrokerServiceForm {...props} />
             </TabPanel>
             <TabPanel value={tabValue} index={7}>
-              Test
+              <BrokerTestForm {...props} />
             </TabPanel>
             <TabPanel value={tabValue} index={8}>
-              Old
+              <BrokerOldForm {...props} />
             </TabPanel>
           </MDBox>
           <FormButtons

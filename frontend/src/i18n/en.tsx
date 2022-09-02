@@ -372,30 +372,31 @@ const en = {
           german_seminar: 'german_seminar',
           coachings_available: 'coachings_available',
           knowledge_base: 'knowledge_base',
-          tradeable_markets: 'tradeable_markets',
-          margin: 'margin',
-          managed_accounts: 'managed_accounts',
-          instant_execution: 'instant_execution',
+          tradeable_markets: 'Tradeable Markets',
+          margin: 'Leverage/Margin',
+          managed_accounts: 'Managed Accounts',
+          instant_execution:
+            'Instant execution (no requotes)',
           positive_slippage_possible:
-            'positive_slippage_possible',
-          ecn_order_execution: 'ecn_order_execution',
-          liquidity_prodiver: 'liquidity_prodiver',
-          micro_lots: 'micro_lots',
+            'Positive Slippage Possible',
+          ecn_order_execution: 'ECN Order Execution',
+          liquidity_prodiver: 'Liquidity Provider',
+          micro_lots: 'Mini or micro lots possible',
           index_cfd_tradeable_below_point:
-            'index_cfd_tradeable_below_point',
+            'Index CFDs tradable from €1 or less per point',
           rate_switch_24_5_index_cfd:
-            'rate_switch_24_5_index_cfd',
+            '24/5 quotes on index CFDs',
           no_financial_cost_index_cfd:
-            'no_financial_cost_index_cfd',
+            'No Financing Costs on Index CFDs',
           no_financial_cost_raw_material_cfd:
-            'no_financial_cost_raw_material_cfd',
+            'No Financing Costs on Commodity CFDs',
           cfd_contracts_automatic_roll:
-            'cfd_contracts_automatic_roll',
+            'CFD contracts are automatically rolled',
           real_stocks_cfd_spreads:
-            'real_stocks_cfd_spreads',
-          dma_stocks: 'dma_stocks',
+            'Listed shares CFD spreads',
+          dma_stocks: 'DMA share CFDs',
           minimal_ordersize_stocks:
-            'minimal_ordersize_stocks',
+            'Minimum order size Share CFDs',
           company: 'company',
           office_in_germany: 'Office in Germany',
           bonus: 'Bonus',

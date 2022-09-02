@@ -68,6 +68,7 @@ function BrokerCheckboxFormInput(props) {
                 defaultValue: '',
               },
             ]}
+            noContainer
           />
         </Grid>
       </Grid>
