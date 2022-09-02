@@ -26,9 +26,11 @@ function HtmlEditorFormItem({
     setValue,
     errors,
     formState: { touched, isSubmitted },
-    watch,
+    control: { defaultValuesRef },
     register,
   } = useFormContext();
+
+  const defaultValues = defaultValuesRef.current || {};
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -40,21 +42,26 @@ function HtmlEditorFormItem({
 
   const { darkMode } = selectMuiSettings();
 
-  const [editorValue, setEditorValue] = useState(
-    value || watch(name) || '',
+  const [originalValue, setOriginalValue] = useState(
+    defaultValues[name] || '',
   );
 
-  useEffect(() => {
-    register({ name });
-  }, [register, name]);
-
-  const onChangeEditor = (newVal) => {
-    setEditorValue(newVal);
-    const isEmpty = $(newVal).text().trim() === '';
-    setValue(name, isEmpty ? '' : newVal, {
+  const updateValue = (value) => {
+    setOriginalValue(value);
+    setValue(name, value, {
       shouldValidate: true,
       shouldDirty: true,
     });
+  };
+
+  useEffect(() => {
+    register({ name });
+    updateValue(value || originalValue);
+  }, [register, name]);
+
+  const onChangeEditor = (newVal) => {
+    const isEmpty = $(newVal).text().trim() === '';
+    updateValue(isEmpty ? '' : newVal);
   };
 
   return (
@@ -76,8 +83,9 @@ function HtmlEditorFormItem({
       >
         {`${label}${required ? ' *' : ''}`}
       </MDTypography>
+
       <MDEditor
-        value={editorValue}
+        value={originalValue}
         onChange={onChangeEditor}
         modules={{
           toolbar: [

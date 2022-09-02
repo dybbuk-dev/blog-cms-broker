@@ -78,7 +78,14 @@ function GroupFormItem(props) {
     groupInputTemplates,
     label,
     name: groupName,
+    namePrefix,
+    nameSuffix,
+    valueAttr,
   } = props;
+
+  const realGroupName = [namePrefix, groupName, nameSuffix]
+    .filter(Boolean)
+    .join('');
 
   const defaultValue = {};
 
@@ -88,23 +95,37 @@ function GroupFormItem(props) {
     },
   );
 
-  const { register, setValue, watch } = useFormContext();
+  const {
+    register,
+    setValue,
+    control: { defaultValuesRef },
+  } = useFormContext();
 
-  const originalValue = watch(groupName) || [];
+  const defaultValues = defaultValuesRef.current || {};
 
-  useEffect(() => {
-    register({ name: groupName });
-  }, [register, groupName]);
+  const valueContainer = valueAttr
+    ? defaultValues[valueAttr]
+    : null;
+
+  const originalValue =
+    defaultValues[realGroupName] ||
+    (valueContainer && valueContainer[groupName]) ||
+    [];
 
   const [curValue, setCurValue] = useState(originalValue);
 
   const updateGroupValue = (newValue) => {
     setCurValue(newValue);
-    setValue(groupName, newValue, {
+    setValue(realGroupName, newValue, {
       shouldValidate: true,
       shouldDirty: true,
     });
   };
+
+  useEffect(() => {
+    register({ name: realGroupName });
+    updateGroupValue(originalValue);
+  }, [register, realGroupName]);
 
   const addNewGroupValue = (index) => {
     updateGroupValue([
@@ -147,8 +168,9 @@ function GroupFormItem(props) {
     if (!args || args.length === 0) {
       return;
     }
-    curValue[index][name] = args[0];
-    updateGroupValue(curValue);
+    const newValue = [...curValue];
+    newValue[index][name] = args[0];
+    updateGroupValue(newValue);
   };
 
   return (
@@ -290,6 +312,9 @@ GroupFormItem.propTypes = {
   groupInputTemplates: PropTypes.array.isRequired,
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
+  namePrefix: PropTypes.string,
+  nameSuffix: PropTypes.string,
+  valueAttr: PropTypes.string,
 };
 
 export default GroupFormItem;

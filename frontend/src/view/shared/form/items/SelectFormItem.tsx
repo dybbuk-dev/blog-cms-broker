@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { i18n } from 'src/i18n';
 import { useFormContext } from 'react-hook-form';
@@ -47,13 +47,17 @@ function SelectFormItem(props) {
 
   const originalValue = watch(name);
 
+  const [realValue, setRealValue] = useState(
+    defaultValue || originalValue,
+  );
+
   useEffect(() => {
     register({ name });
+    handleSelect(value());
   }, [register, name]);
 
   const value = () => {
     const { mode } = props;
-    const realValue = defaultValue || originalValue;
     if (mode === 'multiple') {
       return valueMultiple(realValue);
     } else {
@@ -94,6 +98,7 @@ function SelectFormItem(props) {
 
   const handleSelectMultiple = (values) => {
     if (!values) {
+      setRealValue([]);
       setValue(name, [], {
         shouldValidate: true,
         shouldDirty: true,
@@ -106,6 +111,7 @@ function SelectFormItem(props) {
       .map((data) => (data ? data.value : data))
       .filter((value) => value != null);
 
+    setRealValue(newValue);
     setValue(name, newValue, {
       shouldValidate: true,
       shouldDirty: true,
@@ -115,6 +121,7 @@ function SelectFormItem(props) {
 
   const handleSelectOne = (data) => {
     if (!data) {
+      setRealValue(null);
       setValue(name, null, {
         shouldValidate: true,
         shouldDirty: true,
@@ -123,6 +130,7 @@ function SelectFormItem(props) {
       return;
     }
 
+    setRealValue(data.value);
     setValue(name, data.value, {
       shouldValidate: true,
       shouldDirty: true,
