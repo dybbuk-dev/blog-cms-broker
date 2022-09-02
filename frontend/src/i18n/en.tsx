@@ -356,15 +356,17 @@ const en = {
             'Guaranteed stops and limit possible',
           phone_trade_possible:
             'Telephone trading possible',
-          commissions: 'commissions',
+          commissions: 'Commissions',
           important_market_spreads:
-            'important_market_spreads',
-          cost_for_overnight: 'cost_for_overnight',
+            'Spreads of major markets',
+          cost_for_overnight:
+            'Funding items for overnight positions',
           fees_for_deposit_disbursal:
-            'fees_for_deposit_disbursal',
-          free_orderchange: 'free_orderchange',
-          free_depot: 'free_depot',
-          no_platform_fees: 'no_platform_fees',
+            'Deposit and withdrawal fees',
+          free_orderchange:
+            'Free order changes or cancellations',
+          free_depot: 'Account management free of charge',
+          no_platform_fees: 'No fees for platform',
           german_support: 'german_support',
           contact: 'contact',
           daily_trade_help: 'daily_trade_help',
