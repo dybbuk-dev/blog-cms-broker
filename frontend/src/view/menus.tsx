@@ -73,6 +73,24 @@ const menus = [
   },
 
   {
+    name: i18n('collapses.promotion.menu'),
+    key: 'promotion',
+    icon: <Icon fontSize="medium">view_carousel</Icon>,
+    collapse: [
+      // {
+      //   path: '/openx',
+      //   permissionRequired: permissions.openxRead,
+      //   name: i18n('entities.openx.menu'),
+      // },
+      {
+        path: '/promotion',
+        permissionRequired: permissions.promotionRead,
+        name: i18n('entities.promotion.menu'),
+      },
+    ],
+  },
+
+  {
     path: '/news',
     name: i18n('entities.news.menu'),
     permissionRequired: permissions.newsRead,

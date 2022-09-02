@@ -612,6 +612,133 @@ const privateRoutes = [
     exact: true,
   },
   // #endregion
+
+  // #region Promotion
+  {
+    path: '/promotions',
+    collapseName: 'promotion',
+    i18n: 'collapses.promotion.menu',
+    parent: '/',
+    redirect: '/promotion',
+    permissionRequired: null,
+    virtual: true,
+  },
+
+  // #region Promotions
+  {
+    path: '/promotion',
+    collapseName: 'promotion',
+    i18n: 'entities.promotion.menu',
+    parent: '/promotions',
+    loader: () =>
+      import('src/view/promotion/list/PromotionListPage'),
+    permissionRequired: permissions.promotionRead,
+    exact: true,
+  },
+  {
+    path: '/promotion/new',
+    collapseName: 'promotion',
+    i18n: 'entities.promotion.new.title',
+    parent: '/promotions',
+    loader: () =>
+      import('src/view/promotion/form/PromotionFormPage'),
+    permissionRequired: permissions.promotionCreate,
+    exact: true,
+  },
+
+  {
+    path: '/promotion/importer',
+    collapseName: 'promotion',
+    i18n: 'entities.promotion.importer.title',
+    parent: '/promotions',
+    loader: () =>
+      import(
+        'src/view/promotion/importer/PromotionImporterPage'
+      ),
+    permissionRequired: permissions.promotionImport,
+    exact: true,
+  },
+
+  {
+    path: '/promotion/:id/edit',
+    collapseName: 'promotion',
+    i18n: 'entities.promotion.edit.title',
+    parent: '/promotions',
+    loader: () =>
+      import('src/view/promotion/form/PromotionFormPage'),
+    permissionRequired: permissions.promotionEdit,
+    exact: true,
+  },
+
+  {
+    path: '/promotion/:id',
+    collapseName: 'promotion',
+    i18n: 'entities.promotion.view.title',
+    parent: '/promotions',
+    loader: () =>
+      import('src/view/promotion/view/PromotionViewPage'),
+    permissionRequired: permissions.promotionRead,
+    exact: true,
+  },
+  // #endregion
+
+  // #region Openx banners
+  // {
+  //   path: '/openx',
+  //   collapseName: 'promotion',
+  //   i18n: 'entities.openx.menu',
+  //   parent: '/promotions',
+  //   loader: () =>
+  //     import('src/view/openx/list/OpenxListPage'),
+  //   permissionRequired: permissions.openxRead,
+  //   exact: true,
+  // },
+  // {
+  //   path: '/openx/new',
+  //   collapseName: 'promotion',
+  //   i18n: 'entities.openx.new.title',
+  //   parent: '/promotions',
+  //   loader: () =>
+  //     import('src/view/openx/form/OpenxFormPage'),
+  //   permissionRequired: permissions.openxCreate,
+  //   exact: true,
+  // },
+
+  // {
+  //   path: '/openx/importer',
+  //   collapseName: 'promotion',
+  //   i18n: 'entities.openx.importer.title',
+  //   parent: '/promotions',
+  //   loader: () =>
+  //     import('src/view/openx/importer/OpenxImporterPage'),
+  //   permissionRequired: permissions.openxImport,
+  //   exact: true,
+  // },
+
+  // {
+  //   path: '/openx/:id/edit',
+  //   collapseName: 'promotion',
+  //   i18n: 'entities.openx.edit.title',
+  //   parent: '/promotions',
+  //   loader: () =>
+  //     import('src/view/openx/form/OpenxFormPage'),
+  //   permissionRequired: permissions.openxEdit,
+  //   exact: true,
+  // },
+
+  // {
+  //   path: '/openx/:id',
+  //   collapseName: 'promotion',
+  //   i18n: 'entities.openx.view.title',
+  //   parent: '/promotions',
+  //   loader: () =>
+  //     import('src/view/openx/view/OpenxViewPage'),
+  //   permissionRequired: permissions.openxRead,
+  //   exact: true,
+  // },
+  // #endregion
+
+  // #endregion
 ].filter(Boolean);
 
 const publicRoutes = [

@@ -9,23 +9,16 @@ import { orderByUtils } from '../utils/orderByUtils';
 
 const Op = Sequelize.Op;
 
-class NewsImageRepository {
-  static ALL_FIELDS = [];
-  static async create(
-    created_id,
-    data,
-    options: IRepositoryOptions,
-  ) {
+class PromotionRepository {
+  static ALL_FIELDS = ['name', 'link', 'activated'];
+  static async create(data, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    const record = await options.database.news_image.create(
+    const record = await options.database.promotion.create(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
-        id: created_id,
-        link: data.teaser_link ?? '',
-        link_title: data.teaser_title ?? '',
-        filename: data.teaser_upload ?? '',
+        filename: data.uploadfile ?? '',
         mimetype: '',
         width: 0,
         height: 0,
@@ -35,6 +28,13 @@ class NewsImageRepository {
       {
         transaction,
       },
+    );
+
+    await this._createAuditLog(
+      AuditLogRepository.CREATE,
+      record,
+      data,
+      options,
     );
 
     return this.findById(record.id, options);
@@ -48,7 +48,7 @@ class NewsImageRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    let record = await options.database.news_image.findOne({
+    let record = await options.database.promotion.findOne({
       where: {
         id,
       },
@@ -62,9 +62,7 @@ class NewsImageRepository {
     record = await record.update(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
-        link: data.teaser_link ?? '',
-        link_title: data.teaser_title ?? '',
-        filename: data.teaser_upload ?? '',
+        filename: data.uploadfile ?? '',
         mimetype: '',
         width: 0,
         height: 0,
@@ -76,6 +74,13 @@ class NewsImageRepository {
       },
     );
 
+    await this._createAuditLog(
+      AuditLogRepository.UPDATE,
+      record,
+      data,
+      options,
+    );
+
     return this.findById(record.id, options);
   }
 
@@ -83,7 +88,7 @@ class NewsImageRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    let record = await options.database.news_image.findOne({
+    let record = await options.database.promotion.findOne({
       where: {
         id,
       },
@@ -97,25 +102,41 @@ class NewsImageRepository {
     await record.destroy({
       transaction,
     });
+
+    await this._createAuditLog(
+      AuditLogRepository.DELETE,
+      record,
+      record,
+      options,
+    );
   }
 
   static async findById(id, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
-
-    const record =
-      await options.database.news_image.findOne({
+    const include = [
+      // {
+      //   model: options.database.news,
+      //   as: 'parent',
+      // },
+    ];
+    const record = await options.database.promotion.findOne(
+      {
         where: {
           id,
         },
+        include,
         transaction,
-      });
+      },
+    );
+
     if (record) {
       record.dataValues = {
         ...record.dataValues,
-        teaser_upload: record.dataValues.filename,
+        uploadfile: record.dataValues.filename,
       };
     }
+
     if (!record) {
       throw new Error404();
     }
@@ -149,7 +170,7 @@ class NewsImageRepository {
     };
 
     const records =
-      await options.database.news_image.findAll({
+      await options.database.promotion.findAll({
         attributes: ['id'],
         where,
       });
@@ -161,7 +182,7 @@ class NewsImageRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    return options.database.news_image.count({
+    return options.database.promotion.count({
       where: {
         ...filter,
       },
@@ -204,25 +225,38 @@ class NewsImageRepository {
         }
       }
 
-      ['link', 'link_title', 'filename'].forEach(
-        (field) => {
-          if (filter[field]) {
-            whereAnd.push(
-              SequelizeFilterUtils.ilikeIncludes(
-                'news_image',
-                field,
-                filter[field],
-              ),
-            );
-          }
-        },
-      );
+      ['name', 'link'].forEach((field) => {
+        if (filter[field]) {
+          whereAnd.push(
+            SequelizeFilterUtils.ilikeIncludes(
+              'promotion',
+              field,
+              filter[field],
+            ),
+          );
+        }
+      });
+
+      ['activated'].forEach((field) => {
+        if (
+          filter[field] === true ||
+          filter[field] === 'true' ||
+          filter[field] === false ||
+          filter[field] === 'false'
+        ) {
+          whereAnd.push({
+            [field]:
+              filter[field] === true ||
+              filter[field] === 'true',
+          });
+        }
+      });
     }
 
     const where = { [Op.and]: whereAnd };
 
     let { rows, count } =
-      await options.database.news_image.findAndCountAll({
+      await options.database.promotion.findAndCountAll({
         where,
         limit: limit ? Number(limit) : undefined,
         offset: offset ? Number(offset) : undefined,
@@ -254,8 +288,8 @@ class NewsImageRepository {
           { ['id']: query },
           {
             [Op.and]: SequelizeFilterUtils.ilikeIncludes(
-              'news_image',
-              'description',
+              'promotion',
+              'name',
               query,
             ),
           },
@@ -266,8 +300,8 @@ class NewsImageRepository {
     const where = { [Op.and]: whereAnd };
 
     const records =
-      await options.database.news_image.findAll({
-        attributes: ['id', 'description'],
+      await options.database.promotion.findAll({
+        attributes: ['id', 'name'],
         where,
         limit: limit ? Number(limit) : undefined,
         order: [['id', 'ASC']],
@@ -275,7 +309,33 @@ class NewsImageRepository {
 
     return records.map((record) => ({
       id: record.id,
+      label: record.name,
     }));
+  }
+
+  static async _createAuditLog(
+    action,
+    record,
+    data,
+    options: IRepositoryOptions,
+  ) {
+    let values = {};
+
+    if (data) {
+      values = {
+        ...record.get({ plain: true }),
+      };
+    }
+
+    await AuditLogRepository.log(
+      {
+        entityName: 'promotion',
+        entityId: record.id,
+        action,
+        values,
+      },
+      options,
+    );
   }
 
   static async _fillWithRelationsAndFilesForRows(
@@ -310,4 +370,4 @@ class NewsImageRepository {
   }
 }
 
-export default NewsImageRepository;
+export default PromotionRepository;

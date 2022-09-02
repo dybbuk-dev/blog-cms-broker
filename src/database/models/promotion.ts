@@ -1,31 +1,46 @@
 import { DataTypes } from 'sequelize';
 
 export default function (sequelize) {
-  const news_image = sequelize.define(
-    'news_image',
+  const promotion = sequelize.define(
+    'promotion',
     {
       id: {
         type: DataTypes.BIGINT.UNSIGNED,
-        autoIncrement: false,
+        autoIncrement: true,
         primaryKey: true,
       },
-      filename: {
-        type: DataTypes.STRING(255),
+      sort: {
+        type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
-        defaultValue: '',
-        validate: {
-          len: [0, 255],
-        },
+        defaultValue: 0,
       },
       link: {
         type: DataTypes.STRING(255),
         allowNull: false,
         defaultValue: '',
         validate: {
+          notEmpty: true,
           len: [0, 255],
         },
       },
-      link_title: {
+      name: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+        defaultValue: '',
+        validate: {
+          notEmpty: true,
+          len: [0, 255],
+        },
+      },
+      target: {
+        type: DataTypes.STRING(15),
+        allowNull: false,
+        defaultValue: '',
+        validate: {
+          len: [0, 15],
+        },
+      },
+      filename: {
         type: DataTypes.STRING(255),
         allowNull: false,
         defaultValue: '',
@@ -42,22 +57,19 @@ export default function (sequelize) {
         },
       },
       width: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
-        defaultValue: 0,
-        validate: {
-          len: [0, 10],
-        },
       },
       height: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
-        defaultValue: 0,
-        validate: {
-          len: [0, 10],
-        },
       },
       optimized: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
+      },
+      activated: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: true,
@@ -81,18 +93,16 @@ export default function (sequelize) {
       },
     },
     {
-      indexes: [],
+      indexes: [
+        {
+          fields: ['activated'],
+          name: 'activated',
+        },
+      ],
       underscored: true,
       timestamps: false,
     },
   );
-  news_image.associate = (models) => {
-    models.news_image.belongsTo(models.news, {
-      constraints: true,
-      foreignKey: 'id',
-      onDelete: 'CASCADE',
-      onUpdate: 'CASCADE',
-    });
-  };
-  return news_image;
+  promotion.associate = (models) => {};
+  return promotion;
 }

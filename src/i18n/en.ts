@@ -135,6 +135,11 @@ const en = {
         unique: {},
       },
     },
+    promotion: {
+      errors: {
+        unique: {},
+      },
+    },
   },
 };
 
