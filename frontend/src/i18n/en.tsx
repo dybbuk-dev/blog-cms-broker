@@ -227,10 +227,10 @@ const en = {
         minimum_deposit_short:
           'Minimum deposit (short for overview)',
         custodian_fees: 'Custody Fees',
-        mobile_trading: 'Mobile trading',
-        phone_order: 'Telephone trading',
-        licensed_broker: 'licensed_broker',
-        withholding_tax: 'withholding_tax',
+        mobile_trading: 'Mobile Trading',
+        phone_order: 'Telephone Trading',
+        licensed_broker: 'Licensed Broker',
+        withholding_tax: 'Withholding Tax',
         scalping_allowed: 'Scalping Allowed',
         // #endregion
 

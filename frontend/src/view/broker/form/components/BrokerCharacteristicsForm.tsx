@@ -1,6 +1,7 @@
 import { Grid, InputAdornment } from '@mui/material';
 import { i18n } from 'src/i18n';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
 import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import FieldSetViewItem from 'src/view/shared/view/FieldSetViewItem';
@@ -150,6 +151,14 @@ function BrokerCharacteristicsForm(props) {
             }
           />
         </FieldSetViewItem>
+      </Grid>
+      <Grid item xs={12}>
+        <CheckboxFormItem
+          name="licensed_broker"
+          label={i18n(
+            'entities.broker.fields.licensed_broker',
+          )}
+        />
       </Grid>
     </Grid>
   );
