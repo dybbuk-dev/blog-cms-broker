@@ -10,6 +10,7 @@ import Spinner from 'src/view/shared/Spinner';
 import { Card } from '@mui/material';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
+import LazyLoad from 'react-lazy-load';
 
 function BrokerFormPage(props) {
   const [dispatched, setDispatched] = useState(false);
@@ -22,6 +23,8 @@ function BrokerFormPage(props) {
   const saveLoading = useSelector(
     selectors.selectSaveLoading,
   );
+  const [contentLoading, setContentLoading] =
+    useState(true);
   const record = useSelector(selectors.selectRecord);
 
   const isEditing = Boolean(match.params.id);
@@ -56,20 +59,44 @@ function BrokerFormPage(props) {
               {title}
             </MDTypography>
           </MDBox>
-          {initLoading && <Spinner />}
+          {(initLoading || contentLoading) && (
+            <MDBox display="block" pt={3}>
+              <Spinner />
+              <MDTypography
+                display="block"
+                variant="button"
+                fontWeight="regular"
+                textAlign="center"
+              >
+                {initLoading
+                  ? 'Loading Data...'
+                  : 'Loading Data is completed.'}
+                <br />
+                {contentLoading
+                  ? 'Preparing UI...'
+                  : 'Preparing UI is completed.'}
+              </MDTypography>
+            </MDBox>
+          )}
 
           {dispatched && !initLoading && (
             <MDBox p={3} pt={0}>
-              <BrokerForm
-                saveLoading={saveLoading}
-                initLoading={initLoading}
-                record={record}
-                isEditing={isEditing}
-                onSubmit={doSubmit}
-                onCancel={() =>
-                  getHistory().push('/broker')
-                }
-              />
+              <LazyLoad
+                onContentVisible={() => {
+                  setContentLoading(false);
+                }}
+              >
+                <BrokerForm
+                  saveLoading={saveLoading}
+                  initLoading={initLoading}
+                  record={record}
+                  isEditing={isEditing}
+                  onSubmit={doSubmit}
+                  onCancel={() =>
+                    getHistory().push('/broker')
+                  }
+                />
+              </LazyLoad>
             </MDBox>
           )}
         </MDBox>

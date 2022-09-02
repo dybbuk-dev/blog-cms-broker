@@ -1,4 +1,3 @@
-import LazyLoad from 'react-lazy-load';
 import MDBox from 'src/mui/components/MDBox';
 
 interface TabPanelProps {
@@ -12,7 +11,7 @@ function TabPanel(props: TabPanelProps) {
 
   return (
     <MDBox display={value === index ? 'block' : 'none'}>
-      <LazyLoad>{children}</LazyLoad>
+      {children}
     </MDBox>
   );
 }
