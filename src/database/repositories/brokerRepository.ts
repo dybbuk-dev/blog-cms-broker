@@ -87,6 +87,10 @@ class BrokerRepository {
         model: options.database.broker_email,
         as: 'email',
       },
+      !metaOnly && {
+        model: options.database.broker_address,
+        as: 'address',
+      },
     ].filter(Boolean);
   }
 

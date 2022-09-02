@@ -105,6 +105,10 @@ function BrokerForm(props) {
       // #region Broker Email
       email: record.email?.email,
       // #endregion
+
+      // #region Broker Address
+      address: record.address,
+      // #endregion
     };
   });
 

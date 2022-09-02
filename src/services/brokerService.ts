@@ -16,6 +16,7 @@ import BrokerFeatureRepository from '../database/repositories/brokerFeatureRepos
 import BrokerPhoneRepository from '../database/repositories/brokerPhoneRepository';
 import BrokerFaxRepository from '../database/repositories/brokerFaxRepository';
 import BrokerEmailRepository from '../database/repositories/brokerEmailRepository';
+import BrokerAddressRepository from '../database/repositories/brokerAddressRepository';
 
 export default class BrokerService {
   options: IServiceOptions;
@@ -296,6 +297,37 @@ export default class BrokerService {
   }
 
   /**
+   * ! Update Broker Address
+   */
+  async _updateBrokerAddress(id, data, transaction) {
+    const options = { ...this.options, transaction };
+    await BrokerAddressRepository.destroyByBroker(
+      id,
+      options,
+    );
+    const prefix = 'address_';
+    const address = {};
+    BrokerAddressRepository.ALL_FIELDS.forEach((field) => {
+      const realField = `${prefix}${field}`;
+      console.log(realField, data[realField]);
+      if (data[realField]) {
+        address[field] = data[realField];
+      }
+    });
+    const items = [address].filter(Boolean);
+    for (const item of items) {
+      await BrokerAddressRepository.create(
+        {
+          ...item,
+          broker: id,
+          ip: data.ip || '',
+        },
+        options,
+      );
+    }
+  }
+
+  /**
    * * Update Related Broker's Data
    */
   async _updateRelatedData(id, data, transaction) {
@@ -326,6 +358,7 @@ export default class BrokerService {
     await this._updateBrokerPhone(id, data, transaction);
     await this._updateBrokerFax(id, data, transaction);
     await this._updateBrokerEmail(id, data, transaction);
+    await this._updateBrokerAddress(id, data, transaction);
   }
 
   async create(data) {

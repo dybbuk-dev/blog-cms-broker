@@ -155,6 +155,11 @@ const en = {
         notEmpty: {},
       },
     },
+    broker_address: {
+      errors: {
+        notEmpty: {},
+      },
+    },
     author: {
       errors: {
         unique: {},

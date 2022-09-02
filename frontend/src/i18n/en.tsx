@@ -296,6 +296,18 @@ const en = {
         // #region Email
         email: 'Email',
         // #endregion
+
+        // #region Address
+        addresses: 'Contact',
+        address: {
+          line_0: 'Address 1st line',
+          line_1: 'Address 2nd line',
+          line_2: 'Address 3rd line',
+          line_3: 'Address 4th line',
+          line_4: 'Address 5th line',
+          line_5: 'Address 6th line',
+        },
+        // #endregion
       },
       tabs: {
         broker: 'Broker',

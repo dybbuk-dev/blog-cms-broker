@@ -139,6 +139,51 @@ const schema = yup.object().shape({
   ),
   // #endregion
 
+  // #region Address
+  address_line_0: yupFormSchemas.string(
+    i18n('entities.broker.fields.address.line_0'),
+    {
+      min: 0,
+      max: 255,
+    },
+  ),
+  address_line_1: yupFormSchemas.string(
+    i18n('entities.broker.fields.address.line_1'),
+    {
+      min: 0,
+      max: 255,
+    },
+  ),
+  address_line_2: yupFormSchemas.string(
+    i18n('entities.broker.fields.address.line_2'),
+    {
+      min: 0,
+      max: 255,
+    },
+  ),
+  address_line_3: yupFormSchemas.string(
+    i18n('entities.broker.fields.address.line_3'),
+    {
+      min: 0,
+      max: 255,
+    },
+  ),
+  address_line_4: yupFormSchemas.string(
+    i18n('entities.broker.fields.address.line_4'),
+    {
+      min: 0,
+      max: 255,
+    },
+  ),
+  address_line_5: yupFormSchemas.string(
+    i18n('entities.broker.fields.address.line_5'),
+    {
+      min: 0,
+      max: 255,
+    },
+  ),
+  // #endregion
+
   // #endregion
 });
 
