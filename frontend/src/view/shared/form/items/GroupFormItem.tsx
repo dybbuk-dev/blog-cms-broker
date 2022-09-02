@@ -82,6 +82,7 @@ function GroupFormItem(props) {
     namePrefix,
     nameSuffix,
     valueAttr,
+    noContainer,
   } = props;
 
   const realGroupName = [namePrefix, groupName, nameSuffix]
@@ -176,139 +177,142 @@ function GroupFormItem(props) {
     updateGroupValue(newValue);
   };
 
-  return (
-    <>
-      <Card>
-        <MDBox p={3}>
-          <Grid spacing={2} container>
-            <Grid xs={12} item>
-              <MDBox
-                display="flex"
-                justifyContent="flex-start"
-                alignItems="center"
-              >
-                <MDBox mr={2} whiteSpace="nowrap">
-                  <IconButton
-                    color={sidenavColor}
-                    onClick={() => {
-                      addNewGroupValue(-1);
-                    }}
-                  >
-                    <AddIcon />
-                  </IconButton>
-                </MDBox>
-                {label && (
-                  <MDTypography
-                    variant="h6"
-                    color="text"
-                    textTransform="capitalize"
-                  >
-                    {label}
-                  </MDTypography>
-                )}
-              </MDBox>
-            </Grid>
-            {curValue.map((val, idx, ary) => (
-              <Grid key={`group-row-${idx}`} xs={12} item>
-                <MDBox
-                  display="flex"
-                  justifyContent="flex-start"
-                  alignItems="center"
-                >
-                  <MDBox mr={2} whiteSpace="nowrap">
-                    <IconButton
-                      color={sidenavColor}
-                      onClick={() => {
-                        addNewGroupValue(idx);
-                      }}
-                    >
-                      <AddIcon />
-                    </IconButton>
-                    <IconButton
-                      color={sidenavColor}
-                      onClick={() => {
-                        moveUpGroupValue(idx);
-                      }}
-                    >
-                      <ArrowUpwardIcon />
-                    </IconButton>
-                    <IconButton
-                      color={sidenavColor}
-                      onClick={() => {
-                        moveDownGroupValue(idx);
-                      }}
-                    >
-                      <ArrowDownwardIcon />
-                    </IconButton>
-                    <IconButton
-                      color={sidenavColor}
-                      onClick={() => {
-                        clearGroupValue(idx);
-                      }}
-                    >
-                      <ClearIcon />
-                    </IconButton>
-                  </MDBox>
-                  <MDBox mr={2}>
-                    <MDTypography
-                      variant="button"
-                      color="text"
-                      fontWeight="regular"
-                    >
-                      {idx + 1}.
-                    </MDTypography>
-                  </MDBox>
-                  <MDBox width="100%">
-                    <Grid spacing={2} container>
-                      {groupInputTemplates.map(
-                        ({
-                          input,
-                          fullWidth,
-                          label,
-                          name,
-                          required,
-                          variant,
-                          xl,
-                          lg,
-                          md,
-                          sm,
-                          xs,
-                          ...rest
-                        }) => (
-                          <GroupInputFormItem
-                            key={`${idx}-${name}`}
-                            GroupInput={input}
-                            fullWidth={fullWidth}
-                            index={idx}
-                            label={label}
-                            name={name}
-                            required={required}
-                            value={val[name]}
-                            variant={variant || 'standard'}
-                            xl={xl}
-                            lg={lg}
-                            md={md}
-                            sm={sm}
-                            xs={xs}
-                            onChange={onChange}
-                            {...rest}
-                          />
-                        ),
-                      )}
-                    </Grid>
-                  </MDBox>
-                </MDBox>
-              </Grid>
-            ))}
-          </Grid>
+  const render = () => (
+    <Grid spacing={2} container>
+      <Grid xs={12} item>
+        <MDBox
+          display="flex"
+          justifyContent="flex-start"
+          alignItems="center"
+        >
+          <MDBox mr={2} whiteSpace="nowrap">
+            <IconButton
+              color={sidenavColor}
+              onClick={() => {
+                addNewGroupValue(-1);
+              }}
+            >
+              <AddIcon />
+            </IconButton>
+          </MDBox>
+          {label && (
+            <MDTypography
+              variant="h6"
+              color="text"
+              textTransform="capitalize"
+            >
+              {label}
+            </MDTypography>
+          )}
         </MDBox>
-      </Card>
-    </>
+      </Grid>
+      {curValue.map((val, idx, ary) => (
+        <Grid key={`group-row-${idx}`} xs={12} item>
+          <MDBox
+            display="flex"
+            justifyContent="flex-start"
+            alignItems="center"
+          >
+            <MDBox mr={2} whiteSpace="nowrap">
+              <IconButton
+                color={sidenavColor}
+                onClick={() => {
+                  addNewGroupValue(idx);
+                }}
+              >
+                <AddIcon />
+              </IconButton>
+              <IconButton
+                color={sidenavColor}
+                onClick={() => {
+                  moveUpGroupValue(idx);
+                }}
+              >
+                <ArrowUpwardIcon />
+              </IconButton>
+              <IconButton
+                color={sidenavColor}
+                onClick={() => {
+                  moveDownGroupValue(idx);
+                }}
+              >
+                <ArrowDownwardIcon />
+              </IconButton>
+              <IconButton
+                color={sidenavColor}
+                onClick={() => {
+                  clearGroupValue(idx);
+                }}
+              >
+                <ClearIcon />
+              </IconButton>
+            </MDBox>
+            <MDBox mr={2}>
+              <MDTypography
+                variant="button"
+                color="text"
+                fontWeight="regular"
+              >
+                {idx + 1}.
+              </MDTypography>
+            </MDBox>
+            <MDBox width="100%">
+              <Grid spacing={2} container>
+                {groupInputTemplates.map(
+                  ({
+                    input,
+                    fullWidth,
+                    label,
+                    name,
+                    required,
+                    variant,
+                    xl,
+                    lg,
+                    md,
+                    sm,
+                    xs,
+                    ...rest
+                  }) => (
+                    <GroupInputFormItem
+                      key={`${idx}-${name}`}
+                      GroupInput={input}
+                      fullWidth={fullWidth}
+                      index={idx}
+                      label={label}
+                      name={name}
+                      required={required}
+                      value={val[name]}
+                      variant={variant || 'standard'}
+                      xl={xl}
+                      lg={lg}
+                      md={md}
+                      sm={sm}
+                      xs={xs}
+                      onChange={onChange}
+                      {...rest}
+                    />
+                  ),
+                )}
+              </Grid>
+            </MDBox>
+          </MDBox>
+        </Grid>
+      ))}
+    </Grid>
+  );
+
+  return noContainer ? (
+    render()
+  ) : (
+    <Card>
+      <MDBox p={3}>{render()}</MDBox>
+    </Card>
   );
 }
 
 GroupFormItem.defaultProps = {
   groupInputTemplates: [],
+  noContainer: false,
 };
 
 GroupFormItem.propTypes = {
@@ -318,6 +322,7 @@ GroupFormItem.propTypes = {
   namePrefix: PropTypes.string,
   nameSuffix: PropTypes.string,
   valueAttr: PropTypes.string,
+  noContainer: PropTypes.bool,
 };
 
 export default GroupFormItem;

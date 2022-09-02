@@ -4,49 +4,58 @@ import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
 
 function FieldSetViewItem(props) {
-  const { children, description, label } = props;
-  return (
-    <Card>
-      <MDBox p={3}>
-        <Grid spacing={2} container>
-          {(label || description) && (
-            <Grid item xs={12}>
-              <MDBox
-                display="flex"
-                justifyContent="flex-start"
-                alignItems="center"
-              >
-                <MDTypography
-                  variant="h6"
-                  color="text"
-                  textTransform="capitalize"
-                  mr={2}
-                >
-                  {label}
-                </MDTypography>
-                <MDTypography
-                  variant="caption"
-                  color="text"
-                  fontWeight="regular"
-                >
-                  {description}
-                </MDTypography>
-              </MDBox>
-            </Grid>
-          )}
-          <Grid item xs={12}>
-            {children}
-          </Grid>
+  const { children, description, label, noContainer } =
+    props;
+  const render = () => (
+    <Grid spacing={2} container>
+      {(label || description) && (
+        <Grid item xs={12}>
+          <MDBox
+            display="flex"
+            justifyContent="flex-start"
+            alignItems="center"
+          >
+            <MDTypography
+              variant="h6"
+              color="text"
+              textTransform="capitalize"
+              mr={2}
+            >
+              {label}
+            </MDTypography>
+            <MDTypography
+              variant="caption"
+              color="text"
+              fontWeight="regular"
+            >
+              {description}
+            </MDTypography>
+          </MDBox>
         </Grid>
-      </MDBox>
+      )}
+      <Grid item xs={12}>
+        {children}
+      </Grid>
+    </Grid>
+  );
+  return noContainer ? (
+    render()
+  ) : (
+    <Card>
+      <MDBox p={3}>{render()}</MDBox>
     </Card>
   );
 }
+
+FieldSetViewItem.defaultProps = {
+  noContainer: false,
+};
 
 FieldSetViewItem.propTypes = {
   children: PropTypes.node,
   label: PropTypes.string,
   description: PropTypes.string,
+  noContainer: PropTypes.bool,
 };
 
 export default FieldSetViewItem;
