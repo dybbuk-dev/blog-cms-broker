@@ -60,6 +60,9 @@ const en = {
     routes: {
       menu: 'Routes',
     },
+    promotion: {
+      menu: 'Promotion',
+    },
   },
 
   entities: {
@@ -434,9 +437,10 @@ const en = {
         meta_keywords: 'Meta Keywords',
         name: 'Surname',
         title: 'Title',
-        teaser: 'Teaser',
         body: 'Body',
         target: 'Target',
+        teaser: 'Teaser',
+        teaser_upload: 'Upload teaser logo:',
         teaser_link: 'Teaser link',
         teaser_title: 'Teaser link title',
         sort: 'Sort',
@@ -461,6 +465,59 @@ const en = {
       importer: {
         title: 'Import News',
         fileName: 'news_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
+
+    promotion: {
+      name: 'promotion',
+      label: 'Promotion',
+      menu: 'Promotion',
+      exporterFileName: 'promotion_export',
+      list: {
+        menu: 'Promotion',
+        title: 'Promotion',
+      },
+      create: {
+        success: 'Promotion successfully saved',
+      },
+      update: {
+        success: 'Promotion successfully saved',
+      },
+      destroy: {
+        success: 'Promotion successfully deleted',
+      },
+      destroyAll: {
+        success: 'Promotion(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Promotion',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        link: 'Link',
+        name: 'Surname',
+        uploadImage: 'Upload Banner',
+        sort: 'Sort',
+        activated: 'Activated',
+      },
+      enumerators: {
+        target: {
+          _blank: 'New Window',
+        },
+      },
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Promotion',
+      },
+      view: {
+        title: 'View Promotion',
+      },
+      importer: {
+        title: 'Import Promotion',
+        fileName: 'promotion_import_template',
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },
     },
@@ -652,6 +709,14 @@ const en = {
 
   author: {
     menu: 'Authors',
+  },
+
+  news: {
+    menu: 'News',
+  },
+
+  promotion: {
+    menu: 'Promotion',
   },
 
   tenant: {

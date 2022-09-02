@@ -11,6 +11,7 @@ import mui from 'src/modules/mui/muiReducers';
 import news from 'src/modules/news/newsReducers';
 import navigation from 'src/modules/navigation/navigationReducers';
 import plan from 'src/modules/plan/planReducers';
+import promotion from 'src/modules/promotion/promotionReducers';
 import settings from 'src/modules/settings/settingsReducers';
 import tenant from 'src/modules/tenant/tenantReducers';
 import trackingParameter from 'src/modules/trackingParameter/trackingParameterReducers';
@@ -30,6 +31,7 @@ export default (history) =>
     navigation,
     news,
     plan,
+    promotion,
     settings,
     tenant,
     trackingParameter,
