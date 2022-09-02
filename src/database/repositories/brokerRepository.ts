@@ -8,6 +8,14 @@ import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import moment from 'moment';
 import { orderByUtils } from '../utils/orderByUtils';
 import BrokersCategoryRepository from './brokersCategoryRepository';
+import NavigationRepository from './navigationRepository';
+import BrokerUpsideRepository from './brokerUpsideRepository';
+import BrokerRegulatoryAuthorityRepository from './brokerRegulatoryAuthorityRepository';
+import BrokerDepositGuaranteeRepository from './brokerDepositGuaranteeRepository';
+import BrokerCertificateRepository from './brokerCertificateRepository';
+import BrokerSpreadRepository from './brokerSpreadRepository';
+import BrokerFeatureRepository from './brokerFeatureRepository';
+import BrokerBankRepository from './brokerBankRepository';
 
 const Op = Sequelize.Op;
 
@@ -50,30 +58,6 @@ class BrokerRepository {
       !metaOnly && {
         model: options.database.author,
         as: 'author',
-      },
-      !metaOnly && {
-        model: options.database.broker_upside,
-        as: 'upsides',
-      },
-      !metaOnly && {
-        model: options.database.broker_regulatory_authority,
-        as: 'regulatory_authorities',
-      },
-      !metaOnly && {
-        model: options.database.broker_deposit_guarantee,
-        as: 'deposit_guarantees',
-      },
-      !metaOnly && {
-        model: options.database.broker_certificate,
-        as: 'certificates',
-      },
-      !metaOnly && {
-        model: options.database.broker_spread,
-        as: 'spreads',
-      },
-      !metaOnly && {
-        model: options.database.broker_feature,
-        as: 'features',
       },
       !metaOnly && {
         model: options.database.broker_phone,
@@ -215,7 +199,11 @@ class BrokerRepository {
       throw new Error404();
     }
 
-    return this._fillWithRelationsAndFiles(record, options);
+    return this._fillWithRelationsAndFiles(
+      record,
+      options,
+      false,
+    );
   }
 
   static async filterIdInTenant(
@@ -430,6 +418,7 @@ class BrokerRepository {
   static async _fillWithRelationsAndFilesForRows(
     rows,
     options: IRepositoryOptions,
+    metaOnly = true,
   ) {
     if (!rows) {
       return rows;
@@ -437,7 +426,11 @@ class BrokerRepository {
 
     return Promise.all(
       rows.map((record) =>
-        this._fillWithRelationsAndFiles(record, options),
+        this._fillWithRelationsAndFiles(
+          record,
+          options,
+          metaOnly,
+        ),
       ),
     );
   }
@@ -445,6 +438,7 @@ class BrokerRepository {
   static async _fillWithRelationsAndFiles(
     record,
     options: IRepositoryOptions,
+    metaOnly = true,
   ) {
     if (!record) {
       return record;
@@ -455,17 +449,80 @@ class BrokerRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
+    const brokerParam = {
+      filter: {
+        broker_id: output.id,
+      },
+    };
+
     const { rows: categories } =
       await BrokersCategoryRepository.findAndCountAll(
-        {
-          filter: {
-            broker_id: output.id,
-          },
-        },
+        brokerParam,
         options,
       );
 
     output.categories = categories;
+
+    if (metaOnly) {
+      return output;
+    }
+
+    const { rows: upsides } =
+      await BrokerUpsideRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.upsides = upsides || null;
+
+    const { rows: regulatory_authorities } =
+      await BrokerRegulatoryAuthorityRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.regulatory_authorities =
+      regulatory_authorities || null;
+
+    const { rows: deposit_guarantees } =
+      await BrokerDepositGuaranteeRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.deposit_guarantees = deposit_guarantees || null;
+
+    const { rows: certificates } =
+      await BrokerCertificateRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.certificates = certificates || null;
+
+    const { rows: spreads } =
+      await BrokerSpreadRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.spreads = spreads || null;
+
+    const { rows: features } =
+      await BrokerFeatureRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.features = features || null;
+
+    const { rows: banks } =
+      await BrokerBankRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.banks = banks || null;
 
     return output;
   }

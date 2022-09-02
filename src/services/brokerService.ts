@@ -19,6 +19,7 @@ import BrokerEmailRepository from '../database/repositories/brokerEmailRepositor
 import BrokerAddressRepository from '../database/repositories/brokerAddressRepository';
 import BrokerVideoRepository from '../database/repositories/brokerVideoRepository';
 import BrokerCheckboxRepository from '../database/repositories/brokerCheckboxRepository';
+import BrokerBankRepository from '../database/repositories/brokerBankRepository';
 
 export default class BrokerService {
   options: IServiceOptions;
@@ -236,6 +237,25 @@ export default class BrokerService {
   }
 
   /**
+   * ! Update Broker Bank
+   */
+  async _updateBrokerBank(id, data, transaction) {
+    const options = { ...this.options, transaction };
+    await BrokerBankRepository.destroyByBroker(id, options);
+    const items = data.banks || [];
+    for (const item of items) {
+      await BrokerBankRepository.create(
+        {
+          ...item,
+          broker: id,
+          ip: data.ip || '',
+        },
+        options,
+      );
+    }
+  }
+
+  /**
    * ! Update Broker Phone
    */
   async _updateBrokerPhone(id, data, transaction) {
@@ -412,6 +432,7 @@ export default class BrokerService {
     await this._updateBrokerAddress(id, data, transaction);
     await this._updateBrokerVideo(id, data, transaction);
     await this._updateBrokerCheckbox(id, data, transaction);
+    await this._updateBrokerBank(id, data, transaction);
   }
 
   async create(data) {

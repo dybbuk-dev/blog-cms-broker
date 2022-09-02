@@ -4,6 +4,7 @@ import brokerEnumerators from 'src/modules/broker/brokerEnumerators';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import BrokerCheckboxFormInput from 'src/view/broker/form/components/BrokerCheckboxFormInput';
 import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
+import GroupFormItem from 'src/view/shared/form/items/GroupFormItem';
 import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
@@ -192,6 +193,35 @@ function BrokerCharacteristicsForm(props) {
       </Grid>
       <Grid item xs={12}>
         <BrokerCheckboxFormInput {...props} name="bonus" />
+      </Grid>
+      <Grid item xs={12}>
+        <GroupFormItem
+          name="banks"
+          label={i18n('entities.broker.fields.banks')}
+          groupInputTemplates={[
+            {
+              input: InputFormItem,
+              name: 'name',
+              label: i18n(
+                'entities.broker.fields.bank.name',
+              ),
+              md: 6,
+              xs: 12,
+              defaultValue: '',
+              required: true,
+            },
+            {
+              input: InputFormItem,
+              name: 'url',
+              label: i18n(
+                'entities.broker.fields.bank.url',
+              ),
+              md: 6,
+              xs: 12,
+              defaultValue: '',
+            },
+          ]}
+        />
       </Grid>
       <Grid item xs={12}>
         <BrokerCheckboxFormInput

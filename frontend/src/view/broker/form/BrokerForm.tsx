@@ -94,6 +94,10 @@ function BrokerForm(props) {
       features: record.features,
       // #endregion
 
+      // #region Broker Bank
+      banks: record.banks,
+      // #endregion
+
       // #region Broker Phone
       phone: record.phone?.phone,
       // #endregion

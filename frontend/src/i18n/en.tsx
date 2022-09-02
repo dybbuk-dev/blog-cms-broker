@@ -285,6 +285,14 @@ const en = {
         },
         // #endregion
 
+        // #region Bank
+        banks: 'Bank holding the account',
+        bank: {
+          name: 'Surname',
+          url: 'Homepage',
+        },
+        // #endregion
+
         // #region Phone
         phone: 'Phone',
         // #endregion

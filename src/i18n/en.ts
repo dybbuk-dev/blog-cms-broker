@@ -170,6 +170,13 @@ const en = {
         notEmpty: {},
       },
     },
+    broker_bank: {
+      errors: {
+        notEmpty: {
+          name: 'Bank Name is required',
+        },
+      },
+    },
     author: {
       errors: {
         unique: {},
