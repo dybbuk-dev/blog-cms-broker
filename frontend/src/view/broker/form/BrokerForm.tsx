@@ -17,6 +17,7 @@ import TabPanel from 'src/view/shared/tab/TabPanel';
 import BrokerTabs from 'src/view/broker/BrokerTabs';
 import BrokerOverviewForm from 'src/view/broker/form/components/BrokerOverviewForm';
 import BrokerCharacteristicsForm from 'src/view/broker/form/components/BrokerCharacteristicsForm';
+import BrokerPlatformForm from 'src/view/broker/form/components/BrokerPlatformForm';
 
 function BrokerForm(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -121,6 +122,10 @@ function BrokerForm(props) {
       // #region Broker Checkbox
       checkbox: record.checkbox,
       // #endregion
+
+      // #region Broker Order Type
+      order_types: record.order_types,
+      // #endregion
     };
   });
 
@@ -168,7 +173,7 @@ function BrokerForm(props) {
               <BrokerCharacteristicsForm {...props} />
             </TabPanel>
             <TabPanel value={tabValue} index={3}>
-              Platform
+              <BrokerPlatformForm {...props} />
             </TabPanel>
             <TabPanel value={tabValue} index={4}>
               Markets

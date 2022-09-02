@@ -410,6 +410,10 @@ const en = {
             'Opportunities for deposits and withdrawals',
         },
         // #endregion
+
+        // #region Order Types
+        order_types: 'Order Types',
+        // #endregion
       },
       tabs: {
         broker: 'Broker',
@@ -456,6 +460,24 @@ const en = {
             NONE: 'No Image',
             PRO: 'Pro',
             CONTRA: 'Contra',
+          },
+        },
+        order_type: {
+          type: {
+            'Fill Or Kill (FOK)': 'Fill Or Kill (FOK)',
+            'Limit Buy': 'Limit Buy',
+            'Limit Order': 'Limit Order',
+            'Limit Sell': 'Limit Sell',
+            'Market Order': 'Market Order',
+            'One Cancels Other (OCO)':
+              'One Cancels Other (OCO)',
+            'Stop Buy': 'Stop Buy',
+            'Stop Sell': 'Stop Sell',
+            Stoploss: 'Stoploss',
+            'Stoploss (garantiert)':
+              'Stoploss (garantiert)',
+            'Take Profit': 'Take Profit',
+            'Trailing Stop': 'Trailing Stop',
           },
         },
       },

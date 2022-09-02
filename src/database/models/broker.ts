@@ -202,6 +202,10 @@ export default function (sequelize) {
       as: 'banks',
       foreignKey: 'broker_id',
     });
+    models.broker.hasMany(models.broker_order_type, {
+      as: 'order_types',
+      foreignKey: 'broker_id',
+    });
   };
 
   return broker;

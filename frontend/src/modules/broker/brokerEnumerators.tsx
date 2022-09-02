@@ -23,6 +23,22 @@ const brokerEnumerators = {
   checkbox: {
     image_type: ['NONE', 'PRO', 'CONTRA'],
   },
+  order_type: {
+    type: [
+      'Fill Or Kill (FOK)',
+      'Limit Buy',
+      'Limit Order',
+      'Limit Sell',
+      'Market Order',
+      'One Cancels Other (OCO)',
+      'Stop Buy',
+      'Stop Sell',
+      'Stoploss',
+      'Stoploss (garantiert)',
+      'Take Profit',
+      'Trailing Stop',
+    ],
+  },
 };
 
 export default brokerEnumerators;

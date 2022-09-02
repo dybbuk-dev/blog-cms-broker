@@ -20,6 +20,7 @@ import BrokerAddressRepository from '../database/repositories/brokerAddressRepos
 import BrokerVideoRepository from '../database/repositories/brokerVideoRepository';
 import BrokerCheckboxRepository from '../database/repositories/brokerCheckboxRepository';
 import BrokerBankRepository from '../database/repositories/brokerBankRepository';
+import BrokerOrderTypeRepository from '../database/repositories/brokerOrderTypeRepository';
 
 export default class BrokerService {
   options: IServiceOptions;
@@ -162,6 +163,28 @@ export default class BrokerService {
       await BrokerDepositGuaranteeRepository.create(
         {
           ...item,
+          broker: id,
+          ip: data.ip || '',
+        },
+        options,
+      );
+    }
+  }
+
+  /**
+   * ! Update Broker Order Type
+   */
+  async _updateBrokerOrderType(id, data, transaction) {
+    const options = { ...this.options, transaction };
+    await BrokerOrderTypeRepository.destroyByBroker(
+      id,
+      options,
+    );
+    const items = data.order_types || [];
+    for (const item of items) {
+      await BrokerOrderTypeRepository.create(
+        {
+          type: item,
           broker: id,
           ip: data.ip || '',
         },
@@ -433,6 +456,11 @@ export default class BrokerService {
     await this._updateBrokerVideo(id, data, transaction);
     await this._updateBrokerCheckbox(id, data, transaction);
     await this._updateBrokerBank(id, data, transaction);
+    await this._updateBrokerOrderType(
+      id,
+      data,
+      transaction,
+    );
   }
 
   async create(data) {

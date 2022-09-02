@@ -177,6 +177,13 @@ const en = {
         },
       },
     },
+    broker_order_type: {
+      errors: {
+        notEmpty: {
+          type: 'Broker Order Type is required',
+        },
+      },
+    },
     author: {
       errors: {
         unique: {},

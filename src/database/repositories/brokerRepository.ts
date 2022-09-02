@@ -16,6 +16,7 @@ import BrokerCertificateRepository from './brokerCertificateRepository';
 import BrokerSpreadRepository from './brokerSpreadRepository';
 import BrokerFeatureRepository from './brokerFeatureRepository';
 import BrokerBankRepository from './brokerBankRepository';
+import BrokerOrderTypeRepository from './brokerOrderTypeRepository';
 
 const Op = Sequelize.Op;
 
@@ -523,6 +524,15 @@ class BrokerRepository {
       );
 
     output.banks = banks || null;
+
+    const { rows: order_types } =
+      await BrokerOrderTypeRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.order_types =
+      order_types?.map((val) => val.type) || null;
 
     return output;
   }
