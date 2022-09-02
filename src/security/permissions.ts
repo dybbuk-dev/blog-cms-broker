@@ -595,6 +595,71 @@ class Permissions {
         ],
       },
       // #endregion
+
+      // #region Promotion
+      promotionImport: {
+        id: 'promotionImport',
+        allowedRoles: [],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      promotionCreate: {
+        id: 'promotionCreate',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      promotionEdit: {
+        id: 'promotionEdit',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      promotionDestroy: {
+        id: 'promotionDestroy',
+        allowedRoles: [roles.admin],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      promotionRead: {
+        id: 'promotionRead',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      promotionAutocomplete: {
+        id: 'promotionAutocomplete',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      // #endregion
     };
   }
 
