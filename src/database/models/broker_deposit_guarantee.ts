@@ -16,8 +16,8 @@ export default function (sequelize) {
       url: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        defaultValue: '',
         validate: {
-          notEmpty: true,
           len: [0, 255],
         },
       },
@@ -32,6 +32,7 @@ export default function (sequelize) {
       text: {
         type: DataTypes.TEXT,
         allowNull: false,
+        defaultValue: '',
       },
       ip: {
         type: DataTypes.CHAR(39),
@@ -62,6 +63,7 @@ export default function (sequelize) {
     models.broker_deposit_guarantee.belongsTo(
       models.broker,
       {
+        as: 'broker',
         constraints: true,
         foreignKey: 'broker_id',
         onDelete: 'NO ACTION',

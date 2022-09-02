@@ -1,7 +1,7 @@
 import CloseIcon from '@mui/icons-material/Close';
 import SaveIcon from '@mui/icons-material/Save';
 import UndoIcon from '@mui/icons-material/Undo';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { i18n } from 'src/i18n';
 import FormWrapper, {
   FormButtons,
@@ -16,6 +16,13 @@ import MDBox from 'src/mui/components/MDBox';
 import TabPanel from 'src/view/shared/tab/TabPanel';
 import BrokerTabs from 'src/view/broker/BrokerTabs';
 import BrokerOverviewForm from 'src/view/broker/form/components/BrokerOverviewForm';
+import BrokerCharacteristicsForm from 'src/view/broker/form/components/BrokerCharacteristicsForm';
+import BrokerPlatformForm from 'src/view/broker/form/components/BrokerPlatformForm';
+import BrokerMarketsForm from 'src/view/broker/form/components/BrokerMarketsForm';
+import BrokerSpreadsForm from 'src/view/broker/form/components/BrokerSpreadsForm';
+import BrokerServiceForm from 'src/view/broker/form/components/BrokerServiceForm';
+import BrokerTestForm from 'src/view/broker/form/components/BrokerTestForm';
+import BrokerOldForm from 'src/view/broker/form/components/BrokerOldForm';
 
 function BrokerForm(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -27,8 +34,8 @@ function BrokerForm(props) {
       // #region Base
       name: record.name,
       name_normalized: record.name_normalized,
-      navigation: record.navigation || {},
-      author: record.author || {},
+      navigation: record.navigation,
+      author: record.author,
       activated: record.activated,
       is_broker: record.is_broker,
       is_compareable: record.is_compareable,
@@ -71,6 +78,63 @@ function BrokerForm(props) {
 
       // #region Broker Upside
       upsides: record.upsides,
+      // #endregion
+
+      // #region Broker Regulatory Authority
+      regulatory_authorities: record.regulatory_authorities,
+      // #endregion
+
+      // #region Broker Deposit Guarantee
+      deposit_guarantees: record.deposit_guarantees,
+      // #endregion
+
+      // #region Broker Certificate
+      certificates: record.certificates,
+      // #endregion
+
+      // #region Broker Spread
+      spreads: record.spreads,
+      // #endregion
+
+      // #region Broker Feature
+      features: record.features,
+      // #endregion
+
+      // #region Broker Bank
+      banks: record.banks,
+      // #endregion
+
+      // #region Broker Phone
+      phone: record.phone?.phone,
+      // #endregion
+
+      // #region Broker Fax
+      fax: record.fax?.fax,
+      // #endregion
+
+      // #region Broker Email
+      email: record.email?.email,
+      // #endregion
+
+      // #region Broker Address
+      address: record.address,
+      // #endregion
+
+      // #region Broker Video
+      youtube_hash: record.video?.youtube_hash,
+      // #endregion
+
+      // #region Broker Checkbox
+      checkbox: record.checkbox,
+      // #endregion
+
+      // #region Broker Order Type
+      order_types: record.order_types,
+      // #endregion
+
+      // #region Criteria
+      creteria_activated: record.creteria?.activated,
+      creteria_body: record.creteria?.body,
       // #endregion
     };
   });
@@ -116,25 +180,25 @@ function BrokerForm(props) {
               <BrokerOverviewForm {...props} />
             </TabPanel>
             <TabPanel value={tabValue} index={2}>
-              Characteristics
+              <BrokerCharacteristicsForm {...props} />
             </TabPanel>
             <TabPanel value={tabValue} index={3}>
-              Platform
+              <BrokerPlatformForm {...props} />
             </TabPanel>
             <TabPanel value={tabValue} index={4}>
-              Markets
+              <BrokerMarketsForm {...props} />
             </TabPanel>
             <TabPanel value={tabValue} index={5}>
-              Spreads
+              <BrokerSpreadsForm {...props} />
             </TabPanel>
             <TabPanel value={tabValue} index={6}>
-              Service
+              <BrokerServiceForm {...props} />
             </TabPanel>
             <TabPanel value={tabValue} index={7}>
-              Test
+              <BrokerTestForm {...props} />
             </TabPanel>
             <TabPanel value={tabValue} index={8}>
-              Old
+              <BrokerOldForm {...props} />
             </TabPanel>
           </MDBox>
           <FormButtons

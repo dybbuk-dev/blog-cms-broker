@@ -58,7 +58,7 @@ function LogoFormItem(props) {
           value={watch(name)}
           onChange={(value) => {
             setValue(name, value, {
-              shouldValidate: true,
+              shouldValidate: false,
               shouldDirty: true,
             });
             props.onChange && props.onChange(value);

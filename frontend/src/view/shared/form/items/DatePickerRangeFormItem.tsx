@@ -52,14 +52,14 @@ function DatePickerRangeFormItem(props) {
 
   const handleStartChanged = (value) => {
     setValue(name, [value, endValue()], {
-      shouldValidate: true,
+      shouldValidate: false,
       shouldDirty: true,
     });
   };
 
   const handleEndChanged = (value) => {
     setValue(name, [startValue(), value], {
-      shouldValidate: true,
+      shouldValidate: false,
       shouldDirty: true,
     });
   };

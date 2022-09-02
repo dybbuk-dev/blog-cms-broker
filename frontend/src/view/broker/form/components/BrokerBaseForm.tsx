@@ -8,88 +8,80 @@ import NavigationAutocompleteFormItem from 'src/view/navigation/autocomplete/Nav
 import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
+import FieldSetViewItem from 'src/view/shared/view/FieldSetViewItem';
 
 function BrokerBaseForm(props) {
   const { record } = props;
   return (
     <Grid spacing={2} container>
       <Grid item xs={12} mb={3}>
-        <Card>
-          <MDBox p={3}>
-            <Grid spacing={2} container>
-              <Grid item xs={12}>
-                <MDTypography
-                  variant="h5"
-                  color="text"
-                  textTransform="capitalize"
-                >
-                  {i18n('entities.broker.fields.metadata')}
-                </MDTypography>
-              </Grid>
-              <Grid item md={6} xs={12}>
-                <InputFormItem
-                  name="demo_url"
-                  label={i18n(
-                    'entities.broker.fields.demo_url',
-                  )}
-                  variant="standard"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item md={6} xs={12}>
-                <InputFormItem
-                  name="account_url"
-                  label={i18n(
-                    'entities.broker.fields.account_url',
-                  )}
-                  variant="standard"
-                />
-              </Grid>
-              <Grid item md={6} xs={12}>
-                <InputFormItem
-                  name="maximum_leverage"
-                  label={i18n(
-                    'entities.broker.fields.maximum_leverage',
-                  )}
-                  variant="standard"
-                />
-              </Grid>
-              <Grid item md={6} xs={12}>
-                <InputFormItem
-                  name="minimum_deposit_short"
-                  label={i18n(
-                    'entities.broker.fields.minimum_deposit_short',
-                  )}
-                  variant="standard"
-                />
-              </Grid>
-              <Grid item md={4} xs={12}>
-                <CheckboxFormItem
-                  name="custodian_fees"
-                  label={i18n(
-                    'entities.broker.fields.custodian_fees',
-                  )}
-                />
-              </Grid>
-              <Grid item md={4} xs={12}>
-                <CheckboxFormItem
-                  name="mobile_trading"
-                  label={i18n(
-                    'entities.broker.fields.mobile_trading',
-                  )}
-                />
-              </Grid>
-              <Grid item md={4} xs={12}>
-                <CheckboxFormItem
-                  name="phone_order"
-                  label={i18n(
-                    'entities.broker.fields.phone_order',
-                  )}
-                />
-              </Grid>
+        <FieldSetViewItem
+          label={i18n('entities.broker.fields.metadata')}
+        >
+          <Grid spacing={2} container>
+            <Grid item md={6} xs={12}>
+              <InputFormItem
+                name="demo_url"
+                label={i18n(
+                  'entities.broker.fields.demo_url',
+                )}
+                variant="standard"
+                autoFocus
+              />
             </Grid>
-          </MDBox>
-        </Card>
+            <Grid item md={6} xs={12}>
+              <InputFormItem
+                name="account_url"
+                label={i18n(
+                  'entities.broker.fields.account_url',
+                )}
+                variant="standard"
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <InputFormItem
+                name="maximum_leverage"
+                label={i18n(
+                  'entities.broker.fields.maximum_leverage',
+                )}
+                variant="standard"
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <InputFormItem
+                name="minimum_deposit_short"
+                label={i18n(
+                  'entities.broker.fields.minimum_deposit_short',
+                )}
+                variant="standard"
+              />
+            </Grid>
+            <Grid item md={4} xs={12}>
+              <CheckboxFormItem
+                name="custodian_fees"
+                label={i18n(
+                  'entities.broker.fields.custodian_fees',
+                )}
+              />
+            </Grid>
+            <Grid item md={4} xs={12}>
+              <CheckboxFormItem
+                name="mobile_trading"
+                label={i18n(
+                  'entities.broker.fields.mobile_trading',
+                )}
+              />
+            </Grid>
+            <Grid item md={4} xs={12}>
+              <CheckboxFormItem
+                name="phone_order"
+                label={i18n(
+                  'entities.broker.fields.phone_order',
+                )}
+              />
+            </Grid>
+          </Grid>
+        </FieldSetViewItem>
       </Grid>
       <Grid item md={6} xs={12}>
         <InputFormItem

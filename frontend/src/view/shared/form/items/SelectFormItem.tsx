@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { Autocomplete } from '@mui/material';
 import { i18n } from 'src/i18n';
 import { useFormContext } from 'react-hook-form';
 import FormErrors from 'src/view/shared/form/formErrors';
-import { Autocomplete } from '@mui/material';
-import MDInput from 'src/mui/components/MDInput';
 import MDBox from 'src/mui/components/MDBox';
+import MDInput from 'src/mui/components/MDInput';
 import MDTypography from 'src/mui/components/MDTypography';
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 
 function SelectFormItem(props) {
   const {
@@ -34,7 +34,7 @@ function SelectFormItem(props) {
     errors,
     formState: { touched, isSubmitted },
     setValue,
-    watch,
+    control: { defaultValuesRef },
   } = useFormContext();
 
   const errorMessage = FormErrors.errorMessage(
@@ -45,15 +45,21 @@ function SelectFormItem(props) {
     externalErrorMessage,
   );
 
-  const originalValue = watch(name);
+  const defaultValues = defaultValuesRef.current || {};
+
+  const originalValue = defaultValues[name];
+
+  const [realValue, setRealValue] = useState(
+    defaultValue || originalValue,
+  );
 
   useEffect(() => {
     register({ name });
+    handleSelect(value());
   }, [register, name]);
 
   const value = () => {
     const { mode } = props;
-    const realValue = defaultValue || originalValue;
     if (mode === 'multiple') {
       return valueMultiple(realValue);
     } else {
@@ -94,8 +100,9 @@ function SelectFormItem(props) {
 
   const handleSelectMultiple = (values) => {
     if (!values) {
+      setRealValue([]);
       setValue(name, [], {
-        shouldValidate: true,
+        shouldValidate: false,
         shouldDirty: true,
       });
       props.onChange && props.onChange([]);
@@ -106,8 +113,9 @@ function SelectFormItem(props) {
       .map((data) => (data ? data.value : data))
       .filter((value) => value != null);
 
+    setRealValue(newValue);
     setValue(name, newValue, {
-      shouldValidate: true,
+      shouldValidate: false,
       shouldDirty: true,
     });
     props.onChange && props.onChange(newValue);
@@ -115,16 +123,18 @@ function SelectFormItem(props) {
 
   const handleSelectOne = (data) => {
     if (!data) {
+      setRealValue(null);
       setValue(name, null, {
-        shouldValidate: true,
+        shouldValidate: false,
         shouldDirty: true,
       });
       props.onChange && props.onChange(null);
       return;
     }
 
+    setRealValue(data.value);
     setValue(name, data.value, {
-      shouldValidate: true,
+      shouldValidate: false,
       shouldDirty: true,
     });
     props.onChange && props.onChange(data.value);

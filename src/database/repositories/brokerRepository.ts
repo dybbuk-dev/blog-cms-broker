@@ -8,6 +8,15 @@ import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import moment from 'moment';
 import { orderByUtils } from '../utils/orderByUtils';
 import BrokersCategoryRepository from './brokersCategoryRepository';
+import NavigationRepository from './navigationRepository';
+import BrokerUpsideRepository from './brokerUpsideRepository';
+import BrokerRegulatoryAuthorityRepository from './brokerRegulatoryAuthorityRepository';
+import BrokerDepositGuaranteeRepository from './brokerDepositGuaranteeRepository';
+import BrokerCertificateRepository from './brokerCertificateRepository';
+import BrokerSpreadRepository from './brokerSpreadRepository';
+import BrokerFeatureRepository from './brokerFeatureRepository';
+import BrokerBankRepository from './brokerBankRepository';
+import BrokerOrderTypeRepository from './brokerOrderTypeRepository';
 
 const Op = Sequelize.Op;
 
@@ -34,25 +43,52 @@ class BrokerRepository {
     };
   }
 
-  static includes(options: IRepositoryOptions) {
+  static includes(
+    options: IRepositoryOptions,
+    metaOnly = false,
+  ) {
     return [
-      {
-        model: options.database.navigation,
-        as: 'navigation',
-      },
-      {
-        model: options.database.author,
-        as: 'author',
-      },
       {
         model: options.database.broker_metas,
         as: 'meta',
       },
-      {
-        model: options.database.broker_upside,
-        as: 'upsides',
+      !metaOnly && {
+        model: options.database.navigation,
+        as: 'navigation',
       },
-    ];
+      !metaOnly && {
+        model: options.database.author,
+        as: 'author',
+      },
+      !metaOnly && {
+        model: options.database.broker_phone,
+        as: 'phone',
+      },
+      !metaOnly && {
+        model: options.database.broker_fax,
+        as: 'fax',
+      },
+      !metaOnly && {
+        model: options.database.broker_email,
+        as: 'email',
+      },
+      !metaOnly && {
+        model: options.database.broker_address,
+        as: 'address',
+      },
+      !metaOnly && {
+        model: options.database.broker_video,
+        as: 'video',
+      },
+      !metaOnly && {
+        model: options.database.broker_checkbox,
+        as: 'checkbox',
+      },
+      !metaOnly && {
+        model: options.database.broker_creterias,
+        as: 'creteria',
+      },
+    ].filter(Boolean);
   }
 
   static async create(data, options: IRepositoryOptions) {
@@ -168,7 +204,11 @@ class BrokerRepository {
       throw new Error404();
     }
 
-    return this._fillWithRelationsAndFiles(record, options);
+    return this._fillWithRelationsAndFiles(
+      record,
+      options,
+      false,
+    );
   }
 
   static async filterIdInTenant(
@@ -221,7 +261,7 @@ class BrokerRepository {
     options: IRepositoryOptions,
   ) {
     let whereAnd: Array<any> = [];
-    let include = this.includes(options);
+    let include = this.includes(options, true);
 
     if (filter) {
       if (filter.idRange) {
@@ -383,6 +423,7 @@ class BrokerRepository {
   static async _fillWithRelationsAndFilesForRows(
     rows,
     options: IRepositoryOptions,
+    metaOnly = true,
   ) {
     if (!rows) {
       return rows;
@@ -390,7 +431,11 @@ class BrokerRepository {
 
     return Promise.all(
       rows.map((record) =>
-        this._fillWithRelationsAndFiles(record, options),
+        this._fillWithRelationsAndFiles(
+          record,
+          options,
+          metaOnly,
+        ),
       ),
     );
   }
@@ -398,6 +443,7 @@ class BrokerRepository {
   static async _fillWithRelationsAndFiles(
     record,
     options: IRepositoryOptions,
+    metaOnly = true,
   ) {
     if (!record) {
       return record;
@@ -408,17 +454,89 @@ class BrokerRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
+    const brokerParam = {
+      filter: {
+        broker_id: output.id,
+      },
+    };
+
     const { rows: categories } =
       await BrokersCategoryRepository.findAndCountAll(
-        {
-          filter: {
-            broker_id: output.id,
-          },
-        },
+        brokerParam,
         options,
       );
 
     output.categories = categories;
+
+    if (metaOnly) {
+      return output;
+    }
+
+    const { rows: upsides } =
+      await BrokerUpsideRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.upsides = upsides || null;
+
+    const { rows: regulatory_authorities } =
+      await BrokerRegulatoryAuthorityRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.regulatory_authorities =
+      regulatory_authorities || null;
+
+    const { rows: deposit_guarantees } =
+      await BrokerDepositGuaranteeRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.deposit_guarantees = deposit_guarantees || null;
+
+    const { rows: certificates } =
+      await BrokerCertificateRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.certificates = certificates || null;
+
+    const { rows: spreads } =
+      await BrokerSpreadRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.spreads = spreads || null;
+
+    const { rows: features } =
+      await BrokerFeatureRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.features = features || null;
+
+    const { rows: banks } =
+      await BrokerBankRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.banks = banks || null;
+
+    const { rows: order_types } =
+      await BrokerOrderTypeRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.order_types =
+      order_types?.map((val) => val.type) || null;
 
     return output;
   }

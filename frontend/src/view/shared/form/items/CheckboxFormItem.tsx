@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import FormErrors from 'src/view/shared/form/formErrors';
 import {
@@ -28,8 +28,16 @@ export function CheckboxFormItem(props) {
     errors,
     formState: { touched, isSubmitted },
     setValue,
-    watch,
+    control: { defaultValuesRef },
   } = useFormContext();
+
+  const defaultValues = defaultValuesRef.current || {};
+
+  const [checked, setChecked] = useState(
+    props.value === undefined || props.value === null
+      ? defaultValues[name] || false
+      : props.value,
+  );
 
   useEffect(() => {
     register({ name });
@@ -52,10 +60,11 @@ export function CheckboxFormItem(props) {
           <Switch
             id={name}
             name={name}
-            checked={watch(name) || false}
+            checked={checked}
             onChange={(e) => {
+              setChecked(Boolean(e.target.checked));
               setValue(name, Boolean(e.target.checked), {
-                shouldValidate: true,
+                shouldValidate: false,
                 shouldDirty: true,
               });
               props.onChange &&
@@ -64,7 +73,7 @@ export function CheckboxFormItem(props) {
             onBlur={() =>
               props.onBlur && props.onBlur(null)
             }
-            inputRef={register}
+            // inputRef={register}
             color={sidenavColor}
           />
         }

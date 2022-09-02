@@ -6,10 +6,11 @@ import AuditLogRepository from './auditLogRepository';
 import SequelizeRepository from './sequelizeRepository';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import moment from 'moment';
+import SequelizeArrayUtils from '../utils/sequelizeArrayUtils';
 
 const Op = Sequelize.Op;
 
-class BrokerMetasRepository {
+class BrokerMetaRepository {
   static ALL_FIELDS = [
     'id',
     'homepage',
@@ -31,8 +32,54 @@ class BrokerMetasRepository {
     'scalping_allowed',
   ];
 
+  static BROKER_TYPES = [
+    null,
+    'ECN',
+    'MT4',
+    'MM',
+    'ECN_AND_MT4',
+    'MM_AND_MT4',
+    'DMA',
+    'STP',
+    'STP_AND_MT4',
+    'MARKET_MAKER_AND_STP',
+    'BITCOIN_EXCHANGE',
+  ];
+
+  static WITHHOLDING_TAXES = [
+    null,
+    'WITHHOLDING_TAX_1',
+    'WITHHOLDING_TAX_2',
+  ];
+
+  static _getBrokerTypeIndex(type) {
+    return SequelizeArrayUtils.valueToIndex(
+      type,
+      this.BROKER_TYPES,
+    );
+  }
+
+  static _getWithHoldingTax(type) {
+    return SequelizeArrayUtils.valueToIndex(
+      type,
+      this.WITHHOLDING_TAXES,
+    );
+  }
+
   static _relatedData(data) {
-    return {};
+    return {
+      demo_url: data.demo_url ?? '',
+      account_url: data.account_url ?? '',
+      maximum_leverage: data.maximum_leverage ?? '',
+      minimum_deposit_short:
+        data.minimum_deposit_short ?? '',
+      withholding_tax: this._getWithHoldingTax(
+        data.withholding_tax,
+      ),
+      broker_type: this._getBrokerTypeIndex(
+        data.broker_type,
+      ),
+    };
   }
 
   static includes(options: IRepositoryOptions) {
@@ -349,4 +396,4 @@ class BrokerMetasRepository {
   }
 }
 
-export default BrokerMetasRepository;
+export default BrokerMetaRepository;

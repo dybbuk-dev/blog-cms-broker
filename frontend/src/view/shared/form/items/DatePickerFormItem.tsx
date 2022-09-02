@@ -70,7 +70,7 @@ export function DatePickerFormItem(props) {
         toolbarTitle={label}
         onAccept={(value) =>
           setValue(name, value, {
-            shouldValidate: true,
+            shouldValidate: false,
             shouldDirty: true,
           })
         }
