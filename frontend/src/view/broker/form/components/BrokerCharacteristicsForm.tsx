@@ -1,6 +1,7 @@
 import { Grid, InputAdornment } from '@mui/material';
 import { i18n } from 'src/i18n';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import BrokerCheckboxFormInput from 'src/view/broker/form/components/BrokerCheckboxFormInput';
 import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
 import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
@@ -58,7 +59,7 @@ function BrokerCharacteristicsForm(props) {
                   'entities.broker.fields.address.line_0',
                 )}
                 variant="standard"
-                value={record.address.line_0}
+                value={record.address?.line_0}
               />
             </Grid>
             <Grid item xs={12}>
@@ -68,7 +69,7 @@ function BrokerCharacteristicsForm(props) {
                   'entities.broker.fields.address.line_1',
                 )}
                 variant="standard"
-                value={record.address.line_1}
+                value={record.address?.line_1}
               />
             </Grid>
             <Grid item xs={12}>
@@ -78,7 +79,7 @@ function BrokerCharacteristicsForm(props) {
                   'entities.broker.fields.address.line_2',
                 )}
                 variant="standard"
-                value={record.address.line_2}
+                value={record.address?.line_2}
               />
             </Grid>
             <Grid item xs={12}>
@@ -88,7 +89,7 @@ function BrokerCharacteristicsForm(props) {
                   'entities.broker.fields.address.line_3',
                 )}
                 variant="standard"
-                value={record.address.line_3}
+                value={record.address?.line_3}
               />
             </Grid>
             <Grid item xs={12}>
@@ -98,7 +99,7 @@ function BrokerCharacteristicsForm(props) {
                   'entities.broker.fields.address.line_4',
                 )}
                 variant="standard"
-                value={record.address.line_4}
+                value={record.address?.line_4}
               />
             </Grid>
             <Grid item xs={12}>
@@ -108,7 +109,7 @@ function BrokerCharacteristicsForm(props) {
                   'entities.broker.fields.address.line_5',
                 )}
                 variant="standard"
-                value={record.address.line_5}
+                value={record.address?.line_5}
               />
             </Grid>
           </Grid>
@@ -158,6 +159,12 @@ function BrokerCharacteristicsForm(props) {
           label={i18n(
             'entities.broker.fields.licensed_broker',
           )}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <BrokerCheckboxFormInput
+          {...props}
+          name="office_in_germany"
         />
       </Grid>
     </Grid>

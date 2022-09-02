@@ -16,6 +16,9 @@ const brokerEnumerators = {
       'BITCOIN_EXCHANGE',
     ],
   },
+  checkbox: {
+    image_type: ['NONE', 'PRO', 'CONTRA'],
+  },
 };
 
 export default brokerEnumerators;

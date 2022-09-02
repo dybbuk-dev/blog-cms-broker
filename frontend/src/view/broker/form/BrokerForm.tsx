@@ -1,7 +1,7 @@
 import CloseIcon from '@mui/icons-material/Close';
 import SaveIcon from '@mui/icons-material/Save';
 import UndoIcon from '@mui/icons-material/Undo';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { i18n } from 'src/i18n';
 import FormWrapper, {
   FormButtons,
@@ -28,8 +28,8 @@ function BrokerForm(props) {
       // #region Base
       name: record.name,
       name_normalized: record.name_normalized,
-      navigation: record.navigation || {},
-      author: record.author || {},
+      navigation: record.navigation,
+      author: record.author,
       activated: record.activated,
       is_broker: record.is_broker,
       is_compareable: record.is_compareable,
@@ -112,6 +112,10 @@ function BrokerForm(props) {
 
       // #region Broker Video
       youtube_hash: record.video?.youtube_hash,
+      // #endregion
+
+      // #region Broker Checkbox
+      checkbox: record.checkbox,
       // #endregion
     };
   });

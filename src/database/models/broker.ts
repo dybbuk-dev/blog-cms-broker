@@ -193,6 +193,10 @@ export default function (sequelize) {
       as: 'video',
       foreignKey: 'id',
     });
+    models.broker.hasOne(models.broker_checkbox, {
+      as: 'checkbox',
+      foreignKey: 'id',
+    });
   };
 
   return broker;

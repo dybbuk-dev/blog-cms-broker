@@ -6,118 +6,148 @@ import AuditLogRepository from './auditLogRepository';
 import SequelizeRepository from './sequelizeRepository';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import moment from 'moment';
-import { orderByUtils } from '../utils/orderByUtils';
-import BrokersCategoryRepository from './brokersCategoryRepository';
+import SequelizeArrayUtils from '../utils/sequelizeArrayUtils';
 
 const Op = Sequelize.Op;
 
-class BrokerRepository {
+class BrokerCheckboxRepository {
   static ALL_FIELDS = [
-    'name',
-    'name_normalized',
-    'activated',
-    'is_broker',
-    'is_compareable',
-    'top_broker',
-    'top_binary_broker',
-    'top_forex_broker',
-    'featured_broker',
-    'pdf',
-    'author_name',
-    'author_link',
+    'trade_platform',
+    'free_demo_account',
+    'metatrader_4',
+    'metatrader_5',
+    'web_platform',
+    'mobile_trading_apps',
+    'hedging_allowed',
+    'additional_trade_tools',
+    'automated_trade_possible',
+    'api_interfaces',
+    'social_trading',
+    'rate_alarms',
+    'platform_tutorials',
+    'layout_saveable',
+    'one_click_trading',
+    'trade_from_chart',
+    'all_positions_closeable',
+    'guaranteed_stops',
+    'phone_trade_possible',
+    'commissions',
+    'important_market_spreads',
+    'cost_for_overnight',
+    'fees_for_deposit_disbursal',
+    'free_orderchange',
+    'free_depot',
+    'no_platform_fees',
+    'german_support',
+    'contact',
+    'daily_trade_help',
+    'german_webinar',
+    'german_seminar',
+    'coachings_available',
+    'knowledge_base',
+    'tradeable_markets',
+    'margin',
+    'managed_accounts',
+    'instant_execution',
+    'positive_slippage_possible',
+    'ecn_order_execution',
+    'liquidity_prodiver',
+    'micro_lots',
+    'index_cfd_tradeable_below_point',
+    'rate_switch_24_5_index_cfd',
+    'no_financial_cost_index_cfd',
+    'no_financial_cost_raw_material_cfd',
+    'cfd_contracts_automatic_roll',
+    'real_stocks_cfd_spreads',
+    'dma_stocks',
+    'minimal_ordersize_stocks',
+    'company',
+    'office_in_germany',
+    'bonus',
+    'regulation_and_deposit_security',
+    'reserve_liabiliry',
+    'interest_on_deposit',
+    'witholding_tax',
+    'segregated_accounts',
+    'account_currencies',
+    'posibilities_for_withdrawals',
   ];
 
-  static _relatedData(data) {
-    return {
-      navigation_id: data.navigation || null,
-      author_id: data.author || null,
-    };
+  static DATA_PREFIX = 'checkbox_';
+
+  static PREFIX_TEXT = 'text_';
+
+  static IMAGE_TYPES = ['NONE', 'PRO', 'CONTRA'];
+
+  static FIELD_SEPARATOR = '||';
+  static DATA_SEPARATOR = ';;';
+
+  static _textToArray(value) {
+    return (value || '')
+      .split(this.DATA_SEPARATOR)
+      .map((fields) => {
+        const [text, url] = fields.split(
+          this.FIELD_SEPARATOR,
+        );
+        return {
+          text: text || '',
+          url: url || '',
+        };
+      });
   }
 
-  static includes(
-    options: IRepositoryOptions,
-    metaOnly = false,
-  ) {
-    return [
-      {
-        model: options.database.broker_metas,
-        as: 'meta',
-      },
-      !metaOnly && {
-        model: options.database.navigation,
-        as: 'navigation',
-      },
-      !metaOnly && {
-        model: options.database.author,
-        as: 'author',
-      },
-      !metaOnly && {
-        model: options.database.broker_upside,
-        as: 'upsides',
-      },
-      !metaOnly && {
-        model: options.database.broker_regulatory_authority,
-        as: 'regulatory_authorities',
-      },
-      !metaOnly && {
-        model: options.database.broker_deposit_guarantee,
-        as: 'deposit_guarantees',
-      },
-      !metaOnly && {
-        model: options.database.broker_certificate,
-        as: 'certificates',
-      },
-      !metaOnly && {
-        model: options.database.broker_spread,
-        as: 'spreads',
-      },
-      !metaOnly && {
-        model: options.database.broker_feature,
-        as: 'features',
-      },
-      !metaOnly && {
-        model: options.database.broker_phone,
-        as: 'phone',
-      },
-      !metaOnly && {
-        model: options.database.broker_fax,
-        as: 'fax',
-      },
-      !metaOnly && {
-        model: options.database.broker_email,
-        as: 'email',
-      },
-      !metaOnly && {
-        model: options.database.broker_address,
-        as: 'address',
-      },
-      !metaOnly && {
-        model: options.database.broker_video,
-        as: 'video',
-      },
-      !metaOnly && {
-        model: options.database.broker_checkbox,
-        as: 'checkbox',
-      },
-    ].filter(Boolean);
+  static _arrayToText(value) {
+    return (value || [])
+      .map(({ text, url }) =>
+        [text, url]
+          .filter(Boolean)
+          .join(this.FIELD_SEPARATOR),
+      )
+      .join(this.DATA_SEPARATOR);
+  }
+
+  static _getImageTypeIndex(type) {
+    return SequelizeArrayUtils.valueToIndex(
+      type,
+      this.IMAGE_TYPES,
+    );
+  }
+
+  static _relatedData(data) {
+    const result = {};
+    this.ALL_FIELDS.forEach((field) => {
+      const textField = `${this.PREFIX_TEXT}${field}`;
+      result[field] = this._getImageTypeIndex(
+        data[`${this.DATA_PREFIX}${field}`],
+      );
+      result[textField] = this._arrayToText(
+        data[`${this.DATA_PREFIX}${textField}`],
+      );
+    });
+    return result;
+  }
+
+  static includes(options: IRepositoryOptions) {
+    return [];
   }
 
   static async create(data, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    const record = await options.database.broker.create(
-      {
-        ...lodash.pick(data, this.ALL_FIELDS),
-        ...this._relatedData(data),
-        ip: data.ip ?? '',
-        created: moment(),
-        modified: moment(),
-      },
-      {
-        transaction,
-      },
-    );
+    const record =
+      await options.database.broker_checkbox.create(
+        {
+          ...lodash.pick(data, ['id']),
+          ...this._relatedData(data),
+          ip: data.ip ?? '',
+          created: moment(),
+          modified: moment(),
+        },
+        {
+          transaction,
+        },
+      );
 
     await this._createAuditLog(
       AuditLogRepository.CREATE,
@@ -137,12 +167,13 @@ class BrokerRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    let record = await options.database.broker.findOne({
-      where: {
-        id,
-      },
-      transaction,
-    });
+    let record =
+      await options.database.broker_checkbox.findOne({
+        where: {
+          id,
+        },
+        transaction,
+      });
 
     if (!record) {
       throw new Error404();
@@ -150,7 +181,6 @@ class BrokerRepository {
 
     record = await record.update(
       {
-        ...lodash.pick(data, this.ALL_FIELDS),
         ...this._relatedData(data),
         ip: data.ip ?? '',
         modified: moment(),
@@ -174,12 +204,13 @@ class BrokerRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    let record = await options.database.broker.findOne({
-      where: {
-        id,
-      },
-      transaction,
-    });
+    let record =
+      await options.database.broker_checkbox.findOne({
+        where: {
+          id,
+        },
+        transaction,
+      });
 
     if (!record) {
       throw new Error404();
@@ -203,13 +234,14 @@ class BrokerRepository {
 
     const include = this.includes(options);
 
-    const record = await options.database.broker.findOne({
-      where: {
-        id,
-      },
-      include,
-      transaction,
-    });
+    const record =
+      await options.database.broker_checkbox.findOne({
+        where: {
+          id,
+        },
+        include,
+        transaction,
+      });
 
     if (!record) {
       throw new Error404();
@@ -243,10 +275,11 @@ class BrokerRepository {
       },
     };
 
-    const records = await options.database.broker.findAll({
-      attributes: ['id'],
-      where,
-    });
+    const records =
+      await options.database.broker_checkbox.findAll({
+        attributes: ['id'],
+        where,
+      });
 
     return records.map((record) => record.id);
   }
@@ -255,7 +288,7 @@ class BrokerRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    return options.database.broker.count({
+    return options.database.broker_checkbox.count({
       where: {
         ...filter,
       },
@@ -268,7 +301,7 @@ class BrokerRepository {
     options: IRepositoryOptions,
   ) {
     let whereAnd: Array<any> = [];
-    let include = this.includes(options, true);
+    let include = this.includes(options);
 
     if (filter) {
       if (filter.idRange) {
@@ -299,17 +332,11 @@ class BrokerRepository {
         }
       }
 
-      if (filter.parent) {
-        whereAnd.push({
-          ['parent_id']: filter.parent,
-        });
-      }
-
-      ['name', 'name_normalized'].forEach((field) => {
+      [].forEach((field) => {
         if (filter[field]) {
           whereAnd.push(
             SequelizeFilterUtils.ilikeIncludes(
-              'broker',
+              'broker_checkbox',
               field,
               filter[field],
             ),
@@ -317,16 +344,7 @@ class BrokerRepository {
         }
       });
 
-      [
-        'activated',
-        'is_broker',
-        'is_compareable',
-        'top_broker',
-        'top_binary_broker',
-        'top_forex_broker',
-        'featured_broker',
-        'pdf',
-      ].forEach((field) => {
+      [].forEach((field) => {
         if (
           filter[field] === true ||
           filter[field] === 'true' ||
@@ -345,17 +363,19 @@ class BrokerRepository {
     const where = { [Op.and]: whereAnd };
 
     let { rows, count } =
-      await options.database.broker.findAndCountAll({
-        where,
-        include,
-        limit: limit ? Number(limit) : undefined,
-        offset: offset ? Number(offset) : undefined,
-        order: orderBy
-          ? [orderByUtils(orderBy)]
-          : [['id', 'DESC']],
-        transaction:
-          SequelizeRepository.getTransaction(options),
-      });
+      await options.database.broker_checkbox.findAndCountAll(
+        {
+          where,
+          include,
+          limit: limit ? Number(limit) : undefined,
+          offset: offset ? Number(offset) : undefined,
+          order: orderBy
+            ? [orderBy.split('_')]
+            : [['id', 'DESC']],
+          transaction:
+            SequelizeRepository.getTransaction(options),
+        },
+      );
 
     rows = await this._fillWithRelationsAndFilesForRows(
       rows,
@@ -363,43 +383,6 @@ class BrokerRepository {
     );
 
     return { rows, count };
-  }
-
-  static async findAllAutocomplete(
-    query,
-    limit,
-    options: IRepositoryOptions,
-  ) {
-    let whereAnd: Array<any> = [];
-
-    if (query) {
-      whereAnd.push({
-        [Op.or]: [
-          { ['id']: query },
-          {
-            [Op.and]: SequelizeFilterUtils.ilikeIncludes(
-              'broker',
-              'name',
-              query,
-            ),
-          },
-        ],
-      });
-    }
-
-    const where = { [Op.and]: whereAnd };
-
-    const records = await options.database.broker.findAll({
-      attributes: ['id', 'name'],
-      where,
-      limit: limit ? Number(limit) : undefined,
-      order: [['name', 'ASC']],
-    });
-
-    return records.map((record) => ({
-      id: record.id,
-      label: record.name,
-    }));
   }
 
   static async _createAuditLog(
@@ -418,7 +401,7 @@ class BrokerRepository {
 
     await AuditLogRepository.log(
       {
-        entityName: 'broker',
+        entityName: 'broker_checkbox',
         entityId: record.id,
         action,
         values,
@@ -455,20 +438,8 @@ class BrokerRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    const { rows: categories } =
-      await BrokersCategoryRepository.findAndCountAll(
-        {
-          filter: {
-            broker_id: output.id,
-          },
-        },
-        options,
-      );
-
-    output.categories = categories;
-
     return output;
   }
 }
 
-export default BrokerRepository;
+export default BrokerCheckboxRepository;

@@ -165,6 +165,11 @@ const en = {
         notEmpty: {},
       },
     },
+    broker_checkbox: {
+      errors: {
+        notEmpty: {},
+      },
+    },
     author: {
       errors: {
         unique: {},

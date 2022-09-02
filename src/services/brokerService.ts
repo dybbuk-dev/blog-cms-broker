@@ -18,6 +18,7 @@ import BrokerFaxRepository from '../database/repositories/brokerFaxRepository';
 import BrokerEmailRepository from '../database/repositories/brokerEmailRepository';
 import BrokerAddressRepository from '../database/repositories/brokerAddressRepository';
 import BrokerVideoRepository from '../database/repositories/brokerVideoRepository';
+import BrokerCheckboxRepository from '../database/repositories/brokerCheckboxRepository';
 
 export default class BrokerService {
   options: IServiceOptions;
@@ -310,7 +311,6 @@ export default class BrokerService {
     const address = {};
     BrokerAddressRepository.ALL_FIELDS.forEach((field) => {
       const realField = `${prefix}${field}`;
-      console.log(realField, data[realField]);
       if (data[realField]) {
         address[field] = data[realField];
       }
@@ -333,15 +333,42 @@ export default class BrokerService {
    */
   async _updateBrokerVideo(id, data, transaction) {
     const options = { ...this.options, transaction };
-    const metaId =
+    const videoId =
       await BrokerVideoRepository.filterIdInTenant(
         id,
         options,
       );
-    if (metaId) {
+    if (videoId) {
       await BrokerVideoRepository.update(id, data, options);
     } else {
       await BrokerVideoRepository.create(
+        {
+          ...data,
+          id: id,
+        },
+        options,
+      );
+    }
+  }
+
+  /**
+   * ! Update Broker Checkbox
+   */
+  async _updateBrokerCheckbox(id, data, transaction) {
+    const options = { ...this.options, transaction };
+    const checkboxId =
+      await BrokerCheckboxRepository.filterIdInTenant(
+        id,
+        options,
+      );
+    if (checkboxId) {
+      await BrokerCheckboxRepository.update(
+        id,
+        data,
+        options,
+      );
+    } else {
+      await BrokerCheckboxRepository.create(
         {
           ...data,
           id: id,
@@ -384,6 +411,7 @@ export default class BrokerService {
     await this._updateBrokerEmail(id, data, transaction);
     await this._updateBrokerAddress(id, data, transaction);
     await this._updateBrokerVideo(id, data, transaction);
+    await this._updateBrokerCheckbox(id, data, transaction);
   }
 
   async create(data) {

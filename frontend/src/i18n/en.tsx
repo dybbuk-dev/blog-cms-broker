@@ -317,6 +317,88 @@ const en = {
         youtube_hash_description:
           'All Youtube videos have a hash. This can be copied from the url.',
         // #endregion
+
+        // #region Checkbox
+        checkbox: {
+          image_type: 'Image Type',
+          items: 'Items',
+          text: 'Text',
+          url: 'URL',
+          trade_platform: 'trade_platform',
+          free_demo_account: 'free_demo_account',
+          metatrader_4: 'metatrader_4',
+          metatrader_5: 'metatrader_5',
+          web_platform: 'web_platform',
+          mobile_trading_apps: 'mobile_trading_apps',
+          hedging_allowed: 'hedging_allowed',
+          additional_trade_tools: 'additional_trade_tools',
+          automated_trade_possible:
+            'automated_trade_possible',
+          api_interfaces: 'api_interfaces',
+          social_trading: 'social_trading',
+          rate_alarms: 'rate_alarms',
+          platform_tutorials: 'platform_tutorials',
+          layout_saveable: 'layout_saveable',
+          one_click_trading: 'one_click_trading',
+          trade_from_chart: 'trade_from_chart',
+          all_positions_closeable:
+            'all_positions_closeable',
+          guaranteed_stops: 'guaranteed_stops',
+          phone_trade_possible: 'phone_trade_possible',
+          commissions: 'commissions',
+          important_market_spreads:
+            'important_market_spreads',
+          cost_for_overnight: 'cost_for_overnight',
+          fees_for_deposit_disbursal:
+            'fees_for_deposit_disbursal',
+          free_orderchange: 'free_orderchange',
+          free_depot: 'free_depot',
+          no_platform_fees: 'no_platform_fees',
+          german_support: 'german_support',
+          contact: 'contact',
+          daily_trade_help: 'daily_trade_help',
+          german_webinar: 'german_webinar',
+          german_seminar: 'german_seminar',
+          coachings_available: 'coachings_available',
+          knowledge_base: 'knowledge_base',
+          tradeable_markets: 'tradeable_markets',
+          margin: 'margin',
+          managed_accounts: 'managed_accounts',
+          instant_execution: 'instant_execution',
+          positive_slippage_possible:
+            'positive_slippage_possible',
+          ecn_order_execution: 'ecn_order_execution',
+          liquidity_prodiver: 'liquidity_prodiver',
+          micro_lots: 'micro_lots',
+          index_cfd_tradeable_below_point:
+            'index_cfd_tradeable_below_point',
+          rate_switch_24_5_index_cfd:
+            'rate_switch_24_5_index_cfd',
+          no_financial_cost_index_cfd:
+            'no_financial_cost_index_cfd',
+          no_financial_cost_raw_material_cfd:
+            'no_financial_cost_raw_material_cfd',
+          cfd_contracts_automatic_roll:
+            'cfd_contracts_automatic_roll',
+          real_stocks_cfd_spreads:
+            'real_stocks_cfd_spreads',
+          dma_stocks: 'dma_stocks',
+          minimal_ordersize_stocks:
+            'minimal_ordersize_stocks',
+          company: 'company',
+          office_in_germany: 'Office in Germany',
+          bonus: 'bonus',
+          regulation_and_deposit_security:
+            'regulation_and_deposit_security',
+          reserve_liabiliry: 'reserve_liabiliry',
+          interest_on_deposit: 'interest_on_deposit',
+          witholding_tax: 'witholding_tax',
+          segregated_accounts: 'segregated_accounts',
+          account_currencies: 'account_currencies',
+          posibilities_for_withdrawals:
+            'posibilities_for_withdrawals',
+        },
+        // #endregion
       },
       tabs: {
         broker: 'Broker',
@@ -350,6 +432,13 @@ const en = {
               'Market Maker / STP Broker',
             BITCOIN_EXCHANGE:
               'Exchange for bitcoin and cryptocurrencies',
+          },
+        },
+        checkbox: {
+          image_type: {
+            NONE: 'No Image',
+            PRO: 'Pro',
+            CONTRA: 'Contra',
           },
         },
       },
