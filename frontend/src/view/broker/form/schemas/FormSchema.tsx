@@ -45,6 +45,9 @@ const schema = yup.object().shape({
   // #endregion
   navigation: yupFormSchemas.relationToOne(
     i18n('entities.broker.fields.navigation'),
+    {
+      required: true,
+    },
   ),
   author: yupFormSchemas.relationToOne(
     i18n('entities.broker.fields.author'),

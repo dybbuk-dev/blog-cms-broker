@@ -184,6 +184,11 @@ const en = {
         },
       },
     },
+    broker_creteria: {
+      errors: {
+        notEmpty: {},
+      },
+    },
     author: {
       errors: {
         unique: {},

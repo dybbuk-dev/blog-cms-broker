@@ -170,6 +170,10 @@ export default function (sequelize) {
       as: 'checkbox',
       foreignKey: 'id',
     });
+    models.broker.hasOne(models.broker_creterias, {
+      as: 'creteria',
+      foreignKey: 'broker_id',
+    });
 
     models.broker.hasMany(models.broker_upside, {
       as: 'upsides',

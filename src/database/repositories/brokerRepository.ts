@@ -84,6 +84,10 @@ class BrokerRepository {
         model: options.database.broker_checkbox,
         as: 'checkbox',
       },
+      !metaOnly && {
+        model: options.database.broker_creterias,
+        as: 'creteria',
+      },
     ].filter(Boolean);
   }
 

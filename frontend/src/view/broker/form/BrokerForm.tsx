@@ -131,6 +131,11 @@ function BrokerForm(props) {
       // #region Broker Order Type
       order_types: record.order_types,
       // #endregion
+
+      // #region Criteria
+      creteria_activated: record.creteria?.activated,
+      creteria_body: record.creteria?.body,
+      // #endregion
     };
   });
 

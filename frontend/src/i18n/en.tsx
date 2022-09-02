@@ -422,6 +422,13 @@ const en = {
         // #region Order Types
         order_types: 'Order Types',
         // #endregion
+
+        // #region Creteria
+        creteria: {
+          activated: 'Activated',
+          body: 'Broker Criteria',
+        },
+        // #endregion
       },
       tabs: {
         broker: 'Broker',

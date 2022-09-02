@@ -21,6 +21,7 @@ import BrokerVideoRepository from '../database/repositories/brokerVideoRepositor
 import BrokerCheckboxRepository from '../database/repositories/brokerCheckboxRepository';
 import BrokerBankRepository from '../database/repositories/brokerBankRepository';
 import BrokerOrderTypeRepository from '../database/repositories/brokerOrderTypeRepository';
+import BrokerCreteriaRepository from '../database/repositories/brokerCreteriaRepository';
 
 export default class BrokerService {
   options: IServiceOptions;
@@ -62,6 +63,36 @@ export default class BrokerService {
         {
           ...data,
           id: id,
+        },
+        options,
+      );
+    }
+  }
+
+  /**
+   * ! Update Broker Creteria
+   */
+  async _updateBrokerCreteria(id, data, transaction) {
+    const options = { ...this.options, transaction };
+    await BrokerCreteriaRepository.destroyByBroker(
+      id,
+      options,
+    );
+    const prefix = 'creteria_';
+    const creteria = {};
+    BrokerCreteriaRepository.ALL_FIELDS.forEach((field) => {
+      const realField = `${prefix}${field}`;
+      if (data[realField]) {
+        creteria[field] = data[realField];
+      }
+    });
+    const items = [creteria].filter(Boolean);
+    for (const item of items) {
+      await BrokerCreteriaRepository.create(
+        {
+          ...item,
+          broker: id,
+          ip: data.ip || '',
         },
         options,
       );
@@ -448,6 +479,7 @@ export default class BrokerService {
       transaction,
     );
     await this._updateBrokerSpread(id, data, transaction);
+    await this._updateBrokerCreteria(id, data, transaction);
     await this._updateBrokerFeature(id, data, transaction);
     await this._updateBrokerPhone(id, data, transaction);
     await this._updateBrokerFax(id, data, transaction);
