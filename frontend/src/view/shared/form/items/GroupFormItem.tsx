@@ -160,8 +160,9 @@ function GroupFormItem(props) {
   };
 
   const clearGroupValue = (index) => {
-    curValue.splice(index, 1);
-    updateGroupValue(curValue);
+    const newValue = [...curValue];
+    newValue.splice(index, 1);
+    updateGroupValue(newValue);
   };
 
   const onChange = ({ name, index, args }) => {
