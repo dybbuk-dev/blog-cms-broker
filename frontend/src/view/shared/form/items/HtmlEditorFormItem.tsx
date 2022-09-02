@@ -49,7 +49,7 @@ function HtmlEditorFormItem({
   const updateValue = (value) => {
     setOriginalValue(value);
     setValue(name, value, {
-      shouldValidate: true,
+      shouldValidate: false,
       shouldDirty: true,
     });
   };

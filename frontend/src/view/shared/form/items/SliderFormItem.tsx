@@ -87,7 +87,7 @@ function SliderFormItem(props) {
     if (typeof newValue === 'number') {
       setSliderValue(newValue);
       setValue(name, safeValue(newValue), {
-        shouldValidate: true,
+        shouldValidate: false,
         shouldDirty: true,
       });
       props.onChange && props.onChange(safeValue(newValue));

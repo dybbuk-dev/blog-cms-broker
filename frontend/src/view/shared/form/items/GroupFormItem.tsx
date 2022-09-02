@@ -49,7 +49,6 @@ function GroupInputFormItem(props) {
         variant={variant}
         onChange={onGroupInputChange}
         {...rest}
-        unregister
       />
     </Grid>
   );
@@ -118,7 +117,7 @@ function GroupFormItem(props) {
 
   const updateGroupValue = (newValue) => {
     setValue(realGroupName, newValue, {
-      shouldValidate: true,
+      shouldValidate: false,
       shouldDirty: true,
     });
     setCurValue(newValue);

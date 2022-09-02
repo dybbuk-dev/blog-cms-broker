@@ -31,11 +31,11 @@ function UserAutocompleteFormItem(props) {
       setValue(
         name,
         [...(getValues()[name] || []), record],
-        { shouldValidate: true, shouldDirty: true },
+        { shouldValidate: false, shouldDirty: true },
       );
     } else {
       setValue(name, record, {
-        shouldValidate: true,
+        shouldValidate: false,
         shouldDirty: true,
       });
     }

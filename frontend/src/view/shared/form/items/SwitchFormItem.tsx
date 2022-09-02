@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import FormErrors from 'src/view/shared/form/formErrors';
-
 import {
+  Checkbox,
   FormControl,
   FormControlLabel,
   FormHelperText,
@@ -13,6 +13,8 @@ import { useFormContext } from 'react-hook-form';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 
 function SwitchFormItem(props) {
+  const { sidenavColor } = selectMuiSettings();
+
   const {
     label,
     name,
@@ -21,20 +23,21 @@ function SwitchFormItem(props) {
     externalErrorMessage,
   } = props;
 
-  const { sidenavColor } = selectMuiSettings();
-
   const {
     register,
     errors,
     formState: { touched, isSubmitted },
     setValue,
-    watch,
+    control: { defaultValuesRef },
   } = useFormContext();
 
-  const checked =
+  const defaultValues = defaultValuesRef.current || {};
+
+  const [checked, setChecked] = useState(
     props.value === undefined || props.value === null
-      ? watch(name) || false
-      : props.value;
+      ? defaultValues[name] || false
+      : props.value,
+  );
 
   useEffect(() => {
     register({ name });
@@ -59,8 +62,9 @@ function SwitchFormItem(props) {
             name={name}
             checked={checked}
             onChange={(e) => {
+              setChecked(Boolean(e.target.checked));
               setValue(name, Boolean(e.target.checked), {
-                shouldValidate: true,
+                shouldValidate: false,
                 shouldDirty: true,
               });
               props.onChange &&
@@ -69,7 +73,7 @@ function SwitchFormItem(props) {
             onBlur={() =>
               props.onBlur && props.onBlur(null)
             }
-            inputRef={register}
+            // inputRef={register}
             color={sidenavColor}
           />
         }

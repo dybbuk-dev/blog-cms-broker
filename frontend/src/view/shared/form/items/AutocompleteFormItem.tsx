@@ -87,7 +87,7 @@ function AutocompleteFormItem(props) {
   const handleSelectMultiple = (values) => {
     if (!values) {
       setValue(name, [], {
-        shouldValidate: true,
+        shouldValidate: false,
         shouldDirty: true,
       });
       props.onChange && props.onChange([]);
@@ -98,7 +98,7 @@ function AutocompleteFormItem(props) {
       mapper.toValue(value),
     );
     setValue(name, newValue, {
-      shouldValidate: true,
+      shouldValidate: false,
       shouldDirty: true,
     });
     props.onChange && props.onChange(newValue);
@@ -107,7 +107,7 @@ function AutocompleteFormItem(props) {
   const handleSelectOne = (value) => {
     if (!value) {
       setValue(name, null, {
-        shouldValidate: true,
+        shouldValidate: false,
         shouldDirty: true,
       });
       props.onChange && props.onChange(null);
@@ -116,7 +116,7 @@ function AutocompleteFormItem(props) {
 
     const newValue = mapper.toValue(value);
     setValue(name, newValue, {
-      shouldValidate: true,
+      shouldValidate: false,
       shouldDirty: true,
     });
     props.onChange && props.onChange(newValue);

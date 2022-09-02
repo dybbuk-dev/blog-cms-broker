@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import MDInput from 'src/mui/components/MDInput';
 import { useFormContext } from 'react-hook-form';
@@ -33,7 +33,19 @@ export function InputFormItem(props) {
     register,
     errors,
     formState: { touched, isSubmitted },
+    setValue,
+    control: { defaultValuesRef },
   } = useFormContext();
+
+  const defaultValues = defaultValuesRef.current || {};
+
+  const [curValue, setCurValue] = useState(
+    value || defaultValues[name] || '',
+  );
+
+  useEffect(() => {
+    register({ name });
+  }, [register, name]);
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -51,8 +63,13 @@ export function InputFormItem(props) {
         type={type}
         label={label}
         required={required}
-        inputRef={props.unregister ? null : register}
+        // inputRef={register}
         onChange={(event) => {
+          setCurValue(event.target.value);
+          setValue(name, event.target.value, {
+            shouldValidate: false,
+            shouldDirty: true,
+          });
           props.onChange &&
             props.onChange(event.target.value);
         }}
@@ -76,7 +93,7 @@ export function InputFormItem(props) {
           name,
         }}
         disabled={disabled}
-        value={value}
+        value={curValue}
       />
       {errorMessage && (
         <MDBox mt={0.75}>
