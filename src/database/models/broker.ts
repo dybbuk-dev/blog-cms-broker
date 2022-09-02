@@ -189,6 +189,10 @@ export default function (sequelize) {
       as: 'address',
       foreignKey: 'broker_id',
     });
+    models.broker.hasOne(models.broker_video, {
+      as: 'video',
+      foreignKey: 'id',
+    });
   };
 
   return broker;

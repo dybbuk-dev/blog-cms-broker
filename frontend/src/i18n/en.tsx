@@ -308,6 +308,15 @@ const en = {
           line_5: 'Address 6th line',
         },
         // #endregion
+
+        // #region Video
+        video: 'Video',
+        youtube_hash: 'Youtube Hash',
+        youtube_hash_prefix:
+          'https://www.youtube.com/watch?v=',
+        youtube_hash_description:
+          'All Youtube videos have a hash. This can be copied from the url.',
+        // #endregion
       },
       tabs: {
         broker: 'Broker',

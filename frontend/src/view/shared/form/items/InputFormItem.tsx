@@ -19,6 +19,7 @@ export function InputFormItem(props) {
     required,
     externalErrorMessage,
     disabled,
+    startAdornment,
     endAdornment,
     margin,
     variant,
@@ -70,7 +71,7 @@ export function InputFormItem(props) {
         }}
         error={Boolean(errorMessage)}
         helperText={hint}
-        InputProps={{ endAdornment }}
+        InputProps={{ startAdornment, endAdornment }}
         inputProps={{
           name,
         }}
@@ -112,6 +113,7 @@ InputFormItem.propTypes = {
   autoComplete: PropTypes.string,
   externalErrorMessage: PropTypes.string,
   onChange: PropTypes.func,
+  startAdornment: PropTypes.any,
   endAdornment: PropTypes.any,
   margin: PropTypes.string,
   variant: PropTypes.string,

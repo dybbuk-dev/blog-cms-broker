@@ -184,6 +184,16 @@ const schema = yup.object().shape({
   ),
   // #endregion
 
+  // #region Video
+  youtube_hash: yupFormSchemas.string(
+    i18n('entities.broker.fields.youtube_hash'),
+    {
+      min: 0,
+      max: 255,
+    },
+  ),
+  // #endregion
+
   // #endregion
 });
 

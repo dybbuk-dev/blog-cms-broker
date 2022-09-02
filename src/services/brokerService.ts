@@ -17,6 +17,7 @@ import BrokerPhoneRepository from '../database/repositories/brokerPhoneRepositor
 import BrokerFaxRepository from '../database/repositories/brokerFaxRepository';
 import BrokerEmailRepository from '../database/repositories/brokerEmailRepository';
 import BrokerAddressRepository from '../database/repositories/brokerAddressRepository';
+import BrokerVideoRepository from '../database/repositories/brokerVideoRepository';
 
 export default class BrokerService {
   options: IServiceOptions;
@@ -328,6 +329,29 @@ export default class BrokerService {
   }
 
   /**
+   * ! Update Broker Video
+   */
+  async _updateBrokerVideo(id, data, transaction) {
+    const options = { ...this.options, transaction };
+    const metaId =
+      await BrokerVideoRepository.filterIdInTenant(
+        id,
+        options,
+      );
+    if (metaId) {
+      await BrokerVideoRepository.update(id, data, options);
+    } else {
+      await BrokerVideoRepository.create(
+        {
+          ...data,
+          id: id,
+        },
+        options,
+      );
+    }
+  }
+
+  /**
    * * Update Related Broker's Data
    */
   async _updateRelatedData(id, data, transaction) {
@@ -359,6 +383,7 @@ export default class BrokerService {
     await this._updateBrokerFax(id, data, transaction);
     await this._updateBrokerEmail(id, data, transaction);
     await this._updateBrokerAddress(id, data, transaction);
+    await this._updateBrokerVideo(id, data, transaction);
   }
 
   async create(data) {

@@ -109,6 +109,10 @@ function BrokerForm(props) {
       // #region Broker Address
       address: record.address,
       // #endregion
+
+      // #region Broker Video
+      youtube_hash: record.video?.youtube_hash,
+      // #endregion
     };
   });
 

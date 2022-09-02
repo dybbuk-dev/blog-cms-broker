@@ -160,6 +160,11 @@ const en = {
         notEmpty: {},
       },
     },
+    broker_video: {
+      errors: {
+        notEmpty: {},
+      },
+    },
     author: {
       errors: {
         unique: {},
