@@ -1,4 +1,4 @@
-import { Card, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
@@ -41,9 +41,9 @@ function FieldSetViewItem(props) {
   return noContainer ? (
     render()
   ) : (
-    <Card>
-      <MDBox p={3}>{render()}</MDBox>
-    </Card>
+    <MDBox p={3} border="1px solid grey" borderRadius="md">
+      {render()}
+    </MDBox>
   );
 }
 

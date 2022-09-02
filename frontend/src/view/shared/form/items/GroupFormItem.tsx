@@ -1,4 +1,4 @@
-import { Card, Grid, IconButton } from '@mui/material';
+import { Grid, IconButton } from '@mui/material';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -304,9 +304,9 @@ function GroupFormItem(props) {
   return noContainer ? (
     render()
   ) : (
-    <Card>
-      <MDBox p={3}>{render()}</MDBox>
-    </Card>
+    <MDBox p={3} border="1px solid grey" borderRadius="md">
+      {render()}
+    </MDBox>
   );
 }
 
