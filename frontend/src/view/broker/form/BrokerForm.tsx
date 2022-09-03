@@ -1,7 +1,7 @@
 import CloseIcon from '@mui/icons-material/Close';
 import SaveIcon from '@mui/icons-material/Save';
 import UndoIcon from '@mui/icons-material/Undo';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { i18n } from 'src/i18n';
 import FormWrapper, {
   FormButtons,
@@ -23,14 +23,18 @@ import BrokerSpreadsForm from 'src/view/broker/form/components/BrokerSpreadsForm
 import BrokerServiceForm from 'src/view/broker/form/components/BrokerServiceForm';
 import BrokerTestForm from 'src/view/broker/form/components/BrokerTestForm';
 import BrokerOldForm from 'src/view/broker/form/components/BrokerOldForm';
+import {
+  brokerCheckboxFormPrefix,
+  brokerCheckboxNames,
+  brokerCheckboxTextPrefix,
+} from 'src/view/broker/form/schemas/BrokerCheckboxes';
 
 function BrokerForm(props) {
   const { sidenavColor } = selectMuiSettings();
 
-  const [initialValues] = useState(() => {
+  const [initialValues, setInitialValues] = useState(() => {
     const record = props.record || {};
-
-    return {
+    const result = {
       // #region Base
       name: record.name,
       name_normalized: record.name_normalized,
@@ -118,6 +122,12 @@ function BrokerForm(props) {
 
       // #region Broker Address
       address: record.address,
+      address_line_0: record.address?.line_0,
+      address_line_1: record.address?.line_1,
+      address_line_2: record.address?.line_2,
+      address_line_3: record.address?.line_3,
+      address_line_4: record.address?.line_4,
+      address_line_5: record.address?.line_5,
       // #endregion
 
       // #region Broker Video
@@ -137,6 +147,32 @@ function BrokerForm(props) {
       creteria_body: record.creteria?.body,
       // #endregion
     };
+
+    if (record.checkbox) {
+      for (const brokerCheckboxName of brokerCheckboxNames) {
+        result[
+          [
+            brokerCheckboxFormPrefix,
+            brokerCheckboxName,
+          ].join('')
+        ] = record.checkbox[brokerCheckboxName];
+        result[
+          [
+            brokerCheckboxFormPrefix,
+            brokerCheckboxTextPrefix,
+            brokerCheckboxName,
+          ].join('')
+        ] =
+          record.checkbox[
+            [
+              brokerCheckboxTextPrefix,
+              brokerCheckboxName,
+            ].join('')
+          ];
+      }
+    }
+
+    return result;
   });
 
   const form = useForm({
@@ -151,6 +187,7 @@ function BrokerForm(props) {
 
   const onReset = () => {
     Object.keys(initialValues).forEach((key) => {
+      form.register({ name: key });
       form.setValue(key, initialValues[key]);
     });
   };
@@ -161,6 +198,10 @@ function BrokerForm(props) {
 
   const handleSetTabValue = (event: any, newValue: any) =>
     setTabValue(newValue);
+
+  useEffect(() => {
+    onReset();
+  }, [initialValues]);
 
   return (
     <FormWrapper>

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import MDInput from 'src/mui/components/MDInput';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import FormErrors from 'src/view/shared/form/formErrors';
 import MDBox from 'src/mui/components/MDBox';
+import MDInput from 'src/mui/components/MDInput';
 import MDTypography from 'src/mui/components/MDTypography';
+import PropTypes from 'prop-types';
 
 export function InputFormItem(props) {
   const {
@@ -35,12 +35,15 @@ export function InputFormItem(props) {
     formState: { touched, isSubmitted },
     setValue,
     control: { defaultValuesRef },
+    getValues,
   } = useFormContext();
 
   const defaultValues = defaultValuesRef.current || {};
 
+  const formValue = getValues(name);
+
   const [curValue, setCurValue] = useState(
-    value || defaultValues[name] || '',
+    formValue || value || defaultValues[name] || '',
   );
 
   useEffect(() => {
@@ -93,7 +96,9 @@ export function InputFormItem(props) {
           name,
         }}
         disabled={disabled}
-        value={curValue}
+        value={
+          props.forceValue ? value : formValue || curValue
+        }
       />
       {errorMessage && (
         <MDBox mt={0.75}>

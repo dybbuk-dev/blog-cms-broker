@@ -17,6 +17,14 @@ import BrokerSpreadRepository from './brokerSpreadRepository';
 import BrokerFeatureRepository from './brokerFeatureRepository';
 import BrokerBankRepository from './brokerBankRepository';
 import BrokerOrderTypeRepository from './brokerOrderTypeRepository';
+import BrokerAddressRepository from './brokerAddressRepository';
+import BrokerCheckboxRepository from './brokerCheckboxRepository';
+import BrokerCreteriaRepository from './brokerCreteriaRepository';
+import BrokerMetaRepository from './brokerMetaRepository';
+import BrokerVideoRepository from './brokerVideoRepository';
+import BrokerEmailRepository from './brokerEmailRepository';
+import BrokerFaxRepository from './brokerFaxRepository';
+import BrokerPhoneRepository from './brokerPhoneRepository';
 
 const Op = Sequelize.Op;
 
@@ -172,6 +180,33 @@ class BrokerRepository {
 
     if (!record) {
       throw new Error404();
+    }
+
+    const Repositories: any[] = [
+      BrokerAddressRepository,
+      BrokerBankRepository,
+      BrokerCertificateRepository,
+      BrokerCheckboxRepository,
+      BrokerCreteriaRepository,
+      BrokerDepositGuaranteeRepository,
+      BrokerEmailRepository,
+      BrokerFaxRepository,
+      BrokerFeatureRepository,
+      BrokerMetaRepository,
+      BrokerOrderTypeRepository,
+      BrokerPhoneRepository,
+      BrokerRegulatoryAuthorityRepository,
+      BrokersCategoryRepository,
+      BrokerSpreadRepository,
+      BrokerUpsideRepository,
+      BrokerVideoRepository,
+    ];
+    for (const Repository of Repositories) {
+      if (
+        typeof Repository.destroyByBroker === 'function'
+      ) {
+        await Repository.destroyByBroker(id, options);
+      }
     }
 
     await record.destroy({

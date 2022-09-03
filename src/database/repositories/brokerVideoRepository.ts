@@ -120,6 +120,21 @@ class BrokerVideoRepository {
     );
   }
 
+  static async destroyByBroker(
+    id,
+    options: IRepositoryOptions,
+  ) {
+    const transaction =
+      SequelizeRepository.getTransaction(options);
+
+    await options.database.broker_video.destroy({
+      where: {
+        id: id,
+      },
+      transaction,
+    });
+  }
+
   static async findById(id, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);

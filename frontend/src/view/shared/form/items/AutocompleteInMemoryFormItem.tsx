@@ -42,9 +42,12 @@ function AutocompleteInMemoryFormItem(props) {
     setValue,
     register,
     formState: { touched, isSubmitted },
+    getValues,
   } = useFormContext();
 
   const defaultValues = defaultValuesRef.current || {};
+
+  const formValue = getValues(name);
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -54,7 +57,7 @@ function AutocompleteInMemoryFormItem(props) {
     externalErrorMessage,
   );
 
-  const originalValue = defaultValues[name];
+  const originalValue = formValue || defaultValues[name];
 
   const [fullDataSource, setFullDataSource] = useState<
     Array<any>
@@ -65,7 +68,6 @@ function AutocompleteInMemoryFormItem(props) {
 
   useEffect(() => {
     register({ name });
-    handleSelect(value());
   }, [register, name]);
 
   useEffect(() => {

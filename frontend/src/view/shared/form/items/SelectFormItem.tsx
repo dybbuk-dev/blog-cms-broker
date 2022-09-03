@@ -1,12 +1,12 @@
 import { Autocomplete } from '@mui/material';
 import { i18n } from 'src/i18n';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import FormErrors from 'src/view/shared/form/formErrors';
 import MDBox from 'src/mui/components/MDBox';
 import MDInput from 'src/mui/components/MDInput';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
 
 function SelectFormItem(props) {
   const {
@@ -35,6 +35,7 @@ function SelectFormItem(props) {
     formState: { touched, isSubmitted },
     setValue,
     control: { defaultValuesRef },
+    getValues,
   } = useFormContext();
 
   const errorMessage = FormErrors.errorMessage(
@@ -49,17 +50,21 @@ function SelectFormItem(props) {
 
   const originalValue = defaultValues[name];
 
-  const [realValue, setRealValue] = useState(
-    defaultValue || originalValue,
+  const formValue = getValues(name);
+
+  const [curValue, setCurValue] = useState(
+    formValue || defaultValue || originalValue,
   );
 
   useEffect(() => {
     register({ name });
-    handleSelect(value());
   }, [register, name]);
 
   const value = () => {
     const { mode } = props;
+    const realValue = props.forceValue
+      ? defaultValue
+      : formValue || curValue;
     if (mode === 'multiple') {
       return valueMultiple(realValue);
     } else {
@@ -81,8 +86,9 @@ function SelectFormItem(props) {
     const { options } = props;
 
     if (value != null) {
-      return options.find(
-        (option) => option.value === value,
+      return (
+        options.find((option) => option.value === value) ||
+        null
       );
     }
 
@@ -100,7 +106,7 @@ function SelectFormItem(props) {
 
   const handleSelectMultiple = (values) => {
     if (!values) {
-      setRealValue([]);
+      setCurValue([]);
       setValue(name, [], {
         shouldValidate: false,
         shouldDirty: true,
@@ -113,7 +119,7 @@ function SelectFormItem(props) {
       .map((data) => (data ? data.value : data))
       .filter((value) => value != null);
 
-    setRealValue(newValue);
+    setCurValue(newValue);
     setValue(name, newValue, {
       shouldValidate: false,
       shouldDirty: true,
@@ -123,7 +129,7 @@ function SelectFormItem(props) {
 
   const handleSelectOne = (data) => {
     if (!data) {
-      setRealValue(null);
+      setCurValue(null);
       setValue(name, null, {
         shouldValidate: false,
         shouldDirty: true,
@@ -132,7 +138,7 @@ function SelectFormItem(props) {
       return;
     }
 
-    setRealValue(data.value);
+    setCurValue(data.value);
     setValue(name, data.value, {
       shouldValidate: false,
       shouldDirty: true,

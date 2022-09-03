@@ -1,3 +1,4 @@
+import { grey } from '@mui/material/colors';
 import { Grid, IconButton } from '@mui/material';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useEffect, useState } from 'react';
@@ -38,6 +39,8 @@ function GroupInputFormItem(props) {
       });
   };
 
+  const extraProps = { ...rest, forceValue: true };
+
   return (
     <Grid xl={xl} lg={lg} md={md} sm={sm} xs={xs} item>
       <GroupInput
@@ -48,7 +51,7 @@ function GroupInputFormItem(props) {
         value={value}
         variant={variant}
         onChange={onGroupInputChange}
-        {...rest}
+        {...extraProps}
       />
     </Grid>
   );
@@ -72,7 +75,7 @@ GroupInputFormItem.propTypes = {
 };
 
 function GroupFormItem(props) {
-  const { sidenavColor } = selectMuiSettings();
+  const { darkMode, sidenavColor } = selectMuiSettings();
 
   const {
     groupInputTemplates,
@@ -100,15 +103,19 @@ function GroupFormItem(props) {
     register,
     setValue,
     control: { defaultValuesRef },
+    getValues,
   } = useFormContext();
 
   const defaultValues = defaultValuesRef.current || {};
+
+  const formValue = getValues(realGroupName);
 
   const valueContainer = valueAttr
     ? defaultValues[valueAttr]
     : null;
 
   const originalValue =
+    formValue ||
     defaultValues[realGroupName] ||
     (valueContainer && valueContainer[groupName]) ||
     [];
@@ -116,16 +123,16 @@ function GroupFormItem(props) {
   const [curValue, setCurValue] = useState(originalValue);
 
   const updateGroupValue = (newValue) => {
+    setCurValue(newValue);
     setValue(realGroupName, newValue, {
       shouldValidate: false,
       shouldDirty: true,
     });
-    setCurValue(newValue);
   };
 
   useEffect(() => {
     register({ name: realGroupName });
-    updateGroupValue(originalValue);
+    // updateGroupValue(originalValue);
   }, [register, realGroupName]);
 
   const addNewGroupValue = (index) => {
@@ -303,7 +310,11 @@ function GroupFormItem(props) {
   return noContainer ? (
     render()
   ) : (
-    <MDBox p={3} border="1px solid grey" borderRadius="md">
+    <MDBox
+      p={3}
+      border={`1px solid ${grey[darkMode ? 700 : 300]}`}
+      borderRadius="md"
+    >
       {render()}
     </MDBox>
   );
