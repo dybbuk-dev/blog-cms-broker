@@ -34,11 +34,11 @@ export function CheckboxFormItem(props) {
   const formValue = getValues(name);
 
   const [checked, setChecked] = useState(() => {
-    if (props.value !== undefined && props.value !== null) {
-      return props.value;
-    }
     if (formValue !== undefined && formValue !== null) {
       return formValue;
+    }
+    if (props.value !== undefined && props.value !== null) {
+      return props.value;
     }
     if (
       defaultValues[name] !== undefined &&

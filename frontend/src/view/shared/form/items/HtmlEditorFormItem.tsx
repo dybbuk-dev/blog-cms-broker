@@ -46,7 +46,7 @@ function HtmlEditorFormItem({
   const { darkMode } = selectMuiSettings();
 
   const [originalValue, setOriginalValue] = useState(
-    formValue || defaultValues[name] || '',
+    formValue || value || defaultValues[name] || '',
   );
 
   const updateValue = (value) => {

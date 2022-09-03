@@ -1,3 +1,4 @@
+import { grey } from '@mui/material/colors';
 import { Grid, IconButton } from '@mui/material';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useEffect, useState } from 'react';
@@ -74,7 +75,7 @@ GroupInputFormItem.propTypes = {
 };
 
 function GroupFormItem(props) {
-  const { sidenavColor } = selectMuiSettings();
+  const { darkMode, sidenavColor } = selectMuiSettings();
 
   const {
     groupInputTemplates,
@@ -309,7 +310,11 @@ function GroupFormItem(props) {
   return noContainer ? (
     render()
   ) : (
-    <MDBox p={3} border="1px solid grey" borderRadius="md">
+    <MDBox
+      p={3}
+      border={`1px solid ${grey[darkMode ? 700 : 300]}`}
+      borderRadius="md"
+    >
       {render()}
     </MDBox>
   );

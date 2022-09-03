@@ -1,4 +1,6 @@
+import { grey } from '@mui/material/colors';
 import { Grid } from '@mui/material';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
@@ -6,6 +8,7 @@ import PropTypes from 'prop-types';
 function FieldSetViewItem(props) {
   const { children, description, label, noContainer } =
     props;
+  const { darkMode } = selectMuiSettings();
   const render = () => (
     <Grid spacing={2} container>
       {(label || description) && (
@@ -41,7 +44,11 @@ function FieldSetViewItem(props) {
   return noContainer ? (
     render()
   ) : (
-    <MDBox p={3} border="1px solid grey" borderRadius="md">
+    <MDBox
+      p={3}
+      border={`1px solid ${grey[darkMode ? 700 : 300]}`}
+      borderRadius="md"
+    >
       {render()}
     </MDBox>
   );

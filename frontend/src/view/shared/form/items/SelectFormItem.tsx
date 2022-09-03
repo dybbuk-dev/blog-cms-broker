@@ -53,7 +53,7 @@ function SelectFormItem(props) {
   const formValue = getValues(name);
 
   const [curValue, setCurValue] = useState(
-    defaultValue || formValue || originalValue,
+    formValue || defaultValue || originalValue,
   );
 
   useEffect(() => {
