@@ -197,6 +197,7 @@ function GroupFormItem(props) {
               onClick={() => {
                 addNewGroupValue(-1);
               }}
+              tabIndex={-1}
             >
               <AddIcon />
             </IconButton>
@@ -225,6 +226,7 @@ function GroupFormItem(props) {
                 onClick={() => {
                   addNewGroupValue(idx);
                 }}
+                tabIndex={-1}
               >
                 <AddIcon />
               </IconButton>
@@ -233,6 +235,7 @@ function GroupFormItem(props) {
                 onClick={() => {
                   moveUpGroupValue(idx);
                 }}
+                tabIndex={-1}
               >
                 <ArrowUpwardIcon />
               </IconButton>
@@ -241,6 +244,7 @@ function GroupFormItem(props) {
                 onClick={() => {
                   moveDownGroupValue(idx);
                 }}
+                tabIndex={-1}
               >
                 <ArrowDownwardIcon />
               </IconButton>
@@ -249,6 +253,7 @@ function GroupFormItem(props) {
                 onClick={() => {
                   clearGroupValue(idx);
                 }}
+                tabIndex={-1}
               >
                 <ClearIcon />
               </IconButton>
