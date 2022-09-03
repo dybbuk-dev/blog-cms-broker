@@ -202,6 +202,11 @@ const en = {
         notEmpty: {},
       },
     },
+    broker_trade_platform: {
+      errors: {
+        notEmpty: {},
+      },
+    },
     author: {
       errors: {
         unique: {},

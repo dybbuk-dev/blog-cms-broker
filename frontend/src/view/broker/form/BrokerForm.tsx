@@ -154,6 +154,10 @@ function BrokerForm(props) {
       // #region Currency Pair
       currency_pairs: record.currency_pairs,
       // #endregion
+
+      // #region Trade Platform
+      trade_platforms: record.trade_platforms,
+      // #endregion
     };
 
     if (record.checkbox) {

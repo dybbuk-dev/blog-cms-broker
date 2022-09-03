@@ -444,6 +444,14 @@ const en = {
           url: 'Homepage',
         },
         // #endregion
+
+        // #region Trade Platform
+        trade_platforms: 'Trading Platforms',
+        trade_platform: {
+          name: 'Surname',
+          url: 'Homepage',
+        },
+        // #endregion
       },
       tabs: {
         broker: 'Broker',

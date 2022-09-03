@@ -221,6 +221,10 @@ export default function (sequelize) {
       as: 'currency_pairs',
       foreignKey: 'broker_id',
     });
+    models.broker.hasMany(models.broker_trade_platform, {
+      as: 'trade_platforms',
+      foreignKey: 'broker_id',
+    });
   };
 
   return broker;

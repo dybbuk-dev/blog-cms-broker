@@ -18,6 +18,7 @@ import BrokerPhoneRepository from './brokerPhoneRepository';
 import BrokerRegulatoryAuthorityRepository from './brokerRegulatoryAuthorityRepository';
 import BrokersCategoryRepository from './brokersCategoryRepository';
 import BrokerSpreadRepository from './brokerSpreadRepository';
+import BrokerTradePlatformRepository from './brokerTradePlatformRepository';
 import BrokerUpsideRepository from './brokerUpsideRepository';
 import BrokerVideoRepository from './brokerVideoRepository';
 import Error404 from '../../errors/Error404';
@@ -201,6 +202,7 @@ class BrokerRepository {
       BrokerRegulatoryAuthorityRepository,
       BrokersCategoryRepository,
       BrokerSpreadRepository,
+      BrokerTradePlatformRepository,
       BrokerUpsideRepository,
       BrokerVideoRepository,
     ];
@@ -594,6 +596,14 @@ class BrokerRepository {
       );
 
     output.currency_pairs = currency_pairs || null;
+
+    const { rows: trade_platforms } =
+      await BrokerTradePlatformRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.trade_platforms = trade_platforms || null;
 
     return output;
   }
