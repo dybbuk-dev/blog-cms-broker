@@ -1,27 +1,28 @@
-import Error400 from '../errors/Error400';
-import SequelizeRepository from '../database/repositories/sequelizeRepository';
 import { IServiceOptions } from './IServiceOptions';
-import BrokerRepository from '../database/repositories/brokerRepository';
-import NavigationRepository from '../database/repositories/navigationRepository';
 import AuthorRepository from '../database/repositories/authorRepository';
-import BrokersCategoryRepository from '../database/repositories/brokersCategoryRepository';
-import CategoryRepository from '../database/repositories/categoryRepository';
-import BrokerMetaRepository from '../database/repositories/brokerMetaRepository';
-import BrokerUpsideRepository from '../database/repositories/brokerUpsideRepository';
-import BrokerRegulatoryAuthorityRepository from '../database/repositories/brokerRegulatoryAuthorityRepository';
-import BrokerDepositGuaranteeRepository from '../database/repositories/brokerDepositGuaranteeRepository';
-import BrokerCertificateRepository from '../database/repositories/brokerCertificateRepository';
-import BrokerSpreadRepository from '../database/repositories/brokerSpreadRepository';
-import BrokerFeatureRepository from '../database/repositories/brokerFeatureRepository';
-import BrokerPhoneRepository from '../database/repositories/brokerPhoneRepository';
-import BrokerFaxRepository from '../database/repositories/brokerFaxRepository';
-import BrokerEmailRepository from '../database/repositories/brokerEmailRepository';
 import BrokerAddressRepository from '../database/repositories/brokerAddressRepository';
-import BrokerVideoRepository from '../database/repositories/brokerVideoRepository';
-import BrokerCheckboxRepository from '../database/repositories/brokerCheckboxRepository';
 import BrokerBankRepository from '../database/repositories/brokerBankRepository';
-import BrokerOrderTypeRepository from '../database/repositories/brokerOrderTypeRepository';
+import BrokerCertificateRepository from '../database/repositories/brokerCertificateRepository';
+import BrokerCheckboxRepository from '../database/repositories/brokerCheckboxRepository';
 import BrokerCreteriaRepository from '../database/repositories/brokerCreteriaRepository';
+import BrokerDepositGuaranteeRepository from '../database/repositories/brokerDepositGuaranteeRepository';
+import BrokerEmailRepository from '../database/repositories/brokerEmailRepository';
+import BrokerFaxRepository from '../database/repositories/brokerFaxRepository';
+import BrokerFeatureRepository from '../database/repositories/brokerFeatureRepository';
+import BrokerMetaRepository from '../database/repositories/brokerMetaRepository';
+import BrokerMinimumTradingUnitRepository from '../database/repositories/brokerMinimumTradingUnitRepository';
+import BrokerOrderTypeRepository from '../database/repositories/brokerOrderTypeRepository';
+import BrokerPhoneRepository from '../database/repositories/brokerPhoneRepository';
+import BrokerRegulatoryAuthorityRepository from '../database/repositories/brokerRegulatoryAuthorityRepository';
+import BrokerRepository from '../database/repositories/brokerRepository';
+import BrokersCategoryRepository from '../database/repositories/brokersCategoryRepository';
+import BrokerSpreadRepository from '../database/repositories/brokerSpreadRepository';
+import BrokerUpsideRepository from '../database/repositories/brokerUpsideRepository';
+import BrokerVideoRepository from '../database/repositories/brokerVideoRepository';
+import CategoryRepository from '../database/repositories/categoryRepository';
+import Error400 from '../errors/Error400';
+import NavigationRepository from '../database/repositories/navigationRepository';
+import SequelizeRepository from '../database/repositories/sequelizeRepository';
 
 export default class BrokerService {
   options: IServiceOptions;
@@ -216,6 +217,32 @@ export default class BrokerService {
       await BrokerOrderTypeRepository.create(
         {
           type: item,
+          broker: id,
+          ip: data.ip || '',
+        },
+        options,
+      );
+    }
+  }
+
+  /**
+   * ! Update Broker Minimum Trading Unit
+   */
+  async _updateBrokerMinimumTradingUnit(
+    id,
+    data,
+    transaction,
+  ) {
+    const options = { ...this.options, transaction };
+    await BrokerMinimumTradingUnitRepository.destroyByBroker(
+      id,
+      options,
+    );
+    const items = data.minimum_trading_units || [];
+    for (const item of items) {
+      await BrokerMinimumTradingUnitRepository.create(
+        {
+          minimum_trading_unit: item,
           broker: id,
           ip: data.ip || '',
         },
@@ -489,6 +516,11 @@ export default class BrokerService {
     await this._updateBrokerCheckbox(id, data, transaction);
     await this._updateBrokerBank(id, data, transaction);
     await this._updateBrokerOrderType(
+      id,
+      data,
+      transaction,
+    );
+    await this._updateBrokerMinimumTradingUnit(
       id,
       data,
       transaction,

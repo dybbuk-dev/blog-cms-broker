@@ -432,6 +432,10 @@ const en = {
           body: 'Broker Criteria',
         },
         // #endregion
+
+        // #region Minimum Trading Unit
+        minimum_trading_units: 'Smallest tradable units',
+        // #endregion
       },
       tabs: {
         broker: 'Broker',
@@ -496,6 +500,13 @@ const en = {
               'Stoploss (garantiert)',
             'Take Profit': 'Take Profit',
             'Trailing Stop': 'Trailing Stop',
+          },
+        },
+        minimum_trading_unit: {
+          minimum_trading_unit: {
+            'Mini-Lots (0,1 Lot)': 'Mini-Lots (0,1 Lot)',
+            'Micro-Lots (0,01 Lot)':
+              'Micro-Lots (0,01 Lot)',
           },
         },
       },

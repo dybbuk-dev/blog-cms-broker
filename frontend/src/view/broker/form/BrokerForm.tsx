@@ -146,6 +146,10 @@ function BrokerForm(props) {
       creteria_activated: record.creteria?.activated,
       creteria_body: record.creteria?.body,
       // #endregion
+
+      // #region Minimum Trading Unit
+      minimum_trading_units: record.minimum_trading_units,
+      // #endregion
     };
 
     if (record.checkbox) {

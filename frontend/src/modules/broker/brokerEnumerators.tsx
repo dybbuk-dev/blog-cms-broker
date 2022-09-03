@@ -39,6 +39,12 @@ const brokerEnumerators = {
       'Trailing Stop',
     ],
   },
+  minimum_trading_unit: {
+    minimum_trading_unit: [
+      'Mini-Lots (0,1 Lot)',
+      'Micro-Lots (0,01 Lot)',
+    ],
+  },
 };
 
 export default brokerEnumerators;

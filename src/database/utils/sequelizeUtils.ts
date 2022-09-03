@@ -1,5 +1,5 @@
 export default class SequelizeUtils {
-  static value(obj, fieldName, defaultValue = null) {
+  static value(obj, fieldName, defaultValue: any = null) {
     if (!obj || !obj.dataValues) {
       return defaultValue;
     }

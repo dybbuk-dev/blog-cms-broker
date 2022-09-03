@@ -184,6 +184,14 @@ const en = {
         },
       },
     },
+    minimum_trading_unit: {
+      errors: {
+        notEmpty: {
+          minimum_trading_units:
+            'Broker Minimum Trading Unit is required',
+        },
+      },
+    },
     broker_creteria: {
       errors: {
         notEmpty: {},

@@ -210,6 +210,13 @@ export default function (sequelize) {
       as: 'order_types',
       foreignKey: 'broker_id',
     });
+    models.broker.hasMany(
+      models.broker_minimum_trading_unit,
+      {
+        as: 'minimum_trading_units',
+        foreignKey: 'broker_id',
+      },
+    );
   };
 
   return broker;
