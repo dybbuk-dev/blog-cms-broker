@@ -228,6 +228,21 @@ class BrokerCheckboxRepository {
     );
   }
 
+  static async destroyByBroker(
+    id,
+    options: IRepositoryOptions,
+  ) {
+    const transaction =
+      SequelizeRepository.getTransaction(options);
+
+    await options.database.broker_checkbox.destroy({
+      where: {
+        id: id,
+      },
+      transaction,
+    });
+  }
+
   static async findById(id, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);

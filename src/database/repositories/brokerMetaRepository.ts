@@ -184,6 +184,21 @@ class BrokerMetaRepository {
     );
   }
 
+  static async destroyByBroker(
+    id,
+    options: IRepositoryOptions,
+  ) {
+    const transaction =
+      SequelizeRepository.getTransaction(options);
+
+    await options.database.broker_metas.destroy({
+      where: {
+        id: id,
+      },
+      transaction,
+    });
+  }
+
   static async findById(id, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
