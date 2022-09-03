@@ -46,7 +46,7 @@ function BrokerOldForm(props) {
               label: i18n(
                 'entities.broker.fields.currency_pair.currency',
               ),
-              md: 6,
+              md: 4,
               xs: 12,
               defaultValue: '',
             },
@@ -56,7 +56,7 @@ function BrokerOldForm(props) {
               label: i18n(
                 'entities.broker.fields.currency_pair.url',
               ),
-              md: 6,
+              md: 8,
               xs: 12,
               defaultValue: '',
             },
@@ -76,7 +76,7 @@ function BrokerOldForm(props) {
               label: i18n(
                 'entities.broker.fields.trade_platform.name',
               ),
-              md: 6,
+              md: 4,
               xs: 12,
               defaultValue: '',
             },
@@ -86,7 +86,7 @@ function BrokerOldForm(props) {
               label: i18n(
                 'entities.broker.fields.trade_platform.url',
               ),
-              md: 6,
+              md: 8,
               xs: 12,
               defaultValue: '',
             },
@@ -106,7 +106,7 @@ function BrokerOldForm(props) {
               label: i18n(
                 'entities.broker.fields.trade_store.name',
               ),
-              md: 6,
+              md: 4,
               xs: 12,
               defaultValue: '',
             },
@@ -116,7 +116,7 @@ function BrokerOldForm(props) {
               label: i18n(
                 'entities.broker.fields.trade_store.url',
               ),
-              md: 6,
+              md: 8,
               xs: 12,
               defaultValue: '',
             },
