@@ -94,6 +94,10 @@ function Pagination(props) {
     pageOptionsEnd === last &&
       (pageOptionsStart = last - pageOptionsCount + 1);
   }
+  if (last <= pageOptionsCount) {
+    pageOptionsStart = 1;
+    pageOptionsEnd = last;
+  }
 
   const pageOptions = [];
 
