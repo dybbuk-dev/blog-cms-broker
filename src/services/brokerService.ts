@@ -7,6 +7,7 @@ import BrokerCheckboxRepository from '../database/repositories/brokerCheckboxRep
 import BrokerCreteriaRepository from '../database/repositories/brokerCreteriaRepository';
 import BrokerCurrencyPairRepository from '../database/repositories/brokerCurrencyPairRepository';
 import BrokerDepositGuaranteeRepository from '../database/repositories/brokerDepositGuaranteeRepository';
+import BrokerDepositRepository from '../database/repositories/brokerDepositRepository';
 import BrokerEmailRepository from '../database/repositories/brokerEmailRepository';
 import BrokerFaxRepository from '../database/repositories/brokerFaxRepository';
 import BrokerFeatureRepository from '../database/repositories/brokerFeatureRepository';
@@ -210,6 +211,28 @@ export default class BrokerService {
     const items = data.trade_stores || [];
     for (const item of items) {
       await BrokerTradeStoreRepository.create(
+        {
+          ...item,
+          broker: id,
+          ip: data.ip || '',
+        },
+        options,
+      );
+    }
+  }
+
+  /**
+   * ! Update Broker Deposit
+   */
+  async _updateBrokerDeposit(id, data, transaction) {
+    const options = { ...this.options, transaction };
+    await BrokerDepositRepository.destroyByBroker(
+      id,
+      options,
+    );
+    const items = data.deposits || [];
+    for (const item of items) {
+      await BrokerDepositRepository.create(
         {
           ...item,
           broker: id,
@@ -609,6 +632,7 @@ export default class BrokerService {
       data,
       transaction,
     );
+    await this._updateBrokerDeposit(id, data, transaction);
   }
 
   async create(data) {

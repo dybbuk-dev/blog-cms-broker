@@ -212,6 +212,11 @@ const en = {
         notEmpty: {},
       },
     },
+    broker_deposit: {
+      errors: {
+        notEmpty: {},
+      },
+    },
     author: {
       errors: {
         unique: {},

@@ -8,6 +8,7 @@ import BrokerCheckboxRepository from './brokerCheckboxRepository';
 import BrokerCreteriaRepository from './brokerCreteriaRepository';
 import BrokerCurrencyPairRepository from './brokerCurrencyPairRepository';
 import BrokerDepositGuaranteeRepository from './brokerDepositGuaranteeRepository';
+import BrokerDepositRepository from './brokerDepositRepository';
 import BrokerEmailRepository from './brokerEmailRepository';
 import BrokerFaxRepository from './brokerFaxRepository';
 import BrokerFeatureRepository from './brokerFeatureRepository';
@@ -193,6 +194,7 @@ class BrokerRepository {
       BrokerCreteriaRepository,
       BrokerCurrencyPairRepository,
       BrokerDepositGuaranteeRepository,
+      BrokerDepositRepository,
       BrokerEmailRepository,
       BrokerFaxRepository,
       BrokerFeatureRepository,
@@ -614,6 +616,14 @@ class BrokerRepository {
       );
 
     output.trade_stores = trade_stores || null;
+
+    const { rows: deposits } =
+      await BrokerDepositRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.deposits = deposits || null;
 
     return output;
   }

@@ -162,6 +162,10 @@ function BrokerForm(props) {
       // #region Trade Store
       trade_stores: record.trade_stores,
       // #endregion
+
+      // #region Deposit
+      deposits: record.deposits,
+      // #endregion
     };
 
     if (record.checkbox) {

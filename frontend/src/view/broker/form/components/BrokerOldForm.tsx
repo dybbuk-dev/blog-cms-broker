@@ -123,6 +123,34 @@ function BrokerOldForm(props) {
           ]}
         />
       </Grid>
+      <Grid item xs={12}>
+        <GroupFormItem
+          name="deposits"
+          label={i18n('entities.broker.fields.deposits')}
+          groupInputTemplates={[
+            {
+              input: InputFormItem,
+              name: 'deposit',
+              label: i18n(
+                'entities.broker.fields.deposit.deposit',
+              ),
+              md: 4,
+              xs: 12,
+              defaultValue: '',
+            },
+            {
+              input: InputFormItem,
+              name: 'url',
+              label: i18n(
+                'entities.broker.fields.deposit.url',
+              ),
+              md: 8,
+              xs: 12,
+              defaultValue: '',
+            },
+          ]}
+        />
+      </Grid>
     </Grid>
   );
 }

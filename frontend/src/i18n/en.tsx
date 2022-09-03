@@ -460,6 +460,14 @@ const en = {
           url: 'Homepage',
         },
         // #endregion
+
+        // #region Deposit
+        deposits: 'Deposit Options',
+        deposit: {
+          deposit: 'Deposit Option',
+          url: 'Homepage',
+        },
+        // #endregion
       },
       tabs: {
         broker: 'Broker',
