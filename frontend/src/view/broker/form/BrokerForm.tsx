@@ -158,6 +158,10 @@ function BrokerForm(props) {
       // #region Trade Platform
       trade_platforms: record.trade_platforms,
       // #endregion
+
+      // #region Trade Store
+      trade_stores: record.trade_stores,
+      // #endregion
     };
 
     if (record.checkbox) {

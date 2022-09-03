@@ -452,6 +452,14 @@ const en = {
           url: 'Homepage',
         },
         // #endregion
+
+        // #region Trade Platform
+        trade_stores: 'Trade Offers',
+        trade_store: {
+          name: 'Surname',
+          url: 'Homepage',
+        },
+        // #endregion
       },
       tabs: {
         broker: 'Broker',

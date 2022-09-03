@@ -5,6 +5,7 @@ import BrokerBankRepository from '../database/repositories/brokerBankRepository'
 import BrokerCertificateRepository from '../database/repositories/brokerCertificateRepository';
 import BrokerCheckboxRepository from '../database/repositories/brokerCheckboxRepository';
 import BrokerCreteriaRepository from '../database/repositories/brokerCreteriaRepository';
+import BrokerCurrencyPairRepository from '../database/repositories/brokerCurrencyPairRepository';
 import BrokerDepositGuaranteeRepository from '../database/repositories/brokerDepositGuaranteeRepository';
 import BrokerEmailRepository from '../database/repositories/brokerEmailRepository';
 import BrokerFaxRepository from '../database/repositories/brokerFaxRepository';
@@ -17,14 +18,14 @@ import BrokerRegulatoryAuthorityRepository from '../database/repositories/broker
 import BrokerRepository from '../database/repositories/brokerRepository';
 import BrokersCategoryRepository from '../database/repositories/brokersCategoryRepository';
 import BrokerSpreadRepository from '../database/repositories/brokerSpreadRepository';
+import BrokerTradePlatformRepository from '../database/repositories/brokerTradePlatformRepository';
+import BrokerTradeStoreRepository from '../database/repositories/brokerTradeStoreRepository';
 import BrokerUpsideRepository from '../database/repositories/brokerUpsideRepository';
 import BrokerVideoRepository from '../database/repositories/brokerVideoRepository';
 import CategoryRepository from '../database/repositories/categoryRepository';
 import Error400 from '../errors/Error400';
 import NavigationRepository from '../database/repositories/navigationRepository';
 import SequelizeRepository from '../database/repositories/sequelizeRepository';
-import BrokerCurrencyPairRepository from '../database/repositories/brokerCurrencyPairRepository';
-import BrokerTradePlatformRepository from '../database/repositories/brokerTradePlatformRepository';
 
 export default class BrokerService {
   options: IServiceOptions;
@@ -187,6 +188,28 @@ export default class BrokerService {
     const items = data.trade_platforms || [];
     for (const item of items) {
       await BrokerTradePlatformRepository.create(
+        {
+          ...item,
+          broker: id,
+          ip: data.ip || '',
+        },
+        options,
+      );
+    }
+  }
+
+  /**
+   * ! Update Broker Trade Store
+   */
+  async _updateBrokerTradeStore(id, data, transaction) {
+    const options = { ...this.options, transaction };
+    await BrokerTradeStoreRepository.destroyByBroker(
+      id,
+      options,
+    );
+    const items = data.trade_stores || [];
+    for (const item of items) {
+      await BrokerTradeStoreRepository.create(
         {
           ...item,
           broker: id,
@@ -577,6 +600,11 @@ export default class BrokerService {
       transaction,
     );
     await this._updateBrokerTradePlatform(
+      id,
+      data,
+      transaction,
+    );
+    await this._updateBrokerTradeStore(
       id,
       data,
       transaction,

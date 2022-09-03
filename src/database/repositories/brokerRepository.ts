@@ -19,6 +19,7 @@ import BrokerRegulatoryAuthorityRepository from './brokerRegulatoryAuthorityRepo
 import BrokersCategoryRepository from './brokersCategoryRepository';
 import BrokerSpreadRepository from './brokerSpreadRepository';
 import BrokerTradePlatformRepository from './brokerTradePlatformRepository';
+import BrokerTradeStoreRepository from './brokerTradeStoreRepository';
 import BrokerUpsideRepository from './brokerUpsideRepository';
 import BrokerVideoRepository from './brokerVideoRepository';
 import Error404 from '../../errors/Error404';
@@ -203,6 +204,7 @@ class BrokerRepository {
       BrokersCategoryRepository,
       BrokerSpreadRepository,
       BrokerTradePlatformRepository,
+      BrokerTradeStoreRepository,
       BrokerUpsideRepository,
       BrokerVideoRepository,
     ];
@@ -604,6 +606,14 @@ class BrokerRepository {
       );
 
     output.trade_platforms = trade_platforms || null;
+
+    const { rows: trade_stores } =
+      await BrokerTradeStoreRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.trade_stores = trade_stores || null;
 
     return output;
   }

@@ -207,6 +207,11 @@ const en = {
         notEmpty: {},
       },
     },
+    broker_trade_store: {
+      errors: {
+        notEmpty: {},
+      },
+    },
     author: {
       errors: {
         unique: {},
