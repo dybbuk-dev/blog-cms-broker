@@ -12,6 +12,7 @@ import BrokerDepositRepository from './brokerDepositRepository';
 import BrokerEmailRepository from './brokerEmailRepository';
 import BrokerFaxRepository from './brokerFaxRepository';
 import BrokerFeatureRepository from './brokerFeatureRepository';
+import BrokerForexSignalRepository from './brokerForexSignalRepository';
 import BrokerMetaRepository from './brokerMetaRepository';
 import BrokerMinimumTradingUnitRepository from './brokerMinimumTradingUnitRepository';
 import BrokerOrderTypeRepository from './brokerOrderTypeRepository';
@@ -99,6 +100,10 @@ class BrokerRepository {
       !metaOnly && {
         model: options.database.broker_creterias,
         as: 'creteria',
+      },
+      !metaOnly && {
+        model: options.database.broker_forex_signal,
+        as: 'forex_signal',
       },
     ].filter(Boolean);
   }
@@ -198,6 +203,7 @@ class BrokerRepository {
       BrokerEmailRepository,
       BrokerFaxRepository,
       BrokerFeatureRepository,
+      BrokerForexSignalRepository,
       BrokerMetaRepository,
       BrokerMinimumTradingUnitRepository,
       BrokerOrderTypeRepository,

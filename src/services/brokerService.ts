@@ -11,6 +11,7 @@ import BrokerDepositRepository from '../database/repositories/brokerDepositRepos
 import BrokerEmailRepository from '../database/repositories/brokerEmailRepository';
 import BrokerFaxRepository from '../database/repositories/brokerFaxRepository';
 import BrokerFeatureRepository from '../database/repositories/brokerFeatureRepository';
+import BrokerForexSignalRepository from '../database/repositories/brokerForexSignalRepository';
 import BrokerMetaRepository from '../database/repositories/brokerMetaRepository';
 import BrokerMinimumTradingUnitRepository from '../database/repositories/brokerMinimumTradingUnitRepository';
 import BrokerOrderTypeRepository from '../database/repositories/brokerOrderTypeRepository';
@@ -572,6 +573,33 @@ export default class BrokerService {
   }
 
   /**
+   * ! Update Broker Forex Signal
+   */
+  async _updateBrokerForexSignal(id, data, transaction) {
+    const options = { ...this.options, transaction };
+    const forexSignalId =
+      await BrokerForexSignalRepository.filterIdInTenant(
+        id,
+        options,
+      );
+    if (forexSignalId) {
+      await BrokerForexSignalRepository.update(
+        id,
+        data,
+        options,
+      );
+    } else {
+      await BrokerForexSignalRepository.create(
+        {
+          ...data,
+          id: id,
+        },
+        options,
+      );
+    }
+  }
+
+  /**
    * * Update Related Broker's Data
    */
   async _updateRelatedData(id, data, transaction) {
@@ -633,6 +661,11 @@ export default class BrokerService {
       transaction,
     );
     await this._updateBrokerDeposit(id, data, transaction);
+    await this._updateBrokerForexSignal(
+      id,
+      data,
+      transaction,
+    );
   }
 
   async create(data) {

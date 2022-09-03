@@ -174,6 +174,10 @@ export default function (sequelize) {
       as: 'creteria',
       foreignKey: 'broker_id',
     });
+    models.broker.hasOne(models.broker_forex_signal, {
+      as: 'forex_signal',
+      foreignKey: 'id',
+    });
 
     models.broker.hasMany(models.broker_upside, {
       as: 'upsides',

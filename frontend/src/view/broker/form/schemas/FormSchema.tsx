@@ -198,6 +198,25 @@ const schema = yup.object().shape({
   // #endregion
 
   // #endregion
+
+  // #region Forex Signal
+  forex_signal_prodiver: yupFormSchemas.string(
+    i18n('entities.broker.fields.forex_signal.prodiver'),
+    {
+      min: 0,
+      max: 255,
+    },
+  ),
+  forex_signal_test_posibilities: yupFormSchemas.string(
+    i18n(
+      'entities.broker.fields.forex_signal.test_posibilities',
+    ),
+    {
+      min: 0,
+      max: 255,
+    },
+  ),
+  // #endregion
 });
 
 export default schema;

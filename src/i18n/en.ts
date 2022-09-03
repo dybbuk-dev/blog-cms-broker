@@ -170,6 +170,11 @@ const en = {
         notEmpty: {},
       },
     },
+    broker_forex_signal: {
+      errors: {
+        notEmpty: {},
+      },
+    },
     broker_bank: {
       errors: {
         notEmpty: {

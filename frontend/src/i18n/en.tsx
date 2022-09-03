@@ -468,6 +468,23 @@ const en = {
           url: 'Homepage',
         },
         // #endregion
+
+        // #region Forex Signal
+        forex_signal: {
+          text: 'Text',
+          url: 'URL',
+          costs: 'Costs',
+          notifications: 'Signal Sending',
+          traded_markets: 'Traded Markets',
+          investment_horizon: 'Investment Horizon',
+          trading_signal_amount:
+            'Frequency of trading signals',
+          prodiver: 'Offerer',
+          test_posibilities: 'Test option',
+          test_posibilities_tick: 'Test option hook',
+          beginners_level: 'Suitable for beginners',
+        },
+        // #endregion
       },
       tabs: {
         broker: 'Broker',
