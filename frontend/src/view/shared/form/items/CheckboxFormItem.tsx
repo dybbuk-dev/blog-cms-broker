@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import FormErrors from 'src/view/shared/form/formErrors';
 import {
-  Checkbox,
-  FormControl,
   FormControlLabel,
   FormHelperText,
-  FormLabel,
   Switch,
 } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
@@ -29,15 +26,28 @@ export function CheckboxFormItem(props) {
     formState: { touched, isSubmitted },
     setValue,
     control: { defaultValuesRef },
+    getValues,
   } = useFormContext();
 
   const defaultValues = defaultValuesRef.current || {};
 
-  const [checked, setChecked] = useState(
-    props.value === undefined || props.value === null
-      ? defaultValues[name] || false
-      : props.value,
-  );
+  const formValue = getValues(name);
+
+  const [checked, setChecked] = useState(() => {
+    if (props.value !== undefined && props.value !== null) {
+      return props.value;
+    }
+    if (formValue !== undefined && formValue !== null) {
+      return formValue;
+    }
+    if (
+      defaultValues[name] !== undefined &&
+      defaultValues[name] !== null
+    ) {
+      return defaultValues[name];
+    }
+    return false;
+  });
 
   useEffect(() => {
     register({ name });

@@ -1,12 +1,12 @@
 import { Autocomplete } from '@mui/material';
 import { i18n } from 'src/i18n';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import FormErrors from 'src/view/shared/form/formErrors';
 import MDBox from 'src/mui/components/MDBox';
 import MDInput from 'src/mui/components/MDInput';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
 
 function SelectFormItem(props) {
   const {
@@ -35,6 +35,7 @@ function SelectFormItem(props) {
     formState: { touched, isSubmitted },
     setValue,
     control: { defaultValuesRef },
+    getValues,
   } = useFormContext();
 
   const errorMessage = FormErrors.errorMessage(
@@ -49,8 +50,10 @@ function SelectFormItem(props) {
 
   const originalValue = defaultValues[name];
 
+  const formValue = getValues(name);
+
   const [curValue, setCurValue] = useState(
-    defaultValue || originalValue,
+    defaultValue || formValue || originalValue,
   );
 
   useEffect(() => {
@@ -61,7 +64,7 @@ function SelectFormItem(props) {
     const { mode } = props;
     const realValue = props.forceValue
       ? defaultValue
-      : curValue;
+      : formValue || curValue;
     if (mode === 'multiple') {
       return valueMultiple(realValue);
     } else {

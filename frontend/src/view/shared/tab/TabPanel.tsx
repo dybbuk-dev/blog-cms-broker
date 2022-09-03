@@ -9,11 +9,11 @@ interface TabPanelProps {
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
-  return (
-    <MDBox display={value === index ? 'block' : 'none'}>
-      {children}
-    </MDBox>
-  );
+  if (value !== index) {
+    return null;
+  }
+
+  return <MDBox>{children}</MDBox>;
 }
 
 export default TabPanel;

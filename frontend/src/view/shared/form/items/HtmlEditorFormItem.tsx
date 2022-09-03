@@ -28,9 +28,12 @@ function HtmlEditorFormItem({
     formState: { touched, isSubmitted },
     control: { defaultValuesRef },
     register,
+    getValues,
   } = useFormContext();
 
   const defaultValues = defaultValuesRef.current || {};
+
+  const formValue = getValues(name);
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -43,7 +46,7 @@ function HtmlEditorFormItem({
   const { darkMode } = selectMuiSettings();
 
   const [originalValue, setOriginalValue] = useState(
-    defaultValues[name] || '',
+    formValue || defaultValues[name] || '',
   );
 
   const updateValue = (value) => {
@@ -56,7 +59,7 @@ function HtmlEditorFormItem({
 
   useEffect(() => {
     register({ name });
-    updateValue(value || originalValue);
+    // updateValue(value || originalValue);
   }, [register, name]);
 
   const onChangeEditor = (newVal) => {

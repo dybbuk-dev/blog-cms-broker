@@ -102,15 +102,19 @@ function GroupFormItem(props) {
     register,
     setValue,
     control: { defaultValuesRef },
+    getValues,
   } = useFormContext();
 
   const defaultValues = defaultValuesRef.current || {};
+
+  const formValue = getValues(realGroupName);
 
   const valueContainer = valueAttr
     ? defaultValues[valueAttr]
     : null;
 
   const originalValue =
+    formValue ||
     defaultValues[realGroupName] ||
     (valueContainer && valueContainer[groupName]) ||
     [];
@@ -127,7 +131,7 @@ function GroupFormItem(props) {
 
   useEffect(() => {
     register({ name: realGroupName });
-    updateGroupValue(originalValue);
+    // updateGroupValue(originalValue);
   }, [register, realGroupName]);
 
   const addNewGroupValue = (index) => {
