@@ -12,20 +12,21 @@ export default function (sequelize) {
       broker_id: {
         type: DataTypes.BIGINT.UNSIGNED,
         allowNull: true,
+        defaultValue: null,
       },
       currency: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        defaultValue: '',
         validate: {
-          notEmpty: true,
           len: [0, 255],
         },
       },
       url: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        defaultValue: '',
         validate: {
-          notEmpty: true,
           len: [0, 255],
         },
       },
@@ -56,6 +57,7 @@ export default function (sequelize) {
 
   broker_currency_pair.associate = (models) => {
     models.broker_currency_pair.belongsTo(models.broker, {
+      as: 'broker',
       constraints: true,
       foreignKey: 'broker_id',
       onDelete: 'NO ACTION',

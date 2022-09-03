@@ -436,6 +436,14 @@ const en = {
         // #region Minimum Trading Unit
         minimum_trading_units: 'Smallest tradable units',
         // #endregion
+
+        // #region Currency Pair
+        currency_pairs: 'Currency pairs',
+        currency_pair: {
+          currency: 'Currency Pair',
+          url: 'Homepage',
+        },
+        // #endregion
       },
       tabs: {
         broker: 'Broker',

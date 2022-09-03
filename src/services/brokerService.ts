@@ -23,6 +23,7 @@ import CategoryRepository from '../database/repositories/categoryRepository';
 import Error400 from '../errors/Error400';
 import NavigationRepository from '../database/repositories/navigationRepository';
 import SequelizeRepository from '../database/repositories/sequelizeRepository';
+import BrokerCurrencyPairRepository from '../database/repositories/brokerCurrencyPairRepository';
 
 export default class BrokerService {
   options: IServiceOptions;
@@ -141,6 +142,28 @@ export default class BrokerService {
     const items = data.upsides || [];
     for (const item of items) {
       await BrokerUpsideRepository.create(
+        {
+          ...item,
+          broker: id,
+          ip: data.ip || '',
+        },
+        options,
+      );
+    }
+  }
+
+  /**
+   * ! Update Broker Currency Pair
+   */
+  async _updateBrokerCurrencyPair(id, data, transaction) {
+    const options = { ...this.options, transaction };
+    await BrokerCurrencyPairRepository.destroyByBroker(
+      id,
+      options,
+    );
+    const items = data.currency_pairs || [];
+    for (const item of items) {
+      await BrokerCurrencyPairRepository.create(
         {
           ...item,
           broker: id,
@@ -521,6 +544,11 @@ export default class BrokerService {
       transaction,
     );
     await this._updateBrokerMinimumTradingUnit(
+      id,
+      data,
+      transaction,
+    );
+    await this._updateBrokerCurrencyPair(
       id,
       data,
       transaction,

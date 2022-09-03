@@ -184,12 +184,17 @@ const en = {
         },
       },
     },
-    minimum_trading_unit: {
+    broker_minimum_trading_unit: {
       errors: {
         notEmpty: {
           minimum_trading_units:
             'Broker Minimum Trading Unit is required',
         },
+      },
+    },
+    broker_currency_pair: {
+      errors: {
+        notEmpty: {},
       },
     },
     broker_creteria: {

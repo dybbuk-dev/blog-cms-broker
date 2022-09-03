@@ -1,6 +1,8 @@
 import { Grid } from '@mui/material';
 import { i18n } from 'src/i18n';
 import brokerEnumerators from 'src/modules/broker/brokerEnumerators';
+import GroupFormItem from 'src/view/shared/form/items/GroupFormItem';
+import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import FieldSetViewItem from 'src/view/shared/view/FieldSetViewItem';
 
@@ -30,6 +32,36 @@ function BrokerOldForm(props) {
             mode="multiple"
           />
         </FieldSetViewItem>
+      </Grid>
+      <Grid item xs={12}>
+        <GroupFormItem
+          name="currency_pairs"
+          label={i18n(
+            'entities.broker.fields.currency_pairs',
+          )}
+          groupInputTemplates={[
+            {
+              input: InputFormItem,
+              name: 'currency',
+              label: i18n(
+                'entities.broker.fields.currency_pair.currency',
+              ),
+              md: 6,
+              xs: 12,
+              defaultValue: '',
+            },
+            {
+              input: InputFormItem,
+              name: 'url',
+              label: i18n(
+                'entities.broker.fields.currency_pair.url',
+              ),
+              md: 6,
+              xs: 12,
+              defaultValue: '',
+            },
+          ]}
+        />
       </Grid>
     </Grid>
   );

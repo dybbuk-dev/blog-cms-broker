@@ -150,6 +150,10 @@ function BrokerForm(props) {
       // #region Minimum Trading Unit
       minimum_trading_units: record.minimum_trading_units,
       // #endregion
+
+      // #region Currency Pair
+      currency_pairs: record.currency_pairs,
+      // #endregion
     };
 
     if (record.checkbox) {

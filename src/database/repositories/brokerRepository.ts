@@ -6,6 +6,7 @@ import BrokerBankRepository from './brokerBankRepository';
 import BrokerCertificateRepository from './brokerCertificateRepository';
 import BrokerCheckboxRepository from './brokerCheckboxRepository';
 import BrokerCreteriaRepository from './brokerCreteriaRepository';
+import BrokerCurrencyPairRepository from './brokerCurrencyPairRepository';
 import BrokerDepositGuaranteeRepository from './brokerDepositGuaranteeRepository';
 import BrokerEmailRepository from './brokerEmailRepository';
 import BrokerFaxRepository from './brokerFaxRepository';
@@ -188,6 +189,7 @@ class BrokerRepository {
       BrokerCertificateRepository,
       BrokerCheckboxRepository,
       BrokerCreteriaRepository,
+      BrokerCurrencyPairRepository,
       BrokerDepositGuaranteeRepository,
       BrokerEmailRepository,
       BrokerFaxRepository,
@@ -584,6 +586,14 @@ class BrokerRepository {
       minimum_trading_units?.map(
         (val) => val.minimum_trading_unit,
       ) || null;
+
+    const { rows: currency_pairs } =
+      await BrokerCurrencyPairRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.currency_pairs = currency_pairs || null;
 
     return output;
   }
