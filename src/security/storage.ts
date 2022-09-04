@@ -64,6 +64,12 @@ export default class Storage {
         folder: 'broker_screenshots/broker_detail_logo',
         maxSizeInBytes: 10 * 1024 * 1024,
       },
+
+      broker_certificate_image_certificate_image: {
+        id: 'broker_certificate_image_certificate_image',
+        folder: 'broker_certificate',
+        maxSizeInBytes: 10 * 1024 * 1024,
+      },
     };
   }
 }

@@ -68,11 +68,11 @@ export function InputFormItem(props) {
         required={required}
         // inputRef={register}
         onChange={(event) => {
-          setCurValue(event.target.value);
           setValue(name, event.target.value, {
             shouldValidate: false,
             shouldDirty: true,
           });
+          setCurValue(event.target.value);
           props.onChange &&
             props.onChange(event.target.value);
         }}

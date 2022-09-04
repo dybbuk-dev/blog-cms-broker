@@ -64,6 +64,16 @@ export default function (sequelize) {
       onDelete: 'NO ACTION',
       onUpdate: 'NO ACTION',
     });
+    models.broker_certificate.hasMany(models.file, {
+      as: 'broker_certificate_image_certificate_image',
+      foreignKey: 'belongsToId',
+      constraints: false,
+      scope: {
+        belongsTo: models.broker_certificate.getTableName(),
+        belongsToColumn:
+          'broker_certificate_image_certificate_image',
+      },
+    });
   };
 
   return broker_certificate;

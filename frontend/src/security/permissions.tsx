@@ -360,6 +360,7 @@ class Permissions {
           storage.broker_image_broker_regulation_image,
           storage.broker_image_broker_logo,
           storage.broker_image_broker_detail_logo,
+          storage.broker_certificate_image_certificate_image,
         ],
       },
       brokerEdit: {
@@ -376,6 +377,7 @@ class Permissions {
           storage.broker_image_broker_regulation_image,
           storage.broker_image_broker_logo,
           storage.broker_image_broker_detail_logo,
+          storage.broker_certificate_image_certificate_image,
         ],
       },
       brokerDestroy: {
@@ -392,6 +394,7 @@ class Permissions {
           storage.broker_image_broker_regulation_image,
           storage.broker_image_broker_logo,
           storage.broker_image_broker_detail_logo,
+          storage.broker_certificate_image_certificate_image,
         ],
       },
       brokerRead: {

@@ -308,6 +308,14 @@ class BrokerRepository {
       }
     }
 
+    await FileRepository.destroy(
+      {
+        belongsTo: options.database.broker.getTableName(),
+        belongsToId: id,
+      },
+      options,
+    );
+
     await record.destroy({
       transaction,
     });

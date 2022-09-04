@@ -24,7 +24,6 @@ function BrokerCharacteristicsForm(props) {
                 'entities.broker.fields.homepage',
               )}
               variant="standard"
-              required
             />
           </Grid>
           <Grid item xs={12}>

@@ -5,7 +5,9 @@ import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
 import GroupFormItem from 'src/view/shared/form/items/GroupFormItem';
 import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
+import LogoFormItem from 'src/view/shared/form/items/LogoFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
+import Storage from 'src/security/storage';
 
 function BrokerOverviewForm(props) {
   const { record } = props;
@@ -157,12 +159,25 @@ function BrokerOverviewForm(props) {
           )}
           groupInputTemplates={[
             {
+              input: LogoFormItem,
+              name: 'image',
+              label: i18n(
+                'entities.broker.fields.certificate.image',
+              ),
+              md: 3,
+              xs: 12,
+              defaultValue: '',
+              storage:
+                Storage.values
+                  .broker_certificate_image_certificate_image,
+            },
+            {
               input: InputFormItem,
               name: 'name',
               label: i18n(
                 'entities.broker.fields.certificate.name',
               ),
-              md: 6,
+              md: 3,
               xs: 12,
               defaultValue: '',
               required: true,

@@ -268,6 +268,7 @@ const en = {
         certificate: {
           name: 'Surname',
           url: 'Homepage',
+          image: 'Award Logo',
         },
         // #endregion
 
