@@ -174,6 +174,10 @@ export default function (sequelize) {
       as: 'creteria',
       foreignKey: 'broker_id',
     });
+    models.broker.hasOne(models.broker_forex_signal, {
+      as: 'forex_signal',
+      foreignKey: 'id',
+    });
 
     models.broker.hasMany(models.broker_upside, {
       as: 'upsides',
@@ -208,6 +212,29 @@ export default function (sequelize) {
     });
     models.broker.hasMany(models.broker_order_type, {
       as: 'order_types',
+      foreignKey: 'broker_id',
+    });
+    models.broker.hasMany(
+      models.broker_minimum_trading_unit,
+      {
+        as: 'minimum_trading_units',
+        foreignKey: 'broker_id',
+      },
+    );
+    models.broker.hasMany(models.broker_currency_pair, {
+      as: 'currency_pairs',
+      foreignKey: 'broker_id',
+    });
+    models.broker.hasMany(models.broker_trade_platform, {
+      as: 'trade_platforms',
+      foreignKey: 'broker_id',
+    });
+    models.broker.hasMany(models.broker_trade_store, {
+      as: 'trade_stores',
+      foreignKey: 'broker_id',
+    });
+    models.broker.hasMany(models.broker_deposit, {
+      as: 'deposits',
       foreignKey: 'broker_id',
     });
   };

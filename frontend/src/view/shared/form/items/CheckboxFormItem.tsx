@@ -18,6 +18,7 @@ export function CheckboxFormItem(props) {
     hint,
     required,
     externalErrorMessage,
+    value,
   } = props;
 
   const {
@@ -37,8 +38,8 @@ export function CheckboxFormItem(props) {
     if (formValue !== undefined && formValue !== null) {
       return formValue;
     }
-    if (props.value !== undefined && props.value !== null) {
-      return props.value;
+    if (value !== undefined && value !== null) {
+      return value;
     }
     if (
       defaultValues[name] !== undefined &&
@@ -70,9 +71,7 @@ export function CheckboxFormItem(props) {
           <Switch
             id={name}
             name={name}
-            checked={
-              props.forceValue ? props.value : checked
-            }
+            checked={props.forceValue ? value : checked}
             onChange={(e) => {
               setChecked(Boolean(e.target.checked));
               setValue(name, Boolean(e.target.checked), {
@@ -107,6 +106,7 @@ CheckboxFormItem.propTypes = {
   required: PropTypes.bool,
   label: PropTypes.string,
   hint: PropTypes.string,
+  value: PropTypes.bool,
   externalErrorMessage: PropTypes.string,
 };
 

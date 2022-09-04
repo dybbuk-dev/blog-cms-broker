@@ -28,6 +28,10 @@ import {
   brokerCheckboxNames,
   brokerCheckboxTextPrefix,
 } from 'src/view/broker/form/schemas/BrokerCheckboxes';
+import {
+  brokerForexSignalFields,
+  brokerForexSignalFormPrefix,
+} from 'src/view/broker/form/schemas/BrokerForexSignals';
 
 function BrokerForm(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -146,6 +150,30 @@ function BrokerForm(props) {
       creteria_activated: record.creteria?.activated,
       creteria_body: record.creteria?.body,
       // #endregion
+
+      // #region Minimum Trading Unit
+      minimum_trading_units: record.minimum_trading_units,
+      // #endregion
+
+      // #region Currency Pair
+      currency_pairs: record.currency_pairs,
+      // #endregion
+
+      // #region Trade Platform
+      trade_platforms: record.trade_platforms,
+      // #endregion
+
+      // #region Trade Store
+      trade_stores: record.trade_stores,
+      // #endregion
+
+      // #region Deposit
+      deposits: record.deposits,
+      // #endregion
+
+      // #region Broker Forex Signal
+      forex_signal: record.forex_signal,
+      // #endregion
     };
 
     if (record.checkbox) {
@@ -169,6 +197,17 @@ function BrokerForm(props) {
               brokerCheckboxName,
             ].join('')
           ];
+      }
+    }
+
+    if (record.forex_signal) {
+      for (const brokerForexSignalField of brokerForexSignalFields) {
+        result[
+          [
+            brokerForexSignalFormPrefix,
+            brokerForexSignalField,
+          ].join('')
+        ] = record.forex_signal[brokerForexSignalField];
       }
     }
 

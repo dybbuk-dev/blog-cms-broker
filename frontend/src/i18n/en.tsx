@@ -432,6 +432,59 @@ const en = {
           body: 'Broker Criteria',
         },
         // #endregion
+
+        // #region Minimum Trading Unit
+        minimum_trading_units: 'Smallest tradable units',
+        // #endregion
+
+        // #region Currency Pair
+        currency_pairs: 'Currency pairs',
+        currency_pair: {
+          currency: 'Currency Pair',
+          url: 'Homepage',
+        },
+        // #endregion
+
+        // #region Trade Platform
+        trade_platforms: 'Trading Platforms',
+        trade_platform: {
+          name: 'Surname',
+          url: 'Homepage',
+        },
+        // #endregion
+
+        // #region Trade Platform
+        trade_stores: 'Trade Offers',
+        trade_store: {
+          name: 'Surname',
+          url: 'Homepage',
+        },
+        // #endregion
+
+        // #region Deposit
+        deposits: 'Deposit Options',
+        deposit: {
+          deposit: 'Deposit Option',
+          url: 'Homepage',
+        },
+        // #endregion
+
+        // #region Forex Signal
+        forex_signal: {
+          text: 'Text',
+          url: 'URL',
+          costs: 'Costs',
+          notifications: 'Signal Sending',
+          traded_markets: 'Traded Markets',
+          investment_horizon: 'Investment Horizon',
+          trading_signal_amount:
+            'Frequency of trading signals',
+          prodiver: 'Offerer',
+          test_posibilities: 'Test option',
+          test_posibilities_tick: 'Test option hook',
+          beginners_level: 'Suitable for beginners',
+        },
+        // #endregion
       },
       tabs: {
         broker: 'Broker',
@@ -496,6 +549,13 @@ const en = {
               'Stoploss (garantiert)',
             'Take Profit': 'Take Profit',
             'Trailing Stop': 'Trailing Stop',
+          },
+        },
+        minimum_trading_unit: {
+          minimum_trading_unit: {
+            'Mini-Lots (0,1 Lot)': 'Mini-Lots (0,1 Lot)',
+            'Micro-Lots (0,01 Lot)':
+              'Micro-Lots (0,01 Lot)',
           },
         },
       },

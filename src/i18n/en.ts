@@ -170,6 +170,11 @@ const en = {
         notEmpty: {},
       },
     },
+    broker_forex_signal: {
+      errors: {
+        notEmpty: {},
+      },
+    },
     broker_bank: {
       errors: {
         notEmpty: {
@@ -184,7 +189,35 @@ const en = {
         },
       },
     },
+    broker_minimum_trading_unit: {
+      errors: {
+        notEmpty: {
+          minimum_trading_units:
+            'Broker Minimum Trading Unit is required',
+        },
+      },
+    },
+    broker_currency_pair: {
+      errors: {
+        notEmpty: {},
+      },
+    },
     broker_creteria: {
+      errors: {
+        notEmpty: {},
+      },
+    },
+    broker_trade_platform: {
+      errors: {
+        notEmpty: {},
+      },
+    },
+    broker_trade_store: {
+      errors: {
+        notEmpty: {},
+      },
+    },
+    broker_deposit: {
       errors: {
         notEmpty: {},
       },

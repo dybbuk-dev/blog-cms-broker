@@ -1,30 +1,35 @@
-import lodash from 'lodash';
-import Error404 from '../../errors/Error404';
-import Sequelize from 'sequelize';
 import { IRepositoryOptions } from './IRepositoryOptions';
-import AuditLogRepository from './auditLogRepository';
-import SequelizeRepository from './sequelizeRepository';
-import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
-import moment from 'moment';
 import { orderByUtils } from '../utils/orderByUtils';
-import BrokersCategoryRepository from './brokersCategoryRepository';
-import NavigationRepository from './navigationRepository';
-import BrokerUpsideRepository from './brokerUpsideRepository';
-import BrokerRegulatoryAuthorityRepository from './brokerRegulatoryAuthorityRepository';
-import BrokerDepositGuaranteeRepository from './brokerDepositGuaranteeRepository';
-import BrokerCertificateRepository from './brokerCertificateRepository';
-import BrokerSpreadRepository from './brokerSpreadRepository';
-import BrokerFeatureRepository from './brokerFeatureRepository';
-import BrokerBankRepository from './brokerBankRepository';
-import BrokerOrderTypeRepository from './brokerOrderTypeRepository';
+import AuditLogRepository from './auditLogRepository';
 import BrokerAddressRepository from './brokerAddressRepository';
+import BrokerBankRepository from './brokerBankRepository';
+import BrokerCertificateRepository from './brokerCertificateRepository';
 import BrokerCheckboxRepository from './brokerCheckboxRepository';
 import BrokerCreteriaRepository from './brokerCreteriaRepository';
-import BrokerMetaRepository from './brokerMetaRepository';
-import BrokerVideoRepository from './brokerVideoRepository';
+import BrokerCurrencyPairRepository from './brokerCurrencyPairRepository';
+import BrokerDepositGuaranteeRepository from './brokerDepositGuaranteeRepository';
+import BrokerDepositRepository from './brokerDepositRepository';
 import BrokerEmailRepository from './brokerEmailRepository';
 import BrokerFaxRepository from './brokerFaxRepository';
+import BrokerFeatureRepository from './brokerFeatureRepository';
+import BrokerForexSignalRepository from './brokerForexSignalRepository';
+import BrokerMetaRepository from './brokerMetaRepository';
+import BrokerMinimumTradingUnitRepository from './brokerMinimumTradingUnitRepository';
+import BrokerOrderTypeRepository from './brokerOrderTypeRepository';
 import BrokerPhoneRepository from './brokerPhoneRepository';
+import BrokerRegulatoryAuthorityRepository from './brokerRegulatoryAuthorityRepository';
+import BrokersCategoryRepository from './brokersCategoryRepository';
+import BrokerSpreadRepository from './brokerSpreadRepository';
+import BrokerTradePlatformRepository from './brokerTradePlatformRepository';
+import BrokerTradeStoreRepository from './brokerTradeStoreRepository';
+import BrokerUpsideRepository from './brokerUpsideRepository';
+import BrokerVideoRepository from './brokerVideoRepository';
+import Error404 from '../../errors/Error404';
+import lodash from 'lodash';
+import moment from 'moment';
+import Sequelize from 'sequelize';
+import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
+import SequelizeRepository from './sequelizeRepository';
 
 const Op = Sequelize.Op;
 
@@ -95,6 +100,10 @@ class BrokerRepository {
       !metaOnly && {
         model: options.database.broker_creterias,
         as: 'creteria',
+      },
+      !metaOnly && {
+        model: options.database.broker_forex_signal,
+        as: 'forex_signal',
       },
     ].filter(Boolean);
   }
@@ -188,16 +197,22 @@ class BrokerRepository {
       BrokerCertificateRepository,
       BrokerCheckboxRepository,
       BrokerCreteriaRepository,
+      BrokerCurrencyPairRepository,
       BrokerDepositGuaranteeRepository,
+      BrokerDepositRepository,
       BrokerEmailRepository,
       BrokerFaxRepository,
       BrokerFeatureRepository,
+      BrokerForexSignalRepository,
       BrokerMetaRepository,
+      BrokerMinimumTradingUnitRepository,
       BrokerOrderTypeRepository,
       BrokerPhoneRepository,
       BrokerRegulatoryAuthorityRepository,
       BrokersCategoryRepository,
       BrokerSpreadRepository,
+      BrokerTradePlatformRepository,
+      BrokerTradeStoreRepository,
       BrokerUpsideRepository,
       BrokerVideoRepository,
     ];
@@ -572,6 +587,49 @@ class BrokerRepository {
 
     output.order_types =
       order_types?.map((val) => val.type) || null;
+
+    const { rows: minimum_trading_units } =
+      await BrokerMinimumTradingUnitRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.minimum_trading_units =
+      minimum_trading_units?.map(
+        (val) => val.minimum_trading_unit,
+      ) || null;
+
+    const { rows: currency_pairs } =
+      await BrokerCurrencyPairRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.currency_pairs = currency_pairs || null;
+
+    const { rows: trade_platforms } =
+      await BrokerTradePlatformRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.trade_platforms = trade_platforms || null;
+
+    const { rows: trade_stores } =
+      await BrokerTradeStoreRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.trade_stores = trade_stores || null;
+
+    const { rows: deposits } =
+      await BrokerDepositRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.deposits = deposits || null;
 
     return output;
   }
