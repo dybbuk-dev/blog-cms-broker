@@ -52,6 +52,12 @@ export default class Storage {
           'broker_screenshots/broker_regulation_image',
         maxSizeInBytes: 10 * 1024 * 1024,
       },
+
+      news_image: {
+        id: 'news_image',
+        folder: 'news_images',
+        maxSizeInBytes: 10 * 1024 * 1024,
+      },
     };
   }
 }

@@ -22,6 +22,8 @@ import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem'
 import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
+import LogoFormItem from 'src/view/shared/form/items/LogoFormItem';
+import Storage from 'src/security/storage';
 
 const schema = yup.object().shape({
   link: yupFormSchemas.string(
@@ -66,10 +68,6 @@ const schema = yup.object().shape({
   ),
   teaser: yupFormSchemas.string(
     i18n('entities.news.fields.teaser'),
-    {},
-  ),
-  teaser_upload: yupFormSchemas.string(
-    i18n('entities.news.fields.teaser_upload'),
     {},
   ),
   teaser_link: yupFormSchemas.string(
@@ -118,15 +116,19 @@ function NewsForm(props) {
       name: record.name,
       title: record.title,
       teaser: record.teaser,
-      teaser_upload: record.teaser_upload,
-      teaser_link: record.teaser_link,
-      teaser_title: record.teaser_title,
+      teaser_link: record.news_image
+        ? record.news_image[0]?.link
+        : null,
+      teaser_title: record.news_image
+        ? record.news_image[0]?.linkTitle
+        : null,
       body: record.body,
       target: record.target,
       sort: record.sort ?? 0,
       activated: record.activated,
       pdf: record.pdf,
       frontpage: record.frontpage,
+      news_image: record.news_image || [],
     };
   });
 
@@ -216,13 +218,15 @@ function NewsForm(props) {
           <MDBox p={3}>
             <Grid spacing={2} container>
               <Grid item md={12} xs={12}>
-                <InputFormItem
-                  name="teaser_upload"
-                  label={i18n(
-                    'entities.news.fields.teaser_upload',
-                  )}
-                  variant="standard"
-                />
+                <MDBox pt={7}>
+                  <LogoFormItem
+                    name="news_image"
+                    label={i18n(
+                      'entities.news.fields.teaser_upload',
+                    )}
+                    storage={Storage.values.news_image}
+                  />
+                </MDBox>
               </Grid>
               <Grid item md={12} xs={12}>
                 <InputFormItem
