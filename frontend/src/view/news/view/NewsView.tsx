@@ -7,6 +7,7 @@ import NewsViewItem from 'src/view/news/view/NewsViewItem';
 import HtmlViewItem from 'src/view/shared/view/HtmlViewItem';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
+import LogoViewItem from 'src/view/shared/view/LogoViewItem';
 
 function NewsView(props) {
   const renderView = () => {
@@ -69,11 +70,11 @@ function NewsView(props) {
         <MDBox p={3}>
           <Grid spacing={2} container>
             <Grid item md={12} xs={12}>
-              <TextViewItem
+              <LogoViewItem
                 label={i18n(
                   'entities.news.fields.teaser_upload',
                 )}
-                value={record.teaser_upload}
+                value={record.news_image}
               />
             </Grid>
             <Grid item md={12} xs={12}>
@@ -81,7 +82,11 @@ function NewsView(props) {
                 label={i18n(
                   'entities.news.fields.teaser_link',
                 )}
-                value={record.teaser_link}
+                value={
+                  record.news_image
+                    ? record.news_image[0]?.link
+                    : null
+                }
               />
             </Grid>
             <Grid item md={12} xs={12}>
@@ -89,7 +94,11 @@ function NewsView(props) {
                 label={i18n(
                   'entities.news.fields.teaser_title',
                 )}
-                value={record.teaser_title}
+                value={
+                  record.news_image
+                    ? record.news_image[0]?.linkTitle
+                    : null
+                }
               />
             </Grid>
             <Grid item md={12} xs={12}>

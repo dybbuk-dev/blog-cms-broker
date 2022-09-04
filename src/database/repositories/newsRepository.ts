@@ -8,6 +8,7 @@ import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import moment from 'moment';
 import { orderByUtils } from '../utils/orderByUtils';
 import NewsImageRepository from './newsImageRepository';
+import FileRepository from './fileRepository';
 
 const Op = Sequelize.Op;
 
@@ -18,7 +19,6 @@ class NewsRepository {
     'meta_description',
     'name',
     'title',
-    'teaser',
     'body',
     'target',
     'sort',
@@ -27,6 +27,27 @@ class NewsRepository {
     'frontpage',
     'page_warning_id',
   ];
+
+  static async _replaceRelationFiles(
+    record,
+    data,
+    options: IRepositoryOptions,
+  ) {
+    await FileRepository.replaceRelationFiles(
+      {
+        belongsTo: options.database.news.getTableName(),
+        belongsToColumn: 'news_image',
+        belongsToId: record.id,
+      },
+      data.news_image.map((v) => ({
+        ...v,
+        link: data.teaser_link,
+        linkTitle: data.teaser_title,
+        new: true,
+      })),
+      options,
+    );
+  }
 
   static async create(data, options: IRepositoryOptions) {
     const transaction =
@@ -45,13 +66,7 @@ class NewsRepository {
       },
     );
 
-    if (record.id) {
-      await NewsImageRepository.create(
-        record.id,
-        data,
-        options,
-      );
-    }
+    await this._replaceRelationFiles(record, data, options);
 
     await this._createAuditLog(
       AuditLogRepository.CREATE,
@@ -93,9 +108,9 @@ class NewsRepository {
         transaction,
       },
     );
-    if (record) {
-      await NewsImageRepository.update(id, data, options);
-    }
+
+    await this._replaceRelationFiles(record, data, options);
+
     await this._createAuditLog(
       AuditLogRepository.UPDATE,
       record,
@@ -109,8 +124,6 @@ class NewsRepository {
   static async destroy(id, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
-
-    await NewsImageRepository.destroy(id, options);
 
     let record = await options.database.news.findOne({
       where: {
@@ -153,23 +166,6 @@ class NewsRepository {
       include,
       transaction,
     });
-    const news_image =
-      await options.database.news_image.findOne({
-        where: {
-          id,
-        },
-        transaction,
-      });
-
-    record.dataValues = {
-      ...record.dataValues,
-      teaser_link:
-        news_image == null ? '' : news_image.link,
-      teaser_title:
-        news_image == null ? '' : news_image.link_title,
-      teaser_upload:
-        news_image == null ? '' : news_image.filename,
-    };
 
     if (!record) {
       throw new Error404();
@@ -381,6 +377,12 @@ class NewsRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
+    output.news_image =
+      await FileRepository.fillDownloadUrl(
+        await record.getNews_image({
+          transaction,
+        }),
+      );
     return output;
   }
 }

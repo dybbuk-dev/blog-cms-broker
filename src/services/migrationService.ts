@@ -165,6 +165,19 @@ export default class MigrationService {
             row.filename,
           ].join(''),
       },
+      news_image: {
+        belongsTo: this.options.database.news,
+        belongsToColumn: (row) => 'news_image',
+        belongsToId: 'id',
+        name: 'filename',
+        type: 'type',
+        link: 'link',
+        linkTitle: 'link_title',
+        privateUrl: (row) =>
+          ['/news_images/', row.id, '/', row.filename].join(
+            '',
+          ),
+      },
     };
 
     const modelNames = Object.keys(imageMigrations);
