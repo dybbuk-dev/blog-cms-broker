@@ -18,12 +18,12 @@ class BrokerForexSignalRepository {
     'trading_signal_amount',
   ];
 
-  static REST_FIELDS = [
-    'prodiver',
-    'test_posibilities',
-    'test_posibilities_tick',
-    'beginners_level',
-  ];
+  static REST_FIELDS = {
+    prodiver: '',
+    test_posibilities: '',
+    test_posibilities_tick: false,
+    beginners_level: false,
+  };
 
   static DATA_PREFIX = 'forex_signal_';
 
@@ -56,9 +56,10 @@ class BrokerForexSignalRepository {
 
   static _relatedData(data) {
     const result = {};
-    this.REST_FIELDS.forEach((field) => {
+    Object.keys(this.REST_FIELDS).forEach((field) => {
       result[field] =
-        data[`${this.DATA_PREFIX}${field}`] || '';
+        data[`${this.DATA_PREFIX}${field}`] ||
+        this.REST_FIELDS[field];
     });
     this.TRANSFORM_FIELDS.forEach((field) => {
       result[field] = this._arrayToText(
