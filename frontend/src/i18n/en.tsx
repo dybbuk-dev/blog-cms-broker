@@ -568,6 +568,64 @@ const en = {
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },
     },
+
+    openx: {
+      name: 'openx banner',
+      label: 'Openx Banner',
+      menu: 'Openx Banner',
+      exporterFileName: 'openx_export',
+      list: {
+        menu: 'Openx Banner',
+        title: 'Openx Banner',
+      },
+      create: {
+        success: 'Openx Banner successfully saved',
+      },
+      update: {
+        success: 'Openx Banner successfully saved',
+      },
+      destroy: {
+        success: 'Openx Banner successfully deleted',
+      },
+      destroyAll: {
+        success: 'Openx Banner(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Openx Banner',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        code: 'Code',
+        noscript: 'No-Script-Code',
+        activated: 'Activated',
+        zone: 'Zone',
+      },
+      enumerators: {
+        target: {
+          _blank: 'New Window',
+        },
+        zone: {
+          leaderboard: 'Leaderboards',
+          menu_left: 'menu on the left',
+          menu_right: 'menu on the right',
+          short_leaderboard: 'short leaderboards',
+        },
+      },
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Openx Banner',
+      },
+      view: {
+        title: 'View Openx Banner',
+      },
+      importer: {
+        title: 'Import Openx Banner',
+        fileName: 'openx_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
   },
 
   auth: {

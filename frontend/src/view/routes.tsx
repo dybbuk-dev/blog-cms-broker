@@ -639,7 +639,7 @@ const privateRoutes = [
     path: '/promotion/new',
     collapseName: 'promotion',
     i18n: 'entities.promotion.new.title',
-    parent: '/promotions',
+    parent: '/promotion',
     loader: () =>
       import('src/view/promotion/form/PromotionFormPage'),
     permissionRequired: permissions.promotionCreate,
@@ -650,7 +650,7 @@ const privateRoutes = [
     path: '/promotion/importer',
     collapseName: 'promotion',
     i18n: 'entities.promotion.importer.title',
-    parent: '/promotions',
+    parent: '/promotion',
     loader: () =>
       import(
         'src/view/promotion/importer/PromotionImporterPage'
@@ -663,7 +663,7 @@ const privateRoutes = [
     path: '/promotion/:id/edit',
     collapseName: 'promotion',
     i18n: 'entities.promotion.edit.title',
-    parent: '/promotions',
+    parent: '/promotion',
     loader: () =>
       import('src/view/promotion/form/PromotionFormPage'),
     permissionRequired: permissions.promotionEdit,
@@ -674,7 +674,7 @@ const privateRoutes = [
     path: '/promotion/:id',
     collapseName: 'promotion',
     i18n: 'entities.promotion.view.title',
-    parent: '/promotions',
+    parent: '/promotion',
     loader: () =>
       import('src/view/promotion/view/PromotionViewPage'),
     permissionRequired: permissions.promotionRead,
@@ -683,59 +683,59 @@ const privateRoutes = [
   // #endregion
 
   // #region Openx banners
-  // {
-  //   path: '/openx',
-  //   collapseName: 'promotion',
-  //   i18n: 'entities.openx.menu',
-  //   parent: '/promotions',
-  //   loader: () =>
-  //     import('src/view/openx/list/OpenxListPage'),
-  //   permissionRequired: permissions.openxRead,
-  //   exact: true,
-  // },
-  // {
-  //   path: '/openx/new',
-  //   collapseName: 'promotion',
-  //   i18n: 'entities.openx.new.title',
-  //   parent: '/promotions',
-  //   loader: () =>
-  //     import('src/view/openx/form/OpenxFormPage'),
-  //   permissionRequired: permissions.openxCreate,
-  //   exact: true,
-  // },
+  {
+    path: '/openx',
+    collapseName: 'promotion',
+    i18n: 'entities.openx.menu',
+    parent: '/promotions',
+    loader: () =>
+      import('src/view/openx/list/OpenxListPage'),
+    permissionRequired: permissions.openxRead,
+    exact: true,
+  },
+  {
+    path: '/openx/new',
+    collapseName: 'promotion',
+    i18n: 'entities.openx.new.title',
+    parent: '/openx',
+    loader: () =>
+      import('src/view/openx/form/OpenxFormPage'),
+    permissionRequired: permissions.openxCreate,
+    exact: true,
+  },
 
-  // {
-  //   path: '/openx/importer',
-  //   collapseName: 'promotion',
-  //   i18n: 'entities.openx.importer.title',
-  //   parent: '/promotions',
-  //   loader: () =>
-  //     import('src/view/openx/importer/OpenxImporterPage'),
-  //   permissionRequired: permissions.openxImport,
-  //   exact: true,
-  // },
+  {
+    path: '/openx/importer',
+    collapseName: 'promotion',
+    i18n: 'entities.openx.importer.title',
+    parent: '/openx',
+    loader: () =>
+      import('src/view/openx/importer/OpenxImporterPage'),
+    permissionRequired: permissions.openxImport,
+    exact: true,
+  },
 
-  // {
-  //   path: '/openx/:id/edit',
-  //   collapseName: 'promotion',
-  //   i18n: 'entities.openx.edit.title',
-  //   parent: '/promotions',
-  //   loader: () =>
-  //     import('src/view/openx/form/OpenxFormPage'),
-  //   permissionRequired: permissions.openxEdit,
-  //   exact: true,
-  // },
+  {
+    path: '/openx/:id/edit',
+    collapseName: 'promotion',
+    i18n: 'entities.openx.edit.title',
+    parent: '/openx',
+    loader: () =>
+      import('src/view/openx/form/OpenxFormPage'),
+    permissionRequired: permissions.openxEdit,
+    exact: true,
+  },
 
-  // {
-  //   path: '/openx/:id',
-  //   collapseName: 'promotion',
-  //   i18n: 'entities.openx.view.title',
-  //   parent: '/promotions',
-  //   loader: () =>
-  //     import('src/view/openx/view/OpenxViewPage'),
-  //   permissionRequired: permissions.openxRead,
-  //   exact: true,
-  // },
+  {
+    path: '/openx/:id',
+    collapseName: 'promotion',
+    i18n: 'entities.openx.view.title',
+    parent: '/openx',
+    loader: () =>
+      import('src/view/openx/view/OpenxViewPage'),
+    permissionRequired: permissions.openxRead,
+    exact: true,
+  },
   // #endregion
 
   // #endregion

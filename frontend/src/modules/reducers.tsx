@@ -10,6 +10,7 @@ import layout from 'src/modules/layout/layoutReducers';
 import mui from 'src/modules/mui/muiReducers';
 import news from 'src/modules/news/newsReducers';
 import navigation from 'src/modules/navigation/navigationReducers';
+import openx from 'src/modules/openx/openxReducers';
 import plan from 'src/modules/plan/planReducers';
 import promotion from 'src/modules/promotion/promotionReducers';
 import settings from 'src/modules/settings/settingsReducers';
@@ -30,6 +31,7 @@ export default (history) =>
     mui,
     navigation,
     news,
+    openx,
     plan,
     promotion,
     settings,

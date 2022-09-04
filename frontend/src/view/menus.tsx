@@ -77,11 +77,11 @@ const menus = [
     key: 'promotion',
     icon: <Icon fontSize="medium">view_carousel</Icon>,
     collapse: [
-      // {
-      //   path: '/openx',
-      //   permissionRequired: permissions.openxRead,
-      //   name: i18n('entities.openx.menu'),
-      // },
+      {
+        path: '/openx',
+        permissionRequired: permissions.openxRead,
+        name: i18n('entities.openx.menu'),
+      },
       {
         path: '/promotion',
         permissionRequired: permissions.promotionRead,
