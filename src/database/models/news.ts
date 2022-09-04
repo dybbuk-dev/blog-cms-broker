@@ -47,6 +47,7 @@ export default function (sequelize) {
       title: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        defaultValue: '',
         validate: {
           notEmpty: true,
           len: [0, 255],
@@ -55,10 +56,12 @@ export default function (sequelize) {
       teaser: {
         type: DataTypes.TEXT(),
         allowNull: false,
+        defaultValue: '',
       },
       body: {
         type: DataTypes.TEXT(),
         allowNull: false,
+        defaultValue: '',
       },
       target: {
         type: DataTypes.STRING(15),
@@ -98,6 +101,7 @@ export default function (sequelize) {
       ip: {
         type: DataTypes.CHAR(39),
         allowNull: false,
+        defaultValue: '',
         validate: {
           len: [0, 39],
         },
@@ -125,7 +129,17 @@ export default function (sequelize) {
     },
   );
 
-  news.associate = (models) => {};
+  news.associate = (models) => {
+    models.news.hasMany(models.file, {
+      as: 'news_image',
+      foreignKey: 'belongsToId',
+      constraints: false,
+      scope: {
+        belongsTo: models.news.getTableName(),
+        belongsToColumn: 'news_image',
+      },
+    });
+  };
 
   return news;
 }

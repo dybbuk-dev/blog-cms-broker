@@ -573,6 +573,7 @@ class Permissions {
           plans.growth,
           plans.enterprise,
         ],
+        allowedStorage: [storage.news_image],
       },
       newsEdit: {
         id: 'newsEdit',
@@ -582,6 +583,7 @@ class Permissions {
           plans.growth,
           plans.enterprise,
         ],
+        allowedStorage: [storage.news_image],
       },
       newsDestroy: {
         id: 'newsDestroy',
@@ -591,6 +593,7 @@ class Permissions {
           plans.growth,
           plans.enterprise,
         ],
+        allowedStorage: [storage.news_image],
       },
       newsRead: {
         id: 'newsRead',

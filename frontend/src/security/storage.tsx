@@ -70,6 +70,12 @@ export default class Storage {
         folder: 'broker_certificate',
         maxSizeInBytes: 10 * 1024 * 1024,
       },
+
+      news_image: {
+        id: 'news_image',
+        folder: 'news_images',
+        maxSizeInBytes: 10 * 1024 * 1024,
+      },
     };
   }
 }
