@@ -182,6 +182,10 @@ function BrokerForm(props) {
         [],
       broker_image_broker_regulation_image:
         record.broker_image_broker_regulation_image || [],
+      broker_image_broker_logo:
+        record.broker_image_broker_logo || [],
+      broker_image_broker_detail_logo:
+        record.broker_image_broker_detail_logo || [],
     };
 
     if (record.checkbox) {

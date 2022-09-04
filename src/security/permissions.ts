@@ -358,6 +358,8 @@ class Permissions {
           storage.broker_image_top_broker_logo,
           storage.broker_image_top_broker_horizontal_logo,
           storage.broker_image_broker_regulation_image,
+          storage.broker_image_broker_logo,
+          storage.broker_image_broker_detail_logo,
         ],
       },
       brokerEdit: {
@@ -372,6 +374,8 @@ class Permissions {
           storage.broker_image_top_broker_logo,
           storage.broker_image_top_broker_horizontal_logo,
           storage.broker_image_broker_regulation_image,
+          storage.broker_image_broker_logo,
+          storage.broker_image_broker_detail_logo,
         ],
       },
       brokerDestroy: {
@@ -386,6 +390,8 @@ class Permissions {
           storage.broker_image_top_broker_logo,
           storage.broker_image_top_broker_horizontal_logo,
           storage.broker_image_broker_regulation_image,
+          storage.broker_image_broker_logo,
+          storage.broker_image_broker_detail_logo,
         ],
       },
       brokerRead: {

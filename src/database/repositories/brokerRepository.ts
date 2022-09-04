@@ -158,6 +158,32 @@ class BrokerRepository {
       ),
       options,
     );
+
+    await FileRepository.replaceRelationFiles(
+      {
+        belongsTo: options.database.broker.getTableName(),
+        belongsToColumn: 'broker_image_broker_logo',
+        belongsToId: record.id,
+      },
+      data.broker_image_broker_logo.map((v) => ({
+        ...v,
+        type: 'broker_logo',
+      })),
+      options,
+    );
+
+    await FileRepository.replaceRelationFiles(
+      {
+        belongsTo: options.database.broker.getTableName(),
+        belongsToColumn: 'broker_image_broker_detail_logo',
+        belongsToId: record.id,
+      },
+      data.broker_image_broker_detail_logo.map((v) => ({
+        ...v,
+        type: 'broker_detail_logo',
+      })),
+      options,
+    );
   }
 
   static async create(data, options: IRepositoryOptions) {
@@ -604,6 +630,20 @@ class BrokerRepository {
             transaction,
           },
         ),
+      );
+
+    output.broker_image_broker_logo =
+      await FileRepository.fillDownloadUrl(
+        await record.getBroker_image_broker_logo({
+          transaction,
+        }),
+      );
+
+    output.broker_image_broker_detail_logo =
+      await FileRepository.fillDownloadUrl(
+        await record.getBroker_image_broker_detail_logo({
+          transaction,
+        }),
       );
     // #endregion
 
