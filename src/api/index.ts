@@ -81,21 +81,21 @@ const routes = express.Router();
 // Enable Passport for Social Sign-in
 authSocial(app, routes);
 
+require('./affiliateLink').default(routes);
 require('./auditLog').default(routes);
 require('./auth').default(routes);
 require('./author').default(routes);
-require('./affiliateLink').default(routes);
-require('./trackingParameter').default(routes);
 require('./broker').default(routes);
 require('./category').default(routes);
 require('./file').default(routes);
 require('./mui').default(routes);
 require('./navigation').default(routes);
 require('./news').default(routes);
-require('./promotion').default(routes);
 require('./plan').default(routes);
+require('./promotion').default(routes);
 require('./settings').default(routes);
 require('./tenant').default(routes);
+require('./trackingParameter').default(routes);
 require('./user').default(routes);
 
 // Loads the Tenant if the :tenantId param is passed

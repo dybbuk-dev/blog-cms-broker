@@ -16,12 +16,9 @@ export default function (sequelize, DataTypes) {
         },
       },
       belongsToId: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-          len: [0, 255],
-        },
+        type: DataTypes.BIGINT.UNSIGNED,
+        allowNull: true,
+        defaultValue: null,
       },
       belongsToColumn: {
         type: DataTypes.STRING(255),
@@ -37,6 +34,30 @@ export default function (sequelize, DataTypes) {
         validate: {
           notEmpty: true,
           len: [0, 2083],
+        },
+      },
+      type: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+        defaultValue: '',
+        validate: {
+          len: [0, 255],
+        },
+      },
+      link: {
+        type: DataTypes.STRING(2083),
+        allowNull: false,
+        defaultValue: '',
+        validate: {
+          len: [0, 2083],
+        },
+      },
+      linkTitle: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+        defaultValue: '',
+        validate: {
+          len: [0, 255],
         },
       },
       sizeInBytes: {
@@ -59,6 +80,20 @@ export default function (sequelize, DataTypes) {
       },
     },
     {
+      indexes: [
+        {
+          name: 'belongsTo',
+          fields: ['belongsTo'],
+        },
+        {
+          name: 'belongsToId',
+          fields: ['belongsToId'],
+        },
+        {
+          name: 'type',
+          fields: ['type'],
+        },
+      ],
       timestamps: true,
     },
   );
