@@ -6,6 +6,7 @@ import AuditLogRepository from './auditLogRepository';
 import SequelizeRepository from './sequelizeRepository';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import { orderByUtils } from '../utils/orderByUtils';
+import moment from 'moment';
 
 const Op = Sequelize.Op;
 
@@ -27,6 +28,8 @@ class AffiliateLinkRepository {
           ...lodash.pick(data, this.ALL_FIELDS),
           meta_info: data.meta_info ?? null,
           ip: '',
+          created: moment(),
+          modified: moment(),
         },
         {
           transaction,
@@ -68,6 +71,7 @@ class AffiliateLinkRepository {
         ...lodash.pick(data, this.ALL_FIELDS),
         meta_info: data.meta_info ?? null,
         ip: '',
+        modified: moment(),
       },
       {
         transaction,

@@ -1,14 +1,15 @@
 import PermissionChecker from '../../services/user/permissionChecker';
 import ApiResponseHandler from '../apiResponseHandler';
 import Permissions from '../../security/permissions';
-import NewsService from '../../services/newsService';
+import OpenxService from '../../services/openxService';
 
 export default async (req, res, next) => {
   try {
     new PermissionChecker(req).validateHas(
-      Permissions.values.newsRead,
+      Permissions.values.openxRead,
     );
-    const payload = await new NewsService(req).findById(
+    console.log('find');
+    const payload = await new OpenxService(req).findById(
       req.params.id,
     );
 

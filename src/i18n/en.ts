@@ -140,6 +140,16 @@ const en = {
         unique: {},
       },
     },
+    openx_banner: {
+      errors: {
+        unique: {
+          hash_zone: 'Openx banner hash must be unique.',
+        },
+        update: 'Sorry, update is failed.',
+        distroy: 'Sorry, delete is failed.',
+        find: 'Sorry, data is not existed.',
+      },
+    },
   },
 };
 

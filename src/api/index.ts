@@ -93,6 +93,7 @@ require('./mui').default(routes);
 require('./navigation').default(routes);
 require('./news').default(routes);
 require('./promotion').default(routes);
+require('./openx').default(routes);
 require('./plan').default(routes);
 require('./settings').default(routes);
 require('./tenant').default(routes);
