@@ -109,6 +109,41 @@ class BrokerRepository {
     ].filter(Boolean);
   }
 
+  static async _replaceRelationFiles(
+    record,
+    data,
+    options: IRepositoryOptions,
+  ) {
+    await FileRepository.replaceRelationFiles(
+      {
+        belongsTo: options.database.broker.getTableName(),
+        belongsToColumn: 'broker_image_top_broker_logo',
+        belongsToId: record.id,
+      },
+      data.broker_image_top_broker_logo.map((v) => ({
+        ...v,
+        type: 'top_broker_logo',
+      })),
+      options,
+    );
+
+    await FileRepository.replaceRelationFiles(
+      {
+        belongsTo: options.database.broker.getTableName(),
+        belongsToColumn:
+          'broker_image_top_broker_horizontal_logo',
+        belongsToId: record.id,
+      },
+      data.broker_image_top_broker_horizontal_logo.map(
+        (v) => ({
+          ...v,
+          type: 'top_broker_horizontal_logo',
+        }),
+      ),
+      options,
+    );
+  }
+
   static async create(data, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
@@ -126,15 +161,7 @@ class BrokerRepository {
       },
     );
 
-    await FileRepository.replaceRelationFiles(
-      {
-        belongsTo: options.database.broker.getTableName(),
-        belongsToColumn: 'broker_image_top_broker_logo',
-        belongsToId: record.id,
-      },
-      data.broker_image_top_broker_logo,
-      options,
-    );
+    await this._replaceRelationFiles(record, data, options);
 
     await this._createAuditLog(
       AuditLogRepository.CREATE,
@@ -165,6 +192,8 @@ class BrokerRepository {
       throw new Error404();
     }
 
+    await this._replaceRelationFiles(record, data, options);
+
     record = await record.update(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
@@ -176,6 +205,8 @@ class BrokerRepository {
         transaction,
       },
     );
+
+    await this._replaceRelationFiles(record, data, options);
 
     await this._createAuditLog(
       AuditLogRepository.UPDATE,
@@ -539,6 +570,15 @@ class BrokerRepository {
         await record.getBroker_image_top_broker_logo({
           transaction,
         }),
+      );
+
+    output.broker_image_top_broker_horizontal_logo =
+      await FileRepository.fillDownloadUrl(
+        await record.getBroker_image_top_broker_horizontal_logo(
+          {
+            transaction,
+          },
+        ),
       );
     // #endregion
 

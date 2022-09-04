@@ -151,6 +151,16 @@ export default function (sequelize) {
         belongsToColumn: 'broker_image_top_broker_logo',
       },
     });
+    models.broker.hasMany(models.file, {
+      as: 'broker_image_top_broker_horizontal_logo',
+      foreignKey: 'belongsToId',
+      constraints: false,
+      scope: {
+        belongsTo: models.broker.getTableName(),
+        belongsToColumn:
+          'broker_image_top_broker_horizontal_logo',
+      },
+    });
     models.broker.hasOne(models.broker_metas, {
       as: 'meta',
       foreignKey: 'id',

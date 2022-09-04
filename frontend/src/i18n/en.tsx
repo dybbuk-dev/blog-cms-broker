@@ -488,6 +488,8 @@ const en = {
 
         broker_image: {
           top_broker_logo: 'Top Broker Logo',
+          top_broker_horizontal_logo:
+            'Top Broker Horizontal Logo',
         },
       },
       tabs: {

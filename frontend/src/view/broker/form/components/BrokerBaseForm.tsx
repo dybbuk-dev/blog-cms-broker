@@ -215,6 +215,20 @@ function BrokerBaseForm(props) {
           />
         </MDBox>
       </Grid>
+      <Grid item md={6} xs={12}>
+        <MDBox pt={7}>
+          <LogoFormItem
+            name="broker_image_top_broker_horizontal_logo"
+            label={i18n(
+              'entities.broker.fields.broker_image.top_broker_horizontal_logo',
+            )}
+            storage={
+              Storage.values
+                .broker_image_top_broker_horizontal_logo
+            }
+          />
+        </MDBox>
+      </Grid>
       <Grid item xs={12}>
         <TextAreaFormItem
           name="homepage_impression"

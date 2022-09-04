@@ -177,6 +177,9 @@ function BrokerForm(props) {
 
       broker_image_top_broker_logo:
         record.broker_image_top_broker_logo || [],
+      broker_image_top_broker_horizontal_logo:
+        record.broker_image_top_broker_horizontal_logo ||
+        [],
     };
 
     if (record.checkbox) {

@@ -10,6 +10,14 @@
 export default class Storage {
   static get values() {
     return {
+      userAvatarsProfiles: {
+        id: 'userAvatarsProfiles',
+        folder: 'user/avatars/profile/:userId',
+        maxSizeInBytes: 10 * 1024 * 1024,
+        bypassWritingPermissions: true,
+        publicRead: true,
+      },
+
       settingsLogos: {
         id: 'settingsLogos',
         folder: 'tenant/:tenantId/settings/logos',
@@ -25,17 +33,15 @@ export default class Storage {
         publicRead: true,
       },
 
-      userAvatarsProfiles: {
-        id: 'userAvatarsProfiles',
-        folder: 'user/avatars/profile/:userId',
-        maxSizeInBytes: 10 * 1024 * 1024,
-        bypassWritingPermissions: true,
-        publicRead: true,
-      },
-
       broker_image_top_broker_logo: {
         id: 'broker_image_top_broker_logo',
-        folder: 'broker_screenshots',
+        folder: 'broker_screenshots/top_broker_logo',
+        maxSizeInBytes: 10 * 1024 * 1024,
+      },
+
+      broker_image_top_broker_horizontal_logo: {
+        id: 'broker_image_top_broker_horizontal_logo',
+        folder: 'broker_screenshots/top_broker_horizontal_logo',
         maxSizeInBytes: 10 * 1024 * 1024,
       },
     };
