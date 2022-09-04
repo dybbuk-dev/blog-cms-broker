@@ -239,6 +239,20 @@ function BrokerBaseForm(props) {
           fullWidth
         />
       </Grid>
+      <Grid item md={6} xs={12}>
+        <MDBox pt={7}>
+          <LogoFormItem
+            name="broker_image_broker_regulation_image"
+            label={i18n(
+              'entities.broker.fields.broker_image.broker_regulation_image',
+            )}
+            storage={
+              Storage.values
+                .broker_image_broker_regulation_image
+            }
+          />
+        </MDBox>
+      </Grid>
     </Grid>
   );
 }

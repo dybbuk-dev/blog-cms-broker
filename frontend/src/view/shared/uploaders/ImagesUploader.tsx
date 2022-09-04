@@ -151,6 +151,7 @@ function ImagesUploader(props) {
                     component="img"
                     src={item.downloadUrl}
                     sx={{
+                      background: 'white',
                       maxWidth: '100%',
                       margin: 0,
                       boxShadow: ({ boxShadows: { md } }) =>

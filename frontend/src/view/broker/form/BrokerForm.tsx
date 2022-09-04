@@ -36,7 +36,7 @@ import {
 function BrokerForm(props) {
   const { sidenavColor } = selectMuiSettings();
 
-  const [initialValues, setInitialValues] = useState(() => {
+  const [initialValues] = useState(() => {
     const record = props.record || {};
     const result = {
       // #region Base
@@ -180,6 +180,8 @@ function BrokerForm(props) {
       broker_image_top_broker_horizontal_logo:
         record.broker_image_top_broker_horizontal_logo ||
         [],
+      broker_image_broker_regulation_image:
+        record.broker_image_broker_regulation_image || [],
     };
 
     if (record.checkbox) {

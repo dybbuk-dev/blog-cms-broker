@@ -41,7 +41,15 @@ export default class Storage {
 
       broker_image_top_broker_horizontal_logo: {
         id: 'broker_image_top_broker_horizontal_logo',
-        folder: 'broker_screenshots/top_broker_horizontal_logo',
+        folder:
+          'broker_screenshots/top_broker_horizontal_logo',
+        maxSizeInBytes: 10 * 1024 * 1024,
+      },
+
+      broker_image_broker_regulation_image: {
+        id: 'broker_image_broker_regulation_image',
+        folder:
+          'broker_screenshots/broker_regulation_image',
         maxSizeInBytes: 10 * 1024 * 1024,
       },
     };

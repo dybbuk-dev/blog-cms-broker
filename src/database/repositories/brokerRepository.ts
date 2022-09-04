@@ -142,6 +142,22 @@ class BrokerRepository {
       ),
       options,
     );
+
+    await FileRepository.replaceRelationFiles(
+      {
+        belongsTo: options.database.broker.getTableName(),
+        belongsToColumn:
+          'broker_image_broker_regulation_image',
+        belongsToId: record.id,
+      },
+      data.broker_image_broker_regulation_image.map(
+        (v) => ({
+          ...v,
+          type: 'broker_regulation_image',
+        }),
+      ),
+      options,
+    );
   }
 
   static async create(data, options: IRepositoryOptions) {
@@ -575,6 +591,15 @@ class BrokerRepository {
     output.broker_image_top_broker_horizontal_logo =
       await FileRepository.fillDownloadUrl(
         await record.getBroker_image_top_broker_horizontal_logo(
+          {
+            transaction,
+          },
+        ),
+      );
+
+    output.broker_image_broker_regulation_image =
+      await FileRepository.fillDownloadUrl(
+        await record.getBroker_image_broker_regulation_image(
           {
             transaction,
           },
