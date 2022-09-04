@@ -1,7 +1,10 @@
-import SequelizeRepository from '../../database/repositories/sequelizeRepository';
+import { IRepositoryOptions } from './IRepositoryOptions';
 import assert from 'assert';
 import FileStorage from '../../services/file/fileStorage';
-import { IRepositoryOptions } from './IRepositoryOptions';
+import fs from 'fs';
+import SequelizeRepository from '../../database/repositories/sequelizeRepository';
+import LocalFileStorage from '../../services/file/localhostFileStorage';
+import { getConfig } from '../../config';
 
 export default class FileRepository {
   static async fillDownloadUrl(files) {
@@ -126,6 +129,17 @@ export default class FileRepository {
         },
       );
     }
+  }
+
+  static async destroy(
+    relation,
+    options: IRepositoryOptions,
+  ) {
+    await options.database.file.destroy({
+      where: relation,
+      transaction:
+        SequelizeRepository.getTransaction(options),
+    });
   }
 
   /**

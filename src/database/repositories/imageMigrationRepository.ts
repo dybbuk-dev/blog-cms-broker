@@ -97,7 +97,7 @@ class ImageMigrationRepository {
         linkTitle: data.linkTitle || '',
         sizeInBytes: data.sizeInBytes,
         privateUrl: data.privateUrl || '',
-        publicUrl: data.publicUrl || '',
+        publicUrl: data.publicUrl || null,
         tenantId: currentTenant.id,
         createdById: currentUser.id,
         updatedById: currentUser.id,

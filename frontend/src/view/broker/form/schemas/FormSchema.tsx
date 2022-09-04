@@ -106,7 +106,6 @@ const schema = yup.object().shape({
   homepage: yupFormSchemas.string(
     i18n('entities.broker.fields.homepage'),
     {
-      required: true,
       min: 0,
       max: 255,
     },

@@ -97,6 +97,7 @@ export default class MigrationService {
           {
             ...this.convert(row, imageMigration),
             sizeInBytes: stat.size,
+            publicUrl: null,
           },
           { ...this.options, transaction },
         );

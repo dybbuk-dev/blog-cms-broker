@@ -230,16 +230,19 @@ function BrokerBaseForm(props) {
         </MDBox>
       </Grid>
       <Grid item xs={12}>
-        <TextAreaFormItem
-          name="homepage_impression"
+        <FieldSetViewItem
           label={i18n(
             'entities.broker.fields.homepage_impression',
           )}
-          variant="standard"
-          fullWidth
-        />
+        >
+          <TextAreaFormItem
+            name="homepage_impression"
+            variant="standard"
+            fullWidth
+          />
+        </FieldSetViewItem>
       </Grid>
-      <Grid item md={6} xs={12}>
+      <Grid item md={4} xs={12}>
         <MDBox pt={7}>
           <LogoFormItem
             name="broker_image_broker_regulation_image"
@@ -249,6 +252,32 @@ function BrokerBaseForm(props) {
             storage={
               Storage.values
                 .broker_image_broker_regulation_image
+            }
+          />
+        </MDBox>
+      </Grid>
+      <Grid item md={4} xs={12}>
+        <MDBox pt={7}>
+          <LogoFormItem
+            name="broker_image_broker_logo"
+            label={i18n(
+              'entities.broker.fields.broker_image.broker_logo',
+            )}
+            storage={
+              Storage.values.broker_image_broker_logo
+            }
+          />
+        </MDBox>
+      </Grid>
+      <Grid item md={4} xs={12}>
+        <MDBox pt={7}>
+          <LogoFormItem
+            name="broker_image_broker_detail_logo"
+            label={i18n(
+              'entities.broker.fields.broker_image.broker_detail_logo',
+            )}
+            storage={
+              Storage.values.broker_image_broker_detail_logo
             }
           />
         </MDBox>

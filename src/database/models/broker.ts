@@ -171,6 +171,24 @@ export default function (sequelize) {
           'broker_image_broker_regulation_image',
       },
     });
+    models.broker.hasMany(models.file, {
+      as: 'broker_image_broker_logo',
+      foreignKey: 'belongsToId',
+      constraints: false,
+      scope: {
+        belongsTo: models.broker.getTableName(),
+        belongsToColumn: 'broker_image_broker_logo',
+      },
+    });
+    models.broker.hasMany(models.file, {
+      as: 'broker_image_broker_detail_logo',
+      foreignKey: 'belongsToId',
+      constraints: false,
+      scope: {
+        belongsTo: models.broker.getTableName(),
+        belongsToColumn: 'broker_image_broker_detail_logo',
+      },
+    });
     models.broker.hasOne(models.broker_metas, {
       as: 'meta',
       foreignKey: 'id',

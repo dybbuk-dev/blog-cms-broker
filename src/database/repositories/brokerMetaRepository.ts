@@ -68,6 +68,7 @@ class BrokerMetaRepository {
 
   static _relatedData(data) {
     return {
+      homepage: data.homepage ?? '',
       demo_url: data.demo_url ?? '',
       account_url: data.account_url ?? '',
       maximum_leverage: data.maximum_leverage ?? '',

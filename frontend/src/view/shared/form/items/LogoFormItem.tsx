@@ -1,15 +1,11 @@
-import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
-import ImagesUploader from 'src/view/shared/uploaders/ImagesUploader';
-import {
-  FormControl,
-  FormLabel,
-  FormHelperText,
-} from '@mui/material';
+import { FormControl, FormHelperText } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import FormErrors from 'src/view/shared/form/formErrors';
-import MDTypography from 'src/mui/components/MDTypography';
+import ImagesUploader from 'src/view/shared/uploaders/ImagesUploader';
 import MDBox from 'src/mui/components/MDBox';
+import MDTypography from 'src/mui/components/MDTypography';
+import PropTypes from 'prop-types';
 
 function LogoFormItem(props) {
   const {
@@ -20,15 +16,25 @@ function LogoFormItem(props) {
     max,
     required,
     externalErrorMessage,
+    value,
   } = props;
 
   const {
     errors,
     formState: { touched, isSubmitted },
     setValue,
-    watch,
+    control: { defaultValuesRef },
+    getValues,
     register,
   } = useFormContext();
+
+  const defaultValues = defaultValuesRef.current || {};
+
+  const formValue = getValues(name);
+
+  const [curValue, setCurValue] = useState(
+    formValue || value || defaultValues[name] || '',
+  );
 
   useEffect(() => {
     register({ name });
@@ -55,13 +61,16 @@ function LogoFormItem(props) {
       >
         <ImagesUploader
           storage={storage}
-          value={watch(name)}
-          onChange={(value) => {
-            setValue(name, value, {
+          value={
+            props.forceValue ? value : formValue || curValue
+          }
+          onChange={(newValue) => {
+            setValue(name, newValue, {
               shouldValidate: false,
               shouldDirty: true,
             });
-            props.onChange && props.onChange(value);
+            setCurValue(newValue);
+            props.onChange && props.onChange(newValue);
           }}
           max={max}
         />
@@ -96,6 +105,7 @@ LogoFormItem.propTypes = {
   label: PropTypes.string,
   hint: PropTypes.string,
   formItemProps: PropTypes.object,
+  value: PropTypes.any,
 };
 
 export default LogoFormItem;

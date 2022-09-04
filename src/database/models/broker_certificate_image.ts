@@ -81,6 +81,7 @@ export default function (sequelize) {
     models.broker_certificate_image.belongsTo(
       models.broker_certificate,
       {
+        as: 'broker_certificate',
         constraints: true,
         foreignKey: 'broker_certificate_id',
         onDelete: 'NO ACTION',

@@ -1,5 +1,6 @@
 import lodash from 'lodash';
 import Sequelize from 'sequelize';
+import FileRepository from './fileRepository';
 import { IRepositoryOptions } from './IRepositoryOptions';
 import SequelizeRepository from './sequelizeRepository';
 
@@ -26,14 +27,31 @@ class BrokerCertificateRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    await options.database.broker_certificate.create(
+    const record =
+      await options.database.broker_certificate.create(
+        {
+          ...lodash.pick(data, this.ALL_FIELDS),
+          ...this._relatedData(data, options),
+        },
+        {
+          transaction,
+        },
+      );
+
+    await FileRepository.replaceRelationFiles(
       {
-        ...lodash.pick(data, this.ALL_FIELDS),
-        ...this._relatedData(data, options),
+        belongsTo:
+          options.database.broker_certificate.getTableName(),
+        belongsToColumn:
+          'broker_certificate_image_certificate_image',
+        belongsToId: record.id,
       },
-      {
-        transaction,
-      },
+      data.image.map((v) => ({
+        ...v,
+        type: 'certificate_image',
+        new: true,
+      })),
+      options,
     );
   }
 
@@ -44,12 +62,27 @@ class BrokerCertificateRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    await options.database.broker_certificate.destroy({
-      where: {
-        broker_id: id,
-      },
-      transaction,
-    });
+    const records =
+      await options.database.broker_certificate.findAll({
+        where: {
+          broker_id: id,
+        },
+        transaction,
+      });
+
+    for (const record of records) {
+      await record.destroy({ transaction });
+      await FileRepository.destroy(
+        {
+          belongsTo:
+            options.database.broker_certificate.getTableName(),
+          belongsToColumn:
+            'broker_certificate_image_certificate_image',
+          belongsToId: record.id,
+        },
+        options,
+      );
+    }
   }
 
   static async findAndCountAll(
@@ -102,7 +135,51 @@ class BrokerCertificateRepository {
         },
       );
 
+    rows = await this._fillWithRelationsAndFilesForRows(
+      rows,
+      options,
+    );
+
     return { rows, count };
+  }
+
+  static async _fillWithRelationsAndFilesForRows(
+    rows,
+    options: IRepositoryOptions,
+  ) {
+    if (!rows) {
+      return rows;
+    }
+
+    return Promise.all(
+      rows.map((record) =>
+        this._fillWithRelationsAndFiles(record, options),
+      ),
+    );
+  }
+
+  static async _fillWithRelationsAndFiles(
+    record,
+    options: IRepositoryOptions,
+  ) {
+    if (!record) {
+      return record;
+    }
+
+    const output = record.get({ plain: true });
+
+    const transaction =
+      SequelizeRepository.getTransaction(options);
+
+    output.image = await FileRepository.fillDownloadUrl(
+      await record.getBroker_certificate_image_certificate_image(
+        {
+          transaction,
+        },
+      ),
+    );
+
+    return output;
   }
 }
 
