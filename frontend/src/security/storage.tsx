@@ -10,12 +10,6 @@
 export default class Storage {
   static get values() {
     return {
-      productLogo: {
-        id: 'productLogo',
-        folder: 'tenant/:tenantId/product/logo',
-        maxSizeInBytes: 5242880,
-      },
-
       settingsLogos: {
         id: 'settingsLogos',
         folder: 'tenant/:tenantId/settings/logos',
@@ -37,6 +31,12 @@ export default class Storage {
         maxSizeInBytes: 10 * 1024 * 1024,
         bypassWritingPermissions: true,
         publicRead: true,
+      },
+
+      broker_image_top_broker_logo: {
+        id: 'broker_image_top_broker_logo',
+        folder: 'broker_screenshots',
+        maxSizeInBytes: 10 * 1024 * 1024,
       },
     };
   }

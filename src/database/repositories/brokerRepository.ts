@@ -25,6 +25,7 @@ import BrokerTradeStoreRepository from './brokerTradeStoreRepository';
 import BrokerUpsideRepository from './brokerUpsideRepository';
 import BrokerVideoRepository from './brokerVideoRepository';
 import Error404 from '../../errors/Error404';
+import FileRepository from './fileRepository';
 import lodash from 'lodash';
 import moment from 'moment';
 import Sequelize from 'sequelize';
@@ -123,6 +124,16 @@ class BrokerRepository {
       {
         transaction,
       },
+    );
+
+    await FileRepository.replaceRelationFiles(
+      {
+        belongsTo: options.database.broker.getTableName(),
+        belongsToColumn: 'broker_image_top_broker_logo',
+        belongsToId: record.id,
+      },
+      data.broker_image_top_broker_logo,
+      options,
     );
 
     await this._createAuditLog(
@@ -521,6 +532,15 @@ class BrokerRepository {
     if (metaOnly) {
       return output;
     }
+
+    // #region Images
+    output.broker_image_top_broker_logo =
+      await FileRepository.fillDownloadUrl(
+        await record.getBroker_image_top_broker_logo({
+          transaction,
+        }),
+      );
+    // #endregion
 
     const { rows: upsides } =
       await BrokerUpsideRepository.findAndCountAll(

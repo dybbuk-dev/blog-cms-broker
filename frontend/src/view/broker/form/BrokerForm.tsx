@@ -174,6 +174,9 @@ function BrokerForm(props) {
       // #region Broker Forex Signal
       forex_signal: record.forex_signal,
       // #endregion
+
+      broker_image_top_broker_logo:
+        record.broker_image_top_broker_logo || [],
     };
 
     if (record.checkbox) {

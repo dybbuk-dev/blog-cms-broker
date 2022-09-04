@@ -33,10 +33,10 @@ export default class Storage {
         publicRead: true,
       },
 
-      productLogo: {
-        id: 'productLogo',
-        folder: 'tenant/:tenantId/product/logo',
-        maxSizeInBytes: 5242880,
+      broker_image_top_broker_logo: {
+        id: 'broker_image_top_broker_logo',
+        folder: 'broker_screenshots',
+        maxSizeInBytes: 10 * 1024 * 1024,
       },
     };
   }

@@ -211,6 +211,9 @@ class Permissions {
           plans.growth,
           plans.enterprise,
         ],
+        allowedStorage: [
+          storage.broker_image_top_broker_logo,
+        ],
       },
       brokerEdit: {
         id: 'brokerEdit',
@@ -220,6 +223,9 @@ class Permissions {
           plans.growth,
           plans.enterprise,
         ],
+        allowedStorage: [
+          storage.broker_image_top_broker_logo,
+        ],
       },
       brokerDestroy: {
         id: 'brokerDestroy',
@@ -228,6 +234,9 @@ class Permissions {
           plans.free,
           plans.growth,
           plans.enterprise,
+        ],
+        allowedStorage: [
+          storage.broker_image_top_broker_logo,
         ],
       },
       brokerRead: {

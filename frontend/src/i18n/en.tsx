@@ -485,6 +485,10 @@ const en = {
           beginners_level: 'Suitable for beginners',
         },
         // #endregion
+
+        broker_image: {
+          top_broker_logo: 'Top Broker Logo',
+        },
       },
       tabs: {
         broker: 'Broker',

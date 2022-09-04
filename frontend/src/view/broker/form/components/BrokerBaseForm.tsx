@@ -1,14 +1,15 @@
-import { Card, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { i18n } from 'src/i18n';
-import MDBox from 'src/mui/components/MDBox';
-import MDTypography from 'src/mui/components/MDTypography';
 import AuthorAutocompleteFormItem from 'src/view/author/autocomplete/AuthorAutocompleteFormItem';
 import CategoryAutocompleteFormItem from 'src/view/category/autocomplete/CategoryAutocompleteFormItem';
-import NavigationAutocompleteFormItem from 'src/view/navigation/autocomplete/NavigationAutocompleteFormItem';
 import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
-import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
 import FieldSetViewItem from 'src/view/shared/view/FieldSetViewItem';
+import InputFormItem from 'src/view/shared/form/items/InputFormItem';
+import LogoFormItem from 'src/view/shared/form/items/LogoFormItem';
+import MDBox from 'src/mui/components/MDBox';
+import NavigationAutocompleteFormItem from 'src/view/navigation/autocomplete/NavigationAutocompleteFormItem';
+import Storage from 'src/security/storage';
+import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
 
 function BrokerBaseForm(props) {
   const { record } = props;
@@ -145,19 +146,19 @@ function BrokerBaseForm(props) {
           fullWidth
         />
       </Grid>
-      <Grid item lg={4} md={6} xs={12}>
+      <Grid item lg={3} md={6} xs={12}>
         <CheckboxFormItem
           name="activated"
           label={i18n('entities.broker.fields.activated')}
         />
       </Grid>
-      <Grid item lg={4} md={6} xs={12}>
+      <Grid item lg={3} md={6} xs={12}>
         <CheckboxFormItem
           name="is_broker"
           label={i18n('entities.broker.fields.is_broker')}
         />
       </Grid>
-      <Grid item lg={4} md={6} xs={12}>
+      <Grid item lg={3} md={6} xs={12}>
         <CheckboxFormItem
           name="is_compareable"
           label={i18n(
@@ -165,13 +166,13 @@ function BrokerBaseForm(props) {
           )}
         />
       </Grid>
-      <Grid item lg={4} md={6} xs={12}>
+      <Grid item lg={3} md={6} xs={12}>
         <CheckboxFormItem
           name="top_broker"
           label={i18n('entities.broker.fields.top_broker')}
         />
       </Grid>
-      <Grid item lg={4} md={6} xs={12}>
+      <Grid item lg={3} md={6} xs={12}>
         <CheckboxFormItem
           name="top_binary_broker"
           label={i18n(
@@ -179,7 +180,7 @@ function BrokerBaseForm(props) {
           )}
         />
       </Grid>
-      <Grid item lg={4} md={6} xs={12}>
+      <Grid item lg={3} md={6} xs={12}>
         <CheckboxFormItem
           name="top_forex_broker"
           label={i18n(
@@ -187,7 +188,7 @@ function BrokerBaseForm(props) {
           )}
         />
       </Grid>
-      <Grid item lg={4} md={6} xs={12}>
+      <Grid item lg={3} md={6} xs={12}>
         <CheckboxFormItem
           name="featured_broker"
           label={i18n(
@@ -195,11 +196,24 @@ function BrokerBaseForm(props) {
           )}
         />
       </Grid>
-      <Grid item lg={4} md={6} xs={12}>
+      <Grid item lg={3} md={6} xs={12}>
         <CheckboxFormItem
           name="pdf"
           label={i18n('entities.broker.fields.pdf')}
         />
+      </Grid>
+      <Grid item md={6} xs={12}>
+        <MDBox pt={7}>
+          <LogoFormItem
+            name="broker_image_top_broker_logo"
+            label={i18n(
+              'entities.broker.fields.broker_image.top_broker_logo',
+            )}
+            storage={
+              Storage.values.broker_image_top_broker_logo
+            }
+          />
+        </MDBox>
       </Grid>
       <Grid item xs={12}>
         <TextAreaFormItem
