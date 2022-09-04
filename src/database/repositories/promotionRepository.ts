@@ -6,6 +6,7 @@ import AuditLogRepository from './auditLogRepository';
 import SequelizeRepository from './sequelizeRepository';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import { orderByUtils } from '../utils/orderByUtils';
+import moment from 'moment';
 
 const Op = Sequelize.Op;
 
@@ -68,6 +69,7 @@ class PromotionRepository {
         height: 0,
         optimized: true,
         ip: '',
+        modified: moment(),
       },
       {
         transaction,

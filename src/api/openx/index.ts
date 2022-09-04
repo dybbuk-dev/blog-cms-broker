@@ -1,0 +1,30 @@
+export default (app) => {
+  app.post(
+    `/tenant/:tenantId/openx`,
+    require('./openxCreate').default,
+  );
+  app.put(
+    `/tenant/:tenantId/openx/:id`,
+    require('./openxUpdate').default,
+  );
+  app.post(
+    `/tenant/:tenantId/openx/import`,
+    require('./openxImport').default,
+  );
+  app.delete(
+    `/tenant/:tenantId/openx`,
+    require('./openxDestroy').default,
+  );
+  app.get(
+    `/tenant/:tenantId/openx/autocomplete`,
+    require('./openxAutocomplete').default,
+  );
+  app.get(
+    `/tenant/:tenantId/openx`,
+    require('./openxList').default,
+  );
+  app.get(
+    `/tenant/:tenantId/openx/:id`,
+    require('./openxFind').default,
+  );
+};

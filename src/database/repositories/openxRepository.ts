@@ -1,28 +1,40 @@
-import lodash from 'lodash';
-import Error404 from '../../errors/Error404';
-import Sequelize from 'sequelize';
 import { IRepositoryOptions } from './IRepositoryOptions';
-import AuditLogRepository from './auditLogRepository';
-import SequelizeRepository from './sequelizeRepository';
-import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import { orderByUtils } from '../utils/orderByUtils';
+import AuditLogRepository from './auditLogRepository';
+import Error400 from '../../errors/Error400';
+import lodash from 'lodash';
+import md5 from 'crypto-js/md5';
 import moment from 'moment';
+import Sequelize from 'sequelize';
+import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
+import SequelizeRepository from './sequelizeRepository';
 
 const Op = Sequelize.Op;
 
-class TrackingParameterRepository {
-  static ALL_FIELDS = ['param', 'value'];
+class OpenxRepository {
+  static ALL_FIELDS = [
+    'code',
+    'noscript',
+    'activated',
+    'zone',
+  ];
+
+  static _relatedData(data, options) {
+    return {
+      hash: md5(data.code).toString(),
+      ip: data.ip || '',
+    };
+  }
 
   static async create(data, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
     const record =
-      await options.database.affiliate_tracking_identifier.create(
+      await options.database.openx_banner.create(
         {
           ...lodash.pick(data, this.ALL_FIELDS),
-          value: data.value ?? null,
-          ip: '',
+          ...this._relatedData(data, options),
           created: moment(),
           modified: moment(),
         },
@@ -50,24 +62,24 @@ class TrackingParameterRepository {
       SequelizeRepository.getTransaction(options);
 
     let record =
-      await options.database.affiliate_tracking_identifier.findOne(
-        {
-          where: {
-            id,
-          },
-          transaction,
+      await options.database.openx_banner.findOne({
+        where: {
+          id,
         },
-      );
+        transaction,
+      });
 
     if (!record) {
-      throw new Error404();
+      throw new Error400(
+        options.language,
+        'entities.openx.errors.update',
+      );
     }
 
     record = await record.update(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
-        value: data.value ?? null,
-        ip: '',
+        ...this._relatedData(data, options),
         modified: moment(),
       },
       {
@@ -90,17 +102,18 @@ class TrackingParameterRepository {
       SequelizeRepository.getTransaction(options);
 
     let record =
-      await options.database.affiliate_tracking_identifier.findOne(
-        {
-          where: {
-            id,
-          },
-          transaction,
+      await options.database.openx_banner.findOne({
+        where: {
+          id,
         },
-      );
+        transaction,
+      });
 
     if (!record) {
-      throw new Error404();
+      throw new Error400(
+        options.language,
+        'entities.openx.errors.destroy',
+      );
     }
 
     await record.destroy({
@@ -118,27 +131,21 @@ class TrackingParameterRepository {
   static async findById(id, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
-    const include = [
-      // {
-      //   model: options.database.author,
-      //   as: 'author',
-      // },
-    ];
+
+    const include = [];
+
     const record =
-      await options.database.affiliate_tracking_identifier.findOne(
-        {
-          where: {
-            id,
-          },
-          include,
-          transaction,
+      await options.database.openx_banner.findOne({
+        where: {
+          id,
         },
-      );
-
+        include,
+        transaction,
+      });
     if (!record) {
-      throw new Error404();
+      throw new Error400();
     }
-
+    console.log(record);
     return this._fillWithRelationsAndFiles(record, options);
   }
 
@@ -168,12 +175,10 @@ class TrackingParameterRepository {
     };
 
     const records =
-      await options.database.affiliate_tracking_identifier.findAll(
-        {
-          attributes: ['id'],
-          where,
-        },
-      );
+      await options.database.openx_banner.findAll({
+        attributes: ['id'],
+        where,
+      });
 
     return records.map((record) => record.id);
   }
@@ -182,27 +187,20 @@ class TrackingParameterRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    return options.database.affiliate_tracking_identifier.count(
-      {
-        where: {
-          ...filter,
-        },
-        transaction,
+    return options.database.openx_banner.count({
+      where: {
+        ...filter,
       },
-    );
+      transaction,
+    });
   }
 
   static async findAndCountAll(
     { filter, limit = 0, offset = 0, orderBy = '' },
     options: IRepositoryOptions,
   ) {
-    const include = [
-      // {
-      //   model: options.database.author,
-      //   as: 'author',
-      // },
-    ];
     let whereAnd: Array<any> = [];
+    let include = [];
 
     if (filter) {
       if (filter.idRange) {
@@ -233,40 +231,57 @@ class TrackingParameterRepository {
         }
       }
 
-      ['param', 'value'].forEach((field) => {
+      ['code', 'noscript'].forEach((field) => {
         if (filter[field]) {
           whereAnd.push(
             SequelizeFilterUtils.ilikeIncludes(
-              'affiliate_tracking_identifier',
+              'openx_banner',
               field,
               filter[field],
             ),
           );
         }
       });
+
+      if (filter.zone) {
+        whereAnd.push({
+          zone: filter.zone,
+        });
+      }
+
+      ['activated'].forEach((field) => {
+        if (
+          filter[field] === true ||
+          filter[field] === 'true' ||
+          filter[field] === false ||
+          filter[field] === 'false'
+        ) {
+          whereAnd.push({
+            [field]:
+              filter[field] === true ||
+              filter[field] === 'true',
+          });
+        }
+      });
     }
 
     const where = { [Op.and]: whereAnd };
     let { rows, count } =
-      await options.database.affiliate_tracking_identifier.findAndCountAll(
-        {
-          where,
-          include,
-          limit: limit ? Number(limit) : undefined,
-          offset: offset ? Number(offset) : undefined,
-          order: orderBy
-            ? [orderByUtils(orderBy)]
-            : [['id', 'DESC']],
-          transaction:
-            SequelizeRepository.getTransaction(options),
-        },
-      );
-
+      await options.database.openx_banner.findAndCountAll({
+        where,
+        include,
+        limit: limit ? Number(limit) : undefined,
+        offset: offset ? Number(offset) : undefined,
+        order: orderBy
+          ? [orderByUtils(orderBy)]
+          : [['id', 'DESC']],
+        transaction:
+          SequelizeRepository.getTransaction(options),
+      });
     rows = await this._fillWithRelationsAndFilesForRows(
       rows,
       options,
     );
-
     return { rows, count };
   }
 
@@ -274,7 +289,39 @@ class TrackingParameterRepository {
     query,
     limit,
     options: IRepositoryOptions,
-  ) {}
+  ) {
+    let whereAnd: Array<any> = [];
+
+    if (query) {
+      whereAnd.push({
+        [Op.or]: [
+          { ['id']: query },
+          {
+            [Op.and]: SequelizeFilterUtils.ilikeIncludes(
+              'openx_banner',
+              'code',
+              query,
+            ),
+          },
+        ],
+      });
+    }
+
+    const where = { [Op.and]: whereAnd };
+
+    const records =
+      await options.database.openx_banner.findAll({
+        attributes: ['id', 'code', 'zone'],
+        where,
+        limit: limit ? Number(limit) : undefined,
+        order: [['id', 'ASC']],
+      });
+
+    return records.map((record) => ({
+      id: record.id,
+      label: record.zone,
+    }));
+  }
 
   static async _createAuditLog(
     action,
@@ -292,7 +339,7 @@ class TrackingParameterRepository {
 
     await AuditLogRepository.log(
       {
-        entityName: 'tracking parameter',
+        entityName: 'openx banner',
         entityId: record.id,
         action,
         values,
@@ -333,4 +380,4 @@ class TrackingParameterRepository {
   }
 }
 
-export default TrackingParameterRepository;
+export default OpenxRepository;
