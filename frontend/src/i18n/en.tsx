@@ -490,6 +490,7 @@ const en = {
           top_broker_logo: 'Top Broker Logo',
           top_broker_horizontal_logo:
             'Top Broker Horizontal Logo',
+          broker_regulation_image: 'Regulatory Logo',
         },
       },
       tabs: {

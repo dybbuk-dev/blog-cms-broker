@@ -357,6 +357,7 @@ class Permissions {
         allowedStorage: [
           storage.broker_image_top_broker_logo,
           storage.broker_image_top_broker_horizontal_logo,
+          storage.broker_image_broker_regulation_image,
         ],
       },
       brokerEdit: {
@@ -370,6 +371,7 @@ class Permissions {
         allowedStorage: [
           storage.broker_image_top_broker_logo,
           storage.broker_image_top_broker_horizontal_logo,
+          storage.broker_image_broker_regulation_image,
         ],
       },
       brokerDestroy: {
@@ -383,6 +385,7 @@ class Permissions {
         allowedStorage: [
           storage.broker_image_top_broker_logo,
           storage.broker_image_top_broker_horizontal_logo,
+          storage.broker_image_broker_regulation_image,
         ],
       },
       brokerRead: {
@@ -673,7 +676,7 @@ class Permissions {
       },
       // #endregion
 
-      // #region openx
+      // #region Openx
       openxImport: {
         id: 'openxImport',
         allowedRoles: [],
