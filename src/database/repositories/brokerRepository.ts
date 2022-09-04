@@ -1,13 +1,36 @@
-import lodash from 'lodash';
-import Error404 from '../../errors/Error404';
-import Sequelize from 'sequelize';
 import { IRepositoryOptions } from './IRepositoryOptions';
-import AuditLogRepository from './auditLogRepository';
-import SequelizeRepository from './sequelizeRepository';
-import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
-import moment from 'moment';
 import { orderByUtils } from '../utils/orderByUtils';
+import AuditLogRepository from './auditLogRepository';
+import BrokerAddressRepository from './brokerAddressRepository';
+import BrokerBankRepository from './brokerBankRepository';
+import BrokerCertificateRepository from './brokerCertificateRepository';
+import BrokerCheckboxRepository from './brokerCheckboxRepository';
+import BrokerCreteriaRepository from './brokerCreteriaRepository';
+import BrokerCurrencyPairRepository from './brokerCurrencyPairRepository';
+import BrokerDepositGuaranteeRepository from './brokerDepositGuaranteeRepository';
+import BrokerDepositRepository from './brokerDepositRepository';
+import BrokerEmailRepository from './brokerEmailRepository';
+import BrokerFaxRepository from './brokerFaxRepository';
+import BrokerFeatureRepository from './brokerFeatureRepository';
+import BrokerForexSignalRepository from './brokerForexSignalRepository';
+import BrokerMetaRepository from './brokerMetaRepository';
+import BrokerMinimumTradingUnitRepository from './brokerMinimumTradingUnitRepository';
+import BrokerOrderTypeRepository from './brokerOrderTypeRepository';
+import BrokerPhoneRepository from './brokerPhoneRepository';
+import BrokerRegulatoryAuthorityRepository from './brokerRegulatoryAuthorityRepository';
 import BrokersCategoryRepository from './brokersCategoryRepository';
+import BrokerSpreadRepository from './brokerSpreadRepository';
+import BrokerTradePlatformRepository from './brokerTradePlatformRepository';
+import BrokerTradeStoreRepository from './brokerTradeStoreRepository';
+import BrokerUpsideRepository from './brokerUpsideRepository';
+import BrokerVideoRepository from './brokerVideoRepository';
+import Error404 from '../../errors/Error404';
+import FileRepository from './fileRepository';
+import lodash from 'lodash';
+import moment from 'moment';
+import Sequelize from 'sequelize';
+import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
+import SequelizeRepository from './sequelizeRepository';
 
 const Op = Sequelize.Op;
 
@@ -34,25 +57,91 @@ class BrokerRepository {
     };
   }
 
-  static includes(options: IRepositoryOptions) {
+  static includes(
+    options: IRepositoryOptions,
+    metaOnly = false,
+  ) {
     return [
-      {
-        model: options.database.navigation,
-        as: 'navigation',
-      },
-      {
-        model: options.database.author,
-        as: 'author',
-      },
       {
         model: options.database.broker_metas,
         as: 'meta',
       },
-      {
-        model: options.database.broker_upside,
-        as: 'upsides',
+      !metaOnly && {
+        model: options.database.navigation,
+        as: 'navigation',
       },
-    ];
+      !metaOnly && {
+        model: options.database.author,
+        as: 'author',
+      },
+      !metaOnly && {
+        model: options.database.broker_phone,
+        as: 'phone',
+      },
+      !metaOnly && {
+        model: options.database.broker_fax,
+        as: 'fax',
+      },
+      !metaOnly && {
+        model: options.database.broker_email,
+        as: 'email',
+      },
+      !metaOnly && {
+        model: options.database.broker_address,
+        as: 'address',
+      },
+      !metaOnly && {
+        model: options.database.broker_video,
+        as: 'video',
+      },
+      !metaOnly && {
+        model: options.database.broker_checkbox,
+        as: 'checkbox',
+      },
+      !metaOnly && {
+        model: options.database.broker_creterias,
+        as: 'creteria',
+      },
+      !metaOnly && {
+        model: options.database.broker_forex_signal,
+        as: 'forex_signal',
+      },
+    ].filter(Boolean);
+  }
+
+  static async _replaceRelationFiles(
+    record,
+    data,
+    options: IRepositoryOptions,
+  ) {
+    await FileRepository.replaceRelationFiles(
+      {
+        belongsTo: options.database.broker.getTableName(),
+        belongsToColumn: 'broker_image_top_broker_logo',
+        belongsToId: record.id,
+      },
+      data.broker_image_top_broker_logo.map((v) => ({
+        ...v,
+        type: 'top_broker_logo',
+      })),
+      options,
+    );
+
+    await FileRepository.replaceRelationFiles(
+      {
+        belongsTo: options.database.broker.getTableName(),
+        belongsToColumn:
+          'broker_image_top_broker_horizontal_logo',
+        belongsToId: record.id,
+      },
+      data.broker_image_top_broker_horizontal_logo.map(
+        (v) => ({
+          ...v,
+          type: 'top_broker_horizontal_logo',
+        }),
+      ),
+      options,
+    );
   }
 
   static async create(data, options: IRepositoryOptions) {
@@ -71,6 +160,8 @@ class BrokerRepository {
         transaction,
       },
     );
+
+    await this._replaceRelationFiles(record, data, options);
 
     await this._createAuditLog(
       AuditLogRepository.CREATE,
@@ -101,6 +192,8 @@ class BrokerRepository {
       throw new Error404();
     }
 
+    await this._replaceRelationFiles(record, data, options);
+
     record = await record.update(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
@@ -112,6 +205,8 @@ class BrokerRepository {
         transaction,
       },
     );
+
+    await this._replaceRelationFiles(record, data, options);
 
     await this._createAuditLog(
       AuditLogRepository.UPDATE,
@@ -136,6 +231,39 @@ class BrokerRepository {
 
     if (!record) {
       throw new Error404();
+    }
+
+    const Repositories: any[] = [
+      BrokerAddressRepository,
+      BrokerBankRepository,
+      BrokerCertificateRepository,
+      BrokerCheckboxRepository,
+      BrokerCreteriaRepository,
+      BrokerCurrencyPairRepository,
+      BrokerDepositGuaranteeRepository,
+      BrokerDepositRepository,
+      BrokerEmailRepository,
+      BrokerFaxRepository,
+      BrokerFeatureRepository,
+      BrokerForexSignalRepository,
+      BrokerMetaRepository,
+      BrokerMinimumTradingUnitRepository,
+      BrokerOrderTypeRepository,
+      BrokerPhoneRepository,
+      BrokerRegulatoryAuthorityRepository,
+      BrokersCategoryRepository,
+      BrokerSpreadRepository,
+      BrokerTradePlatformRepository,
+      BrokerTradeStoreRepository,
+      BrokerUpsideRepository,
+      BrokerVideoRepository,
+    ];
+    for (const Repository of Repositories) {
+      if (
+        typeof Repository.destroyByBroker === 'function'
+      ) {
+        await Repository.destroyByBroker(id, options);
+      }
     }
 
     await record.destroy({
@@ -168,7 +296,11 @@ class BrokerRepository {
       throw new Error404();
     }
 
-    return this._fillWithRelationsAndFiles(record, options);
+    return this._fillWithRelationsAndFiles(
+      record,
+      options,
+      false,
+    );
   }
 
   static async filterIdInTenant(
@@ -221,7 +353,7 @@ class BrokerRepository {
     options: IRepositoryOptions,
   ) {
     let whereAnd: Array<any> = [];
-    let include = this.includes(options);
+    let include = this.includes(options, true);
 
     if (filter) {
       if (filter.idRange) {
@@ -383,6 +515,7 @@ class BrokerRepository {
   static async _fillWithRelationsAndFilesForRows(
     rows,
     options: IRepositoryOptions,
+    metaOnly = true,
   ) {
     if (!rows) {
       return rows;
@@ -390,7 +523,11 @@ class BrokerRepository {
 
     return Promise.all(
       rows.map((record) =>
-        this._fillWithRelationsAndFiles(record, options),
+        this._fillWithRelationsAndFiles(
+          record,
+          options,
+          metaOnly,
+        ),
       ),
     );
   }
@@ -398,6 +535,7 @@ class BrokerRepository {
   static async _fillWithRelationsAndFiles(
     record,
     options: IRepositoryOptions,
+    metaOnly = true,
   ) {
     if (!record) {
       return record;
@@ -408,17 +546,150 @@ class BrokerRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
+    const brokerParam = {
+      filter: {
+        broker_id: output.id,
+      },
+    };
+
     const { rows: categories } =
       await BrokersCategoryRepository.findAndCountAll(
-        {
-          filter: {
-            broker_id: output.id,
-          },
-        },
+        brokerParam,
         options,
       );
 
     output.categories = categories;
+
+    if (metaOnly) {
+      return output;
+    }
+
+    // #region Images
+    output.broker_image_top_broker_logo =
+      await FileRepository.fillDownloadUrl(
+        await record.getBroker_image_top_broker_logo({
+          transaction,
+        }),
+      );
+
+    output.broker_image_top_broker_horizontal_logo =
+      await FileRepository.fillDownloadUrl(
+        await record.getBroker_image_top_broker_horizontal_logo(
+          {
+            transaction,
+          },
+        ),
+      );
+    // #endregion
+
+    const { rows: upsides } =
+      await BrokerUpsideRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.upsides = upsides || null;
+
+    const { rows: regulatory_authorities } =
+      await BrokerRegulatoryAuthorityRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.regulatory_authorities =
+      regulatory_authorities || null;
+
+    const { rows: deposit_guarantees } =
+      await BrokerDepositGuaranteeRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.deposit_guarantees = deposit_guarantees || null;
+
+    const { rows: certificates } =
+      await BrokerCertificateRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.certificates = certificates || null;
+
+    const { rows: spreads } =
+      await BrokerSpreadRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.spreads = spreads || null;
+
+    const { rows: features } =
+      await BrokerFeatureRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.features = features || null;
+
+    const { rows: banks } =
+      await BrokerBankRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.banks = banks || null;
+
+    const { rows: order_types } =
+      await BrokerOrderTypeRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.order_types =
+      order_types?.map((val) => val.type) || null;
+
+    const { rows: minimum_trading_units } =
+      await BrokerMinimumTradingUnitRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.minimum_trading_units =
+      minimum_trading_units?.map(
+        (val) => val.minimum_trading_unit,
+      ) || null;
+
+    const { rows: currency_pairs } =
+      await BrokerCurrencyPairRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.currency_pairs = currency_pairs || null;
+
+    const { rows: trade_platforms } =
+      await BrokerTradePlatformRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.trade_platforms = trade_platforms || null;
+
+    const { rows: trade_stores } =
+      await BrokerTradeStoreRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.trade_stores = trade_stores || null;
+
+    const { rows: deposits } =
+      await BrokerDepositRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.deposits = deposits || null;
 
     return output;
   }

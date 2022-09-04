@@ -54,7 +54,7 @@ function InputRangeFormItem(props) {
 
   const handleStartChanged = (value) => {
     setValue(name, [value, endValue()], {
-      shouldValidate: true,
+      shouldValidate: false,
       shouldDirty: true,
     });
     props.onChange && props.onChange([value, endValue()]);
@@ -62,7 +62,7 @@ function InputRangeFormItem(props) {
 
   const handleEndChanged = (value) => {
     setValue(name, [startValue(), value], {
-      shouldValidate: true,
+      shouldValidate: false,
       shouldDirty: true,
     });
     props.onChange && props.onChange([value, startValue()]);

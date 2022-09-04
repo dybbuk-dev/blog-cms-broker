@@ -101,8 +101,125 @@ const en = {
     broker_upside: {
       errors: {
         notEmpty: {
-          text: 'Text could not be empty',
+          text: 'Demo Account Text is required',
         },
+      },
+    },
+    broker_regulatory_authority: {
+      errors: {
+        notEmpty: {
+          name: 'Regulatory Authority Name is required',
+        },
+      },
+    },
+    broker_deposit_guarantee: {
+      errors: {
+        notEmpty: {
+          name: 'Deposit Guarantee Name is required',
+        },
+      },
+    },
+    broker_certificate: {
+      errors: {
+        notEmpty: {
+          name: 'Certificate Name is required',
+        },
+      },
+    },
+    broker_spread: {
+      errors: {
+        notEmpty: {
+          spread: 'Spread is required',
+        },
+      },
+    },
+    broker_feature: {
+      errors: {
+        notEmpty: {
+          feature: 'Special Feature is required',
+        },
+      },
+    },
+    broker_phone: {
+      errors: {
+        notEmpty: {},
+      },
+    },
+    broker_fax: {
+      errors: {
+        notEmpty: {},
+      },
+    },
+    broker_email: {
+      errors: {
+        notEmpty: {},
+      },
+    },
+    broker_address: {
+      errors: {
+        notEmpty: {},
+      },
+    },
+    broker_video: {
+      errors: {
+        notEmpty: {},
+      },
+    },
+    broker_checkbox: {
+      errors: {
+        notEmpty: {},
+      },
+    },
+    broker_forex_signal: {
+      errors: {
+        notEmpty: {},
+      },
+    },
+    broker_bank: {
+      errors: {
+        notEmpty: {
+          name: 'Bank Name is required',
+        },
+      },
+    },
+    broker_order_type: {
+      errors: {
+        notEmpty: {
+          type: 'Broker Order Type is required',
+        },
+      },
+    },
+    broker_minimum_trading_unit: {
+      errors: {
+        notEmpty: {
+          minimum_trading_units:
+            'Broker Minimum Trading Unit is required',
+        },
+      },
+    },
+    broker_currency_pair: {
+      errors: {
+        notEmpty: {},
+      },
+    },
+    broker_creteria: {
+      errors: {
+        notEmpty: {},
+      },
+    },
+    broker_trade_platform: {
+      errors: {
+        notEmpty: {},
+      },
+    },
+    broker_trade_store: {
+      errors: {
+        notEmpty: {},
+      },
+    },
+    broker_deposit: {
+      errors: {
+        notEmpty: {},
       },
     },
     author: {

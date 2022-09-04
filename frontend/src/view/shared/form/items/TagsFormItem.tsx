@@ -59,7 +59,7 @@ function TagsFormItem(props) {
   const handleChange = (data) => {
     if (!data || !data.length) {
       setValue(name, null, {
-        shouldValidate: true,
+        shouldValidate: false,
         shouldDirty: true,
       });
       props.onChange && props.onChange(null);
@@ -72,7 +72,7 @@ function TagsFormItem(props) {
       .split(',');
 
     setValue(name, commaSplittedValues, {
-      shouldValidate: true,
+      shouldValidate: false,
       shouldDirty: true,
     });
     props.onChange && props.onChange(commaSplittedValues);

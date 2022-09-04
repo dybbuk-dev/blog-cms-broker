@@ -48,13 +48,6 @@ const menus = [
   },
 
   {
-    path: '/broker',
-    name: i18n('entities.broker.menu'),
-    permissionRequired: permissions.brokerRead,
-    icon: <Icon fontSize="medium">badge</Icon>,
-  },
-
-  {
     name: i18n('collapses.routes.menu'),
     key: 'routes',
     icon: <Icon fontSize="medium">signpost</Icon>,
@@ -73,6 +66,20 @@ const menus = [
   },
 
   {
+    path: '/broker',
+    name: i18n('entities.broker.menu'),
+    permissionRequired: permissions.brokerRead,
+    icon: <Icon fontSize="medium">badge</Icon>,
+  },
+
+  {
+    path: '/news',
+    name: i18n('entities.news.menu'),
+    permissionRequired: permissions.newsRead,
+    icon: <Icon fontSize="medium">newspaper</Icon>,
+  },
+
+  {
     name: i18n('collapses.promotion.menu'),
     key: 'promotion',
     icon: <Icon fontSize="medium">view_carousel</Icon>,
@@ -88,13 +95,6 @@ const menus = [
         name: i18n('entities.promotion.menu'),
       },
     ],
-  },
-
-  {
-    path: '/news',
-    name: i18n('entities.news.menu'),
-    permissionRequired: permissions.newsRead,
-    icon: <Icon fontSize="medium">unsubscribe</Icon>,
   },
 
   {

@@ -1,12 +1,11 @@
 import $ from 'jquery';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import MDBox from 'src/mui/components/MDBox';
 import MDEditor from 'src/mui/components/MDEditor';
 import MDTypography from 'src/mui/components/MDTypography';
 import FormErrors from 'src/view/shared/form/formErrors';
-import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
 
 interface HtmlEditorFormItemProps {
   name: string;
@@ -27,7 +26,15 @@ function HtmlEditorFormItem({
     setValue,
     errors,
     formState: { touched, isSubmitted },
+    control: { defaultValuesRef },
+    register,
+    getValues,
   } = useFormContext();
+
+  const defaultValues = defaultValuesRef.current || {};
+
+  const formValue = getValues(name);
+
   const errorMessage = FormErrors.errorMessage(
     name,
     errors,
@@ -35,18 +42,31 @@ function HtmlEditorFormItem({
     isSubmitted,
     externalErrorMessage,
   );
+
   const { darkMode } = selectMuiSettings();
-  const [editorValue, setEditorValue] = useState(
-    value ?? '',
+
+  const [originalValue, setOriginalValue] = useState(
+    formValue || value || defaultValues[name] || '',
   );
-  const onChangeEditor = (newVal) => {
-    setEditorValue(newVal);
-    const isEmpty = $(newVal).text().trim() === '';
-    setValue(name, isEmpty ? '' : newVal, {
-      shouldValidate: true,
+
+  const updateValue = (value) => {
+    setOriginalValue(value);
+    setValue(name, value, {
+      shouldValidate: false,
       shouldDirty: true,
     });
   };
+
+  useEffect(() => {
+    register({ name });
+    // updateValue(value || originalValue);
+  }, [register, name]);
+
+  const onChangeEditor = (newVal) => {
+    const isEmpty = $(newVal).text().trim() === '';
+    updateValue(isEmpty ? '' : newVal);
+  };
+
   return (
     <MDBox
       pt={2}
@@ -66,8 +86,9 @@ function HtmlEditorFormItem({
       >
         {`${label}${required ? ' *' : ''}`}
       </MDTypography>
+
       <MDEditor
-        value={editorValue}
+        value={originalValue}
         onChange={onChangeEditor}
         modules={{
           toolbar: [
@@ -100,15 +121,6 @@ function HtmlEditorFormItem({
           </MDTypography>
         </MDBox>
       )}
-      <MDBox display="none">
-        <TextAreaFormItem
-          name={name}
-          label={label}
-          required={required ?? false}
-          variant="standard"
-          fullWidth
-        />
-      </MDBox>
     </MDBox>
   );
 }

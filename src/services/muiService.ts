@@ -7,7 +7,7 @@ const DEFAULT_SETTINGS = {
   transparentSidenav: false,
   whiteSidenav: false,
   sidenavColor: 'info',
-  transparentNavbar: true,
+  transparentNavbar: false,
   fixedNavbar: true,
   direction: 'ltr',
   darkMode: false,

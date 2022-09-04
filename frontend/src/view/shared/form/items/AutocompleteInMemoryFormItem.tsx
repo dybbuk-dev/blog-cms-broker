@@ -1,32 +1,19 @@
-import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
-import FormErrors from 'src/view/shared/form/formErrors';
-import Select from 'react-select';
-import { i18n } from 'src/i18n';
-import {
-  components as materialUiComponents,
-  styles as materialUiStyles,
-} from 'src/view/shared/form/items/shared/reactSelectMaterialUi';
-import makeStyles from '@mui/styles/makeStyles';
-import { Autocomplete, IconButton } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import { useFormContext } from 'react-hook-form';
 import _uniqBy from 'lodash/uniqBy';
-import MDBox from 'src/mui/components/MDBox';
-import MDInput from 'src/mui/components/MDInput';
+import { Autocomplete } from '@mui/material';
+import { i18n } from 'src/i18n';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { useFormContext } from 'react-hook-form';
+import { useState, useEffect } from 'react';
+import AddIcon from '@mui/icons-material/Add';
+import FormErrors from 'src/view/shared/form/formErrors';
+import MDBox from 'src/mui/components/MDBox';
 import MDButton from 'src/mui/components/MDButton';
+import MDInput from 'src/mui/components/MDInput';
 import MDTypography from 'src/mui/components/MDTypography';
+import PropTypes from 'prop-types';
 
 function AutocompleteInMemoryFormItem(props) {
   const { sidenavColor } = selectMuiSettings();
-  const {
-    errors,
-    watch,
-    setValue,
-    register,
-    formState: { touched, isSubmitted },
-  } = useFormContext();
 
   const {
     label,
@@ -49,12 +36,35 @@ function AutocompleteInMemoryFormItem(props) {
     renderInput,
   } = props;
 
-  const originalValue = watch(name);
+  const {
+    errors,
+    control: { defaultValuesRef },
+    setValue,
+    register,
+    formState: { touched, isSubmitted },
+    getValues,
+  } = useFormContext();
+
+  const defaultValues = defaultValuesRef.current || {};
+
+  const formValue = getValues(name);
+
+  const errorMessage = FormErrors.errorMessage(
+    name,
+    errors,
+    touched,
+    isSubmitted,
+    externalErrorMessage,
+  );
+
+  const originalValue = formValue || defaultValues[name];
 
   const [fullDataSource, setFullDataSource] = useState<
     Array<any>
   >([]);
   const [loading, setLoading] = useState(false);
+
+  const [realValue, setRealValue] = useState(originalValue);
 
   useEffect(() => {
     register({ name });
@@ -102,8 +112,8 @@ function AutocompleteInMemoryFormItem(props) {
   };
 
   const valueMultiple = () => {
-    if (originalValue) {
-      return originalValue.map((value) =>
+    if (realValue) {
+      return realValue.map((value) =>
         prioritizeFromDataSource(
           mapper.toAutocomplete(value),
         ),
@@ -114,9 +124,9 @@ function AutocompleteInMemoryFormItem(props) {
   };
 
   const valueOne = () => {
-    if (originalValue) {
+    if (realValue) {
       return prioritizeFromDataSource(
-        mapper.toAutocomplete(originalValue),
+        mapper.toAutocomplete(realValue),
       );
     }
 
@@ -133,8 +143,9 @@ function AutocompleteInMemoryFormItem(props) {
 
   const handleSelectMultiple = (values) => {
     if (!values) {
+      setRealValue([]);
       setValue(name, [], {
-        shouldValidate: true,
+        shouldValidate: false,
         shouldDirty: true,
       });
       props.onChange && props.onChange([]);
@@ -144,8 +155,9 @@ function AutocompleteInMemoryFormItem(props) {
     const newValue = values.map((value) =>
       mapper.toValue(value),
     );
+    setRealValue(newValue);
     setValue(name, newValue, {
-      shouldValidate: true,
+      shouldValidate: false,
       shouldDirty: true,
     });
     props.onChange && props.onChange(newValue);
@@ -153,8 +165,9 @@ function AutocompleteInMemoryFormItem(props) {
 
   const handleSelectOne = (value) => {
     if (!value) {
+      setRealValue(null);
       setValue(name, null, {
-        shouldValidate: true,
+        shouldValidate: false,
         shouldDirty: true,
       });
       props.onChange && props.onChange(null);
@@ -162,8 +175,9 @@ function AutocompleteInMemoryFormItem(props) {
     }
 
     const newValue = mapper.toValue(value);
+    setRealValue(newValue);
     setValue(name, newValue, {
-      shouldValidate: true,
+      shouldValidate: false,
       shouldDirty: true,
     });
     props.onChange && props.onChange(newValue);
@@ -197,14 +211,6 @@ function AutocompleteInMemoryFormItem(props) {
   const hintOrLoading = loading
     ? i18n('autocomplete.loading')
     : hint;
-
-  const errorMessage = FormErrors.errorMessage(
-    name,
-    errors,
-    touched,
-    isSubmitted,
-    externalErrorMessage,
-  );
 
   const fnRenderInput = renderInput
     ? renderInput

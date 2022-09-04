@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import FormErrors from 'src/view/shared/form/formErrors';
 import {
-  Checkbox,
-  FormControl,
   FormControlLabel,
   FormHelperText,
-  FormLabel,
   Switch,
 } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
@@ -21,6 +18,7 @@ export function CheckboxFormItem(props) {
     hint,
     required,
     externalErrorMessage,
+    value,
   } = props;
 
   const {
@@ -28,8 +26,29 @@ export function CheckboxFormItem(props) {
     errors,
     formState: { touched, isSubmitted },
     setValue,
-    watch,
+    control: { defaultValuesRef },
+    getValues,
   } = useFormContext();
+
+  const defaultValues = defaultValuesRef.current || {};
+
+  const formValue = getValues(name);
+
+  const [checked, setChecked] = useState(() => {
+    if (formValue !== undefined && formValue !== null) {
+      return formValue;
+    }
+    if (value !== undefined && value !== null) {
+      return value;
+    }
+    if (
+      defaultValues[name] !== undefined &&
+      defaultValues[name] !== null
+    ) {
+      return defaultValues[name];
+    }
+    return false;
+  });
 
   useEffect(() => {
     register({ name });
@@ -52,10 +71,11 @@ export function CheckboxFormItem(props) {
           <Switch
             id={name}
             name={name}
-            checked={watch(name) || false}
+            checked={props.forceValue ? value : checked}
             onChange={(e) => {
+              setChecked(Boolean(e.target.checked));
               setValue(name, Boolean(e.target.checked), {
-                shouldValidate: true,
+                shouldValidate: false,
                 shouldDirty: true,
               });
               props.onChange &&
@@ -64,7 +84,7 @@ export function CheckboxFormItem(props) {
             onBlur={() =>
               props.onBlur && props.onBlur(null)
             }
-            inputRef={register}
+            // inputRef={register}
             color={sidenavColor}
           />
         }
@@ -86,6 +106,7 @@ CheckboxFormItem.propTypes = {
   required: PropTypes.bool,
   label: PropTypes.string,
   hint: PropTypes.string,
+  value: PropTypes.bool,
   externalErrorMessage: PropTypes.string,
 };
 

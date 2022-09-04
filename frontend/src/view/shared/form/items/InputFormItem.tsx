@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import MDInput from 'src/mui/components/MDInput';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import FormErrors from 'src/view/shared/form/formErrors';
 import MDBox from 'src/mui/components/MDBox';
+import MDInput from 'src/mui/components/MDInput';
 import MDTypography from 'src/mui/components/MDTypography';
+import PropTypes from 'prop-types';
 
 export function InputFormItem(props) {
   const {
@@ -19,6 +19,7 @@ export function InputFormItem(props) {
     required,
     externalErrorMessage,
     disabled,
+    startAdornment,
     endAdornment,
     margin,
     variant,
@@ -32,7 +33,22 @@ export function InputFormItem(props) {
     register,
     errors,
     formState: { touched, isSubmitted },
+    setValue,
+    control: { defaultValuesRef },
+    getValues,
   } = useFormContext();
+
+  const defaultValues = defaultValuesRef.current || {};
+
+  const formValue = getValues(name);
+
+  const [curValue, setCurValue] = useState(
+    formValue || value || defaultValues[name] || '',
+  );
+
+  useEffect(() => {
+    register({ name });
+  }, [register, name]);
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -50,8 +66,13 @@ export function InputFormItem(props) {
         type={type}
         label={label}
         required={required}
-        inputRef={register}
+        // inputRef={register}
         onChange={(event) => {
+          setCurValue(event.target.value);
+          setValue(name, event.target.value, {
+            shouldValidate: false,
+            shouldDirty: true,
+          });
           props.onChange &&
             props.onChange(event.target.value);
         }}
@@ -70,12 +91,14 @@ export function InputFormItem(props) {
         }}
         error={Boolean(errorMessage)}
         helperText={hint}
-        InputProps={{ endAdornment }}
+        InputProps={{ startAdornment, endAdornment }}
         inputProps={{
           name,
         }}
         disabled={disabled}
-        value={value}
+        value={
+          props.forceValue ? value : formValue || curValue
+        }
       />
       {errorMessage && (
         <MDBox mt={0.75}>
@@ -112,6 +135,7 @@ InputFormItem.propTypes = {
   autoComplete: PropTypes.string,
   externalErrorMessage: PropTypes.string,
   onChange: PropTypes.func,
+  startAdornment: PropTypes.any,
   endAdornment: PropTypes.any,
   margin: PropTypes.string,
   variant: PropTypes.string,

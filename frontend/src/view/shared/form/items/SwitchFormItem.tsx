@@ -1,18 +1,17 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import FormErrors from 'src/view/shared/form/formErrors';
-
 import {
-  FormControl,
   FormControlLabel,
   FormHelperText,
-  FormLabel,
   Switch,
 } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 
 function SwitchFormItem(props) {
+  const { sidenavColor } = selectMuiSettings();
+
   const {
     label,
     name,
@@ -21,15 +20,34 @@ function SwitchFormItem(props) {
     externalErrorMessage,
   } = props;
 
-  const { sidenavColor } = selectMuiSettings();
-
   const {
     register,
     errors,
     formState: { touched, isSubmitted },
     setValue,
-    watch,
+    control: { defaultValuesRef },
+    getValues,
   } = useFormContext();
+
+  const defaultValues = defaultValuesRef.current || {};
+
+  const formValue = getValues(name);
+
+  const [checked, setChecked] = useState(() => {
+    if (formValue !== undefined && formValue !== null) {
+      return formValue;
+    }
+    if (props.value !== undefined && props.value !== null) {
+      return props.value;
+    }
+    if (
+      defaultValues[name] !== undefined &&
+      defaultValues[name] !== null
+    ) {
+      return defaultValues[name];
+    }
+    return false;
+  });
 
   useEffect(() => {
     register({ name });
@@ -52,10 +70,13 @@ function SwitchFormItem(props) {
           <Switch
             id={name}
             name={name}
-            checked={watch(name) || false}
+            checked={
+              props.forceValue ? props.value : checked
+            }
             onChange={(e) => {
+              setChecked(Boolean(e.target.checked));
               setValue(name, Boolean(e.target.checked), {
-                shouldValidate: true,
+                shouldValidate: false,
                 shouldDirty: true,
               });
               props.onChange &&
@@ -64,7 +85,7 @@ function SwitchFormItem(props) {
             onBlur={() =>
               props.onBlur && props.onBlur(null)
             }
-            inputRef={register}
+            // inputRef={register}
             color={sidenavColor}
           />
         }

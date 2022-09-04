@@ -6,33 +6,125 @@ import AuditLogRepository from './auditLogRepository';
 import SequelizeRepository from './sequelizeRepository';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import moment from 'moment';
+import SequelizeArrayUtils from '../utils/sequelizeArrayUtils';
 
 const Op = Sequelize.Op;
 
-class BrokerMetasRepository {
+class BrokerCheckboxRepository {
   static ALL_FIELDS = [
-    'id',
-    'homepage',
-    'homepage_title',
-    'homepage_impression',
-    'broker_type',
-    'description',
-    'teaser',
-    'demo_url',
-    'account_url',
-    'maximum_leverage',
-    'minimum_deposit',
-    'minimum_deposit_short',
-    'custodian_fees',
-    'mobile_trading',
-    'phone_order',
-    'licensed_broker',
-    'withholding_tax',
-    'scalping_allowed',
+    'trade_platform',
+    'free_demo_account',
+    'metatrader_4',
+    'metatrader_5',
+    'web_platform',
+    'mobile_trading_apps',
+    'hedging_allowed',
+    'additional_trade_tools',
+    'automated_trade_possible',
+    'api_interfaces',
+    'social_trading',
+    'rate_alarms',
+    'platform_tutorials',
+    'layout_saveable',
+    'one_click_trading',
+    'trade_from_chart',
+    'all_positions_closeable',
+    'guaranteed_stops',
+    'phone_trade_possible',
+    'commissions',
+    'important_market_spreads',
+    'cost_for_overnight',
+    'fees_for_deposit_disbursal',
+    'free_orderchange',
+    'free_depot',
+    'no_platform_fees',
+    'german_support',
+    'contact',
+    'daily_trade_help',
+    'german_webinar',
+    'german_seminar',
+    'coachings_available',
+    'knowledge_base',
+    'tradeable_markets',
+    'margin',
+    'managed_accounts',
+    'instant_execution',
+    'positive_slippage_possible',
+    'ecn_order_execution',
+    'liquidity_prodiver',
+    'micro_lots',
+    'index_cfd_tradeable_below_point',
+    'rate_switch_24_5_index_cfd',
+    'no_financial_cost_index_cfd',
+    'no_financial_cost_raw_material_cfd',
+    'cfd_contracts_automatic_roll',
+    'real_stocks_cfd_spreads',
+    'dma_stocks',
+    'minimal_ordersize_stocks',
+    'company',
+    'office_in_germany',
+    'bonus',
+    'regulation_and_deposit_security',
+    'reserve_liabiliry',
+    'interest_on_deposit',
+    'witholding_tax',
+    'segregated_accounts',
+    'account_currencies',
+    'posibilities_for_withdrawals',
   ];
 
+  static DATA_PREFIX = 'checkbox_';
+
+  static PREFIX_TEXT = 'text_';
+
+  static IMAGE_TYPES = ['NONE', 'PRO', 'CONTRA'];
+
+  static FIELD_SEPARATOR = '||';
+  static DATA_SEPARATOR = ';;';
+
+  static _textToArray(value) {
+    return (value || '')
+      .split(this.DATA_SEPARATOR)
+      .map((fields) => {
+        const [text, url] = fields.split(
+          this.FIELD_SEPARATOR,
+        );
+        return {
+          text: text || '',
+          url: url || '',
+        };
+      });
+  }
+
+  static _arrayToText(value) {
+    return (value || [])
+      .map(({ text, url }) =>
+        [text, url]
+          .filter(Boolean)
+          .join(this.FIELD_SEPARATOR),
+      )
+      .join(this.DATA_SEPARATOR);
+  }
+
+  static _getImageTypeIndex(type) {
+    return SequelizeArrayUtils.valueToIndex(
+      type,
+      this.IMAGE_TYPES,
+    );
+  }
+
   static _relatedData(data) {
-    return {};
+    const result = {};
+    this.ALL_FIELDS.forEach((field) => {
+      const textField = `${this.PREFIX_TEXT}${field}`;
+      result[field] = this._getImageTypeIndex(
+        data[`${this.DATA_PREFIX}${field}`],
+      );
+      result[textField] = this._arrayToText(
+        data[`${this.DATA_PREFIX}${textField}`],
+      );
+    });
+    return result;
   }
 
   static includes(options: IRepositoryOptions) {
@@ -44,9 +136,9 @@ class BrokerMetasRepository {
       SequelizeRepository.getTransaction(options);
 
     const record =
-      await options.database.broker_metas.create(
+      await options.database.broker_checkbox.create(
         {
-          ...lodash.pick(data, this.ALL_FIELDS),
+          ...lodash.pick(data, ['id']),
           ...this._relatedData(data),
           ip: data.ip ?? '',
           created: moment(),
@@ -76,7 +168,7 @@ class BrokerMetasRepository {
       SequelizeRepository.getTransaction(options);
 
     let record =
-      await options.database.broker_metas.findOne({
+      await options.database.broker_checkbox.findOne({
         where: {
           id,
         },
@@ -89,7 +181,6 @@ class BrokerMetasRepository {
 
     record = await record.update(
       {
-        ...lodash.pick(data, this.ALL_FIELDS),
         ...this._relatedData(data),
         ip: data.ip ?? '',
         modified: moment(),
@@ -114,7 +205,7 @@ class BrokerMetasRepository {
       SequelizeRepository.getTransaction(options);
 
     let record =
-      await options.database.broker_metas.findOne({
+      await options.database.broker_checkbox.findOne({
         where: {
           id,
         },
@@ -137,6 +228,21 @@ class BrokerMetasRepository {
     );
   }
 
+  static async destroyByBroker(
+    id,
+    options: IRepositoryOptions,
+  ) {
+    const transaction =
+      SequelizeRepository.getTransaction(options);
+
+    await options.database.broker_checkbox.destroy({
+      where: {
+        id: id,
+      },
+      transaction,
+    });
+  }
+
   static async findById(id, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
@@ -144,7 +250,7 @@ class BrokerMetasRepository {
     const include = this.includes(options);
 
     const record =
-      await options.database.broker_metas.findOne({
+      await options.database.broker_checkbox.findOne({
         where: {
           id,
         },
@@ -185,7 +291,7 @@ class BrokerMetasRepository {
     };
 
     const records =
-      await options.database.broker_metas.findAll({
+      await options.database.broker_checkbox.findAll({
         attributes: ['id'],
         where,
       });
@@ -197,7 +303,7 @@ class BrokerMetasRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    return options.database.broker_metas.count({
+    return options.database.broker_checkbox.count({
       where: {
         ...filter,
       },
@@ -245,7 +351,7 @@ class BrokerMetasRepository {
         if (filter[field]) {
           whereAnd.push(
             SequelizeFilterUtils.ilikeIncludes(
-              'broker_metas',
+              'broker_checkbox',
               field,
               filter[field],
             ),
@@ -272,17 +378,19 @@ class BrokerMetasRepository {
     const where = { [Op.and]: whereAnd };
 
     let { rows, count } =
-      await options.database.broker_metas.findAndCountAll({
-        where,
-        include,
-        limit: limit ? Number(limit) : undefined,
-        offset: offset ? Number(offset) : undefined,
-        order: orderBy
-          ? [orderBy.split('_')]
-          : [['id', 'DESC']],
-        transaction:
-          SequelizeRepository.getTransaction(options),
-      });
+      await options.database.broker_checkbox.findAndCountAll(
+        {
+          where,
+          include,
+          limit: limit ? Number(limit) : undefined,
+          offset: offset ? Number(offset) : undefined,
+          order: orderBy
+            ? [orderBy.split('_')]
+            : [['id', 'DESC']],
+          transaction:
+            SequelizeRepository.getTransaction(options),
+        },
+      );
 
     rows = await this._fillWithRelationsAndFilesForRows(
       rows,
@@ -308,7 +416,7 @@ class BrokerMetasRepository {
 
     await AuditLogRepository.log(
       {
-        entityName: 'broker_metas',
+        entityName: 'broker_checkbox',
         entityId: record.id,
         action,
         values,
@@ -349,4 +457,4 @@ class BrokerMetasRepository {
   }
 }
 
-export default BrokerMetasRepository;
+export default BrokerCheckboxRepository;

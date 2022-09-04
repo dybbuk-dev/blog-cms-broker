@@ -80,4 +80,20 @@ export default class SequelizeRepository {
       `entities.${entityName}.errors.unique.${fieldName}`,
     );
   }
+
+  static handleNotEmptyField(
+    data,
+    fields,
+    language,
+    entityName,
+  ) {
+    (fields || []).forEach((field) => {
+      if (!data[field] || data[field] === '') {
+        throw new Error400(
+          language,
+          `entities.${entityName}.errors.notEmpty.${field}`,
+        );
+      }
+    });
+  }
 }

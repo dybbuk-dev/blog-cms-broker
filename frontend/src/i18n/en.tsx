@@ -219,31 +219,278 @@ const en = {
         metadata: 'Metadata',
         homepage: 'Homepage',
         homepage_title: 'homepage_title',
-        homepage_impression: 'Impression script',
-        broker_type: 'broker_type',
-        description: 'description',
+        homepage_impression: 'Impression Script',
+        broker_type: 'Broker Type',
+        description: 'Description',
         teaser: 'Teaser Text',
         demo_url: 'Demo account',
         account_url: 'Live Account',
         maximum_leverage: 'Maximum Leverage',
-        minimum_deposit: 'minimum_deposit',
+        minimum_deposit: 'Minimum Deposit',
         minimum_deposit_short:
           'Minimum deposit (short for overview)',
         custodian_fees: 'Custody Fees',
-        mobile_trading: 'Mobile trading',
-        phone_order: 'Telephone trading',
-        licensed_broker: 'licensed_broker',
-        withholding_tax: 'withholding_tax',
-        scalping_allowed: 'scalping_allowed',
+        mobile_trading: 'Mobile Trading',
+        phone_order: 'Telephone Trading',
+        licensed_broker: 'Licensed Broker',
+        withholding_tax: 'Withholding Tax',
+        scalping_allowed: 'Scalping Allowed',
         // #endregion
 
-        demo_account: 'Demo Account',
         // #region Upside
+        upsides: 'Demo Account',
         upside: {
           type: 'Type',
           text: 'Text',
         },
         // #endregion
+
+        // #region Regulatory Authority
+        regulatory_authorities: 'Regulatory Authorities',
+        regulatory_authority: {
+          name: 'Surname',
+          abbreviation: 'Abbreviation',
+          url: 'Homepage',
+        },
+        // #endregion
+
+        // #region Deposit Guarantee
+        deposit_guarantees: 'Deposit Guarantees',
+        deposit_guarantee: {
+          name: 'Surname',
+          url: 'Homepage',
+          text: 'Free Text',
+        },
+        // #endregion
+
+        // #region Certificate
+        certificates: 'Certificates',
+        certificate: {
+          name: 'Surname',
+          url: 'Homepage',
+        },
+        // #endregion
+
+        // #region Spread
+        spreads: 'Spreads',
+        spread: {
+          spread: 'Spread',
+          url: 'Homepage',
+          primary: 'Primary Spread',
+        },
+        // #endregion
+
+        // #region Spread
+        features: 'Specialties',
+        feature: {
+          feature: 'Special Feature',
+          url: 'Homepage',
+        },
+        // #endregion
+
+        // #region Bank
+        banks: 'Bank holding the account',
+        bank: {
+          name: 'Surname',
+          url: 'Homepage',
+        },
+        // #endregion
+
+        // #region Phone
+        phone: 'Phone',
+        // #endregion
+
+        // #region Fax
+        fax: 'Fax',
+        // #endregion
+
+        // #region Email
+        email: 'Email',
+        // #endregion
+
+        // #region Address
+        addresses: 'Contact',
+        address: {
+          line_0: 'Address 1st line',
+          line_1: 'Address 2nd line',
+          line_2: 'Address 3rd line',
+          line_3: 'Address 4th line',
+          line_4: 'Address 5th line',
+          line_5: 'Address 6th line',
+        },
+        // #endregion
+
+        // #region Video
+        video: 'Video',
+        youtube_hash: 'Youtube Hash',
+        youtube_hash_prefix:
+          'https://www.youtube.com/watch?v=',
+        youtube_hash_description:
+          'All Youtube videos have a hash. This can be copied from the url.',
+        // #endregion
+
+        // #region Checkbox
+        checkbox: {
+          image_type: 'Image Type',
+          items: 'Items',
+          text: 'Text',
+          url: 'URL',
+          trade_platform: 'Trade Platform',
+          free_demo_account: 'Free Demo Account',
+          metatrader_4: 'Meta Trader 4',
+          metatrader_5: 'Meta Trader 5',
+          web_platform: 'Web Platform',
+          mobile_trading_apps: 'Mobile Trading Apps',
+          hedging_allowed: 'Hedging Allowed',
+          additional_trade_tools:
+            'Additional Tools For Trading',
+          automated_trade_possible:
+            'Automated Trade Possible',
+          api_interfaces: 'API Interfaces',
+          social_trading: 'Social Trading',
+          rate_alarms: 'Rate Alarms Via SMS or Email',
+          platform_tutorials: 'Trading Platform Guides',
+          layout_saveable: 'Layout can be saved',
+          one_click_trading: 'One Click Trading',
+          trade_from_chart: 'Trading from the chart',
+          all_positions_closeable:
+            'All positions closable at once',
+          guaranteed_stops:
+            'Guaranteed stops and limit possible',
+          phone_trade_possible:
+            'Telephone trading possible',
+          commissions: 'Commissions',
+          important_market_spreads:
+            'Spreads of major markets',
+          cost_for_overnight:
+            'Funding items for overnight positions',
+          fees_for_deposit_disbursal:
+            'Deposit and withdrawal fees',
+          free_orderchange:
+            'Free order changes or cancellations',
+          free_depot: 'Account management free of charge',
+          no_platform_fees: 'No fees for platform',
+          german_support: 'German support',
+          contact: 'Contact Options',
+          daily_trade_help: 'Daily trading supports',
+          german_webinar:
+            'Regular webinars available in German',
+          german_seminar: 'Regular seminars available',
+          coachings_available:
+            'Individual coaching available',
+          knowledge_base: 'Extensive knowledge area',
+          tradeable_markets: 'Tradeable Markets',
+          margin: 'Leverage/Margin',
+          managed_accounts: 'Managed Accounts',
+          instant_execution:
+            'Instant execution (no requotes)',
+          positive_slippage_possible:
+            'Positive Slippage Possible',
+          ecn_order_execution: 'ECN Order Execution',
+          liquidity_prodiver: 'Liquidity Provider',
+          micro_lots: 'Mini or micro lots possible',
+          index_cfd_tradeable_below_point:
+            'Index CFDs tradable from €1 or less per point',
+          rate_switch_24_5_index_cfd:
+            '24/5 quotes on index CFDs',
+          no_financial_cost_index_cfd:
+            'No Financing Costs on Index CFDs',
+          no_financial_cost_raw_material_cfd:
+            'No Financing Costs on Commodity CFDs',
+          cfd_contracts_automatic_roll:
+            'CFD contracts are automatically rolled',
+          real_stocks_cfd_spreads:
+            'Listed shares CFD spreads',
+          dma_stocks: 'DMA share CFDs',
+          minimal_ordersize_stocks:
+            'Minimum order size Share CFDs',
+          company: 'company',
+          office_in_germany: 'Office in Germany',
+          bonus: 'Bonus',
+          regulation_and_deposit_security:
+            'Regulation And Deposit Insurance',
+          reserve_liabiliry:
+            'Obligation to make additional payments',
+          interest_on_deposit:
+            'Interest on account deposit',
+          witholding_tax: 'witholding_tax',
+          segregated_accounts:
+            'Customer funds separated (segregated accounts)',
+          account_currencies: 'Account Currencies',
+          posibilities_for_withdrawals:
+            'Opportunities for deposits and withdrawals',
+        },
+        // #endregion
+
+        // #region Order Types
+        order_types: 'Order Types',
+        // #endregion
+
+        // #region Creteria
+        creteria: {
+          activated: 'Activated',
+          body: 'Broker Criteria',
+        },
+        // #endregion
+
+        // #region Minimum Trading Unit
+        minimum_trading_units: 'Smallest tradable units',
+        // #endregion
+
+        // #region Currency Pair
+        currency_pairs: 'Currency pairs',
+        currency_pair: {
+          currency: 'Currency Pair',
+          url: 'Homepage',
+        },
+        // #endregion
+
+        // #region Trade Platform
+        trade_platforms: 'Trading Platforms',
+        trade_platform: {
+          name: 'Surname',
+          url: 'Homepage',
+        },
+        // #endregion
+
+        // #region Trade Platform
+        trade_stores: 'Trade Offers',
+        trade_store: {
+          name: 'Surname',
+          url: 'Homepage',
+        },
+        // #endregion
+
+        // #region Deposit
+        deposits: 'Deposit Options',
+        deposit: {
+          deposit: 'Deposit Option',
+          url: 'Homepage',
+        },
+        // #endregion
+
+        // #region Forex Signal
+        forex_signal: {
+          text: 'Text',
+          url: 'URL',
+          costs: 'Costs',
+          notifications: 'Signal Sending',
+          traded_markets: 'Traded Markets',
+          investment_horizon: 'Investment Horizon',
+          trading_signal_amount:
+            'Frequency of trading signals',
+          prodiver: 'Offerer',
+          test_posibilities: 'Test option',
+          test_posibilities_tick: 'Test option hook',
+          beginners_level: 'Suitable for beginners',
+        },
+        // #endregion
+
+        broker_image: {
+          top_broker_logo: 'Top Broker Logo',
+          top_broker_horizontal_logo:
+            'Top Broker Horizontal Logo',
+        },
       },
       tabs: {
         broker: 'Broker',
@@ -261,6 +508,60 @@ const en = {
           type: {
             UPSIDE: 'Upside',
             DOWNSIDE: 'Downside',
+          },
+        },
+        meta: {
+          broker_type: {
+            ECN: 'ECN Broker',
+            MT4: 'MetaTrader Broker',
+            MM: 'Market Maker',
+            ECN_AND_MT4: 'ECN Broker (MT4)',
+            MM_AND_MT4: 'Market Maker (MT4)',
+            DMA: 'DMA Broker',
+            STP: 'STP Broker',
+            STP_AND_MT4: 'STP Broker (MT4)',
+            MARKET_MAKER_AND_STP:
+              'Market Maker / STP Broker',
+            BITCOIN_EXCHANGE:
+              'Exchange for bitcoin and cryptocurrencies',
+          },
+          withholding_tax: {
+            WITHHOLDING_TAX_1:
+              'Withheld directly by the broker',
+            WITHHOLDING_TAX_2:
+              'Must be paid by the customer himself',
+          },
+        },
+        checkbox: {
+          image_type: {
+            NONE: 'No Image',
+            PRO: 'Pro',
+            CONTRA: 'Contra',
+          },
+        },
+        order_type: {
+          type: {
+            'Fill Or Kill (FOK)': 'Fill Or Kill (FOK)',
+            'Limit Buy': 'Limit Buy',
+            'Limit Order': 'Limit Order',
+            'Limit Sell': 'Limit Sell',
+            'Market Order': 'Market Order',
+            'One Cancels Other (OCO)':
+              'One Cancels Other (OCO)',
+            'Stop Buy': 'Stop Buy',
+            'Stop Sell': 'Stop Sell',
+            Stoploss: 'Stoploss',
+            'Stoploss (garantiert)':
+              'Stoploss (garantiert)',
+            'Take Profit': 'Take Profit',
+            'Trailing Stop': 'Trailing Stop',
+          },
+        },
+        minimum_trading_unit: {
+          minimum_trading_unit: {
+            'Mini-Lots (0,1 Lot)': 'Mini-Lots (0,1 Lot)',
+            'Micro-Lots (0,01 Lot)':
+              'Micro-Lots (0,01 Lot)',
           },
         },
       },

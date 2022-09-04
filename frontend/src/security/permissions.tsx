@@ -113,6 +113,19 @@ class Permissions {
           plans.enterprise,
         ],
       },
+      muiEdit: {
+        id: 'muiEdit',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
       settingsEdit: {
         id: 'settingsEdit',
         allowedRoles: [roles.admin, roles.manager],
@@ -193,72 +206,7 @@ class Permissions {
       },
       // #endregion
 
-      // #region Broker
-      brokerImport: {
-        id: 'brokerImport',
-        allowedRoles: [],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      brokerCreate: {
-        id: 'brokerCreate',
-        allowedRoles: [roles.admin, roles.manager],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      brokerEdit: {
-        id: 'brokerEdit',
-        allowedRoles: [roles.admin, roles.manager],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      brokerDestroy: {
-        id: 'brokerDestroy',
-        allowedRoles: [roles.admin],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      brokerRead: {
-        id: 'brokerRead',
-        allowedRoles: [
-          roles.admin,
-          roles.manager,
-          roles.custom,
-        ],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      brokerAutocomplete: {
-        id: 'brokerAutocomplete',
-        allowedRoles: [
-          roles.admin,
-          roles.manager,
-          roles.custom,
-        ],
-        allowedPlans: [
-          plans.free,
-          plans.growth,
-          plans.enterprise,
-        ],
-      },
-      // #endregion
-
-      // #region Affiliate Link
+      // #region Affiliate_link
       affiliateLinkImport: {
         id: 'affiliateLinkImport',
         allowedRoles: [],
@@ -375,6 +323,83 @@ class Permissions {
       },
       trackingParameterAutocomplete: {
         id: 'trackingParameterAutocomplete',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      // #endregion
+
+      // #region Broker
+      brokerImport: {
+        id: 'brokerImport',
+        allowedRoles: [],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerCreate: {
+        id: 'brokerCreate',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+        allowedStorage: [
+          storage.broker_image_top_broker_logo,
+          storage.broker_image_top_broker_horizontal_logo,
+        ],
+      },
+      brokerEdit: {
+        id: 'brokerEdit',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+        allowedStorage: [
+          storage.broker_image_top_broker_logo,
+          storage.broker_image_top_broker_horizontal_logo,
+        ],
+      },
+      brokerDestroy: {
+        id: 'brokerDestroy',
+        allowedRoles: [roles.admin],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+        allowedStorage: [
+          storage.broker_image_top_broker_logo,
+          storage.broker_image_top_broker_horizontal_logo,
+        ],
+      },
+      brokerRead: {
+        id: 'brokerRead',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerAutocomplete: {
+        id: 'brokerAutocomplete',
         allowedRoles: [
           roles.admin,
           roles.manager,
@@ -583,7 +608,7 @@ class Permissions {
       },
       // #endregion
 
-      // #region News
+      // #region Promotion
       promotionImport: {
         id: 'promotionImport',
         allowedRoles: [],

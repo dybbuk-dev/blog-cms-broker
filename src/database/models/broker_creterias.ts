@@ -12,6 +12,7 @@ export default function (sequelize) {
       broker_id: {
         type: DataTypes.BIGINT.UNSIGNED,
         allowNull: true,
+        defaultValue: null,
       },
       activated: {
         type: DataTypes.BOOLEAN,
@@ -21,10 +22,12 @@ export default function (sequelize) {
       body: {
         type: DataTypes.TEXT,
         allowNull: false,
+        defaultValue: '',
       },
       ip: {
         type: DataTypes.CHAR(39),
         allowNull: false,
+        defaultValue: '',
         validate: {
           len: [0, 39],
         },
@@ -49,6 +52,7 @@ export default function (sequelize) {
 
   broker_creterias.associate = (models) => {
     models.broker_creterias.belongsTo(models.broker, {
+      as: 'broker',
       constraints: true,
       foreignKey: 'broker_id',
       onDelete: 'NO ACTION',

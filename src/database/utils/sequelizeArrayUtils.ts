@@ -23,6 +23,15 @@ export default class SequelizeArrayUtils {
     );
   }
 
+  static valueToIndex(
+    value,
+    values: any[] = [],
+    defaultIndex = 0,
+  ) {
+    const index = values.indexOf(value);
+    return index < 0 ? defaultIndex : index;
+  }
+
   static toJSON(obj, fieldName, defaultJSON = {}) {
     if (this.invalid(obj, fieldName)) {
       return defaultJSON;

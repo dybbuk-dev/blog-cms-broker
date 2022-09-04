@@ -31,7 +31,7 @@ const initialState: StateTypes = {
   transparentSidenav: false,
   whiteSidenav: false,
   sidenavColor: 'info',
-  transparentNavbar: true,
+  transparentNavbar: false,
   fixedNavbar: true,
   openConfigurator: false,
   direction: 'ltr',

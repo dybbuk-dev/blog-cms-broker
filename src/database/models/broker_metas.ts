@@ -1,4 +1,6 @@
 import { DataTypes } from 'sequelize';
+import SequelizeArrayUtils from '../utils/sequelizeArrayUtils';
+import BrokerMetaRepository from '../repositories/brokerMetaRepository';
 
 export default function (sequelize) {
   const broker_metas = sequelize.define(
@@ -34,6 +36,13 @@ export default function (sequelize) {
         type: DataTypes.TINYINT.UNSIGNED,
         allowNull: false,
         defaultValue: 0,
+        get() {
+          return SequelizeArrayUtils.indexToValue(
+            this,
+            'broker_type',
+            BrokerMetaRepository.BROKER_TYPES,
+          );
+        },
       },
       description: {
         type: DataTypes.TEXT,
@@ -109,6 +118,13 @@ export default function (sequelize) {
         type: DataTypes.TINYINT.UNSIGNED,
         allowNull: false,
         defaultValue: 0,
+        get() {
+          return SequelizeArrayUtils.indexToValue(
+            this,
+            'withholding_tax',
+            BrokerMetaRepository.WITHHOLDING_TAXES,
+          );
+        },
       },
       scalping_allowed: {
         type: DataTypes.BOOLEAN,

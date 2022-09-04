@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize';
 
 export default function (sequelize) {
-  const affiliate_link_hearbeat = sequelize.define(
-    'affiliate_link_hearbeat',
+  const affiliate_link_heartbeat = sequelize.define(
+    'affiliate_link_heartbeat',
     {
       id: {
         type: DataTypes.BIGINT.UNSIGNED,
@@ -22,8 +22,8 @@ export default function (sequelize) {
       paranoid: true,
     },
   );
-  affiliate_link_hearbeat.associate = (models) => {
-    models.affiliate_link_hearbeat.belongsTo(
+  affiliate_link_heartbeat.associate = (models) => {
+    models.affiliate_link_heartbeat.belongsTo(
       models.affiliate_link,
       {
         constraints: true,
@@ -33,5 +33,5 @@ export default function (sequelize) {
       },
     );
   };
-  return affiliate_link_hearbeat;
+  return affiliate_link_heartbeat;
 }
