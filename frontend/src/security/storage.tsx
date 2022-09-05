@@ -33,6 +33,14 @@ export default class Storage {
         publicRead: true,
       },
 
+      ckeditorImages: {
+        id: 'ckeditorImages',
+        folder: 'ckeditor_images',
+        maxSizeInBytes: 10 * 1024 * 1024,
+        bypassWritingPermissions: true,
+        publicRead: true,
+      },
+
       broker_image_top_broker_logo: {
         id: 'broker_image_top_broker_logo',
         folder: 'broker_screenshots/top_broker_logo',
