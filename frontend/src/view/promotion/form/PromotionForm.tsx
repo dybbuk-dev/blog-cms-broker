@@ -22,6 +22,8 @@ import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem'
 import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
+import LogoFormItem from 'src/view/shared/form/items/LogoFormItem';
+import Storage from 'src/security/storage';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(
@@ -40,8 +42,8 @@ const schema = yup.object().shape({
       max: 255,
     },
   ),
-  uploadfile: yupFormSchemas.string(
-    i18n('entities.promotion.fields.uploadImage'),
+  promotion_image: yupFormSchemas.images(
+    i18n('entities.promotion.fields.uploadfile'),
     {
       required: true,
     },
@@ -58,10 +60,12 @@ function PromotionForm(props) {
     const record = props.record || {};
 
     return {
-      link: record.link,
+      link: record.promotion_image
+        ? record.promotion_image[0]?.link
+        : null,
       name: record.name,
       activated: record.activated,
-      uploadfile: record.uploadfile,
+      promotion_image: record.promotion_image || null,
     };
   });
 
@@ -110,14 +114,16 @@ function PromotionForm(props) {
               />
             </Grid>
             <Grid item md={12} xs={12}>
-              <InputFormItem
-                name="uploadfile"
-                label={i18n(
-                  'entities.promotion.fields.uploadImage',
-                )}
-                variant="standard"
-                required={true}
-              />
+              <MDBox pt={7}>
+                <LogoFormItem
+                  name="promotion_image"
+                  label={i18n(
+                    'entities.promotion.fields.uploadfile',
+                  )}
+                  storage={Storage.values.promotion_image}
+                  required={true}
+                />
+              </MDBox>
             </Grid>
             <Grid item md={6} xs={12}>
               <CheckboxFormItem

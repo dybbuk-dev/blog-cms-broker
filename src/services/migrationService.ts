@@ -14,6 +14,7 @@ interface IImageMigration {
   link: string;
   linkTitle: string;
   privateUrl: Function;
+  ignoreDeleteOriginal?: boolean;
 }
 
 interface IImageMigrations {
@@ -104,10 +105,12 @@ export default class MigrationService {
         processed++;
       }
 
-      await ImageMigrationRepository.truncate(modelName, {
-        ...this.options,
-        transaction,
-      });
+      if (!imageMigration.ignoreDeleteOriginal) {
+        await ImageMigrationRepository.truncate(modelName, {
+          ...this.options,
+          transaction,
+        });
+      }
 
       await SequelizeRepository.commitTransaction(
         transaction,
@@ -178,6 +181,18 @@ export default class MigrationService {
           ['/news_images/', row.id, '/', row.filename].join(
             '',
           ),
+      },
+      promotion: {
+        belongsTo: this.options.database.promotion,
+        belongsToColumn: (row) => 'promotion_image',
+        belongsToId: 'id',
+        name: 'filename',
+        type: 'type',
+        link: 'link',
+        linkTitle: 'title',
+        privateUrl: (row) =>
+          ['/promo/', row.filename].join(''),
+        ignoreDeleteOriginal: true,
       },
     };
 

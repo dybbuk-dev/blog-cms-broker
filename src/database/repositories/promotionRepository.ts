@@ -7,11 +7,35 @@ import SequelizeRepository from './sequelizeRepository';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import { orderByUtils } from '../utils/orderByUtils';
 import moment from 'moment';
+import FileRepository from './fileRepository';
 
 const Op = Sequelize.Op;
 
 class PromotionRepository {
-  static ALL_FIELDS = ['name', 'link', 'activated'];
+  static ALL_FIELDS = ['name', 'activated'];
+
+  static async _replaceRelationFiles(
+    record,
+    data,
+    options: IRepositoryOptions,
+  ) {
+    await FileRepository.replaceRelationFiles(
+      {
+        belongsTo:
+          options.database.promotion.getTableName(),
+        belongsToColumn: 'promotion_image',
+        belongsToId: record.id,
+      },
+      data.promotion_image.map((v) => ({
+        ...v,
+        link: data.link,
+        linkTitle: data.name,
+        new: true,
+      })),
+      options,
+    );
+  }
+
   static async create(data, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
@@ -19,7 +43,6 @@ class PromotionRepository {
     const record = await options.database.promotion.create(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
-        filename: data.uploadfile ?? '',
         mimetype: '',
         width: 0,
         height: 0,
@@ -30,6 +53,8 @@ class PromotionRepository {
         transaction,
       },
     );
+
+    await this._replaceRelationFiles(record, data, options);
 
     await this._createAuditLog(
       AuditLogRepository.CREATE,
@@ -63,7 +88,6 @@ class PromotionRepository {
     record = await record.update(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
-        filename: data.uploadfile ?? '',
         mimetype: '',
         width: 0,
         height: 0,
@@ -75,6 +99,8 @@ class PromotionRepository {
         transaction,
       },
     );
+
+    await this._replaceRelationFiles(record, data, options);
 
     await this._createAuditLog(
       AuditLogRepository.UPDATE,
@@ -100,6 +126,15 @@ class PromotionRepository {
     if (!record) {
       throw new Error404();
     }
+
+    await FileRepository.destroy(
+      {
+        belongsTo:
+          options.database.promotion.getTableName(),
+        belongsToId: id,
+      },
+      options,
+    );
 
     await record.destroy({
       transaction,
@@ -131,13 +166,6 @@ class PromotionRepository {
         transaction,
       },
     );
-
-    if (record) {
-      record.dataValues = {
-        ...record.dataValues,
-        uploadfile: record.dataValues.filename,
-      };
-    }
 
     if (!record) {
       throw new Error404();
@@ -227,7 +255,7 @@ class PromotionRepository {
         }
       }
 
-      ['name', 'link'].forEach((field) => {
+      ['name'].forEach((field) => {
         if (filter[field]) {
           whereAnd.push(
             SequelizeFilterUtils.ilikeIncludes(
@@ -281,39 +309,7 @@ class PromotionRepository {
     query,
     limit,
     options: IRepositoryOptions,
-  ) {
-    let whereAnd: Array<any> = [];
-
-    if (query) {
-      whereAnd.push({
-        [Op.or]: [
-          { ['id']: query },
-          {
-            [Op.and]: SequelizeFilterUtils.ilikeIncludes(
-              'promotion',
-              'name',
-              query,
-            ),
-          },
-        ],
-      });
-    }
-
-    const where = { [Op.and]: whereAnd };
-
-    const records =
-      await options.database.promotion.findAll({
-        attributes: ['id', 'name'],
-        where,
-        limit: limit ? Number(limit) : undefined,
-        order: [['id', 'ASC']],
-      });
-
-    return records.map((record) => ({
-      id: record.id,
-      label: record.name,
-    }));
-  }
+  ) {}
 
   static async _createAuditLog(
     action,
@@ -368,6 +364,12 @@ class PromotionRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
+    output.promotion_image =
+      await FileRepository.fillDownloadUrl(
+        await record.getPromotion_image({
+          transaction,
+        }),
+      );
     return output;
   }
 }
