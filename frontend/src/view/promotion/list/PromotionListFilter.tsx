@@ -158,15 +158,6 @@ function PromotionListFilter(props) {
                     variant="standard"
                   />
                 </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputFormItem
-                    name="link"
-                    label={i18n(
-                      'entities.promotion.fields.link',
-                    )}
-                    variant="standard"
-                  />
-                </Grid>
                 <Grid item lg={4} xs={12}>
                   <SelectFormItem
                     name="activated"

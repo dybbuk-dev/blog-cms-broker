@@ -76,6 +76,12 @@ export default class Storage {
         folder: 'news_images',
         maxSizeInBytes: 10 * 1024 * 1024,
       },
+
+      promotion_image: {
+        id: 'promotion_image',
+        folder: 'promo',
+        maxSizeInBytes: 10 * 1024 * 1024,
+      },
     };
   }
 }

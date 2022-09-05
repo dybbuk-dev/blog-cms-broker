@@ -7,7 +7,6 @@ import SequelizeRepository from './sequelizeRepository';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import moment from 'moment';
 import { orderByUtils } from '../utils/orderByUtils';
-import NewsImageRepository from './newsImageRepository';
 import FileRepository from './fileRepository';
 
 const Op = Sequelize.Op;
@@ -135,6 +134,14 @@ class NewsRepository {
     if (!record) {
       throw new Error404();
     }
+
+    await FileRepository.destroy(
+      {
+        belongsTo: options.database.news.getTableName(),
+        belongsToId: id,
+      },
+      options,
+    );
 
     await record.destroy({
       transaction,

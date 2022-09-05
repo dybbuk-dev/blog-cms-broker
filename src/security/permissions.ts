@@ -641,6 +641,7 @@ class Permissions {
           plans.growth,
           plans.enterprise,
         ],
+        allowedStorage: [storage.promotion_image],
       },
       promotionEdit: {
         id: 'promotionEdit',
@@ -650,6 +651,7 @@ class Permissions {
           plans.growth,
           plans.enterprise,
         ],
+        allowedStorage: [storage.promotion_image],
       },
       promotionDestroy: {
         id: 'promotionDestroy',
@@ -659,6 +661,7 @@ class Permissions {
           plans.growth,
           plans.enterprise,
         ],
+        allowedStorage: [storage.promotion_image],
       },
       promotionRead: {
         id: 'promotionRead',

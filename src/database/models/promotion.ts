@@ -19,7 +19,6 @@ export default function (sequelize) {
         allowNull: false,
         defaultValue: '',
         validate: {
-          notEmpty: true,
           len: [0, 255],
         },
       },
@@ -59,10 +58,12 @@ export default function (sequelize) {
       width: {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
+        defaultValue: 0,
       },
       height: {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
+        defaultValue: 0,
       },
       optimized: {
         type: DataTypes.BOOLEAN,
@@ -77,6 +78,7 @@ export default function (sequelize) {
       ip: {
         type: DataTypes.CHAR(39),
         allowNull: false,
+        defaultValue: '',
         validate: {
           len: [0, 39],
         },
@@ -103,6 +105,16 @@ export default function (sequelize) {
       timestamps: false,
     },
   );
-  promotion.associate = (models) => {};
+  promotion.associate = (models) => {
+    models.promotion.hasMany(models.file, {
+      as: 'promotion_image',
+      foreignKey: 'belongsToId',
+      constraints: false,
+      scope: {
+        belongsTo: models.promotion.getTableName(),
+        belongsToColumn: 'promotion_image',
+      },
+    });
+  };
   return promotion;
 }

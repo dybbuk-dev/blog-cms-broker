@@ -803,7 +803,7 @@ const en = {
         idRange: 'Id #',
         link: 'Link',
         name: 'Surname',
-        uploadImage: 'Upload Banner',
+        uploadfile: 'Upload Banner',
         sort: 'Sort',
         activated: 'Activated',
       },
