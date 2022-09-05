@@ -47,7 +47,7 @@ function NavigationAutocompleteFormItem(props) {
     return NavigationService.listAutocomplete(
       value,
       limit,
-      props.withChildren,
+      !!props.withChildren,
     );
   };
 
@@ -108,8 +108,16 @@ function NavigationAutocompleteFormItem(props) {
             {option.label}
           </Box>
         )}
-        groupBy={(option) => option.parent.label}
-        getOptionDisabled={(option) => !!option.hasChildren}
+        groupBy={
+          props.withChildren
+            ? (option) => option.parent.label
+            : null
+        }
+        getOptionDisabled={
+          props.withChildren
+            ? (option) => !!option.hasChildren
+            : null
+        }
       />
 
       {modalVisible && (

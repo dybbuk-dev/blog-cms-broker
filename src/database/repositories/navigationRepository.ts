@@ -355,6 +355,7 @@ class NavigationRepository {
           [Op.is]: null,
         },
       });
+      console.log('here');
     }
 
     const where = { [Op.and]: whereAnd };
@@ -370,6 +371,8 @@ class NavigationRepository {
           ['title', 'ASC'],
         ],
       });
+
+    console.log(withChildren);
 
     const roots = withChildren
       ? await this.findAllAutocomplete(null, null, options)
