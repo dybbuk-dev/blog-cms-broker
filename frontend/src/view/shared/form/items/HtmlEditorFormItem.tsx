@@ -1,17 +1,19 @@
-import $ from 'jquery';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
-import MDBox from 'src/mui/components/MDBox';
-import MDEditor from 'src/mui/components/MDEditor';
-import MDTypography from 'src/mui/components/MDTypography';
+import $ from 'jquery';
 import FormErrors from 'src/view/shared/form/formErrors';
+import MDBox from 'src/mui/components/MDBox';
+import MDTypography from 'src/mui/components/MDTypography';
+
+import { CKEditor } from 'ckeditor4-react';
 
 interface HtmlEditorFormItemProps {
   name: string;
   label: string;
   value?: string;
   required?: boolean;
+  height: number;
   externalErrorMessage?: string;
 }
 
@@ -20,6 +22,7 @@ function HtmlEditorFormItem({
   label,
   value,
   required,
+  height,
   externalErrorMessage,
 }: HtmlEditorFormItemProps) {
   const {
@@ -86,28 +89,20 @@ function HtmlEditorFormItem({
       >
         {`${label}${required ? ' *' : ''}`}
       </MDTypography>
-
-      <MDEditor
-        value={originalValue}
-        onChange={onChangeEditor}
-        modules={{
-          toolbar: [
-            ['bold', 'italic', 'underline', 'strike'],
-            [{ list: 'ordered' }, { list: 'bullet' }],
-            ['link', 'image'],
-            ['clean'],
-          ],
+      <CKEditor
+        initData={originalValue}
+        config={{
+          extraPlugins: ['image2', 'uploadimage'],
+          removePlugins: ['resize'],
+          height,
+          autoGrow_onStartup: true,
+          resize_enabled: false,
+          // filebrowserBrowseUrl: '/browser/browse.php',
+          // filebrowserUploadUrl: '/uploader/upload.php'
         }}
-        formats={[
-          'bold',
-          'italic',
-          'underline',
-          'strike',
-          'list',
-          'bullet',
-          'link',
-          'image',
-        ]}
+        onChange={(param) => {
+          onChangeEditor(param.editor?.getData());
+        }}
       />
       {errorMessage && (
         <MDBox mt={0.75}>
@@ -128,6 +123,7 @@ function HtmlEditorFormItem({
 HtmlEditorFormItem.defaultProps = {
   value: '',
   required: false,
+  height: 300,
 };
 
 export default HtmlEditorFormItem;
