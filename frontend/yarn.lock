@@ -4298,6 +4298,24 @@ cjs-module-lexer@^1.0.0:
   resolved "https://registry.yarnpkg.com/cjs-module-lexer/-/cjs-module-lexer-1.2.2.tgz#9f84ba3244a512f3a54e5277e8eef4c489864e40"
   integrity sha512-cOU9usZw8/dXIXKtwa8pM0OTJQuJkxMN6w30csNRUerHfeQ5R6U3kkU/FtJeIf3M202OHfY2U8ccInBG7/xogA==
 
+ckeditor4-integrations-common@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ckeditor4-integrations-common/-/ckeditor4-integrations-common-1.0.0.tgz#a8afc33b94877b4d01362c7c73aa9eec162b2d20"
+  integrity sha512-OAoQT/gYrHkg0qgzf6MS/rndYhq3SScLVQ3rtXQeuCE8ju7nFHg3qZ7WGA2XpFxcZzsMP6hhugXqdel5vbcC3g==
+
+ckeditor4-react@^3.0.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/ckeditor4-react/-/ckeditor4-react-3.1.0.tgz#1a60ad5290eaf2c098be4e841feb6c07e0117084"
+  integrity sha512-EWS16bxukJwpZMJoVKSOaikv62SiUy78hXCTWrJqRZRACKpgReAhG4GXxSdaXc3DHWycSILoNTZJ2QBXflI/5g==
+  dependencies:
+    ckeditor4-integrations-common "^1.0.0"
+    prop-types "^15.8.1"
+
+ckeditor4@^4.19.1:
+  version "4.19.1"
+  resolved "https://registry.yarnpkg.com/ckeditor4/-/ckeditor4-4.19.1.tgz#73e786c4194e9ee6072a0fa267ac32f230d69174"
+  integrity sha512-eK/tilHSUpLc9mrD7Lvt07LJfJ13BBa4ftxJBxIX49sGMlWg5WaB81C+MRBZwnntcfpjVdyCLpZAptAHTDB65Q==
+
 class-is@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/class-is/-/class-is-1.1.0.tgz#9d3c0fba0440d211d843cec3dedfa48055005825"

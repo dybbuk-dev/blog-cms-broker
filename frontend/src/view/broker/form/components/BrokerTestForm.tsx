@@ -20,6 +20,7 @@ function BrokerTestForm(props) {
           label={i18n(
             'entities.broker.fields.creteria.body',
           )}
+          height={500}
         />
       </Grid>
     </Grid>
