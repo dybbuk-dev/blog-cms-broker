@@ -379,7 +379,7 @@ class NavigationRepository {
       const root = roots.find((v) => v.id === parent);
       return {
         id: root?.id,
-        label: root?.label,
+        label: root?.label || 'Root',
       };
     };
 
