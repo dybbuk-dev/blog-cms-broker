@@ -11,4 +11,8 @@ export default (app) => {
     `/tenant/:tenantId/file/credentials`,
     require('./credentials').default,
   );
+  app.post(
+    `/tenant/:tenantId/file/ckeditor`,
+    require('./ckeditor').default,
+  );
 };

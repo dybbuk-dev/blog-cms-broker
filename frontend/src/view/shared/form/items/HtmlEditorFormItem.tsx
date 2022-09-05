@@ -1,12 +1,15 @@
+import { AuthToken } from 'src/modules/auth/authToken';
+import { CKEditor } from 'ckeditor4-react';
+import { getLanguageCode } from 'src/i18n';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import $ from 'jquery';
+import AuthCurrentTenant from 'src/modules/auth/authCurrentTenant';
+import config from 'src/config';
 import FormErrors from 'src/view/shared/form/formErrors';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
-
-import { CKEditor } from 'ckeditor4-react';
 
 interface HtmlEditorFormItemProps {
   name: string;
@@ -25,6 +28,25 @@ function HtmlEditorFormItem({
   height,
   externalErrorMessage,
 }: HtmlEditorFormItemProps) {
+  const token = AuthToken.get();
+
+  const ckeditorConfig = {
+    extraPlugins: ['image2', 'uploadimage'],
+    height,
+    resize_minHeight: height,
+    resize_maxHeight: height * 2,
+    filebrowserUploadUrl: [
+      config.backendUrl,
+      '/tenant/',
+      AuthCurrentTenant.get(),
+      '/file/ckeditor',
+    ].join(''),
+    fileTools_requestHeaders: {
+      Authorization: `Bearer ${token}`,
+      'Accept-Language': getLanguageCode(),
+    },
+  };
+
   const {
     setValue,
     errors,
@@ -65,9 +87,8 @@ function HtmlEditorFormItem({
     // updateValue(value || originalValue);
   }, [register, name]);
 
-  const onChangeEditor = (newVal) => {
-    const isEmpty = $(newVal).text().trim() === '';
-    updateValue(isEmpty ? '' : newVal);
+  const onChangeEditor = (evt) => {
+    updateValue(evt.editor?.getData());
   };
 
   return (
@@ -91,18 +112,8 @@ function HtmlEditorFormItem({
       </MDTypography>
       <CKEditor
         initData={originalValue}
-        config={{
-          extraPlugins: ['image2', 'uploadimage'],
-          removePlugins: ['resize'],
-          height,
-          autoGrow_onStartup: true,
-          resize_enabled: false,
-          // filebrowserBrowseUrl: '/browser/browse.php',
-          // filebrowserUploadUrl: '/uploader/upload.php'
-        }}
-        onChange={(param) => {
-          onChangeEditor(param.editor?.getData());
-        }}
+        config={ckeditorConfig}
+        onChange={onChangeEditor}
       />
       {errorMessage && (
         <MDBox mt={0.75}>
