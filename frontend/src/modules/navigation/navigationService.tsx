@@ -96,10 +96,15 @@ export default class NavigationService {
     return response.data;
   }
 
-  static async listAutocomplete(query, limit) {
+  static async listAutocomplete(
+    query,
+    limit,
+    withChildren = false,
+  ) {
     const params = {
       query,
       limit,
+      withChildren,
     };
 
     const tenantId = AuthCurrentTenant.get();

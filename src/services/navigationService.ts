@@ -122,11 +122,16 @@ export default class NavigationService {
     return NavigationRepository.findById(id, this.options);
   }
 
-  async findAllAutocomplete(search, limit) {
+  async findAllAutocomplete(
+    search,
+    limit,
+    withChildren = false,
+  ) {
     return NavigationRepository.findAllAutocomplete(
       search,
       limit,
       this.options,
+      withChildren,
     );
   }
 

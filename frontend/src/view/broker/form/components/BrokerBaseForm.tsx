@@ -119,6 +119,7 @@ function BrokerBaseForm(props) {
           required={true}
           showCreate={true}
           variant="standard"
+          withChildren
           fullWidth
         />
       </Grid>

@@ -11,7 +11,11 @@ export default async (req, res, next) => {
 
     const payload = await new NavigationService(
       req,
-    ).findAllAutocomplete(req.query.query, req.query.limit);
+    ).findAllAutocomplete(
+      req.query.query,
+      req.query.limit,
+      req.query.withChildren,
+    );
 
     await ApiResponseHandler.success(req, res, payload);
   } catch (error) {
