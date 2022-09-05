@@ -42,6 +42,12 @@ const schema = yup.object().shape({
       max: 255,
     },
   ),
+  promotion_image: yupFormSchemas.images(
+    i18n('entities.promotion.fields.uploadfile'),
+    {
+      required: true,
+    },
+  ),
   activated: yupFormSchemas.boolean(
     i18n('entities.promotion.fields.activated'),
     {},
