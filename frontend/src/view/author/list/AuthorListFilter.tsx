@@ -36,9 +36,6 @@ const schema = yup.object().shape({
   name: yupFilterSchemas.string(
     i18n('entities.author.fields.name'),
   ),
-  link: yupFilterSchemas.string(
-    i18n('entities.author.fields.link'),
-  ),
 });
 
 const emptyValues = {
@@ -54,10 +51,6 @@ const previewRenders = {
   },
   name: {
     label: i18n('entities.author.fields.name'),
-    render: filterRenders.generic(),
-  },
-  link: {
-    label: i18n('entities.author.fields.link'),
     render: filterRenders.generic(),
   },
 };
@@ -146,15 +139,6 @@ function AuthorListFilter(props) {
                     name="name"
                     label={i18n(
                       'entities.author.fields.name',
-                    )}
-                    variant="standard"
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputFormItem
-                    name="link"
-                    label={i18n(
-                      'entities.author.fields.link',
                     )}
                     variant="standard"
                   />

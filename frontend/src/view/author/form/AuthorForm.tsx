@@ -21,6 +21,9 @@ import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
 import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
+import Storage from 'src/security/storage';
+import LogoFormItem from 'src/view/shared/form/items/LogoFormItem';
+import MDBox from 'src/mui/components/MDBox';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(
@@ -39,7 +42,7 @@ const schema = yup.object().shape({
       max: 255,
     },
   ),
-  image: yupFormSchemas.string(
+  author_image: yupFormSchemas.images(
     i18n('entities.author.fields.image'),
     {
       required: true,
@@ -64,8 +67,12 @@ function AuthorForm(props) {
 
     return {
       name: record.name,
-      link: record.link,
-      image: record.image,
+      link: record.link
+        ? record.link
+        : record.author_image
+        ? record.author_image[0]?.link
+        : null,
+      author_image: record.author_image,
       description: record.description,
     };
   });
@@ -93,7 +100,7 @@ function AuthorForm(props) {
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <Grid spacing={2} container>
-            <Grid item md={6} xs={12}>
+            <Grid item md={12} xs={12}>
               <InputFormItem
                 name="name"
                 label={i18n('entities.author.fields.name')}
@@ -102,7 +109,7 @@ function AuthorForm(props) {
                 autoFocus
               />
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item md={12} xs={12}>
               <InputFormItem
                 name="link"
                 label={i18n('entities.author.fields.link')}
@@ -110,13 +117,17 @@ function AuthorForm(props) {
                 required={true}
               />
             </Grid>
-            <Grid item md={6} xs={12}>
-              <InputFormItem
-                name="image"
-                label={i18n('entities.author.fields.image')}
-                variant="standard"
-                required={true}
-              />
+            <Grid item md={12} xs={12}>
+              <MDBox pt={7}>
+                <LogoFormItem
+                  name="author_image"
+                  label={i18n(
+                    'entities.author.fields.image',
+                  )}
+                  storage={Storage.values.author_image}
+                  required={true}
+                />
+              </MDBox>
             </Grid>
             <Grid item md={12} xs={12}>
               <HtmlEditorFormItem
@@ -125,6 +136,7 @@ function AuthorForm(props) {
                   'entities.author.fields.description',
                 )}
                 value={initialValues.description}
+                required={true}
               />
             </Grid>
           </Grid>

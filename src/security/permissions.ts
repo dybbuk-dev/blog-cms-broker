@@ -159,6 +159,7 @@ class Permissions {
           plans.growth,
           plans.enterprise,
         ],
+        allowedStorage: [storage.author_image],
       },
       authorEdit: {
         id: 'authorEdit',
@@ -168,6 +169,7 @@ class Permissions {
           plans.growth,
           plans.enterprise,
         ],
+        allowedStorage: [storage.author_image],
       },
       authorDestroy: {
         id: 'authorDestroy',
@@ -177,6 +179,7 @@ class Permissions {
           plans.growth,
           plans.enterprise,
         ],
+        allowedStorage: [storage.author_image],
       },
       authorRead: {
         id: 'authorRead',

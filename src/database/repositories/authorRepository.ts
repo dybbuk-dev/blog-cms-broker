@@ -7,16 +7,32 @@ import SequelizeRepository from './sequelizeRepository';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import moment from 'moment';
 import { orderByUtils } from '../utils/orderByUtils';
+import FileRepository from './fileRepository';
 
 const Op = Sequelize.Op;
 
 class AuthorRepository {
-  static ALL_FIELDS = [
-    'name',
-    'link',
-    'image',
-    'description',
-  ];
+  static ALL_FIELDS = ['name', 'description'];
+
+  static async _replaceRelationFiles(
+    record,
+    data,
+    options: IRepositoryOptions,
+  ) {
+    await FileRepository.replaceRelationFiles(
+      {
+        belongsTo: options.database.author.getTableName(),
+        belongsToColumn: 'author_image',
+        belongsToId: record.id,
+      },
+      data.author_image.map((v) => ({
+        ...v,
+        link: data.link,
+        new: true,
+      })),
+      options,
+    );
+  }
 
   static async create(data, options: IRepositoryOptions) {
     const transaction =
@@ -33,6 +49,8 @@ class AuthorRepository {
         transaction,
       },
     );
+
+    await this._replaceRelationFiles(record, data, options);
 
     await this._createAuditLog(
       AuditLogRepository.CREATE,
@@ -74,6 +92,8 @@ class AuthorRepository {
       },
     );
 
+    await this._replaceRelationFiles(record, data, options);
+
     await this._createAuditLog(
       AuditLogRepository.UPDATE,
       record,
@@ -98,6 +118,14 @@ class AuthorRepository {
     if (!record) {
       throw new Error404();
     }
+
+    await FileRepository.destroy(
+      {
+        belongsTo: options.database.author.getTableName(),
+        belongsToId: id,
+      },
+      options,
+    );
 
     await record.destroy({
       transaction,
@@ -209,19 +237,17 @@ class AuthorRepository {
         }
       }
 
-      ['name', 'link', 'image', 'description'].forEach(
-        (field) => {
-          if (filter[field]) {
-            whereAnd.push(
-              SequelizeFilterUtils.ilikeIncludes(
-                'author',
-                field,
-                filter[field],
-              ),
-            );
-          }
-        },
-      );
+      ['name', 'description'].forEach((field) => {
+        if (filter[field]) {
+          whereAnd.push(
+            SequelizeFilterUtils.ilikeIncludes(
+              'author',
+              field,
+              filter[field],
+            ),
+          );
+        }
+      });
     }
 
     const where = { [Op.and]: whereAnd };
@@ -336,6 +362,12 @@ class AuthorRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
+    output.author_image =
+      await FileRepository.fillDownloadUrl(
+        await record.getAuthor_image({
+          transaction,
+        }),
+      );
     return output;
   }
 }

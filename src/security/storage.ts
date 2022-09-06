@@ -41,6 +41,12 @@ export default class Storage {
         publicRead: true,
       },
 
+      author_image: {
+        id: 'author_image',
+        folder: 'authors',
+        maxSizeInBytes: 10 * 1024 * 1024,
+      },
+
       broker_image_top_broker_logo: {
         id: 'broker_image_top_broker_logo',
         folder: 'broker_screenshots/top_broker_logo',
