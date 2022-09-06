@@ -5,6 +5,7 @@ import AutocompleteInMemoryFormItem from 'src/view/shared/form/items/Autocomplet
 import { useFormContext } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import selectors from 'src/modules/navigation/navigationSelectors';
+import { Box } from '@mui/material';
 
 function NavigationAutocompleteFormItem(props) {
   const { setValue, getValues } = useFormContext();
@@ -43,7 +44,11 @@ function NavigationAutocompleteFormItem(props) {
   };
 
   const fetchFn = (value, limit) => {
-    return NavigationService.listAutocomplete(value, limit);
+    return NavigationService.listAutocomplete(
+      value,
+      limit,
+      !!props.withChildren,
+    );
   };
 
   const mapper = {
@@ -54,15 +59,21 @@ function NavigationAutocompleteFormItem(props) {
 
       const value = originalValue.id;
       let label = originalValue.label;
+      let parent = originalValue.parent;
 
       if (originalValue.name) {
         label = originalValue.name;
+      }
+      if (originalValue.parent_id) {
+        parent = originalValue.parent_id;
       }
 
       return {
         key: value,
         value,
         label,
+        parent,
+        hasChildren: originalValue.hasChildren,
       };
     },
 
@@ -74,6 +85,8 @@ function NavigationAutocompleteFormItem(props) {
       return {
         id: originalValue.value,
         label: originalValue.label,
+        parent: originalValue.parent,
+        hasChildren: originalValue.hasChildren,
       };
     },
   };
@@ -86,6 +99,25 @@ function NavigationAutocompleteFormItem(props) {
         mapper={mapper}
         onOpenModal={doOpenModal}
         hasPermissionToCreate={hasPermissionToCreate}
+        renderOption={(props, option) => (
+          <Box
+            component="li"
+            {...props}
+            {...{ key: `${option.value}-${option.parent}` }}
+          >
+            {option.label}
+          </Box>
+        )}
+        groupBy={
+          props.withChildren
+            ? (option) => option.parent.label
+            : null
+        }
+        getOptionDisabled={
+          props.withChildren
+            ? (option) => !!option.hasChildren
+            : null
+        }
       />
 
       {modalVisible && (

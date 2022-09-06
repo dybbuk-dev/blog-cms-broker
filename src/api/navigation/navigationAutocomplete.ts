@@ -9,9 +9,21 @@ export default async (req, res, next) => {
       Permissions.values.navigationAutocomplete,
     );
 
+    const children =
+      req.query.withChildren === undefined ||
+      req.query.withChildren === null
+        ? false
+        : req.query.withChildren
+            .toString()
+            .toLowerCase() === 'true';
+
     const payload = await new NavigationService(
       req,
-    ).findAllAutocomplete(req.query.query, req.query.limit);
+    ).findAllAutocomplete(
+      req.query.query,
+      req.query.limit,
+      children,
+    );
 
     await ApiResponseHandler.success(req, res, payload);
   } catch (error) {

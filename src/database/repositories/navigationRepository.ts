@@ -329,12 +329,10 @@ class NavigationRepository {
     query,
     limit,
     options: IRepositoryOptions,
+    withChildren = false,
   ) {
     let whereAnd: Array<any> = [
       {
-        parent_id: {
-          [Op.is]: null,
-        },
         title: {
           [Op.ne]: '',
         },
@@ -343,16 +341,19 @@ class NavigationRepository {
 
     if (query) {
       whereAnd.push({
-        [Op.or]: [
-          { ['id']: query },
-          {
-            [Op.and]: SequelizeFilterUtils.ilikeIncludes(
-              'navigation',
-              'title',
-              query,
-            ),
-          },
-        ],
+        [Op.and]: SequelizeFilterUtils.ilikeIncludes(
+          'navigation',
+          'title',
+          query,
+        ),
+      });
+    }
+
+    if (!withChildren) {
+      whereAnd.push({
+        parent_id: {
+          [Op.is]: null,
+        },
       });
     }
 
@@ -360,18 +361,56 @@ class NavigationRepository {
 
     const records =
       await options.database.navigation.findAll({
-        attributes: ['id', 'title'],
+        attributes: ['id', 'title', 'parent_id'],
         where,
         limit: limit ? Number(limit) : undefined,
         order: [
+          ['parent_id', 'ASC'],
           ['sort', 'ASC'],
           ['title', 'ASC'],
         ],
       });
 
+    const roots = withChildren
+      ? await this.findAllAutocomplete(null, null, options)
+      : [];
+
+    const findParent = (parent) => {
+      const root = roots.find((v) => v.id === parent);
+      return {
+        id: root?.id,
+        label: root?.label || 'Root',
+      };
+    };
+
+    let realParents: any[] = [];
+    if (withChildren) {
+      realParents =
+        await options.database.navigation.findAll({
+          attributes: [
+            [
+              Sequelize.fn(
+                'DISTINCT',
+                Sequelize.col('parent_id'),
+              ),
+              'id',
+            ],
+          ],
+          where: {
+            parent_id: {
+              [Op.not]: null,
+            },
+          },
+        });
+    }
+
     return records.map((record) => ({
       id: record.id,
       label: record.title,
+      parent: findParent(record.parent_id),
+      hasChildren: !!realParents.find(
+        (v) => v.id === record.id,
+      ),
     }));
   }
 

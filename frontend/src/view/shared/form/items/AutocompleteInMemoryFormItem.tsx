@@ -34,6 +34,8 @@ function AutocompleteInMemoryFormItem(props) {
     fullWidth,
     renderOption,
     renderInput,
+    groupBy,
+    getOptionDisabled,
   } = props;
 
   const {
@@ -258,6 +260,8 @@ function AutocompleteInMemoryFormItem(props) {
           getOptionLabel={(option) => option.label ?? ''}
           renderOption={renderOption}
           renderInput={fnRenderInput}
+          groupBy={groupBy}
+          getOptionDisabled={getOptionDisabled}
           loadingText={i18n('autocomplete.loading')}
           noOptionsText={i18n('autocomplete.noOptions')}
           onBlur={() => props.onBlur && props.onBlur(null)}
@@ -326,6 +330,8 @@ AutocompleteInMemoryFormItem.propTypes = {
   fullWidth: PropTypes.bool,
   renderOption: PropTypes.func,
   renderInput: PropTypes.func,
+  groupBy: PropTypes.func,
+  getOptionDisabled: PropTypes.func,
 };
 
 export default AutocompleteInMemoryFormItem;

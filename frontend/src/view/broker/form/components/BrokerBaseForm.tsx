@@ -1,5 +1,6 @@
 import { Grid } from '@mui/material';
 import { i18n } from 'src/i18n';
+import { useState } from 'react';
 import AuthorAutocompleteFormItem from 'src/view/author/autocomplete/AuthorAutocompleteFormItem';
 import CategoryAutocompleteFormItem from 'src/view/category/autocomplete/CategoryAutocompleteFormItem';
 import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
@@ -8,11 +9,15 @@ import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import LogoFormItem from 'src/view/shared/form/items/LogoFormItem';
 import MDBox from 'src/mui/components/MDBox';
 import NavigationAutocompleteFormItem from 'src/view/navigation/autocomplete/NavigationAutocompleteFormItem';
+import slug from 'slug';
 import Storage from 'src/security/storage';
 import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
 
 function BrokerBaseForm(props) {
   const { record } = props;
+  const [normalizedName, setNormalizedName] = useState(
+    slug(record.name || ''),
+  );
   return (
     <Grid spacing={2} container>
       <Grid item xs={12} mb={3}>
@@ -90,6 +95,9 @@ function BrokerBaseForm(props) {
           label={i18n('entities.broker.fields.name')}
           variant="standard"
           required={true}
+          onChange={(newVal) => {
+            setNormalizedName(slug(newVal));
+          }}
         />
       </Grid>
       <Grid item md={6} xs={12}>
@@ -100,6 +108,8 @@ function BrokerBaseForm(props) {
           )}
           variant="standard"
           required={true}
+          value={record.name_normalized || normalizedName}
+          {...{ forceValue: true }}
         />
       </Grid>
       <Grid item md={6} xs={12}>
@@ -109,6 +119,7 @@ function BrokerBaseForm(props) {
           required={true}
           showCreate={true}
           variant="standard"
+          withChildren
           fullWidth
         />
       </Grid>
