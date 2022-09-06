@@ -194,6 +194,18 @@ export default class MigrationService {
           ['/promo/', row.filename].join(''),
         ignoreDeleteOriginal: true,
       },
+      author: {
+        belongsTo: this.options.database.author,
+        belongsToColumn: (row) => 'author_image',
+        belongsToId: 'id',
+        name: 'image',
+        type: 'type',
+        link: 'link',
+        linkTitle: 'title',
+        privateUrl: (row) =>
+          ['/author/', row.image].join(''),
+        ignoreDeleteOriginal: true,
+      },
     };
 
     const modelNames = Object.keys(imageMigrations);

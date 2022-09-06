@@ -23,7 +23,6 @@ export default function (sequelize) {
         allowNull: false,
         defaultValue: '',
         validate: {
-          notEmpty: true,
           len: [0, 255],
         },
       },
@@ -32,7 +31,6 @@ export default function (sequelize) {
         allowNull: false,
         defaultValue: '',
         validate: {
-          notEmpty: true,
           len: [0, 255],
         },
       },
@@ -66,6 +64,16 @@ export default function (sequelize) {
       timestamps: false,
     },
   );
-  author.associate = (models) => {};
+  author.associate = (models) => {
+    models.author.hasMany(models.file, {
+      as: 'author_image',
+      foreignKey: 'belongsToId',
+      constraints: false,
+      scope: {
+        belongsTo: models.author.getTableName(),
+        belongsToColumn: 'author_image',
+      },
+    });
+  };
   return author;
 }

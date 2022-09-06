@@ -209,7 +209,9 @@ function AuthorListTable(props) {
                     {row.id}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
-                    {row.image}
+                    {row.image
+                      ? row.image
+                      : row.author_image[0].name}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
                     {row.name}
@@ -219,7 +221,9 @@ function AuthorListTable(props) {
                       component={Link}
                       to={row.link}
                     >
-                      {row.link}
+                      {row.link
+                        ? row.link
+                        : row.author_image[0].link}
                     </MaterialLink>
                   </DataTableBodyCell>
                   <DataTableBodyCell>

@@ -66,6 +66,9 @@ const schema = yup.object().shape({
       max: 255,
     },
   ),
+  news_images: yupFormSchemas.images(
+    i18n('entities.news.fields.teaser_upload'),
+  ),
   teaser: yupFormSchemas.string(
     i18n('entities.news.fields.teaser'),
     {},
