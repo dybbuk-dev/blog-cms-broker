@@ -12,12 +12,13 @@ export default function (sequelize) {
       broker_id: {
         type: DataTypes.BIGINT.UNSIGNED,
         allowNull: true,
+        defaultValue: null,
       },
       name: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        defaultValue: '',
         validate: {
-          notEmpty: true,
           len: [0, 255],
         },
       },
@@ -25,18 +26,20 @@ export default function (sequelize) {
         type: DataTypes.STRING(255),
         allowNull: false,
         unique: true,
+        defaultValue: '',
         validate: {
-          notEmpty: true,
           len: [0, 255],
         },
       },
       author_id: {
         type: DataTypes.BIGINT.UNSIGNED,
         allowNull: true,
+        defaultValue: null,
       },
       author_name: {
         type: DataTypes.STRING(255),
         allowNull: true,
+        defaultValue: '',
         validate: {
           len: [0, 255],
         },
@@ -44,6 +47,7 @@ export default function (sequelize) {
       author_link: {
         type: DataTypes.STRING(255),
         allowNull: true,
+        defaultValue: '',
         validate: {
           len: [0, 255],
         },
@@ -51,6 +55,7 @@ export default function (sequelize) {
       pagetitle: {
         type: DataTypes.STRING(255),
         allowNull: true,
+        defaultValue: '',
         validate: {
           len: [0, 255],
         },
@@ -58,6 +63,7 @@ export default function (sequelize) {
       metadescription: {
         type: DataTypes.STRING(255),
         allowNull: true,
+        defaultValue: '',
         validate: {
           len: [0, 255],
         },
@@ -65,6 +71,7 @@ export default function (sequelize) {
       metakeywords: {
         type: DataTypes.STRING(255),
         allowNull: true,
+        defaultValue: '',
         validate: {
           len: [0, 255],
         },
@@ -72,7 +79,7 @@ export default function (sequelize) {
       activated: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: 0,
+        defaultValue: false,
       },
       content: {
         type: DataTypes.TEXT,
@@ -81,6 +88,7 @@ export default function (sequelize) {
       ip: {
         type: DataTypes.CHAR(39),
         allowNull: false,
+        defaultValue: '',
         validate: {
           len: [0, 39],
         },
@@ -110,12 +118,14 @@ export default function (sequelize) {
 
   broker_article.associate = (models) => {
     models.broker_article.belongsTo(models.broker, {
+      as: 'broker',
       constraints: true,
       foreignKey: 'broker_id',
       onDelete: 'NO ACTION',
       onUpdate: 'NO ACTION',
     });
     models.broker_article.belongsTo(models.author, {
+      as: 'author',
       constraints: true,
       foreignKey: 'author_id',
       onDelete: 'NO ACTION',
