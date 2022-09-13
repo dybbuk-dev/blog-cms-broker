@@ -91,8 +91,12 @@ function DashboardNavbar({
 
     // A function that sets the transparent state of the navbar.
     function handleTransparentNavbar() {
-      // (fixedNavbar && window.scrollY === 0) || !fixedNavbar
-      dispatch(muiActions.doTransparentNavbar(false));
+      dispatch(
+        muiActions.doTransparentNavbar(
+          (fixedNavbar && window.scrollY === 0) ||
+            !fixedNavbar,
+        ),
+      );
     }
 
     /**

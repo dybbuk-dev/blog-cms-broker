@@ -46,6 +46,13 @@ export function InputFormItem(props) {
     formValue || value || defaultValues[name] || '',
   );
 
+  if (props.forceValue) {
+    setValue(name, value, {
+      shouldValidate: false,
+      shouldDirty: true,
+    });
+  }
+
   useEffect(() => {
     register({ name });
   }, [register, name]);

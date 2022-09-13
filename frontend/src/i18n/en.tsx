@@ -506,6 +506,7 @@ const en = {
         service: 'Service',
         test: 'Test',
         old: 'Old',
+        articles: 'Articles',
       },
       enumerators: {
         upside: {
@@ -580,6 +581,62 @@ const en = {
       importer: {
         title: 'Import Brokers',
         fileName: 'broker_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
+
+    brokerArticle: {
+      name: 'brokerArticle',
+      label: 'All Broker Articles',
+      menu: 'Broker Articles',
+      exporterFileName: 'brokerArticle_export',
+      list: {
+        menu: 'Broker Articles',
+        title: 'Broker Articles',
+      },
+      create: {
+        success: 'Broker Article successfully saved',
+      },
+      update: {
+        success: 'Broker Article successfully saved',
+      },
+      destroy: {
+        success: 'Broker Article successfully deleted',
+      },
+      destroyAll: {
+        success: 'Broker Article(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Broker Article',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        name: 'Surname',
+        name_normalized: 'Name Normalized',
+        pagetitle: 'Page Title',
+        metadescription: 'Meta Description',
+        metakeywords: 'Meta Keywords',
+        activated: 'Activated',
+        content: 'Content',
+        author: 'Author',
+      },
+      enumerators: {
+        target: {
+          _blank: 'New Window',
+        },
+      },
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Broker Article',
+      },
+      view: {
+        title: 'View Broker Article',
+      },
+      importer: {
+        title: 'Import Broker Articles',
+        fileName: 'brokerArticle_import_template',
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },
     },

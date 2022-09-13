@@ -5,7 +5,7 @@ import fields from 'src/modules/category/importer/categoryImporterFields';
 import { i18n } from 'src/i18n';
 
 const categoryImporterActions = importerActions(
-  'NAVIGATION_IMPORTER',
+  'CATEGORY_IMPORTER',
   selectors,
   CategoryService.import,
   fields,

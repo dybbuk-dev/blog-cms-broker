@@ -16,7 +16,7 @@ import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
 function BrokerBaseForm(props) {
   const { record } = props;
   const [normalizedName, setNormalizedName] = useState(
-    slug(record.name || ''),
+    slug(record.name_normalized || record.name || ''),
   );
   return (
     <Grid spacing={2} container>
@@ -108,7 +108,10 @@ function BrokerBaseForm(props) {
           )}
           variant="standard"
           required={true}
-          value={record.name_normalized || normalizedName}
+          onChange={(newValue) => {
+            setNormalizedName(slug(newValue));
+          }}
+          value={normalizedName}
           {...{ forceValue: true }}
         />
       </Grid>

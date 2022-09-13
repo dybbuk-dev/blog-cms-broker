@@ -98,6 +98,13 @@ const en = {
         },
       },
     },
+    broker_article: {
+      errors: {
+        unique: {
+          name_normalized: 'Name Normalized must be unique',
+        },
+      },
+    },
     broker_upside: {
       errors: {
         notEmpty: {

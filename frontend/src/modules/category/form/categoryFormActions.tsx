@@ -4,7 +4,7 @@ import Message from 'src/view/shared/message';
 import { getHistory } from 'src/modules/store';
 import { i18n } from 'src/i18n';
 
-const prefix = 'NAVIGATION_FORM';
+const prefix = 'CATEGORY_FORM';
 
 const categoryFormActions = {
   INIT_STARTED: `${prefix}_INIT_STARTED`,

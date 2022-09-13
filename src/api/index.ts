@@ -86,6 +86,7 @@ require('./auditLog').default(routes);
 require('./auth').default(routes);
 require('./author').default(routes);
 require('./broker').default(routes);
+require('./brokerArticle').default(routes);
 require('./category').default(routes);
 require('./file').default(routes);
 require('./mui').default(routes);

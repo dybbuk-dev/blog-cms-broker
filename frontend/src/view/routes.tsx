@@ -500,6 +500,73 @@ const privateRoutes = [
   },
   // #endregion
 
+  // #region Broker Article
+  {
+    path: '/broker-article',
+    collapseName: 'broker',
+    i18n: 'entities.brokerArticle.menu',
+    parent: '/routes',
+    loader: () =>
+      import(
+        'src/view/brokerArticle/list/BrokerArticleListPage'
+      ),
+    permissionRequired: permissions.brokerArticleRead,
+    exact: true,
+  },
+
+  {
+    path: '/broker-article/new',
+    collapseName: 'broker',
+    i18n: 'entities.brokerArticle.new.title',
+    parent: '/brokerArticle',
+    loader: () =>
+      import(
+        'src/view/brokerArticle/form/BrokerArticleFormPage'
+      ),
+    permissionRequired: permissions.brokerArticleCreate,
+    exact: true,
+  },
+
+  {
+    path: '/broker-article/importer',
+    collapseName: 'broker',
+    i18n: 'entities.brokerArticle.importer.title',
+    parent: '/brokerArticle',
+    loader: () =>
+      import(
+        'src/view/brokerArticle/importer/BrokerArticleImporterPage'
+      ),
+    permissionRequired: permissions.brokerArticleImport,
+    exact: true,
+  },
+
+  {
+    path: '/broker-article/:id/edit',
+    collapseName: 'broker',
+    i18n: 'entities.brokerArticle.edit.title',
+    parent: '/brokerArticle',
+    loader: () =>
+      import(
+        'src/view/brokerArticle/form/BrokerArticleFormPage'
+      ),
+    permissionRequired: permissions.brokerArticleEdit,
+    exact: true,
+  },
+
+  {
+    path: '/broker-article/:id',
+    collapseName: 'broker',
+    i18n: 'entities.brokerArticle.view.title',
+    parent: '/brokerArticle',
+    loader: () =>
+      import(
+        'src/view/brokerArticle/view/BrokerArticleViewPage'
+      ),
+    permissionRequired: permissions.brokerArticleRead,
+    exact: true,
+  },
+  // #endregion
+
   // #region Category
   {
     path: '/category',

@@ -5,10 +5,11 @@ interface BrokerTabsProps {
   orientation?: 'horizontal' | 'vertical';
   value?: number;
   onChange?: any;
+  broker?: number;
 }
 
 function BrokerTabs(props: BrokerTabsProps) {
-  const { orientation, value, onChange } = props;
+  const { orientation, value, onChange, broker } = props;
   const tabLabels = [
     'broker',
     'overview',
@@ -19,7 +20,8 @@ function BrokerTabs(props: BrokerTabsProps) {
     'service',
     'test',
     'old',
-  ];
+    broker && 'articles',
+  ].filter(Boolean);
   return (
     <AppBar position="static">
       <Tabs
