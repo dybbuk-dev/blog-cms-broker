@@ -5,7 +5,7 @@ import exporterFields from 'src/modules/category/list/categoryListExporterFields
 import Errors from 'src/modules/shared/error/errors';
 import Exporter from 'src/modules/shared/exporter/exporter';
 
-const prefix = 'NAVIGATION_LIST';
+const prefix = 'CATEGORY_LIST';
 
 const categoryListActions = {
   FETCH_STARTED: `${prefix}_FETCH_STARTED`,

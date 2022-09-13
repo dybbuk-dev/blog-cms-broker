@@ -5,7 +5,7 @@ import { i18n } from 'src/i18n';
 import { getHistory } from 'src/modules/store';
 import Message from 'src/view/shared/message';
 
-const prefix = 'NAVIGATION_DESTROY';
+const prefix = 'CATEGORY_DESTROY';
 
 const categoryDestroyActions = {
   DESTROY_STARTED: `${prefix}_DESTROY_STARTED`,
