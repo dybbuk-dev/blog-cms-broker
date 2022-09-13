@@ -58,6 +58,9 @@ function Header({
     darkMode,
   } = selectMuiSettings();
   const route = useLocation().pathname.split('/').slice(1);
+  const [transparentNav, setTransparentNav] = useState(
+    transparentNavbar,
+  );
 
   useEffect(() => {
     // Setting the navbar type
@@ -65,12 +68,15 @@ function Header({
 
     // A function that sets the transparent state of the navbar.
     function handleTransparentNavbar() {
-      dispatch(
-        muiActions.doTransparentNavbar(
-          false,
-          // (fixedNavbar && window.scrollY === 0) ||
-          //   !fixedNavbar,
-        ),
+      // dispatch(
+      //   muiActions.doTransparentNavbar(
+      // (fixedNavbar && window.scrollY === 0) ||
+      //   !fixedNavbar,
+      //   ),
+      // );
+      setTransparentNav(
+        (fixedNavbar && window.scrollY === 0) ||
+          !fixedNavbar,
       );
     }
 
@@ -78,10 +84,10 @@ function Header({
      * The event listener that's calling the handleTransparentNavbar function when
      * scrolling the window.
      */
-    // window.addEventListener(
-    //   'scroll',
-    //   handleTransparentNavbar,
-    // );
+    window.addEventListener(
+      'scroll',
+      handleTransparentNavbar,
+    );
 
     // Call the handleTransparentNavbar function to set the state with the initial value.
     handleTransparentNavbar();
@@ -137,7 +143,7 @@ function Header({
       color="inherit"
       sx={(theme) =>
         navbar(theme, {
-          transparentNavbar,
+          transparentNavbar: transparentNav,
           absolute,
           light,
           darkMode,

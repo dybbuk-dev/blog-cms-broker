@@ -11,7 +11,10 @@ export default async (req, res, next) => {
 
     const payload = await new BrokerArticleService(
       req,
-    ).update(req.params.id, req.body.data);
+    ).update(req.params.id, {
+      ...req.body.data,
+      ip: req.ip,
+    });
 
     await ApiResponseHandler.success(req, res, payload);
   } catch (error) {

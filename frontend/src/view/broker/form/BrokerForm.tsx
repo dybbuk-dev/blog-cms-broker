@@ -32,6 +32,7 @@ import {
   brokerForexSignalFields,
   brokerForexSignalFormPrefix,
 } from 'src/view/broker/form/schemas/BrokerForexSignals';
+import BrokerArticleListPage from 'src/view/brokerArticle/list/BrokerArticleListPage';
 
 function BrokerForm(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -262,6 +263,7 @@ function BrokerForm(props) {
             <BrokerTabs
               value={tabValue}
               onChange={handleSetTabValue}
+              broker={props.record?.id}
             />
           </MDBox>
           <MDBox py={3}>
@@ -292,6 +294,13 @@ function BrokerForm(props) {
             <TabPanel value={tabValue} index={8}>
               <BrokerOldForm {...props} />
             </TabPanel>
+            {Boolean(props.record?.id) && (
+              <TabPanel value={tabValue} index={9}>
+                <BrokerArticleListPage
+                  broker={props.record?.id || null}
+                />
+              </TabPanel>
+            )}
           </MDBox>
           <FormButtons
             style={{

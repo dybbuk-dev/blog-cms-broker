@@ -210,6 +210,12 @@ class BrokerArticleRepository {
     let whereAnd: Array<any> = [];
 
     if (filter) {
+      if (filter.broker) {
+        whereAnd.push({
+          broker_id: filter.broker || 0,
+        });
+      }
+
       if (filter.idRange) {
         const [start, end] = filter.idRange;
 

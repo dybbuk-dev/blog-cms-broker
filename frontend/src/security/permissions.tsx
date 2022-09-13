@@ -428,6 +428,71 @@ class Permissions {
       },
       // #endregion
 
+      // #region Broker Article
+      brokerArticleImport: {
+        id: 'brokerArticleImport',
+        allowedRoles: [],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerArticleCreate: {
+        id: 'brokerArticleCreate',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerArticleEdit: {
+        id: 'brokerArticleEdit',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerArticleDestroy: {
+        id: 'brokerArticleDestroy',
+        allowedRoles: [roles.admin],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerArticleRead: {
+        id: 'brokerArticleRead',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      brokerArticleAutocomplete: {
+        id: 'brokerArticleAutocomplete',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      // #endregion
+
       // #region Category
       categoryImport: {
         id: 'categoryImport',

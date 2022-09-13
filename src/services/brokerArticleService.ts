@@ -1,5 +1,7 @@
 import { IServiceOptions } from './IServiceOptions';
+import AuthorRepository from '../database/repositories/authorRepository';
 import BrokerArticleRepository from '../database/repositories/brokerArticleRepository';
+import BrokerRepository from '../database/repositories/brokerRepository';
 import Error400 from '../errors/Error400';
 import SequelizeRepository from '../database/repositories/sequelizeRepository';
 
@@ -17,6 +19,16 @@ export default class BrokerArticleService {
       );
 
     try {
+      data.broker = await BrokerRepository.filterIdInTenant(
+        data.broker,
+        { ...this.options, transaction },
+      );
+
+      data.author = await AuthorRepository.filterIdInTenant(
+        data.author,
+        { ...this.options, transaction },
+      );
+
       const record = await BrokerArticleRepository.create(
         data,
         {
@@ -38,7 +50,7 @@ export default class BrokerArticleService {
       SequelizeRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'brokerArticle',
+        'broker_article',
       );
 
       throw error;
@@ -52,6 +64,16 @@ export default class BrokerArticleService {
       );
 
     try {
+      data.broker = await BrokerRepository.filterIdInTenant(
+        data.broker,
+        { ...this.options, transaction },
+      );
+
+      data.author = await AuthorRepository.filterIdInTenant(
+        data.author,
+        { ...this.options, transaction },
+      );
+
       const record = await BrokerArticleRepository.update(
         id,
         data,
@@ -74,7 +96,7 @@ export default class BrokerArticleService {
       SequelizeRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'brokerArticle',
+        'broker_article',
       );
 
       throw error;
