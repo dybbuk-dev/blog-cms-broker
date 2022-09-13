@@ -38,6 +38,10 @@ class BrokerArticleRepository {
   ) {
     return [
       !metaOnly && {
+        model: options.database.broker,
+        as: 'broker',
+      },
+      !metaOnly && {
         model: options.database.author,
         as: 'author',
       },
