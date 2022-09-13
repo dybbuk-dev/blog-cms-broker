@@ -68,12 +68,6 @@ function Header({
 
     // A function that sets the transparent state of the navbar.
     function handleTransparentNavbar() {
-      // dispatch(
-      //   muiActions.doTransparentNavbar(
-      // (fixedNavbar && window.scrollY === 0) ||
-      //   !fixedNavbar,
-      //   ),
-      // );
       setTransparentNav(
         (fixedNavbar && window.scrollY === 0) ||
           !fixedNavbar,
