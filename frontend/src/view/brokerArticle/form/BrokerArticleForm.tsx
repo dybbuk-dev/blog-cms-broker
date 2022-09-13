@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid, InputAdornment } from '@mui/material';
 import { i18n } from 'src/i18n';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useForm, FormProvider } from 'react-hook-form';
@@ -67,7 +67,7 @@ const schema = yup.object().shape({
 });
 
 function BrokerArticleForm(props) {
-  const { sidenavColor } = selectMuiSettings();
+  const { sidenavColor, darkMode } = selectMuiSettings();
   const [initialValues] = useState(() => {
     const record = props.record || {};
 
@@ -139,6 +139,20 @@ function BrokerArticleForm(props) {
                 onChange={(newValue) => {
                   setNormalizedName(slug(newValue));
                 }}
+                startAdornment={
+                  <InputAdornment
+                    position="start"
+                    sx={{
+                      color:
+                        (darkMode ? 'white' : 'inherit') +
+                        ' !important',
+                    }}
+                  >
+                    <span>
+                      {`/${props.record?.broker?.name_normalized}/`}
+                    </span>
+                  </InputAdornment>
+                }
                 value={normalizedName}
                 {...{ forceValue: true }}
               />
