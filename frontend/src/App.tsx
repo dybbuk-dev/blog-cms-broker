@@ -40,6 +40,9 @@ import { Icon } from '@mui/material';
 import { i18n } from 'src/i18n';
 import MDBox from 'src/mui/components/MDBox';
 
+import colors from 'src/mui/assets/theme/base/colors';
+const { dark, white } = colors;
+
 const store = configureStore();
 
 export default function App(props) {
@@ -107,6 +110,7 @@ function AppWithSnackbar(props) {
     openConfigurator,
     direction,
     layout,
+    darkMode,
   } = selectMuiSettings();
 
   const dispatch = useDispatch();
@@ -154,14 +158,14 @@ function AppWithSnackbar(props) {
       alignItems="center"
       width="3.25rem"
       height="3.25rem"
-      bgColor="white"
+      bgColor={darkMode ? dark.main : white.main}
       shadow="sm"
       borderRadius="50%"
       position="fixed"
       right="2rem"
       bottom="2rem"
       zIndex={99}
-      color="dark"
+      color="text"
       sx={{ cursor: 'pointer' }}
       onClick={handleConfiguratorOpen}
     >

@@ -10,7 +10,6 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import './assets/scrollbar.css';
-import './assets/quill.css';
 
 (async function () {
   const isSocialOnboardRequested =
