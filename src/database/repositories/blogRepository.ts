@@ -1,48 +1,79 @@
-import { IRepositoryOptions } from './IRepositoryOptions';
-import { orderByUtils } from '../utils/orderByUtils';
-import AuditLogRepository from './auditLogRepository';
-import Error400 from '../../errors/Error400';
 import lodash from 'lodash';
-import md5 from 'crypto-js/md5';
-import moment from 'moment';
+import Error404 from '../../errors/Error404';
 import Sequelize from 'sequelize';
-import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
+import { IRepositoryOptions } from './IRepositoryOptions';
+import AuditLogRepository from './auditLogRepository';
 import SequelizeRepository from './sequelizeRepository';
-
+import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
+import moment from 'moment';
+import { orderByUtils } from '../utils/orderByUtils';
+import FileRepository from './fileRepository';
+import BlogBrokerRepository from './blogBrokerRepository';
+import BrokerRepository from './brokerRepository';
 const Op = Sequelize.Op;
 
-class OpenxRepository {
+class BlogRepository {
   static ALL_FIELDS = [
-    'code',
-    'noscript',
+    'name',
+    'pagetitle',
+    'metadescription',
+    'metakeywords',
+    'content',
     'activated',
-    'zone',
   ];
 
-  static _relatedData(data, options) {
+  static _relatedData(data) {
     return {
-      hash: md5(data.code).toString(),
-      ip: data.ip || '',
+      teaser: data.teaser ?? '',
+      author_id: data.author ? data.author.id : null,
+      ip: '',
     };
+  }
+
+  static async _replaceRelationFiles(
+    record,
+    data,
+    options: IRepositoryOptions,
+  ) {
+    await FileRepository.replaceRelationFiles(
+      {
+        belongsTo:
+          options.database.blog_entry.getTableName(),
+        belongsToColumn: 'blog_image',
+        belongsToId: record.id,
+      },
+      data.blog_image.map((v) => ({
+        ...v,
+        link: null,
+        linkTitle: null,
+        new: true,
+      })),
+      options,
+    );
   }
 
   static async create(data, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
+    const record = await options.database.blog_entry.create(
+      {
+        ...lodash.pick(data, this.ALL_FIELDS),
+        ...this._relatedData(data),
+        created: data.created ? data.created : moment(),
+        modified: data.created ? data.created : moment(),
+      },
+      {
+        transaction,
+      },
+    );
 
-    const record =
-      await options.database.openx_banner.create(
-        {
-          ...lodash.pick(data, this.ALL_FIELDS),
-          ...this._relatedData(data, options),
-          created: moment(),
-          modified: moment(),
-        },
-        {
-          transaction,
-        },
+    if (data.blog_image) {
+      await this._replaceRelationFiles(
+        record,
+        data,
+        options,
       );
-
+    }
     await this._createAuditLog(
       AuditLogRepository.CREATE,
       record,
@@ -61,31 +92,28 @@ class OpenxRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    let record =
-      await options.database.openx_banner.findOne({
-        where: {
-          id,
-        },
-        transaction,
-      });
+    let record = await options.database.blog_entry.findOne({
+      where: {
+        id,
+      },
+      transaction,
+    });
 
     if (!record) {
-      throw new Error400(
-        options.language,
-        'entities.openx.errors.update',
-      );
+      throw new Error404();
     }
-
     record = await record.update(
       {
         ...lodash.pick(data, this.ALL_FIELDS),
-        ...this._relatedData(data, options),
-        modified: moment(),
+        ...this._relatedData(data),
+        modified: data.created ? data.created : moment(),
       },
       {
         transaction,
       },
     );
+
+    await this._replaceRelationFiles(record, data, options);
 
     await this._createAuditLog(
       AuditLogRepository.UPDATE,
@@ -101,20 +129,27 @@ class OpenxRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    let record =
-      await options.database.openx_banner.findOne({
-        where: {
-          id,
-        },
-        transaction,
-      });
+    let record = await options.database.blog_entry.findOne({
+      where: {
+        id,
+      },
+      transaction,
+    });
 
     if (!record) {
-      throw new Error400(
-        options.language,
-        'entities.openx.errors.destroy',
-      );
+      throw new Error404();
     }
+
+    await BlogBrokerRepository.destroyByBlog(id, options);
+
+    await FileRepository.destroy(
+      {
+        belongsTo:
+          options.database.blog_entry.getTableName(),
+        belongsToId: id,
+      },
+      options,
+    );
 
     await record.destroy({
       transaction,
@@ -132,20 +167,31 @@ class OpenxRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    const include = [];
+    const include = [
+      {
+        model: options.database.author,
+        as: 'author',
+      },
+    ];
 
     const record =
-      await options.database.openx_banner.findOne({
+      await options.database.blog_entry.findOne({
         where: {
           id,
         },
         include,
         transaction,
       });
+
     if (!record) {
-      throw new Error400();
+      throw new Error404();
     }
-    return this._fillWithRelationsAndFiles(record, options);
+
+    return this._fillWithRelationsAndFiles(
+      record,
+      options,
+      false,
+    );
   }
 
   static async filterIdInTenant(
@@ -174,7 +220,7 @@ class OpenxRepository {
     };
 
     const records =
-      await options.database.openx_banner.findAll({
+      await options.database.blog_entry.findAll({
         attributes: ['id'],
         where,
       });
@@ -186,7 +232,7 @@ class OpenxRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    return options.database.openx_banner.count({
+    return options.database.blog_entry.count({
       where: {
         ...filter,
       },
@@ -199,8 +245,16 @@ class OpenxRepository {
     options: IRepositoryOptions,
   ) {
     let whereAnd: Array<any> = [];
-    let include = [];
-
+    const include = [
+      // {
+      //   model: options.database.navigation,
+      //   as: 'navigation',
+      // },
+      {
+        model: options.database.author,
+        as: 'author',
+      },
+    ];
     if (filter) {
       if (filter.idRange) {
         const [start, end] = filter.idRange;
@@ -230,23 +284,46 @@ class OpenxRepository {
         }
       }
 
-      ['code', 'noscript'].forEach((field) => {
+      // if (filter.navigation) {
+      //   if (
+      //     filter.navigation !== undefined &&
+      //     filter.navigation !== null &&
+      //     filter.navigation !== ''
+      //   ) {
+      //     whereAnd.push({
+      //       navigation_id: filter.navigation.id,
+      //     });
+      //   }
+      // }
+      if (filter.author) {
+        if (
+          filter.author !== undefined &&
+          filter.author !== null &&
+          filter.author !== ''
+        ) {
+          whereAnd.push({
+            author_id: filter.author.id,
+          });
+        }
+      }
+      [
+        'name',
+        'pagetitle',
+        'metakeywords',
+        'metadescription',
+        'content',
+        'teaser',
+      ].forEach((field) => {
         if (filter[field]) {
           whereAnd.push(
             SequelizeFilterUtils.ilikeIncludes(
-              'openx_banner',
+              'blog_entry',
               field,
               filter[field],
             ),
           );
         }
       });
-
-      if (filter.zone) {
-        whereAnd.push({
-          zone: filter.zone,
-        });
-      }
 
       ['activated'].forEach((field) => {
         if (
@@ -266,7 +343,7 @@ class OpenxRepository {
 
     const where = { [Op.and]: whereAnd };
     let { rows, count } =
-      await options.database.openx_banner.findAndCountAll({
+      await options.database.blog_entry.findAndCountAll({
         where,
         include,
         limit: limit ? Number(limit) : undefined,
@@ -277,10 +354,13 @@ class OpenxRepository {
         transaction:
           SequelizeRepository.getTransaction(options),
       });
+
     rows = await this._fillWithRelationsAndFilesForRows(
       rows,
       options,
+      true,
     );
+
     return { rows, count };
   }
 
@@ -297,8 +377,8 @@ class OpenxRepository {
           { ['id']: query },
           {
             [Op.and]: SequelizeFilterUtils.ilikeIncludes(
-              'openx_banner',
-              'code',
+              'blog_entry',
+              'name',
               query,
             ),
           },
@@ -309,16 +389,16 @@ class OpenxRepository {
     const where = { [Op.and]: whereAnd };
 
     const records =
-      await options.database.openx_banner.findAll({
-        attributes: ['id', 'code', 'zone'],
+      await options.database.blog_entry.findAll({
+        attributes: ['id', 'name'],
         where,
         limit: limit ? Number(limit) : undefined,
-        order: [['id', 'ASC']],
+        order: [['name', 'ASC']],
       });
 
     return records.map((record) => ({
       id: record.id,
-      label: record.zone,
+      label: record.name,
     }));
   }
 
@@ -338,7 +418,7 @@ class OpenxRepository {
 
     await AuditLogRepository.log(
       {
-        entityName: 'openx banner',
+        entityName: 'blog_entry',
         entityId: record.id,
         action,
         values,
@@ -350,6 +430,7 @@ class OpenxRepository {
   static async _fillWithRelationsAndFilesForRows(
     rows,
     options: IRepositoryOptions,
+    metaOnly,
   ) {
     if (!rows) {
       return rows;
@@ -357,7 +438,11 @@ class OpenxRepository {
 
     return Promise.all(
       rows.map((record) =>
-        this._fillWithRelationsAndFiles(record, options),
+        this._fillWithRelationsAndFiles(
+          record,
+          options,
+          metaOnly,
+        ),
       ),
     );
   }
@@ -365,6 +450,7 @@ class OpenxRepository {
   static async _fillWithRelationsAndFiles(
     record,
     options: IRepositoryOptions,
+    metaOnly = true,
   ) {
     if (!record) {
       return record;
@@ -372,11 +458,32 @@ class OpenxRepository {
 
     const output = record.get({ plain: true });
 
+    if (metaOnly) {
+      return output;
+    }
+    const blogParam = {
+      filter: {
+        blog_entry_id: output.id,
+      },
+    };
     const transaction =
       SequelizeRepository.getTransaction(options);
 
+    output.blog_image =
+      await FileRepository.fillDownloadUrl(
+        await record.getBlog_image({
+          transaction,
+        }),
+      );
+    const { rows: blog_broker } =
+      await BlogBrokerRepository.findAndCountAll(
+        blogParam,
+        options,
+      );
+    console.log(blog_broker);
+    output.brokers = blog_broker || null;
     return output;
   }
 }
 
-export default OpenxRepository;
+export default BlogRepository;

@@ -267,6 +267,23 @@ const en = {
         find: 'Sorry, data is not existed.',
       },
     },
+    page: {
+      errors: {
+        unique: {},
+        notEmpty: {
+          name: 'Related Link name is required.',
+          url: 'Related Link url is required.',
+        },
+      },
+    },
+    blog: {
+      errors: {
+        unique: {
+          name_normalized:
+            'Name normalized must be unique.',
+        },
+      },
+    },
   },
 };
 

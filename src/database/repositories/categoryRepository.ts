@@ -274,6 +274,18 @@ class CategoryRepository {
         }
       });
 
+      if (filter.author) {
+        if (
+          filter.author !== undefined &&
+          filter.author !== null &&
+          filter.author !== ''
+        ) {
+          whereAnd.push({
+            author_id: filter.author.id,
+          });
+        }
+      }
+
       [
         'activated',
         'show_in_navigation',
