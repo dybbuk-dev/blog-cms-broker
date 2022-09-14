@@ -48,6 +48,24 @@ const menus = [
   },
 
   {
+    name: i18n('collapses.blog.menu'),
+    key: 'blog',
+    icon: <Icon fontSize="medium">feed</Icon>,
+    collapse: [
+      {
+        path: '/blog',
+        permissionRequired: permissions.blogRead,
+        name: i18n('entities.blog.menu'),
+      },
+      // {
+      //   path: '/comment',
+      //   permissionRequired: permissions.commentRead,
+      //   name: i18n('entities.comment.menu'),
+      // },
+    ],
+  },
+
+  {
     name: i18n('collapses.routes.menu'),
     key: 'routes',
     icon: <Icon fontSize="medium">signpost</Icon>,
@@ -95,6 +113,13 @@ const menus = [
         name: i18n('entities.promotion.menu'),
       },
     ],
+  },
+
+  {
+    path: '/page',
+    name: i18n('entities.page.menu'),
+    permissionRequired: permissions.pageRead,
+    icon: <Icon fontSize="medium">auto_stories</Icon>,
   },
 
   {

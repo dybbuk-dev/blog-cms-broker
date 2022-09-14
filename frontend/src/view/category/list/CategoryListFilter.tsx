@@ -28,6 +28,7 @@ import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRang
 import CategoryAutocompleteFormItem from 'src/view/category/autocomplete/CategoryAutocompleteFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import { filterBooleanOptions } from 'src/modules/utils';
+import AuthorAutocompleteFormItem from 'src/view/author/autocomplete/AuthorAutocompleteFormItem';
 
 const schema = yup.object().shape({
   idRange: yupFilterSchemas.integerRange(
@@ -109,6 +110,10 @@ const previewRenders = {
   show_in_footer: {
     label: i18n('entities.category.fields.show_in_footer'),
     render: filterRenders.boolean(),
+  },
+  author: {
+    label: i18n('entities.category.fields.author'),
+    render: filterRenders.relationToOne(),
   },
 };
 
@@ -219,7 +224,7 @@ function CategoryListFilter(props) {
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
-                  <CategoryAutocompleteFormItem
+                  <AuthorAutocompleteFormItem
                     name="author"
                     label={i18n(
                       'entities.category.fields.author',

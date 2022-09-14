@@ -1,0 +1,30 @@
+export default (app) => {
+  app.post(
+    `/tenant/:tenantId/page`,
+    require('./pageCreate').default,
+  );
+  app.put(
+    `/tenant/:tenantId/page/:id`,
+    require('./pageUpdate').default,
+  );
+  app.post(
+    `/tenant/:tenantId/page/import`,
+    require('./pageImport').default,
+  );
+  app.delete(
+    `/tenant/:tenantId/page`,
+    require('./pageDestroy').default,
+  );
+  app.get(
+    `/tenant/:tenantId/page/autocomplete`,
+    require('./pageAutocomplete').default,
+  );
+  app.get(
+    `/tenant/:tenantId/page`,
+    require('./pageList').default,
+  );
+  app.get(
+    `/tenant/:tenantId/page/:id`,
+    require('./pageFind').default,
+  );
+};

@@ -57,11 +57,23 @@ const en = {
     affiliateLink: {
       menu: 'Affiliate links',
     },
+    author: {
+      menu: 'Authors',
+    },
+    blog: {
+      menu: 'Blogs',
+    },
     routes: {
       menu: 'Routes',
     },
     promotion: {
       menu: 'Promotion',
+    },
+    page: {
+      menu: 'General Pages',
+    },
+    pageRelatedLink: {
+      menu: 'Page Related Link',
     },
   },
 
@@ -161,6 +173,61 @@ const en = {
       importer: {
         title: 'Import Authors',
         fileName: 'author_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
+
+    blog: {
+      name: 'blog',
+      label: 'All Blogs',
+      menu: 'Blogs',
+      exporterFileName: 'blog_export',
+      list: {
+        menu: 'Blogs',
+        title: 'Blogs',
+      },
+      create: {
+        success: 'Blog successfully saved',
+      },
+      update: {
+        success: 'Blog successfully saved',
+      },
+      destroy: {
+        success: 'Blog successfully deleted',
+      },
+      destroyAll: {
+        success: 'Blog(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Blog',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        link: 'Link',
+        comment: 'Comments',
+        pagetitle: 'Page title',
+        metadescription: 'Meta Description',
+        metakeywords: 'Meta Keywords',
+        author: 'Author',
+        blog_image: 'Upload teaser logo',
+        teaser: 'teasers',
+        name: 'Surname',
+        content: 'Contents',
+        activated: 'Activated',
+        brokers: 'Linked Brokers',
+      },
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Blog',
+      },
+      view: {
+        title: 'View Blog',
+      },
+      importer: {
+        title: 'Import Blogs',
+        fileName: 'blog_import_template',
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },
     },
@@ -988,6 +1055,69 @@ const en = {
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },
     },
+
+    page: {
+      name: 'page',
+      label: 'All Pages',
+      menu: 'General Pages',
+      exporterFileName: 'page_export',
+      list: {
+        menu: 'Pages',
+        title: 'Pages',
+      },
+      create: {
+        success: 'Page successfully saved',
+      },
+      update: {
+        success: 'Page successfully saved',
+      },
+      destroy: {
+        success: 'Page successfully deleted',
+      },
+      destroyAll: {
+        success: 'Page(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Page',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        navigation: 'Navigation',
+        link: 'Link',
+        title: 'Title',
+        meta_description: 'Meta Description',
+        meta_keywords: 'Meta Keywords',
+        created: 'Created on',
+        author: 'Author',
+        relatedLinks: 'Related Links',
+        relatedLink: {
+          name: 'Name',
+          url: 'Address',
+        },
+        page_image: 'Upload teaser logo',
+        teaser_link: 'Link',
+        teaser_title: 'Link title',
+        teaser: 'teasers',
+        name: 'Surname',
+        body: 'Body',
+        activated: 'Activated',
+        pdf: 'Download PDF',
+      },
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Page',
+      },
+      view: {
+        title: 'View Page',
+      },
+      importer: {
+        title: 'Import Pages',
+        fileName: 'page_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
   },
 
   auth: {
@@ -1137,6 +1267,10 @@ const en = {
 
   promotion: {
     menu: 'Promotion',
+  },
+
+  page: {
+    menu: 'Pages',
   },
 
   tenant: {

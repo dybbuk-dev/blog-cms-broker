@@ -145,7 +145,6 @@ class OpenxRepository {
     if (!record) {
       throw new Error400();
     }
-    console.log(record);
     return this._fillWithRelationsAndFiles(record, options);
   }
 

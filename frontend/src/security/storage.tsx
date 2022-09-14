@@ -96,6 +96,18 @@ export default class Storage {
         folder: 'promo',
         maxSizeInBytes: 10 * 1024 * 1024,
       },
+
+      page_image: {
+        id: 'page_image',
+        folder: 'pages_images',
+        maxSizeInBytes: 10 * 1024 * 1024,
+      },
+
+      blog_image: {
+        id: 'blog_image',
+        folder: 'blog_images',
+        maxSizeInBytes: 10 * 1024 * 1024,
+      },
     };
   }
 }
