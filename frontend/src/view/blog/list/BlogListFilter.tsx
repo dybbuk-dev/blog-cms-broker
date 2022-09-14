@@ -9,8 +9,8 @@ import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { i18n } from 'src/i18n';
-import actions from 'src/modules/category/list/categoryListActions';
-import selectors from 'src/modules/category/list/categoryListSelectors';
+import actions from 'src/modules/blog/list/blogListActions';
+import selectors from 'src/modules/blog/list/blogListSelectors';
 import yupFilterSchemas from 'src/modules/shared/yup/yupFilterSchemas';
 import FilterWrapper, {
   FilterButtons,
@@ -25,99 +25,90 @@ import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import MDButton from 'src/mui/components/MDButton';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
-import CategoryAutocompleteFormItem from 'src/view/category/autocomplete/CategoryAutocompleteFormItem';
+import BlogAutocompleteFormItem from 'src/view/blog/autocomplete/BlogAutocompleteFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import { filterBooleanOptions } from 'src/modules/utils';
+import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
+import NavigationAutocompleteFormItem from 'src/view/navigation/autocomplete/NavigationAutocompleteFormItem';
 import AuthorAutocompleteFormItem from 'src/view/author/autocomplete/AuthorAutocompleteFormItem';
 
 const schema = yup.object().shape({
   idRange: yupFilterSchemas.integerRange(
-    i18n('entities.category.fields.idRange'),
-  ),
-  name: yupFilterSchemas.string(
-    i18n('entities.category.fields.name'),
-  ),
-  title: yupFilterSchemas.string(
-    i18n('entities.category.fields.title'),
+    i18n('entities.blog.fields.idRange'),
   ),
   link: yupFilterSchemas.string(
-    i18n('entities.category.fields.link'),
+    i18n('entities.blog.fields.link'),
   ),
-  author_name: yupFilterSchemas.string(
-    i18n('entities.category.fields.author_name'),
+  pagetitle: yupFilterSchemas.string(
+    i18n('entities.blog.fields.pagetitle'),
   ),
-  author_link: yupFilterSchemas.string(
-    i18n('entities.category.fields.author_link'),
+  metakeywords: yupFilterSchemas.string(
+    i18n('entities.blog.fields.metakeywords'),
+  ),
+  metadescription: yupFilterSchemas.string(
+    i18n('entities.blog.fields.metadescription'),
+  ),
+  content: yupFilterSchemas.string(
+    i18n('entities.blog.fields.content'),
+  ),
+  name: yupFilterSchemas.string(
+    i18n('entities.blog.fields.name'),
   ),
   activated: yupFilterSchemas.boolean(
-    i18n('entities.category.fields.activated'),
-  ),
-  show_in_navigation: yupFilterSchemas.boolean(
-    i18n('entities.category.fields.show_in_navigation'),
-  ),
-  show_in_footer: yupFilterSchemas.boolean(
-    i18n('entities.category.fields.show_in_footer'),
+    i18n('entities.blog.fields.activated'),
   ),
 });
 
 const emptyValues = {
   idRange: [],
   name: null,
-  title: null,
+  pagetitle: null,
   link: null,
-  author_name: null,
-  author_link: null,
+  metakeywords: null,
+  metadescription: null,
+  content: null,
   activated: null,
-  show_in_navigation: null,
-  show_in_footer: null,
 };
 
 const previewRenders = {
   idRange: {
-    label: i18n('entities.category.fields.idRange'),
+    label: i18n('entities.blog.fields.idRange'),
     render: filterRenders.decimalRange(),
   },
-  name: {
-    label: i18n('entities.category.fields.name'),
-    render: filterRenders.generic(),
-  },
-  title: {
-    label: i18n('entities.category.fields.title'),
-    render: filterRenders.generic(),
-  },
   link: {
-    label: i18n('entities.category.fields.link'),
+    label: i18n('entities.blog.fields.link'),
     render: filterRenders.generic(),
   },
-  author_name: {
-    label: i18n('entities.category.fields.author_name'),
+  pagetitle: {
+    label: i18n('entities.blog.fields.pagetitle'),
     render: filterRenders.generic(),
   },
-  author_link: {
-    label: i18n('entities.category.fields.author_link'),
+  metakeywords: {
+    label: i18n('entities.blog.fields.metakeywords'),
     render: filterRenders.generic(),
+  },
+  metadescription: {
+    label: i18n('entities.blog.fields.metadescription'),
+    render: filterRenders.generic(),
+  },
+  name: {
+    label: i18n('entities.blog.fields.name'),
+    render: filterRenders.generic(),
+  },
+  content: {
+    label: i18n('entities.blog.fields.content'),
   },
   activated: {
-    label: i18n('entities.category.fields.activated'),
-    render: filterRenders.boolean(),
-  },
-  show_in_navigation: {
-    label: i18n(
-      'entities.category.fields.show_in_navigation',
-    ),
-    render: filterRenders.boolean(),
-  },
-  show_in_footer: {
-    label: i18n('entities.category.fields.show_in_footer'),
+    label: i18n('entities.blog.fields.activated'),
     render: filterRenders.boolean(),
   },
   author: {
-    label: i18n('entities.category.fields.author'),
+    label: i18n('entities.blog.fields.author'),
     render: filterRenders.relationToOne(),
   },
 };
 
-function CategoryListFilter(props) {
+function BlogListFilter(props) {
   const { sidenavColor } = selectMuiSettings();
   const rawFilter = useSelector(selectors.selectRawFilter);
   const dispatch = useDispatch();
@@ -187,78 +178,75 @@ function CategoryListFilter(props) {
           <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <Grid container spacing={2}>
-                <Grid item lg={6} xs={12}>
+                <Grid item md={6} xs={12}>
                   <InputNumberRangeFormItem
                     name="idRange"
                     label={i18n(
-                      'entities.category.fields.idRange',
+                      'entities.blog.fields.idRange',
                     )}
                     variant="standard"
                   />
                 </Grid>
-                <Grid item lg={6} xs={12}>
+                <Grid item md={6} xs={12}>
                   <InputFormItem
                     name="name"
                     label={i18n(
-                      'entities.category.fields.name',
+                      'entities.blog.fields.name',
                     )}
                     variant="standard"
                   />
                 </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputFormItem
-                    name="title"
-                    label={i18n(
-                      'entities.category.fields.title',
-                    )}
-                    variant="standard"
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
+                <Grid item md={6} xs={12}>
                   <InputFormItem
                     name="link"
                     label={i18n(
-                      'entities.category.fields.link',
+                      'entities.blog.fields.link',
                     )}
                     variant="standard"
                   />
                 </Grid>
-                <Grid item lg={6} xs={12}>
+                <Grid item md={6} xs={12}>
+                  <InputFormItem
+                    name="metakeywords"
+                    label={i18n(
+                      'entities.blog.fields.metakeywords',
+                    )}
+                    variant="standard"
+                  />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                  <InputFormItem
+                    name="metadescription"
+                    label={i18n(
+                      'entities.blog.fields.metadescription',
+                    )}
+                    variant="standard"
+                  />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                  <InputFormItem
+                    name="pagetitle"
+                    label={i18n(
+                      'entities.blog.fields.pagetitle',
+                    )}
+                    variant="standard"
+                  />
+                </Grid>
+                <Grid item md={6} xs={12}>
                   <AuthorAutocompleteFormItem
                     name="author"
                     label={i18n(
-                      'entities.category.fields.author',
+                      'entities.blog.fields.author',
                     )}
                     variant="standard"
                     fullWidth
                   />
                 </Grid>
-                <Grid item lg={6} xs={12}></Grid>
-                <Grid item lg={4} xs={12}>
+                <Grid item md={6} xs={12}>
                   <SelectFormItem
                     name="activated"
                     label={i18n(
-                      'entities.category.fields.activated',
-                    )}
-                    options={filterBooleanOptions}
-                    variant="standard"
-                  />
-                </Grid>
-                <Grid item lg={4} xs={12}>
-                  <SelectFormItem
-                    name="show_in_navigation"
-                    label={i18n(
-                      'entities.category.fields.show_in_navigation',
-                    )}
-                    options={filterBooleanOptions}
-                    variant="standard"
-                  />
-                </Grid>
-                <Grid item lg={4} xs={12}>
-                  <SelectFormItem
-                    name="show_in_footer"
-                    label={i18n(
-                      'entities.category.fields.show_in_footer',
+                      'entities.blog.fields.activated',
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
@@ -298,4 +286,4 @@ function CategoryListFilter(props) {
   );
 }
 
-export default CategoryListFilter;
+export default BlogListFilter;

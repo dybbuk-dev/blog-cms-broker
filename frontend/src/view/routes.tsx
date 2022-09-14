@@ -430,6 +430,127 @@ const privateRoutes = [
 
   // #endregion
 
+  // #region Blog
+  {
+    path: '/blogs',
+    collapseName: 'blog',
+    i18n: 'collapses.blog.menu',
+    parent: '/',
+    redirect: '/blog',
+    permissionRequired: null,
+    virtual: true,
+  },
+
+  // #region Blogs
+  {
+    path: '/blog',
+    collapseName: 'blog',
+    i18n: 'entities.blog.menu',
+    parent: '/blogs',
+    loader: () => import('src/view/blog/list/BlogListPage'),
+    permissionRequired: permissions.blogRead,
+    exact: true,
+  },
+  {
+    path: '/blog/new',
+    collapseName: 'blog',
+    i18n: 'entities.blog.new.title',
+    parent: '/blog',
+    loader: () => import('src/view/blog/form/BlogFormPage'),
+    permissionRequired: permissions.blogCreate,
+    exact: true,
+  },
+
+  {
+    path: '/blog/importer',
+    collapseName: 'blog',
+    i18n: 'entities.blog.importer.title',
+    parent: '/blog',
+    loader: () =>
+      import('src/view/blog/importer/BlogImporterPage'),
+    permissionRequired: permissions.blogImport,
+    exact: true,
+  },
+
+  {
+    path: '/blog/:id/edit',
+    collapseName: 'blog',
+    i18n: 'entities.blog.edit.title',
+    parent: '/blog',
+    loader: () => import('src/view/blog/form/BlogFormPage'),
+    permissionRequired: permissions.blogEdit,
+    exact: true,
+  },
+
+  {
+    path: '/blog/:id',
+    collapseName: 'blog',
+    i18n: 'entities.blog.view.title',
+    parent: '/blog',
+    loader: () => import('src/view/blog/view/BlogViewPage'),
+    permissionRequired: permissions.blogRead,
+    exact: true,
+  },
+  // #endregion
+
+  // // #region Comment
+  // {
+  //   path: '/comment',
+  //   collapseName: 'blog',
+  //   i18n: 'entities.comment.menu',
+  //   parent: '/blogs',
+  //   loader: () =>
+  //     import('src/view/comment/list/OpenxListPage'),
+  //   permissionRequired: permissions.commentRead,
+  //   exact: true,
+  // },
+  // {
+  //   path: '/comment/new',
+  //   collapseName: 'blog',
+  //   i18n: 'entities.comment.new.title',
+  //   parent: '/comment',
+  //   loader: () =>
+  //     import('src/view/comment/form/OpenxFormPage'),
+  //   permissionRequired: permissions.commentCreate,
+  //   exact: true,
+  // },
+
+  // {
+  //   path: '/comment/importer',
+  //   collapseName: 'blog',
+  //   i18n: 'entities.comment.importer.title',
+  //   parent: '/comment',
+  //   loader: () =>
+  //     import('src/view/comment/importer/OpenxImporterPage'),
+  //   permissionRequired: permissions.commentImport,
+  //   exact: true,
+  // },
+
+  // {
+  //   path: '/comment/:id/edit',
+  //   collapseName: 'blog',
+  //   i18n: 'entities.comment.edit.title',
+  //   parent: '/comment',
+  //   loader: () =>
+  //     import('src/view/comment/form/OpenxFormPage'),
+  //   permissionRequired: permissions.commentEdit,
+  //   exact: true,
+  // },
+
+  // {
+  //   path: '/comment/:id',
+  //   collapseName: 'blog',
+  //   i18n: 'entities.comment.view.title',
+  //   parent: '/comment',
+  //   loader: () =>
+  //     import('src/view/comment/view/OpenxViewPage'),
+  //   permissionRequired: permissions.commentRead,
+  //   exact: true,
+  // },
+  // // #endregion
+
+  // #endregion
+
   // #region Routes
   {
     path: '/routes',
@@ -738,6 +859,58 @@ const privateRoutes = [
   },
   // #endregion
 
+  // #endregion
+
+  // #region Page
+  {
+    path: '/page',
+    collapseName: 'page',
+    i18n: 'collapses.page.menu',
+    parent: '/',
+    loader: () => import('src/view/page/list/PageListPage'),
+    permissionRequired: permissions.pageRead,
+    exact: true,
+  },
+  {
+    path: '/page/new',
+    collapseName: 'page',
+    i18n: 'entities.page.new.title',
+    parent: '/page',
+    loader: () => import('src/view/page/form/PageFormPage'),
+    permissionRequired: permissions.pageCreate,
+    exact: true,
+  },
+
+  {
+    path: '/page/importer',
+    collapseName: 'page',
+    i18n: 'entities.page.importer.title',
+    parent: '/page',
+    loader: () =>
+      import('src/view/page/importer/PageImporterPage'),
+    permissionRequired: permissions.pageImport,
+    exact: true,
+  },
+
+  {
+    path: '/page/:id/edit',
+    collapseName: 'page',
+    i18n: 'entities.page.edit.title',
+    parent: '/page',
+    loader: () => import('src/view/page/form/PageFormPage'),
+    permissionRequired: permissions.pageEdit,
+    exact: true,
+  },
+
+  {
+    path: '/page/:id',
+    collapseName: 'page',
+    i18n: 'entities.page.view.title',
+    parent: '/page',
+    loader: () => import('src/view/page/view/PageViewPage'),
+    permissionRequired: permissions.pageRead,
+    exact: true,
+  },
   // #endregion
 ].filter(Boolean);
 
