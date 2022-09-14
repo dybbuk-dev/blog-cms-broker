@@ -81,10 +81,6 @@ export default function (sequelize) {
         type: DataTypes.TEXT,
         allowNull: false,
         defaultValue: '',
-        validate: {
-          notEmpty: true,
-          len: [0, 255],
-        },
       },
       ip: {
         type: DataTypes.CHAR(39),

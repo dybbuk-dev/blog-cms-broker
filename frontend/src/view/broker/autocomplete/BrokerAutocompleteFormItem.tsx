@@ -5,6 +5,7 @@ import AutocompleteInMemoryFormItem from 'src/view/shared/form/items/Autocomplet
 import { useFormContext } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import selectors from 'src/modules/broker/brokerSelectors';
+import { Box } from '@mui/material';
 
 function BrokerAutocompleteFormItem(props) {
   const { setValue, getValues } = useFormContext();
@@ -86,6 +87,15 @@ function BrokerAutocompleteFormItem(props) {
         mapper={mapper}
         onOpenModal={doOpenModal}
         hasPermissionToCreate={hasPermissionToCreate}
+        renderOption={(props, option) => (
+          <Box
+            component="li"
+            {...props}
+            {...{ key: `${option.value}` }}
+          >
+            {option.label}
+          </Box>
+        )}
       />
 
       {modalVisible && (

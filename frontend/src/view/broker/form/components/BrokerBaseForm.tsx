@@ -16,7 +16,10 @@ import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
 function BrokerBaseForm(props) {
   const { record } = props;
   const [normalizedName, setNormalizedName] = useState(
-    slug(record.name_normalized || record.name || ''),
+    slug(
+      (record && (record.name_normalized || record.name)) ||
+        '',
+    ),
   );
   return (
     <Grid spacing={2} container>

@@ -52,12 +52,7 @@ class BlogBrokerRepository {
   ) {
     let whereAnd: Array<any> = [];
 
-    const include = [
-      {
-        model: options.database.broker,
-        as: 'broker',
-      },
-    ];
+    const include = [];
 
     if (filter) {
       ['broker_id', 'blog_entry_id'].forEach((field) => {

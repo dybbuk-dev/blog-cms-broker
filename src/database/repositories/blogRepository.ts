@@ -461,11 +461,13 @@ class BlogRepository {
     if (metaOnly) {
       return output;
     }
+
     const blogParam = {
       filter: {
         blog_entry_id: output.id,
       },
     };
+
     const transaction =
       SequelizeRepository.getTransaction(options);
 
@@ -475,13 +477,17 @@ class BlogRepository {
           transaction,
         }),
       );
+
     const { rows: blog_broker } =
       await BlogBrokerRepository.findAndCountAll(
         blogParam,
         options,
       );
-    console.log(blog_broker);
-    output.brokers = blog_broker || null;
+
+    output.brokers =
+      blog_broker.map((v) => ({
+        id: v.broker_id,
+      })) || [];
     return output;
   }
 }
