@@ -1,9 +1,9 @@
-import filesize from 'filesize';
 import { i18n } from 'src/i18n';
-import authAxios from 'src/modules/shared/axios/authAxios';
 import { v4 as uuid } from 'uuid';
+import authAxios from 'src/modules/shared/axios/authAxios';
 import AuthCurrentTenant from 'src/modules/auth/authCurrentTenant';
 import axios from 'axios';
+import filesize from 'filesize';
 
 export default class FileUploader {
   static validate(file, config) {
@@ -21,10 +21,14 @@ export default class FileUploader {
       config.storage.maxSizeInBytes &&
       file.size > config.storage.maxSizeInBytes
     ) {
+      const size = filesize.partial({
+        base: 2,
+        standard: 'jedec',
+      });
       throw new Error(
         i18n(
           'fileUploader.size',
-          filesize(config.storage.maxSizeInBytes),
+          size(config.storage.maxSizeInBytes),
         ),
       );
     }
@@ -33,7 +37,10 @@ export default class FileUploader {
 
     if (
       config.formats &&
-      !config.formats.includes(extension)
+      config.formats.length > 0 &&
+      !config.formats.find(
+        (v) => v.toLowerCase() === extension.toLowerCase(),
+      )
     ) {
       throw new Error(
         i18n(
@@ -114,7 +121,7 @@ export default class FileUploader {
   }
 }
 
-function extractExtensionFrom(filename) {
+export function extractExtensionFrom(filename) {
   if (!filename) {
     return null;
   }
@@ -126,5 +133,13 @@ function extractExtensionFrom(filename) {
     return null;
   }
 
-  return exec[1];
+  return exec[1].toLowerCase();
+}
+
+export function extractNameFrom(filename) {
+  if (!filename) {
+    return null;
+  }
+
+  return filename.substring(0, filename.lastIndexOf('.'));
 }

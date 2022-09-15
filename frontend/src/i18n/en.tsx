@@ -1473,6 +1473,10 @@ const en = {
     image: 'You must upload an image',
     size: 'File is too big. Max allowed size is {0}',
     formats: `Invalid format. Must be one of: {0}.`,
+    placeholder: {
+      title: 'Click or drag and drop files here',
+      size: '(Max {0})',
+    },
   },
   importer: {
     line: 'Line',

@@ -1,33 +1,42 @@
-import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
-import ImagesUploader from 'src/view/shared/uploaders/ImagesUploader';
-import {
-  FormControl,
-  FormLabel,
-  FormHelperText,
-} from '@mui/material';
+import { FormControl, FormHelperText } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import FormErrors from 'src/view/shared/form/formErrors';
+import ImagesUploader from 'src/view/shared/uploaders/ImagesUploader';
 import MDTypography from 'src/mui/components/MDTypography';
+import PropTypes from 'prop-types';
 
 function ImagesFormItem(props) {
   const {
-    label,
-    name,
-    hint,
-    storage,
-    max,
-    required,
     externalErrorMessage,
+    forceValue,
+    hint,
+    label,
+    max,
+    name,
+    required,
+    storage,
+    value,
   } = props;
 
   const {
+    control: { defaultValuesRef },
     errors,
     formState: { touched, isSubmitted },
-    setValue,
-    watch,
+    getValues,
     register,
+    setValue,
   } = useFormContext();
+
+  const defaultValues = defaultValuesRef.current || {};
+
+  const formValue = getValues(name);
+
+  const [curValue, setCurValue] = useState(
+    props.forceValue
+      ? value
+      : formValue || value || defaultValues[name] || [],
+  );
 
   useEffect(() => {
     register({ name });
@@ -51,29 +60,28 @@ function ImagesFormItem(props) {
       component="fieldset"
       size="small"
     >
-      <MDTypography
-        variant="caption"
-        fontWeight="regular"
-        mb={3}
-      >
+      <MDTypography variant="caption" fontWeight="regular">
         {label}
       </MDTypography>
 
       <ImagesUploader
         storage={storage}
-        value={watch(name)}
-        onChange={(value) => {
-          setValue(name, value, {
+        value={curValue}
+        onChange={(newValue) => {
+          setCurValue(newValue);
+          setValue(name, newValue, {
             shouldValidate: false,
             shouldDirty: true,
           });
-          props.onChange && props.onChange(value);
+          props.onChange && props.onChange(newValue);
         }}
         max={max}
       />
 
       {formHelperText && (
-        <FormHelperText style={{ marginTop: 0 }}>
+        <FormHelperText
+          style={{ marginTop: 0, fontWeight: 400 }}
+        >
           {formHelperText}
         </FormHelperText>
       )}
@@ -82,18 +90,21 @@ function ImagesFormItem(props) {
 }
 
 ImagesFormItem.defaultProps = {
+  forceValue: false,
   max: undefined,
   required: false,
 };
 
 ImagesFormItem.propTypes = {
-  storage: PropTypes.object.isRequired,
-  max: PropTypes.number,
-  required: PropTypes.bool,
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string,
-  hint: PropTypes.string,
+  forceValue: PropTypes.bool,
   formItemProps: PropTypes.object,
+  hint: PropTypes.string,
+  label: PropTypes.string,
+  max: PropTypes.number,
+  name: PropTypes.string.isRequired,
+  required: PropTypes.bool,
+  storage: PropTypes.object.isRequired,
+  value: PropTypes.any,
 };
 
 export default ImagesFormItem;

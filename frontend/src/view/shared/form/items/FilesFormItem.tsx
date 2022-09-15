@@ -57,11 +57,7 @@ function FilesFormItem(props) {
       component="fieldset"
       size="small"
     >
-      <MDTypography
-        variant="caption"
-        fontWeight="regular"
-        mb={0.8}
-      >
+      <MDTypography variant="caption" fontWeight="regular">
         {label}
       </MDTypography>
 

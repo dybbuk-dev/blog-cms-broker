@@ -295,15 +295,13 @@ function PageForm(props) {
           <MDBox p={3}>
             <Grid container spacing={2}>
               <Grid item md={12} xs={12}>
-                <MDBox pt={7}>
-                  <LogoFormItem
-                    name="page_image"
-                    label={i18n(
-                      'entities.page.fields.page_image',
-                    )}
-                    storage={Storage.values.page_image}
-                  />
-                </MDBox>
+                <LogoFormItem
+                  name="page_image"
+                  label={i18n(
+                    'entities.page.fields.page_image',
+                  )}
+                  storage={Storage.values.page_image}
+                />
               </Grid>
               <Grid item md={12} xs={12}>
                 <InputFormItem

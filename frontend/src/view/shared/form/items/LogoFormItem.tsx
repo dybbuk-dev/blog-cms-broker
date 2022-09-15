@@ -3,29 +3,29 @@ import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import FormErrors from 'src/view/shared/form/formErrors';
 import ImagesUploader from 'src/view/shared/uploaders/ImagesUploader';
-import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
 
 function LogoFormItem(props) {
   const {
-    label,
-    name,
-    hint,
-    storage,
-    max,
-    required,
     externalErrorMessage,
+    forceValue,
+    hint,
+    label,
+    max,
+    name,
+    required,
+    storage,
     value,
   } = props;
 
   const {
+    control: { defaultValuesRef },
     errors,
     formState: { touched, isSubmitted },
-    setValue,
-    control: { defaultValuesRef },
     getValues,
     register,
+    setValue,
   } = useFormContext();
 
   const defaultValues = defaultValuesRef.current || {};
@@ -33,7 +33,9 @@ function LogoFormItem(props) {
   const formValue = getValues(name);
 
   const [curValue, setCurValue] = useState(
-    formValue || value || defaultValues[name] || '',
+    props.forceValue
+      ? value
+      : formValue || value || defaultValues[name] || [],
   );
 
   useEffect(() => {
@@ -51,60 +53,61 @@ function LogoFormItem(props) {
   const formHelperText = errorMessage || hint;
 
   return (
-    <MDBox textAlign="center" my={3}>
-      <FormControl
-        fullWidth
-        required={required}
-        error={Boolean(errorMessage)}
-        component="fieldset"
-        size="small"
+    <FormControl
+      fullWidth
+      required={required}
+      error={Boolean(errorMessage)}
+      component="fieldset"
+      size="small"
+    >
+      <MDTypography
+        variant="body2"
+        fontWeight="regular"
+        textAlign="center"
       >
-        <ImagesUploader
-          storage={storage}
-          value={
-            props.forceValue ? value : formValue || curValue
-          }
-          onChange={(newValue) => {
-            setValue(name, newValue, {
-              shouldValidate: false,
-              shouldDirty: true,
-            });
-            setCurValue(newValue);
-            props.onChange && props.onChange(newValue);
-          }}
-          max={max}
-        />
+        {label}
+      </MDTypography>
 
-        {formHelperText && (
-          <FormHelperText
-            sx={{ textAlign: 'center', fontWeight: 400 }}
-          >
-            {formHelperText}
-          </FormHelperText>
-        )}
-        <MDBox textAlign="center" px={3}>
-          <MDTypography variant="h5" fontWeight="regular">
-            {label}
-          </MDTypography>
-        </MDBox>
-      </FormControl>
-    </MDBox>
+      <ImagesUploader
+        storage={storage}
+        value={curValue}
+        onChange={(newValue) => {
+          setCurValue(newValue);
+          setValue(name, newValue, {
+            shouldValidate: false,
+            shouldDirty: true,
+          });
+          props.onChange && props.onChange(newValue);
+        }}
+        max={max}
+      />
+
+      {formHelperText && (
+        <FormHelperText
+          sx={{ textAlign: 'center', fontWeight: 400 }}
+        >
+          {formHelperText}
+        </FormHelperText>
+      )}
+    </FormControl>
   );
 }
 
 LogoFormItem.defaultProps = {
+  forceValue: false,
   max: 1,
   required: false,
 };
 
 LogoFormItem.propTypes = {
-  storage: PropTypes.object.isRequired,
-  max: PropTypes.number,
-  required: PropTypes.bool,
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string,
-  hint: PropTypes.string,
+  forceValue: PropTypes.bool,
   formItemProps: PropTypes.object,
+  hint: PropTypes.string,
+  label: PropTypes.string,
+  max: PropTypes.number,
+  name: PropTypes.string.isRequired,
+  required: PropTypes.bool,
+  storage: PropTypes.object.isRequired,
   value: PropTypes.any,
 };
 

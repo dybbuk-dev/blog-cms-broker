@@ -269,12 +269,12 @@ function AutocompleteInMemoryFormItem(props) {
         <MDBox
           minWidth={
             props.showCreate && props.hasPermissionToCreate
-              ? 'calc(100% - 28.8px)'
+              ? 'calc(100% - 42px)'
               : '100%'
           }
           maxWidth={
             props.showCreate && props.hasPermissionToCreate
-              ? 'calc(100% - 28.8px)'
+              ? 'calc(100% - 42px)'
               : '100%'
           }
         >

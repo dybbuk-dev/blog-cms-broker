@@ -114,16 +114,14 @@ function PromotionForm(props) {
               />
             </Grid>
             <Grid item md={12} xs={12}>
-              <MDBox pt={7}>
-                <LogoFormItem
-                  name="promotion_image"
-                  label={i18n(
-                    'entities.promotion.fields.uploadfile',
-                  )}
-                  storage={Storage.values.promotion_image}
-                  required={true}
-                />
-              </MDBox>
+              <LogoFormItem
+                name="promotion_image"
+                label={i18n(
+                  'entities.promotion.fields.uploadfile',
+                )}
+                storage={Storage.values.promotion_image}
+                required={true}
+              />
             </Grid>
             <Grid item md={6} xs={12}>
               <CheckboxFormItem

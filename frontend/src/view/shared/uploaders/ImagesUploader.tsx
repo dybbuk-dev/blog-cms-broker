@@ -1,24 +1,20 @@
-import React, { useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import FileUploader from 'src/modules/shared/fileUpload/fileUploader';
-import Errors from 'src/modules/shared/error/errors';
-import { i18n } from 'src/i18n';
-import ImageModal from 'src/view/shared/modals/ImageModal';
-import { Button, Box, CardMedia } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import SearchIcon from '@mui/icons-material/Search';
-import CloseIcon from '@mui/icons-material/Close';
-import IconButton from '@mui/material/IconButton';
+import { CardMedia, Grid } from '@mui/material';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
-import MDButton from 'src/mui/components/MDButton';
-import MDAvatar from 'src/mui/components/MDAvatar';
+import { useState } from 'react';
+import CloseIcon from '@mui/icons-material/Close';
+import Errors from 'src/modules/shared/error/errors';
+import FileUploader from 'src/modules/shared/fileUpload/fileUploader';
+import ImageModal from 'src/view/shared/modals/ImageModal';
 import MDBox from 'src/mui/components/MDBox';
+import MDButton from 'src/mui/components/MDButton';
+import PropTypes from 'prop-types';
+import SearchIcon from '@mui/icons-material/Search';
+import DragAndDropUploaderArea from 'src/view/shared/uploaders/DragAndDropUploaderArea';
 
 function ImagesUploader(props) {
   const { sidenavColor } = selectMuiSettings();
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState<any>(null);
-  const input = useRef<any>();
 
   const value = () => {
     const { value } = props;
@@ -45,38 +41,34 @@ function ImagesUploader(props) {
     );
   };
 
-  const handleChange = async (event) => {
-    try {
-      const files = event.target.files;
-
-      if (!files || !files.length) {
-        return;
-      }
-
-      let file = files[0];
-
-      FileUploader.validate(file, {
-        storage: props.storage,
-        image: true,
-      });
-
-      setLoading(true);
-
-      file = await FileUploader.upload(file, {
-        storage: props.storage,
-        image: true,
-      });
-
-      input.current.value = '';
-
-      setLoading(false);
-      props.onChange([...value(), file]);
-    } catch (error) {
-      input.current.value = '';
-      console.error(error);
-      setLoading(false);
-      Errors.showMessage(error);
+  const handleChange = async (uploads) => {
+    if (!uploads || !uploads.length) {
+      return;
     }
+
+    const newValue = [...value()];
+
+    setLoading(true);
+
+    for (let i = 0; i < uploads.length; i++) {
+      try {
+        const file = await FileUploader.upload(uploads[i], {
+          storage: props.storage,
+          image: true,
+        });
+        if (!file) {
+          continue;
+        }
+        newValue.push(file);
+      } catch (error) {
+        console.error(error);
+        Errors.showMessage(error);
+      }
+    }
+
+    setLoading(false);
+
+    props.onChange && props.onChange(newValue);
   };
 
   const doPreviewImage = (image) => {
@@ -92,120 +84,102 @@ function ImagesUploader(props) {
 
   const { max, readonly } = props;
 
-  const uploadButton = (
-    <>
-      <MDButton
-        component="label"
-        disabled={loading}
-        startIcon={<AddIcon />}
-        variant="outlined"
-        color={sidenavColor}
-        size="small"
-        onClick={() => input.current.click()}
-      >
-        {i18n('fileUploader.upload')}
-      </MDButton>
-      <input
-        style={{ display: 'none' }}
-        disabled={loading || readonly}
-        accept="image/*"
-        type="file"
-        onChange={handleChange}
-        ref={input}
-      />
-    </>
-  );
+  const renderImage = (item) => {
+    return (
+      <MDBox>
+        <CardMedia
+          alt={item.name}
+          component="img"
+          src={item.downloadUrl}
+          sx={{
+            borderRadius: 0,
+            maxWidth: '100%',
+            margin: 0,
+            boxShadow: ({ boxShadows: { md } }) => md,
+            objectFit: 'cover',
+            objectPosition: 'center',
+          }}
+        />
+        <MDBox
+          display="flex"
+          justifyContent="center"
+          gap={1}
+          mt={1}
+        >
+          <MDButton
+            onClick={() => doPreviewImage(item)}
+            size="small"
+            color={sidenavColor}
+            iconOnly
+          >
+            <SearchIcon />
+          </MDButton>
+
+          {!readonly && (
+            <MDButton
+              onClick={() => handleRemove(item.id)}
+              size="small"
+              color={sidenavColor}
+              iconOnly
+            >
+              <CloseIcon />
+            </MDButton>
+          )}
+        </MDBox>
+      </MDBox>
+    );
+  };
+
+  const renderImages = (images) => {
+    return (images || []).map((item) =>
+      max === 1 ? (
+        <MDBox key={item.id}>{renderImage(item)}</MDBox>
+      ) : (
+        <Grid key={item.id} xs={3} item>
+          {renderImage(item)}
+        </Grid>
+      ),
+    );
+  };
+
+  const renderValue = () => {
+    const images = value();
+    if (!images || !images.length) {
+      return null;
+    }
+    return (
+      <MDBox mt={1}>
+        {max === 1 ? (
+          <MDBox
+            display="flex"
+            justifyContent="center"
+            alignItems="baseline"
+            gap={1}
+          >
+            {renderImages(images)}
+          </MDBox>
+        ) : (
+          <Grid spacing={1} container>
+            {renderImages(images)}
+          </Grid>
+        )}
+      </MDBox>
+    );
+  };
 
   return (
     <div>
-      {readonly || (max && fileList().length >= max)
-        ? null
-        : uploadButton}
+      {renderValue()}
 
-      {value() && value().length ? (
-        <MDBox display="flex" justifyContent="center">
-          {value().map((item) => {
-            return (
-              <MDBox
-                key={item.id}
-                sx={{
-                  '&:hover .card-header': {
-                    transform: 'translate3d(0, -50px, 0)',
-                  },
-                }}
-              >
-                <MDBox
-                  position="relative"
-                  borderRadius="lg"
-                  mt={-6}
-                  mx={2}
-                  className="card-header"
-                  sx={{
-                    transition:
-                      'transform 300ms cubic-bezier(0.34, 1.61, 0.7, 1)',
-                  }}
-                  zIndex={2}
-                >
-                  <CardMedia
-                    alt={item.name}
-                    component="img"
-                    src={item.downloadUrl}
-                    sx={{
-                      background: 'white',
-                      maxWidth: '100%',
-                      margin: 0,
-                      boxShadow: ({ boxShadows: { md } }) =>
-                        md,
-                      objectFit: 'cover',
-                      objectPosition: 'center',
-                    }}
-                  />
-                </MDBox>
-
-                <MDBox textAlign="center" pt={2} px={3}>
-                  <MDBox
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    mt={-8}
-                    position="relative"
-                    zIndex={1}
-                  >
-                    <MDBox
-                      display="flex"
-                      justifyContent="center"
-                      gap={1}
-                      mt={1}
-                    >
-                      <MDButton
-                        onClick={() => doPreviewImage(item)}
-                        size="small"
-                        color={sidenavColor}
-                        iconOnly
-                      >
-                        <SearchIcon />
-                      </MDButton>
-
-                      {!readonly && (
-                        <MDButton
-                          onClick={() =>
-                            handleRemove(item.id)
-                          }
-                          size="small"
-                          color={sidenavColor}
-                          iconOnly
-                        >
-                          <CloseIcon />
-                        </MDButton>
-                      )}
-                    </MDBox>
-                  </MDBox>
-                </MDBox>
-              </MDBox>
-            );
-          })}
-        </MDBox>
-      ) : null}
+      {readonly ||
+      (max && fileList().length >= max) ? null : (
+        <DragAndDropUploaderArea
+          handleChange={handleChange}
+          // multiple={max !== 1}
+          storage={props.storage}
+          types={['jpeg', 'jpg', 'png', 'gif']}
+        />
+      )}
 
       {image && (
         <ImageModal
@@ -219,11 +193,11 @@ function ImagesUploader(props) {
 }
 
 ImagesUploader.propTypes = {
-  readonly: PropTypes.bool,
   max: PropTypes.number,
+  onChange: PropTypes.func,
+  readonly: PropTypes.bool,
   storage: PropTypes.object,
   value: PropTypes.any,
-  onChange: PropTypes.func,
 };
 
 export default ImagesUploader;
