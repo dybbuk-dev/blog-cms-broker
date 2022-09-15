@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { DEFAULT_MOMENT_FORMAT } from 'src/config/common';
 import { getUserNameOrEmailPrefix } from 'src/modules/utils';
 
 const exporterRenders = {
@@ -31,7 +32,9 @@ const exporterRenders = {
   filesOrImages: () => (value) =>
     (value || []).map((item) => item.downloadUrl).join(' '),
   datetime: () => (value) =>
-    value ? moment(value).format('YYYY-MM-DD HH:mm') : null,
+    value
+      ? moment(value).format(DEFAULT_MOMENT_FORMAT)
+      : null,
 };
 
 export default exporterRenders;

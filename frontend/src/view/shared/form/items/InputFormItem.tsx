@@ -8,25 +8,26 @@ import PropTypes from 'prop-types';
 
 export function InputFormItem(props) {
   const {
+    autoComplete,
+    autoFocus,
+    disabled,
+    endAdornment,
+    externalErrorMessage,
+    forceValue,
+    fullWidth,
+    hint,
     id,
     label,
-    name,
-    hint,
-    type,
-    placeholder,
-    autoFocus,
-    autoComplete,
-    required,
-    externalErrorMessage,
-    disabled,
-    startAdornment,
-    endAdornment,
     margin,
-    variant,
-    size,
+    name,
+    placeholder,
+    required,
     shrink,
-    fullWidth,
+    size,
+    startAdornment,
+    type,
     value,
+    variant,
   } = props;
 
   const {
@@ -46,7 +47,7 @@ export function InputFormItem(props) {
     formValue || value || defaultValues[name] || '',
   );
 
-  if (props.forceValue) {
+  if (forceValue) {
     setValue(name, value, {
       shouldValidate: false,
       shouldDirty: true,
@@ -75,10 +76,12 @@ export function InputFormItem(props) {
         required={required}
         // inputRef={register}
         onChange={(event) => {
-          setValue(name, event.target.value, {
-            shouldValidate: false,
-            shouldDirty: true,
-          });
+          if (!forceValue) {
+            setValue(name, event.target.value, {
+              shouldValidate: false,
+              shouldDirty: true,
+            });
+          }
           setCurValue(event.target.value);
           props.onChange &&
             props.onChange(event.target.value);
@@ -103,9 +106,7 @@ export function InputFormItem(props) {
           name,
         }}
         disabled={disabled}
-        value={
-          props.forceValue ? value : formValue || curValue
-        }
+        value={forceValue ? value : formValue || curValue}
       />
       {errorMessage && (
         <MDBox mt={0.75}>
@@ -124,32 +125,34 @@ export function InputFormItem(props) {
 }
 
 InputFormItem.defaultProps = {
-  type: 'text',
+  forceValue: false,
   required: false,
+  type: 'text',
 };
 
 InputFormItem.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  required: PropTypes.bool,
-  type: PropTypes.string,
-  label: PropTypes.string,
-  hint: PropTypes.string,
+  autoComplete: PropTypes.string,
   autoFocus: PropTypes.bool,
   disabled: PropTypes.bool,
-  prefix: PropTypes.string,
-  placeholder: PropTypes.string,
-  autoComplete: PropTypes.string,
-  externalErrorMessage: PropTypes.string,
-  onChange: PropTypes.func,
-  startAdornment: PropTypes.any,
   endAdornment: PropTypes.any,
-  margin: PropTypes.string,
-  variant: PropTypes.string,
-  size: PropTypes.string,
-  shrink: PropTypes.bool,
+  externalErrorMessage: PropTypes.string,
+  forceValue: PropTypes.bool,
   fullWidth: PropTypes.bool,
+  hint: PropTypes.string,
+  id: PropTypes.string,
+  label: PropTypes.string,
+  margin: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  prefix: PropTypes.string,
+  required: PropTypes.bool,
+  shrink: PropTypes.bool,
+  size: PropTypes.string,
+  startAdornment: PropTypes.any,
+  type: PropTypes.string,
   value: PropTypes.string,
+  variant: PropTypes.string,
 };
 
 export default InputFormItem;

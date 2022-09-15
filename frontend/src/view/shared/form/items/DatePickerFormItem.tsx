@@ -1,13 +1,17 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { TextField } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import FormErrors from 'src/view/shared/form/formErrors';
 import MDInput from 'src/mui/components/MDInput';
+import PropTypes from 'prop-types';
+import {
+  DEFAULT_PICKER_FORMAT,
+  DEFAULT_PICKER_FORMAT_DATE_ONLY,
+} from 'src/config/common';
+import moment from 'moment';
 
 export function DatePickerFormItem(props) {
   const {
@@ -24,6 +28,8 @@ export function DatePickerFormItem(props) {
     margin,
     variant,
     shrink,
+    value,
+    forceValue,
   } = props;
 
   const {
@@ -31,8 +37,24 @@ export function DatePickerFormItem(props) {
     errors,
     formState: { touched, isSubmitted },
     setValue,
-    watch,
+    control: { defaultValuesRef },
+    getValues,
   } = useFormContext();
+
+  const defaultValues = defaultValuesRef.current || {};
+
+  const formValue = getValues(name);
+
+  const [curValue, setCurValue] = useState(
+    formValue || value || defaultValues[name] || '',
+  );
+
+  if (forceValue) {
+    setValue(name, moment(value), {
+      shouldValidate: false,
+      shouldDirty: true,
+    });
+  }
 
   useEffect(() => {
     register({ name });
@@ -59,21 +81,28 @@ export function DatePickerFormItem(props) {
   };
 
   const format = showTime
-    ? 'yyyy-MM-dd HH:mm'
-    : 'yyyy-MM-dd';
+    ? DEFAULT_PICKER_FORMAT
+    : DEFAULT_PICKER_FORMAT_DATE_ONLY;
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DTPicker
+        clearable
+        disableCloseOnSelect={false}
         inputFormat={format}
         showToolbar={true}
         toolbarTitle={label}
-        onAccept={(value) =>
-          setValue(name, value, {
+        onAccept={(value) => {
+          if (props.onAccept) {
+            props.onAccept(value);
+            return;
+          }
+          setCurValue(value);
+          setValue(name, moment(value), {
             shouldValidate: false,
             shouldDirty: true,
-          })
-        }
+          });
+        }}
         onChange={(value) => {
           props.onChange && props.onChange(value);
         }}
@@ -100,7 +129,7 @@ export function DatePickerFormItem(props) {
             helperText={errorMessage || hint}
           />
         )}
-        value={watch(name)}
+        value={forceValue ? value : formValue || curValue}
       />
     </LocalizationProvider>
   );
@@ -108,6 +137,7 @@ export function DatePickerFormItem(props) {
 
 DatePickerFormItem.defaultProps = {
   required: false,
+  forceValue: false,
 };
 
 DatePickerFormItem.propTypes = {
@@ -125,6 +155,9 @@ DatePickerFormItem.propTypes = {
   margin: PropTypes.string,
   shrink: PropTypes.bool,
   variant: PropTypes.string,
+  onAccept: PropTypes.func,
+  value: PropTypes.string,
+  forceValue: PropTypes.bool,
 };
 
 export default DatePickerFormItem;
