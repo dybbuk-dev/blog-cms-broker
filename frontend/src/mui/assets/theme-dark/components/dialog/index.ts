@@ -14,13 +14,13 @@ Coded by www.creative-tim.com
 */
 
 // Material Dashboard 2 PRO React TS Base Styles
-import colors from 'src/mui/assets/theme/base/colors';
+import colors from 'src/mui/assets/theme-dark/base/colors';
 import borders from 'src/mui/assets/theme-dark/base/borders';
 import boxShadows from 'src/mui/assets/theme-dark/base/boxShadows';
 
 const { borderRadius } = borders;
 const { xxl } = boxShadows;
-const { dark } = colors;
+const { background } = colors;
 
 // types
 type Types = any;
@@ -28,7 +28,8 @@ type Types = any;
 const dialog: Types = {
   styleOverrides: {
     paper: {
-      backgroundColor: dark.main,
+      backgroundColor: background.default,
+      backgroundImage: 'none',
       borderRadius: borderRadius.lg,
       boxShadow: xxl,
       overflowY: 'visible',
