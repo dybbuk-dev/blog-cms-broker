@@ -15,6 +15,7 @@ const Op = Sequelize.Op;
 class BlogRepository {
   static ALL_FIELDS = [
     'name',
+    'name_normalized',
     'pagetitle',
     'metadescription',
     'metakeywords',
