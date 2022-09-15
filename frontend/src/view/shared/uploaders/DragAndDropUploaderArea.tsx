@@ -1,6 +1,7 @@
 import { FileUploader } from 'react-drag-drop-files';
 import { i18n } from 'src/i18n';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
 import Errors from 'src/modules/shared/error/errors';
 import filesize from 'filesize';
 import MDBox from 'src/mui/components/MDBox';
@@ -51,7 +52,7 @@ function DragAndDropUploaderArea(props) {
             color: '#777777',
           }}
         >
-          <CloudUploadIcon fontSize="large" />
+          <CloudUploadOutlinedIcon fontSize="large" />
           <MDTypography
             display="block"
             variant="button"
