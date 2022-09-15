@@ -161,13 +161,13 @@ function SelectFormItem(props) {
   );
 
   return (
-    <>
+    <MDBox position="relative">
       <Autocomplete
         multiple={mode === 'multiple'}
         isOptionEqualToValue={(option, value) =>
           option.value === value.value
         }
-        disablePortal={mode !== 'multiple'}
+        disablePortal={false}
         value={value()}
         options={options}
         onChange={(event: any, newValue: any) => {
@@ -191,7 +191,7 @@ function SelectFormItem(props) {
           </MDTypography>
         </MDBox>
       )}
-    </>
+    </MDBox>
   );
 }
 

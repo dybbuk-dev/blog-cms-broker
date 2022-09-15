@@ -1,15 +1,10 @@
-import $ from 'jquery';
-import PropTypes from 'prop-types';
-import { i18n } from 'src/i18n';
 import { Box } from '@mui/material';
-import ColorBadge, {
-  getColorBadgeBack,
-  getColorBadgeFore,
-} from 'src/view/shared/components/ColorBadge';
-import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
-import MDInput from 'src/mui/components/MDInput';
-import { useRef } from 'react';
+import { i18n } from 'src/i18n';
+import ColorBadge from 'src/view/shared/components/ColorBadge';
 import MDBox from 'src/mui/components/MDBox';
+import MDInput from 'src/mui/components/MDInput';
+import PropTypes from 'prop-types';
+import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 
 export function generateColorBadgeSelectOptions(
   values,

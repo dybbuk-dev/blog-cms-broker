@@ -10,6 +10,7 @@ function BrokerArticleAutocompleteFormItem(props) {
   const { setValue, getValues } = useFormContext();
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [rerender, setRerender] = useState(0);
 
   const hasPermissionToCreate = useSelector(
     selectors.selectPermissionToCreate,
@@ -38,6 +39,8 @@ function BrokerArticleAutocompleteFormItem(props) {
         shouldDirty: true,
       });
     }
+
+    setRerender(rerender + 1);
 
     doCloseModal();
   };
@@ -89,6 +92,7 @@ function BrokerArticleAutocompleteFormItem(props) {
         mapper={mapper}
         onOpenModal={doOpenModal}
         hasPermissionToCreate={hasPermissionToCreate}
+        rerender={rerender}
       />
 
       {modalVisible && (

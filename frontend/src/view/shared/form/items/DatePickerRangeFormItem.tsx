@@ -10,6 +10,10 @@ import { i18n } from 'src/i18n';
 import FormErrors from 'src/view/shared/form/formErrors';
 import MDInput from 'src/mui/components/MDInput';
 import MDTypography from 'src/mui/components/MDTypography';
+import {
+  DEFAULT_PICKER_FORMAT,
+  DEFAULT_PICKER_FORMAT_DATE_ONLY,
+} from 'src/config/common';
 
 function DatePickerRangeFormItem(props) {
   const {
@@ -109,8 +113,8 @@ function DatePickerRangeFormItem(props) {
   };
 
   const format = showTime
-    ? 'yyyy-MM-dd HH:mm'
-    : 'yyyy-MM-dd';
+    ? DEFAULT_PICKER_FORMAT
+    : DEFAULT_PICKER_FORMAT_DATE_ONLY;
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -159,8 +163,8 @@ function DatePickerRangeFormItem(props) {
         <div
           style={{
             flexShrink: 1,
-            marginLeft: '8px',
-            marginRight: '8px',
+            marginLeft: '6.4px',
+            marginRight: '6.4px',
           }}
         >
           <MDTypography color="secondary">~</MDTypography>

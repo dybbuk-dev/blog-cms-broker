@@ -1,5 +1,5 @@
 import _uniqBy from 'lodash/uniqBy';
-import { Autocomplete } from '@mui/material';
+import { Autocomplete, Box } from '@mui/material';
 import { i18n } from 'src/i18n';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useFormContext } from 'react-hook-form';
@@ -16,26 +16,28 @@ function AutocompleteInMemoryFormItem(props) {
   const { sidenavColor } = selectMuiSettings();
 
   const {
-    label,
-    name,
-    hint,
-    placeholder,
     autoFocus,
+    createButtonIcon,
     externalErrorMessage,
-    mode,
-    required,
-    isClearable,
-    mapper,
     fetchFn,
+    fullWidth,
+    getOptionDisabled,
+    groupBy,
+    hint,
+    isClearable,
+    label,
+    mapper,
     margin,
+    mode,
+    name,
+    placeholder,
+    renderInput,
+    renderOption,
+    required,
+    rerender,
     shrink,
     size,
     variant,
-    fullWidth,
-    renderOption,
-    renderInput,
-    groupBy,
-    getOptionDisabled,
   } = props;
 
   const {
@@ -93,9 +95,17 @@ function AutocompleteInMemoryFormItem(props) {
       }
     };
 
-    fetchAllResults().then(() => {});
+    fetchAllResults().then(() => {
+      setRealValue(getValues(name) || defaultValues[name]);
+      props.onChange &&
+        props.onChange(
+          prioritizeFromDataSource(
+            getValues(name) ?? defaultValues[name] ?? {},
+          ),
+        );
+    });
     // eslint-disable-next-line
-  }, []);
+  }, [rerender]);
 
   const prioritizeFromDataSource = (selected) => {
     return (
@@ -231,6 +241,16 @@ function AutocompleteInMemoryFormItem(props) {
         />
       );
 
+  const fnDefaultRenderOption = (props, option) => (
+    <Box
+      component="li"
+      {...props}
+      {...{ key: `${option.id ?? ''}-${option.value}` }}
+    >
+      {option.label}
+    </Box>
+  );
+
   useEffect(() => {
     if (props.onChange) {
       props.onChange(
@@ -240,33 +260,50 @@ function AutocompleteInMemoryFormItem(props) {
   }, [fullDataSource]);
 
   return (
-    <>
+    <MDBox position="relative">
       <MDBox
         display="flex"
         justifyContent="space-between"
         alignItems="flex-start"
       >
-        <Autocomplete
-          multiple={mode === 'multiple'}
-          isOptionEqualToValue={(option, value) => {
-            return option.value === value.value;
-          }}
-          disablePortal={mode !== 'multiple'}
-          value={value()}
-          options={options()}
-          onChange={(event: any, newValue: any) => {
-            handleSelect(newValue);
-          }}
-          getOptionLabel={(option) => option.label ?? ''}
-          renderOption={renderOption}
-          renderInput={fnRenderInput}
-          groupBy={groupBy}
-          getOptionDisabled={getOptionDisabled}
-          loadingText={i18n('autocomplete.loading')}
-          noOptionsText={i18n('autocomplete.noOptions')}
-          onBlur={() => props.onBlur && props.onBlur(null)}
-          fullWidth={fullWidth}
-        />
+        <MDBox
+          minWidth={
+            props.showCreate && props.hasPermissionToCreate
+              ? 'calc(100% - 28.8px)'
+              : '100%'
+          }
+          maxWidth={
+            props.showCreate && props.hasPermissionToCreate
+              ? 'calc(100% - 28.8px)'
+              : '100%'
+          }
+        >
+          <Autocomplete
+            multiple={mode === 'multiple'}
+            isOptionEqualToValue={(option, value) => {
+              return option.value === value.value;
+            }}
+            disablePortal={false}
+            value={value()}
+            options={options()}
+            onChange={(event: any, newValue: any) => {
+              handleSelect(newValue);
+            }}
+            getOptionLabel={(option) => option.label ?? ''}
+            renderOption={
+              renderOption || fnDefaultRenderOption
+            }
+            renderInput={fnRenderInput}
+            groupBy={groupBy}
+            getOptionDisabled={getOptionDisabled}
+            loadingText={i18n('autocomplete.loading')}
+            noOptionsText={i18n('autocomplete.noOptions')}
+            onBlur={() =>
+              props.onBlur && props.onBlur(null)
+            }
+            fullWidth={fullWidth}
+          />
+        </MDBox>
 
         {props.showCreate && props.hasPermissionToCreate ? (
           <MDButton
@@ -283,7 +320,7 @@ function AutocompleteInMemoryFormItem(props) {
             circular
             iconOnly
           >
-            <AddIcon />
+            {createButtonIcon}
           </MDButton>
         ) : null}
       </MDBox>
@@ -299,39 +336,42 @@ function AutocompleteInMemoryFormItem(props) {
           </MDTypography>
         </MDBox>
       )}
-    </>
+    </MDBox>
   );
 }
 
 AutocompleteInMemoryFormItem.defaultProps = {
+  createButtonIcon: <AddIcon />,
   isClearable: true,
   mode: 'default',
   required: false,
 };
 
 AutocompleteInMemoryFormItem.propTypes = {
+  autoFocus: PropTypes.bool,
+  createButtonIcon: PropTypes.element,
+  externalErrorMessage: PropTypes.string,
   fetchFn: PropTypes.func.isRequired,
+  fullWidth: PropTypes.bool,
+  getOptionDisabled: PropTypes.func,
+  groupBy: PropTypes.func,
+  hasPermissionToCreate: PropTypes.bool,
+  hint: PropTypes.string,
+  isClearable: PropTypes.bool,
+  label: PropTypes.string,
   mapper: PropTypes.object.isRequired,
-  required: PropTypes.bool,
+  margin: PropTypes.string,
   mode: PropTypes.string,
   name: PropTypes.string.isRequired,
-  label: PropTypes.string,
-  hint: PropTypes.string,
-  autoFocus: PropTypes.bool,
   placeholder: PropTypes.string,
-  externalErrorMessage: PropTypes.string,
-  isClearable: PropTypes.bool,
-  showCreate: PropTypes.bool,
-  hasPermissionToCreate: PropTypes.bool,
-  variant: PropTypes.string,
-  size: PropTypes.string,
-  shrink: PropTypes.bool,
-  margin: PropTypes.string,
-  fullWidth: PropTypes.bool,
-  renderOption: PropTypes.func,
   renderInput: PropTypes.func,
-  groupBy: PropTypes.func,
-  getOptionDisabled: PropTypes.func,
+  renderOption: PropTypes.func,
+  required: PropTypes.bool,
+  rerender: PropTypes.number,
+  showCreate: PropTypes.bool,
+  shrink: PropTypes.bool,
+  size: PropTypes.string,
+  variant: PropTypes.string,
 };
 
 export default AutocompleteInMemoryFormItem;

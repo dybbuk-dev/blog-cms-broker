@@ -19,8 +19,8 @@ import borders from 'src/mui/assets/theme-dark/base/borders';
 import boxShadows from 'src/mui/assets/theme-dark/base/boxShadows';
 
 // Material Dashboard 2 PRO React TS Helper Functions
-import pxToRem from 'src/mui/assets/theme/functions/pxToRem';
-import boxShadow from 'src/mui/assets/theme/functions/boxShadow';
+import pxToRem from 'src/mui/assets/theme-dark/functions/pxToRem';
+import boxShadow from 'src/mui/assets/theme-dark/functions/boxShadow';
 
 const { grey, white, black, info } = colors;
 const { borderRadius, borderWidth } = borders;

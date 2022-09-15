@@ -1,6 +1,10 @@
 import * as yup from 'yup';
 import { i18n } from 'src/i18n';
 import moment from 'moment';
+import {
+  DEFAULT_MOMENT_FORMAT,
+  DEFAULT_MOMENT_FORMAT_DATE_ONLY,
+} from 'src/config/common';
 
 const yupFilterSchemas = {
   generic(label) {
@@ -142,7 +146,7 @@ const yupFilterSchemas = {
         originalValue
           ? moment(
               originalValue,
-              'YYYY-MM-DD HH:mm',
+              DEFAULT_MOMENT_FORMAT,
             ).toISOString()
           : null,
       );
@@ -165,7 +169,10 @@ const yupFilterSchemas = {
             return true;
           }
 
-          return moment(value, 'YYYY-MM-DD').isValid();
+          return moment(
+            value,
+            DEFAULT_MOMENT_FORMAT_DATE_ONLY,
+          ).isValid();
         },
       );
   },
@@ -187,12 +194,17 @@ const yupFilterSchemas = {
                 return true;
               }
 
-              return moment(value, 'YYYY-MM-DD').isValid();
+              return moment(
+                value,
+                DEFAULT_MOMENT_FORMAT_DATE_ONLY,
+              ).isValid();
             },
           )
           .transform((value) =>
             value
-              ? moment(value).format('YYYY-MM-DD')
+              ? moment(value).format(
+                  DEFAULT_MOMENT_FORMAT_DATE_ONLY,
+                )
               : null,
           ),
       )

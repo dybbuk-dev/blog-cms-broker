@@ -33,61 +33,61 @@ import pxToRem from 'src/mui/assets/theme-dark/functions/pxToRem';
 import rgba from 'src/mui/assets/theme-dark/functions/rgba';
 
 // Material Dashboard 2 PRO React TS components base styles for @mui material components
-import sidenav from 'src/mui/assets/theme-dark/components/sidenav';
-import list from 'src/mui/assets/theme-dark/components/list';
-import listItem from 'src/mui/assets/theme-dark/components/list/listItem';
-import listItemText from 'src/mui/assets/theme-dark/components/list/listItemText';
-import card from 'src/mui/assets/theme-dark/components/card';
-import cardMedia from 'src/mui/assets/theme-dark/components/card/cardMedia';
-import cardContent from 'src/mui/assets/theme-dark/components/card/cardContent';
+import appBar from 'src/mui/assets/theme-dark/components/appBar';
+import autocomplete from 'src/mui/assets/theme-dark/components/form/autocomplete';
+import avatar from 'src/mui/assets/theme-dark/components/avatar';
+import breadcrumbs from 'src/mui/assets/theme-dark/components/breadcrumbs';
 import button from 'src/mui/assets/theme-dark/components/button';
+import buttonBase from 'src/mui/assets/theme-dark/components/buttonBase';
+import card from 'src/mui/assets/theme-dark/components/card';
+import cardContent from 'src/mui/assets/theme-dark/components/card/cardContent';
+import cardMedia from 'src/mui/assets/theme-dark/components/card/cardMedia';
+import checkbox from 'src/mui/assets/theme-dark/components/form/checkbox';
+import container from 'src/mui/assets/theme-dark/components/container';
+import dialog from 'src/mui/assets/theme-dark/components/dialog';
+import dialogActions from 'src/mui/assets/theme-dark/components/dialog/dialogActions';
+import dialogContent from 'src/mui/assets/theme-dark/components/dialog/dialogContent';
+import dialogContentText from 'src/mui/assets/theme-dark/components/dialog/dialogContentText';
+import dialogTitle from 'src/mui/assets/theme-dark/components/dialog/dialogTitle';
+import divider from 'src/mui/assets/theme-dark/components/divider';
+import flatpickr from 'src/mui/assets/theme-dark/components/flatpickr';
+import formControlLabel from 'src/mui/assets/theme-dark/components/form/formControlLabel';
+import formLabel from 'src/mui/assets/theme-dark/components/form/formLabel';
+import icon from 'src/mui/assets/theme-dark/components/icon';
 import iconButton from 'src/mui/assets/theme-dark/components/iconButton';
 import input from 'src/mui/assets/theme-dark/components/form/input';
 import inputLabel from 'src/mui/assets/theme-dark/components/form/inputLabel';
 import inputOutlined from 'src/mui/assets/theme-dark/components/form/inputOutlined';
-import textField from 'src/mui/assets/theme-dark/components/form/textField';
+import linearProgress from 'src/mui/assets/theme-dark/components/linearProgress';
+import link from 'src/mui/assets/theme-dark/components/link';
+import list from 'src/mui/assets/theme-dark/components/list';
+import listItem from 'src/mui/assets/theme-dark/components/list/listItem';
+import listItemText from 'src/mui/assets/theme-dark/components/list/listItemText';
 import menu from 'src/mui/assets/theme-dark/components/menu';
 import menuItem from 'src/mui/assets/theme-dark/components/menu/menuItem';
-import switchButton from 'src/mui/assets/theme-dark/components/form/switchButton';
-import divider from 'src/mui/assets/theme-dark/components/divider';
-import tableContainer from 'src/mui/assets/theme-dark/components/table/tableContainer';
-import tableHead from 'src/mui/assets/theme-dark/components/table/tableHead';
-import tableCell from 'src/mui/assets/theme-dark/components/table/tableCell';
-import linearProgress from 'src/mui/assets/theme-dark/components/linearProgress';
-import breadcrumbs from 'src/mui/assets/theme-dark/components/breadcrumbs';
+import popover from 'src/mui/assets/theme-dark/components/popover';
+import radio from 'src/mui/assets/theme-dark/components/form/radio';
+import select from 'src/mui/assets/theme-dark/components/form/select';
+import sidenav from 'src/mui/assets/theme-dark/components/sidenav';
 import slider from 'src/mui/assets/theme-dark/components/slider';
-import avatar from 'src/mui/assets/theme-dark/components/avatar';
-import tooltip from 'src/mui/assets/theme-dark/components/tooltip';
-import appBar from 'src/mui/assets/theme-dark/components/appBar';
-import tabs from 'src/mui/assets/theme-dark/components/tabs';
-import tab from 'src/mui/assets/theme-dark/components/tabs/tab';
-import stepper from 'src/mui/assets/theme-dark/components/stepper';
 import step from 'src/mui/assets/theme-dark/components/stepper/step';
 import stepConnector from 'src/mui/assets/theme-dark/components/stepper/stepConnector';
-import stepLabel from 'src/mui/assets/theme-dark/components/stepper/stepLabel';
 import stepIcon from 'src/mui/assets/theme-dark/components/stepper/stepIcon';
-import select from 'src/mui/assets/theme-dark/components/form/select';
-import formControlLabel from 'src/mui/assets/theme-dark/components/form/formControlLabel';
-import formLabel from 'src/mui/assets/theme-dark/components/form/formLabel';
-import checkbox from 'src/mui/assets/theme-dark/components/form/checkbox';
-import radio from 'src/mui/assets/theme-dark/components/form/radio';
-import autocomplete from 'src/mui/assets/theme-dark/components/form/autocomplete';
-import flatpickr from 'src/mui/assets/theme-dark/components/flatpickr';
-import container from 'src/mui/assets/theme-dark/components/container';
-import popover from 'src/mui/assets/theme-dark/components/popover';
-import buttonBase from 'src/mui/assets/theme-dark/components/buttonBase';
-import icon from 'src/mui/assets/theme-dark/components/icon';
+import stepLabel from 'src/mui/assets/theme-dark/components/stepper/stepLabel';
+import stepper from 'src/mui/assets/theme-dark/components/stepper';
 import svgIcon from 'src/mui/assets/theme-dark/components/svgIcon';
-import link from 'src/mui/assets/theme-dark/components/link';
-import dialog from 'src/mui/assets/theme-dark/components/dialog';
-import dialogTitle from 'src/mui/assets/theme-dark/components/dialog/dialogTitle';
-import dialogContent from 'src/mui/assets/theme-dark/components/dialog/dialogContent';
-import dialogContentText from 'src/mui/assets/theme-dark/components/dialog/dialogContentText';
-import dialogActions from 'src/mui/assets/theme-dark/components/dialog/dialogActions';
+import switchButton from 'src/mui/assets/theme-dark/components/form/switchButton';
+import tab from 'src/mui/assets/theme-dark/components/tabs/tab';
+import tableCell from 'src/mui/assets/theme-dark/components/table/tableCell';
+import tableContainer from 'src/mui/assets/theme-dark/components/table/tableContainer';
+import tableHead from 'src/mui/assets/theme-dark/components/table/tableHead';
+import tabs from 'src/mui/assets/theme-dark/components/tabs';
+import textField from 'src/mui/assets/theme-dark/components/form/textField';
+import tooltip from 'src/mui/assets/theme-dark/components/tooltip';
 
 export default createTheme({
   breakpoints: { ...breakpoints },
-  palette: { ...colors },
+  palette: { ...colors, mode: 'dark' },
   typography: { ...typography },
   boxShadows: { ...boxShadows },
   borders: { ...borders },
@@ -107,54 +107,54 @@ export default createTheme({
         ...container,
       },
     },
-    MuiDrawer: { ...sidenav },
-    MuiList: { ...list },
-    MuiListItem: { ...listItem },
-    MuiListItemText: { ...listItemText },
-    MuiCard: { ...card },
-    MuiCardMedia: { ...cardMedia },
-    MuiCardContent: { ...cardContent },
+    MuiAppBar: { ...appBar },
+    MuiAutocomplete: { ...autocomplete },
+    MuiAvatar: { ...avatar },
+    MuiBreadcrumbs: { ...breadcrumbs },
     MuiButton: { ...button },
+    MuiButtonBase: { ...buttonBase },
+    MuiCard: { ...card },
+    MuiCardContent: { ...cardContent },
+    MuiCardMedia: { ...cardMedia },
+    MuiCheckbox: { ...checkbox },
+    MuiDialog: { ...dialog },
+    MuiDialogActions: { ...dialogActions },
+    MuiDialogContent: { ...dialogContent },
+    MuiDialogContentText: { ...dialogContentText },
+    MuiDialogTitle: { ...dialogTitle },
+    MuiDivider: { ...divider },
+    MuiDrawer: { ...sidenav },
+    MuiFormControlLabel: { ...formControlLabel },
+    MuiFormLabel: { ...formLabel },
+    MuiIcon: { ...icon },
     MuiIconButton: { ...iconButton },
     MuiInput: { ...input },
     MuiInputLabel: { ...inputLabel },
-    MuiOutlinedInput: { ...inputOutlined },
-    MuiTextField: { ...textField },
+    MuiLinearProgress: { ...linearProgress },
+    MuiLink: { ...link },
+    MuiList: { ...list },
+    MuiListItem: { ...listItem },
+    MuiListItemText: { ...listItemText },
     MuiMenu: { ...menu },
     MuiMenuItem: { ...menuItem },
-    MuiSwitch: { ...switchButton },
-    MuiDivider: { ...divider },
-    MuiTableContainer: { ...tableContainer },
-    MuiTableHead: { ...tableHead },
-    MuiTableCell: { ...tableCell },
-    MuiLinearProgress: { ...linearProgress },
-    MuiBreadcrumbs: { ...breadcrumbs },
+    MuiOutlinedInput: { ...inputOutlined },
+    MuiPopover: { ...popover },
+    MuiRadio: { ...radio },
+    MuiSelect: { ...select },
     MuiSlider: { ...slider },
-    MuiAvatar: { ...avatar },
-    MuiTooltip: { ...tooltip },
-    MuiAppBar: { ...appBar },
-    MuiTabs: { ...tabs },
-    MuiTab: { ...tab },
-    MuiStepper: { ...stepper },
     MuiStep: { ...step },
     MuiStepConnector: { ...stepConnector },
-    MuiStepLabel: { ...stepLabel },
     MuiStepIcon: { ...stepIcon },
-    MuiSelect: { ...select },
-    MuiFormControlLabel: { ...formControlLabel },
-    MuiFormLabel: { ...formLabel },
-    MuiCheckbox: { ...checkbox },
-    MuiRadio: { ...radio },
-    MuiAutocomplete: { ...autocomplete },
-    MuiPopover: { ...popover },
-    MuiButtonBase: { ...buttonBase },
-    MuiIcon: { ...icon },
+    MuiStepLabel: { ...stepLabel },
+    MuiStepper: { ...stepper },
     MuiSvgIcon: { ...svgIcon },
-    MuiLink: { ...link },
-    MuiDialog: { ...dialog },
-    MuiDialogTitle: { ...dialogTitle },
-    MuiDialogContent: { ...dialogContent },
-    MuiDialogContentText: { ...dialogContentText },
-    MuiDialogActions: { ...dialogActions },
+    MuiSwitch: { ...switchButton },
+    MuiTab: { ...tab },
+    MuiTableCell: { ...tableCell },
+    MuiTableContainer: { ...tableContainer },
+    MuiTableHead: { ...tableHead },
+    MuiTabs: { ...tabs },
+    MuiTextField: { ...textField },
+    MuiTooltip: { ...tooltip },
   },
 });
