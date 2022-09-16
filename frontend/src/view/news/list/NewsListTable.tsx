@@ -206,7 +206,7 @@ function NewsListTable(props) {
                   <DataTableBodyCell>
                     <MaterialLink
                       component={Link}
-                      to={row.link}
+                      to={`/aktuelles/${row.link}`}
                     >
                       {row.title}
                     </MaterialLink>

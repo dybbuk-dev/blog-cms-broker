@@ -261,8 +261,9 @@ function BlogCommentListTable(props) {
                     <MaterialLink
                       component={Link}
                       to={
-                        'blog/' +
-                        (row.blog_entry?.name ?? '')
+                        '/blog/' +
+                        (row.blog_entry?.name_normalized ??
+                          '')
                       }
                     >
                       {row.blog_entry?.name}

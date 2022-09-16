@@ -269,7 +269,8 @@ function BrokerPostListTable(props) {
                     <MaterialLink
                       component={Link}
                       to={
-                        'broker/' + (row.broker?.name ?? '')
+                        '/erfahrungsberichte/' +
+                        (row.broker?.name_normalized ?? '')
                       }
                     >
                       {row.broker?.name}

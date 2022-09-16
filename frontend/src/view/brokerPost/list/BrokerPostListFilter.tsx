@@ -147,7 +147,6 @@ function BrokerPostListFilter(props) {
                     variant="standard"
                   />
                 </Grid>
-                <Grid item lg={6} xs={12}></Grid>
                 <Grid item lg={6} xs={12}>
                   <InputFormItem
                     name="name"
@@ -171,15 +170,6 @@ function BrokerPostListFilter(props) {
                     name="rating"
                     label={i18n(
                       'entities.brokerPost.fields.rating',
-                    )}
-                    variant="standard"
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputFormItem
-                    name="created"
-                    label={i18n(
-                      'entities.brokerPost.fields.created',
                     )}
                     variant="standard"
                   />

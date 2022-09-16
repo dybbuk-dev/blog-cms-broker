@@ -66,13 +66,6 @@ const menus = [
   },
 
   {
-    path: '/broker-post',
-    name: i18n('entities.brokerPost.menu'),
-    permissionRequired: permissions.brokerPostRead,
-    icon: <Icon fontSize="medium">recent_actors</Icon>,
-  },
-
-  {
     name: i18n('collapses.routes.menu'),
     key: 'routes',
     icon: <Icon fontSize="medium">signpost</Icon>,
@@ -95,6 +88,13 @@ const menus = [
     name: i18n('entities.broker.menu'),
     permissionRequired: permissions.brokerRead,
     icon: <Icon fontSize="medium">badge</Icon>,
+  },
+
+  {
+    path: '/broker-post',
+    name: i18n('entities.brokerPost.menu'),
+    permissionRequired: permissions.brokerPostRead,
+    icon: <Icon fontSize="medium">comment</Icon>,
   },
 
   {

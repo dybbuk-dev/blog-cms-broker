@@ -216,12 +216,14 @@ function AuthorListTable(props) {
                     {row.name}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
-                    <MaterialLink
-                      component={Link}
-                      to={row.author_image[0]?.link}
-                    >
-                      {row.author_image[0]?.link}
-                    </MaterialLink>
+                    {Boolean(row.author_image[0]?.link) && (
+                      <MaterialLink
+                        component={Link}
+                        to={row.author_image[0]?.link}
+                      >
+                        {row.author_image[0]?.link}
+                      </MaterialLink>
+                    )}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
                     <MDBox
