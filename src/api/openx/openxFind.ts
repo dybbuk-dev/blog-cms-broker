@@ -8,7 +8,7 @@ export default async (req, res, next) => {
     new PermissionChecker(req).validateHas(
       Permissions.values.openxRead,
     );
-    console.log('find');
+
     const payload = await new OpenxService(req).findById(
       req.params.id,
     );

@@ -39,7 +39,7 @@ export default class PageService {
     const body = {
       data,
     };
-    console.log(body);
+
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.post(

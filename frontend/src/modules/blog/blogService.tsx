@@ -39,7 +39,7 @@ export default class BlogService {
     const body = {
       data,
     };
-    console.log(body);
+
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.post(
@@ -83,7 +83,7 @@ export default class BlogService {
       limit,
       offset,
     };
-    console.log(filter);
+
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.get(
@@ -92,7 +92,7 @@ export default class BlogService {
         params,
       },
     );
-    console.log(response.data);
+
     return response.data;
   }
 

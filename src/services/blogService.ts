@@ -27,7 +27,6 @@ export default class BlogService {
     const options = { ...this.options, transaction };
     await BlogBrokerRepository.destroyByBlog(id, options);
     const items = data.brokers || [];
-    console.log(items);
     for (const item of items) {
       await BlogBrokerRepository.create(
         {

@@ -12,7 +12,6 @@ import LogoViewItem from 'src/view/shared/view/LogoViewItem';
 function PromotionView(props) {
   const renderView = () => {
     const { record } = props;
-    console.log(record);
     return (
       <>
         <Grid spacing={2} container>

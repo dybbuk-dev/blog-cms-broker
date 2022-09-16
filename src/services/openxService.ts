@@ -104,7 +104,6 @@ export default class OpenxService {
   }
 
   async findById(id) {
-    console.log(id);
     return OpenxRepository.findById(id, this.options);
   }
 
