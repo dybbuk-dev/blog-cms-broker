@@ -38,7 +38,7 @@ export default class BlogCommentService {
       SequelizeRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'blog_comment',
+        'blogComment',
       );
 
       throw error;
@@ -74,7 +74,7 @@ export default class BlogCommentService {
       SequelizeRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'blog_comment',
+        'blogComment',
       );
 
       throw error;

@@ -5,7 +5,7 @@ import BlogRepository from '../database/repositories/blogRepository';
 import BlogBrokerRepository from '../database/repositories/blogBrokerRepository';
 import BrokerRepository from '../database/repositories/brokerRepository';
 
-export default class PageService {
+export default class BlogService {
   options: IServiceOptions;
 
   constructor(options) {
