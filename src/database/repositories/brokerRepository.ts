@@ -505,7 +505,12 @@ class BrokerRepository {
     limit,
     options: IRepositoryOptions,
   ) {
-    let whereAnd: Array<any> = [];
+    let whereAnd: Array<any> = [
+      {
+        activated: true,
+        is_broker: true,
+      },
+    ];
 
     if (query) {
       whereAnd.push({

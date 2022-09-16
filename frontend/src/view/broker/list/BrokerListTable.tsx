@@ -1,33 +1,33 @@
 import { Box, TableContainer } from '@mui/material';
+import { i18n } from 'src/i18n';
+import { Link } from 'react-router-dom';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { useDispatch, useSelector } from 'react-redux';
+import actions from 'src/modules/broker/list/brokerListActions';
+import brokerSelectors from 'src/modules/broker/brokerSelectors';
 import Checkbox from '@mui/material/Checkbox';
+import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
+import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
+import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
+import DeleteIcon from '@mui/icons-material/Delete';
+import destroyActions from 'src/modules/broker/destroy/brokerDestroyActions';
+import destroySelectors from 'src/modules/broker/destroy/brokerDestroySelectors';
+import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
+import MaterialLink from '@mui/material/Link';
+import MDBadgeDot from 'src/mui/components/MDBadgeDot';
+import MDBox from 'src/mui/components/MDBox';
+import MDTypography from 'src/mui/components/MDTypography';
+import Pagination from 'src/view/shared/table/Pagination';
+import React, { useState } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
+import selectors from 'src/modules/broker/list/brokerListSelectors';
+import Spinner from 'src/view/shared/Spinner';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Tooltip from '@mui/material/Tooltip';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import SearchIcon from '@mui/icons-material/Search';
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import MaterialLink from '@mui/material/Link';
-import { i18n } from 'src/i18n';
-import brokerSelectors from 'src/modules/broker/brokerSelectors';
-import destroyActions from 'src/modules/broker/destroy/brokerDestroyActions';
-import destroySelectors from 'src/modules/broker/destroy/brokerDestroySelectors';
-import actions from 'src/modules/broker/list/brokerListActions';
-import selectors from 'src/modules/broker/list/brokerListSelectors';
-import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
-import Pagination from 'src/view/shared/table/Pagination';
-import Spinner from 'src/view/shared/Spinner';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
-import MDBox from 'src/mui/components/MDBox';
-import MDTypography from 'src/mui/components/MDTypography';
-import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
-import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
-import MDBadgeDot from 'src/mui/components/MDBadgeDot';
 
 function BrokerListTable(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -140,7 +140,6 @@ function BrokerListTable(props) {
                     ? sorter.order
                     : 'none'
                 }
-                width="0"
               >
                 {i18n('entities.broker.fields.name')}
               </DataTableHeadCell>
@@ -207,8 +206,6 @@ function BrokerListTable(props) {
                       display="block"
                       href={row.meta?.homepage}
                       target="_blank"
-                      width="300px"
-                      whiteSpace="break-spaces"
                     >
                       {row.meta?.homepage}
                     </MaterialLink>
@@ -218,7 +215,6 @@ function BrokerListTable(props) {
                       <MDTypography
                         display="block"
                         variant="caption"
-                        width="100px"
                         whiteSpace="break-spaces"
                         fontWeight="regular"
                         color="text"
@@ -237,6 +233,7 @@ function BrokerListTable(props) {
                     ].map((field) => (
                       <MDBadgeDot
                         key={field}
+                        width="max-content"
                         badgeContent={i18n(
                           `entities.broker.fields.${field}`,
                         )}

@@ -55,7 +55,7 @@ function DataTableBodyCell({
     >
       <MDBox
         display="inline-block"
-        width="max-content"
+        // width="max-content"
         color="text"
         sx={{ verticalAlign: 'middle' }}
       >
