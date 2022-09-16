@@ -100,11 +100,15 @@ export default class NavigationService {
     query,
     limit,
     withChildren = false,
+    part = null,
+    id = null,
   ) {
     const params = {
       query,
       limit,
       withChildren,
+      part,
+      id,
     };
 
     const tenantId = AuthCurrentTenant.get();

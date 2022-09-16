@@ -23,6 +23,8 @@ export default async (req, res, next) => {
       req.query.query,
       req.query.limit,
       children,
+      req.query.part,
+      req.query.id,
     );
 
     await ApiResponseHandler.success(req, res, payload);

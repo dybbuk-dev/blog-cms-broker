@@ -51,6 +51,8 @@ function NavigationAutocompleteFormItem(props) {
       value,
       limit,
       !!props.withChildren,
+      props.part,
+      props.id,
     );
   };
 

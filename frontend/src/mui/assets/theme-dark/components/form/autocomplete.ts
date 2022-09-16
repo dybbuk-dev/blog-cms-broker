@@ -85,7 +85,7 @@ const autocompletle: Types = {
     },
 
     groupLabel: {
-      color: dark.main,
+      color: white.main,
     },
 
     loading: {

@@ -184,6 +184,8 @@ function PageForm(props) {
                   showCreate={true}
                   variant="standard"
                   withChildren={true}
+                  part="page"
+                  id={props.record?.id || 0}
                   fullWidth
                 />
               </Grid>
