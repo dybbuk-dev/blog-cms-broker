@@ -31,12 +31,12 @@ export function InputFormItem(props) {
   } = props;
 
   const {
-    register,
+    control: { defaultValuesRef },
     errors,
     formState: { touched, isSubmitted },
-    setValue,
-    control: { defaultValuesRef },
     getValues,
+    register,
+    setValue,
   } = useFormContext();
 
   const defaultValues = defaultValuesRef.current || {};
@@ -57,6 +57,12 @@ export function InputFormItem(props) {
   useEffect(() => {
     register({ name });
   }, [register, name]);
+
+  useEffect(() => {
+    if (forceValue) {
+      setCurValue(value);
+    }
+  }, [value]);
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -106,7 +112,7 @@ export function InputFormItem(props) {
           name,
         }}
         disabled={disabled}
-        value={forceValue ? value : formValue || curValue}
+        value={curValue}
       />
       {errorMessage && (
         <MDBox mt={0.75}>

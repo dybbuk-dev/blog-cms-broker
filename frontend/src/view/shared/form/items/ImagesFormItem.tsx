@@ -33,7 +33,7 @@ function ImagesFormItem(props) {
   const formValue = getValues(name);
 
   const [curValue, setCurValue] = useState(
-    props.forceValue
+    forceValue
       ? value
       : formValue || value || defaultValues[name] || [],
   );
@@ -41,6 +41,12 @@ function ImagesFormItem(props) {
   useEffect(() => {
     register({ name });
   }, [register, name]);
+
+  useEffect(() => {
+    if (forceValue) {
+      setCurValue(value);
+    }
+  }, [value]);
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -104,7 +110,7 @@ ImagesFormItem.propTypes = {
   name: PropTypes.string.isRequired,
   required: PropTypes.bool,
   storage: PropTypes.object.isRequired,
-  value: PropTypes.any,
+  value: PropTypes.array,
 };
 
 export default ImagesFormItem;

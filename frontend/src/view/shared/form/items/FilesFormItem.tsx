@@ -8,14 +8,16 @@ import PropTypes from 'prop-types';
 
 function FilesFormItem(props) {
   const {
-    label,
-    name,
-    hint,
-    storage,
-    formats,
-    max,
-    required,
     externalErrorMessage,
+    forceValue,
+    formats,
+    hint,
+    label,
+    max,
+    name,
+    required,
+    storage,
+    value,
   } = props;
 
   const {
@@ -32,12 +34,20 @@ function FilesFormItem(props) {
   const formValue = getValues(name);
 
   const [curValue, setCurValue] = useState(
-    formValue || defaultValues[name] || [],
+    forceValue
+      ? value
+      : formValue || value || defaultValues[name] || [],
   );
 
   useEffect(() => {
     register({ name });
   }, [register, name]);
+
+  useEffect(() => {
+    if (forceValue) {
+      setCurValue(value);
+    }
+  }, [value]);
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -86,11 +96,13 @@ function FilesFormItem(props) {
 }
 
 FilesFormItem.defaultProps = {
+  forceValue: false,
   max: undefined,
   required: false,
 };
 
 FilesFormItem.propTypes = {
+  forceValue: PropTypes.bool,
   formats: PropTypes.any,
   formItemProps: PropTypes.object,
   hint: PropTypes.string,
@@ -99,6 +111,7 @@ FilesFormItem.propTypes = {
   name: PropTypes.string.isRequired,
   required: PropTypes.bool,
   storage: PropTypes.object.isRequired,
+  value: PropTypes.array,
 };
 
 export default FilesFormItem;

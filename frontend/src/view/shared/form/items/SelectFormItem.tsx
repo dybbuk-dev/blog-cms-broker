@@ -10,32 +10,33 @@ import PropTypes from 'prop-types';
 
 function SelectFormItem(props) {
   const {
-    label,
-    name,
-    hint,
-    renderOption,
-    renderInput,
-    renderTags,
-    options,
-    required,
-    mode,
-    placeholder,
-    isClearable,
     externalErrorMessage,
-    size,
-    shrink,
+    forceValue,
+    hint,
+    isClearable,
+    label,
     margin,
-    variant,
+    mode,
+    name,
+    options,
+    placeholder,
+    renderInput,
+    renderOption,
+    renderTags,
+    required,
+    shrink,
+    size,
     value: defaultValue,
+    variant,
   } = props;
 
   const {
-    register,
+    control: { defaultValuesRef },
     errors,
     formState: { touched, isSubmitted },
-    setValue,
-    control: { defaultValuesRef },
     getValues,
+    register,
+    setValue,
   } = useFormContext();
 
   const errorMessage = FormErrors.errorMessage(
@@ -62,7 +63,7 @@ function SelectFormItem(props) {
 
   const value = () => {
     const { mode } = props;
-    const realValue = props.forceValue
+    const realValue = forceValue
       ? defaultValue
       : formValue || curValue;
     if (mode === 'multiple') {
@@ -196,28 +197,30 @@ function SelectFormItem(props) {
 }
 
 SelectFormItem.defaultProps = {
-  required: false,
+  forceValue: false,
   isClearable: true,
+  required: false,
 };
 
 SelectFormItem.propTypes = {
+  externalErrorMessage: PropTypes.string,
+  forceValue: PropTypes.bool,
+  hint: PropTypes.string,
+  isClearable: PropTypes.bool,
+  label: PropTypes.string,
+  margin: PropTypes.string,
+  mode: PropTypes.string,
   name: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
-  label: PropTypes.string,
-  hint: PropTypes.string,
-  required: PropTypes.bool,
-  externalErrorMessage: PropTypes.string,
-  mode: PropTypes.string,
-  isClearable: PropTypes.bool,
   placeholder: PropTypes.string,
-  variant: PropTypes.string,
-  size: PropTypes.string,
-  shrink: PropTypes.bool,
-  margin: PropTypes.string,
-  renderOption: PropTypes.func,
   renderInput: PropTypes.func,
+  renderOption: PropTypes.func,
   renderTags: PropTypes.func,
+  required: PropTypes.bool,
+  shrink: PropTypes.bool,
+  size: PropTypes.string,
   value: PropTypes.any,
+  variant: PropTypes.string,
 };
 
 export default SelectFormItem;
