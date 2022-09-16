@@ -1,4 +1,8 @@
 import moment from 'moment';
+import {
+  DEFAULT_MOMENT_FORMAT_DATE_ONLY,
+  DEFAULT_MOMENT_FORMAT,
+} from 'src/config/common';
 import { i18n } from 'src/i18n';
 
 const filterRenders = {
@@ -137,12 +141,14 @@ function formatDecimal(value, fractionDigits) {
 }
 
 function formatDate(value) {
-  return value ? moment(value).format('YYYY-MM-DD') : null;
+  return value
+    ? moment(value).format(DEFAULT_MOMENT_FORMAT_DATE_ONLY)
+    : null;
 }
 
 function formatDatetime(value) {
   return value
-    ? moment(value).format('YYYY-MM-DD HH:mm')
+    ? moment(value).format(DEFAULT_MOMENT_FORMAT)
     : null;
 }
 

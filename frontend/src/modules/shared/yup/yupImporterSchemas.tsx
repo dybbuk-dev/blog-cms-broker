@@ -1,6 +1,7 @@
 import * as yup from 'yup';
 import { i18n } from 'src/i18n';
 import moment from 'moment';
+import { DEFAULT_MOMENT_FORMAT_DATE_ONLY } from 'src/config/common';
 
 const yupImporterSchemas = {
   generic(label) {
@@ -343,7 +344,9 @@ const yupImporterSchemas = {
           return 'Invalid date';
         }
 
-        return moment(value).format('YYYY-MM-DD');
+        return moment(value).format(
+          DEFAULT_MOMENT_FORMAT_DATE_ONLY,
+        );
       })
       .test(
         'is-date',

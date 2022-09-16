@@ -146,7 +146,7 @@ export default class MigrationService {
         linkTitle: 'link_title',
         privateUrl: (row) =>
           [
-            '/broker_screenshots/',
+            'broker_screenshots/',
             row.broker_id,
             '/',
             row.filename,
@@ -163,7 +163,7 @@ export default class MigrationService {
         linkTitle: 'link_title',
         privateUrl: (row) =>
           [
-            '/broker_certificate/',
+            'broker_certificate/',
             row.broker_certificate_id,
             '/',
             row.filename,
@@ -178,7 +178,7 @@ export default class MigrationService {
         link: 'link',
         linkTitle: 'link_title',
         privateUrl: (row) =>
-          ['/news_images/', row.id, '/', row.filename].join(
+          ['news_images/', row.id, '/', row.filename].join(
             '',
           ),
       },
@@ -191,7 +191,7 @@ export default class MigrationService {
         link: 'link',
         linkTitle: 'title',
         privateUrl: (row) =>
-          ['/promo/', row.filename].join(''),
+          ['promo/', row.filename].join(''),
         ignoreDeleteOriginal: true,
       },
       author: {
@@ -203,7 +203,7 @@ export default class MigrationService {
         link: 'link',
         linkTitle: 'title',
         privateUrl: (row) =>
-          ['/author/', row.image].join(''),
+          ['author/', row.image].join(''),
         ignoreDeleteOriginal: true,
       },
       page_image: {
@@ -215,12 +215,9 @@ export default class MigrationService {
         link: 'link',
         linkTitle: 'link_title',
         privateUrl: (row) =>
-          [
-            '/pages_images/',
-            row.id,
-            '/',
-            row.filename,
-          ].join(''),
+          ['pages_images/', row.id, '/', row.filename].join(
+            '',
+          ),
         ignoreDeleteOriginal: true,
       },
       blog_image: {
@@ -232,7 +229,7 @@ export default class MigrationService {
         link: 'link',
         linkTitle: 'link_title',
         privateUrl: (row) =>
-          ['/blog_images/', row.id, '/', row.filename].join(
+          ['blog_images/', row.id, '/', row.filename].join(
             '',
           ),
         ignoreDeleteOriginal: true,

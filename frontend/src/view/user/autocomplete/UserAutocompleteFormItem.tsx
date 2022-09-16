@@ -12,6 +12,7 @@ import { getUserAvatar } from 'src/modules/utils';
 function UserAutocompleteFormItem(props) {
   const { setValue, getValues } = useFormContext();
   const [modalVisible, setModalVisible] = useState(false);
+  const [rerender, setRerender] = useState(0);
 
   const { name, mode } = props;
   const isMultiple = mode && mode === 'multiple';
@@ -39,6 +40,8 @@ function UserAutocompleteFormItem(props) {
         shouldDirty: true,
       });
     }
+
+    setRerender(rerender + 1);
 
     setModalVisible(false);
   };
@@ -106,6 +109,7 @@ function UserAutocompleteFormItem(props) {
           mapper={mapper}
           onOpenModal={() => setModalVisible(true)}
           hasPermissionToCreate={hasPermissionToCreate}
+          rerender={rerender}
           onChange={onChangeUserAutocomplete}
         />
       </MDBox>

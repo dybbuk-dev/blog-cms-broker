@@ -1,31 +1,31 @@
+import { i18n } from 'src/i18n';
+import { Link } from 'react-router-dom';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { TableContainer } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import actions from 'src/modules/affiliateLink/list/affiliateLinkListActions';
+import affiliateLinkSelectors from 'src/modules/affiliateLink/affiliateLinkSelectors';
 import Checkbox from '@mui/material/Checkbox';
+import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
+import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
+import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
+import DeleteIcon from '@mui/icons-material/Delete';
+import destroyActions from 'src/modules/affiliateLink/destroy/affiliateLinkDestroyActions';
+import destroySelectors from 'src/modules/affiliateLink/destroy/affiliateLinkDestroySelectors';
+import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
+import MaterialLink from '@mui/material/Link';
+import MDBox from 'src/mui/components/MDBox';
+import MDTypography from 'src/mui/components/MDTypography';
+import Pagination from 'src/view/shared/table/Pagination';
+import SearchIcon from '@mui/icons-material/Search';
+import selectors from 'src/modules/affiliateLink/list/affiliateLinkListSelectors';
+import Spinner from 'src/view/shared/Spinner';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import Tooltip from '@mui/material/Tooltip';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import SearchIcon from '@mui/icons-material/Search';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import MaterialLink from '@mui/material/Link';
-import { i18n } from 'src/i18n';
-import affiliateLinkSelectors from 'src/modules/affiliateLink/affiliateLinkSelectors';
-import destroyActions from 'src/modules/affiliateLink/destroy/affiliateLinkDestroyActions';
-import destroySelectors from 'src/modules/affiliateLink/destroy/affiliateLinkDestroySelectors';
-import actions from 'src/modules/affiliateLink/list/affiliateLinkListActions';
-import selectors from 'src/modules/affiliateLink/list/affiliateLinkListSelectors';
-import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
-import Pagination from 'src/view/shared/table/Pagination';
-import Spinner from 'src/view/shared/Spinner';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
-import MDBox from 'src/mui/components/MDBox';
-import MDTypography from 'src/mui/components/MDTypography';
-import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
-import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
 
 function AffiliateLinkListTable(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -200,14 +200,7 @@ function AffiliateLinkListTable(props) {
                   </DataTableBodyCell>
                   <DataTableBodyCell>
                     <MaterialLink href={row.link}>
-                      <MDTypography
-                        display="block"
-                        variant="button"
-                        width="600px"
-                        whiteSpace="break-spaces"
-                      >
-                        {row.link}
-                      </MDTypography>
+                      {row.link}
                     </MaterialLink>
                   </DataTableBodyCell>
                   <DataTableBodyCell>

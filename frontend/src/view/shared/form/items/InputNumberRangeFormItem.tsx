@@ -1,32 +1,32 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { i18n } from 'src/i18n';
+import { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import FormErrors from 'src/view/shared/form/formErrors';
-import MDInput from 'src/mui/components/MDInput';
 import MDBox from 'src/mui/components/MDBox';
+import MDInput from 'src/mui/components/MDInput';
 import MDTypography from 'src/mui/components/MDTypography';
+import PropTypes from 'prop-types';
 
 function InputNumberRangeFormItem(props) {
   const {
-    label,
-    name,
-    hint,
-    placeholder,
-    autoFocus,
     autoComplete,
-    required,
-    externalErrorMessage,
-    id,
-    type,
+    autoFocus,
     disabled,
     endAdornment,
-    margin,
-    variant,
-    size,
-    shrink,
+    externalErrorMessage,
     fullWidth,
+    hint,
+    id,
+    label,
+    margin,
+    name,
+    placeholder,
+    required,
+    shrink,
+    size,
+    type,
     value,
+    variant,
   } = props;
 
   const {

@@ -221,15 +221,13 @@ function NewsForm(props) {
           <MDBox p={3}>
             <Grid spacing={2} container>
               <Grid item md={12} xs={12}>
-                <MDBox pt={7}>
-                  <LogoFormItem
-                    name="news_image"
-                    label={i18n(
-                      'entities.news.fields.teaser_upload',
-                    )}
-                    storage={Storage.values.news_image}
-                  />
-                </MDBox>
+                <LogoFormItem
+                  name="news_image"
+                  label={i18n(
+                    'entities.news.fields.teaser_upload',
+                  )}
+                  storage={Storage.values.news_image}
+                />
               </Grid>
               <Grid item md={12} xs={12}>
                 <InputFormItem

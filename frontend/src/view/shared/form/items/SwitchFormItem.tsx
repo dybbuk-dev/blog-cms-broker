@@ -13,20 +13,22 @@ function SwitchFormItem(props) {
   const { sidenavColor } = selectMuiSettings();
 
   const {
+    externalErrorMessage,
+    forceValue,
+    hint,
     label,
     name,
-    hint,
     required,
-    externalErrorMessage,
+    value,
   } = props;
 
   const {
-    register,
+    control: { defaultValuesRef },
     errors,
     formState: { touched, isSubmitted },
-    setValue,
-    control: { defaultValuesRef },
     getValues,
+    register,
+    setValue,
   } = useFormContext();
 
   const defaultValues = defaultValuesRef.current || {};
@@ -37,8 +39,8 @@ function SwitchFormItem(props) {
     if (formValue !== undefined && formValue !== null) {
       return formValue;
     }
-    if (props.value !== undefined && props.value !== null) {
-      return props.value;
+    if (value !== undefined && value !== null) {
+      return value;
     }
     if (
       defaultValues[name] !== undefined &&
@@ -52,6 +54,12 @@ function SwitchFormItem(props) {
   useEffect(() => {
     register({ name });
   }, [register, name]);
+
+  useEffect(() => {
+    if (forceValue) {
+      setChecked(value);
+    }
+  }, [value]);
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -70,9 +78,7 @@ function SwitchFormItem(props) {
           <Switch
             id={name}
             name={name}
-            checked={
-              props.forceValue ? props.value : checked
-            }
+            checked={checked}
             onChange={(e) => {
               setChecked(Boolean(e.target.checked));
               setValue(name, Boolean(e.target.checked), {
@@ -100,14 +106,18 @@ function SwitchFormItem(props) {
   );
 }
 
-SwitchFormItem.defaultProps = {};
+SwitchFormItem.defaultProps = {
+  forceValue: false,
+};
 
 SwitchFormItem.propTypes = {
+  externalErrorMessage: PropTypes.string,
+  forceValue: PropTypes.bool,
+  hint: PropTypes.string,
+  label: PropTypes.string,
   name: PropTypes.string.isRequired,
   required: PropTypes.bool,
-  label: PropTypes.string,
-  hint: PropTypes.string,
-  externalErrorMessage: PropTypes.string,
+  value: PropTypes.bool,
 };
 
 export default SwitchFormItem;

@@ -18,7 +18,7 @@ Coded by www.creative-tim.com
  */
 
 // Material Dashboard 2 PRO React TS Helper Functions
-import rgba from 'src/mui/assets/theme/functions/rgba';
+import rgba from 'src/mui/assets/theme-dark/functions/rgba';
 
 function gradientChartLine(
   chart: any,

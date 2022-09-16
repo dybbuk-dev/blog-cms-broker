@@ -948,6 +948,7 @@ const privateRoutes = [
     permissionRequired: permissions.pageRead,
     exact: true,
   },
+
   {
     path: '/page/new',
     collapseName: 'page',

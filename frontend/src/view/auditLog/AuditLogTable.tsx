@@ -1,32 +1,23 @@
-import {
-  Autocomplete,
-  Box,
-  Icon,
-  TableContainer,
-} from '@mui/material';
+import { DEFAULT_MOMENT_FORMAT } from 'src/config/common';
+import { i18n } from 'src/i18n';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { TableContainer } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+import actions from 'src/modules/auditLog/auditLogActions';
+import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
+import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
 import IconButton from '@mui/material/IconButton';
+import MDBox from 'src/mui/components/MDBox';
+import MDTypography from 'src/mui/components/MDTypography';
+import moment from 'moment';
+import Pagination from 'src/view/shared/table/Pagination';
+import SearchIcon from '@mui/icons-material/Search';
+import selectors from 'src/modules/auditLog/auditLogSelectors';
+import Spinner from 'src/view/shared/Spinner';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Tooltip from '@mui/material/Tooltip';
-import SearchIcon from '@mui/icons-material/Search';
-import { i18n } from 'src/i18n';
-import actions from 'src/modules/auditLog/auditLogActions';
-import selectors from 'src/modules/auditLog/auditLogSelectors';
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import Spinner from 'src/view/shared/Spinner';
-import Pagination from 'src/view/shared/table/Pagination';
-import TableCellCustom from 'src/view/shared/table/TableCellCustom';
-import moment from 'moment';
-import MDBox from 'src/mui/components/MDBox';
-import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
-import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
-import MDButton from 'src/mui/components/MDButton';
-import MDTypography from 'src/mui/components/MDTypography';
 
 function AuditLogTable(props) {
   const dispatch = useDispatch();
@@ -183,7 +174,7 @@ function AuditLogTable(props) {
                   </DataTableBodyCell>
                   <DataTableBodyCell>
                     {moment(row.timestamp).format(
-                      'YYYY-MM-DD HH:mm',
+                      DEFAULT_MOMENT_FORMAT,
                     )}
                   </DataTableBodyCell>
                   <DataTableBodyCell>

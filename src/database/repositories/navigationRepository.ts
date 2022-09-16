@@ -330,6 +330,7 @@ class NavigationRepository {
     limit,
     options: IRepositoryOptions,
     withChildren = false,
+    excludes: any[] = [0],
   ) {
     let whereAnd: Array<any> = [
       {
@@ -356,6 +357,12 @@ class NavigationRepository {
         },
       });
     }
+
+    whereAnd.push({
+      id: {
+        [Op.notIn]: excludes,
+      },
+    });
 
     const where = { [Op.and]: whereAnd };
 

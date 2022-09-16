@@ -1,32 +1,32 @@
+import { i18n } from 'src/i18n';
+import { Link } from 'react-router-dom';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { TableContainer } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import actions from 'src/modules/category/list/categoryListActions';
+import categorySelectors from 'src/modules/category/categorySelectors';
 import Checkbox from '@mui/material/Checkbox';
+import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
+import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
+import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
+import DeleteIcon from '@mui/icons-material/Delete';
+import destroyActions from 'src/modules/category/destroy/categoryDestroyActions';
+import destroySelectors from 'src/modules/category/destroy/categoryDestroySelectors';
+import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
+import MaterialLink from '@mui/material/Link';
+import MDBadgeDot from 'src/mui/components/MDBadgeDot';
+import MDBox from 'src/mui/components/MDBox';
+import MDTypography from 'src/mui/components/MDTypography';
+import Pagination from 'src/view/shared/table/Pagination';
+import SearchIcon from '@mui/icons-material/Search';
+import selectors from 'src/modules/category/list/categoryListSelectors';
+import Spinner from 'src/view/shared/Spinner';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import Tooltip from '@mui/material/Tooltip';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import SearchIcon from '@mui/icons-material/Search';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import MaterialLink from '@mui/material/Link';
-import { i18n } from 'src/i18n';
-import categorySelectors from 'src/modules/category/categorySelectors';
-import destroyActions from 'src/modules/category/destroy/categoryDestroyActions';
-import destroySelectors from 'src/modules/category/destroy/categoryDestroySelectors';
-import actions from 'src/modules/category/list/categoryListActions';
-import selectors from 'src/modules/category/list/categoryListSelectors';
-import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
-import Pagination from 'src/view/shared/table/Pagination';
-import Spinner from 'src/view/shared/Spinner';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
-import MDBox from 'src/mui/components/MDBox';
-import MDTypography from 'src/mui/components/MDTypography';
-import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
-import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
-import MDBadgeDot from 'src/mui/components/MDBadgeDot';
 
 function CategoryListTable(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -152,12 +152,13 @@ function CategoryListTable(props) {
               >
                 {i18n('entities.category.fields.link')}
               </DataTableHeadCell>
-              <DataTableHeadCell sorted={false}>
+              <DataTableHeadCell sorted={false} width="0">
                 {i18n('entities.category.fields.activated')}
               </DataTableHeadCell>
               <DataTableHeadCell
                 sorted={false}
                 align="right"
+                width="0"
               >
                 {i18n('entities.category.fields.sort')}
               </DataTableHeadCell>
@@ -225,6 +226,7 @@ function CategoryListTable(props) {
                     ].map((field) => (
                       <MDBadgeDot
                         key={field}
+                        width="max-content"
                         badgeContent={i18n(
                           `entities.category.fields.${field}`,
                         )}

@@ -9,6 +9,7 @@ import moment from 'moment';
 import { orderByUtils } from '../utils/orderByUtils';
 import FileRepository from './fileRepository';
 import PageRelatedLinkRepository from './pageRelatedLinkRepository';
+import NavigationRepositoryEx from './extends/navigationRepositoryEx';
 
 const Op = Sequelize.Op;
 
@@ -300,17 +301,29 @@ class PageRepository {
         }
       }
 
-      if (filter.navigation) {
-        if (
-          filter.navigation !== undefined &&
-          filter.navigation !== null &&
-          filter.navigation !== ''
-        ) {
-          whereAnd.push({
-            navigation_id: filter.navigation.id,
-          });
-        }
+      if (filter.type) {
+        whereAnd.push({
+          [Op.or]: [
+            {
+              navigation_id: {
+                [Op.in]:
+                  await NavigationRepositoryEx.filterNavigationIds(
+                    filter.type,
+                    options,
+                  ),
+              },
+            },
+            NavigationRepositoryEx.getTypeIndex(
+              filter.type,
+            ) === 0 && {
+              navigation_id: {
+                [Op.is]: null,
+              },
+            },
+          ].filter(Boolean),
+        });
       }
+
       if (filter.author) {
         if (
           filter.author !== undefined &&
@@ -322,6 +335,7 @@ class PageRepository {
           });
         }
       }
+
       [
         'name',
         'link',

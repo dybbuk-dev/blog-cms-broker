@@ -50,6 +50,7 @@ function navbar(theme: Theme | any, ownerState: any) {
             darkMode ? background.default : white.main,
             0.8,
           ),
+    backgroundImage: 'none',
 
     color: () => {
       let color;

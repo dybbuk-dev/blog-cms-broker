@@ -8,34 +8,35 @@ import PropTypes from 'prop-types';
 
 function TextAreaFormItem(props) {
   const {
+    autoComplete,
+    autoFocus,
+    disabled,
+    endAdornment,
+    externalErrorMessage,
+    forceValue,
+    fullWidth,
+    hint,
     id,
     label,
-    name,
-    hint,
-    placeholder,
-    autoFocus,
-    autoComplete,
-    required,
-    externalErrorMessage,
-    disabled,
-    startAdornment,
-    endAdornment,
     margin,
-    variant,
-    size,
-    shrink,
-    fullWidth,
-    value,
+    name,
+    placeholder,
+    required,
     rows,
+    shrink,
+    size,
+    startAdornment,
+    value,
+    variant,
   } = props;
 
   const {
-    register,
+    control: { defaultValuesRef },
     errors,
     formState: { touched, isSubmitted },
-    setValue,
-    control: { defaultValuesRef },
     getValues,
+    register,
+    setValue,
   } = useFormContext();
 
   const defaultValues = defaultValuesRef.current || {};
@@ -49,6 +50,12 @@ function TextAreaFormItem(props) {
   useEffect(() => {
     register({ name });
   }, [register, name]);
+
+  useEffect(() => {
+    if (forceValue) {
+      setCurValue(value);
+    }
+  }, [value]);
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -97,9 +104,7 @@ function TextAreaFormItem(props) {
         disabled={disabled}
         multiline
         rows={rows ?? 4}
-        value={
-          props.forceValue ? value : formValue || curValue
-        }
+        value={curValue}
       />
       {errorMessage && (
         <MDBox mt={0.75}>
@@ -118,32 +123,34 @@ function TextAreaFormItem(props) {
 }
 
 TextAreaFormItem.defaultProps = {
+  forceValue: false,
   type: 'text',
   required: false,
 };
 
 TextAreaFormItem.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  required: PropTypes.bool,
-  label: PropTypes.string,
-  hint: PropTypes.string,
+  autoComplete: PropTypes.string,
   autoFocus: PropTypes.bool,
   disabled: PropTypes.bool,
-  prefix: PropTypes.string,
-  placeholder: PropTypes.string,
-  autoComplete: PropTypes.string,
-  externalErrorMessage: PropTypes.string,
-  onChange: PropTypes.func,
-  startAdornment: PropTypes.any,
   endAdornment: PropTypes.any,
-  margin: PropTypes.string,
-  variant: PropTypes.string,
-  size: PropTypes.string,
-  shrink: PropTypes.bool,
+  externalErrorMessage: PropTypes.string,
+  forceValue: PropTypes.bool,
   fullWidth: PropTypes.bool,
-  value: PropTypes.string,
+  hint: PropTypes.string,
+  id: PropTypes.string,
+  label: PropTypes.string,
+  margin: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  prefix: PropTypes.string,
+  required: PropTypes.bool,
   rows: PropTypes.number,
+  shrink: PropTypes.bool,
+  size: PropTypes.string,
+  startAdornment: PropTypes.any,
+  value: PropTypes.string,
+  variant: PropTypes.string,
 };
 
 export default TextAreaFormItem;

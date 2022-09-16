@@ -11,6 +11,7 @@ function BrokerAutocompleteFormItem(props) {
   const { setValue, getValues } = useFormContext();
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [rerender, setRerender] = useState(0);
 
   const hasPermissionToCreate = useSelector(
     selectors.selectPermissionToCreate,
@@ -39,6 +40,8 @@ function BrokerAutocompleteFormItem(props) {
         shouldDirty: true,
       });
     }
+
+    setRerender(rerender + 1);
 
     doCloseModal();
   };
@@ -87,15 +90,7 @@ function BrokerAutocompleteFormItem(props) {
         mapper={mapper}
         onOpenModal={doOpenModal}
         hasPermissionToCreate={hasPermissionToCreate}
-        renderOption={(props, option) => (
-          <Box
-            component="li"
-            {...props}
-            {...{ key: `${option.value}` }}
-          >
-            {option.label}
-          </Box>
-        )}
+        rerender={rerender}
       />
 
       {modalVisible && (

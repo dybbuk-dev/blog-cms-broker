@@ -13,21 +13,22 @@ export function CheckboxFormItem(props) {
   const { sidenavColor } = selectMuiSettings();
 
   const {
+    externalErrorMessage,
+    forceValue,
+    hint,
     label,
     name,
-    hint,
     required,
-    externalErrorMessage,
     value,
   } = props;
 
   const {
-    register,
+    control: { defaultValuesRef },
     errors,
     formState: { touched, isSubmitted },
-    setValue,
-    control: { defaultValuesRef },
     getValues,
+    register,
+    setValue,
   } = useFormContext();
 
   const defaultValues = defaultValuesRef.current || {};
@@ -54,6 +55,12 @@ export function CheckboxFormItem(props) {
     register({ name });
   }, [register, name]);
 
+  useEffect(() => {
+    if (forceValue) {
+      setChecked(value);
+    }
+  }, [value]);
+
   const errorMessage = FormErrors.errorMessage(
     name,
     errors,
@@ -71,7 +78,7 @@ export function CheckboxFormItem(props) {
           <Switch
             id={name}
             name={name}
-            checked={props.forceValue ? value : checked}
+            checked={checked}
             onChange={(e) => {
               setChecked(Boolean(e.target.checked));
               setValue(name, Boolean(e.target.checked), {
@@ -99,15 +106,18 @@ export function CheckboxFormItem(props) {
   );
 }
 
-CheckboxFormItem.defaultProps = {};
+CheckboxFormItem.defaultProps = {
+  forceValue: false,
+};
 
 CheckboxFormItem.propTypes = {
+  externalErrorMessage: PropTypes.string,
+  forceValue: PropTypes.bool,
+  hint: PropTypes.string,
+  label: PropTypes.string,
   name: PropTypes.string.isRequired,
   required: PropTypes.bool,
-  label: PropTypes.string,
-  hint: PropTypes.string,
   value: PropTypes.bool,
-  externalErrorMessage: PropTypes.string,
 };
 
 export default CheckboxFormItem;

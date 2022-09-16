@@ -25,12 +25,11 @@ import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import MDButton from 'src/mui/components/MDButton';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
-import PageAutocompleteFormItem from 'src/view/page/autocomplete/PageAutocompleteFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import { filterBooleanOptions } from 'src/modules/utils';
-import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
-import NavigationAutocompleteFormItem from 'src/view/navigation/autocomplete/NavigationAutocompleteFormItem';
 import AuthorAutocompleteFormItem from 'src/view/author/autocomplete/AuthorAutocompleteFormItem';
+import { navigationTypeOptions } from 'src/modules/navigation/navigationUtils';
+import MDBox from 'src/mui/components/MDBox';
 
 const schema = yup.object().shape({
   idRange: yupFilterSchemas.integerRange(
@@ -60,6 +59,9 @@ const schema = yup.object().shape({
   pdf: yupFilterSchemas.boolean(
     i18n('entities.page.fields.pdf'),
   ),
+  type: yupFilterSchemas.enumerator(
+    i18n('entities.navigation.fields.type'),
+  ),
 });
 
 const emptyValues = {
@@ -72,6 +74,7 @@ const emptyValues = {
   body: null,
   activated: null,
   pdf: null,
+  type: 'NONE',
 };
 
 const previewRenders = {
@@ -117,6 +120,12 @@ const previewRenders = {
   author: {
     label: i18n('entities.page.fields.author'),
     render: filterRenders.relationToOne(),
+  },
+  type: {
+    label: i18n('entities.navigation.fields.type'),
+    render: filterRenders.enumerator(
+      'entities.navigation.enumerators.type',
+    ),
   },
 };
 
@@ -168,8 +177,36 @@ function PageListFilter(props) {
     return form.handleSubmit(onSubmit)();
   };
 
+  const onClickTypeButton = (type) => {
+    form.setValue('type', type);
+    return form.handleSubmit(onSubmit)();
+  };
+
   return (
     <FilterWrapper>
+      <MDBox
+        display="flex"
+        justifyContent="center"
+        gap={1}
+        mb={2}
+      >
+        {navigationTypeOptions.map((type) => (
+          <MDButton
+            key={type.value}
+            variant={
+              form.getValues('type') === type.value
+                ? 'contained'
+                : 'outlined'
+            }
+            color={sidenavColor}
+            onClick={() => {
+              onClickTypeButton(type.value);
+            }}
+          >
+            {type.label}
+          </MDButton>
+        ))}
+      </MDBox>
       <FilterAccordion
         expanded={expanded}
         onChange={(event, isExpanded) =>
@@ -200,14 +237,13 @@ function PageListFilter(props) {
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
-                  <NavigationAutocompleteFormItem
-                    name="navigation"
+                  <SelectFormItem
+                    name="type"
                     label={i18n(
-                      'entities.page.fields.navigation',
+                      'entities.navigation.fields.type',
                     )}
+                    options={navigationTypeOptions}
                     variant="standard"
-                    withChildren={true}
-                    fullWidth
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>

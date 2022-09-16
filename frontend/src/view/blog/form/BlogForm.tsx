@@ -208,15 +208,13 @@ function BlogForm(props) {
               />
             </Grid>
             <Grid item md={12} xs={12}>
-              <MDBox pt={7}>
-                <LogoFormItem
-                  name="blog_image"
-                  label={i18n(
-                    'entities.blog.fields.blog_image',
-                  )}
-                  storage={Storage.values.blog_image}
-                />
-              </MDBox>
+              <LogoFormItem
+                name="blog_image"
+                label={i18n(
+                  'entities.blog.fields.blog_image',
+                )}
+                storage={Storage.values.blog_image}
+              />
             </Grid>
             <Grid item md={12} xs={12}>
               <HtmlEditorFormItem

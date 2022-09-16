@@ -29,6 +29,7 @@ import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
 import Storage from 'src/security/storage';
 import moment from 'moment';
 import GroupFormItem from 'src/view/shared/form/items/GroupFormItem';
+import FieldSetViewItem from 'src/view/shared/view/FieldSetViewItem';
 
 const schema = yup.object().shape({
   link: yupFormSchemas.string(
@@ -162,68 +163,70 @@ function PageForm(props) {
     <FormWrapper>
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <MDBox
-            pb={3}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="flex-start"
-          >
-            <MDTypography variant="h4">
-              {'meta data'}
-            </MDTypography>
-          </MDBox>
-          <MDBox p={3}>
-            <Grid container spacing={2}>
-              <Grid item md={12} xs={12}>
-                <NavigationAutocompleteFormItem
-                  name="navigation"
-                  label={i18n(
-                    'entities.page.fields.navigation',
-                  )}
-                  required={false}
-                  showCreate={true}
-                  variant="standard"
-                  withChildren={true}
-                  fullWidth
-                />
-              </Grid>
-              <Grid item md={12} xs={12}>
-                <InputFormItem
-                  name="link"
-                  label={i18n('entities.page.fields.link')}
-                  variant="standard"
-                  required={true}
-                />
-              </Grid>
-              <Grid item md={12} xs={12}>
-                <InputFormItem
-                  name="title"
-                  label={i18n('entities.page.fields.title')}
-                  variant="standard"
-                  required={true}
-                />
-              </Grid>
-              <Grid item md={12} xs={12}>
-                <TextAreaFormItem
-                  name="meta_keywords"
-                  label={i18n(
-                    'entities.page.fields.meta_keywords',
-                  )}
-                  variant="standard"
-                  required={true}
-                />
-              </Grid>
-              <Grid item md={12} xs={12}>
-                <TextAreaFormItem
-                  name="meta_description"
-                  label={i18n(
-                    'entities.page.fields.meta_description',
-                  )}
-                  variant="standard"
-                  required={true}
-                />
-              </Grid>
-              {/* <Grid item md={12} xs={12}>
+          <Grid spacing={2} container>
+            <Grid xs={12} item>
+              <FieldSetViewItem
+                label={i18n(
+                  'entities.page.fields.metadata',
+                )}
+              >
+                <Grid container spacing={2}>
+                  <Grid item md={12} xs={12}>
+                    <NavigationAutocompleteFormItem
+                      name="navigation"
+                      label={i18n(
+                        'entities.page.fields.navigation',
+                      )}
+                      required={false}
+                      showCreate={true}
+                      variant="standard"
+                      withChildren={true}
+                      part="page"
+                      id={props.record?.id || 0}
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item md={12} xs={12}>
+                    <InputFormItem
+                      name="link"
+                      label={i18n(
+                        'entities.page.fields.link',
+                      )}
+                      variant="standard"
+                      required={true}
+                    />
+                  </Grid>
+                  <Grid item md={12} xs={12}>
+                    <InputFormItem
+                      name="title"
+                      label={i18n(
+                        'entities.page.fields.title',
+                      )}
+                      variant="standard"
+                      required={true}
+                    />
+                  </Grid>
+                  <Grid item md={12} xs={12}>
+                    <TextAreaFormItem
+                      name="meta_keywords"
+                      label={i18n(
+                        'entities.page.fields.meta_keywords',
+                      )}
+                      variant="standard"
+                      required={true}
+                    />
+                  </Grid>
+                  <Grid item md={12} xs={12}>
+                    <TextAreaFormItem
+                      name="meta_description"
+                      label={i18n(
+                        'entities.page.fields.meta_description',
+                      )}
+                      variant="standard"
+                      required={true}
+                    />
+                  </Grid>
+                  {/* <Grid item md={12} xs={12}>
                 <InputFormItem
                   name="created"
                   label={i18n(
@@ -232,152 +235,144 @@ function PageForm(props) {
                   variant="standard"
                 />
               </Grid> */}
-              <Grid item md={12} xs={12}>
-                <AuthorAutocompleteFormItem
-                  name="author"
-                  label={i18n(
-                    'entities.page.fields.author',
-                  )}
-                  required={false}
-                  showCreate={true}
-                  variant="standard"
-                  fullWidth
-                />
-              </Grid>
+                  <Grid item md={12} xs={12}>
+                    <AuthorAutocompleteFormItem
+                      name="author"
+                      label={i18n(
+                        'entities.page.fields.author',
+                      )}
+                      required={false}
+                      showCreate={true}
+                      variant="standard"
+                      fullWidth
+                    />
+                  </Grid>
+                </Grid>
+              </FieldSetViewItem>
             </Grid>
-          </MDBox>
-          <MDBox pb={3}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <GroupFormItem
-                  name="related_links"
-                  label={i18n(
-                    'entities.page.fields.relatedLinks',
-                  )}
-                  groupInputTemplates={[
-                    {
-                      input: InputFormItem,
-                      name: 'name',
-                      label: i18n(
-                        'entities.page.fields.relatedLink.name',
-                      ),
-                      md: 6,
-                      xs: 12,
-                      defaultValue: '',
-                      required: true,
-                    },
-                    {
-                      input: InputFormItem,
-                      name: 'url',
-                      label: i18n(
-                        'entities.page.fields.relatedLink.url',
-                      ),
-                      md: 6,
-                      xs: 12,
-                      defaultValue: '',
-                      required: true,
-                    },
-                  ]}
-                />
-              </Grid>
+            <Grid xs={12} item>
+              <GroupFormItem
+                name="related_links"
+                label={i18n(
+                  'entities.page.fields.relatedLinks',
+                )}
+                groupInputTemplates={[
+                  {
+                    input: InputFormItem,
+                    name: 'name',
+                    label: i18n(
+                      'entities.page.fields.relatedLink.name',
+                    ),
+                    md: 6,
+                    xs: 12,
+                    defaultValue: '',
+                    required: true,
+                  },
+                  {
+                    input: InputFormItem,
+                    name: 'url',
+                    label: i18n(
+                      'entities.page.fields.relatedLink.url',
+                    ),
+                    md: 6,
+                    xs: 12,
+                    defaultValue: '',
+                    required: true,
+                  },
+                ]}
+              />
             </Grid>
-          </MDBox>
-          <MDBox
-            pb={3}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="flex-start"
-          >
-            <MDTypography variant="h4">
-              {'teasers'}
-            </MDTypography>
-          </MDBox>
-          <MDBox p={3}>
-            <Grid container spacing={2}>
-              <Grid item md={12} xs={12}>
-                <MDBox pt={7}>
-                  <LogoFormItem
-                    name="page_image"
-                    label={i18n(
-                      'entities.page.fields.page_image',
-                    )}
-                    storage={Storage.values.page_image}
-                  />
-                </MDBox>
-              </Grid>
-              <Grid item md={12} xs={12}>
-                <InputFormItem
-                  name="teaser_link"
-                  label={i18n(
-                    'entities.page.fields.teaser_link',
-                  )}
-                  variant="standard"
-                />
-              </Grid>
-              <Grid item md={12} xs={12}>
-                <InputFormItem
-                  name="teaser_title"
-                  label={i18n(
-                    'entities.page.fields.teaser_title',
-                  )}
-                  variant="standard"
-                />
-              </Grid>
-              <Grid item md={12} xs={12}>
-                <HtmlEditorFormItem
-                  name="teaser"
-                  label={i18n(
-                    'entities.news.fields.teaser',
-                  )}
-                  value={initialValues.teaser}
-                />
-              </Grid>
+            <Grid xs={12} item>
+              <FieldSetViewItem
+                label={i18n('entities.page.fields.teaser')}
+              >
+                <Grid container spacing={2}>
+                  <Grid item md={12} xs={12}>
+                    <LogoFormItem
+                      name="page_image"
+                      label={i18n(
+                        'entities.page.fields.page_image',
+                      )}
+                      storage={Storage.values.page_image}
+                    />
+                  </Grid>
+                  <Grid item md={12} xs={12}>
+                    <InputFormItem
+                      name="teaser_link"
+                      label={i18n(
+                        'entities.page.fields.teaser_link',
+                      )}
+                      variant="standard"
+                    />
+                  </Grid>
+                  <Grid item md={12} xs={12}>
+                    <InputFormItem
+                      name="teaser_title"
+                      label={i18n(
+                        'entities.page.fields.teaser_title',
+                      )}
+                      variant="standard"
+                    />
+                  </Grid>
+                  <Grid item md={12} xs={12}>
+                    <HtmlEditorFormItem
+                      name="teaser"
+                      label={i18n(
+                        'entities.news.fields.teaser',
+                      )}
+                      value={initialValues.teaser}
+                    />
+                  </Grid>
+                </Grid>
+              </FieldSetViewItem>
             </Grid>
-          </MDBox>
-          <MDBox
-            pb={3}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="flex-start"
-          >
-            <MDTypography variant="h4">
-              {'pages content'}
-            </MDTypography>
-          </MDBox>
-          <MDBox p={3}>
-            <Grid container spacing={2}>
-              <Grid item md={12} xs={12}>
-                <InputFormItem
-                  name="name"
-                  variant="standard"
-                  label={i18n('entities.page.fields.name')}
-                  required={true}
-                />
-              </Grid>
-              <Grid item md={12} xs={12}>
-                <HtmlEditorFormItem
-                  name="body"
-                  label={i18n('entities.news.fields.body')}
-                  value={initialValues.body}
-                  required={true}
-                />
-              </Grid>
-              <Grid item md={12} xs={12}>
-                <CheckboxFormItem
-                  name="activated"
-                  label={i18n(
-                    'entities.page.fields.activated',
-                  )}
-                />
-              </Grid>
-              <Grid item md={6} xs={12}>
-                <CheckboxFormItem
-                  name="pdf"
-                  label={i18n('entities.page.fields.pdf')}
-                />
-              </Grid>
+            <Grid xs={12} item>
+              <FieldSetViewItem
+                label={i18n(
+                  'entities.page.fields.page_content',
+                )}
+              >
+                <Grid container spacing={2}>
+                  <Grid item md={12} xs={12}>
+                    <InputFormItem
+                      name="name"
+                      variant="standard"
+                      label={i18n(
+                        'entities.page.fields.name',
+                      )}
+                      required={true}
+                    />
+                  </Grid>
+                  <Grid item md={12} xs={12}>
+                    <HtmlEditorFormItem
+                      name="body"
+                      label={i18n(
+                        'entities.news.fields.body',
+                      )}
+                      value={initialValues.body}
+                      required={true}
+                    />
+                  </Grid>
+                  <Grid item md={12} xs={12}>
+                    <CheckboxFormItem
+                      name="activated"
+                      label={i18n(
+                        'entities.page.fields.activated',
+                      )}
+                    />
+                  </Grid>
+                  <Grid item md={6} xs={12}>
+                    <CheckboxFormItem
+                      name="pdf"
+                      label={i18n(
+                        'entities.page.fields.pdf',
+                      )}
+                    />
+                  </Grid>
+                </Grid>
+              </FieldSetViewItem>
             </Grid>
-          </MDBox>
+          </Grid>
           <FormButtons
             style={{
               flexDirection: modal

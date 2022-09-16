@@ -220,31 +220,27 @@ function BrokerBaseForm(props) {
         />
       </Grid>
       <Grid item md={6} xs={12}>
-        <MDBox pt={7}>
-          <LogoFormItem
-            name="broker_image_top_broker_logo"
-            label={i18n(
-              'entities.broker.fields.broker_image.top_broker_logo',
-            )}
-            storage={
-              Storage.values.broker_image_top_broker_logo
-            }
-          />
-        </MDBox>
+        <LogoFormItem
+          name="broker_image_top_broker_logo"
+          label={i18n(
+            'entities.broker.fields.broker_image.top_broker_logo',
+          )}
+          storage={
+            Storage.values.broker_image_top_broker_logo
+          }
+        />
       </Grid>
       <Grid item md={6} xs={12}>
-        <MDBox pt={7}>
-          <LogoFormItem
-            name="broker_image_top_broker_horizontal_logo"
-            label={i18n(
-              'entities.broker.fields.broker_image.top_broker_horizontal_logo',
-            )}
-            storage={
-              Storage.values
-                .broker_image_top_broker_horizontal_logo
-            }
-          />
-        </MDBox>
+        <LogoFormItem
+          name="broker_image_top_broker_horizontal_logo"
+          label={i18n(
+            'entities.broker.fields.broker_image.top_broker_horizontal_logo',
+          )}
+          storage={
+            Storage.values
+              .broker_image_top_broker_horizontal_logo
+          }
+        />
       </Grid>
       <Grid item xs={12}>
         <FieldSetViewItem
@@ -260,44 +256,36 @@ function BrokerBaseForm(props) {
         </FieldSetViewItem>
       </Grid>
       <Grid item md={4} xs={12}>
-        <MDBox pt={7}>
-          <LogoFormItem
-            name="broker_image_broker_regulation_image"
-            label={i18n(
-              'entities.broker.fields.broker_image.broker_regulation_image',
-            )}
-            storage={
-              Storage.values
-                .broker_image_broker_regulation_image
-            }
-          />
-        </MDBox>
+        <LogoFormItem
+          name="broker_image_broker_regulation_image"
+          label={i18n(
+            'entities.broker.fields.broker_image.broker_regulation_image',
+          )}
+          storage={
+            Storage.values
+              .broker_image_broker_regulation_image
+          }
+        />
       </Grid>
       <Grid item md={4} xs={12}>
-        <MDBox pt={7}>
-          <LogoFormItem
-            name="broker_image_broker_logo"
-            label={i18n(
-              'entities.broker.fields.broker_image.broker_logo',
-            )}
-            storage={
-              Storage.values.broker_image_broker_logo
-            }
-          />
-        </MDBox>
+        <LogoFormItem
+          name="broker_image_broker_logo"
+          label={i18n(
+            'entities.broker.fields.broker_image.broker_logo',
+          )}
+          storage={Storage.values.broker_image_broker_logo}
+        />
       </Grid>
       <Grid item md={4} xs={12}>
-        <MDBox pt={7}>
-          <LogoFormItem
-            name="broker_image_broker_detail_logo"
-            label={i18n(
-              'entities.broker.fields.broker_image.broker_detail_logo',
-            )}
-            storage={
-              Storage.values.broker_image_broker_detail_logo
-            }
-          />
-        </MDBox>
+        <LogoFormItem
+          name="broker_image_broker_detail_logo"
+          label={i18n(
+            'entities.broker.fields.broker_image.broker_detail_logo',
+          )}
+          storage={
+            Storage.values.broker_image_broker_detail_logo
+          }
+        />
       </Grid>
     </Grid>
   );

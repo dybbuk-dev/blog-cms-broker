@@ -2,6 +2,7 @@ import Error400 from '../errors/Error400';
 import SequelizeRepository from '../database/repositories/sequelizeRepository';
 import { IServiceOptions } from './IServiceOptions';
 import NavigationRepository from '../database/repositories/navigationRepository';
+import PageRepositoryEx from '../database/repositories/extends/pageRepositoryEx';
 
 export default class NavigationService {
   options: IServiceOptions;
@@ -126,12 +127,25 @@ export default class NavigationService {
     search,
     limit,
     withChildren = false,
+    part = null,
+    id = null,
   ) {
+    let excludes = [0];
+    if (part) {
+      if (part === 'page') {
+        excludes =
+          await PageRepositoryEx.filterNavigationIds(
+            [id ?? 0],
+            this.options,
+          );
+      }
+    }
     return NavigationRepository.findAllAutocomplete(
       search,
       limit,
       this.options,
       withChildren,
+      excludes,
     );
   }
 

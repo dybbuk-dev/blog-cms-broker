@@ -70,7 +70,7 @@ const en = {
       menu: 'Promotion',
     },
     page: {
-      menu: 'General Pages',
+      menu: 'Pages',
     },
     pageRelatedLink: {
       menu: 'Page Related Link',
@@ -1112,7 +1112,7 @@ const en = {
     page: {
       name: 'page',
       label: 'All Pages',
-      menu: 'General Pages',
+      menu: 'Pages',
       exporterFileName: 'page_export',
       list: {
         menu: 'Pages',
@@ -1148,14 +1148,16 @@ const en = {
           name: 'Name',
           url: 'Address',
         },
-        page_image: 'Upload teaser logo',
+        page_image: 'Upload Teaser Logo',
         teaser_link: 'Link',
         teaser_title: 'Link title',
-        teaser: 'teasers',
+        teaser: 'Teasers',
         name: 'Surname',
         body: 'Body',
         activated: 'Activated',
         pdf: 'Download PDF',
+        metadata: 'Metadata',
+        page_content: 'Page Content',
       },
       placeholders: {},
       hints: {},
@@ -1526,6 +1528,10 @@ const en = {
     image: 'You must upload an image',
     size: 'File is too big. Max allowed size is {0}',
     formats: `Invalid format. Must be one of: {0}.`,
+    placeholder: {
+      title: 'Click or drag and drop files here',
+      size: '(Max {0})',
+    },
   },
   importer: {
     line: 'Line',

@@ -54,8 +54,6 @@ const schema = yup.object().shape({
     i18n('entities.author.fields.description'),
     {
       required: true,
-      min: 1,
-      max: 255,
     },
   ),
 });
@@ -118,16 +116,12 @@ function AuthorForm(props) {
               />
             </Grid>
             <Grid item md={12} xs={12}>
-              <MDBox pt={7}>
-                <LogoFormItem
-                  name="author_image"
-                  label={i18n(
-                    'entities.author.fields.image',
-                  )}
-                  storage={Storage.values.author_image}
-                  required={true}
-                />
-              </MDBox>
+              <LogoFormItem
+                name="author_image"
+                label={i18n('entities.author.fields.image')}
+                storage={Storage.values.author_image}
+                required={true}
+              />
             </Grid>
             <Grid item md={12} xs={12}>
               <HtmlEditorFormItem
