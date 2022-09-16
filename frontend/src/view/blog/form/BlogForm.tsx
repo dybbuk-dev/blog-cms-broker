@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid, InputAdornment } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import SaveIcon from '@mui/icons-material/Save';
 import UndoIcon from '@mui/icons-material/Undo';
@@ -14,25 +14,18 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import MDButton from 'src/mui/components/MDButton';
-import blogEnumerators from '../../../modules/blog/blogEnumerators';
-import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
-import BlogAutocompleteFormItem from 'src/view/blog/autocomplete/BlogAutocompleteFormItem';
 import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
-import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
-import NavigationAutocompleteFormItem from 'src/view/navigation/autocomplete/NavigationAutocompleteFormItem';
 import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
-import MDTypography from 'src/mui/components/MDTypography';
 import MDBox from 'src/mui/components/MDBox';
 import AuthorAutocompleteFormItem from 'src/view/author/autocomplete/AuthorAutocompleteFormItem';
 import LogoFormItem from 'src/view/shared/form/items/LogoFormItem';
 import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
 import Storage from 'src/security/storage';
-import moment from 'moment';
-import GroupFormItem from 'src/view/shared/form/items/GroupFormItem';
 import BrokerAutocompleteFormItem from 'src/view/broker/autocomplete/BrokerAutocompleteFormItem';
+import slug from 'slug';
 
 const schema = yup.object().shape({
-  link: yupFormSchemas.string(
+  name_normalized: yupFormSchemas.string(
     i18n('entities.blog.fields.link'),
     {
       required: true,
@@ -91,12 +84,18 @@ const schema = yup.object().shape({
 });
 
 function BlogForm(props) {
-  const { sidenavColor } = selectMuiSettings();
+  const { sidenavColor, darkMode } = selectMuiSettings();
+  const { record } = props;
+  const [normalizedName, setNormalizedName] = useState(
+    slug(
+      (record && (record.name_normalized || record.name)) ||
+        '',
+    ),
+  );
   const [initialValues] = useState(() => {
     const record = props.record || {};
 
     return {
-      link: record.link || null,
       pagetitle: record.pagetitle || null,
       meta_keywords: record.metakeywords || null,
       meta_description: record.metadescription || null,
@@ -139,15 +138,36 @@ function BlogForm(props) {
                 name="name"
                 variant="standard"
                 label={i18n('entities.blog.fields.name')}
+                onChange={(newVal) => {
+                  setNormalizedName(slug(newVal));
+                }}
                 required={true}
+                autoFocus
               />
             </Grid>
             <Grid item md={12} xs={12}>
               <InputFormItem
-                name="link"
+                name="name_normalized"
                 label={i18n('entities.blog.fields.link')}
                 variant="standard"
                 required={true}
+                onChange={(newValue) => {
+                  setNormalizedName(slug(newValue));
+                }}
+                startAdornment={
+                  <InputAdornment
+                    position="start"
+                    sx={{
+                      color:
+                        (darkMode ? 'white' : 'inherit') +
+                        ' !important',
+                    }}
+                  >
+                    <span>/blog/</span>
+                  </InputAdornment>
+                }
+                value={normalizedName}
+                {...{ forceValue: true }}
               />
             </Grid>
             <Grid item md={12} xs={12}>
@@ -199,14 +219,14 @@ function BlogForm(props) {
             <Grid item md={12} xs={12}>
               <HtmlEditorFormItem
                 name="teaser"
-                label={i18n('entities.news.fields.teaser')}
+                label={i18n('entities.blog.fields.teaser')}
                 value={initialValues.teaser}
               />
             </Grid>
             <Grid item md={12} xs={12}>
               <HtmlEditorFormItem
                 name="content"
-                label={i18n('entities.news.fields.content')}
+                label={i18n('entities.blog.fields.content')}
                 value={initialValues.content}
                 required={true}
               />

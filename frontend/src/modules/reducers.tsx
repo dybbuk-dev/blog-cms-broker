@@ -5,6 +5,7 @@ import auth from 'src/modules/auth/authReducers';
 import author from 'src/modules/author/authorReducers';
 import affiliateLink from 'src/modules/affiliateLink/affiliateLinkReducers';
 import blog from 'src/modules/blog/blogReducers';
+import blogComment from 'src/modules/blogComment/blogCommentReducers';
 import broker from 'src/modules/broker/brokerReducers';
 import brokerArticle from 'src/modules/brokerArticle/brokerArticleReducers';
 import category from 'src/modules/category/categoryReducers';
@@ -29,6 +30,7 @@ export default (history) =>
     auth,
     author,
     blog,
+    blogComment,
     broker,
     brokerArticle,
     category,

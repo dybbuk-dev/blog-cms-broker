@@ -161,7 +161,7 @@ function OpenxListFilter(props) {
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}></Grid>
-                <Grid item lg={12} xs={12}>
+                <Grid item lg={6} xs={12}>
                   <InputFormItem
                     name="code"
                     label={i18n(
@@ -170,7 +170,7 @@ function OpenxListFilter(props) {
                     variant="standard"
                   />
                 </Grid>
-                <Grid item lg={12} xs={12}>
+                <Grid item lg={6} xs={12}>
                   <InputFormItem
                     name="noscript"
                     label={i18n(
@@ -179,7 +179,7 @@ function OpenxListFilter(props) {
                     variant="standard"
                   />
                 </Grid>
-                <Grid item md={12} xs={12}>
+                <Grid item md={6} xs={12}>
                   <SelectFormItem
                     name="zone"
                     label={i18n(
@@ -189,7 +189,7 @@ function OpenxListFilter(props) {
                     variant="standard"
                   />
                 </Grid>
-                <Grid item lg={12} xs={12}>
+                <Grid item lg={6} xs={12}>
                   <SelectFormItem
                     name="activated"
                     label={i18n(

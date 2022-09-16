@@ -1,7 +1,7 @@
 import authAxios from 'src/modules/shared/axios/authAxios';
 import AuthCurrentTenant from 'src/modules/auth/authCurrentTenant';
 
-export default class PageService {
+export default class BlogCommentService {
   static async update(id, data) {
     const body = {
       id,
@@ -11,7 +11,7 @@ export default class PageService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.put(
-      `/tenant/${tenantId}/page/${id}`,
+      `/tenant/${tenantId}/blogComment/${id}`,
       body,
     );
 
@@ -26,7 +26,7 @@ export default class PageService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.delete(
-      `/tenant/${tenantId}/page`,
+      `/tenant/${tenantId}/blogComment`,
       {
         params,
       },
@@ -39,11 +39,11 @@ export default class PageService {
     const body = {
       data,
     };
-    console.log(body);
+
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.post(
-      `/tenant/${tenantId}/page`,
+      `/tenant/${tenantId}/blogComment`,
       body,
     );
 
@@ -59,7 +59,7 @@ export default class PageService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.post(
-      `/tenant/${tenantId}/page/import`,
+      `/tenant/${tenantId}/blogComment/import`,
       body,
     );
 
@@ -70,7 +70,7 @@ export default class PageService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.get(
-      `/tenant/${tenantId}/page/${id}`,
+      `/tenant/${tenantId}/blogComment/${id}`,
     );
 
     return response.data;
@@ -85,14 +85,12 @@ export default class PageService {
     };
 
     const tenantId = AuthCurrentTenant.get();
-
     const response = await authAxios.get(
-      `/tenant/${tenantId}/page`,
+      `/tenant/${tenantId}/blogComment`,
       {
         params,
       },
     );
-
     return response.data;
   }
 
@@ -105,7 +103,7 @@ export default class PageService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.get(
-      `/tenant/${tenantId}/page/autocomplete`,
+      `/tenant/${tenantId}/blogComment/autocomplete`,
       {
         params,
       },

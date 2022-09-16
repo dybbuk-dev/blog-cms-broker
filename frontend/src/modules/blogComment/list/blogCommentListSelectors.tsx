@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectRaw = (state) => state.author.list;
+const selectRaw = (state) => state.blogComment.list;
 
 const selectLoading = createSelector(
   [selectRaw],
@@ -109,7 +109,7 @@ const selectIsAllSelected = createSelector(
   },
 );
 
-const authorListSelectors = {
+const blogCommentListSelectors = {
   selectLoading,
   selectRows,
   selectCount,
@@ -127,4 +127,4 @@ const authorListSelectors = {
   selectSorter,
 };
 
-export default authorListSelectors;
+export default blogCommentListSelectors;

@@ -7,74 +7,33 @@ import SequelizeRepository from './sequelizeRepository';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import moment from 'moment';
 import { orderByUtils } from '../utils/orderByUtils';
-import FileRepository from './fileRepository';
-import BlogBrokerRepository from './blogBrokerRepository';
-import BrokerRepository from './brokerRepository';
 const Op = Sequelize.Op;
 
-class BlogRepository {
-  static ALL_FIELDS = [
-    'name',
-    'name_normalized',
-    'pagetitle',
-    'metadescription',
-    'metakeywords',
-    'content',
-    'activated',
-  ];
+class BlogCommentRepository {
+  static ALL_FIELDS = ['name', 'content'];
 
   static _relatedData(data) {
     return {
-      teaser: data.teaser ?? '',
-      author_id: data.author ? data.author.id : null,
       ip: '',
     };
-  }
-
-  static async _replaceRelationFiles(
-    record,
-    data,
-    options: IRepositoryOptions,
-  ) {
-    await FileRepository.replaceRelationFiles(
-      {
-        belongsTo:
-          options.database.blog_entry.getTableName(),
-        belongsToColumn: 'blog_image',
-        belongsToId: record.id,
-      },
-      data.blog_image.map((v) => ({
-        ...v,
-        link: null,
-        linkTitle: null,
-        new: true,
-      })),
-      options,
-    );
   }
 
   static async create(data, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
-    const record = await options.database.blog_entry.create(
-      {
-        ...lodash.pick(data, this.ALL_FIELDS),
-        ...this._relatedData(data),
-        created: data.created ? data.created : moment(),
-        modified: data.created ? data.created : moment(),
-      },
-      {
-        transaction,
-      },
-    );
-
-    if (data.blog_image) {
-      await this._replaceRelationFiles(
-        record,
-        data,
-        options,
+    const record =
+      await options.database.blog_comment.create(
+        {
+          ...lodash.pick(data, this.ALL_FIELDS),
+          ...this._relatedData(data),
+          created: data.created ? data.created : moment(),
+          modified: data.created ? data.created : moment(),
+        },
+        {
+          transaction,
+        },
       );
-    }
+
     await this._createAuditLog(
       AuditLogRepository.CREATE,
       record,
@@ -93,12 +52,13 @@ class BlogRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    let record = await options.database.blog_entry.findOne({
-      where: {
-        id,
-      },
-      transaction,
-    });
+    let record =
+      await options.database.blog_comment.findOne({
+        where: {
+          id,
+        },
+        transaction,
+      });
 
     if (!record) {
       throw new Error404();
@@ -114,8 +74,6 @@ class BlogRepository {
       },
     );
 
-    await this._replaceRelationFiles(record, data, options);
-
     await this._createAuditLog(
       AuditLogRepository.UPDATE,
       record,
@@ -130,27 +88,17 @@ class BlogRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    let record = await options.database.blog_entry.findOne({
-      where: {
-        id,
-      },
-      transaction,
-    });
+    let record =
+      await options.database.blog_comment.findOne({
+        where: {
+          id,
+        },
+        transaction,
+      });
 
     if (!record) {
       throw new Error404();
     }
-
-    await BlogBrokerRepository.destroyByBlog(id, options);
-
-    await FileRepository.destroy(
-      {
-        belongsTo:
-          options.database.blog_entry.getTableName(),
-        belongsToId: id,
-      },
-      options,
-    );
 
     await record.destroy({
       transaction,
@@ -168,15 +116,10 @@ class BlogRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    const include = [
-      {
-        model: options.database.author,
-        as: 'author',
-      },
-    ];
+    const include = [];
 
     const record =
-      await options.database.blog_entry.findOne({
+      await options.database.blog_comment.findOne({
         where: {
           id,
         },
@@ -221,7 +164,7 @@ class BlogRepository {
     };
 
     const records =
-      await options.database.blog_entry.findAll({
+      await options.database.blog_comment.findAll({
         attributes: ['id'],
         where,
       });
@@ -233,7 +176,7 @@ class BlogRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    return options.database.blog_entry.count({
+    return options.database.blog_comment.count({
       where: {
         ...filter,
       },
@@ -247,13 +190,9 @@ class BlogRepository {
   ) {
     let whereAnd: Array<any> = [];
     const include = [
-      // {
-      //   model: options.database.navigation,
-      //   as: 'navigation',
-      // },
       {
-        model: options.database.author,
-        as: 'author',
+        model: options.database.blog_entry,
+        as: 'blog_entry',
       },
     ];
     if (filter) {
@@ -285,40 +224,11 @@ class BlogRepository {
         }
       }
 
-      // if (filter.navigation) {
-      //   if (
-      //     filter.navigation !== undefined &&
-      //     filter.navigation !== null &&
-      //     filter.navigation !== ''
-      //   ) {
-      //     whereAnd.push({
-      //       navigation_id: filter.navigation.id,
-      //     });
-      //   }
-      // }
-      if (filter.author) {
-        if (
-          filter.author !== undefined &&
-          filter.author !== null &&
-          filter.author !== ''
-        ) {
-          whereAnd.push({
-            author_id: filter.author.id,
-          });
-        }
-      }
-      [
-        'name',
-        'pagetitle',
-        'metakeywords',
-        'metadescription',
-        'content',
-        'teaser',
-      ].forEach((field) => {
+      ['name', 'email'].forEach((field) => {
         if (filter[field]) {
           whereAnd.push(
             SequelizeFilterUtils.ilikeIncludes(
-              'blog_entry',
+              'blog_comment',
               field,
               filter[field],
             ),
@@ -326,25 +236,27 @@ class BlogRepository {
         }
       });
 
-      ['activated'].forEach((field) => {
-        if (
-          filter[field] === true ||
-          filter[field] === 'true' ||
-          filter[field] === false ||
-          filter[field] === 'false'
-        ) {
-          whereAnd.push({
-            [field]:
-              filter[field] === true ||
-              filter[field] === 'true',
-          });
-        }
-      });
+      ['spam', 'deleted', 'review_required'].forEach(
+        (field) => {
+          if (
+            filter[field] === true ||
+            filter[field] === 'true' ||
+            filter[field] === false ||
+            filter[field] === 'false'
+          ) {
+            whereAnd.push({
+              [field]:
+                filter[field] === true ||
+                filter[field] === 'true',
+            });
+          }
+        },
+      );
     }
 
     const where = { [Op.and]: whereAnd };
     let { rows, count } =
-      await options.database.blog_entry.findAndCountAll({
+      await options.database.blog_comment.findAndCountAll({
         where,
         include,
         limit: limit ? Number(limit) : undefined,
@@ -378,7 +290,7 @@ class BlogRepository {
           { ['id']: query },
           {
             [Op.and]: SequelizeFilterUtils.ilikeIncludes(
-              'blog_entry',
+              'blog_comment',
               'name',
               query,
             ),
@@ -390,7 +302,7 @@ class BlogRepository {
     const where = { [Op.and]: whereAnd };
 
     const records =
-      await options.database.blog_entry.findAll({
+      await options.database.blog_comment.findAll({
         attributes: ['id', 'name'],
         where,
         limit: limit ? Number(limit) : undefined,
@@ -419,7 +331,7 @@ class BlogRepository {
 
     await AuditLogRepository.log(
       {
-        entityName: 'blog_entry',
+        entityName: 'blog_comment',
         entityId: record.id,
         action,
         values,
@@ -463,34 +375,11 @@ class BlogRepository {
       return output;
     }
 
-    const blogParam = {
-      filter: {
-        blog_entry_id: output.id,
-      },
-    };
-
     const transaction =
       SequelizeRepository.getTransaction(options);
 
-    output.blog_image =
-      await FileRepository.fillDownloadUrl(
-        await record.getBlog_image({
-          transaction,
-        }),
-      );
-
-    const { rows: blog_broker } =
-      await BlogBrokerRepository.findAndCountAll(
-        blogParam,
-        options,
-      );
-
-    output.brokers =
-      blog_broker.map((v) => ({
-        id: v.broker_id,
-      })) || [];
     return output;
   }
 }
 
-export default BlogRepository;
+export default BlogCommentRepository;

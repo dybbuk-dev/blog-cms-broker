@@ -180,7 +180,7 @@ const en = {
     blog: {
       name: 'blog',
       label: 'All Blogs',
-      menu: 'Blogs',
+      menu: 'Articles',
       exporterFileName: 'blog_export',
       list: {
         menu: 'Blogs',
@@ -228,6 +228,59 @@ const en = {
       importer: {
         title: 'Import Blogs',
         fileName: 'blog_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
+
+    blogComment: {
+      name: 'comment',
+      label: 'All Comments',
+      menu: 'Comments',
+      exporterFileName: 'comment_export',
+      list: {
+        menu: 'Comments',
+        title: 'Comments',
+      },
+      create: {
+        success: 'Comment successfully saved',
+      },
+      update: {
+        success: 'Comment successfully saved',
+      },
+      destroy: {
+        success: 'Comment successfully deleted',
+      },
+      destroyAll: {
+        success: 'Comment(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Comment',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        name: 'Surname',
+        deleted: 'deleted',
+        spam: 'spam',
+        review_required: 'review required',
+        content: 'teasers',
+        author: 'Author',
+        email: 'Email',
+        broker: 'brokers',
+        activated: 'Activated',
+        blog: 'blog',
+      },
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Comment',
+      },
+      view: {
+        title: 'View Comment',
+      },
+      importer: {
+        title: 'Import Comments',
+        fileName: 'comment_import_template',
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },
     },

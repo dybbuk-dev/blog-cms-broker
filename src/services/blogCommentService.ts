@@ -1,46 +1,13 @@
 import Error400 from '../errors/Error400';
 import SequelizeRepository from '../database/repositories/sequelizeRepository';
 import { IServiceOptions } from './IServiceOptions';
-import BlogRepository from '../database/repositories/blogRepository';
-import BlogBrokerRepository from '../database/repositories/blogBrokerRepository';
-import BrokerRepository from '../database/repositories/brokerRepository';
+import BlogCommentRepository from '../database/repositories/blogCommentRepository';
 
-export default class BlogService {
+export default class BlogCommentService {
   options: IServiceOptions;
 
   constructor(options) {
     this.options = options;
-  }
-
-  async _withRelatedData(data, transaction) {
-    const options = { ...this.options, transaction };
-    return {
-      ...data,
-      brokers: await BrokerRepository.filterIdInTenant(
-        data.brokers,
-        options,
-      ),
-    };
-  }
-
-  async _updateBlogBroker(id, data, transaction) {
-    const options = { ...this.options, transaction };
-    await BlogBrokerRepository.destroyByBlog(id, options);
-    const items = data.brokers || [];
-    console.log(items);
-    for (const item of items) {
-      await BlogBrokerRepository.create(
-        {
-          broker_id: item.id,
-          blog_entry_id: id,
-        },
-        options,
-      );
-    }
-  }
-
-  async _updateRelatedData(id, data, transaction) {
-    await this._updateBlogBroker(id, data, transaction);
   }
 
   async create(data) {
@@ -50,18 +17,12 @@ export default class BlogService {
       );
 
     try {
-      const record = await BlogRepository.create(
-        await this._withRelatedData(data, transaction),
+      const record = await BlogCommentRepository.create(
+        data,
         {
           ...this.options,
           transaction,
         },
-      );
-
-      await this._updateRelatedData(
-        record.id,
-        data,
-        transaction,
       );
 
       await SequelizeRepository.commitTransaction(
@@ -77,7 +38,7 @@ export default class BlogService {
       SequelizeRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'blog',
+        'blogComment',
       );
 
       throw error;
@@ -91,15 +52,13 @@ export default class BlogService {
       );
 
     try {
-      const record = await BlogRepository.update(id, data, {
-        ...this.options,
-        transaction,
-      });
-
-      await this._updateRelatedData(
-        record.id,
+      const record = await BlogCommentRepository.update(
+        id,
         data,
-        transaction,
+        {
+          ...this.options,
+          transaction,
+        },
       );
 
       await SequelizeRepository.commitTransaction(
@@ -115,7 +74,7 @@ export default class BlogService {
       SequelizeRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'blog',
+        'blogComment',
       );
 
       throw error;
@@ -130,7 +89,7 @@ export default class BlogService {
 
     try {
       for (const id of ids) {
-        await BlogRepository.destroy(id, {
+        await BlogCommentRepository.destroy(id, {
           ...this.options,
           transaction,
         });
@@ -148,11 +107,11 @@ export default class BlogService {
   }
 
   async findById(id) {
-    return BlogRepository.findById(id, this.options);
+    return BlogCommentRepository.findById(id, this.options);
   }
 
   async findAllAutocomplete(search, limit) {
-    return BlogRepository.findAllAutocomplete(
+    return BlogCommentRepository.findAllAutocomplete(
       search,
       limit,
       this.options,
@@ -160,7 +119,7 @@ export default class BlogService {
   }
 
   async findAndCountAll(args) {
-    return BlogRepository.findAndCountAll(
+    return BlogCommentRepository.findAndCountAll(
       args,
       this.options,
     );
@@ -190,7 +149,7 @@ export default class BlogService {
   }
 
   async _isImportHashExistent(importHash) {
-    const count = await BlogRepository.count(
+    const count = await BlogCommentRepository.count(
       {
         importHash,
       },

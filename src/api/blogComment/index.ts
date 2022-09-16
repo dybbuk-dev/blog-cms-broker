@@ -1,0 +1,30 @@
+export default (app) => {
+  app.post(
+    `/tenant/:tenantId/blogComment`,
+    require('./blogCommentCreate').default,
+  );
+  app.put(
+    `/tenant/:tenantId/blogComment/:id`,
+    require('./blogCommentUpdate').default,
+  );
+  app.post(
+    `/tenant/:tenantId/blogComment/import`,
+    require('./blogCommentImport').default,
+  );
+  app.delete(
+    `/tenant/:tenantId/blogComment`,
+    require('./blogCommentDestroy').default,
+  );
+  app.get(
+    `/tenant/:tenantId/blogComment/autocomplete`,
+    require('./blogCommentAutocomplete').default,
+  );
+  app.get(
+    `/tenant/:tenantId/blogComment`,
+    require('./blogCommentList').default,
+  );
+  app.get(
+    `/tenant/:tenantId/blogComment/:id`,
+    require('./blogCommentFind').default,
+  );
+};
