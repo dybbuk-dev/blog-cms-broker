@@ -9,8 +9,8 @@ import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { i18n } from 'src/i18n';
-import actions from 'src/modules/news/list/newsListActions';
-import selectors from 'src/modules/news/list/newsListSelectors';
+import actions from 'src/modules/blogComment/list/blogCommentListActions';
+import selectors from 'src/modules/blogComment/list/blogCommentListSelectors';
 import yupFilterSchemas from 'src/modules/shared/yup/yupFilterSchemas';
 import FilterWrapper, {
   FilterButtons,
@@ -25,100 +25,41 @@ import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import MDButton from 'src/mui/components/MDButton';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
-import NewsAutocompleteFormItem from 'src/view/news/autocomplete/NewsAutocompleteFormItem';
-import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
-import { filterBooleanOptions } from 'src/modules/utils';
 
 const schema = yup.object().shape({
   idRange: yupFilterSchemas.integerRange(
-    i18n('entities.news.fields.idRange'),
-  ),
-  link: yupFilterSchemas.string(
-    i18n('entities.news.fields.link'),
-  ),
-  meta_keywords: yupFilterSchemas.string(
-    i18n('entities.news.fields.meta_keywords'),
-  ),
-  meta_description: yupFilterSchemas.string(
-    i18n('entities.news.fields.meta_description'),
+    i18n('entities.blogComment.fields.idRange'),
   ),
   name: yupFilterSchemas.string(
-    i18n('entities.news.fields.name'),
+    i18n('entities.blogComment.fields.name'),
   ),
-  title: yupFilterSchemas.string(
-    i18n('entities.news.fields.title'),
-  ),
-  teaser: yupFilterSchemas.string(
-    i18n('entities.news.fields.teaser'),
-  ),
-  body: yupFilterSchemas.string(
-    i18n('entities.news.fields.body'),
-  ),
-  activated: yupFilterSchemas.boolean(
-    i18n('entities.news.fields.activated'),
-  ),
-  pdf: yupFilterSchemas.boolean(
-    i18n('entities.news.fields.show_user_logged_in'),
+  email: yupFilterSchemas.string(
+    i18n('entities.blogComment.fields.email'),
   ),
 });
 
 const emptyValues = {
   idRange: [],
-  link: null,
-  meta_keywords: null,
-  meta_description: null,
   name: null,
-  title: null,
-  teaser: null,
-  body: null,
-  activated: null,
-  pdf: null,
+  email: null,
 };
 
 const previewRenders = {
   idRange: {
-    label: i18n('entities.news.fields.idRange'),
+    label: i18n('entities.blogComment.fields.idRange'),
     render: filterRenders.decimalRange(),
   },
-  link: {
-    label: i18n('entities.news.fields.link'),
-    render: filterRenders.generic(),
-  },
-  meta_keywords: {
-    label: i18n('entities.news.fields.meta_keywords'),
-    render: filterRenders.generic(),
-  },
-  meta_description: {
-    label: i18n('entities.news.fields.meta_description'),
-    render: filterRenders.generic(),
-  },
   name: {
-    label: i18n('entities.news.fields.name'),
+    label: i18n('entities.blogComment.fields.name'),
     render: filterRenders.generic(),
   },
-  title: {
-    label: i18n('entities.news.fields.title'),
+  email: {
+    label: i18n('entities.blogComment.fields.email'),
     render: filterRenders.generic(),
-  },
-  teaser: {
-    label: i18n('entities.news.fields.teaser'),
-    render: filterRenders.generic(),
-  },
-  body: {
-    label: i18n('entities.news.fields.body'),
-    render: filterRenders.generic(),
-  },
-  activated: {
-    label: i18n('entities.news.fields.activated'),
-    render: filterRenders.boolean(),
-  },
-  pdf: {
-    label: i18n('entities.news.fields.pdf'),
-    render: filterRenders.boolean(),
   },
 };
 
-function NewsListFilter(props) {
+function BlogCommentListFilter(props) {
   const { sidenavColor } = selectMuiSettings();
   const rawFilter = useSelector(selectors.selectRawFilter);
   const dispatch = useDispatch();
@@ -192,62 +133,27 @@ function NewsListFilter(props) {
                   <InputNumberRangeFormItem
                     name="idRange"
                     label={i18n(
-                      'entities.news.fields.idRange',
+                      'entities.blogComment.fields.idRange',
                     )}
                     variant="standard"
                   />
                 </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputFormItem
-                    name="link"
-                    label={i18n(
-                      'entities.news.fields.link',
-                    )}
-                    variant="standard"
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <InputFormItem
-                    name="meta_description"
-                    label={i18n(
-                      'entities.news.fields.meta_description',
-                    )}
-                    variant="standard"
-                  />
-                </Grid>
+                <Grid item lg={6} xs={12}></Grid>
                 <Grid item lg={6} xs={12}>
                   <InputFormItem
                     name="name"
                     label={i18n(
-                      'entities.news.fields.name',
+                      'entities.blogComment.fields.name',
                     )}
                     variant="standard"
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
                   <InputFormItem
-                    name="title"
+                    name="email"
                     label={i18n(
-                      'entities.news.fields.title',
+                      'entities.blogComment.fields.email',
                     )}
-                    variant="standard"
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <SelectFormItem
-                    name="activated"
-                    label={i18n(
-                      'entities.news.fields.activated',
-                    )}
-                    options={filterBooleanOptions}
-                    variant="standard"
-                  />
-                </Grid>
-                <Grid item lg={6} xs={12}>
-                  <SelectFormItem
-                    name="pdf"
-                    label={i18n('entities.news.fields.pdf')}
-                    options={filterBooleanOptions}
                     variant="standard"
                   />
                 </Grid>
@@ -285,4 +191,4 @@ function NewsListFilter(props) {
   );
 }
 
-export default NewsListFilter;
+export default BlogCommentListFilter;

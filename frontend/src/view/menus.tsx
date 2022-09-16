@@ -57,11 +57,11 @@ const menus = [
         permissionRequired: permissions.blogRead,
         name: i18n('entities.blog.menu'),
       },
-      // {
-      //   path: '/comment',
-      //   permissionRequired: permissions.commentRead,
-      //   name: i18n('entities.comment.menu'),
-      // },
+      {
+        path: '/blogComment',
+        permissionRequired: permissions.blogCommentRead,
+        name: i18n('entities.blogComment.menu'),
+      },
     ],
   },
 

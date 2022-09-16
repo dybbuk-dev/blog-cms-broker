@@ -228,7 +228,7 @@ function PageListFilter(props) {
                     variant="standard"
                   />
                 </Grid>
-                <Grid item md={12} xs={12}>
+                <Grid item md={6} xs={12}>
                   <InputFormItem
                     name="meta_keywords"
                     label={i18n(
@@ -237,7 +237,7 @@ function PageListFilter(props) {
                     variant="standard"
                   />
                 </Grid>
-                <Grid item md={12} xs={12}>
+                <Grid item md={6} xs={12}>
                   <InputFormItem
                     name="meta_description"
                     label={i18n(

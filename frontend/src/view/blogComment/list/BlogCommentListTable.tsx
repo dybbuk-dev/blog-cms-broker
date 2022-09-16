@@ -14,11 +14,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import MaterialLink from '@mui/material/Link';
 import { i18n } from 'src/i18n';
-import newsSelectors from 'src/modules/news/newsSelectors';
-import destroyActions from 'src/modules/news/destroy/newsDestroyActions';
-import destroySelectors from 'src/modules/news/destroy/newsDestroySelectors';
-import actions from 'src/modules/news/list/newsListActions';
-import selectors from 'src/modules/news/list/newsListSelectors';
+import blogCommentSelectors from 'src/modules/blogComment/blogCommentSelectors';
+import destroyActions from 'src/modules/blogComment/destroy/blogCommentDestroyActions';
+import destroySelectors from 'src/modules/blogComment/destroy/blogCommentDestroySelectors';
+import actions from 'src/modules/blogComment/list/blogCommentListActions';
+import selectors from 'src/modules/blogComment/list/blogCommentListSelectors';
 import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
 import Pagination from 'src/view/shared/table/Pagination';
 import Spinner from 'src/view/shared/Spinner';
@@ -28,9 +28,8 @@ import MDTypography from 'src/mui/components/MDTypography';
 import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
 import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
 import MDBadgeDot from 'src/mui/components/MDBadgeDot';
-import moment from 'moment';
 
-function NewsListTable(props) {
+function BlogCommentListTable(props) {
   const { sidenavColor } = selectMuiSettings();
   const [recordIdToDestroy, setRecordIdToDestroy] =
     useState(null);
@@ -57,10 +56,10 @@ function NewsListTable(props) {
     selectors.selectIsAllSelected,
   );
   const hasPermissionToEdit = useSelector(
-    newsSelectors.selectPermissionToEdit,
+    blogCommentSelectors.selectPermissionToEdit,
   );
   const hasPermissionToDestroy = useSelector(
-    newsSelectors.selectPermissionToDestroy,
+    blogCommentSelectors.selectPermissionToDestroy,
   );
 
   const doOpenDestroyConfirmModal = (id) => {
@@ -132,30 +131,33 @@ function NewsListTable(props) {
                 align="right"
                 width="0"
               >
-                {i18n('entities.news.fields.id')}
+                {i18n('entities.blogComment.fields.id')}
               </DataTableHeadCell>
               <DataTableHeadCell
-                onClick={() => doChangeSort('title')}
+                onClick={() => doChangeSort('id')}
                 sorted={
-                  sorter.field === 'title'
+                  sorter.field === 'id' &&
+                  sorter.field.field == 'id'
                     ? sorter.order
                     : 'none'
                 }
               >
-                {i18n('entities.news.fields.title')}
+                {i18n('entities.blogComment.fields.blog')}
               </DataTableHeadCell>
               <DataTableHeadCell
-                onClick={() => doChangeSort('created')}
+                onClick={() => doChangeSort('name')}
                 sorted={
-                  sorter.field === 'created'
+                  sorter.field === 'name'
                     ? sorter.order
                     : 'none'
                 }
               >
-                {i18n('entities.news.fields.created')}
+                {i18n('entities.blogComment.fields.name')}
               </DataTableHeadCell>
               <DataTableHeadCell sorted={false}>
-                {i18n('entities.news.fields.activated')}
+                {i18n(
+                  'entities.blogComment.fields.activated',
+                )}
               </DataTableHeadCell>
               <DataTableHeadCell sorted={false} width="0">
                 {' '}
@@ -205,22 +207,26 @@ function NewsListTable(props) {
                   <DataTableBodyCell>
                     <MaterialLink
                       component={Link}
-                      to={row.link}
+                      to={'blog/' + row.blog_entry.name}
                     >
-                      {row.title}
+                      {row.blog_entry.name
+                        ? row.blog_entry.name
+                        : ''}
                     </MaterialLink>
                   </DataTableBodyCell>
                   <DataTableBodyCell>
-                    {moment(row.created)
-                      .utc()
-                      .format('YYYY-MM-DD')}
+                    {row.name ? row.name : ''}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
-                    {['activated', 'pdf'].map((field) => (
+                    {[
+                      'deleted',
+                      'spam',
+                      'review_required',
+                    ].map((field) => (
                       <MDBadgeDot
                         key={field}
                         badgeContent={i18n(
-                          `entities.news.fields.${field}`,
+                          `entities.blogComment.fields.${field}`,
                         )}
                         color={
                           Boolean(row[field])
@@ -241,7 +247,7 @@ function NewsListTable(props) {
                         <IconButton
                           component={Link}
                           color={sidenavColor}
-                          to={`/news/${row.id}`}
+                          to={`/blogComment/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>
@@ -253,7 +259,7 @@ function NewsListTable(props) {
                           <IconButton
                             color={sidenavColor}
                             component={Link}
-                            to={`/news/${row.id}/edit`}
+                            to={`/blogComment/${row.id}/edit`}
                           >
                             <EditIcon />
                           </IconButton>
@@ -304,4 +310,4 @@ function NewsListTable(props) {
   );
 }
 
-export default NewsListTable;
+export default BlogCommentListTable;

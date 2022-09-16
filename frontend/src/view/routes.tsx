@@ -430,7 +430,7 @@ const privateRoutes = [
 
   // #endregion
 
-  // #region Blog
+  // #region Blogs
   {
     path: '/blogs',
     collapseName: 'blog',
@@ -441,7 +441,7 @@ const privateRoutes = [
     virtual: true,
   },
 
-  // #region Blogs
+  // #region Blog
   {
     path: '/blog',
     collapseName: 'blog',
@@ -493,61 +493,71 @@ const privateRoutes = [
   },
   // #endregion
 
-  // // #region Comment
-  // {
-  //   path: '/comment',
-  //   collapseName: 'blog',
-  //   i18n: 'entities.comment.menu',
-  //   parent: '/blogs',
-  //   loader: () =>
-  //     import('src/view/comment/list/OpenxListPage'),
-  //   permissionRequired: permissions.commentRead,
-  //   exact: true,
-  // },
-  // {
-  //   path: '/comment/new',
-  //   collapseName: 'blog',
-  //   i18n: 'entities.comment.new.title',
-  //   parent: '/comment',
-  //   loader: () =>
-  //     import('src/view/comment/form/OpenxFormPage'),
-  //   permissionRequired: permissions.commentCreate,
-  //   exact: true,
-  // },
+  // #region Blog Comment
+  {
+    path: '/blogComment',
+    collapseName: 'blog',
+    i18n: 'entities.blogComment.menu',
+    parent: '/blogs',
+    loader: () =>
+      import(
+        'src/view/blogComment/list/BlogCommentListPage'
+      ),
+    permissionRequired: permissions.blogCommentRead,
+    exact: true,
+  },
+  {
+    path: '/blogComment/new',
+    collapseName: 'blog',
+    i18n: 'entities.blogComment.new.title',
+    parent: '/blogComment',
+    loader: () =>
+      import(
+        'src/view/blogComment/form/BlogCommentFormPage'
+      ),
+    permissionRequired: permissions.blogCommentCreate,
+    exact: true,
+  },
 
-  // {
-  //   path: '/comment/importer',
-  //   collapseName: 'blog',
-  //   i18n: 'entities.comment.importer.title',
-  //   parent: '/comment',
-  //   loader: () =>
-  //     import('src/view/comment/importer/OpenxImporterPage'),
-  //   permissionRequired: permissions.commentImport,
-  //   exact: true,
-  // },
+  {
+    path: '/blogComment/importer',
+    collapseName: 'blog',
+    i18n: 'entities.blogComment.importer.title',
+    parent: '/blogComment',
+    loader: () =>
+      import(
+        'src/view/blogComment/importer/BlogCommentImporterPage'
+      ),
+    permissionRequired: permissions.blogCommentImport,
+    exact: true,
+  },
 
-  // {
-  //   path: '/comment/:id/edit',
-  //   collapseName: 'blog',
-  //   i18n: 'entities.comment.edit.title',
-  //   parent: '/comment',
-  //   loader: () =>
-  //     import('src/view/comment/form/OpenxFormPage'),
-  //   permissionRequired: permissions.commentEdit,
-  //   exact: true,
-  // },
+  {
+    path: '/blogComment/:id/edit',
+    collapseName: 'blog',
+    i18n: 'entities.blogComment.edit.title',
+    parent: '/blogComment',
+    loader: () =>
+      import(
+        'src/view/blogComment/form/BlogCommentFormPage'
+      ),
+    permissionRequired: permissions.blogCommentEdit,
+    exact: true,
+  },
 
-  // {
-  //   path: '/comment/:id',
-  //   collapseName: 'blog',
-  //   i18n: 'entities.comment.view.title',
-  //   parent: '/comment',
-  //   loader: () =>
-  //     import('src/view/comment/view/OpenxViewPage'),
-  //   permissionRequired: permissions.commentRead,
-  //   exact: true,
-  // },
-  // // #endregion
+  {
+    path: '/blogComment/:id',
+    collapseName: 'blog',
+    i18n: 'entities.blogComment.view.title',
+    parent: '/blogComment',
+    loader: () =>
+      import(
+        'src/view/blogComment/view/BlogCommentViewPage'
+      ),
+    permissionRequired: permissions.blogCommentRead,
+    exact: true,
+  },
+  // #endregion
 
   // #endregion
 
