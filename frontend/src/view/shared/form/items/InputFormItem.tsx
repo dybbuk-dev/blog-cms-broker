@@ -21,6 +21,7 @@ export function InputFormItem(props) {
     margin,
     name,
     placeholder,
+    readOnly,
     required,
     shrink,
     size,
@@ -110,6 +111,7 @@ export function InputFormItem(props) {
         InputProps={{ startAdornment, endAdornment }}
         inputProps={{
           name,
+          readOnly,
         }}
         disabled={disabled}
         value={curValue}
@@ -132,6 +134,7 @@ export function InputFormItem(props) {
 
 InputFormItem.defaultProps = {
   forceValue: false,
+  readOnly: false,
   required: false,
   type: 'text',
 };
@@ -152,6 +155,7 @@ InputFormItem.propTypes = {
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
   prefix: PropTypes.string,
+  readOnly: PropTypes.bool,
   required: PropTypes.bool,
   shrink: PropTypes.bool,
   size: PropTypes.string,

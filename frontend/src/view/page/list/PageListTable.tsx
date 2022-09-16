@@ -257,6 +257,7 @@ function PageListTable(props) {
                     >
                       <Tooltip title={i18n('common.view')}>
                         <IconButton
+                          size="small"
                           component={Link}
                           color={sidenavColor}
                           to={`/page/${row.id}`}
@@ -269,6 +270,7 @@ function PageListTable(props) {
                           title={i18n('common.edit')}
                         >
                           <IconButton
+                            size="small"
                             color={sidenavColor}
                             component={Link}
                             to={`/page/${row.id}/edit`}
@@ -282,6 +284,7 @@ function PageListTable(props) {
                           title={i18n('common.destroy')}
                         >
                           <IconButton
+                            size="small"
                             color={sidenavColor}
                             onClick={() =>
                               doOpenDestroyConfirmModal(

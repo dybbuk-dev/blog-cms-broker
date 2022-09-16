@@ -28,8 +28,10 @@ function TextViewItem(props) {
         rows={props.rows}
         success={props.success}
         error={props.error}
+        inputProps={{
+          readOnly: true,
+        }}
         fullWidth
-        readOnly
       />
     </MDBox>
   );

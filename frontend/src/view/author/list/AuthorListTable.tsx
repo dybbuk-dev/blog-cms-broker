@@ -230,6 +230,7 @@ function AuthorListTable(props) {
                     >
                       <Tooltip title={i18n('common.view')}>
                         <IconButton
+                          size="small"
                           component={Link}
                           color={sidenavColor}
                           to={`/author/${row.id}`}
@@ -242,6 +243,7 @@ function AuthorListTable(props) {
                           title={i18n('common.edit')}
                         >
                           <IconButton
+                            size="small"
                             color={sidenavColor}
                             component={Link}
                             to={`/author/${row.id}/edit`}
@@ -255,6 +257,7 @@ function AuthorListTable(props) {
                           title={i18n('common.destroy')}
                         >
                           <IconButton
+                            size="small"
                             color={sidenavColor}
                             onClick={() =>
                               doOpenDestroyConfirmModal(

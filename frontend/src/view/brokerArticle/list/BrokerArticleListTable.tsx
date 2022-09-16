@@ -232,20 +232,22 @@ function BrokerArticleListTable(props) {
                       display="flex"
                       justifyContent="flex-end"
                     >
-                      <Tooltip title={i18n('common.view')}>
+                      {/* <Tooltip title={i18n('common.view')}>
                         <IconButton
+                          size="small"
                           component={Link}
                           color={sidenavColor}
                           to={`/broker-article/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>
-                      </Tooltip>
+                      </Tooltip> */}
                       {hasPermissionToEdit && (
                         <Tooltip
                           title={i18n('common.edit')}
                         >
                           <IconButton
+                            size="small"
                             color={sidenavColor}
                             onClick={() => {
                               doOpenModal(row.id);
@@ -260,6 +262,7 @@ function BrokerArticleListTable(props) {
                           title={i18n('common.destroy')}
                         >
                           <IconButton
+                            size="small"
                             color={sidenavColor}
                             onClick={() =>
                               doOpenDestroyConfirmModal(

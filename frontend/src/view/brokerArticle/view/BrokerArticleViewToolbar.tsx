@@ -1,18 +1,18 @@
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import HistoryIcon from '@mui/icons-material/History';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { i18n } from 'src/i18n';
+import { Link } from 'react-router-dom';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 import auditLogSelectors from 'src/modules/auditLog/auditLogSelectors';
 import brokerArticleSelectors from 'src/modules/brokerArticle/brokerArticleSelectors';
+import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
+import DeleteIcon from '@mui/icons-material/Delete';
 import destroyActions from 'src/modules/brokerArticle/destroy/brokerArticleDestroyActions';
 import destroySelectors from 'src/modules/brokerArticle/destroy/brokerArticleDestroySelectors';
-import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
-import ToolbarWrapper from 'src/view/shared/styles/ToolbarWrapper';
+import EditIcon from '@mui/icons-material/Edit';
+import HistoryIcon from '@mui/icons-material/History';
 import MDButton from 'src/mui/components/MDButton';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import ToolbarWrapper from 'src/view/shared/styles/ToolbarWrapper';
 
 function BrokerArticleViewToolbar(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -54,7 +54,7 @@ function BrokerArticleViewToolbar(props) {
       {hasPermissionToEdit && (
         <MDButton
           component={Link}
-          to={`/brokerArticle/${id}/edit`}
+          to={`/broker-article/${id}/edit`}
           variant="gradient"
           color={sidenavColor}
           type="button"

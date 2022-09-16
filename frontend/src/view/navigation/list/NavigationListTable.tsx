@@ -253,6 +253,7 @@ function NavigationListTable(props) {
                     >
                       <Tooltip title={i18n('common.view')}>
                         <IconButton
+                          size="small"
                           component={Link}
                           color={sidenavColor}
                           to={`/navigation/${row.id}`}
@@ -265,6 +266,7 @@ function NavigationListTable(props) {
                           title={i18n('common.edit')}
                         >
                           <IconButton
+                            size="small"
                             color={sidenavColor}
                             component={Link}
                             to={`/navigation/${row.id}/edit`}
@@ -278,6 +280,7 @@ function NavigationListTable(props) {
                           title={i18n('common.destroy')}
                         >
                           <IconButton
+                            size="small"
                             color={sidenavColor}
                             onClick={() =>
                               doOpenDestroyConfirmModal(

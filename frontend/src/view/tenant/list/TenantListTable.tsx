@@ -187,6 +187,7 @@ function TenantListTable() {
                           )}
                         >
                           <IconButton
+                            size="small"
                             color={sidenavColor}
                             onClick={() =>
                               doAcceptInvitation(
@@ -203,6 +204,7 @@ function TenantListTable() {
                           )}
                         >
                           <IconButton
+                            size="small"
                             color={sidenavColor}
                             onClick={() =>
                               setInvitationTokenToDeclineInvitation(
@@ -241,6 +243,7 @@ function TenantListTable() {
                             title={i18n('common.edit')}
                           >
                             <IconButton
+                              size="small"
                               color={sidenavColor}
                               component={Link}
                               to={`/tenant/${row.id}/edit`}
@@ -254,6 +257,7 @@ function TenantListTable() {
                             title={i18n('common.destroy')}
                           >
                             <IconButton
+                              size="small"
                               color={sidenavColor}
                               onClick={() =>
                                 setRecordIdToDestroy(row.id)

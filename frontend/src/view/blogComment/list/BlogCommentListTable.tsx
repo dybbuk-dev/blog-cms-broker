@@ -1,33 +1,34 @@
-import { Box, TableContainer } from '@mui/material';
-import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Tooltip from '@mui/material/Tooltip';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import SearchIcon from '@mui/icons-material/Search';
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import MaterialLink from '@mui/material/Link';
+import { DEFAULT_MOMENT_FORMAT } from 'src/config/common';
 import { i18n } from 'src/i18n';
+import { Link } from 'react-router-dom';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { TableContainer } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import actions from 'src/modules/blogComment/list/blogCommentListActions';
 import blogCommentSelectors from 'src/modules/blogComment/blogCommentSelectors';
+import Checkbox from '@mui/material/Checkbox';
+import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
+import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
+import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
+import DeleteIcon from '@mui/icons-material/Delete';
 import destroyActions from 'src/modules/blogComment/destroy/blogCommentDestroyActions';
 import destroySelectors from 'src/modules/blogComment/destroy/blogCommentDestroySelectors';
-import actions from 'src/modules/blogComment/list/blogCommentListActions';
-import selectors from 'src/modules/blogComment/list/blogCommentListSelectors';
-import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
-import Pagination from 'src/view/shared/table/Pagination';
-import Spinner from 'src/view/shared/Spinner';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import EditIcon from '@mui/icons-material/Edit';
+import IconButton from '@mui/material/IconButton';
+import MaterialLink from '@mui/material/Link';
+import MDBadgeDot from 'src/mui/components/MDBadgeDot';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
-import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
-import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
-import MDBadgeDot from 'src/mui/components/MDBadgeDot';
+import moment from 'moment';
+import Pagination from 'src/view/shared/table/Pagination';
+import SearchIcon from '@mui/icons-material/Search';
+import selectors from 'src/modules/blogComment/list/blogCommentListSelectors';
+import Spinner from 'src/view/shared/Spinner';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableRow from '@mui/material/TableRow';
+import Tooltip from '@mui/material/Tooltip';
 
 function BlogCommentListTable(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -133,15 +134,7 @@ function BlogCommentListTable(props) {
               >
                 {i18n('entities.blogComment.fields.id')}
               </DataTableHeadCell>
-              <DataTableHeadCell
-                onClick={() => doChangeSort('id')}
-                sorted={
-                  sorter.field === 'id' &&
-                  sorter.field.field == 'id'
-                    ? sorter.order
-                    : 'none'
-                }
-              >
+              <DataTableHeadCell sorted={false}>
                 {i18n('entities.blogComment.fields.blog')}
               </DataTableHeadCell>
               <DataTableHeadCell
@@ -154,7 +147,29 @@ function BlogCommentListTable(props) {
               >
                 {i18n('entities.blogComment.fields.name')}
               </DataTableHeadCell>
-              <DataTableHeadCell sorted={false}>
+              <DataTableHeadCell
+                onClick={() => doChangeSort('email')}
+                sorted={
+                  sorter.field === 'email'
+                    ? sorter.order
+                    : 'none'
+                }
+              >
+                {i18n('entities.blogComment.fields.email')}
+              </DataTableHeadCell>
+              <DataTableHeadCell
+                onClick={() => doChangeSort('created')}
+                sorted={
+                  sorter.field === 'created'
+                    ? sorter.order
+                    : 'none'
+                }
+              >
+                {i18n(
+                  'entities.blogComment.fields.created',
+                )}
+              </DataTableHeadCell>
+              <DataTableHeadCell sorted={false} width="0">
                 {i18n(
                   'entities.blogComment.fields.activated',
                 )}
@@ -207,15 +222,24 @@ function BlogCommentListTable(props) {
                   <DataTableBodyCell>
                     <MaterialLink
                       component={Link}
-                      to={'blog/' + row.blog_entry.name}
+                      to={
+                        'blog/' +
+                        (row.blog_entry?.name ?? '')
+                      }
                     >
-                      {row.blog_entry.name
-                        ? row.blog_entry.name
-                        : ''}
+                      {row.blog_entry?.name}
                     </MaterialLink>
                   </DataTableBodyCell>
                   <DataTableBodyCell>
-                    {row.name ? row.name : ''}
+                    {row.name}
+                  </DataTableBodyCell>
+                  <DataTableBodyCell>
+                    {row.email}
+                  </DataTableBodyCell>
+                  <DataTableBodyCell>
+                    {moment(row.created).format(
+                      DEFAULT_MOMENT_FORMAT,
+                    )}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
                     {[
@@ -225,6 +249,7 @@ function BlogCommentListTable(props) {
                     ].map((field) => (
                       <MDBadgeDot
                         key={field}
+                        width="max-content"
                         badgeContent={i18n(
                           `entities.blogComment.fields.${field}`,
                         )}
@@ -245,6 +270,7 @@ function BlogCommentListTable(props) {
                     >
                       <Tooltip title={i18n('common.view')}>
                         <IconButton
+                          size="small"
                           component={Link}
                           color={sidenavColor}
                           to={`/blogComment/${row.id}`}
@@ -257,6 +283,7 @@ function BlogCommentListTable(props) {
                           title={i18n('common.edit')}
                         >
                           <IconButton
+                            size="small"
                             color={sidenavColor}
                             component={Link}
                             to={`/blogComment/${row.id}/edit`}
@@ -270,6 +297,7 @@ function BlogCommentListTable(props) {
                           title={i18n('common.destroy')}
                         >
                           <IconButton
+                            size="small"
                             color={sidenavColor}
                             onClick={() =>
                               doOpenDestroyConfirmModal(

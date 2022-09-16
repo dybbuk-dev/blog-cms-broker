@@ -213,6 +213,7 @@ function AffiliateLinkListTable(props) {
                     >
                       <Tooltip title={i18n('common.view')}>
                         <IconButton
+                          size="small"
                           component={Link}
                           color={sidenavColor}
                           to={`/affiliate-link/${row.id}`}
@@ -225,6 +226,7 @@ function AffiliateLinkListTable(props) {
                           title={i18n('common.edit')}
                         >
                           <IconButton
+                            size="small"
                             color={sidenavColor}
                             component={Link}
                             to={`/affiliate-link/${row.id}/edit`}
@@ -238,6 +240,7 @@ function AffiliateLinkListTable(props) {
                           title={i18n('common.destroy')}
                         >
                           <IconButton
+                            size="small"
                             color={sidenavColor}
                             onClick={() =>
                               doOpenDestroyConfirmModal(

@@ -235,6 +235,7 @@ function TrackingParameterListTable(props) {
                     >
                       <Tooltip title={i18n('common.view')}>
                         <IconButton
+                          size="small"
                           component={Link}
                           color={sidenavColor}
                           to={`/tracking-parameter/${row.id}`}
@@ -247,6 +248,7 @@ function TrackingParameterListTable(props) {
                           title={i18n('common.edit')}
                         >
                           <IconButton
+                            size="small"
                             color={sidenavColor}
                             component={Link}
                             to={`/tracking-parameter/${row.id}/edit`}
@@ -260,6 +262,7 @@ function TrackingParameterListTable(props) {
                           title={i18n('common.destroy')}
                         >
                           <IconButton
+                            size="small"
                             color={sidenavColor}
                             onClick={() =>
                               doOpenDestroyConfirmModal(

@@ -94,7 +94,7 @@ function BlogCommentForm(props) {
                   'entities.blogComment.fields.email',
                 )}
                 variant="standard"
-                disabled
+                readOnly
               />
             </Grid>
             <Grid item md={12} xs={12}>

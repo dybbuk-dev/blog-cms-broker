@@ -254,6 +254,7 @@ function BrokerListTable(props) {
                     >
                       {/* <Tooltip title={i18n('common.view')}>
                         <IconButton
+size="small"
                           component={Link}
                           color={sidenavColor}
                           to={`/broker/${row.id}`}
@@ -266,6 +267,7 @@ function BrokerListTable(props) {
                           title={i18n('common.edit')}
                         >
                           <IconButton
+                            size="small"
                             color={sidenavColor}
                             component={Link}
                             to={`/broker/${row.id}/edit`}
@@ -279,6 +281,7 @@ function BrokerListTable(props) {
                           title={i18n('common.destroy')}
                         >
                           <IconButton
+                            size="small"
                             color={sidenavColor}
                             onClick={() =>
                               doOpenDestroyConfirmModal(
