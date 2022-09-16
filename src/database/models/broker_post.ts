@@ -21,7 +21,11 @@ export default function (sequelize) {
         type: DataTypes.BIGINT.UNSIGNED,
         allowNull: true,
       },
-      review: { type: DataTypes.TEXT, allowNull: false },
+      review: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        defaultValue: '',
+      },
       rating: {
         type: DataTypes.TINYINT.UNSIGNED,
         allowNull: false,
@@ -29,43 +33,54 @@ export default function (sequelize) {
       name: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        defaultValue: '',
         validate: {
-          len: [0, 39],
+          len: [0, 255],
         },
       },
       email: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        defaultValue: '',
         validate: {
-          len: [0, 39],
+          len: [0, 255],
         },
       },
       deleted: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
-      spam: { type: DataTypes.BOOLEAN, allowNull: false },
+      spam: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
       review_required: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       user_agent: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        defaultValue: '',
         validate: {
-          len: [0, 39],
+          len: [0, 255],
         },
       },
       referer: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        defaultValue: '',
         validate: {
-          len: [0, 39],
+          len: [0, 255],
         },
       },
       ip_created: {
         type: DataTypes.CHAR(39),
         allowNull: false,
+        defaultValue: '',
         validate: {
           len: [0, 39],
         },
@@ -73,6 +88,7 @@ export default function (sequelize) {
       ip: {
         type: DataTypes.CHAR(39),
         allowNull: false,
+        defaultValue: '',
         validate: {
           len: [0, 39],
         },
@@ -95,11 +111,28 @@ export default function (sequelize) {
           fields: ['created'],
         },
         {
+          name: 'parent_id',
+          fields: ['parent_id'],
+        },
+        {
+          name: 'broker_id',
+          fields: ['broker_id'],
+        },
+        {
+          name: 'user_id',
+          fields: ['user_id'],
+        },
+        {
           fields: ['deleted', 'spam', 'review_required'],
+          name: 'deleted_spam_review_required',
         },
         {
           name: 'rating',
           fields: ['rating'],
+        },
+        {
+          fields: ['deleted', 'spam', 'review_required'],
+          name: 'broker_posts_deleted_spam_review_required',
         },
       ],
       underscored: true,
