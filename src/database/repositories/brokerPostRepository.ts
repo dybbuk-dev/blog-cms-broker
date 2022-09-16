@@ -21,6 +21,9 @@ class BrokerPostRepository {
   static _relatedData(data) {
     return {
       ip: '',
+      email: data.email || '',
+      created: data.created || moment.now(),
+      modified: moment.now(),
     };
   }
 
@@ -32,8 +35,6 @@ class BrokerPostRepository {
         {
           ...lodash.pick(data, this.ALL_FIELDS),
           ...this._relatedData(data),
-          created: data.created ? data.created : moment(),
-          modified: data.created ? data.created : moment(),
         },
         {
           transaction,
@@ -74,9 +75,6 @@ class BrokerPostRepository {
       {
         ...lodash.pick(data, this.ALL_FIELDS),
         ...this._relatedData(data),
-        email: data.email ? data.email : '',
-        created: data.created ? data.created : moment(),
-        modified: data.created ? data.created : moment(),
       },
       {
         transaction,
