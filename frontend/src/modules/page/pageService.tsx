@@ -83,7 +83,7 @@ export default class PageService {
       limit,
       offset,
     };
-    console.log(filter);
+
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.get(
@@ -92,7 +92,7 @@ export default class PageService {
         params,
       },
     );
-    console.log(response.data);
+
     return response.data;
   }
 

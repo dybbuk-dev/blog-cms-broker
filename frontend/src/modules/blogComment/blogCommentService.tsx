@@ -85,14 +85,12 @@ export default class BlogCommentService {
     };
 
     const tenantId = AuthCurrentTenant.get();
-
     const response = await authAxios.get(
       `/tenant/${tenantId}/blogComment`,
       {
         params,
       },
     );
-
     return response.data;
   }
 

@@ -2,7 +2,7 @@ import BlogCommentService from 'src/modules/blogComment/blogCommentService';
 import Errors from 'src/modules/shared/error/errors';
 import { getHistory } from 'src/modules/store';
 
-const prefix = 'BLOG_COMMENT_VIEW';
+const prefix = 'BLOGCOMMENT_VIEW';
 
 const blogCommentViewActions = {
   FIND_STARTED: `${prefix}_FIND_STARTED`,

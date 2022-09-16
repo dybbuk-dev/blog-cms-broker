@@ -109,7 +109,7 @@ const selectIsAllSelected = createSelector(
   },
 );
 
-const categoryListSelectors = {
+const authorListSelectors = {
   selectLoading,
   selectRows,
   selectCount,
@@ -127,4 +127,4 @@ const categoryListSelectors = {
   selectSorter,
 };
 
-export default categoryListSelectors;
+export default authorListSelectors;

@@ -4,7 +4,7 @@ import Message from 'src/view/shared/message';
 import { getHistory } from 'src/modules/store';
 import { i18n } from 'src/i18n';
 
-const prefix = 'BLOG_COMMENT_FORM';
+const prefix = 'BLOGCOMMENT_FORM';
 
 const blogCommentFormActions = {
   INIT_STARTED: `${prefix}_INIT_STARTED`,

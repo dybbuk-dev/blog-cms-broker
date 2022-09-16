@@ -5,7 +5,7 @@ import fields from 'src/modules/blogComment/importer/blogCommentImporterFields';
 import { i18n } from 'src/i18n';
 
 const blogCommentImporterActions = importerActions(
-  'BLOG_COMMENT_IMPORTER',
+  'BLOGCOMMENT_IMPORTER',
   selectors,
   BlogCommentService.import,
   fields,

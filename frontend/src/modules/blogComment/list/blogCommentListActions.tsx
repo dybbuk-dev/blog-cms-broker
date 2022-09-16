@@ -5,7 +5,7 @@ import exporterFields from 'src/modules/blogComment/list/blogCommentListExporter
 import Errors from 'src/modules/shared/error/errors';
 import Exporter from 'src/modules/shared/exporter/exporter';
 
-const prefix = 'BLOG_COMMENT_LIST';
+const prefix = 'BLOGCOMMENT_LIST';
 
 const blogCommentListActions = {
   FETCH_STARTED: `${prefix}_FETCH_STARTED`,
