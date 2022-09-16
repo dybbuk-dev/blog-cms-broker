@@ -65,6 +65,9 @@ const en = {
     blog: {
       menu: 'Blogs',
     },
+    brokerPost: {
+      menu: 'Posts',
+    },
     routes: {
       menu: 'Routes',
     },
@@ -295,6 +298,73 @@ const en = {
       importer: {
         title: 'Import Comments',
         fileName: 'comment_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
+
+    brokerPost: {
+      name: 'Posts',
+      label: 'All Posts',
+      menu: 'Posts',
+      exporterFileName: 'post_export',
+      list: {
+        menu: 'Posts',
+        title: 'Posts',
+      },
+      create: {
+        success: 'Post successfully saved',
+      },
+      update: {
+        success: 'Post successfully saved',
+      },
+      review: {
+        success: 'Post successfully reviewed',
+      },
+      reviewAll: {
+        success: 'Post(s) successfully reviewed',
+      },
+      spam: {
+        success: 'Post successfully spammed',
+      },
+      spamAll: {
+        success: 'Post(s) successfully spammed',
+      },
+      destroy: {
+        success: 'Post successfully deleted',
+      },
+      destroyAll: {
+        success: 'Post(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Post',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        name: 'Name',
+        deleted: 'Deleted',
+        spam: 'Spam',
+        review_required: 'Review Required',
+        content: 'Teasers',
+        author: 'Author',
+        email: 'Email',
+        activated: 'Activated',
+        broker: 'Broker',
+        created: 'Created At',
+        rating: 'Rating',
+        review: 'Review',
+      },
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Post',
+      },
+      view: {
+        title: 'View Post',
+      },
+      importer: {
+        title: 'Import Posts',
+        fileName: 'post_import_template',
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },
     },

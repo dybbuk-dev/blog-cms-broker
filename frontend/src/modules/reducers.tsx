@@ -8,6 +8,7 @@ import blog from 'src/modules/blog/blogReducers';
 import blogComment from 'src/modules/blogComment/blogCommentReducers';
 import broker from 'src/modules/broker/brokerReducers';
 import brokerArticle from 'src/modules/brokerArticle/brokerArticleReducers';
+import brokerPost from 'src/modules/brokerPost/brokerPostReducers';
 import category from 'src/modules/category/categoryReducers';
 import layout from 'src/modules/layout/layoutReducers';
 import mui from 'src/modules/mui/muiReducers';
@@ -33,6 +34,7 @@ export default (history) =>
     blogComment,
     broker,
     brokerArticle,
+    brokerPost,
     category,
     layout,
     mui,

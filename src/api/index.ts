@@ -89,6 +89,7 @@ require('./blog').default(routes);
 require('./blogComment').default(routes);
 require('./broker').default(routes);
 require('./brokerArticle').default(routes);
+require('./brokerPost').default(routes);
 require('./category').default(routes);
 require('./file').default(routes);
 require('./mui').default(routes);
