@@ -8,7 +8,6 @@ export default async (req, res, next) => {
     new PermissionChecker(req).validateHas(
       Permissions.values.blogCommentRead,
     );
-
     const payload = await new BlogCommentService(
       req,
     ).findById(req.params.id);
