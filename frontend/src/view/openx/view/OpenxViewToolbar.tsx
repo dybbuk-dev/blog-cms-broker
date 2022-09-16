@@ -54,7 +54,7 @@ function OpenxViewToolbar(props) {
       {hasPermissionToEdit && (
         <MDButton
           component={Link}
-          to={`/openx/${id}/edit`}
+          to={`/open-x/${id}/edit`}
           variant="gradient"
           color={sidenavColor}
           type="button"

@@ -139,7 +139,7 @@ function OpenxToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/openx/new"
+          to="/open-x/new"
           startIcon={<AddIcon />}
           size="small"
         >
@@ -152,7 +152,7 @@ function OpenxToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/openx/importer"
+          to="/open-x/importer"
           startIcon={<CloudUploadIcon />}
           size="small"
         >

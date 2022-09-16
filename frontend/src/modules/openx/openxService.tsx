@@ -11,7 +11,7 @@ export default class OpenxService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.put(
-      `/tenant/${tenantId}/openx/${id}`,
+      `/tenant/${tenantId}/open-x/${id}`,
       body,
     );
 
@@ -26,7 +26,7 @@ export default class OpenxService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.delete(
-      `/tenant/${tenantId}/openx`,
+      `/tenant/${tenantId}/open-x`,
       {
         params,
       },
@@ -43,7 +43,7 @@ export default class OpenxService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.post(
-      `/tenant/${tenantId}/openx`,
+      `/tenant/${tenantId}/open-x`,
       body,
     );
 
@@ -59,7 +59,7 @@ export default class OpenxService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.post(
-      `/tenant/${tenantId}/openx/import`,
+      `/tenant/${tenantId}/open-x/import`,
       body,
     );
 
@@ -69,9 +69,8 @@ export default class OpenxService {
   static async find(id) {
     const tenantId = AuthCurrentTenant.get();
     const response = await authAxios.get(
-      `/tenant/${tenantId}/openx/${id}`,
+      `/tenant/${tenantId}/open-x/${id}`,
     );
-    console.log(response.data);
     return response.data;
   }
 
@@ -86,7 +85,7 @@ export default class OpenxService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.get(
-      `/tenant/${tenantId}/openx`,
+      `/tenant/${tenantId}/open-x`,
       {
         params,
       },
@@ -104,7 +103,7 @@ export default class OpenxService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.get(
-      `/tenant/${tenantId}/openx/autocomplete`,
+      `/tenant/${tenantId}/open-x/autocomplete`,
       {
         params,
       },

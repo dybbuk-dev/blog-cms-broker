@@ -190,7 +190,9 @@ function OpenxListTable(props) {
                     {row.id}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
-                    {row.zone}
+                    {i18n(
+                      `entities.openx.enumerators.zone.${row.zone}`,
+                    )}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
                     {['activated'].map((field) => (
@@ -220,7 +222,7 @@ function OpenxListTable(props) {
                           size="small"
                           component={Link}
                           color={sidenavColor}
-                          to={`/openx/${row.id}`}
+                          to={`/open-x/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>
@@ -233,7 +235,7 @@ function OpenxListTable(props) {
                             size="small"
                             color={sidenavColor}
                             component={Link}
-                            to={`/openx/${row.id}/edit`}
+                            to={`/open-x/${row.id}/edit`}
                           >
                             <EditIcon />
                           </IconButton>

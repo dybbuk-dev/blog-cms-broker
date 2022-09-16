@@ -44,7 +44,7 @@ const openxFormActions = {
         type: openxFormActions.INIT_ERROR,
       });
 
-      getHistory().push('/openx');
+      getHistory().push('/open-x');
     }
   },
 
@@ -64,7 +64,7 @@ const openxFormActions = {
         i18n('entities.openx.create.success'),
       );
 
-      getHistory().push('/openx');
+      getHistory().push('/open-x');
     } catch (error) {
       Errors.handle(error);
 
@@ -90,7 +90,7 @@ const openxFormActions = {
         i18n('entities.openx.update.success'),
       );
 
-      getHistory().push('/openx');
+      getHistory().push('/open-x');
     } catch (error) {
       Errors.handle(error);
 

@@ -36,7 +36,7 @@ function OpenxViewItem(props) {
             component={Link}
             variant="contained"
             color={sidenavColor}
-            to={`/openx/${record.id}`}
+            to={`/open-x/${record.id}`}
             underline="hover"
             size="large"
           >

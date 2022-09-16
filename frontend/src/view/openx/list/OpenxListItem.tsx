@@ -31,7 +31,7 @@ function OpenxListItem(props) {
         <div key={record.id}>
           <MaterialLink
             component={Link}
-            to={`/openx/${record.id}`}
+            to={`/open-x/${record.id}`}
             underline="hover"
           >
             {record.zone}

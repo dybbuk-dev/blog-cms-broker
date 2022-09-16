@@ -1103,9 +1103,9 @@ const en = {
         },
         zone: {
           leaderboard: 'Leaderboards',
-          menu_left: 'menu on the left',
-          menu_right: 'menu on the right',
-          short_leaderboard: 'short leaderboards',
+          menu_left: 'Menu on the left',
+          menu_right: 'Menu on the right',
+          short_leaderboard: 'Short leaderboards',
         },
       },
       placeholders: {},

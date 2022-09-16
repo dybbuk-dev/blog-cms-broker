@@ -34,7 +34,7 @@ const openxDestroyActions = {
 
       dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/openx');
+      getHistory().push('/open-x');
     } catch (error) {
       Errors.handle(error);
 
@@ -67,7 +67,7 @@ const openxDestroyActions = {
         i18n('entities.openx.destroyAll.success'),
       );
 
-      getHistory().push('/openx');
+      getHistory().push('/open-x');
     } catch (error) {
       Errors.handle(error);
 

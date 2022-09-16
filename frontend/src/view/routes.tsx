@@ -882,7 +882,7 @@ const privateRoutes = [
 
   // #region Openx banners
   {
-    path: '/openx',
+    path: '/open-x',
     collapseName: 'promotion',
     i18n: 'entities.openx.menu',
     parent: '/promotions',
@@ -892,10 +892,10 @@ const privateRoutes = [
     exact: true,
   },
   {
-    path: '/openx/new',
+    path: '/open-x/new',
     collapseName: 'promotion',
     i18n: 'entities.openx.new.title',
-    parent: '/openx',
+    parent: '/open-x',
     loader: () =>
       import('src/view/openx/form/OpenxFormPage'),
     permissionRequired: permissions.openxCreate,
@@ -903,10 +903,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/openx/importer',
+    path: '/open-x/importer',
     collapseName: 'promotion',
     i18n: 'entities.openx.importer.title',
-    parent: '/openx',
+    parent: '/open-x',
     loader: () =>
       import('src/view/openx/importer/OpenxImporterPage'),
     permissionRequired: permissions.openxImport,
@@ -914,10 +914,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/openx/:id/edit',
+    path: '/open-x/:id/edit',
     collapseName: 'promotion',
     i18n: 'entities.openx.edit.title',
-    parent: '/openx',
+    parent: '/open-x',
     loader: () =>
       import('src/view/openx/form/OpenxFormPage'),
     permissionRequired: permissions.openxEdit,
@@ -925,10 +925,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/openx/:id',
+    path: '/open-x/:id',
     collapseName: 'promotion',
     i18n: 'entities.openx.view.title',
-    parent: '/openx',
+    parent: '/open-x',
     loader: () =>
       import('src/view/openx/view/OpenxViewPage'),
     permissionRequired: permissions.openxRead,

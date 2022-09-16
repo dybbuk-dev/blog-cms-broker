@@ -103,7 +103,7 @@ const menus = [
     icon: <Icon fontSize="medium">view_carousel</Icon>,
     collapse: [
       {
-        path: '/openx',
+        path: '/open-x',
         permissionRequired: permissions.openxRead,
         name: i18n('entities.openx.menu'),
       },

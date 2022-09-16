@@ -66,7 +66,9 @@ function OpenxFormPage(props) {
                 record={record}
                 isEditing={isEditing}
                 onSubmit={doSubmit}
-                onCancel={() => getHistory().push('/openx')}
+                onCancel={() =>
+                  getHistory().push('/open-x')
+                }
               />
             </MDBox>
           )}

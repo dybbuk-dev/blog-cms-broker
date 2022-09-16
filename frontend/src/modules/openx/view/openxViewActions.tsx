@@ -28,7 +28,7 @@ const openxViewActions = {
         type: openxViewActions.FIND_ERROR,
       });
 
-      getHistory().push('/openx');
+      getHistory().push('/open-x');
     }
   },
 };
