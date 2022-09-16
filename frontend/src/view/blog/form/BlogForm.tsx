@@ -155,14 +155,7 @@ function BlogForm(props) {
                   setNormalizedName(slug(newValue));
                 }}
                 startAdornment={
-                  <InputAdornment
-                    position="start"
-                    sx={{
-                      color:
-                        (darkMode ? 'white' : 'inherit') +
-                        ' !important',
-                    }}
-                  >
+                  <InputAdornment position="start">
                     <span>/blog/</span>
                   </InputAdornment>
                 }

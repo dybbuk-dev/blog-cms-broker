@@ -137,14 +137,7 @@ function BrokerCharacteristicsForm(props) {
             )}
             variant="standard"
             startAdornment={
-              <InputAdornment
-                position="start"
-                sx={{
-                  color:
-                    (darkMode ? 'white' : 'inherit') +
-                    ' !important',
-                }}
-              >
+              <InputAdornment position="start">
                 <span>
                   {i18n(
                     'entities.broker.fields.youtube_hash_prefix',

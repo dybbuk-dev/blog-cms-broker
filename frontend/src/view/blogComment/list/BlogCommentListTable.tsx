@@ -297,7 +297,6 @@ function BlogCommentListTable(props) {
                             : 'error'
                         }
                         variant="contained"
-                        container
                       />
                     ))}
                   </DataTableBodyCell>

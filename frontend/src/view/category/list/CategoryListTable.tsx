@@ -236,7 +236,6 @@ function CategoryListTable(props) {
                             : 'error'
                         }
                         variant="contained"
-                        container
                       />
                     ))}
                   </DataTableBodyCell>

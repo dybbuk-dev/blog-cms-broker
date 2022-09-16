@@ -57,8 +57,8 @@ class NewsRepository {
         ...lodash.pick(data, this.ALL_FIELDS),
         target: data.target ?? '',
         ip: '',
-        created: moment(),
-        modified: moment(),
+        created: data.created || moment.now(),
+        modified: moment.now(),
       },
       {
         transaction,
@@ -100,7 +100,8 @@ class NewsRepository {
       {
         ...lodash.pick(data, this.ALL_FIELDS),
         target: data.target ?? '',
-        modified: moment(),
+        created: data.created || moment.now(),
+        modified: moment.now(),
         ip: '',
       },
       {

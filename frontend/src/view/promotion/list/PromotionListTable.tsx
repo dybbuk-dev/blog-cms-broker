@@ -224,7 +224,6 @@ function PromotionListTable(props) {
                             : 'error'
                         }
                         variant="contained"
-                        container
                       />
                     ))}
                   </DataTableBodyCell>

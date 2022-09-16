@@ -230,7 +230,6 @@ function NewsListTable(props) {
                             : 'error'
                         }
                         variant="contained"
-                        container
                       />
                     ))}
                   </DataTableBodyCell>

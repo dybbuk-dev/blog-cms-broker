@@ -220,7 +220,6 @@ function BlogListTable(props) {
                             : 'error'
                         }
                         variant="contained"
-                        container
                       />
                     ))}
                   </DataTableBodyCell>

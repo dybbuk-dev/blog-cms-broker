@@ -140,14 +140,7 @@ function BrokerArticleForm(props) {
                   setNormalizedName(slug(newValue));
                 }}
                 startAdornment={
-                  <InputAdornment
-                    position="start"
-                    sx={{
-                      color:
-                        (darkMode ? 'white' : 'inherit') +
-                        ' !important',
-                    }}
-                  >
+                  <InputAdornment position="start">
                     <span>
                       {`/${props.record?.broker?.name_normalized}/`}
                     </span>

@@ -104,9 +104,6 @@ function TenantForm(props) {
                     <InputAdornment
                       position="end"
                       sx={{
-                        color:
-                          (darkMode ? 'white' : 'inherit') +
-                          ' !important',
                         pr: 5,
                       }}
                     >

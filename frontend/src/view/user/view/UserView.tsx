@@ -81,7 +81,6 @@ function UserView(props) {
                   color={sidenavColor}
                   variant="contained"
                   size="md"
-                  container
                 />
               ))
             }

@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid, InputAdornment } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import SaveIcon from '@mui/icons-material/Save';
 import UndoIcon from '@mui/icons-material/Undo';
@@ -24,6 +24,8 @@ import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import LogoFormItem from 'src/view/shared/form/items/LogoFormItem';
 import Storage from 'src/security/storage';
+import FieldSetViewItem from 'src/view/shared/view/FieldSetViewItem';
+import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
 
 const schema = yup.object().shape({
   link: yupFormSchemas.string(
@@ -105,10 +107,14 @@ const schema = yup.object().shape({
     i18n('entities.news.fields.frontpage'),
     {},
   ),
+  created: yupFormSchemas.datetime(
+    i18n('entities.news.fields.created'),
+    {},
+  ),
 });
 
 function NewsForm(props) {
-  const { sidenavColor } = selectMuiSettings();
+  const { sidenavColor, darkMode } = selectMuiSettings();
   const [initialValues] = useState(() => {
     const record = props.record || {};
 
@@ -132,6 +138,7 @@ function NewsForm(props) {
       pdf: record.pdf,
       frontpage: record.frontpage,
       news_image: record.news_image || [],
+      created: record.created,
     };
   });
 
@@ -157,151 +164,162 @@ function NewsForm(props) {
     <FormWrapper>
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <MDBox
-            pb={3}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="flex-start"
-          >
-            <MDTypography variant="h4">
-              {'meta data'}
-            </MDTypography>
-          </MDBox>
-          <MDBox p={3}>
-            <Grid spacing={2} container>
-              <Grid item md={12} xs={12}>
-                <InputFormItem
-                  name="link"
-                  label={i18n('entities.news.fields.link')}
-                  variant="standard"
-                  required={true}
-                  autoFocus
-                />
-              </Grid>
-              <Grid item md={12} xs={12}>
-                <InputFormItem
-                  name="title"
-                  label={i18n('entities.news.fields.title')}
-                  variant="standard"
-                  required={true}
-                />
-              </Grid>
-              <Grid item md={12} xs={12}>
-                <InputFormItem
-                  name="meta_keywords"
-                  label={i18n(
-                    'entities.news.fields.meta_keywords',
-                  )}
-                  variant="standard"
-                  required={true}
-                />
-              </Grid>
-              <Grid item md={12} xs={12}>
-                <InputFormItem
-                  name="meta_description"
-                  label={i18n(
-                    'entities.news.fields.meta_description',
-                  )}
-                  variant="standard"
-                  required={true}
-                />
-              </Grid>
-            </Grid>
-          </MDBox>
-          <MDBox
-            pb={3}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="flex-start"
-          >
-            <MDTypography variant="h4">
-              {'teasers'}
-            </MDTypography>
-          </MDBox>
-          <MDBox p={3}>
-            <Grid spacing={2} container>
-              <Grid item md={12} xs={12}>
-                <LogoFormItem
-                  name="news_image"
-                  label={i18n(
-                    'entities.news.fields.teaser_upload',
-                  )}
-                  storage={Storage.values.news_image}
-                />
-              </Grid>
-              <Grid item md={12} xs={12}>
-                <InputFormItem
-                  name="teaser_link"
-                  label={i18n(
-                    'entities.news.fields.teaser_link',
-                  )}
-                  variant="standard"
-                />
-              </Grid>
-              <Grid item md={12} xs={12}>
-                <InputFormItem
-                  name="teaser_title"
-                  label={i18n(
-                    'entities.news.fields.teaser_title',
-                  )}
-                  variant="standard"
-                />
-              </Grid>
-              <Grid item md={12} xs={12}>
-                <HtmlEditorFormItem
-                  name="teaser"
-                  label={i18n(
-                    'entities.news.fields.teaser',
-                  )}
-                  value={initialValues.teaser}
-                />
-              </Grid>
-            </Grid>
-          </MDBox>
-          <MDBox
-            pb={3}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="flex-start"
-          >
-            <MDTypography variant="h4">
-              {'pages content'}
-            </MDTypography>
-          </MDBox>
-          <MDBox p={3}>
-            <Grid spacing={2} container>
-              <Grid item md={12} xs={12}>
-                <InputFormItem
-                  name="name"
-                  label={i18n('entities.news.fields.name')}
-                  variant="standard"
-                  required={true}
-                />
-              </Grid>
-              <Grid item md={12} xs={12}>
-                <HtmlEditorFormItem
-                  name="body"
-                  label={i18n('entities.news.fields.body')}
-                  value={initialValues.body}
-                  required={true}
-                />
-              </Grid>
-            </Grid>
-          </MDBox>
           <Grid spacing={2} container>
-            <Grid item md={4} xs={12}>
-              <CheckboxFormItem
-                name="activated"
+            <Grid xs={12} item>
+              <FieldSetViewItem
                 label={i18n(
-                  'entities.news.fields.activated',
+                  'entities.news.fields.metadata',
                 )}
-              />
+              >
+                <Grid spacing={2} container>
+                  <Grid item xs={12}>
+                    <InputFormItem
+                      name="link"
+                      label={i18n(
+                        'entities.news.fields.link',
+                      )}
+                      startAdornment={
+                        <InputAdornment position="start">
+                          <span>/aktuelles/</span>
+                        </InputAdornment>
+                      }
+                      variant="standard"
+                      required={true}
+                      autoFocus
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <InputFormItem
+                      name="title"
+                      label={i18n(
+                        'entities.news.fields.title',
+                      )}
+                      variant="standard"
+                      required={true}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <InputFormItem
+                      name="meta_keywords"
+                      label={i18n(
+                        'entities.news.fields.meta_keywords',
+                      )}
+                      variant="standard"
+                      required={true}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <InputFormItem
+                      name="meta_description"
+                      label={i18n(
+                        'entities.news.fields.meta_description',
+                      )}
+                      variant="standard"
+                      required={true}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <DatePickerFormItem
+                      name="created"
+                      label={i18n(
+                        'entities.news.fields.created',
+                      )}
+                      variant="standard"
+                      showTime
+                    />
+                  </Grid>
+                </Grid>
+              </FieldSetViewItem>
             </Grid>
-            <Grid item md={4} xs={12}>
-              <CheckboxFormItem
-                name="pdf"
-                label={i18n('entities.news.fields.pdf')}
-              />
+            <Grid xs={12} item>
+              <FieldSetViewItem
+                label={i18n('entities.news.fields.teaser')}
+              >
+                <Grid spacing={2} container>
+                  <Grid item xs={12}>
+                    <LogoFormItem
+                      name="news_image"
+                      label={i18n(
+                        'entities.news.fields.teaser_upload',
+                      )}
+                      storage={Storage.values.news_image}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <InputFormItem
+                      name="teaser_link"
+                      label={i18n(
+                        'entities.news.fields.teaser_link',
+                      )}
+                      variant="standard"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <InputFormItem
+                      name="teaser_title"
+                      label={i18n(
+                        'entities.news.fields.teaser_title',
+                      )}
+                      variant="standard"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <HtmlEditorFormItem
+                      name="teaser"
+                      label={i18n(
+                        'entities.news.fields.teaser',
+                      )}
+                      value={initialValues.teaser}
+                    />
+                  </Grid>
+                </Grid>
+              </FieldSetViewItem>
+            </Grid>
+            <Grid xs={12} item>
+              <FieldSetViewItem
+                label={i18n(
+                  'entities.news.fields.page_content',
+                )}
+              >
+                <Grid spacing={2} container>
+                  <Grid item xs={12}>
+                    <InputFormItem
+                      name="name"
+                      label={i18n(
+                        'entities.news.fields.name',
+                      )}
+                      variant="standard"
+                      required={true}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <HtmlEditorFormItem
+                      name="body"
+                      label={i18n(
+                        'entities.news.fields.body',
+                      )}
+                      value={initialValues.body}
+                      required={true}
+                    />
+                  </Grid>
+                  <Grid item md={6} xs={12}>
+                    <CheckboxFormItem
+                      name="activated"
+                      label={i18n(
+                        'entities.news.fields.activated',
+                      )}
+                    />
+                  </Grid>
+                  <Grid item md={6} xs={12}>
+                    <CheckboxFormItem
+                      name="pdf"
+                      label={i18n(
+                        'entities.news.fields.pdf',
+                      )}
+                    />
+                  </Grid>
+                </Grid>
+              </FieldSetViewItem>
             </Grid>
           </Grid>
           <FormButtons
