@@ -70,7 +70,7 @@ const en = {
       menu: 'Promotion',
     },
     page: {
-      menu: 'General Pages',
+      menu: 'Pages',
     },
     pageRelatedLink: {
       menu: 'Page Related Link',
@@ -1059,7 +1059,7 @@ const en = {
     page: {
       name: 'page',
       label: 'All Pages',
-      menu: 'General Pages',
+      menu: 'Pages',
       exporterFileName: 'page_export',
       list: {
         menu: 'Pages',

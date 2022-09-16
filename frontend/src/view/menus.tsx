@@ -50,7 +50,7 @@ const menus = [
   {
     name: i18n('collapses.blog.menu'),
     key: 'blog',
-    icon: <Icon fontSize="medium">feed</Icon>,
+    icon: <Icon fontSize="medium">article</Icon>,
     collapse: [
       {
         path: '/blog',
@@ -119,7 +119,7 @@ const menus = [
     path: '/page',
     name: i18n('entities.page.menu'),
     permissionRequired: permissions.pageRead,
-    icon: <Icon fontSize="medium">auto_stories</Icon>,
+    icon: <Icon fontSize="medium">description</Icon>,
   },
 
   {

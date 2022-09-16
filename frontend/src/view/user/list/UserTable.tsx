@@ -1,41 +1,31 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import userSelectors from 'src/modules/user/userSelectors';
-import selectors from 'src/modules/user/list/userListSelectors';
-import actions from 'src/modules/user/list/userListActions';
-import { Link } from 'react-router-dom';
+import { Avatar, TableContainer } from '@mui/material';
 import { i18n } from 'src/i18n';
-import Pagination from 'src/view/shared/table/Pagination';
-import Spinner from 'src/view/shared/Spinner';
-import {
-  Box,
-  Avatar,
-  TableContainer,
-  Icon,
-} from '@mui/material';
+import { Link } from 'react-router-dom';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
+import actions from 'src/modules/user/list/userListActions';
 import Checkbox from '@mui/material/Checkbox';
+import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
+import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
+import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
+import MDBadgeDot from 'src/mui/components/MDBadgeDot';
+import MDBox from 'src/mui/components/MDBox';
+import MDTypography from 'src/mui/components/MDTypography';
+import Pagination from 'src/view/shared/table/Pagination';
+import Roles from 'src/security/roles';
+import SearchIcon from '@mui/icons-material/Search';
+import selectors from 'src/modules/user/list/userListSelectors';
+import Spinner from 'src/view/shared/Spinner';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Tooltip from '@mui/material/Tooltip';
-import EditIcon from '@mui/icons-material/Edit';
-import SearchIcon from '@mui/icons-material/Search';
-import DeleteIcon from '@mui/icons-material/Delete';
-import TableCellCustom from 'src/view/shared/table/TableCellCustom';
-import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
-import Roles from 'src/security/roles';
+import userSelectors from 'src/modules/user/userSelectors';
 import UserStatusView from 'src/view/user/view/UserStatusView';
-import MDBox from 'src/mui/components/MDBox';
-import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
-import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
-import MDButton from 'src/mui/components/MDButton';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
-import MDTypography from 'src/mui/components/MDTypography';
-import MDBadge from 'src/mui/components/MDBadge';
-import MDBadgeDot from 'src/mui/components/MDBadgeDot';
-import MDAvatar from 'src/mui/components/MDAvatar';
 
 function UserTable() {
   const dispatch = useDispatch();

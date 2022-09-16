@@ -1,33 +1,31 @@
-import { Box, TableContainer } from '@mui/material';
-import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Tooltip from '@mui/material/Tooltip';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import SearchIcon from '@mui/icons-material/Search';
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import MaterialLink from '@mui/material/Link';
+import { Avatar, TableContainer } from '@mui/material';
 import { i18n } from 'src/i18n';
+import { Link } from 'react-router-dom';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import actions from 'src/modules/author/list/authorListActions';
 import authorSelectors from 'src/modules/author/authorSelectors';
+import Checkbox from '@mui/material/Checkbox';
+import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
+import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
+import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
+import DeleteIcon from '@mui/icons-material/Delete';
 import destroyActions from 'src/modules/author/destroy/authorDestroyActions';
 import destroySelectors from 'src/modules/author/destroy/authorDestroySelectors';
-import actions from 'src/modules/author/list/authorListActions';
-import selectors from 'src/modules/author/list/authorListSelectors';
-import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
-import Pagination from 'src/view/shared/table/Pagination';
-import Spinner from 'src/view/shared/Spinner';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import EditIcon from '@mui/icons-material/Edit';
+import IconButton from '@mui/material/IconButton';
+import MaterialLink from '@mui/material/Link';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
-import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
-import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
-import MDBadgeDot from 'src/mui/components/MDBadgeDot';
+import Pagination from 'src/view/shared/table/Pagination';
+import SearchIcon from '@mui/icons-material/Search';
+import selectors from 'src/modules/author/list/authorListSelectors';
+import Spinner from 'src/view/shared/Spinner';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableRow from '@mui/material/TableRow';
+import Tooltip from '@mui/material/Tooltip';
 
 function AuthorListTable(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -209,9 +207,10 @@ function AuthorListTable(props) {
                     {row.id}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
-                    {row.image
-                      ? row.image
-                      : row.author_image[0].name}
+                    <Avatar
+                      src={row.author_image[0]?.downloadUrl}
+                      alt={row.name}
+                    />
                   </DataTableBodyCell>
                   <DataTableBodyCell>
                     {row.name}
@@ -219,11 +218,9 @@ function AuthorListTable(props) {
                   <DataTableBodyCell>
                     <MaterialLink
                       component={Link}
-                      to={row.link}
+                      to={row.author_image[0]?.link}
                     >
-                      {row.link
-                        ? row.link
-                        : row.author_image[0].link}
+                      {row.author_image[0]?.link}
                     </MaterialLink>
                   </DataTableBodyCell>
                   <DataTableBodyCell>

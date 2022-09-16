@@ -54,8 +54,6 @@ const schema = yup.object().shape({
     i18n('entities.author.fields.description'),
     {
       required: true,
-      min: 1,
-      max: 255,
     },
   ),
 });

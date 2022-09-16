@@ -1,34 +1,35 @@
 import { Box, TableContainer } from '@mui/material';
+import { i18n } from 'src/i18n';
+import { Link } from 'react-router-dom';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { useDispatch, useSelector } from 'react-redux';
+import actions from 'src/modules/news/list/newsListActions';
 import Checkbox from '@mui/material/Checkbox';
+import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
+import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
+import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
+import DeleteIcon from '@mui/icons-material/Delete';
+import destroyActions from 'src/modules/news/destroy/newsDestroyActions';
+import destroySelectors from 'src/modules/news/destroy/newsDestroySelectors';
+import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
+import MaterialLink from '@mui/material/Link';
+import MDBadgeDot from 'src/mui/components/MDBadgeDot';
+import MDBox from 'src/mui/components/MDBox';
+import MDTypography from 'src/mui/components/MDTypography';
+import moment from 'moment';
+import newsSelectors from 'src/modules/news/newsSelectors';
+import Pagination from 'src/view/shared/table/Pagination';
+import React, { useState } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
+import selectors from 'src/modules/news/list/newsListSelectors';
+import Spinner from 'src/view/shared/Spinner';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Tooltip from '@mui/material/Tooltip';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import SearchIcon from '@mui/icons-material/Search';
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import MaterialLink from '@mui/material/Link';
-import { i18n } from 'src/i18n';
-import newsSelectors from 'src/modules/news/newsSelectors';
-import destroyActions from 'src/modules/news/destroy/newsDestroyActions';
-import destroySelectors from 'src/modules/news/destroy/newsDestroySelectors';
-import actions from 'src/modules/news/list/newsListActions';
-import selectors from 'src/modules/news/list/newsListSelectors';
-import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
-import Pagination from 'src/view/shared/table/Pagination';
-import Spinner from 'src/view/shared/Spinner';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
-import MDBox from 'src/mui/components/MDBox';
-import MDTypography from 'src/mui/components/MDTypography';
-import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
-import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
-import MDBadgeDot from 'src/mui/components/MDBadgeDot';
-import moment from 'moment';
+import { DEFAULT_MOMENT_FORMAT_DATE_ONLY } from 'src/config/common';
 
 function NewsListTable(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -154,7 +155,7 @@ function NewsListTable(props) {
               >
                 {i18n('entities.news.fields.created')}
               </DataTableHeadCell>
-              <DataTableHeadCell sorted={false}>
+              <DataTableHeadCell sorted={false} width="0">
                 {i18n('entities.news.fields.activated')}
               </DataTableHeadCell>
               <DataTableHeadCell sorted={false} width="0">
@@ -211,14 +212,15 @@ function NewsListTable(props) {
                     </MaterialLink>
                   </DataTableBodyCell>
                   <DataTableBodyCell>
-                    {moment(row.created)
-                      .utc()
-                      .format('MM/DD/YYYY')}
+                    {moment(row.created).format(
+                      DEFAULT_MOMENT_FORMAT_DATE_ONLY,
+                    )}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
                     {['activated', 'pdf'].map((field) => (
                       <MDBadgeDot
                         key={field}
+                        width="max-content"
                         badgeContent={i18n(
                           `entities.news.fields.${field}`,
                         )}
