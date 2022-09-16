@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useRouteMatch } from 'react-router-dom';
-import { i18n } from 'src/i18n';
-import actions from 'src/modules/blogComment/form/blogCommentFormActions';
-import selectors from 'src/modules/blogComment/form/blogCommentFormSelectors';
-import { getHistory } from 'src/modules/store';
-import BlogCommentForm from 'src/view/blogComment/form/BlogCommentForm';
-import Spinner from 'src/view/shared/Spinner';
 import { Card } from '@mui/material';
+import { getHistory } from 'src/modules/store';
+import { i18n } from 'src/i18n';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useRouteMatch } from 'react-router-dom';
+import actions from 'src/modules/blogComment/form/blogCommentFormActions';
+import BlogCommentForm from 'src/view/blogComment/form/BlogCommentForm';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
+import selectors from 'src/modules/blogComment/form/blogCommentFormSelectors';
+import Spinner from 'src/view/shared/Spinner';
 
 function BlogCommentFormPage(props) {
   const [dispatched, setDispatched] = useState(false);
@@ -67,7 +67,7 @@ function BlogCommentFormPage(props) {
                 isEditing={isEditing}
                 onSubmit={doSubmit}
                 onCancel={() =>
-                  getHistory().push('/blogComment')
+                  getHistory().push('/blog-comment')
                 }
               />
             </MDBox>

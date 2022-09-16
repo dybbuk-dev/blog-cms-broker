@@ -5,31 +5,31 @@ import { i18n } from 'src/i18n';
 import { getHistory } from 'src/modules/store';
 import Message from 'src/view/shared/message';
 
-const prefix = 'BLOGCOMMENT_DESTROY';
+const prefix = 'BLOGCOMMENT_REVIEW';
 
-const blogCommentDestroyActions = {
-  DESTROY_STARTED: `${prefix}_DESTROY_STARTED`,
-  DESTROY_SUCCESS: `${prefix}_DESTROY_SUCCESS`,
-  DESTROY_ERROR: `${prefix}_DESTROY_ERROR`,
+const blogCommentReviewActions = {
+  REVIEW_STARTED: `${prefix}_REVIEW_STARTED`,
+  REVIEW_SUCCESS: `${prefix}_REVIEW_SUCCESS`,
+  REVIEW_ERROR: `${prefix}_REVIEW_ERROR`,
 
-  DESTROY_ALL_STARTED: `${prefix}_DESTROY_ALL_STARTED`,
-  DESTROY_ALL_SUCCESS: `${prefix}_DESTROY_ALL_SUCCESS`,
-  DESTROY_ALL_ERROR: `${prefix}_DESTROY_ALL_ERROR`,
+  REVIEW_ALL_STARTED: `${prefix}_REVIEW_ALL_STARTED`,
+  REVIEW_ALL_SUCCESS: `${prefix}_REVIEW_ALL_SUCCESS`,
+  REVIEW_ALL_ERROR: `${prefix}_REVIEW_ALL_ERROR`,
 
-  doDestroy: (id) => async (dispatch) => {
+  doReview: (id) => async (dispatch) => {
     try {
       dispatch({
-        type: blogCommentDestroyActions.DESTROY_STARTED,
+        type: blogCommentReviewActions.REVIEW_STARTED,
       });
 
-      await BlogCommentService.destroyAll([id]);
+      await BlogCommentService.reviewAll([id]);
 
       dispatch({
-        type: blogCommentDestroyActions.DESTROY_SUCCESS,
+        type: blogCommentReviewActions.REVIEW_SUCCESS,
       });
 
       Message.success(
-        i18n('entities.blogComment.destroy.success'),
+        i18n('entities.blogComment.review.success'),
       );
 
       dispatch(listActions.doFetchCurrentFilter());
@@ -41,21 +41,21 @@ const blogCommentDestroyActions = {
       dispatch(listActions.doFetchCurrentFilter());
 
       dispatch({
-        type: blogCommentDestroyActions.DESTROY_ERROR,
+        type: blogCommentReviewActions.REVIEW_ERROR,
       });
     }
   },
 
-  doDestroyAll: (ids) => async (dispatch) => {
+  doReviewAll: (ids) => async (dispatch) => {
     try {
       dispatch({
-        type: blogCommentDestroyActions.DESTROY_ALL_STARTED,
+        type: blogCommentReviewActions.REVIEW_ALL_STARTED,
       });
 
-      await BlogCommentService.destroyAll(ids);
+      await BlogCommentService.reviewAll(ids);
 
       dispatch({
-        type: blogCommentDestroyActions.DESTROY_ALL_SUCCESS,
+        type: blogCommentReviewActions.REVIEW_ALL_SUCCESS,
       });
 
       if (listActions) {
@@ -64,7 +64,7 @@ const blogCommentDestroyActions = {
       }
 
       Message.success(
-        i18n('entities.blogComment.destroyAll.success'),
+        i18n('entities.blogComment.reviewAll.success'),
       );
 
       getHistory().push('/blog-comment');
@@ -74,10 +74,10 @@ const blogCommentDestroyActions = {
       dispatch(listActions.doFetchCurrentFilter());
 
       dispatch({
-        type: blogCommentDestroyActions.DESTROY_ALL_ERROR,
+        type: blogCommentReviewActions.REVIEW_ALL_ERROR,
       });
     }
   },
 };
 
-export default blogCommentDestroyActions;
+export default blogCommentReviewActions;

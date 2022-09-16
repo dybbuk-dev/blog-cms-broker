@@ -495,7 +495,7 @@ const privateRoutes = [
 
   // #region Blog Comment
   {
-    path: '/blogComment',
+    path: '/blog-comment',
     collapseName: 'blog',
     i18n: 'entities.blogComment.menu',
     parent: '/blogs',
@@ -507,7 +507,7 @@ const privateRoutes = [
     exact: true,
   },
   {
-    path: '/blogComment/new',
+    path: '/blog-comment/new',
     collapseName: 'blog',
     i18n: 'entities.blogComment.new.title',
     parent: '/blogComment',
@@ -520,7 +520,7 @@ const privateRoutes = [
   },
 
   {
-    path: '/blogComment/importer',
+    path: '/blog-comment/importer',
     collapseName: 'blog',
     i18n: 'entities.blogComment.importer.title',
     parent: '/blogComment',
@@ -533,7 +533,7 @@ const privateRoutes = [
   },
 
   {
-    path: '/blogComment/:id/edit',
+    path: '/blog-comment/:id/edit',
     collapseName: 'blog',
     i18n: 'entities.blogComment.edit.title',
     parent: '/blogComment',
@@ -546,7 +546,7 @@ const privateRoutes = [
   },
 
   {
-    path: '/blogComment/:id',
+    path: '/blog-comment/:id',
     collapseName: 'blog',
     i18n: 'entities.blogComment.view.title',
     parent: '/blogComment',

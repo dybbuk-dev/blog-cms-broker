@@ -5,31 +5,31 @@ import { i18n } from 'src/i18n';
 import { getHistory } from 'src/modules/store';
 import Message from 'src/view/shared/message';
 
-const prefix = 'BLOGCOMMENT_DESTROY';
+const prefix = 'BLOGCOMMENT_SPAM';
 
-const blogCommentDestroyActions = {
-  DESTROY_STARTED: `${prefix}_DESTROY_STARTED`,
-  DESTROY_SUCCESS: `${prefix}_DESTROY_SUCCESS`,
-  DESTROY_ERROR: `${prefix}_DESTROY_ERROR`,
+const blogCommentSpamActions = {
+  SPAM_STARTED: `${prefix}_SPAM_STARTED`,
+  SPAM_SUCCESS: `${prefix}_SPAM_SUCCESS`,
+  SPAM_ERROR: `${prefix}_SPAM_ERROR`,
 
-  DESTROY_ALL_STARTED: `${prefix}_DESTROY_ALL_STARTED`,
-  DESTROY_ALL_SUCCESS: `${prefix}_DESTROY_ALL_SUCCESS`,
-  DESTROY_ALL_ERROR: `${prefix}_DESTROY_ALL_ERROR`,
+  SPAM_ALL_STARTED: `${prefix}_SPAM_ALL_STARTED`,
+  SPAM_ALL_SUCCESS: `${prefix}_SPAM_ALL_SUCCESS`,
+  SPAM_ALL_ERROR: `${prefix}_SPAM_ALL_ERROR`,
 
-  doDestroy: (id) => async (dispatch) => {
+  doSpam: (id) => async (dispatch) => {
     try {
       dispatch({
-        type: blogCommentDestroyActions.DESTROY_STARTED,
+        type: blogCommentSpamActions.SPAM_STARTED,
       });
 
-      await BlogCommentService.destroyAll([id]);
+      await BlogCommentService.spamAll([id]);
 
       dispatch({
-        type: blogCommentDestroyActions.DESTROY_SUCCESS,
+        type: blogCommentSpamActions.SPAM_SUCCESS,
       });
 
       Message.success(
-        i18n('entities.blogComment.destroy.success'),
+        i18n('entities.blogComment.spam.success'),
       );
 
       dispatch(listActions.doFetchCurrentFilter());
@@ -41,21 +41,21 @@ const blogCommentDestroyActions = {
       dispatch(listActions.doFetchCurrentFilter());
 
       dispatch({
-        type: blogCommentDestroyActions.DESTROY_ERROR,
+        type: blogCommentSpamActions.SPAM_ERROR,
       });
     }
   },
 
-  doDestroyAll: (ids) => async (dispatch) => {
+  doSpamAll: (ids) => async (dispatch) => {
     try {
       dispatch({
-        type: blogCommentDestroyActions.DESTROY_ALL_STARTED,
+        type: blogCommentSpamActions.SPAM_ALL_STARTED,
       });
 
-      await BlogCommentService.destroyAll(ids);
+      await BlogCommentService.spamAll(ids);
 
       dispatch({
-        type: blogCommentDestroyActions.DESTROY_ALL_SUCCESS,
+        type: blogCommentSpamActions.SPAM_ALL_SUCCESS,
       });
 
       if (listActions) {
@@ -64,7 +64,7 @@ const blogCommentDestroyActions = {
       }
 
       Message.success(
-        i18n('entities.blogComment.destroyAll.success'),
+        i18n('entities.blogComment.spamAll.success'),
       );
 
       getHistory().push('/blog-comment');
@@ -74,10 +74,10 @@ const blogCommentDestroyActions = {
       dispatch(listActions.doFetchCurrentFilter());
 
       dispatch({
-        type: blogCommentDestroyActions.DESTROY_ALL_ERROR,
+        type: blogCommentSpamActions.SPAM_ALL_ERROR,
       });
     }
   },
 };
 
-export default blogCommentDestroyActions;
+export default blogCommentSpamActions;

@@ -100,12 +100,86 @@ class BlogCommentRepository {
       throw new Error404();
     }
 
-    await record.destroy({
-      transaction,
-    });
+    record = await record.update(
+      {
+        deleted: true,
+        modified: moment.now(),
+      },
+      {
+        transaction,
+      },
+    );
 
     await this._createAuditLog(
       AuditLogRepository.DELETE,
+      record,
+      record,
+      options,
+    );
+  }
+
+  static async spam(id, options: IRepositoryOptions) {
+    const transaction =
+      SequelizeRepository.getTransaction(options);
+
+    let record =
+      await options.database.blog_comment.findOne({
+        where: {
+          id,
+        },
+        transaction,
+      });
+
+    if (!record) {
+      throw new Error404();
+    }
+
+    record = await record.update(
+      {
+        spam: true,
+        modified: moment.now(),
+      },
+      {
+        transaction,
+      },
+    );
+
+    await this._createAuditLog(
+      AuditLogRepository.UPDATE,
+      record,
+      record,
+      options,
+    );
+  }
+
+  static async review(id, options: IRepositoryOptions) {
+    const transaction =
+      SequelizeRepository.getTransaction(options);
+
+    let record =
+      await options.database.blog_comment.findOne({
+        where: {
+          id,
+        },
+        transaction,
+      });
+
+    if (!record) {
+      throw new Error404();
+    }
+
+    record = await record.update(
+      {
+        review_required: !record.review_required,
+        modified: moment.now(),
+      },
+      {
+        transaction,
+      },
+    );
+
+    await this._createAuditLog(
+      AuditLogRepository.UPDATE,
       record,
       record,
       options,

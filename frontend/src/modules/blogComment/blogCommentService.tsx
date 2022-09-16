@@ -11,7 +11,7 @@ export default class BlogCommentService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.put(
-      `/tenant/${tenantId}/blogComment/${id}`,
+      `/tenant/${tenantId}/blog-comment/${id}`,
       body,
     );
 
@@ -26,10 +26,40 @@ export default class BlogCommentService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.delete(
-      `/tenant/${tenantId}/blogComment`,
+      `/tenant/${tenantId}/blog-comment`,
       {
         params,
       },
+    );
+
+    return response.data;
+  }
+
+  static async reviewAll(ids) {
+    const body = {
+      ids,
+    };
+
+    const tenantId = AuthCurrentTenant.get();
+
+    const response = await authAxios.post(
+      `/tenant/${tenantId}/blog-comment/review`,
+      body,
+    );
+
+    return response.data;
+  }
+
+  static async spamAll(ids) {
+    const body = {
+      ids,
+    };
+
+    const tenantId = AuthCurrentTenant.get();
+
+    const response = await authAxios.post(
+      `/tenant/${tenantId}/blog-comment/spam`,
+      body,
     );
 
     return response.data;
@@ -43,7 +73,7 @@ export default class BlogCommentService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.post(
-      `/tenant/${tenantId}/blogComment`,
+      `/tenant/${tenantId}/blog-comment`,
       body,
     );
 
@@ -59,7 +89,7 @@ export default class BlogCommentService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.post(
-      `/tenant/${tenantId}/blogComment/import`,
+      `/tenant/${tenantId}/blog-comment/import`,
       body,
     );
 
@@ -70,7 +100,7 @@ export default class BlogCommentService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.get(
-      `/tenant/${tenantId}/blogComment/${id}`,
+      `/tenant/${tenantId}/blog-comment/${id}`,
     );
 
     return response.data;
@@ -86,7 +116,7 @@ export default class BlogCommentService {
 
     const tenantId = AuthCurrentTenant.get();
     const response = await authAxios.get(
-      `/tenant/${tenantId}/blogComment`,
+      `/tenant/${tenantId}/blog-comment`,
       {
         params,
       },
@@ -103,7 +133,7 @@ export default class BlogCommentService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.get(
-      `/tenant/${tenantId}/blogComment/autocomplete`,
+      `/tenant/${tenantId}/blog-comment/autocomplete`,
       {
         params,
       },

@@ -106,6 +106,56 @@ export default class BlogCommentService {
     }
   }
 
+  async spamAll(ids) {
+    const transaction =
+      await SequelizeRepository.createTransaction(
+        this.options.database,
+      );
+
+    try {
+      for (const id of ids) {
+        await BlogCommentRepository.spam(id, {
+          ...this.options,
+          transaction,
+        });
+      }
+
+      await SequelizeRepository.commitTransaction(
+        transaction,
+      );
+    } catch (error) {
+      await SequelizeRepository.rollbackTransaction(
+        transaction,
+      );
+      throw error;
+    }
+  }
+
+  async reviewAll(ids) {
+    const transaction =
+      await SequelizeRepository.createTransaction(
+        this.options.database,
+      );
+
+    try {
+      for (const id of ids) {
+        await BlogCommentRepository.review(id, {
+          ...this.options,
+          transaction,
+        });
+      }
+
+      await SequelizeRepository.commitTransaction(
+        transaction,
+      );
+    } catch (error) {
+      await SequelizeRepository.rollbackTransaction(
+        transaction,
+      );
+      throw error;
+    }
+  }
+
   async findById(id) {
     return BlogCommentRepository.findById(id, this.options);
   }

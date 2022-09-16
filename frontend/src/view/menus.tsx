@@ -58,7 +58,7 @@ const menus = [
         name: i18n('entities.blog.menu'),
       },
       {
-        path: '/blogComment',
+        path: '/blog-comment',
         permissionRequired: permissions.blogCommentRead,
         name: i18n('entities.blogComment.menu'),
       },

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import actions from 'src/modules/blogComment/list/blogCommentListActions';
 import blogCommentSelectors from 'src/modules/blogComment/blogCommentSelectors';
+import BugReportIcon from '@mui/icons-material/BugReport';
 import Checkbox from '@mui/material/Checkbox';
 import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
 import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
@@ -22,8 +23,13 @@ import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import moment from 'moment';
 import Pagination from 'src/view/shared/table/Pagination';
+import reviewActions from 'src/modules/blogComment/review/blogCommentReviewActions';
+import reviewSelectors from 'src/modules/blogComment/review/blogCommentReviewSelectors';
+import ReviewsIcon from '@mui/icons-material/Reviews';
 import SearchIcon from '@mui/icons-material/Search';
 import selectors from 'src/modules/blogComment/list/blogCommentListSelectors';
+import spamActions from 'src/modules/blogComment/spam/blogCommentSpamActions';
+import spamSelectors from 'src/modules/blogComment/spam/blogCommentSpamSelectors';
 import Spinner from 'src/view/shared/Spinner';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -33,6 +39,10 @@ import Tooltip from '@mui/material/Tooltip';
 function BlogCommentListTable(props) {
   const { sidenavColor } = selectMuiSettings();
   const [recordIdToDestroy, setRecordIdToDestroy] =
+    useState(null);
+  const [recordIdToSpam, setRecordIdToSpam] =
+    useState(null);
+  const [recordIdToReview, setRecordIdToReview] =
     useState(null);
   const dispatch = useDispatch();
 
@@ -71,6 +81,22 @@ function BlogCommentListTable(props) {
     setRecordIdToDestroy(null);
   };
 
+  const doOpenSpamConfirmModal = (id) => {
+    setRecordIdToSpam(id);
+  };
+
+  const doCloseSpamConfirmModal = () => {
+    setRecordIdToSpam(null);
+  };
+
+  const doOpenReviewConfirmModal = (id) => {
+    setRecordIdToReview(id);
+  };
+
+  const doCloseReviewConfirmModal = () => {
+    setRecordIdToReview(null);
+  };
+
   const doChangeSort = (field) => {
     const order =
       sorter.field === field && sorter.order === 'asc'
@@ -93,6 +119,18 @@ function BlogCommentListTable(props) {
     doCloseDestroyConfirmModal();
 
     dispatch(destroyActions.doDestroy(id));
+  };
+
+  const doSpam = (id) => {
+    doCloseSpamConfirmModal();
+
+    dispatch(spamActions.doSpam(id));
+  };
+
+  const doReview = (id) => {
+    doCloseReviewConfirmModal();
+
+    dispatch(reviewActions.doReview(id));
   };
 
   const doToggleAllSelected = () => {
@@ -273,41 +311,71 @@ function BlogCommentListTable(props) {
                           size="small"
                           component={Link}
                           color={sidenavColor}
-                          to={`/blogComment/${row.id}`}
+                          to={`/blog-comment/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>
                       </Tooltip>
                       {hasPermissionToEdit && (
-                        <Tooltip
-                          title={i18n('common.edit')}
-                        >
-                          <IconButton
-                            size="small"
-                            color={sidenavColor}
-                            component={Link}
-                            to={`/blogComment/${row.id}/edit`}
+                        <>
+                          <Tooltip
+                            title={i18n('common.edit')}
                           >
-                            <EditIcon />
-                          </IconButton>
-                        </Tooltip>
-                      )}
-                      {hasPermissionToDestroy && (
-                        <Tooltip
-                          title={i18n('common.destroy')}
-                        >
-                          <IconButton
-                            size="small"
-                            color={sidenavColor}
-                            onClick={() =>
-                              doOpenDestroyConfirmModal(
-                                row.id,
-                              )
-                            }
+                            <IconButton
+                              size="small"
+                              color={sidenavColor}
+                              component={Link}
+                              to={`/blog-comment/${row.id}/edit`}
+                            >
+                              <EditIcon />
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip
+                            title={i18n('common.spam')}
                           >
-                            <DeleteIcon />
-                          </IconButton>
-                        </Tooltip>
+                            <IconButton
+                              size="small"
+                              color={sidenavColor}
+                              onClick={() =>
+                                doOpenSpamConfirmModal(
+                                  row.id,
+                                )
+                              }
+                            >
+                              <BugReportIcon />
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip
+                            title={i18n('common.review')}
+                          >
+                            <IconButton
+                              size="small"
+                              color={sidenavColor}
+                              onClick={() =>
+                                doOpenReviewConfirmModal(
+                                  row.id,
+                                )
+                              }
+                            >
+                              <ReviewsIcon />
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip
+                            title={i18n('common.destroy')}
+                          >
+                            <IconButton
+                              size="small"
+                              color={sidenavColor}
+                              onClick={() =>
+                                doOpenDestroyConfirmModal(
+                                  row.id,
+                                )
+                              }
+                            >
+                              <DeleteIcon />
+                            </IconButton>
+                          </Tooltip>
+                        </>
                       )}
                     </MDBox>
                   </DataTableBodyCell>
@@ -330,6 +398,24 @@ function BlogCommentListTable(props) {
           title={i18n('common.areYouSure')}
           onConfirm={() => doDestroy(recordIdToDestroy)}
           onClose={() => doCloseDestroyConfirmModal()}
+          okText={i18n('common.yes')}
+          cancelText={i18n('common.no')}
+        />
+      )}
+      {recordIdToSpam && (
+        <ConfirmModal
+          title={i18n('common.areYouSure')}
+          onConfirm={() => doSpam(recordIdToSpam)}
+          onClose={() => doCloseSpamConfirmModal()}
+          okText={i18n('common.yes')}
+          cancelText={i18n('common.no')}
+        />
+      )}
+      {recordIdToReview && (
+        <ConfirmModal
+          title={i18n('common.areYouSure')}
+          onConfirm={() => doReview(recordIdToReview)}
+          onClose={() => doCloseReviewConfirmModal()}
           okText={i18n('common.yes')}
           cancelText={i18n('common.no')}
         />
