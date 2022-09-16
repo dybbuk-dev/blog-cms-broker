@@ -157,7 +157,7 @@ const en = {
       fields: {
         id: 'Id',
         idRange: 'Id #',
-        name: 'Surname',
+        name: 'Name',
         link: 'Link',
         image: 'Image',
         description: 'Description',
@@ -212,7 +212,7 @@ const en = {
         author: 'Author',
         blog_image: 'Upload teaser logo',
         teaser: 'teasers',
-        name: 'Surname',
+        name: 'Name',
         content: 'Contents',
         activated: 'Activated',
         brokers: 'Linked Brokers',
@@ -259,7 +259,7 @@ const en = {
       fields: {
         id: 'Id',
         idRange: 'Id #',
-        name: 'Surname',
+        name: 'Name',
         deleted: 'Deleted',
         spam: 'Spam',
         review_required: 'Review Required',
@@ -314,7 +314,7 @@ const en = {
         id: 'Id',
         idRange: 'Id #',
         navigation: 'Main Navigation',
-        name: 'Surname',
+        name: 'Name',
         name_normalized: 'Name normalized',
         activated: 'Activated',
         is_broker: 'Is Broker',
@@ -368,7 +368,7 @@ const en = {
         // #region Regulatory Authority
         regulatory_authorities: 'Regulatory Authorities',
         regulatory_authority: {
-          name: 'Surname',
+          name: 'Name',
           abbreviation: 'Abbreviation',
           url: 'Homepage',
         },
@@ -377,7 +377,7 @@ const en = {
         // #region Deposit Guarantee
         deposit_guarantees: 'Deposit Guarantees',
         deposit_guarantee: {
-          name: 'Surname',
+          name: 'Name',
           url: 'Homepage',
           text: 'Free Text',
         },
@@ -386,7 +386,7 @@ const en = {
         // #region Certificate
         certificates: 'Certificates',
         certificate: {
-          name: 'Surname',
+          name: 'Name',
           url: 'Homepage',
           image: 'Award Logo',
         },
@@ -412,7 +412,7 @@ const en = {
         // #region Bank
         banks: 'Bank holding the account',
         bank: {
-          name: 'Surname',
+          name: 'Name',
           url: 'Homepage',
         },
         // #endregion
@@ -569,7 +569,7 @@ const en = {
         // #region Trade Platform
         trade_platforms: 'Trading Platforms',
         trade_platform: {
-          name: 'Surname',
+          name: 'Name',
           url: 'Homepage',
         },
         // #endregion
@@ -577,7 +577,7 @@ const en = {
         // #region Trade Platform
         trade_stores: 'Trade Offers',
         trade_store: {
-          name: 'Surname',
+          name: 'Name',
           url: 'Homepage',
         },
         // #endregion
@@ -732,7 +732,7 @@ const en = {
       fields: {
         id: 'Id',
         idRange: 'Id #',
-        name: 'Surname',
+        name: 'Name',
         name_normalized: 'Name Normalized',
         pagetitle: 'Page Title',
         metadescription: 'Meta Description',
@@ -788,7 +788,7 @@ const en = {
       fields: {
         id: 'Id',
         idRange: 'Id #',
-        name: 'Surname',
+        name: 'Name',
         link: 'Link',
         title: 'Title',
         author: 'Author',
@@ -847,7 +847,7 @@ const en = {
       fields: {
         id: 'Id',
         idRange: 'Id #',
-        name: 'Surname',
+        name: 'Name',
         link: 'Link',
         title: 'Title',
         target: 'Target',
@@ -917,7 +917,7 @@ const en = {
         link: 'Link',
         meta_description: 'Meta Description',
         meta_keywords: 'Meta Keywords',
-        name: 'Surname',
+        name: 'Name',
         title: 'Title',
         body: 'Body',
         target: 'Target',
@@ -979,7 +979,7 @@ const en = {
         id: 'Id',
         idRange: 'Id #',
         link: 'Link',
-        name: 'Surname',
+        name: 'Name',
         uploadfile: 'Upload Banner',
         sort: 'Sort',
         activated: 'Activated',
@@ -1152,7 +1152,7 @@ const en = {
         teaser_link: 'Link',
         teaser_title: 'Link title',
         teaser: 'Teasers',
-        name: 'Surname',
+        name: 'Name',
         body: 'Body',
         activated: 'Activated',
         pdf: 'Download PDF',
