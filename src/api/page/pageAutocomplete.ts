@@ -6,7 +6,7 @@ import PageService from '../../services/pageService';
 export default async (req, res, next) => {
   try {
     new PermissionChecker(req).validateHas(
-      Permissions.values.pageAutocomplete,
+      Permissions.values.generalPageAutocomplete,
     );
 
     const payload = await new PageService(

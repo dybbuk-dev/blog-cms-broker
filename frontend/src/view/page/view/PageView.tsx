@@ -11,6 +11,7 @@ import LogoViewItem from 'src/view/shared/view/LogoViewItem';
 import AuthorViewItem from 'src/view/author/view/AuthorViewItem';
 import HtmlViewItem from 'src/view/shared/view/HtmlViewItem';
 import { isUndefined } from 'lodash';
+import PageWarningViewItem from 'src/view/pageWarning/view/PageWarningViewItem';
 
 function PageView(props) {
   const renderView = () => {
@@ -33,27 +34,31 @@ function PageView(props) {
             <Grid item md={12} xs={12}>
               <NavigationViewItem
                 label={i18n(
-                  'entities.page.fields.navigation',
+                  'entities.generalPage.fields.navigation',
                 )}
                 value={record.navigation}
               />
             </Grid>
             <Grid item md={12} xs={12}>
               <TextViewItem
-                label={i18n('entities.page.fields.link')}
+                label={i18n(
+                  'entities.generalPage.fields.link',
+                )}
                 value={record.link}
               />
             </Grid>
             <Grid item md={12} xs={12}>
               <TextViewItem
-                label={i18n('entities.page.fields.title')}
+                label={i18n(
+                  'entities.generalPage.fields.title',
+                )}
                 value={record.title}
               />
             </Grid>
             <Grid item md={12} xs={12}>
               <TextViewItem
                 label={i18n(
-                  'entities.page.fields.meta_keywords',
+                  'entities.generalPage.fields.meta_keywords',
                 )}
                 value={record.meta_keywords}
               />
@@ -61,20 +66,24 @@ function PageView(props) {
             <Grid item md={12} xs={12}>
               <TextViewItem
                 label={i18n(
-                  'entities.page.fields.meta_description',
+                  'entities.generalPage.fields.meta_description',
                 )}
                 value={record.meta_description}
               />
             </Grid>
-            {/* <Grid item md={12} xs={12}>
+            <Grid item md={12} xs={12}>
               <TextViewItem
-                label={i18n('entities.page.fields.created')}
+                label={i18n(
+                  'entities.generalPage.fields.created',
+                )}
                 value={record.created}
               />
-            </Grid> */}
+            </Grid>
             <Grid item md={12} xs={12}>
               <AuthorViewItem
-                label={i18n('entities.page.fields.author')}
+                label={i18n(
+                  'entities.generalPage.fields.author',
+                )}
                 value={record.author}
               />
             </Grid>
@@ -96,7 +105,7 @@ function PageView(props) {
               <MDBox pt={7}>
                 <LogoViewItem
                   label={i18n(
-                    'entities.page.fields.page_image',
+                    'entities.generalPage.fields.page_image',
                   )}
                   value={record.page_image}
                 />
@@ -106,7 +115,7 @@ function PageView(props) {
             <Grid item md={12} xs={12}>
               <TextViewItem
                 label={i18n(
-                  'entities.page.fields.teaser_link',
+                  'entities.generalPage.fields.teaser_link',
                 )}
                 value={
                   record.page_image
@@ -118,7 +127,7 @@ function PageView(props) {
             <Grid item md={12} xs={12}>
               <TextViewItem
                 label={i18n(
-                  'entities.page.fields.teaser_title',
+                  'entities.generalPage.fields.teaser_title',
                 )}
                 value={
                   record.page_image
@@ -150,7 +159,9 @@ function PageView(props) {
           <Grid container spacing={2}>
             <Grid item md={12} xs={12}>
               <TextViewItem
-                label={i18n('entities.page.fields.name')}
+                label={i18n(
+                  'entities.generalPage.fields.name',
+                )}
                 value={record.name}
               />
             </Grid>
@@ -163,15 +174,25 @@ function PageView(props) {
             <Grid item md={12} xs={12}>
               <CheckboxViewItem
                 label={i18n(
-                  'entities.page.fields.activated',
+                  'entities.generalPage.fields.activated',
                 )}
                 checked={record.activated}
               />
             </Grid>
             <Grid item md={6} xs={12}>
               <CheckboxViewItem
-                label={i18n('entities.page.fields.pdf')}
+                label={i18n(
+                  'entities.generalPage.fields.pdf',
+                )}
                 checked={record.pdf}
+              />
+            </Grid>
+            <Grid item md={12} xs={12}>
+              <PageWarningViewItem
+                label={i18n(
+                  'entities.generalPage.fields.page_warning',
+                )}
+                value={record.page_warning}
               />
             </Grid>
           </Grid>

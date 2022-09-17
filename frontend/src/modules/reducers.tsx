@@ -16,6 +16,7 @@ import news from 'src/modules/news/newsReducers';
 import navigation from 'src/modules/navigation/navigationReducers';
 import openx from 'src/modules/openx/openxReducers';
 import page from 'src/modules/page/pageReducers';
+import pageWarning from 'src/modules/pageWarning/pageWarningReducers';
 import plan from 'src/modules/plan/planReducers';
 import promotion from 'src/modules/promotion/promotionReducers';
 import settings from 'src/modules/settings/settingsReducers';
@@ -42,6 +43,7 @@ export default (history) =>
     news,
     openx,
     page,
+    pageWarning,
     plan,
     promotion,
     settings,

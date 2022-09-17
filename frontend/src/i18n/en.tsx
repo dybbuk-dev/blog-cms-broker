@@ -68,17 +68,23 @@ const en = {
     brokerPost: {
       menu: 'Posts',
     },
+    generalPage: {
+      menu: 'General Pages',
+    },
+    pageWarning: {
+      menu: 'Warning Pages',
+    },
     routes: {
       menu: 'Routes',
     },
     promotion: {
       menu: 'Promotion',
     },
-    page: {
-      menu: 'Pages',
-    },
     pageRelatedLink: {
       menu: 'Page Related Link',
+    },
+    sitePage: {
+      menu: 'Site Pages',
     },
   },
 
@@ -1195,29 +1201,29 @@ const en = {
       },
     },
 
-    page: {
-      name: 'page',
-      label: 'All Pages',
-      menu: 'Pages',
-      exporterFileName: 'page_export',
+    generalPage: {
+      name: 'general page',
+      label: 'All General Pages',
+      menu: 'General Pages',
+      exporterFileName: 'general_page_export',
       list: {
-        menu: 'Pages',
-        title: 'Pages',
+        menu: 'General Pages',
+        title: 'General Pages',
       },
       create: {
-        success: 'Page successfully saved',
+        success: 'General Page successfully saved',
       },
       update: {
-        success: 'Page successfully saved',
+        success: 'General Page successfully saved',
       },
       destroy: {
-        success: 'Page successfully deleted',
+        success: 'General Page successfully deleted',
       },
       destroyAll: {
-        success: 'Page(s) successfully deleted',
+        success: 'General Page(s) successfully deleted',
       },
       edit: {
-        title: 'Edit Page',
+        title: 'Edit General Page',
       },
       fields: {
         id: 'Id',
@@ -1235,6 +1241,7 @@ const en = {
           url: 'Address',
         },
         page_image: 'Upload Teaser Logo',
+        page_warning: 'Warning',
         teaser_link: 'Link',
         teaser_title: 'Link title',
         teaser: 'Teasers',
@@ -1248,14 +1255,59 @@ const en = {
       placeholders: {},
       hints: {},
       new: {
-        title: 'New Page',
+        title: 'New General Page',
       },
       view: {
-        title: 'View Page',
+        title: 'View General Page',
       },
       importer: {
-        title: 'Import Pages',
-        fileName: 'page_import_template',
+        title: 'Import General Pages',
+        fileName: 'general_page_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
+
+    pageWarning: {
+      name: 'pageWarning',
+      label: 'All Warning Pages',
+      menu: 'Warning Pages',
+      exporterFileName: 'page_Warning_export',
+      list: {
+        menu: 'Warning Pages',
+        title: 'Warning Pages',
+      },
+      create: {
+        success: 'Warning Page successfully saved',
+      },
+      update: {
+        success: 'Warning Page successfully saved',
+      },
+      destroy: {
+        success: 'Warning Page successfully deleted',
+      },
+      destroyAll: {
+        success: 'Warning Page(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Warning Page',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        title: 'Title',
+        body: 'body',
+      },
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Warning Page',
+      },
+      view: {
+        title: 'View Warning Page',
+      },
+      importer: {
+        title: 'Import Warning Pages',
+        fileName: 'page_Warning_import_template',
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },
     },

@@ -996,57 +996,137 @@ const privateRoutes = [
 
   // #endregion
 
-  // #region Page
+  // #region Site Page
   {
-    path: '/page',
+    path: '/site-page',
     collapseName: 'page',
-    i18n: 'collapses.page.menu',
+    i18n: 'collapses.sitePage.menu',
     parent: '/',
+    redirect: '/general-page',
+    permissionRequired: null,
+    virtual: true,
+  },
+
+  // #region General Page
+  {
+    path: '/general-page',
+    collapseName: 'page',
+    i18n: 'collapses.generalPage.menu',
+    parent: '/site-page',
     loader: () => import('src/view/page/list/PageListPage'),
-    permissionRequired: permissions.pageRead,
+    permissionRequired: permissions.generalPageRead,
     exact: true,
   },
 
   {
-    path: '/page/new',
+    path: '/general-page/new',
     collapseName: 'page',
-    i18n: 'entities.page.new.title',
-    parent: '/page',
+    i18n: 'entities.generalPage.new.title',
+    parent: '/general-page',
     loader: () => import('src/view/page/form/PageFormPage'),
-    permissionRequired: permissions.pageCreate,
+    permissionRequired: permissions.generalPageCreate,
     exact: true,
   },
 
   {
-    path: '/page/importer',
+    path: '/general-page/importer',
     collapseName: 'page',
-    i18n: 'entities.page.importer.title',
-    parent: '/page',
+    i18n: 'entities.generalPage.importer.title',
+    parent: '/general-page',
     loader: () =>
       import('src/view/page/importer/PageImporterPage'),
-    permissionRequired: permissions.pageImport,
+    permissionRequired: permissions.generalPageImport,
     exact: true,
   },
 
   {
-    path: '/page/:id/edit',
+    path: '/general-page/:id/edit',
     collapseName: 'page',
-    i18n: 'entities.page.edit.title',
-    parent: '/page',
+    i18n: 'entities.generalPage.edit.title',
+    parent: '/general-page',
     loader: () => import('src/view/page/form/PageFormPage'),
-    permissionRequired: permissions.pageEdit,
+    permissionRequired: permissions.generalPageEdit,
     exact: true,
   },
 
   {
-    path: '/page/:id',
+    path: '/general-page/:id',
     collapseName: 'page',
-    i18n: 'entities.page.view.title',
-    parent: '/page',
+    i18n: 'entities.generalPage.view.title',
+    parent: '/general-page',
     loader: () => import('src/view/page/view/PageViewPage'),
-    permissionRequired: permissions.pageRead,
+    permissionRequired: permissions.generalPageRead,
     exact: true,
   },
+  // #endregion
+
+  // #region Warning Page
+  {
+    path: '/page-warning',
+    collapseName: 'page',
+    i18n: 'collapses.pageWarning.menu',
+    parent: '/site-page',
+    loader: () =>
+      import(
+        'src/view/pageWarning/list/PageWarningListPage'
+      ),
+    permissionRequired: permissions.pageWarningRead,
+    exact: true,
+  },
+
+  {
+    path: '/page-warning/new',
+    collapseName: 'page',
+    i18n: 'entities.pageWarning.new.title',
+    parent: '/page-warning',
+    loader: () =>
+      import(
+        'src/view/pageWarning/form/PageWarningFormPage'
+      ),
+    permissionRequired: permissions.pageWarningCreate,
+    exact: true,
+  },
+
+  {
+    path: '/page-warning/importer',
+    collapseName: 'page',
+    i18n: 'entities.pageWarning.importer.title',
+    parent: '/page-warning',
+    loader: () =>
+      import(
+        'src/view/pageWarning/importer/PageWarningImporterPage'
+      ),
+    permissionRequired: permissions.pageWarningImport,
+    exact: true,
+  },
+
+  {
+    path: '/page-warning/:id/edit',
+    collapseName: 'page',
+    i18n: 'entities.pageWarning.edit.title',
+    parent: '/page-warning',
+    loader: () =>
+      import(
+        'src/view/pageWarning/form/PageWarningFormPage'
+      ),
+    permissionRequired: permissions.pageWarningEdit,
+    exact: true,
+  },
+
+  {
+    path: '/page-warning/:id',
+    collapseName: 'page',
+    i18n: 'entities.pageWarning.view.title',
+    parent: '/page-warning',
+    loader: () =>
+      import(
+        'src/view/pageWarning/view/PageWarningViewPage'
+      ),
+    permissionRequired: permissions.pageWarningRead,
+    exact: true,
+  },
+  // #endregion
+
   // #endregion
 ].filter(Boolean);
 

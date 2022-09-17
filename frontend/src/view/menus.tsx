@@ -123,10 +123,21 @@ const menus = [
   },
 
   {
-    path: '/page',
-    name: i18n('entities.page.menu'),
-    permissionRequired: permissions.pageRead,
+    name: i18n('collapses.sitePage.menu'),
+    key: 'page',
     icon: <Icon fontSize="medium">description</Icon>,
+    collapse: [
+      {
+        path: '/general-page',
+        permissionRequired: permissions.generalPageRead,
+        name: i18n('entities.generalPage.menu'),
+      },
+      {
+        path: '/page-warning',
+        permissionRequired: permissions.pageWarningRead,
+        name: i18n('entities.pageWarning.menu'),
+      },
+    ],
   },
 
   {

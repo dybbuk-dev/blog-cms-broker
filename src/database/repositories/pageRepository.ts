@@ -27,7 +27,6 @@ class PageRepository {
     'body',
     'activated',
     'pdf',
-    'warning_id',
   ];
 
   static _relatedData(data) {
@@ -38,9 +37,14 @@ class PageRepository {
         ? data.navigation.id
         : null,
       author_id: data.author ? data.author.id : null,
+      page_warning_id: data.page_warning
+        ? data.page_warning.id
+        : null,
       target: data.target ?? '',
       sort: data.sort ?? 0,
       ip: '',
+      created: data.created || moment.now(),
+      modified: moment.now(),
     };
   }
 
@@ -72,8 +76,6 @@ class PageRepository {
       {
         ...lodash.pick(data, this.ALL_FIELDS),
         ...this._relatedData(data),
-        created: data.created ? data.created : moment(),
-        modified: data.created ? data.created : moment(),
       },
       {
         transaction,
@@ -119,7 +121,6 @@ class PageRepository {
       {
         ...lodash.pick(data, this.ALL_FIELDS),
         ...this._relatedData(data),
-        modified: data.created ? data.created : moment(),
       },
       {
         transaction,
@@ -190,6 +191,10 @@ class PageRepository {
       {
         model: options.database.navigation,
         as: 'navigation',
+      },
+      {
+        model: options.database.page_warning,
+        as: 'page_warning',
       },
     ];
 
@@ -271,6 +276,10 @@ class PageRepository {
         model: options.database.author,
         as: 'author',
       },
+      {
+        model: options.database.page_warning,
+        as: 'page_warning',
+      },
     ];
     if (filter) {
       if (filter.idRange) {
@@ -332,6 +341,18 @@ class PageRepository {
         ) {
           whereAnd.push({
             author_id: filter.author.id,
+          });
+        }
+      }
+
+      if (filter.page_warning) {
+        if (
+          filter.page_warning !== undefined &&
+          filter.page_warning !== null &&
+          filter.page_warning !== ''
+        ) {
+          whereAnd.push({
+            page_warning_id: filter.page_warning.id,
           });
         }
       }

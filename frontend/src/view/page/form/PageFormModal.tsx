@@ -48,7 +48,7 @@ function PageFormModal(props) {
           justifyContent="space-between"
         >
           <MDTypography fontWeight="bold">
-            {i18n('entities.page.new.title')}
+            {i18n('entities.generalPage.new.title')}
           </MDTypography>
           <IconButton
             color="secondary"

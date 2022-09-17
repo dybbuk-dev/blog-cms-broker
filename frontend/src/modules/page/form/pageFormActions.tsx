@@ -44,7 +44,7 @@ const pageFormActions = {
         type: pageFormActions.INIT_ERROR,
       });
 
-      getHistory().push('/page');
+      getHistory().push('/general-page');
     }
   },
 
@@ -62,7 +62,7 @@ const pageFormActions = {
 
       Message.success(i18n('entities.page.create.success'));
 
-      getHistory().push('/page');
+      getHistory().push('/general-page');
     } catch (error) {
       Errors.handle(error);
 
@@ -86,7 +86,7 @@ const pageFormActions = {
 
       Message.success(i18n('entities.page.update.success'));
 
-      getHistory().push('/page');
+      getHistory().push('/general-page');
     } catch (error) {
       Errors.handle(error);
 

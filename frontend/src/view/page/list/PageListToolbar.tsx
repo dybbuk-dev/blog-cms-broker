@@ -139,7 +139,7 @@ function PageToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/page/new"
+          to="/general-page/new"
           startIcon={<AddIcon />}
           size="small"
         >
@@ -152,7 +152,7 @@ function PageToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/page/importer"
+          to="/general-page/importer"
           startIcon={<CloudUploadIcon />}
           size="small"
         >
