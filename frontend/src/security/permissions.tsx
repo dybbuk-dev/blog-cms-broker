@@ -889,9 +889,9 @@ class Permissions {
       },
       // #endregion
 
-      // #region Page
-      pageImport: {
-        id: 'pageImport',
+      // #region General Page
+      generalPageImport: {
+        id: 'generalPageImport',
         allowedRoles: [],
         allowedPlans: [
           plans.free,
@@ -899,8 +899,8 @@ class Permissions {
           plans.enterprise,
         ],
       },
-      pageCreate: {
-        id: 'pageCreate',
+      generalPageCreate: {
+        id: 'generalPageCreate',
         allowedRoles: [roles.admin, roles.manager],
         allowedPlans: [
           plans.free,
@@ -909,8 +909,8 @@ class Permissions {
         ],
         allowedStorage: [storage.page_image],
       },
-      pageEdit: {
-        id: 'pageEdit',
+      generalPageEdit: {
+        id: 'generalPageEdit',
         allowedRoles: [roles.admin, roles.manager],
         allowedPlans: [
           plans.free,
@@ -919,8 +919,8 @@ class Permissions {
         ],
         allowedStorage: [storage.page_image],
       },
-      pageDestroy: {
-        id: 'pageDestroy',
+      generalPageDestroy: {
+        id: 'generalPageDestroy',
         allowedRoles: [roles.admin],
         allowedPlans: [
           plans.free,
@@ -929,8 +929,8 @@ class Permissions {
         ],
         allowedStorage: [storage.page_image],
       },
-      pageRead: {
-        id: 'pageRead',
+      generalPageRead: {
+        id: 'generalPageRead',
         allowedRoles: [
           roles.admin,
           roles.manager,
@@ -942,8 +942,73 @@ class Permissions {
           plans.enterprise,
         ],
       },
-      pageAutocomplete: {
-        id: 'pageAutocomplete',
+      generalPageAutocomplete: {
+        id: 'generalPageAutocomplete',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      // #endregion
+
+      // #region Warning Page
+      pageWarningImport: {
+        id: 'pageWarningImport',
+        allowedRoles: [],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      pageWarningCreate: {
+        id: 'pageWarningCreate',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      pageWarningEdit: {
+        id: 'pageWarningEdit',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      pageWarningDestroy: {
+        id: 'pageWarningDestroy',
+        allowedRoles: [roles.admin],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      pageWarningRead: {
+        id: 'pageWarningRead',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      pageWarningAutocomplete: {
+        id: 'pageWarningAutocomplete',
         allowedRoles: [
           roles.admin,
           roles.manager,
