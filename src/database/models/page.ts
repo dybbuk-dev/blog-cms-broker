@@ -187,6 +187,14 @@ export default function (sequelize) {
       onUpdate: 'NO ACTION',
     });
 
+    models.page.belongsTo(models.page_warning, {
+      as: 'page_warning',
+      constraints: true,
+      foreignKey: 'page_warning_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
+    });
+
     models.page.hasMany(models.file, {
       as: 'page_image',
       foreignKey: 'belongsToId',
