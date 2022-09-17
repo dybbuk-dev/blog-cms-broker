@@ -11,7 +11,7 @@ export default class PageService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.put(
-      `/tenant/${tenantId}/page/${id}`,
+      `/tenant/${tenantId}/general-page/${id}`,
       body,
     );
 
@@ -26,7 +26,7 @@ export default class PageService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.delete(
-      `/tenant/${tenantId}/page`,
+      `/tenant/${tenantId}/general-page`,
       {
         params,
       },
@@ -43,7 +43,7 @@ export default class PageService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.post(
-      `/tenant/${tenantId}/page`,
+      `/tenant/${tenantId}/general-page`,
       body,
     );
 
@@ -59,7 +59,7 @@ export default class PageService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.post(
-      `/tenant/${tenantId}/page/import`,
+      `/tenant/${tenantId}/general-page/import`,
       body,
     );
 
@@ -70,7 +70,7 @@ export default class PageService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.get(
-      `/tenant/${tenantId}/page/${id}`,
+      `/tenant/${tenantId}/general-page/${id}`,
     );
 
     return response.data;
@@ -87,7 +87,7 @@ export default class PageService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.get(
-      `/tenant/${tenantId}/page`,
+      `/tenant/${tenantId}/general-page`,
       {
         params,
       },
@@ -105,7 +105,7 @@ export default class PageService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.get(
-      `/tenant/${tenantId}/page/autocomplete`,
+      `/tenant/${tenantId}/general-page/autocomplete`,
       {
         params,
       },
