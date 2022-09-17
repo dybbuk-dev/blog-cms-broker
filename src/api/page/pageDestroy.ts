@@ -6,7 +6,7 @@ import PageService from '../../services/pageService';
 export default async (req, res, next) => {
   try {
     new PermissionChecker(req).validateHas(
-      Permissions.values.pageDestroy,
+      Permissions.values.generalPageDestroy,
     );
 
     await new PageService(req).destroyAll(req.query.ids);
