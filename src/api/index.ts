@@ -97,6 +97,7 @@ require('./navigation').default(routes);
 require('./news').default(routes);
 require('./openx').default(routes);
 require('./page').default(routes);
+require('./pageWarning').default(routes);
 require('./plan').default(routes);
 require('./promotion').default(routes);
 require('./settings').default(routes);
