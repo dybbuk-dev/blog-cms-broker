@@ -12,7 +12,7 @@ function PageImportPage() {
     selectors,
     actions,
     fields,
-    i18n('entities.page.importer.hint'),
+    i18n('entities.generalPage.importer.hint'),
   );
 
   return (
@@ -26,7 +26,7 @@ function PageImportPage() {
             alignItems="flex-start"
           >
             <MDTypography variant="h3">
-              {i18n('entities.page.importer.title')}
+              {i18n('entities.generalPage.importer.title')}
             </MDTypography>
           </MDBox>
         </MDBox>

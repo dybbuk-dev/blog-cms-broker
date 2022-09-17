@@ -33,31 +33,31 @@ import MDBox from 'src/mui/components/MDBox';
 
 const schema = yup.object().shape({
   idRange: yupFilterSchemas.integerRange(
-    i18n('entities.page.fields.idRange'),
+    i18n('entities.generalPage.fields.idRange'),
   ),
   link: yupFilterSchemas.string(
-    i18n('entities.page.fields.link'),
+    i18n('entities.generalPage.fields.link'),
   ),
   title: yupFilterSchemas.string(
-    i18n('entities.page.fields.title'),
+    i18n('entities.generalPage.fields.title'),
   ),
   meta_keywords: yupFilterSchemas.string(
-    i18n('entities.page.fields.meta_keywords'),
+    i18n('entities.generalPage.fields.meta_keywords'),
   ),
   meta_description: yupFilterSchemas.string(
-    i18n('entities.page.fields.meta_description'),
+    i18n('entities.generalPage.fields.meta_description'),
   ),
   body: yupFilterSchemas.string(
-    i18n('entities.page.fields.body'),
+    i18n('entities.generalPage.fields.body'),
   ),
   name: yupFilterSchemas.string(
-    i18n('entities.page.fields.name'),
+    i18n('entities.generalPage.fields.name'),
   ),
   activated: yupFilterSchemas.boolean(
-    i18n('entities.page.fields.activated'),
+    i18n('entities.generalPage.fields.activated'),
   ),
   pdf: yupFilterSchemas.boolean(
-    i18n('entities.page.fields.pdf'),
+    i18n('entities.generalPage.fields.pdf'),
   ),
   type: yupFilterSchemas.enumerator(
     i18n('entities.navigation.fields.type'),
@@ -79,46 +79,50 @@ const emptyValues = {
 
 const previewRenders = {
   idRange: {
-    label: i18n('entities.page.fields.idRange'),
+    label: i18n('entities.generalPage.fields.idRange'),
     render: filterRenders.decimalRange(),
   },
   link: {
-    label: i18n('entities.page.fields.link'),
+    label: i18n('entities.generalPage.fields.link'),
     render: filterRenders.generic(),
   },
   title: {
-    label: i18n('entities.page.fields.title'),
+    label: i18n('entities.generalPage.fields.title'),
     render: filterRenders.generic(),
   },
   meta_keywords: {
-    label: i18n('entities.page.fields.meta_keywords'),
+    label: i18n(
+      'entities.generalPage.fields.meta_keywords',
+    ),
     render: filterRenders.generic(),
   },
   meta_description: {
-    label: i18n('entities.page.fields.meta_description'),
+    label: i18n(
+      'entities.generalPage.fields.meta_description',
+    ),
     render: filterRenders.generic(),
   },
   name: {
-    label: i18n('entities.page.fields.name'),
+    label: i18n('entities.generalPage.fields.name'),
     render: filterRenders.generic(),
   },
   body: {
-    label: i18n('entities.page.fields.body'),
+    label: i18n('entities.generalPage.fields.body'),
   },
   activated: {
-    label: i18n('entities.page.fields.activated'),
+    label: i18n('entities.generalPage.fields.activated'),
     render: filterRenders.boolean(),
   },
   pdf: {
-    label: i18n('entities.page.fields.pdf'),
+    label: i18n('entities.generalPage.fields.pdf'),
     render: filterRenders.boolean(),
   },
   navigation: {
-    label: i18n('entities.page.fields.navigation'),
+    label: i18n('entities.generalPage.fields.navigation'),
     render: filterRenders.relationToOne(),
   },
   author: {
-    label: i18n('entities.page.fields.author'),
+    label: i18n('entities.generalPage.fields.author'),
     render: filterRenders.relationToOne(),
   },
   type: {
@@ -231,7 +235,7 @@ function PageListFilter(props) {
                   <InputNumberRangeFormItem
                     name="idRange"
                     label={i18n(
-                      'entities.page.fields.idRange',
+                      'entities.generalPage.fields.idRange',
                     )}
                     variant="standard"
                   />
@@ -250,7 +254,7 @@ function PageListFilter(props) {
                   <InputFormItem
                     name="link"
                     label={i18n(
-                      'entities.page.fields.link',
+                      'entities.generalPage.fields.link',
                     )}
                     variant="standard"
                   />
@@ -259,7 +263,7 @@ function PageListFilter(props) {
                   <InputFormItem
                     name="title"
                     label={i18n(
-                      'entities.page.fields.title',
+                      'entities.generalPage.fields.title',
                     )}
                     variant="standard"
                   />
@@ -268,7 +272,7 @@ function PageListFilter(props) {
                   <InputFormItem
                     name="meta_keywords"
                     label={i18n(
-                      'entities.page.fields.meta_keywords',
+                      'entities.generalPage.fields.meta_keywords',
                     )}
                     variant="standard"
                   />
@@ -277,7 +281,7 @@ function PageListFilter(props) {
                   <InputFormItem
                     name="meta_description"
                     label={i18n(
-                      'entities.page.fields.meta_description',
+                      'entities.generalPage.fields.meta_description',
                     )}
                     variant="standard"
                   />
@@ -286,7 +290,7 @@ function PageListFilter(props) {
                   <InputFormItem
                     name="name"
                     label={i18n(
-                      'entities.page.fields.name',
+                      'entities.generalPage.fields.name',
                     )}
                     variant="standard"
                   />
@@ -295,7 +299,7 @@ function PageListFilter(props) {
                   <AuthorAutocompleteFormItem
                     name="author"
                     label={i18n(
-                      'entities.page.fields.author',
+                      'entities.generalPage.fields.author',
                     )}
                     variant="standard"
                     fullWidth
@@ -305,7 +309,7 @@ function PageListFilter(props) {
                   <SelectFormItem
                     name="activated"
                     label={i18n(
-                      'entities.page.fields.activated',
+                      'entities.generalPage.fields.activated',
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
@@ -314,7 +318,9 @@ function PageListFilter(props) {
                 <Grid item md={6} xs={12}>
                   <SelectFormItem
                     name="pdf"
-                    label={i18n('entities.page.fields.pdf')}
+                    label={i18n(
+                      'entities.generalPage.fields.pdf',
+                    )}
                     options={filterBooleanOptions}
                     variant="standard"
                   />

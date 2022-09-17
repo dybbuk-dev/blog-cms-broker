@@ -54,7 +54,7 @@ function PageViewToolbar(props) {
       {hasPermissionToEdit && (
         <MDButton
           component={Link}
-          to={`/page/${id}/edit`}
+          to={`/general-page/${id}/edit`}
           variant="gradient"
           color={sidenavColor}
           type="button"

@@ -26,8 +26,8 @@ function PageFormPage(props) {
 
   const isEditing = Boolean(match.params.id);
   const title = isEditing
-    ? i18n('entities.page.edit.title')
-    : i18n('entities.page.new.title');
+    ? i18n('entities.generalPage.edit.title')
+    : i18n('entities.generalPage.new.title');
 
   useEffect(() => {
     dispatch(actions.doInit(match.params.id));
@@ -66,7 +66,9 @@ function PageFormPage(props) {
                 record={record}
                 isEditing={isEditing}
                 onSubmit={doSubmit}
-                onCancel={() => getHistory().push('/page')}
+                onCancel={() =>
+                  getHistory().push('/general-page')
+                }
               />
             </MDBox>
           )}

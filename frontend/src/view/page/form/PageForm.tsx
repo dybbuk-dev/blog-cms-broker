@@ -14,26 +14,21 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import MDButton from 'src/mui/components/MDButton';
-import pageEnumerators from '../../../modules/page/pageEnumerators';
-import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
-import PageAutocompleteFormItem from 'src/view/page/autocomplete/PageAutocompleteFormItem';
+import PageWarningAutocompleteFormItem from 'src/view/pageWarning/autocomplete/PageWarningAutocompleteFormItem';
 import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
-import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import NavigationAutocompleteFormItem from 'src/view/navigation/autocomplete/NavigationAutocompleteFormItem';
 import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
-import MDTypography from 'src/mui/components/MDTypography';
-import MDBox from 'src/mui/components/MDBox';
 import AuthorAutocompleteFormItem from 'src/view/author/autocomplete/AuthorAutocompleteFormItem';
 import LogoFormItem from 'src/view/shared/form/items/LogoFormItem';
 import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
 import Storage from 'src/security/storage';
-import moment from 'moment';
 import GroupFormItem from 'src/view/shared/form/items/GroupFormItem';
 import FieldSetViewItem from 'src/view/shared/view/FieldSetViewItem';
+import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
 
 const schema = yup.object().shape({
   link: yupFormSchemas.string(
-    i18n('entities.page.fields.link'),
+    i18n('entities.generalPage.fields.link'),
     {
       required: true,
       min: 1,
@@ -41,7 +36,7 @@ const schema = yup.object().shape({
     },
   ),
   meta_keywords: yupFormSchemas.string(
-    i18n('entities.page.fields.meta_keywords'),
+    i18n('entities.generalPage.fields.meta_keywords'),
     {
       required: true,
       min: 1,
@@ -49,7 +44,7 @@ const schema = yup.object().shape({
     },
   ),
   meta_description: yupFormSchemas.string(
-    i18n('entities.page.fields.meta_description'),
+    i18n('entities.generalPage.fields.meta_description'),
     {
       required: true,
       min: 1,
@@ -57,7 +52,7 @@ const schema = yup.object().shape({
     },
   ),
   name: yupFormSchemas.string(
-    i18n('entities.page.fields.name'),
+    i18n('entities.generalPage.fields.name'),
     {
       required: true,
       min: 1,
@@ -65,7 +60,7 @@ const schema = yup.object().shape({
     },
   ),
   title: yupFormSchemas.string(
-    i18n('entities.page.fields.title'),
+    i18n('entities.generalPage.fields.title'),
     {
       required: true,
       min: 1,
@@ -73,37 +68,37 @@ const schema = yup.object().shape({
     },
   ),
   teaser: yupFormSchemas.string(
-    i18n('entities.page.fields.teaser'),
+    i18n('entities.generalPage.fields.teaser'),
     {},
   ),
   body: yupFormSchemas.string(
-    i18n('entities.page.fields.body'),
+    i18n('entities.generalPage.fields.body'),
     {
       required: true,
     },
   ),
   page_image: yupFormSchemas.images(
-    i18n('entities.page.fields.page_image'),
+    i18n('entities.generalPage.fields.page_image'),
     {},
   ),
   teaser_link: yupFormSchemas.string(
-    i18n('entities.page.fields.teaser_link'),
+    i18n('entities.generalPage.fields.teaser_link'),
     {},
   ),
   teaser_title: yupFormSchemas.string(
-    i18n('entities.page.fields.teaser_title'),
+    i18n('entities.generalPage.fields.teaser_title'),
     {},
   ),
   activated: yupFormSchemas.boolean(
-    i18n('entities.page.fields.activated'),
+    i18n('entities.generalPage.fields.activated'),
     {},
   ),
   pdf: yupFormSchemas.boolean(
-    i18n('entities.page.fields.pdf'),
+    i18n('entities.generalPage.fields.pdf'),
     {},
   ),
-  created: yupFormSchemas.date(
-    i18n('entities.page.fields.created'),
+  created: yupFormSchemas.datetime(
+    i18n('entities.generalPage.fields.created'),
     {},
   ),
 });
@@ -119,12 +114,9 @@ function PageForm(props) {
       title: record.title || null,
       meta_keywords: record.meta_keywords || null,
       meta_description: record.meta_description,
-      created: record.created
-        ? moment(record.created)
-            .utc()
-            .format('YYYY-MM-DD HH:MM:SS')
-        : null,
+      created: record.created || null,
       author: record.author,
+      page_warning: record.page_warning,
       related_links: record.related_links,
       page_image: record.page_image || null,
       teaser_link: record.page_image
@@ -167,7 +159,7 @@ function PageForm(props) {
             <Grid xs={12} item>
               <FieldSetViewItem
                 label={i18n(
-                  'entities.page.fields.metadata',
+                  'entities.generalPage.fields.metadata',
                 )}
               >
                 <Grid container spacing={2}>
@@ -175,7 +167,7 @@ function PageForm(props) {
                     <NavigationAutocompleteFormItem
                       name="navigation"
                       label={i18n(
-                        'entities.page.fields.navigation',
+                        'entities.generalPage.fields.navigation',
                       )}
                       required={false}
                       showCreate={true}
@@ -190,7 +182,7 @@ function PageForm(props) {
                     <InputFormItem
                       name="link"
                       label={i18n(
-                        'entities.page.fields.link',
+                        'entities.generalPage.fields.link',
                       )}
                       variant="standard"
                       required={true}
@@ -200,7 +192,7 @@ function PageForm(props) {
                     <InputFormItem
                       name="title"
                       label={i18n(
-                        'entities.page.fields.title',
+                        'entities.generalPage.fields.title',
                       )}
                       variant="standard"
                       required={true}
@@ -210,7 +202,7 @@ function PageForm(props) {
                     <TextAreaFormItem
                       name="meta_keywords"
                       label={i18n(
-                        'entities.page.fields.meta_keywords',
+                        'entities.generalPage.fields.meta_keywords',
                       )}
                       variant="standard"
                       required={true}
@@ -220,26 +212,27 @@ function PageForm(props) {
                     <TextAreaFormItem
                       name="meta_description"
                       label={i18n(
-                        'entities.page.fields.meta_description',
+                        'entities.generalPage.fields.meta_description',
                       )}
                       variant="standard"
                       required={true}
                     />
                   </Grid>
-                  {/* <Grid item md={12} xs={12}>
-                <InputFormItem
-                  name="created"
-                  label={i18n(
-                    'entities.page.fields.created',
-                  )}
-                  variant="standard"
-                />
-              </Grid> */}
+                  <Grid item md={12} xs={12}>
+                    <DatePickerFormItem
+                      name="created"
+                      label={i18n(
+                        'entities.generalPage.fields.created',
+                      )}
+                      variant="standard"
+                      showTime
+                    />
+                  </Grid>
                   <Grid item md={12} xs={12}>
                     <AuthorAutocompleteFormItem
                       name="author"
                       label={i18n(
-                        'entities.page.fields.author',
+                        'entities.generalPage.fields.author',
                       )}
                       required={false}
                       showCreate={true}
@@ -254,14 +247,14 @@ function PageForm(props) {
               <GroupFormItem
                 name="related_links"
                 label={i18n(
-                  'entities.page.fields.relatedLinks',
+                  'entities.generalPage.fields.relatedLinks',
                 )}
                 groupInputTemplates={[
                   {
                     input: InputFormItem,
                     name: 'name',
                     label: i18n(
-                      'entities.page.fields.relatedLink.name',
+                      'entities.generalPage.fields.relatedLink.name',
                     ),
                     md: 6,
                     xs: 12,
@@ -272,7 +265,7 @@ function PageForm(props) {
                     input: InputFormItem,
                     name: 'url',
                     label: i18n(
-                      'entities.page.fields.relatedLink.url',
+                      'entities.generalPage.fields.relatedLink.url',
                     ),
                     md: 6,
                     xs: 12,
@@ -284,14 +277,16 @@ function PageForm(props) {
             </Grid>
             <Grid xs={12} item>
               <FieldSetViewItem
-                label={i18n('entities.page.fields.teaser')}
+                label={i18n(
+                  'entities.generalPage.fields.teaser',
+                )}
               >
                 <Grid container spacing={2}>
                   <Grid item md={12} xs={12}>
                     <LogoFormItem
                       name="page_image"
                       label={i18n(
-                        'entities.page.fields.page_image',
+                        'entities.generalPage.fields.page_image',
                       )}
                       storage={Storage.values.page_image}
                     />
@@ -300,7 +295,7 @@ function PageForm(props) {
                     <InputFormItem
                       name="teaser_link"
                       label={i18n(
-                        'entities.page.fields.teaser_link',
+                        'entities.generalPage.fields.teaser_link',
                       )}
                       variant="standard"
                     />
@@ -309,7 +304,7 @@ function PageForm(props) {
                     <InputFormItem
                       name="teaser_title"
                       label={i18n(
-                        'entities.page.fields.teaser_title',
+                        'entities.generalPage.fields.teaser_title',
                       )}
                       variant="standard"
                     />
@@ -329,7 +324,7 @@ function PageForm(props) {
             <Grid xs={12} item>
               <FieldSetViewItem
                 label={i18n(
-                  'entities.page.fields.page_content',
+                  'entities.generalPage.fields.page_content',
                 )}
               >
                 <Grid container spacing={2}>
@@ -338,7 +333,7 @@ function PageForm(props) {
                       name="name"
                       variant="standard"
                       label={i18n(
-                        'entities.page.fields.name',
+                        'entities.generalPage.fields.name',
                       )}
                       required={true}
                     />
@@ -357,7 +352,7 @@ function PageForm(props) {
                     <CheckboxFormItem
                       name="activated"
                       label={i18n(
-                        'entities.page.fields.activated',
+                        'entities.generalPage.fields.activated',
                       )}
                     />
                   </Grid>
@@ -365,8 +360,20 @@ function PageForm(props) {
                     <CheckboxFormItem
                       name="pdf"
                       label={i18n(
-                        'entities.page.fields.pdf',
+                        'entities.generalPage.fields.pdf',
                       )}
+                    />
+                  </Grid>
+                  <Grid item md={12} xs={12}>
+                    <PageWarningAutocompleteFormItem
+                      name="page_warning"
+                      label={i18n(
+                        'entities.generalPage.fields.page_warning',
+                      )}
+                      required={false}
+                      showCreate={true}
+                      variant="standard"
+                      fullWidth
                     />
                   </Grid>
                 </Grid>

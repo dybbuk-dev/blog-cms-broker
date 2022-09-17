@@ -18,7 +18,7 @@ function PageListPage(props) {
             alignItems="flex-start"
           >
             <MDTypography variant="h3">
-              {i18n('entities.page.list.title')}
+              {i18n('entities.generalPage.list.title')}
             </MDTypography>
             <PageListToolbar />
           </MDBox>

@@ -130,7 +130,7 @@ function PageListTable(props) {
                 align="right"
                 width="0"
               >
-                {i18n('entities.page.fields.id')}
+                {i18n('entities.generalPage.fields.id')}
               </DataTableHeadCell>
               <DataTableHeadCell
                 onClick={() =>
@@ -142,7 +142,9 @@ function PageListTable(props) {
                     : 'none'
                 }
               >
-                {i18n('entities.page.fields.navigation')}
+                {i18n(
+                  'entities.generalPage.fields.navigation',
+                )}
               </DataTableHeadCell>
               <DataTableHeadCell
                 onClick={() => doChangeSort('name')}
@@ -152,7 +154,7 @@ function PageListTable(props) {
                     : 'none'
                 }
               >
-                {i18n('entities.page.fields.name')}
+                {i18n('entities.generalPage.fields.name')}
               </DataTableHeadCell>
               <DataTableHeadCell
                 onClick={() => doChangeSort('title')}
@@ -162,10 +164,12 @@ function PageListTable(props) {
                     : 'none'
                 }
               >
-                {i18n('entities.page.fields.title')}
+                {i18n('entities.generalPage.fields.title')}
               </DataTableHeadCell>
               <DataTableHeadCell sorted={false}>
-                {i18n('entities.page.fields.activated')}
+                {i18n(
+                  'entities.generalPage.fields.activated',
+                )}
               </DataTableHeadCell>
               <DataTableHeadCell sorted={false} width="0">
                 {' '}
@@ -237,7 +241,7 @@ function PageListTable(props) {
                       <MDBadgeDot
                         key={field}
                         badgeContent={i18n(
-                          `entities.page.fields.${field}`,
+                          `entities.generalPage.fields.${field}`,
                         )}
                         width="max-content"
                         color={
@@ -259,7 +263,7 @@ function PageListTable(props) {
                           size="small"
                           component={Link}
                           color={sidenavColor}
-                          to={`/page/${row.id}`}
+                          to={`/general-page/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>
@@ -272,7 +276,7 @@ function PageListTable(props) {
                             size="small"
                             color={sidenavColor}
                             component={Link}
-                            to={`/page/${row.id}/edit`}
+                            to={`/general-page/${row.id}/edit`}
                           >
                             <EditIcon />
                           </IconButton>

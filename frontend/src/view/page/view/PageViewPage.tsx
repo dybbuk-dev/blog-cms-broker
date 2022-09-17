@@ -31,7 +31,7 @@ function PagePage() {
             alignItems="flex-start"
           >
             <MDTypography variant="h3">
-              {i18n('entities.page.view.title')}
+              {i18n('entities.generalPage.view.title')}
             </MDTypography>
             <PageViewToolbar match={match} />
           </MDBox>
