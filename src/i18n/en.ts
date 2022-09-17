@@ -283,6 +283,11 @@ const en = {
         },
       },
     },
+    page_warning: {
+      errors: {
+        unique: {},
+      },
+    },
     blog: {
       errors: {
         unique: {
