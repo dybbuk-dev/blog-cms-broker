@@ -619,6 +619,72 @@ const privateRoutes = [
   },
   // #endregion
 
+  // #region Expert Advisor Test
+  {
+    path: '/expert-advisor-test',
+    collapseName: 'expertAdvisorTest',
+    i18n: 'collapses.expertAdvisorTest.menu',
+    parent: '/',
+    loader: () =>
+      import(
+        'src/view/expertAdvisorTest/list/ExpertAdvisorTestListPage'
+      ),
+    permissionRequired: permissions.expertAdvisorTestRead,
+    exact: true,
+  },
+  {
+    path: '/expert-advisor-test/new',
+    collapseName: 'expertAdvisorTest',
+    i18n: 'entities.expertAdvisorTest.new.title',
+    parent: '/expert-advisor-test',
+    loader: () =>
+      import(
+        'src/view/expertAdvisorTest/form/ExpertAdvisorTestFormPage'
+      ),
+    permissionRequired: permissions.expertAdvisorTestCreate,
+    exact: true,
+  },
+
+  {
+    path: '/expert-advisor-test/importer',
+    collapseName: 'expertAdvisorTest',
+    i18n: 'entities.expertAdvisorTest.importer.title',
+    parent: '/expert-advisor-test',
+    loader: () =>
+      import(
+        'src/view/expertAdvisorTest/importer/ExpertAdvisorTestImporterPage'
+      ),
+    permissionRequired: permissions.expertAdvisorTestImport,
+    exact: true,
+  },
+
+  {
+    path: '/expert-advisor-test/:id/edit',
+    collapseName: 'expertAdvisorTest',
+    i18n: 'entities.expertAdvisorTest.edit.title',
+    parent: '/expert-advisor-test',
+    loader: () =>
+      import(
+        'src/view/expertAdvisorTest/form/ExpertAdvisorTestFormPage'
+      ),
+    permissionRequired: permissions.expertAdvisorTestEdit,
+    exact: true,
+  },
+
+  {
+    path: '/expert-advisor-test/:id',
+    collapseName: 'expertAdvisorTest',
+    i18n: 'entities.expertAdvisorTest.view.title',
+    parent: '/expert-advisor-test',
+    loader: () =>
+      import(
+        'src/view/expertAdvisorTest/view/ExpertAdvisorTestViewPage'
+      ),
+    permissionRequired: permissions.expertAdvisorTestRead,
+    exact: true,
+  },
+  // #endregion
+
   // #region Routes
   {
     path: '/routes',
