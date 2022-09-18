@@ -558,6 +558,74 @@ class Permissions {
       },
       // #endregion
 
+      // #region Expert Advisor Test
+      expertAdvisorTestImport: {
+        id: 'expertAdvisorTestImport',
+        allowedRoles: [],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      expertAdvisorTestCreate: {
+        id: 'expertAdvisorTestCreate',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+        allowedStorage: [storage.expert_advisor_test_image],
+      },
+      expertAdvisorTestEdit: {
+        id: 'expertAdvisorTestEdit',
+        allowedRoles: [roles.admin, roles.manager],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+        allowedStorage: [storage.expert_advisor_test_image],
+      },
+      expertAdvisorTestDestroy: {
+        id: 'expertAdvisorTestDestroy',
+        allowedRoles: [roles.admin],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+        allowedStorage: [storage.expert_advisor_test_image],
+      },
+      expertAdvisorTestRead: {
+        id: 'expertAdvisorTestRead',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      expertAdvisorTestAutocomplete: {
+        id: 'expertAdvisorTestAutocomplete',
+        allowedRoles: [
+          roles.admin,
+          roles.manager,
+          roles.custom,
+        ],
+        allowedPlans: [
+          plans.free,
+          plans.growth,
+          plans.enterprise,
+        ],
+      },
+      // #endregion
+
       // #region Category
       categoryImport: {
         id: 'categoryImport',

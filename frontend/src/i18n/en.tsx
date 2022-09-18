@@ -86,6 +86,9 @@ const en = {
     sitePage: {
       menu: 'Site Pages',
     },
+    expertAdvisorTest: {
+      menu: 'Expert Advisor Tests',
+    },
   },
 
   entities: {
@@ -847,6 +850,65 @@ const en = {
       importer: {
         title: 'Import Broker Articles',
         fileName: 'brokerArticle_import_template',
+        hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
+
+    expertAdvisorTest: {
+      name: 'expert advisor test',
+      label: 'All Expert Advisor Tests',
+      menu: 'Expert Advisor Tests',
+      exporterFileName: 'expert_advisor_test_export',
+      list: {
+        menu: 'Expert Advisor Tests',
+        title: 'Expert Advisor Tests',
+      },
+      create: {
+        success: 'Expert Advisor Test successfully saved',
+      },
+      update: {
+        success: 'Expert Advisor Test successfully saved',
+      },
+      destroy: {
+        success: 'Expert Advisor Test successfully deleted',
+      },
+      destroyAll: {
+        success:
+          'Expert Advisor Test(s) successfully deleted',
+      },
+      edit: {
+        title: 'Edit Expert Advisor Test',
+      },
+      fields: {
+        id: 'Id',
+        idRange: 'Id #',
+        navigation: 'Navigation',
+        broker: 'Broker',
+        meta_description: 'Meta Description',
+        meta_keywords: 'Meta Keywords',
+        start_date: 'start_date',
+        metadata: 'Meta Data',
+        screenshot: 'Screenshot',
+        general: 'General',
+        expert_advisor_test_image: 'Upload Logo',
+        name: 'Name',
+        description: 'Description',
+        activated: 'Activated',
+        pdf: 'Download PDF',
+        deposit: 'Inlay',
+        homepage: 'Homepage',
+      },
+      placeholders: {},
+      hints: {},
+      new: {
+        title: 'New Expert Advisor Test',
+      },
+      view: {
+        title: 'View Expert Advisor Test',
+      },
+      importer: {
+        title: 'Import Expert Advisor Tests',
+        fileName: 'expert_advisor_test_import_template',
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },
     },

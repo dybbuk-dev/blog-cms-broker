@@ -108,6 +108,12 @@ export default class Storage {
         folder: 'blog_images',
         maxSizeInBytes: 10 * 1024 * 1024,
       },
+
+      expert_advisor_test_image: {
+        id: 'expert_advisor_test_image',
+        folder: 'expert_advisor_test_screenshots',
+        maxSizeInBytes: 10 * 1024 * 1024,
+      },
     };
   }
 }
