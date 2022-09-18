@@ -10,6 +10,7 @@ import broker from 'src/modules/broker/brokerReducers';
 import brokerArticle from 'src/modules/brokerArticle/brokerArticleReducers';
 import brokerPost from 'src/modules/brokerPost/brokerPostReducers';
 import category from 'src/modules/category/categoryReducers';
+import expertAdvisorTest from 'src/modules/expertAdvisorTest/expertAdvisorTestReducers';
 import layout from 'src/modules/layout/layoutReducers';
 import mui from 'src/modules/mui/muiReducers';
 import news from 'src/modules/news/newsReducers';
@@ -37,6 +38,7 @@ export default (history) =>
     brokerArticle,
     brokerPost,
     category,
+    expertAdvisorTest,
     layout,
     mui,
     navigation,
