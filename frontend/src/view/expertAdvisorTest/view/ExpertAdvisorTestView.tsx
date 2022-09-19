@@ -101,7 +101,7 @@ function ExpertAdvisorTestView(props) {
                     'entities.expertAdvisorTest.fields.homepage',
                   )}
                   value={
-                    record.expert_advisor_test_metas[0]
+                    record.expert_advisor_test_metas
                       ? record.expert_advisor_test_metas[0]
                           .homepage
                       : ''
@@ -114,7 +114,7 @@ function ExpertAdvisorTestView(props) {
                     'entities.expertAdvisorTest.fields.meta_keywords',
                   )}
                   value={
-                    record.expert_advisor_test_metas[0]
+                    record.expert_advisor_test_metas
                       ? record.expert_advisor_test_metas[0]
                           .meta_keywords
                       : ''
@@ -127,7 +127,7 @@ function ExpertAdvisorTestView(props) {
                     'entities.expertAdvisorTest.fields.meta_description',
                   )}
                   value={
-                    record.expert_advisor_test_metas[0]
+                    record.expert_advisor_test_metas
                       ? record.expert_advisor_test_metas[0]
                           .meta_description
                       : ''

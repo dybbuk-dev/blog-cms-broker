@@ -24,13 +24,14 @@ import FieldSetViewItem from 'src/view/shared/view/FieldSetViewItem';
 import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
 import BrokerAutocompleteFormItem from 'src/view/broker/autocomplete/BrokerAutocompleteFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
+import ImagesFormItem from 'src/view/shared/form/items/ImagesFormItem';
 
 const schema = yup.object().shape({
   id: yupFormSchemas.integer(
     i18n('entities.expertAdvisorTest.fields.id'),
     {
       required: true,
-      min: 0,
+      min: 1,
     },
   ),
   name: yupFormSchemas.string(
@@ -109,18 +110,25 @@ function ExpertAdvisorTestForm(props) {
       broker: record.broker,
       navigation: record.navigation,
       deposit: record.deposit,
-      meta_keywords: record.meta_data[0]
-        ? record.meta_data[0].meta_keywords
-        : '',
-      meta_description: record.meta_data[0]
-        ? record.meta_data[0].meta_description
-        : '',
-      description: record.meta_data[0]
-        ? record.meta_data[0].description
-        : '',
-      homepage: record.meta_data[0]
-        ? record.meta_data[0].homepage
-        : '',
+      meta_keywords:
+        (record.expert_advisor_test_metas &&
+          record.expert_advisor_test_metas[0]
+            ?.meta_keywords) ||
+        '',
+      meta_description:
+        (record.expert_advisor_test_metas &&
+          record.expert_advisor_test_metas[0]
+            ?.meta_description) ||
+        '',
+      description:
+        (record.expert_advisor_test_metas &&
+          record.expert_advisor_test_metas[0]
+            ?.description) ||
+        '',
+      homepage:
+        (record.expert_advisor_test_metas &&
+          record.expert_advisor_test_metas[0]?.homepage) ||
+        '',
       expert_advisor_test_image:
         record.expert_advisor_test_image || null,
       activated: record.activated,
@@ -299,7 +307,7 @@ function ExpertAdvisorTestForm(props) {
               >
                 <Grid container spacing={2}>
                   <Grid item md={12} xs={12}>
-                    <LogoFormItem
+                    <ImagesFormItem
                       name="expert_advisor_test_image"
                       label={i18n(
                         'entities.expertAdvisorTest.fields.expert_advisor_test_image',
