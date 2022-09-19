@@ -213,6 +213,7 @@ function ExpertAdvisorTestListTable(props) {
                         }
                       >
                         {row.name}
+                        <br />({row.name_normalized})
                       </MaterialLink>
                     )}
                   </DataTableBodyCell>
