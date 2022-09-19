@@ -124,13 +124,14 @@ function AuthorForm(props) {
               />
             </Grid>
             <Grid item md={12} xs={12}>
-              <HtmlEditorFormItem
+              <TextAreaFormItem
                 name="description"
                 label={i18n(
                   'entities.author.fields.description',
                 )}
                 value={initialValues.description}
                 required={true}
+                variant="standard"
               />
             </Grid>
           </Grid>
