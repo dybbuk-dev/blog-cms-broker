@@ -185,7 +185,12 @@ function Menu({
         'resize',
         handleMiniSidenav,
       );
-  }, [dispatch, pathname]);
+  }, [
+    dispatch,
+    pathname,
+    transparentSidenav,
+    whiteSidenav,
+  ]);
 
   const renderAvailable = (permissionRequired) => {
     return {
@@ -489,23 +494,7 @@ function Menu({
               display="flex"
               alignItems="center"
             >
-              <MDTypography
-                display="block"
-                fontSize="1.1rem"
-                fontWeight="regular"
-                color={
-                  (transparentSidenav && !darkMode) ||
-                  whiteSidenav
-                    ? 'black'
-                    : 'white'
-                }
-                overflow="hidden"
-                textOverflow="ellipsis"
-                maxWidth="100%"
-                textAlign="center"
-              >
-                {i18n('app.title')}
-              </MDTypography>
+              <BrandLogo sidenav={true} />
             </MDBox>
           </MDBox>
           <Divider
@@ -539,7 +528,7 @@ function Menu({
                       ? tenantRoutes
                       : [],
                   )
-                  .concat([...planRoutes]),
+                  .concat([...userRoutes, ...planRoutes]),
               },
               { type: 'divider', key: 'divider-0' },
               ...menus,
