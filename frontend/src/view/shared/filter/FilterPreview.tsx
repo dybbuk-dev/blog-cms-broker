@@ -34,18 +34,24 @@ export default function FilterPreview(props) {
 
   if (!itemsNotEmpty.length || props.expanded) {
     return (
-      <MDTypography variant="h6" color="secondary">
+      <MDTypography variant="h6" color="text">
         {i18n('common.filters')}
       </MDTypography>
     );
   }
 
   return (
-    <MDBox display="flex" alignItems="flex-start">
-      <MDTypography variant="h6" color="secondary" mr={1}>
+    <MDBox display="flex" alignItems="center" gap={1}>
+      <MDTypography variant="h6" color="text">
         {i18n('common.filters')}:
       </MDTypography>
-      <Stack direction="row" spacing={1}>
+      <MDBox
+        display="flex"
+        alignItems="center"
+        flexGrow={1}
+        flexWrap="wrap"
+        gap={0.8}
+      >
         {itemsNotEmpty.map((item) => (
           <Chip
             key={item.key}
@@ -59,7 +65,7 @@ export default function FilterPreview(props) {
             }
           />
         ))}
-      </Stack>
+      </MDBox>
     </MDBox>
   );
 }
