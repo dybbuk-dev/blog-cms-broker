@@ -19,6 +19,7 @@ function SwitchFormItem(props) {
     label,
     name,
     required,
+    rerender,
     value,
   } = props;
 
@@ -35,7 +36,7 @@ function SwitchFormItem(props) {
 
   const formValue = getValues(name);
 
-  const [checked, setChecked] = useState(() => {
+  const getInitialValue = () => {
     if (formValue !== undefined && formValue !== null) {
       return formValue;
     }
@@ -49,7 +50,11 @@ function SwitchFormItem(props) {
       return defaultValues[name];
     }
     return false;
-  });
+  };
+
+  const [curValue, setCurValue] = useState(
+    getInitialValue(),
+  );
 
   useEffect(() => {
     register({ name });
@@ -57,9 +62,13 @@ function SwitchFormItem(props) {
 
   useEffect(() => {
     if (forceValue) {
-      setChecked(value);
+      setCurValue(value);
     }
   }, [value]);
+
+  useEffect(() => {
+    setCurValue(getInitialValue());
+  }, [rerender]);
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -78,13 +87,13 @@ function SwitchFormItem(props) {
           <Switch
             id={name}
             name={name}
-            checked={checked}
+            checked={curValue}
             onChange={(e) => {
-              setChecked(Boolean(e.target.checked));
               setValue(name, Boolean(e.target.checked), {
                 shouldValidate: false,
                 shouldDirty: true,
               });
+              setCurValue(Boolean(e.target.checked));
               props.onChange &&
                 props.onChange(e.target.checked);
             }}
@@ -117,6 +126,7 @@ SwitchFormItem.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
   required: PropTypes.bool,
+  rerender: PropTypes.number,
   value: PropTypes.bool,
 };
 

@@ -52,7 +52,7 @@ function DragAndDropUploaderArea(props) {
             color: '#777777',
           }}
         >
-          <CloudUploadOutlinedIcon fontSize="large" />
+          <CloudUploadIcon fontSize="large" />
           <MDTypography
             display="block"
             variant="button"

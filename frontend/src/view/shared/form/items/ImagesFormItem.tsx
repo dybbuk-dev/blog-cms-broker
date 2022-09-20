@@ -15,6 +15,7 @@ function ImagesFormItem(props) {
     max,
     name,
     required,
+    rerender,
     storage,
     value,
   } = props;
@@ -32,11 +33,19 @@ function ImagesFormItem(props) {
 
   const formValue = getValues(name);
 
+  const getInitialValue = () =>
+    formValue || value || defaultValues[name] || [];
+
   const [curValue, setCurValue] = useState(
-    forceValue
-      ? value
-      : formValue || value || defaultValues[name] || [],
+    getInitialValue(),
   );
+
+  if (forceValue) {
+    setValue(name, value, {
+      shouldValidate: false,
+      shouldDirty: true,
+    });
+  }
 
   useEffect(() => {
     register({ name });
@@ -47,6 +56,10 @@ function ImagesFormItem(props) {
       setCurValue(value);
     }
   }, [value]);
+
+  useEffect(() => {
+    setCurValue(getInitialValue());
+  }, [rerender]);
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -109,6 +122,7 @@ ImagesFormItem.propTypes = {
   max: PropTypes.number,
   name: PropTypes.string.isRequired,
   required: PropTypes.bool,
+  rerender: PropTypes.number,
   storage: PropTypes.object.isRequired,
   value: PropTypes.array,
 };

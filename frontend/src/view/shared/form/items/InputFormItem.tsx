@@ -23,6 +23,7 @@ export function InputFormItem(props) {
     placeholder,
     readOnly,
     required,
+    rerender,
     shrink,
     size,
     startAdornment,
@@ -44,8 +45,11 @@ export function InputFormItem(props) {
 
   const formValue = getValues(name);
 
+  const getInitialValue = () =>
+    formValue || value || defaultValues[name] || '';
+
   const [curValue, setCurValue] = useState(
-    formValue || value || defaultValues[name] || '',
+    getInitialValue(),
   );
 
   if (forceValue) {
@@ -64,6 +68,10 @@ export function InputFormItem(props) {
       setCurValue(value);
     }
   }, [value]);
+
+  useEffect(() => {
+    setCurValue(getInitialValue());
+  }, [rerender]);
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -157,6 +165,7 @@ InputFormItem.propTypes = {
   prefix: PropTypes.string,
   readOnly: PropTypes.bool,
   required: PropTypes.bool,
+  rerender: PropTypes.number,
   shrink: PropTypes.bool,
   size: PropTypes.string,
   startAdornment: PropTypes.any,

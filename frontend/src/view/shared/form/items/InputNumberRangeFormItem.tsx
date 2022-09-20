@@ -1,5 +1,5 @@
 import { i18n } from 'src/i18n';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import FormErrors from 'src/view/shared/form/formErrors';
 import MDBox from 'src/mui/components/MDBox';
@@ -14,28 +14,60 @@ function InputNumberRangeFormItem(props) {
     disabled,
     endAdornment,
     externalErrorMessage,
-    fullWidth,
+    forceValue,
     hint,
-    id,
     label,
     margin,
     name,
     placeholder,
     required,
+    rerender,
     shrink,
     size,
-    type,
     value,
     variant,
   } = props;
 
   const {
-    register,
+    control: { defaultValuesRef },
     errors,
     formState: { touched, isSubmitted },
+    getValues,
+    register,
     setValue,
-    watch,
   } = useFormContext();
+
+  const defaultValues = defaultValuesRef.current || {};
+
+  const formValue = getValues(name);
+
+  const getInitialValue = () =>
+    formValue || value || defaultValues[name] || [];
+
+  const [curValue, setCurValue] = useState(
+    getInitialValue(),
+  );
+
+  if (forceValue && value) {
+    setValue(name, value, {
+      shouldValidate: false,
+      shouldDirty: true,
+    });
+  }
+
+  useEffect(() => {
+    register({ name });
+  }, [register, name]);
+
+  useEffect(() => {
+    if (forceValue) {
+      setCurValue(value);
+    }
+  }, [value]);
+
+  useEffect(() => {
+    setCurValue(getInitialValue());
+  }, [rerender]);
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -45,68 +77,61 @@ function InputNumberRangeFormItem(props) {
     externalErrorMessage,
   );
 
-  const originalValue = watch(name);
-
-  useEffect(() => {
-    register({ name });
-  }, [register, name]);
-
-  const handleStartChanged = (value) => {
-    setValue(name, [value, endValue()], {
+  const updateCurValue = (newValue) => {
+    setValue(name, newValue, {
       shouldValidate: false,
       shouldDirty: true,
     });
-    props.onChange && props.onChange([value, endValue()]);
+    setCurValue(newValue);
+    props.onChange && props.onChange(newValue);
+  };
+
+  const handleStartChanged = (value) => {
+    updateCurValue([value, endValue()]);
   };
 
   const handleEndChanged = (value) => {
-    setValue(name, [startValue(), value], {
-      shouldValidate: false,
-      shouldDirty: true,
-    });
-    props.onChange && props.onChange([value, startValue()]);
+    updateCurValue([startValue(), value]);
   };
 
   const startValue = () => {
-    if (!originalValue) {
+    if (!curValue) {
       return '';
     }
 
-    if (Array.isArray(!originalValue)) {
+    if (Array.isArray(!curValue)) {
       return '';
     }
 
-    if (!originalValue.length) {
+    if (!curValue.length) {
       return '';
     }
 
-    return originalValue[0];
+    return curValue[0];
   };
 
   const endValue = () => {
-    if (!originalValue) {
+    if (!curValue) {
       return '';
     }
 
-    if (Array.isArray(!originalValue)) {
+    if (Array.isArray(!curValue)) {
       return '';
     }
 
-    if (originalValue.length < 2) {
+    if (curValue.length < 2) {
       return '';
     }
 
-    return originalValue[1];
+    return curValue[1];
   };
 
   return (
     <>
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'nowrap',
-          alignItems: 'baseline',
-        }}
+      <MDBox
+        display="flex"
+        flexWrap="nowrap"
+        alignItems="baseline"
       >
         <MDInput
           fullWidth
@@ -134,15 +159,9 @@ function InputNumberRangeFormItem(props) {
           }}
         />
 
-        <div
-          style={{
-            flexShrink: 1,
-            marginLeft: '8px',
-            marginRight: '8px',
-          }}
-        >
+        <MDBox flexShrink={1} mx="6.4px">
           <MDTypography color="secondary">~</MDTypography>
-        </div>
+        </MDBox>
 
         <MDInput
           type="number"
@@ -170,9 +189,9 @@ function InputNumberRangeFormItem(props) {
             props.onBlur && props.onBlur(event);
           }}
         />
-      </div>
+      </MDBox>
       {errorMessage && (
-        <MDBox mt={0.75}>
+        <MDBox mt={0.6}>
           <MDTypography
             component="div"
             variant="caption"
@@ -188,31 +207,31 @@ function InputNumberRangeFormItem(props) {
 }
 
 InputNumberRangeFormItem.defaultProps = {
+  forceValue: false,
   required: false,
 };
 
 InputNumberRangeFormItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string,
-  hint: PropTypes.string,
-  autoFocus: PropTypes.bool,
-  required: PropTypes.bool,
-  prefix: PropTypes.string,
-  placeholder: PropTypes.string,
-  externalErrorMessage: PropTypes.string,
-  formItemProps: PropTypes.object,
-  id: PropTypes.string,
-  type: PropTypes.string,
-  disabled: PropTypes.bool,
   autoComplete: PropTypes.string,
-  onChange: PropTypes.func,
+  autoFocus: PropTypes.bool,
+  disabled: PropTypes.bool,
   endAdornment: PropTypes.any,
+  externalErrorMessage: PropTypes.string,
+  forceValue: PropTypes.bool,
+  formItemProps: PropTypes.object,
+  hint: PropTypes.string,
+  label: PropTypes.string,
   margin: PropTypes.string,
-  variant: PropTypes.string,
-  size: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  prefix: PropTypes.string,
+  required: PropTypes.bool,
+  rerender: PropTypes.number,
   shrink: PropTypes.bool,
-  fullWidth: PropTypes.bool,
-  value: PropTypes.string,
+  size: PropTypes.string,
+  value: PropTypes.arrayOf(PropTypes.string),
+  variant: PropTypes.string,
 };
 
 export default InputNumberRangeFormItem;

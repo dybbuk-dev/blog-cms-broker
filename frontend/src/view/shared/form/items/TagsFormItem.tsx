@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { i18n } from 'src/i18n';
 import { useFormContext } from 'react-hook-form';
@@ -20,27 +20,65 @@ const filter = createFilterOptions<Option>();
 
 function TagsFormItem(props) {
   const {
-    label,
-    name,
-    hint,
     externalErrorMessage,
-    variant,
-    required,
-    placeholder,
+    forceValue,
+    hint,
     isClearable,
-    notFoundContent = i18n('autocomplete.noOptions'),
-    size,
-    shrink,
+    label,
     margin,
+    name,
+    notFoundContent = i18n('autocomplete.noOptions'),
+    placeholder,
+    required,
+    rerender,
+    shrink,
+    size,
+    value: defaultValue,
+    variant,
   } = props;
 
   const {
-    register,
+    control: { defaultValuesRef },
     errors,
     formState: { touched, isSubmitted },
+    getValues,
+    register,
     setValue,
-    watch,
   } = useFormContext();
+
+  const defaultValues = defaultValuesRef.current || {};
+
+  const originalValue = defaultValues[name];
+
+  const formValue = getValues(name);
+
+  const getInitialValue = () =>
+    formValue || defaultValue || originalValue || [];
+
+  const [curValue, setCurValue] = useState(
+    getInitialValue(),
+  );
+
+  if (forceValue) {
+    setValue(name, defaultValue, {
+      shouldValidate: false,
+      shouldDirty: true,
+    });
+  }
+
+  useEffect(() => {
+    register({ name });
+  }, [register, name]);
+
+  useEffect(() => {
+    if (forceValue) {
+      setCurValue(defaultValue);
+    }
+  }, [defaultValue]);
+
+  useEffect(() => {
+    setCurValue(getInitialValue());
+  }, [rerender]);
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -50,19 +88,18 @@ function TagsFormItem(props) {
     externalErrorMessage,
   );
 
-  useEffect(() => {
-    register({ name });
-  }, [register, name]);
-
-  const originalValue = watch(name);
+  const updateCurValueAndOnChange = (newValue) => {
+    setCurValue(newValue);
+    setValue(name, newValue, {
+      shouldValidate: false,
+      shouldDirty: true,
+    });
+    props.onChange && props.onChange(newValue);
+  };
 
   const handleChange = (data) => {
     if (!data || !data.length) {
-      setValue(name, null, {
-        shouldValidate: false,
-        shouldDirty: true,
-      });
-      props.onChange && props.onChange(null);
+      updateCurValueAndOnChange(null);
       return;
     }
 
@@ -71,27 +108,23 @@ function TagsFormItem(props) {
       .join(',')
       .split(',');
 
-    setValue(name, commaSplittedValues, {
-      shouldValidate: false,
-      shouldDirty: true,
-    });
-    props.onChange && props.onChange(commaSplittedValues);
+    updateCurValueAndOnChange(commaSplittedValues);
   };
 
   const value = () => {
-    if (!originalValue || !originalValue.length) {
+    if (!curValue || !curValue.length) {
       return [];
     }
 
-    return originalValue.map((item) => ({
+    return curValue.map((item) => ({
       value: item,
       label: item,
     }));
   };
 
-  const [options, setOptions] = React.useState<
-    Array<Option>
-  >(value());
+  const [options, setOptions] = useState<Array<Option>>(
+    value(),
+  );
 
   return (
     <>
@@ -170,23 +203,27 @@ function TagsFormItem(props) {
 }
 
 TagsFormItem.defaultProps = {
-  required: false,
+  forceValue: false,
   isClearable: true,
+  required: false,
 };
 
 TagsFormItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string,
-  hint: PropTypes.string,
-  required: PropTypes.bool,
   errorMessage: PropTypes.string,
-  mode: PropTypes.string,
+  forceValue: PropTypes.bool,
+  hint: PropTypes.string,
   isClearable: PropTypes.bool,
-  notFoundContent: PropTypes.string,
-  variant: PropTypes.string,
-  size: PropTypes.string,
-  shrink: PropTypes.bool,
+  label: PropTypes.string,
   margin: PropTypes.string,
+  mode: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  notFoundContent: PropTypes.string,
+  required: PropTypes.bool,
+  rerender: PropTypes.number,
+  shrink: PropTypes.bool,
+  size: PropTypes.string,
+  value: PropTypes.any,
+  variant: PropTypes.string,
 };
 
 export default TagsFormItem;

@@ -1,7 +1,10 @@
-import PropTypes from 'prop-types';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import Color from 'color';
-import MDTypography from 'src/mui/components/MDTypography';
+import darkColors from 'src/mui/assets/theme-dark/base/colors';
+import lightColors from 'src/mui/assets/theme/base/colors';
 import MDBox from 'src/mui/components/MDBox';
+import MDTypography from 'src/mui/components/MDTypography';
+import PropTypes from 'prop-types';
 
 export function getColorBadgeFore(color) {
   if (!color) {
@@ -18,13 +21,19 @@ export function getColorBadgeBack(color) {
 }
 
 function ColorBadge(props) {
+  const { sidenavColor, darkMode } = selectMuiSettings();
+  const defaultColor = darkMode
+    ? darkColors[sidenavColor]?.main
+    : lightColors[sidenavColor]?.main;
   const { color, label } = props;
   return (
     <MDBox lineHeight={1}>
       <MDTypography
         display="inline-block"
         variant="caption"
-        backgroundColor={getColorBadgeBack(color)}
+        backgroundColor={getColorBadgeBack(
+          color || defaultColor,
+        )}
         px={1}
         py={0.75}
         fontWeight="bold"
@@ -33,7 +42,7 @@ function ColorBadge(props) {
         textTransform="uppercase"
         letterSpacing={1}
         sx={{
-          color: getColorBadgeFore(color),
+          color: getColorBadgeFore(color || defaultColor),
         }}
       >
         {label}

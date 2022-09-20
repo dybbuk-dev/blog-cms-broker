@@ -24,9 +24,9 @@ const Error403Page = () => {
         <Card>
           <MDBox
             variant="gradient"
-            bgColor="info"
+            bgColor={sidenavColor}
             borderRadius="lg"
-            coloredShadow="info"
+            coloredShadow={sidenavColor}
             mx={2}
             mt={-3}
             p={2}

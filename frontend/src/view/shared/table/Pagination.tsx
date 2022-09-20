@@ -1,33 +1,29 @@
-import React from 'react';
-import PaginationWrapper from 'src/view/shared/table/styles/PaginationWrapper';
+import { Autocomplete, Icon } from '@mui/material';
 import { i18n } from 'src/i18n';
-import PropTypes from 'prop-types';
-import {
-  Autocomplete,
-  Icon,
-  TablePagination,
-  useMediaQuery,
-} from '@mui/material';
-import MDBox from 'src/mui/components/MDBox';
-import MDTypography from 'src/mui/components/MDTypography';
-import MDPagination from 'src/mui/components/MDPagination';
-import MDInput from 'src/mui/components/MDInput';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import MDBox from 'src/mui/components/MDBox';
+import MDInput from 'src/mui/components/MDInput';
+import MDPagination from 'src/mui/components/MDPagination';
+import MDTypography from 'src/mui/components/MDTypography';
+import PropTypes from 'prop-types';
 
 function Pagination(props) {
   const { entriesPerPage, showTotalEntries, pagination } =
     props;
   const { current, pageSize, total } = pagination;
   const { sidenavColor } = selectMuiSettings();
-  const defaultPageSize = 10;
+  const defaultPageSize =
+    entriesPerPage?.defaultPageSize || 10;
 
   let entries: any[];
 
-  if (entriesPerPage) {
-    entries = entriesPerPage.entries
-      ? entriesPerPage.entries
-      : ['5', '10', '25', '50', '100'];
-  }
+  entries = entriesPerPage?.entries || [
+    '5',
+    '10',
+    '25',
+    '50',
+    '100',
+  ];
 
   const onChangeRowsPerPage = (pageSize) => {
     props.onChange({

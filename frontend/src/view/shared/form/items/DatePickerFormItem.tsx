@@ -12,24 +12,27 @@ import {
   DEFAULT_PICKER_FORMAT_DATE_ONLY,
 } from 'src/config/common';
 import moment from 'moment';
+import MDBox from 'src/mui/components/MDBox';
+import MDTypography from 'src/mui/components/MDTypography';
 
-export function DatePickerFormItem(props) {
+function DatePickerFormItem(props) {
   const {
-    label,
-    name,
-    hint,
-    placeholder,
-    autoFocus,
     autoComplete,
+    autoFocus,
     externalErrorMessage,
-    // required,
-    showTime,
-    size,
-    margin,
-    variant,
-    shrink,
-    value,
     forceValue,
+    hint,
+    label,
+    margin,
+    name,
+    placeholder,
+    required,
+    rerender,
+    showTime,
+    shrink,
+    size,
+    value,
+    variant,
   } = props;
 
   const {
@@ -45,11 +48,14 @@ export function DatePickerFormItem(props) {
 
   const formValue = getValues(name);
 
+  const getInitialValue = () =>
+    formValue || value || defaultValues[name] || '';
+
   const [curValue, setCurValue] = useState(
-    formValue || value || defaultValues[name] || '',
+    getInitialValue(),
   );
 
-  if (forceValue) {
+  if (forceValue && value) {
     setValue(name, moment(value), {
       shouldValidate: false,
       shouldDirty: true,
@@ -59,6 +65,16 @@ export function DatePickerFormItem(props) {
   useEffect(() => {
     register({ name });
   }, [register, name]);
+
+  useEffect(() => {
+    if (forceValue) {
+      setCurValue(value);
+    }
+  }, [value]);
+
+  useEffect(() => {
+    setCurValue(getInitialValue());
+  }, [rerender]);
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -125,12 +141,24 @@ export function DatePickerFormItem(props) {
             InputLabelProps={{
               shrink: shrink,
             }}
+            required={required}
             error={Boolean(errorMessage)}
-            helperText={errorMessage || hint}
           />
         )}
-        value={forceValue ? value : formValue || curValue}
+        value={curValue}
       />
+      {errorMessage && (
+        <MDBox mt={0.6}>
+          <MDTypography
+            component="div"
+            variant="caption"
+            color="error"
+            fontWeight="regular"
+          >
+            {errorMessage}
+          </MDTypography>
+        </MDBox>
+      )}
     </LocalizationProvider>
   );
 }
@@ -141,23 +169,24 @@ DatePickerFormItem.defaultProps = {
 };
 
 DatePickerFormItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  required: PropTypes.bool,
-  label: PropTypes.string,
-  hint: PropTypes.string,
   autoFocus: PropTypes.bool,
-  size: PropTypes.string,
-  prefix: PropTypes.string,
-  placeholder: PropTypes.string,
   externalErrorMessage: PropTypes.string,
-  formItemProps: PropTypes.object,
-  showTime: PropTypes.bool,
-  margin: PropTypes.string,
-  shrink: PropTypes.bool,
-  variant: PropTypes.string,
-  onAccept: PropTypes.func,
-  value: PropTypes.string,
   forceValue: PropTypes.bool,
+  formItemProps: PropTypes.object,
+  hint: PropTypes.string,
+  label: PropTypes.string,
+  margin: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  onAccept: PropTypes.func,
+  placeholder: PropTypes.string,
+  prefix: PropTypes.string,
+  required: PropTypes.bool,
+  rerender: PropTypes.number,
+  showTime: PropTypes.bool,
+  shrink: PropTypes.bool,
+  size: PropTypes.string,
+  value: PropTypes.string,
+  variant: PropTypes.string,
 };
 
 export default DatePickerFormItem;
