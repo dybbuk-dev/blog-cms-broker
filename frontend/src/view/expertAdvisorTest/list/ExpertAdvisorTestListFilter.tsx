@@ -51,6 +51,8 @@ const schema = yup.object().shape({
 const emptyValues = {
   idRange: [],
   name: null,
+  broker: null,
+  navigation: null,
   activated: null,
   pdf: null,
 };
@@ -93,6 +95,7 @@ function ExpertAdvisorTestListFilter(props) {
   const rawFilter = useSelector(selectors.selectRawFilter);
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
+  const [rerender, setRerender] = useState(0);
 
   const [initialValues] = useState(() => {
     return {
@@ -121,6 +124,7 @@ function ExpertAdvisorTestListFilter(props) {
     const rawValues = form.getValues();
     dispatch(actions.doFetch(values, rawValues));
     setExpanded(false);
+    setRerender(rerender + 1);
   };
 
   const onReset = () => {
@@ -129,6 +133,7 @@ function ExpertAdvisorTestListFilter(props) {
     });
     dispatch(actions.doReset());
     setExpanded(false);
+    setRerender(rerender + 1);
   };
 
   const onRemove = (key) => {
@@ -165,6 +170,7 @@ function ExpertAdvisorTestListFilter(props) {
                       'entities.expertAdvisorTest.fields.idRange',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -174,6 +180,7 @@ function ExpertAdvisorTestListFilter(props) {
                       'entities.expertAdvisorTest.fields.name',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -183,6 +190,7 @@ function ExpertAdvisorTestListFilter(props) {
                       'entities.expertAdvisorTest.fields.navigation',
                     )}
                     variant="standard"
+                    rerender={rerender}
                     fullWidth
                   />
                 </Grid>
@@ -193,6 +201,7 @@ function ExpertAdvisorTestListFilter(props) {
                       'entities.expertAdvisorTest.fields.broker',
                     )}
                     variant="standard"
+                    rerender={rerender}
                     fullWidth
                   />
                 </Grid>
@@ -204,6 +213,7 @@ function ExpertAdvisorTestListFilter(props) {
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -214,6 +224,7 @@ function ExpertAdvisorTestListFilter(props) {
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
               </Grid>

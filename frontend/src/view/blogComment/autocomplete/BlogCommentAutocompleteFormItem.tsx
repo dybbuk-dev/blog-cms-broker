@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BlogCommentService from 'src/modules/blogComment/blogCommentService';
 import BlogCommentFormModal from 'src/view/blogComment/form/BlogCommentFormModal';
 import AutocompleteInMemoryFormItem from 'src/view/shared/form/items/AutocompleteInMemoryFormItem';
@@ -7,9 +7,23 @@ import { useSelector } from 'react-redux';
 import selectors from 'src/modules/blogComment/blogCommentSelectors';
 
 function BlogCommentAutocompleteFormItem(props) {
+  const {
+    autoFocus,
+    label,
+    margin,
+    mode,
+    name,
+    required,
+    rerender: parentRerender,
+    shrink,
+    size,
+    variant,
+  } = props;
+
   const { setValue, getValues } = useFormContext();
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [rerender, setRerender] = useState(0);
 
   const hasPermissionToCreate = useSelector(
     selectors.selectPermissionToCreate,
@@ -38,6 +52,8 @@ function BlogCommentAutocompleteFormItem(props) {
         shouldDirty: true,
       });
     }
+
+    setRerender(rerender + 1);
 
     doCloseModal();
   };
@@ -80,6 +96,10 @@ function BlogCommentAutocompleteFormItem(props) {
       };
     },
   };
+
+  useEffect(() => {
+    setRerender(rerender + 1);
+  }, [parentRerender]);
 
   return (
     <>

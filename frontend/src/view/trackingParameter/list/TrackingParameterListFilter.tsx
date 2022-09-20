@@ -33,18 +33,18 @@ const schema = yup.object().shape({
   idRange: yupFilterSchemas.integerRange(
     i18n('entities.trackingParameter.fields.idRange'),
   ),
-  name: yupFilterSchemas.string(
-    i18n('entities.trackingParameter.fields.name'),
+  param: yupFilterSchemas.string(
+    i18n('entities.trackingParameter.fields.param'),
   ),
-  link: yupFilterSchemas.string(
-    i18n('entities.trackingParameter.fields.link'),
+  value: yupFilterSchemas.string(
+    i18n('entities.trackingParameter.fields.value'),
   ),
 });
 
 const emptyValues = {
   idRange: [],
-  name: null,
-  link: null,
+  param: null,
+  value: null,
 };
 
 const previewRenders = {
@@ -54,12 +54,12 @@ const previewRenders = {
     ),
     render: filterRenders.decimalRange(),
   },
-  name: {
-    label: i18n('entities.trackingParameter.fields.name'),
+  param: {
+    label: i18n('entities.trackingParameter.fields.param'),
     render: filterRenders.generic(),
   },
-  link: {
-    label: i18n('entities.trackingParameter.fields.link'),
+  value: {
+    label: i18n('entities.trackingParameter.fields.value'),
     render: filterRenders.generic(),
   },
 };
@@ -69,6 +69,7 @@ function TrackingParameterListFilter(props) {
   const rawFilter = useSelector(selectors.selectRawFilter);
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
+  const [rerender, setRerender] = useState(0);
 
   const [initialValues] = useState(() => {
     return {
@@ -97,6 +98,7 @@ function TrackingParameterListFilter(props) {
     const rawValues = form.getValues();
     dispatch(actions.doFetch(values, rawValues));
     setExpanded(false);
+    setRerender(rerender + 1);
   };
 
   const onReset = () => {
@@ -105,6 +107,7 @@ function TrackingParameterListFilter(props) {
     });
     dispatch(actions.doReset());
     setExpanded(false);
+    setRerender(rerender + 1);
   };
 
   const onRemove = (key) => {
@@ -141,6 +144,7 @@ function TrackingParameterListFilter(props) {
                       'entities.trackingParameter.fields.idRange',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -150,6 +154,7 @@ function TrackingParameterListFilter(props) {
                       'entities.trackingParameter.fields.param',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -159,6 +164,7 @@ function TrackingParameterListFilter(props) {
                       'entities.trackingParameter.fields.value',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
               </Grid>

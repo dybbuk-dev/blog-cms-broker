@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BrokerPostService from 'src/modules/brokerPost/brokerPostService';
 import BrokerPostFormModal from 'src/view/brokerPost/form/BrokerPostFormModal';
 import AutocompleteInMemoryFormItem from 'src/view/shared/form/items/AutocompleteInMemoryFormItem';
@@ -7,9 +7,22 @@ import { useSelector } from 'react-redux';
 import selectors from 'src/modules/brokerPost/brokerPostSelectors';
 
 function BrokerPostAutocompleteFormItem(props) {
+  const {
+    autoFocus,
+    label,
+    margin,
+    mode,
+    name,
+    required,
+    rerender: parentRerender,
+    shrink,
+    size,
+    variant,
+  } = props;
   const { setValue, getValues } = useFormContext();
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [rerender, setRerender] = useState(0);
 
   const hasPermissionToCreate = useSelector(
     selectors.selectPermissionToCreate,
@@ -38,6 +51,8 @@ function BrokerPostAutocompleteFormItem(props) {
         shouldDirty: true,
       });
     }
+
+    setRerender(rerender + 1);
 
     doCloseModal();
   };
@@ -77,6 +92,10 @@ function BrokerPostAutocompleteFormItem(props) {
       };
     },
   };
+
+  useEffect(() => {
+    setRerender(rerender + 1);
+  }, [parentRerender]);
 
   return (
     <>

@@ -73,6 +73,7 @@ function BrokerPostListFilter(props) {
   const rawFilter = useSelector(selectors.selectRawFilter);
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
+  const [rerender, setRerender] = useState(0);
 
   const [initialValues] = useState(() => {
     return {
@@ -101,6 +102,7 @@ function BrokerPostListFilter(props) {
     const rawValues = form.getValues();
     dispatch(actions.doFetch(values, rawValues));
     setExpanded(false);
+    setRerender(rerender + 1);
   };
 
   const onReset = () => {
@@ -109,6 +111,7 @@ function BrokerPostListFilter(props) {
     });
     dispatch(actions.doReset());
     setExpanded(false);
+    setRerender(rerender + 1);
   };
 
   const onRemove = (key) => {
@@ -145,6 +148,7 @@ function BrokerPostListFilter(props) {
                       'entities.brokerPost.fields.idRange',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -154,6 +158,7 @@ function BrokerPostListFilter(props) {
                       'entities.brokerPost.fields.name',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -163,6 +168,7 @@ function BrokerPostListFilter(props) {
                       'entities.brokerPost.fields.email',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -172,6 +178,7 @@ function BrokerPostListFilter(props) {
                       'entities.brokerPost.fields.rating',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
               </Grid>

@@ -86,6 +86,7 @@ function OpenxListFilter(props) {
   const rawFilter = useSelector(selectors.selectRawFilter);
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
+  const [rerender, setRerender] = useState(0);
 
   const [initialValues] = useState(() => {
     return {
@@ -114,6 +115,7 @@ function OpenxListFilter(props) {
     const rawValues = form.getValues();
     dispatch(actions.doFetch(values, rawValues));
     setExpanded(false);
+    setRerender(rerender + 1);
   };
 
   const onReset = () => {
@@ -122,6 +124,7 @@ function OpenxListFilter(props) {
     });
     dispatch(actions.doReset());
     setExpanded(false);
+    setRerender(rerender + 1);
   };
 
   const onRemove = (key) => {
@@ -158,6 +161,7 @@ function OpenxListFilter(props) {
                       'entities.openx.fields.idRange',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}></Grid>
@@ -168,6 +172,7 @@ function OpenxListFilter(props) {
                       'entities.openx.fields.code',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -177,6 +182,7 @@ function OpenxListFilter(props) {
                       'entities.openx.fields.noscript',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -187,6 +193,7 @@ function OpenxListFilter(props) {
                     )}
                     options={openxZoneOptions}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -197,6 +204,7 @@ function OpenxListFilter(props) {
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
               </Grid>

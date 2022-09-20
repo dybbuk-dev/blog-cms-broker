@@ -1,12 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AuthorService from 'src/modules/author/authorService';
 import AuthorFormModal from 'src/view/author/form/AuthorFormModal';
 import AutocompleteInMemoryFormItem from 'src/view/shared/form/items/AutocompleteInMemoryFormItem';
 import { useFormContext } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import selectors from 'src/modules/author/authorSelectors';
+import MDBox from 'src/mui/components/MDBox';
 
 function AuthorAutocompleteFormItem(props) {
+  const {
+    autoFocus,
+    label,
+    margin,
+    mode,
+    name,
+    required,
+    rerender: parentRerender,
+    shrink,
+    size,
+    variant,
+  } = props;
   const { setValue, getValues } = useFormContext();
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -25,8 +38,6 @@ function AuthorAutocompleteFormItem(props) {
   };
 
   const doCreateSuccess = (record) => {
-    const { name, mode } = props;
-
     if (mode && mode === 'multiple') {
       setValue(
         name,
@@ -81,8 +92,12 @@ function AuthorAutocompleteFormItem(props) {
     },
   };
 
+  useEffect(() => {
+    setRerender(rerender + 1);
+  }, [parentRerender]);
+
   return (
-    <>
+    <MDBox position="relative">
       <AutocompleteInMemoryFormItem
         {...props}
         fetchFn={fetchFn}
@@ -98,7 +113,7 @@ function AuthorAutocompleteFormItem(props) {
           onSuccess={doCreateSuccess}
         />
       )}
-    </>
+    </MDBox>
   );
 }
 

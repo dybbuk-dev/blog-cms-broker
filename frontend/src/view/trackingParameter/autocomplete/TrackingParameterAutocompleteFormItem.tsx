@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TrackingParameterService from 'src/modules/trackingParameter/trackingParameterService';
 import TrackingParameterFormModal from 'src/view/trackingParameter/form/TrackingParameterFormModal';
 import AutocompleteInMemoryFormItem from 'src/view/shared/form/items/AutocompleteInMemoryFormItem';
@@ -7,6 +7,19 @@ import { useSelector } from 'react-redux';
 import selectors from 'src/modules/trackingParameter/trackingParameterSelectors';
 
 function TrackingParameterAutocompleteFormItem(props) {
+  const {
+    autoFocus,
+    label,
+    margin,
+    mode,
+    name,
+    required,
+    rerender: parentRerender,
+    shrink,
+    size,
+    variant,
+  } = props;
+
   const { setValue, getValues } = useFormContext();
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -83,6 +96,10 @@ function TrackingParameterAutocompleteFormItem(props) {
       };
     },
   };
+
+  useEffect(() => {
+    setRerender(rerender + 1);
+  }, [parentRerender]);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BrokerArticleService from 'src/modules/brokerArticle/brokerArticleService';
 import BrokerArticleFormModal from 'src/view/brokerArticle/form/BrokerArticleFormModal';
 import AutocompleteInMemoryFormItem from 'src/view/shared/form/items/AutocompleteInMemoryFormItem';
@@ -7,6 +7,19 @@ import { useSelector } from 'react-redux';
 import selectors from 'src/modules/brokerArticle/brokerArticleSelectors';
 
 function BrokerArticleAutocompleteFormItem(props) {
+  const {
+    autoFocus,
+    label,
+    margin,
+    mode,
+    name,
+    required,
+    rerender: parentRerender,
+    shrink,
+    size,
+    variant,
+  } = props;
+
   const { setValue, getValues } = useFormContext();
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -83,6 +96,10 @@ function BrokerArticleAutocompleteFormItem(props) {
       };
     },
   };
+
+  useEffect(() => {
+    setRerender(rerender + 1);
+  }, [parentRerender]);
 
   return (
     <>
