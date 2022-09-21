@@ -45,7 +45,7 @@ const userFormActions = {
         type: userFormActions.INIT_ERROR,
       });
 
-      getHistory().push('/user');
+      getHistory().push('/admin/user');
     }
   },
 
@@ -63,7 +63,7 @@ const userFormActions = {
 
       Message.success(i18n('user.doAddSuccess'));
 
-      getHistory().push('/user');
+      getHistory().push('/admin/user');
     } catch (error) {
       Errors.handle(error);
 
@@ -95,7 +95,7 @@ const userFormActions = {
 
       Message.success(i18n('user.doUpdateSuccess'));
 
-      getHistory().push('/user');
+      getHistory().push('/admin/user');
     } catch (error) {
       Errors.handle(error);
 

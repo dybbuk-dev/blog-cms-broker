@@ -28,7 +28,7 @@ const navigationViewActions = {
         type: navigationViewActions.FIND_ERROR,
       });
 
-      getHistory().push('/navigation');
+      getHistory().push('/admin/navigation');
     }
   },
 };

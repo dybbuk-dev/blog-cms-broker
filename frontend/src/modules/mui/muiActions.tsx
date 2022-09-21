@@ -120,7 +120,7 @@ const muiActions = {
         type: muiActions.INIT_ERROR,
       });
 
-      getHistory().push('/');
+      getHistory().push('/admin');
     }
   },
 

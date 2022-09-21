@@ -34,7 +34,7 @@ const navigationDestroyActions = {
 
       dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/navigation');
+      getHistory().push('/admin/navigation');
     } catch (error) {
       Errors.handle(error);
 
@@ -67,7 +67,7 @@ const navigationDestroyActions = {
         i18n('entities.navigation.destroyAll.success'),
       );
 
-      getHistory().push('/navigation');
+      getHistory().push('/admin/navigation');
     } catch (error) {
       Errors.handle(error);
 

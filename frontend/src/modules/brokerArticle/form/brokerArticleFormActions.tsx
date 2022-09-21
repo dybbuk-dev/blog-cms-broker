@@ -44,7 +44,7 @@ const brokerArticleFormActions = {
         type: brokerArticleFormActions.INIT_ERROR,
       });
 
-      getHistory().push('/broker-article');
+      getHistory().push('/admin/broker-article');
     }
   },
 
@@ -64,7 +64,7 @@ const brokerArticleFormActions = {
         i18n('entities.brokerArticle.create.success'),
       );
 
-      getHistory().push('/broker-article');
+      getHistory().push('/admin/broker-article');
     } catch (error) {
       Errors.handle(error);
 
@@ -90,7 +90,7 @@ const brokerArticleFormActions = {
         i18n('entities.brokerArticle.update.success'),
       );
 
-      getHistory().push('/broker-article');
+      getHistory().push('/admin/broker-article');
     } catch (error) {
       Errors.handle(error);
 

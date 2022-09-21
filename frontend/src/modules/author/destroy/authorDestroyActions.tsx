@@ -34,7 +34,7 @@ const authorDestroyActions = {
 
       dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/author');
+      getHistory().push('/admin/author');
     } catch (error) {
       Errors.handle(error);
 
@@ -67,7 +67,7 @@ const authorDestroyActions = {
         i18n('entities.author.destroyAll.success'),
       );
 
-      getHistory().push('/author');
+      getHistory().push('/admin/author');
     } catch (error) {
       Errors.handle(error);
 

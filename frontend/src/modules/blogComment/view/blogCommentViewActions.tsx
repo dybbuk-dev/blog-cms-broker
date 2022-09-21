@@ -28,7 +28,7 @@ const blogCommentViewActions = {
         type: blogCommentViewActions.FIND_ERROR,
       });
 
-      getHistory().push('/blog-comment');
+      getHistory().push('/admin/blog-comment');
     }
   },
 };

@@ -44,7 +44,7 @@ const expertAdvisorTestFormActions = {
         type: expertAdvisorTestFormActions.INIT_ERROR,
       });
 
-      getHistory().push('/expert-advisor-test');
+      getHistory().push('/admin/expert-advisor-test');
     }
   },
 
@@ -64,7 +64,7 @@ const expertAdvisorTestFormActions = {
         i18n('entities.expertAdvisorTest.create.success'),
       );
 
-      getHistory().push('/expert-advisor-test');
+      getHistory().push('/admin/expert-advisor-test');
     } catch (error) {
       Errors.handle(error);
 
@@ -90,7 +90,7 @@ const expertAdvisorTestFormActions = {
         i18n('entities.expertAdvisorTest.update.success'),
       );
 
-      getHistory().push('/expert-advisor-test');
+      getHistory().push('/admin/expert-advisor-test');
     } catch (error) {
       Errors.handle(error);
 

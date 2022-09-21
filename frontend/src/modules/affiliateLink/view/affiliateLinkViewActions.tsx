@@ -28,7 +28,7 @@ const affiliateLinkViewActions = {
         type: affiliateLinkViewActions.FIND_ERROR,
       });
 
-      getHistory().push('/affiliate-link');
+      getHistory().push('/admin/affiliate-link');
     }
   },
 };

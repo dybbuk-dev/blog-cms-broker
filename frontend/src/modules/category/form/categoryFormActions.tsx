@@ -44,7 +44,7 @@ const categoryFormActions = {
         type: categoryFormActions.INIT_ERROR,
       });
 
-      getHistory().push('/category');
+      getHistory().push('/admin/category');
     }
   },
 
@@ -64,7 +64,7 @@ const categoryFormActions = {
         i18n('entities.category.create.success'),
       );
 
-      getHistory().push('/category');
+      getHistory().push('/admin/category');
     } catch (error) {
       Errors.handle(error);
 
@@ -90,7 +90,7 @@ const categoryFormActions = {
         i18n('entities.category.update.success'),
       );
 
-      getHistory().push('/category');
+      getHistory().push('/admin/category');
     } catch (error) {
       Errors.handle(error);
 

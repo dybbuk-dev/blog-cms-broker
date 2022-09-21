@@ -34,7 +34,7 @@ const categoryDestroyActions = {
 
       dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/category');
+      getHistory().push('/admin/category');
     } catch (error) {
       Errors.handle(error);
 
@@ -67,7 +67,7 @@ const categoryDestroyActions = {
         i18n('entities.category.destroyAll.success'),
       );
 
-      getHistory().push('/category');
+      getHistory().push('/admin/category');
     } catch (error) {
       Errors.handle(error);
 

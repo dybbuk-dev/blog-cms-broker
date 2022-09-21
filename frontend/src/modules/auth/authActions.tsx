@@ -263,7 +263,7 @@ const authActions = {
       });
       await dispatch(authActions.doRefreshCurrentUser());
       Message.success(i18n('auth.profile.success'));
-      // getHistory().push('/');
+      // getHistory().push('/admin');
     } catch (error) {
       Errors.handle(error);
 
@@ -292,7 +292,7 @@ const authActions = {
         Message.success(
           i18n('auth.passwordChange.success'),
         );
-        getHistory().push('/');
+        getHistory().push('/admin');
       } catch (error) {
         Errors.handle(error);
 
@@ -324,13 +324,13 @@ const authActions = {
         type: authActions.EMAIL_VERIFY_SUCCESS,
       });
 
-      getHistory().push('/');
+      getHistory().push('/admin');
     } catch (error) {
       Errors.showMessage(error);
       dispatch({
         type: authActions.EMAIL_VERIFY_ERROR,
       });
-      getHistory().push('/');
+      getHistory().push('/admin');
     }
   },
 
@@ -347,7 +347,7 @@ const authActions = {
         dispatch({
           type: authActions.PASSWORD_RESET_SUCCESS,
         });
-        getHistory().push('/');
+        getHistory().push('/admin');
       } catch (error) {
         Errors.handle(error);
 
@@ -356,7 +356,7 @@ const authActions = {
         });
 
         dispatch(authActions.doSignout());
-        getHistory().push('/');
+        getHistory().push('/admin');
       }
     },
 
@@ -368,7 +368,7 @@ const authActions = {
 
     AuthCurrentTenant.set(tenant);
     await dispatch(authActions.doRefreshCurrentUser());
-    getHistory().push('/');
+    getHistory().push('/admin');
   },
 };
 

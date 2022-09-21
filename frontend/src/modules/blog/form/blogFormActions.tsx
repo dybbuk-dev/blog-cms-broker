@@ -44,7 +44,7 @@ const blogFormActions = {
         type: blogFormActions.INIT_ERROR,
       });
 
-      getHistory().push('/blog');
+      getHistory().push('/admin/blog');
     }
   },
 
@@ -62,7 +62,7 @@ const blogFormActions = {
 
       Message.success(i18n('entities.blog.create.success'));
 
-      getHistory().push('/blog');
+      getHistory().push('/admin/blog');
     } catch (error) {
       Errors.handle(error);
 
@@ -86,7 +86,7 @@ const blogFormActions = {
 
       Message.success(i18n('entities.blog.update.success'));
 
-      getHistory().push('/blog');
+      getHistory().push('/admin/blog');
     } catch (error) {
       Errors.handle(error);
 

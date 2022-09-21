@@ -30,7 +30,7 @@ const expertAdvisorTestViewActions = {
         type: expertAdvisorTestViewActions.FIND_ERROR,
       });
 
-      getHistory().push('/general-expertAdvisorTest');
+      getHistory().push('/admin/general-expertAdvisorTest');
     }
   },
 };

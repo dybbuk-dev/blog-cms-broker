@@ -44,7 +44,7 @@ const blogCommentFormActions = {
         type: blogCommentFormActions.INIT_ERROR,
       });
 
-      getHistory().push('/blog-comment');
+      getHistory().push('/admin/blog-comment');
     }
   },
 
@@ -64,7 +64,7 @@ const blogCommentFormActions = {
         i18n('entities.blogComment.create.success'),
       );
 
-      getHistory().push('/blog-comment');
+      getHistory().push('/admin/blog-comment');
     } catch (error) {
       Errors.handle(error);
 
@@ -90,7 +90,7 @@ const blogCommentFormActions = {
         i18n('entities.blogComment.update.success'),
       );
 
-      getHistory().push('/blog-comment');
+      getHistory().push('/admin/blog-comment');
     } catch (error) {
       Errors.handle(error);
 

@@ -30,7 +30,7 @@ const trackingParameterViewActions = {
         type: trackingParameterViewActions.FIND_ERROR,
       });
 
-      getHistory().push('/tracking-parameter');
+      getHistory().push('/admin/tracking-parameter');
     }
   },
 };

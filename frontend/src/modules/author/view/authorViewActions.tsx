@@ -28,7 +28,7 @@ const authorViewActions = {
         type: authorViewActions.FIND_ERROR,
       });
 
-      getHistory().push('/author');
+      getHistory().push('/admin/author');
     }
   },
 };

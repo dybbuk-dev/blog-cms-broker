@@ -34,7 +34,7 @@ const brokerPostReviewActions = {
 
       dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/broker-post');
+      getHistory().push('/admin/broker-post');
     } catch (error) {
       Errors.handle(error);
 
@@ -67,7 +67,7 @@ const brokerPostReviewActions = {
         i18n('entities.brokerPost.reviewAll.success'),
       );
 
-      getHistory().push('/broker-post');
+      getHistory().push('/admin/broker-post');
     } catch (error) {
       Errors.handle(error);
 

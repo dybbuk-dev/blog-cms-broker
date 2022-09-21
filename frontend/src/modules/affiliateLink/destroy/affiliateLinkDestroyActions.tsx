@@ -34,7 +34,7 @@ const affiliateLinkDestroyActions = {
 
       dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/affiliate-link');
+      getHistory().push('/admin/affiliate-link');
     } catch (error) {
       Errors.handle(error);
 
@@ -67,7 +67,7 @@ const affiliateLinkDestroyActions = {
         i18n('entities.affiliateLink.destroyAll.success'),
       );
 
-      getHistory().push('/affiliate-link');
+      getHistory().push('/admin/affiliate-link');
     } catch (error) {
       Errors.handle(error);
 

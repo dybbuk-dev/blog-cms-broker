@@ -34,7 +34,7 @@ const newsDestroyActions = {
 
       dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/news');
+      getHistory().push('/admin/news');
     } catch (error) {
       Errors.handle(error);
 
@@ -67,7 +67,7 @@ const newsDestroyActions = {
         i18n('entities.news.destroyAll.success'),
       );
 
-      getHistory().push('/news');
+      getHistory().push('/admin/news');
     } catch (error) {
       Errors.handle(error);
 

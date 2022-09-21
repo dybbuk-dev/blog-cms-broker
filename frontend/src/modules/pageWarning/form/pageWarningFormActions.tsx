@@ -44,7 +44,7 @@ const pageWarningFormActions = {
         type: pageWarningFormActions.INIT_ERROR,
       });
 
-      getHistory().push('/page-warning');
+      getHistory().push('/admin/page-warning');
     }
   },
 
@@ -64,7 +64,7 @@ const pageWarningFormActions = {
         i18n('entities.pageWarning.create.success'),
       );
 
-      getHistory().push('/page-warning');
+      getHistory().push('/admin/page-warning');
     } catch (error) {
       Errors.handle(error);
 
@@ -90,7 +90,7 @@ const pageWarningFormActions = {
         i18n('entities.pageWarning.update.success'),
       );
 
-      getHistory().push('/page-warning');
+      getHistory().push('/admin/page-warning');
     } catch (error) {
       Errors.handle(error);
 
