@@ -67,7 +67,7 @@ function CategoryFormPage(props) {
                 isEditing={isEditing}
                 onSubmit={doSubmit}
                 onCancel={() =>
-                  getHistory().push('/category')
+                  getHistory().push('/admin/category')
                 }
               />
             </MDBox>

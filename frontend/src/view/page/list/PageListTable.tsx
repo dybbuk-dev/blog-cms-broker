@@ -263,7 +263,7 @@ function PageListTable(props) {
                           size="small"
                           component={Link}
                           color={sidenavColor}
-                          to={`/general-page/${row.id}`}
+                          to={`/admin/general-page/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>
@@ -276,7 +276,7 @@ function PageListTable(props) {
                             size="small"
                             color={sidenavColor}
                             component={Link}
-                            to={`/general-page/${row.id}/edit`}
+                            to={`/admin/general-page/${row.id}/edit`}
                           >
                             <EditIcon />
                           </IconButton>

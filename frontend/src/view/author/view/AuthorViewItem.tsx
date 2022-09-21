@@ -36,7 +36,7 @@ function AuthorViewItem(props) {
             component={Link}
             variant="contained"
             color={sidenavColor}
-            to={`/author/${record.id}`}
+            to={`/admin/author/${record.id}`}
             underline="hover"
             size="large"
           >

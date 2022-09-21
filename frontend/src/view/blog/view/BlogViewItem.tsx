@@ -36,7 +36,7 @@ function BlogViewItem(props) {
             component={Link}
             variant="contained"
             color={sidenavColor}
-            to={`/blog/${record.id}`}
+            to={`/admin/blog/${record.id}`}
             underline="hover"
             size="large"
           >

@@ -67,7 +67,7 @@ function PageFormPage(props) {
                 isEditing={isEditing}
                 onSubmit={doSubmit}
                 onCancel={() =>
-                  getHistory().push('/general-page')
+                  getHistory().push('/admin/general-page')
                 }
               />
             </MDBox>

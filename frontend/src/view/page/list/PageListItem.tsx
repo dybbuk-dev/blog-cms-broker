@@ -31,7 +31,7 @@ function PageListItem(props) {
         <div key={record.id}>
           <MaterialLink
             component={Link}
-            to={`/page/${record.id}`}
+            to={`/admin/page/${record.id}`}
             underline="hover"
           >
             {record.name}

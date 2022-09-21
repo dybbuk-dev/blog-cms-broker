@@ -55,7 +55,9 @@ function UserEditPage(props) {
             <UserEditForm
               user={user}
               saveLoading={saveLoading}
-              onCancel={() => getHistory().push('/user')}
+              onCancel={() =>
+                getHistory().push('/admin/user')
+              }
             />
           )}
         </MDBox>

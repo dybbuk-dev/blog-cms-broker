@@ -139,7 +139,7 @@ function AuthorToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/author/new"
+          to="/admin/author/new"
           startIcon={<AddIcon />}
           size="small"
         >
@@ -152,7 +152,7 @@ function AuthorToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/author/importer"
+          to="/admin/author/importer"
           startIcon={<CloudUploadIcon />}
           size="small"
         >
@@ -167,7 +167,7 @@ function AuthorToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to="/audit-logs?entityNames=author"
+          to="/admin/audit-logs?entityNames=author"
           startIcon={<HistoryIcon />}
           size="small"
         >

@@ -259,7 +259,7 @@ function ExpertAdvisorTestListTable(props) {
                           size="small"
                           component={Link}
                           color={sidenavColor}
-                          to={`/expert-advisor-test/${row.id}`}
+                          to={`/admin/expert-advisor-test/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>
@@ -272,7 +272,7 @@ function ExpertAdvisorTestListTable(props) {
                             size="small"
                             color={sidenavColor}
                             component={Link}
-                            to={`/expert-advisor-test/${row.id}/edit`}
+                            to={`/admin/expert-advisor-test/${row.id}/edit`}
                           >
                             <EditIcon />
                           </IconButton>

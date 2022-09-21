@@ -36,7 +36,7 @@ function BlogCommentViewItem(props) {
             component={Link}
             variant="contained"
             color={sidenavColor}
-            to={`/blogComment/${record.id}`}
+            to={`/admin/blogComment/${record.id}`}
             underline="hover"
             size="large"
           >

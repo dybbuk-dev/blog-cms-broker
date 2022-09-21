@@ -36,7 +36,7 @@ function BrokerViewItem(props) {
             component={Link}
             variant="contained"
             color={sidenavColor}
-            to={`/broker/${record.id}`}
+            to={`/admin/broker/${record.id}`}
             underline="hover"
             size="large"
           >

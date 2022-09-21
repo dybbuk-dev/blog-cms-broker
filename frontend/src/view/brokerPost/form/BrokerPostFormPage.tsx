@@ -67,7 +67,7 @@ function BrokerPostFormPage(props) {
                 isEditing={isEditing}
                 onSubmit={doSubmit}
                 onCancel={() =>
-                  getHistory().push('/broker-post')
+                  getHistory().push('/admin/broker-post')
                 }
               />
             </MDBox>

@@ -162,7 +162,7 @@ function BrokerArticleToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/broker-article/importer"
+          to="/admin/broker-article/importer"
           startIcon={<CloudUploadIcon />}
           size="small"
         >
@@ -177,7 +177,7 @@ function BrokerArticleToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to="/audit-logs?entityNames=brokerArticle"
+          to="/admin/audit-logs?entityNames=brokerArticle"
           startIcon={<HistoryIcon />}
           size="small"
         >

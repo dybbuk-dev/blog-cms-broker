@@ -31,7 +31,7 @@ function PageWarningListItem(props) {
         <div key={record.id}>
           <MaterialLink
             component={Link}
-            to={`/page-warning/${record.id}`}
+            to={`/admin/page-warning/${record.id}`}
             underline="hover"
           >
             {record.title}

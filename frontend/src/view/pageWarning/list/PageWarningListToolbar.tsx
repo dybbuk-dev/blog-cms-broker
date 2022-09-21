@@ -139,7 +139,7 @@ function PageWarningToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/page-warning/new"
+          to="/admin/page-warning/new"
           startIcon={<AddIcon />}
           size="small"
         >
@@ -152,7 +152,7 @@ function PageWarningToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/page-warning/importer"
+          to="/admin/page-warning/importer"
           startIcon={<CloudUploadIcon />}
           size="small"
         >
@@ -167,7 +167,7 @@ function PageWarningToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to="/audit-logs?entityNames=page_warning"
+          to="/admin/audit-logs?entityNames=page_warning"
           startIcon={<HistoryIcon />}
           size="small"
         >

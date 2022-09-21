@@ -139,7 +139,7 @@ function PromotionToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/promotion/new"
+          to="/admin/promotion/new"
           startIcon={<AddIcon />}
           size="small"
         >
@@ -152,7 +152,7 @@ function PromotionToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/promotion/importer"
+          to="/admin/promotion/importer"
           startIcon={<CloudUploadIcon />}
           size="small"
         >
@@ -167,7 +167,7 @@ function PromotionToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to="/audit-logs?entityNames=promotion"
+          to="/admin/audit-logs?entityNames=promotion"
           startIcon={<HistoryIcon />}
           size="small"
         >

@@ -4,8 +4,9 @@ const permissions = Permissions.values;
 
 const privateRoutes = [
   {
-    path: '/',
+    path: '/admin',
     i18n: 'dashboard.menu',
+    parent: '/',
     loader: () =>
       import('src/view/dashboard/DashboardPage'),
     permissionRequired: null,
@@ -13,41 +14,41 @@ const privateRoutes = [
   },
 
   {
-    path: '/report',
+    path: '/admin/report',
     collapseName: 'reports',
     i18n: 'collapses.reports.menu',
-    parent: '/',
-    redirect: '/report/tasks-by-month',
+    parent: '/admin',
+    redirect: '/admin/report/tasks-by-month',
     permissionRequired: null,
     virtual: true,
   },
 
   {
-    path: '/person-name-breadcrumb',
+    path: '/admin/person-name-breadcrumb',
     collapseName: 'my-profile',
     // labelCode: '{USER_TEXT}',
     i18n: 'roles.admin.label',
-    parent: '/',
-    redirect: '/profile',
+    parent: '/admin',
+    redirect: '/admin/profile',
     permissionRequired: null,
     virtual: true,
   },
 
   {
-    path: '/profile',
+    path: '/admin/profile',
     collapseName: 'my-profile',
     i18n: 'auth.profile.title',
-    parent: '/person-name-breadcrumb',
+    parent: '/admin/person-name-breadcrumb',
     loader: () => import('src/view/auth/ProfileFormPage'),
     permissionRequired: null,
     exact: true,
   },
 
   {
-    path: '/password-change',
+    path: '/admin/password-change',
     collapseName: 'my-profile',
     i18n: 'auth.passwordChange.title',
-    parent: '/person-name-breadcrumb',
+    parent: '/admin/person-name-breadcrumb',
     loader: () =>
       import('src/view/auth/PasswordChangeFormPage'),
     permissionRequired: null,
@@ -55,10 +56,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/tenant',
+    path: '/admin/tenant',
     collapseName: 'my-profile',
     i18n: 'tenant.list.title',
-    parent: '/person-name-breadcrumb',
+    parent: '/admin/person-name-breadcrumb',
     loader: () =>
       import('src/view/tenant/list/TenantListPage'),
     permissionRequired: null,
@@ -66,10 +67,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/tenant/new',
+    path: '/admin/tenant/new',
     collapseName: 'my-profile',
     i18n: 'tenant.new.title',
-    parent: '/tenant',
+    parent: '/admin/tenant',
     loader: () =>
       import('src/view/tenant/form/TenantFormPage'),
     permissionRequired: null,
@@ -77,10 +78,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/tenant/:id/edit',
+    path: '/admin/tenant/:id/edit',
     collapseName: 'my-profile',
     i18n: 'tenant.edit.title',
-    parent: '/tenant',
+    parent: '/admin/tenant',
     loader: () =>
       import('src/view/tenant/form/TenantFormPage'),
     permissionRequired: null,
@@ -88,37 +89,37 @@ const privateRoutes = [
   },
 
   config.isPlanEnabled && {
-    path: '/plan',
+    path: '/admin/plan',
     i18n: 'plan.title',
     collapseName: 'my-profile',
-    parent: '/person-name-breadcrumb',
+    parent: '/admin/person-name-breadcrumb',
     loader: () => import('src/view/plan/PlanPage'),
     permissionRequired: permissions.planRead,
     exact: true,
   },
 
   {
-    path: '/user',
+    path: '/admin/user',
     i18n: 'user.menu',
-    parent: '/',
+    parent: '/admin',
     loader: () => import('src/view/user/list/UserPage'),
     permissionRequired: permissions.userRead,
     exact: true,
   },
 
   {
-    path: '/user/new',
+    path: '/admin/user/new',
     i18n: 'user.new.title',
-    parent: '/user',
+    parent: '/admin/user',
     loader: () => import('src/view/user/new/UserNewPage'),
     permissionRequired: permissions.userCreate,
     exact: true,
   },
 
   {
-    path: '/user/importer',
+    path: '/admin/user/importer',
     i18n: 'user.importer.title',
-    parent: '/user',
+    parent: '/admin/user',
     loader: () =>
       import('src/view/user/importer/UserImporterPage'),
     permissionRequired: permissions.userImport,
@@ -126,47 +127,47 @@ const privateRoutes = [
   },
 
   {
-    path: '/user/:id/edit',
+    path: '/admin/user/:id/edit',
     i18n: 'user.edit.title',
-    parent: '/user',
+    parent: '/admin/user',
     loader: () => import('src/view/user/edit/UserEditPage'),
     permissionRequired: permissions.userEdit,
     exact: true,
   },
 
   {
-    path: '/user/:id',
+    path: '/admin/user/:id',
     i18n: 'user.view.title',
-    parent: '/user',
+    parent: '/admin/user',
     loader: () => import('src/view/user/view/UserViewPage'),
     permissionRequired: permissions.userRead,
     exact: true,
   },
 
   {
-    path: '/settings-breadcrumb',
+    path: '/admin/settings-breadcrumb',
     collapseName: 'settings',
     i18n: 'settings.title',
-    parent: '/',
-    redirect: '/settings',
+    parent: '/admin',
+    redirect: '/admin/settings',
     permissionRequired: null,
     virtual: true,
   },
 
   {
-    path: '/audit-logs',
+    path: '/admin/audit-logs',
     collapseName: 'settings',
     i18n: 'auditLog.menu',
-    parent: '/settings-breadcrumb',
+    parent: '/admin/settings-breadcrumb',
     loader: () => import('src/view/auditLog/AuditLogPage'),
     permissionRequired: permissions.auditLogRead,
   },
 
   {
-    path: '/settings',
+    path: '/admin/settings',
     collapseName: 'settings',
     i18n: 'settings.tenant',
-    parent: '/settings-breadcrumb',
+    parent: '/admin/settings-breadcrumb',
     loader: () =>
       import('src/view/settings/SettingsFormPage'),
     permissionRequired: permissions.settingsEdit,
@@ -174,10 +175,10 @@ const privateRoutes = [
 
   // #region Broker
   {
-    path: '/broker',
+    path: '/admin/broker',
     collapseName: 'broker',
     i18n: 'entities.broker.menu',
-    parent: '/',
+    parent: '/admin',
     loader: () =>
       import('src/view/broker/list/BrokerListPage'),
     permissionRequired: permissions.brokerRead,
@@ -185,10 +186,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/broker/new',
+    path: '/admin/broker/new',
     collapseName: 'broker',
     i18n: 'entities.broker.new.title',
-    parent: '/broker',
+    parent: '/admin/broker',
     loader: () =>
       import('src/view/broker/form/BrokerFormPage'),
     permissionRequired: permissions.brokerCreate,
@@ -196,10 +197,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/broker/importer',
+    path: '/admin/broker/importer',
     collapseName: 'broker',
     i18n: 'entities.broker.importer.title',
-    parent: '/broker',
+    parent: '/admin/broker',
     loader: () =>
       import('src/view/broker/importer/BrokerImporterPage'),
     permissionRequired: permissions.brokerImport,
@@ -207,10 +208,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/broker/:id/edit',
+    path: '/admin/broker/:id/edit',
     collapseName: 'broker',
     i18n: 'entities.broker.edit.title',
-    parent: '/broker',
+    parent: '/admin/broker',
     loader: () =>
       import('src/view/broker/form/BrokerFormPage'),
     permissionRequired: permissions.brokerEdit,
@@ -218,10 +219,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/broker/:id',
+    path: '/admin/broker/:id',
     collapseName: 'broker',
     i18n: 'entities.broker.view.title',
-    parent: '/broker',
+    parent: '/admin/broker',
     loader: () =>
       import('src/view/broker/view/BrokerViewPage'),
     permissionRequired: permissions.brokerRead,
@@ -231,20 +232,20 @@ const privateRoutes = [
 
   // #region Author
   {
-    path: '/author',
+    path: '/admin/author',
     collapseName: 'author',
     i18n: 'collapses.author.menu',
-    parent: '/',
+    parent: '/admin',
     loader: () =>
       import('src/view/author/list/AuthorListPage'),
     permissionRequired: permissions.authorRead,
     exact: true,
   },
   {
-    path: '/author/new',
+    path: '/admin/author/new',
     collapseName: 'author',
     i18n: 'entities.author.new.title',
-    parent: '/author',
+    parent: '/admin/author',
     loader: () =>
       import('src/view/author/form/AuthorFormPage'),
     permissionRequired: permissions.authorCreate,
@@ -252,10 +253,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/author/importer',
+    path: '/admin/author/importer',
     collapseName: 'author',
     i18n: 'entities.author.importer.title',
-    parent: '/author',
+    parent: '/admin/author',
     loader: () =>
       import('src/view/author/importer/AuthorImporterPage'),
     permissionRequired: permissions.authorImport,
@@ -263,10 +264,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/author/:id/edit',
+    path: '/admin/author/:id/edit',
     collapseName: 'author',
     i18n: 'entities.author.edit.title',
-    parent: '/author',
+    parent: '/admin/author',
     loader: () =>
       import('src/view/author/form/AuthorFormPage'),
     permissionRequired: permissions.authorEdit,
@@ -274,10 +275,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/author/:id',
+    path: '/admin/author/:id',
     collapseName: 'author',
     i18n: 'entities.author.view.title',
-    parent: '/author',
+    parent: '/admin/author',
     loader: () =>
       import('src/view/author/view/AuthorViewPage'),
     permissionRequired: permissions.authorRead,
@@ -287,21 +288,21 @@ const privateRoutes = [
 
   // #region Affiliate link
   {
-    path: '/affiliate-links',
+    path: '/admin/affiliate-links',
     collapseName: 'affiliateLinks',
     i18n: 'collapses.affiliateLink.menu',
-    parent: '/',
-    redirect: '/affiliate-link',
+    parent: '/admin',
+    redirect: '/admin/affiliate-link',
     permissionRequired: null,
     virtual: true,
   },
 
   // #region Affiliate links
   {
-    path: '/affiliate-link',
+    path: '/admin/affiliate-link',
     collapseName: 'affiliateLinks',
     i18n: 'entities.affiliateLink.menu',
-    parent: '/affiliate-links',
+    parent: '/admin/affiliate-links',
     loader: () =>
       import(
         'src/view/affiliateLink/list/AffiliateLinkListPage'
@@ -310,10 +311,10 @@ const privateRoutes = [
     exact: true,
   },
   {
-    path: '/affiliate-link/new',
+    path: '/admin/affiliate-link/new',
     collapseName: 'affiliateLinks',
     i18n: 'entities.affiliateLink.new.title',
-    parent: '/affiliate-links',
+    parent: '/admin/affiliate-links',
     loader: () =>
       import(
         'src/view/affiliateLink/form/AffiliateLinkFormPage'
@@ -323,10 +324,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/affiliate-link/importer',
+    path: '/admin/affiliate-link/importer',
     collapseName: 'affiliateLinks',
     i18n: 'entities.affiliateLink.importer.title',
-    parent: '/affiliate-links',
+    parent: '/admin/affiliate-links',
     loader: () =>
       import(
         'src/view/affiliateLink/importer/AffiliateLinkImporterPage'
@@ -336,10 +337,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/affiliate-link/:id/edit',
+    path: '/admin/affiliate-link/:id/edit',
     collapseName: 'affiliateLinks',
     i18n: 'entities.affiliateLink.edit.title',
-    parent: '/affiliate-links',
+    parent: '/admin/affiliate-links',
     loader: () =>
       import(
         'src/view/affiliateLink/form/AffiliateLinkFormPage'
@@ -349,10 +350,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/affiliate-link/:id',
+    path: '/admin/affiliate-link/:id',
     collapseName: 'affiliateLinks',
     i18n: 'entities.affiliateLink.view.title',
-    parent: '/affiliate-links',
+    parent: '/admin/affiliate-links',
     loader: () =>
       import(
         'src/view/affiliateLink/view/AffiliateLinkViewPage'
@@ -364,10 +365,10 @@ const privateRoutes = [
 
   // #region Tracking Parameter
   {
-    path: '/tracking-parameter',
+    path: '/admin/tracking-parameter',
     collapseName: 'affiliateLinks',
     i18n: 'entities.trackingParameter.menu',
-    parent: '/affiliate-links',
+    parent: '/admin/affiliate-links',
     loader: () =>
       import(
         'src/view/trackingParameter/list/TrackingParameterListPage'
@@ -376,10 +377,10 @@ const privateRoutes = [
     exact: true,
   },
   {
-    path: '/tracking-parameter/new',
+    path: '/admin/tracking-parameter/new',
     collapseName: 'affiliateLinks',
     i18n: 'entities.trackingParameter.new.title',
-    parent: '/affiliate-links',
+    parent: '/admin/affiliate-links',
     loader: () =>
       import(
         'src/view/trackingParameter/form/TrackingParameterFormPage'
@@ -389,10 +390,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/tracking-parameter/importer',
+    path: '/admin/tracking-parameter/importer',
     collapseName: 'affiliateLinks',
     i18n: 'entities.trackingParameter.importer.title',
-    parent: '/affiliate-links',
+    parent: '/admin/affiliate-links',
     loader: () =>
       import(
         'src/view/trackingParameter/importer/TrackingParameterImporterPage'
@@ -402,10 +403,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/tracking-parameter/:id/edit',
+    path: '/admin/tracking-parameter/:id/edit',
     collapseName: 'affiliateLinks',
     i18n: 'entities.trackingParameter.edit.title',
-    parent: '/affiliate-links',
+    parent: '/admin/affiliate-links',
     loader: () =>
       import(
         'src/view/trackingParameter/form/TrackingParameterFormPage'
@@ -415,10 +416,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/tracking-parameter/:id',
+    path: '/admin/tracking-parameter/:id',
     collapseName: 'affiliateLinks',
     i18n: 'entities.trackingParameter.view.title',
-    parent: '/affiliate-links',
+    parent: '/admin/affiliate-links',
     loader: () =>
       import(
         'src/view/trackingParameter/view/TrackingParameterViewPage'
@@ -432,40 +433,40 @@ const privateRoutes = [
 
   // #region Blogs
   {
-    path: '/blogs',
+    path: '/admin/blogs',
     collapseName: 'blog',
     i18n: 'collapses.blog.menu',
-    parent: '/',
-    redirect: '/blog',
+    parent: '/admin',
+    redirect: '/admin/blog',
     permissionRequired: null,
     virtual: true,
   },
 
   // #region Blog
   {
-    path: '/blog',
+    path: '/admin/blog',
     collapseName: 'blog',
     i18n: 'entities.blog.menu',
-    parent: '/blogs',
+    parent: '/admin/blogs',
     loader: () => import('src/view/blog/list/BlogListPage'),
     permissionRequired: permissions.blogRead,
     exact: true,
   },
   {
-    path: '/blog/new',
+    path: '/admin/blog/new',
     collapseName: 'blog',
     i18n: 'entities.blog.new.title',
-    parent: '/blog',
+    parent: '/admin/blog',
     loader: () => import('src/view/blog/form/BlogFormPage'),
     permissionRequired: permissions.blogCreate,
     exact: true,
   },
 
   {
-    path: '/blog/importer',
+    path: '/admin/blog/importer',
     collapseName: 'blog',
     i18n: 'entities.blog.importer.title',
-    parent: '/blog',
+    parent: '/admin/blog',
     loader: () =>
       import('src/view/blog/importer/BlogImporterPage'),
     permissionRequired: permissions.blogImport,
@@ -473,20 +474,20 @@ const privateRoutes = [
   },
 
   {
-    path: '/blog/:id/edit',
+    path: '/admin/blog/:id/edit',
     collapseName: 'blog',
     i18n: 'entities.blog.edit.title',
-    parent: '/blog',
+    parent: '/admin/blog',
     loader: () => import('src/view/blog/form/BlogFormPage'),
     permissionRequired: permissions.blogEdit,
     exact: true,
   },
 
   {
-    path: '/blog/:id',
+    path: '/admin/blog/:id',
     collapseName: 'blog',
     i18n: 'entities.blog.view.title',
-    parent: '/blog',
+    parent: '/admin/blog',
     loader: () => import('src/view/blog/view/BlogViewPage'),
     permissionRequired: permissions.blogRead,
     exact: true,
@@ -495,10 +496,10 @@ const privateRoutes = [
 
   // #region Blog Comment
   {
-    path: '/blog-comment',
+    path: '/admin/blog-comment',
     collapseName: 'blog',
     i18n: 'entities.blogComment.menu',
-    parent: '/blogs',
+    parent: '/admin/blogs',
     loader: () =>
       import(
         'src/view/blogComment/list/BlogCommentListPage'
@@ -507,10 +508,10 @@ const privateRoutes = [
     exact: true,
   },
   {
-    path: '/blog-comment/new',
+    path: '/admin/blog-comment/new',
     collapseName: 'blog',
     i18n: 'entities.blogComment.new.title',
-    parent: '/blogComment',
+    parent: '/admin/blogComment',
     loader: () =>
       import(
         'src/view/blogComment/form/BlogCommentFormPage'
@@ -520,10 +521,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/blog-comment/importer',
+    path: '/admin/blog-comment/importer',
     collapseName: 'blog',
     i18n: 'entities.blogComment.importer.title',
-    parent: '/blogComment',
+    parent: '/admin/blogComment',
     loader: () =>
       import(
         'src/view/blogComment/importer/BlogCommentImporterPage'
@@ -533,10 +534,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/blog-comment/:id/edit',
+    path: '/admin/blog-comment/:id/edit',
     collapseName: 'blog',
     i18n: 'entities.blogComment.edit.title',
-    parent: '/blogComment',
+    parent: '/admin/blogComment',
     loader: () =>
       import(
         'src/view/blogComment/form/BlogCommentFormPage'
@@ -546,10 +547,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/blog-comment/:id',
+    path: '/admin/blog-comment/:id',
     collapseName: 'blog',
     i18n: 'entities.blogComment.view.title',
-    parent: '/blogComment',
+    parent: '/admin/blogComment',
     loader: () =>
       import(
         'src/view/blogComment/view/BlogCommentViewPage'
@@ -563,20 +564,20 @@ const privateRoutes = [
 
   // #region Broker Post
   {
-    path: '/broker-post',
+    path: '/admin/broker-post',
     collapseName: 'brokerPost',
     i18n: 'collapses.brokerPost.menu',
-    parent: '/',
+    parent: '/admin',
     loader: () =>
       import('src/view/brokerPost/list/BrokerPostListPage'),
     permissionRequired: permissions.brokerPostRead,
     exact: true,
   },
   {
-    path: '/broker-post/new',
+    path: '/admin/broker-post/new',
     collapseName: 'brokerPost',
     i18n: 'entities.brokerPost.new.title',
-    parent: '/broker-post',
+    parent: '/admin/broker-post',
     loader: () =>
       import('src/view/brokerPost/form/BrokerPostFormPage'),
     permissionRequired: permissions.brokerPostCreate,
@@ -584,10 +585,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/broker-post/importer',
+    path: '/admin/broker-post/importer',
     collapseName: 'brokerPost',
     i18n: 'entities.brokerPost.importer.title',
-    parent: '/broker-post',
+    parent: '/admin/broker-post',
     loader: () =>
       import(
         'src/view/brokerPost/importer/BrokerPostImporterPage'
@@ -597,10 +598,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/broker-post/:id/edit',
+    path: '/admin/broker-post/:id/edit',
     collapseName: 'brokerPost',
     i18n: 'entities.brokerPost.edit.title',
-    parent: '/broker-post',
+    parent: '/admin/broker-post',
     loader: () =>
       import('src/view/brokerPost/form/BrokerPostFormPage'),
     permissionRequired: permissions.brokerPostEdit,
@@ -608,10 +609,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/broker-post/:id',
+    path: '/admin/broker-post/:id',
     collapseName: 'brokerPost',
     i18n: 'entities.brokerPost.view.title',
-    parent: '/broker-post',
+    parent: '/admin/broker-post',
     loader: () =>
       import('src/view/brokerPost/view/BrokerPostViewPage'),
     permissionRequired: permissions.brokerPostRead,
@@ -621,10 +622,10 @@ const privateRoutes = [
 
   // #region Expert Advisor Test
   {
-    path: '/expert-advisor-test',
+    path: '/admin/expert-advisor-test',
     collapseName: 'expertAdvisorTest',
     i18n: 'collapses.expertAdvisorTest.menu',
-    parent: '/',
+    parent: '/admin',
     loader: () =>
       import(
         'src/view/expertAdvisorTest/list/ExpertAdvisorTestListPage'
@@ -633,10 +634,10 @@ const privateRoutes = [
     exact: true,
   },
   {
-    path: '/expert-advisor-test/new',
+    path: '/admin/expert-advisor-test/new',
     collapseName: 'expertAdvisorTest',
     i18n: 'entities.expertAdvisorTest.new.title',
-    parent: '/expert-advisor-test',
+    parent: '/admin/expert-advisor-test',
     loader: () =>
       import(
         'src/view/expertAdvisorTest/form/ExpertAdvisorTestFormPage'
@@ -646,10 +647,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/expert-advisor-test/importer',
+    path: '/admin/expert-advisor-test/importer',
     collapseName: 'expertAdvisorTest',
     i18n: 'entities.expertAdvisorTest.importer.title',
-    parent: '/expert-advisor-test',
+    parent: '/admin/expert-advisor-test',
     loader: () =>
       import(
         'src/view/expertAdvisorTest/importer/ExpertAdvisorTestImporterPage'
@@ -659,10 +660,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/expert-advisor-test/:id/edit',
+    path: '/admin/expert-advisor-test/:id/edit',
     collapseName: 'expertAdvisorTest',
     i18n: 'entities.expertAdvisorTest.edit.title',
-    parent: '/expert-advisor-test',
+    parent: '/admin/expert-advisor-test',
     loader: () =>
       import(
         'src/view/expertAdvisorTest/form/ExpertAdvisorTestFormPage'
@@ -672,10 +673,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/expert-advisor-test/:id',
+    path: '/admin/expert-advisor-test/:id',
     collapseName: 'expertAdvisorTest',
     i18n: 'entities.expertAdvisorTest.view.title',
-    parent: '/expert-advisor-test',
+    parent: '/admin/expert-advisor-test',
     loader: () =>
       import(
         'src/view/expertAdvisorTest/view/ExpertAdvisorTestViewPage'
@@ -687,21 +688,21 @@ const privateRoutes = [
 
   // #region Routes
   {
-    path: '/routes',
+    path: '/admin/routes',
     collapseName: 'routes',
     i18n: 'collapses.routes.menu',
-    parent: '/',
-    redirect: '/navigation',
+    parent: '/admin',
+    redirect: '/admin/navigation',
     permissionRequired: null,
     virtual: true,
   },
 
   // #region Navigation
   {
-    path: '/navigation',
+    path: '/admin/navigation',
     collapseName: 'routes',
     i18n: 'entities.navigation.menu',
-    parent: '/routes',
+    parent: '/admin/routes',
     loader: () =>
       import('src/view/navigation/list/NavigationListPage'),
     permissionRequired: permissions.navigationRead,
@@ -709,10 +710,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/navigation/new',
+    path: '/admin/navigation/new',
     collapseName: 'routes',
     i18n: 'entities.navigation.new.title',
-    parent: '/navigation',
+    parent: '/admin/navigation',
     loader: () =>
       import('src/view/navigation/form/NavigationFormPage'),
     permissionRequired: permissions.navigationCreate,
@@ -720,10 +721,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/navigation/importer',
+    path: '/admin/navigation/importer',
     collapseName: 'routes',
     i18n: 'entities.navigation.importer.title',
-    parent: '/navigation',
+    parent: '/admin/navigation',
     loader: () =>
       import(
         'src/view/navigation/importer/NavigationImporterPage'
@@ -733,10 +734,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/navigation/:id/edit',
+    path: '/admin/navigation/:id/edit',
     collapseName: 'routes',
     i18n: 'entities.navigation.edit.title',
-    parent: '/navigation',
+    parent: '/admin/navigation',
     loader: () =>
       import('src/view/navigation/form/NavigationFormPage'),
     permissionRequired: permissions.navigationEdit,
@@ -744,10 +745,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/navigation/:id',
+    path: '/admin/navigation/:id',
     collapseName: 'routes',
     i18n: 'entities.navigation.view.title',
-    parent: '/navigation',
+    parent: '/admin/navigation',
     loader: () =>
       import('src/view/navigation/view/NavigationViewPage'),
     permissionRequired: permissions.navigationRead,
@@ -757,10 +758,10 @@ const privateRoutes = [
 
   // #region Broker Article
   {
-    path: '/broker-article',
+    path: '/admin/broker-article',
     collapseName: 'broker',
     i18n: 'entities.brokerArticle.menu',
-    parent: '/routes',
+    parent: '/admin/routes',
     loader: () =>
       import(
         'src/view/brokerArticle/list/BrokerArticleListPage'
@@ -770,10 +771,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/broker-article/new',
+    path: '/admin/broker-article/new',
     collapseName: 'broker',
     i18n: 'entities.brokerArticle.new.title',
-    parent: '/brokerArticle',
+    parent: '/admin/brokerArticle',
     loader: () =>
       import(
         'src/view/brokerArticle/form/BrokerArticleFormPage'
@@ -783,10 +784,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/broker-article/importer',
+    path: '/admin/broker-article/importer',
     collapseName: 'broker',
     i18n: 'entities.brokerArticle.importer.title',
-    parent: '/brokerArticle',
+    parent: '/admin/brokerArticle',
     loader: () =>
       import(
         'src/view/brokerArticle/importer/BrokerArticleImporterPage'
@@ -796,10 +797,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/broker-article/:id/edit',
+    path: '/admin/broker-article/:id/edit',
     collapseName: 'broker',
     i18n: 'entities.brokerArticle.edit.title',
-    parent: '/brokerArticle',
+    parent: '/admin/brokerArticle',
     loader: () =>
       import(
         'src/view/brokerArticle/form/BrokerArticleFormPage'
@@ -809,10 +810,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/broker-article/:id',
+    path: '/admin/broker-article/:id',
     collapseName: 'broker',
     i18n: 'entities.brokerArticle.view.title',
-    parent: '/brokerArticle',
+    parent: '/admin/brokerArticle',
     loader: () =>
       import(
         'src/view/brokerArticle/view/BrokerArticleViewPage'
@@ -824,10 +825,10 @@ const privateRoutes = [
 
   // #region Category
   {
-    path: '/category',
+    path: '/admin/category',
     collapseName: 'routes',
     i18n: 'entities.category.menu',
-    parent: '/routes',
+    parent: '/admin/routes',
     loader: () =>
       import('src/view/category/list/CategoryListPage'),
     permissionRequired: permissions.categoryRead,
@@ -835,10 +836,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/category/new',
+    path: '/admin/category/new',
     collapseName: 'routes',
     i18n: 'entities.category.new.title',
-    parent: '/category',
+    parent: '/admin/category',
     loader: () =>
       import('src/view/category/form/CategoryFormPage'),
     permissionRequired: permissions.categoryCreate,
@@ -846,10 +847,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/category/importer',
+    path: '/admin/category/importer',
     collapseName: 'routes',
     i18n: 'entities.category.importer.title',
-    parent: '/category',
+    parent: '/admin/category',
     loader: () =>
       import(
         'src/view/category/importer/CategoryImporterPage'
@@ -859,10 +860,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/category/:id/edit',
+    path: '/admin/category/:id/edit',
     collapseName: 'routes',
     i18n: 'entities.category.edit.title',
-    parent: '/category',
+    parent: '/admin/category',
     loader: () =>
       import('src/view/category/form/CategoryFormPage'),
     permissionRequired: permissions.categoryEdit,
@@ -870,10 +871,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/category/:id',
+    path: '/admin/category/:id',
     collapseName: 'routes',
     i18n: 'entities.category.view.title',
-    parent: '/category',
+    parent: '/admin/category',
     loader: () =>
       import('src/view/category/view/CategoryViewPage'),
     permissionRequired: permissions.categoryRead,
@@ -885,29 +886,29 @@ const privateRoutes = [
 
   // #region news
   {
-    path: '/news',
+    path: '/admin/news',
     collapseName: 'news',
     i18n: 'entities.news.menu',
-    parent: '/',
+    parent: '/admin',
     loader: () => import('src/view/news/list/NewsListPage'),
     permissionRequired: permissions.newsRead,
     exact: true,
   },
   {
-    path: '/news/new',
+    path: '/admin/news/new',
     collapseName: 'news',
     i18n: 'entities.news.new.title',
-    parent: '/news',
+    parent: '/admin/news',
     loader: () => import('src/view/news/form/NewsFormPage'),
     permissionRequired: permissions.newsCreate,
     exact: true,
   },
 
   {
-    path: '/news/importer',
+    path: '/admin/news/importer',
     collapseName: 'news',
     i18n: 'entities.news.importer.title',
-    parent: '/news',
+    parent: '/admin/news',
     loader: () =>
       import('src/view/news/importer/NewsImporterPage'),
     permissionRequired: permissions.newsImport,
@@ -915,20 +916,20 @@ const privateRoutes = [
   },
 
   {
-    path: '/news/:id/edit',
+    path: '/admin/news/:id/edit',
     collapseName: 'news',
     i18n: 'entities.news.edit.title',
-    parent: '/news',
+    parent: '/admin/news',
     loader: () => import('src/view/news/form/NewsFormPage'),
     permissionRequired: permissions.newsEdit,
     exact: true,
   },
 
   {
-    path: '/news/:id',
+    path: '/admin/news/:id',
     collapseName: 'news',
     i18n: 'entities.news.view.title',
-    parent: '/news',
+    parent: '/admin/news',
     loader: () => import('src/view/news/view/NewsViewPage'),
     permissionRequired: permissions.newsRead,
     exact: true,
@@ -937,31 +938,31 @@ const privateRoutes = [
 
   // #region Promotion
   {
-    path: '/promotions',
+    path: '/admin/promotions',
     collapseName: 'promotion',
     i18n: 'collapses.promotion.menu',
-    parent: '/',
-    redirect: '/promotion',
+    parent: '/admin',
+    redirect: '/admin/promotion',
     permissionRequired: null,
     virtual: true,
   },
 
   // #region Promotions
   {
-    path: '/promotion',
+    path: '/admin/promotion',
     collapseName: 'promotion',
     i18n: 'entities.promotion.menu',
-    parent: '/promotions',
+    parent: '/admin/promotions',
     loader: () =>
       import('src/view/promotion/list/PromotionListPage'),
     permissionRequired: permissions.promotionRead,
     exact: true,
   },
   {
-    path: '/promotion/new',
+    path: '/admin/promotion/new',
     collapseName: 'promotion',
     i18n: 'entities.promotion.new.title',
-    parent: '/promotion',
+    parent: '/admin/promotion',
     loader: () =>
       import('src/view/promotion/form/PromotionFormPage'),
     permissionRequired: permissions.promotionCreate,
@@ -969,10 +970,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/promotion/importer',
+    path: '/admin/promotion/importer',
     collapseName: 'promotion',
     i18n: 'entities.promotion.importer.title',
-    parent: '/promotion',
+    parent: '/admin/promotion',
     loader: () =>
       import(
         'src/view/promotion/importer/PromotionImporterPage'
@@ -982,10 +983,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/promotion/:id/edit',
+    path: '/admin/promotion/:id/edit',
     collapseName: 'promotion',
     i18n: 'entities.promotion.edit.title',
-    parent: '/promotion',
+    parent: '/admin/promotion',
     loader: () =>
       import('src/view/promotion/form/PromotionFormPage'),
     permissionRequired: permissions.promotionEdit,
@@ -993,10 +994,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/promotion/:id',
+    path: '/admin/promotion/:id',
     collapseName: 'promotion',
     i18n: 'entities.promotion.view.title',
-    parent: '/promotion',
+    parent: '/admin/promotion',
     loader: () =>
       import('src/view/promotion/view/PromotionViewPage'),
     permissionRequired: permissions.promotionRead,
@@ -1006,20 +1007,20 @@ const privateRoutes = [
 
   // #region Openx banners
   {
-    path: '/open-x',
+    path: '/admin/open-x',
     collapseName: 'promotion',
     i18n: 'entities.openx.menu',
-    parent: '/promotions',
+    parent: '/admin/promotions',
     loader: () =>
       import('src/view/openx/list/OpenxListPage'),
     permissionRequired: permissions.openxRead,
     exact: true,
   },
   {
-    path: '/open-x/new',
+    path: '/admin/open-x/new',
     collapseName: 'promotion',
     i18n: 'entities.openx.new.title',
-    parent: '/open-x',
+    parent: '/admin/open-x',
     loader: () =>
       import('src/view/openx/form/OpenxFormPage'),
     permissionRequired: permissions.openxCreate,
@@ -1027,10 +1028,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/open-x/importer',
+    path: '/admin/open-x/importer',
     collapseName: 'promotion',
     i18n: 'entities.openx.importer.title',
-    parent: '/open-x',
+    parent: '/admin/open-x',
     loader: () =>
       import('src/view/openx/importer/OpenxImporterPage'),
     permissionRequired: permissions.openxImport,
@@ -1038,10 +1039,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/open-x/:id/edit',
+    path: '/admin/open-x/:id/edit',
     collapseName: 'promotion',
     i18n: 'entities.openx.edit.title',
-    parent: '/open-x',
+    parent: '/admin/open-x',
     loader: () =>
       import('src/view/openx/form/OpenxFormPage'),
     permissionRequired: permissions.openxEdit,
@@ -1049,10 +1050,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/open-x/:id',
+    path: '/admin/open-x/:id',
     collapseName: 'promotion',
     i18n: 'entities.openx.view.title',
-    parent: '/open-x',
+    parent: '/admin/open-x',
     loader: () =>
       import('src/view/openx/view/OpenxViewPage'),
     permissionRequired: permissions.openxRead,
@@ -1064,41 +1065,41 @@ const privateRoutes = [
 
   // #region Site Page
   {
-    path: '/site-page',
+    path: '/admin/site-page',
     collapseName: 'page',
     i18n: 'collapses.sitePage.menu',
-    parent: '/',
-    redirect: '/general-page',
+    parent: '/admin',
+    redirect: '/admin/general-page',
     permissionRequired: null,
     virtual: true,
   },
 
   // #region General Page
   {
-    path: '/general-page',
+    path: '/admin/general-page',
     collapseName: 'page',
     i18n: 'collapses.generalPage.menu',
-    parent: '/site-page',
+    parent: '/admin/site-page',
     loader: () => import('src/view/page/list/PageListPage'),
     permissionRequired: permissions.generalPageRead,
     exact: true,
   },
 
   {
-    path: '/general-page/new',
+    path: '/admin/general-page/new',
     collapseName: 'page',
     i18n: 'entities.generalPage.new.title',
-    parent: '/general-page',
+    parent: '/admin/general-page',
     loader: () => import('src/view/page/form/PageFormPage'),
     permissionRequired: permissions.generalPageCreate,
     exact: true,
   },
 
   {
-    path: '/general-page/importer',
+    path: '/admin/general-page/importer',
     collapseName: 'page',
     i18n: 'entities.generalPage.importer.title',
-    parent: '/general-page',
+    parent: '/admin/general-page',
     loader: () =>
       import('src/view/page/importer/PageImporterPage'),
     permissionRequired: permissions.generalPageImport,
@@ -1106,20 +1107,20 @@ const privateRoutes = [
   },
 
   {
-    path: '/general-page/:id/edit',
+    path: '/admin/general-page/:id/edit',
     collapseName: 'page',
     i18n: 'entities.generalPage.edit.title',
-    parent: '/general-page',
+    parent: '/admin/general-page',
     loader: () => import('src/view/page/form/PageFormPage'),
     permissionRequired: permissions.generalPageEdit,
     exact: true,
   },
 
   {
-    path: '/general-page/:id',
+    path: '/admin/general-page/:id',
     collapseName: 'page',
     i18n: 'entities.generalPage.view.title',
-    parent: '/general-page',
+    parent: '/admin/general-page',
     loader: () => import('src/view/page/view/PageViewPage'),
     permissionRequired: permissions.generalPageRead,
     exact: true,
@@ -1128,10 +1129,10 @@ const privateRoutes = [
 
   // #region Warning Page
   {
-    path: '/page-warning',
+    path: '/admin/page-warning',
     collapseName: 'page',
     i18n: 'collapses.pageWarning.menu',
-    parent: '/site-page',
+    parent: '/admin/site-page',
     loader: () =>
       import(
         'src/view/pageWarning/list/PageWarningListPage'
@@ -1141,10 +1142,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/page-warning/new',
+    path: '/admin/page-warning/new',
     collapseName: 'page',
     i18n: 'entities.pageWarning.new.title',
-    parent: '/page-warning',
+    parent: '/admin/page-warning',
     loader: () =>
       import(
         'src/view/pageWarning/form/PageWarningFormPage'
@@ -1154,10 +1155,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/page-warning/importer',
+    path: '/admin/page-warning/importer',
     collapseName: 'page',
     i18n: 'entities.pageWarning.importer.title',
-    parent: '/page-warning',
+    parent: '/admin/page-warning',
     loader: () =>
       import(
         'src/view/pageWarning/importer/PageWarningImporterPage'
@@ -1167,10 +1168,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/page-warning/:id/edit',
+    path: '/admin/page-warning/:id/edit',
     collapseName: 'page',
     i18n: 'entities.pageWarning.edit.title',
-    parent: '/page-warning',
+    parent: '/admin/page-warning',
     loader: () =>
       import(
         'src/view/pageWarning/form/PageWarningFormPage'
@@ -1180,10 +1181,10 @@ const privateRoutes = [
   },
 
   {
-    path: '/page-warning/:id',
+    path: '/admin/page-warning/:id',
     collapseName: 'page',
     i18n: 'entities.pageWarning.view.title',
-    parent: '/page-warning',
+    parent: '/admin/page-warning',
     loader: () =>
       import(
         'src/view/pageWarning/view/PageWarningViewPage'
@@ -1198,15 +1199,19 @@ const privateRoutes = [
 
 const publicRoutes = [
   {
-    path: '/auth/signin',
+    path: '/',
+    loader: () => import('src/view/home/FirstPage'),
+  },
+  {
+    path: '/admin/auth/signin',
     loader: () => import('src/view/auth/SigninPage'),
   },
   {
-    path: '/auth/signup',
+    path: '/admin/auth/signup',
     loader: () => import('src/view/auth/SignupPage'),
   },
   {
-    path: '/auth/forgot-password',
+    path: '/admin/auth/forgot-password',
     loader: () =>
       import('src/view/auth/ForgotPasswordPage'),
   },
@@ -1214,14 +1219,14 @@ const publicRoutes = [
 
 const emptyTenantRoutes = [
   {
-    path: '/auth/tenant',
+    path: '/admin/auth/tenant',
     loader: () => import('src/view/auth/TenantPage'),
   },
 ].filter(Boolean);
 
 const emptyPermissionsRoutes = [
   {
-    path: '/auth/empty-permissions',
+    path: '/admin/auth/empty-permissions',
     loader: () =>
       import('src/view/auth/EmptyPermissionsPage'),
   },
@@ -1229,7 +1234,7 @@ const emptyPermissionsRoutes = [
 
 const emailUnverifiedRoutes = [
   {
-    path: '/auth/email-unverified',
+    path: '/admin/auth/email-unverified',
     loader: () =>
       import('src/view/auth/EmailUnverifiedPage'),
   },
@@ -1237,15 +1242,15 @@ const emailUnverifiedRoutes = [
 
 const simpleRoutes = [
   {
-    path: '/auth/password-reset',
+    path: '/admin/auth/password-reset',
     loader: () => import('src/view/auth/PasswordResetPage'),
   },
   {
-    path: '/auth/invitation',
+    path: '/admin/auth/invitation',
     loader: () => import('src/view/auth/InvitationPage'),
   },
   {
-    path: '/auth/verify-email',
+    path: '/admin/auth/verify-email',
     loader: () => import('src/view/auth/VerifyEmailPage'),
   },
   {

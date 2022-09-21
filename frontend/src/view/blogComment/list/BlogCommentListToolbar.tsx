@@ -252,7 +252,7 @@ function BlogCommentToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/blog-comment/new"
+          to="/admin/blog-comment/new"
           startIcon={<AddIcon />}
           size="small"
         >
@@ -265,7 +265,7 @@ function BlogCommentToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/blog-comment/importer"
+          to="/admin/blog-comment/importer"
           startIcon={<CloudUploadIcon />}
           size="small"
         >
@@ -282,7 +282,7 @@ function BlogCommentToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to="/audit-logs?entityNames=blog_comment"
+          to="/admin/audit-logs?entityNames=blog_comment"
           startIcon={<HistoryIcon />}
           size="small"
         >

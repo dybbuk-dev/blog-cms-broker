@@ -139,7 +139,7 @@ function BrokerToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/broker/new"
+          to="/admin/broker/new"
           startIcon={<AddIcon />}
           size="small"
         >
@@ -152,7 +152,7 @@ function BrokerToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/broker/importer"
+          to="/admin/broker/importer"
           startIcon={<CloudUploadIcon />}
           size="small"
         >
@@ -167,7 +167,7 @@ function BrokerToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to="/audit-logs?entityNames=broker"
+          to="/admin/audit-logs?entityNames=broker"
           startIcon={<HistoryIcon />}
           size="small"
         >

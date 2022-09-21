@@ -238,7 +238,7 @@ function TrackingParameterListTable(props) {
                           size="small"
                           component={Link}
                           color={sidenavColor}
-                          to={`/tracking-parameter/${row.id}`}
+                          to={`/admin/tracking-parameter/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>
@@ -251,7 +251,7 @@ function TrackingParameterListTable(props) {
                             size="small"
                             color={sidenavColor}
                             component={Link}
-                            to={`/tracking-parameter/${row.id}/edit`}
+                            to={`/admin/tracking-parameter/${row.id}/edit`}
                           >
                             <EditIcon />
                           </IconButton>

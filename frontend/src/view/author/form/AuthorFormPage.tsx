@@ -67,7 +67,7 @@ function AuthorFormPage(props) {
                 isEditing={isEditing}
                 onSubmit={doSubmit}
                 onCancel={() =>
-                  getHistory().push('/author')
+                  getHistory().push('/admin/author')
                 }
               />
             </MDBox>

@@ -31,7 +31,7 @@ function NavigationListItem(props) {
         <div key={record.id}>
           <MaterialLink
             component={Link}
-            to={`/navigation/${record.id}`}
+            to={`/admin/navigation/${record.id}`}
             underline="hover"
           >
             {record.name}

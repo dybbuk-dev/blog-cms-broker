@@ -139,7 +139,7 @@ function CategoryToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/category/new"
+          to="/admin/category/new"
           startIcon={<AddIcon />}
           size="small"
         >
@@ -152,7 +152,7 @@ function CategoryToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/category/importer"
+          to="/admin/category/importer"
           startIcon={<CloudUploadIcon />}
           size="small"
         >
@@ -167,7 +167,7 @@ function CategoryToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to="/audit-logs?entityNames=category"
+          to="/admin/audit-logs?entityNames=category"
           startIcon={<HistoryIcon />}
           size="small"
         >

@@ -21,7 +21,7 @@ function SettingsFormToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to="/audit-logs?entityNames=settings"
+          to="/admin/audit-logs?entityNames=settings"
           startIcon={<HistoryIcon />}
           size="small"
         >

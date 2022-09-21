@@ -76,7 +76,7 @@ function UserViewItem(props) {
             component={Link}
             variant="contained"
             color={sidenavColor}
-            to={`/user/${record.id}`}
+            to={`/admin/user/${record.id}`}
             underline="hover"
             sx={{
               py: 0,

@@ -236,7 +236,7 @@ function BrokerArticleListTable(props) {
                           size="small"
                           component={Link}
                           color={sidenavColor}
-                          to={`/broker-article/${row.id}`}
+                          to={`/admin/broker-article/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>

@@ -108,7 +108,7 @@ function PasswordResetPage() {
                   variant="button"
                   color="info"
                   component={Link}
-                  to="/auth/signin"
+                  to="/admin/auth/signin"
                   fontWeight="medium"
                   textGradient
                 >

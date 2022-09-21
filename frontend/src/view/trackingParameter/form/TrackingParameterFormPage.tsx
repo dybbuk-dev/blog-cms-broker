@@ -67,7 +67,9 @@ function TrackingParameterFormPage(props) {
                 isEditing={isEditing}
                 onSubmit={doSubmit}
                 onCancel={() =>
-                  getHistory().push('/tracking-parameter')
+                  getHistory().push(
+                    '/admin/tracking-parameter',
+                  )
                 }
               />
             </MDBox>

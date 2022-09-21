@@ -139,7 +139,7 @@ function ExpertAdvisorTestToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/expert-advisor-test/new"
+          to="/admin/expert-advisor-test/new"
           startIcon={<AddIcon />}
           size="small"
         >
@@ -152,7 +152,7 @@ function ExpertAdvisorTestToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/expert-advisor-test/importer"
+          to="/admin/expert-advisor-test/importer"
           startIcon={<CloudUploadIcon />}
           size="small"
         >
@@ -167,7 +167,7 @@ function ExpertAdvisorTestToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to="/audit-logs?entityNames=expert_advisor_tests"
+          to="/admin/audit-logs?entityNames=expert_advisor_tests"
           startIcon={<HistoryIcon />}
           size="small"
         >

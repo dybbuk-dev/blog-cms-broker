@@ -139,7 +139,7 @@ function AffiliateLinkToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/affiliate-link/new"
+          to="/admin/affiliate-link/new"
           startIcon={<AddIcon />}
           size="small"
         >
@@ -152,7 +152,7 @@ function AffiliateLinkToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/affiliate-link/importer"
+          to="/admin/affiliate-link/importer"
           startIcon={<CloudUploadIcon />}
           size="small"
         >
@@ -167,7 +167,7 @@ function AffiliateLinkToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to="/audit-logs?entityNames=affiliate link"
+          to="/admin/audit-logs?entityNames=affiliate link"
           startIcon={<HistoryIcon />}
           size="small"
         >

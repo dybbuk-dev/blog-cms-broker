@@ -255,7 +255,7 @@ function NavigationListTable(props) {
                           size="small"
                           component={Link}
                           color={sidenavColor}
-                          to={`/navigation/${row.id}`}
+                          to={`/admin/navigation/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>
@@ -268,7 +268,7 @@ function NavigationListTable(props) {
                             size="small"
                             color={sidenavColor}
                             component={Link}
-                            to={`/navigation/${row.id}/edit`}
+                            to={`/admin/navigation/${row.id}/edit`}
                           >
                             <EditIcon />
                           </IconButton>

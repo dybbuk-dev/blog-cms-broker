@@ -139,7 +139,7 @@ function TrackingParameterToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/tracking-parameter/new"
+          to="/admin/tracking-parameter/new"
           startIcon={<AddIcon />}
           size="small"
         >
@@ -152,7 +152,7 @@ function TrackingParameterToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/tracking-parameter/importer"
+          to="/admin/tracking-parameter/importer"
           startIcon={<CloudUploadIcon />}
           size="small"
         >
@@ -167,7 +167,7 @@ function TrackingParameterToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to="/audit-logs?entityNames=tracking parameter"
+          to="/admin/audit-logs?entityNames=tracking parameter"
           startIcon={<HistoryIcon />}
           size="small"
         >

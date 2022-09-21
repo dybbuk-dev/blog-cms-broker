@@ -67,7 +67,9 @@ function ExpertAdvisorTestFormExpertAdvisorTest(props) {
                 isEditing={isEditing}
                 onSubmit={doSubmit}
                 onCancel={() =>
-                  getHistory().push('/expert-advisor-test')
+                  getHistory().push(
+                    '/admin/expert-advisor-test',
+                  )
                 }
               />
             </MDBox>

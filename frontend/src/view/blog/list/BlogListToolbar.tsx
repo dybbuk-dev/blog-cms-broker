@@ -139,7 +139,7 @@ function BlogToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/blog/new"
+          to="/admin/blog/new"
           startIcon={<AddIcon />}
           size="small"
         >
@@ -152,7 +152,7 @@ function BlogToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/blog/importer"
+          to="/admin/blog/importer"
           startIcon={<CloudUploadIcon />}
           size="small"
         >
@@ -167,7 +167,7 @@ function BlogToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to="/audit-logs?entityNames=blog"
+          to="/admin/audit-logs?entityNames=blog"
           startIcon={<HistoryIcon />}
           size="small"
         >

@@ -36,7 +36,7 @@ function CategoryViewItem(props) {
             component={Link}
             variant="contained"
             color={sidenavColor}
-            to={`/category/${record.id}`}
+            to={`/admin/category/${record.id}`}
             underline="hover"
             size="large"
           >

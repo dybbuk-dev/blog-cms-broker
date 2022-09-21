@@ -221,7 +221,7 @@ function OpenxListTable(props) {
                           size="small"
                           component={Link}
                           color={sidenavColor}
-                          to={`/open-x/${row.id}`}
+                          to={`/admin/open-x/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>
@@ -234,7 +234,7 @@ function OpenxListTable(props) {
                             size="small"
                             color={sidenavColor}
                             component={Link}
-                            to={`/open-x/${row.id}/edit`}
+                            to={`/admin/open-x/${row.id}/edit`}
                           >
                             <EditIcon />
                           </IconButton>

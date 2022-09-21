@@ -243,7 +243,7 @@ function NewsListTable(props) {
                           size="small"
                           component={Link}
                           color={sidenavColor}
-                          to={`/news/${row.id}`}
+                          to={`/admin/news/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>
@@ -256,7 +256,7 @@ function NewsListTable(props) {
                             size="small"
                             color={sidenavColor}
                             component={Link}
-                            to={`/news/${row.id}/edit`}
+                            to={`/admin/news/${row.id}/edit`}
                           >
                             <EditIcon />
                           </IconButton>

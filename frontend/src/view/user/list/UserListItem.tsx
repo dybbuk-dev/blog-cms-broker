@@ -39,7 +39,7 @@ function UserListItem(props) {
           <MaterialLink
             display="flex"
             component={Link}
-            to={`/user/${record.id}`}
+            to={`/admin/user/${record.id}`}
             underline="hover"
             textTransform="capitalize"
             alignItems="center"
