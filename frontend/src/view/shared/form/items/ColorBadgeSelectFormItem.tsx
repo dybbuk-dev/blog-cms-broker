@@ -65,6 +65,7 @@ function ColorBadgeSelectFormItem(props) {
         {option && (
           <MDBox
             display="block"
+            lineHeight={0}
             position="absolute"
             mt={2.2}
           >

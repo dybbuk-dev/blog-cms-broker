@@ -6,15 +6,9 @@ const FormWrapper = styled('div')({
 });
 
 export const FormButtons = styled('div')({
-  paddingTop: '8px',
-  paddingBottom: '8px',
-  marginLeft: '-4px',
-  marginRight: '-4px',
   display: 'flex',
-
-  '& > *': {
-    margin: '4px',
-  },
+  gap: '8px',
+  margin: '8px 0',
 });
 
 export default FormWrapper;

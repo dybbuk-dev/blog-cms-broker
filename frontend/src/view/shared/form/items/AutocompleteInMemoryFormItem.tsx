@@ -5,6 +5,7 @@ import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useFormContext } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import AddIcon from '@mui/icons-material/Add';
+import CustomAutocomplete from 'src/view/shared/components/Autocomplete';
 import FormErrors from 'src/view/shared/form/formErrors';
 import MDBox from 'src/mui/components/MDBox';
 import MDButton from 'src/mui/components/MDButton';
@@ -33,6 +34,7 @@ function AutocompleteInMemoryFormItem(props) {
     placeholder,
     renderInput,
     renderOption,
+    renderTags,
     required,
     rerender,
     shrink,
@@ -286,31 +288,36 @@ function AutocompleteInMemoryFormItem(props) {
               : '100%'
           }
         >
-          <Autocomplete
-            multiple={mode === 'multiple'}
-            isOptionEqualToValue={(option, value) => {
-              return option.value === value.value;
-            }}
-            disablePortal={false}
-            value={value()}
-            options={options()}
-            onChange={(event: any, newValue: any) => {
-              handleSelect(newValue);
-            }}
-            getOptionLabel={(option) => option.label ?? ''}
-            renderOption={
-              renderOption || fnDefaultRenderOption
-            }
-            renderInput={fnRenderInput}
-            groupBy={groupBy}
-            getOptionDisabled={getOptionDisabled}
-            loadingText={i18n('autocomplete.loading')}
-            noOptionsText={i18n('autocomplete.noOptions')}
-            onBlur={() =>
-              props.onBlur && props.onBlur(null)
-            }
-            fullWidth={fullWidth}
-          />
+          <CustomAutocomplete>
+            <Autocomplete
+              multiple={mode === 'multiple'}
+              isOptionEqualToValue={(option, value) => {
+                return option.value === value.value;
+              }}
+              disablePortal={false}
+              value={value()}
+              options={options()}
+              onChange={(event: any, newValue: any) => {
+                handleSelect(newValue);
+              }}
+              getOptionLabel={(option) =>
+                option.label ?? ''
+              }
+              renderOption={
+                renderOption || fnDefaultRenderOption
+              }
+              renderTags={renderTags}
+              renderInput={fnRenderInput}
+              groupBy={groupBy}
+              getOptionDisabled={getOptionDisabled}
+              loadingText={i18n('autocomplete.loading')}
+              noOptionsText={i18n('autocomplete.noOptions')}
+              onBlur={() =>
+                props.onBlur && props.onBlur(null)
+              }
+              fullWidth={fullWidth}
+            />
+          </CustomAutocomplete>
         </MDBox>
 
         {props.showCreate && props.hasPermissionToCreate ? (
@@ -374,6 +381,7 @@ AutocompleteInMemoryFormItem.propTypes = {
   placeholder: PropTypes.string,
   renderInput: PropTypes.func,
   renderOption: PropTypes.func,
+  renderTags: PropTypes.func,
   required: PropTypes.bool,
   rerender: PropTypes.number,
   showCreate: PropTypes.bool,

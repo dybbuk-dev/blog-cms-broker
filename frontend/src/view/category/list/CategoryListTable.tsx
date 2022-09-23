@@ -114,6 +114,7 @@ function CategoryListTable(props) {
               >
                 {hasRows && (
                   <Checkbox
+                    color={sidenavColor}
                     checked={Boolean(isAllSelected)}
                     onChange={() => doToggleAllSelected()}
                     size="small"
@@ -200,6 +201,7 @@ function CategoryListTable(props) {
                 <TableRow key={row.id}>
                   <DataTableBodyCell padding="checkbox">
                     <Checkbox
+                      color={sidenavColor}
                       checked={selectedKeys.includes(
                         row.id,
                       )}
@@ -299,15 +301,15 @@ function CategoryListTable(props) {
               ))}
           </TableBody>
         </Table>
-
-        <Pagination
-          onChange={doChangePagination}
-          disabled={loading}
-          pagination={pagination}
-          entriesPerPage
-          showTotalEntries
-        />
       </TableContainer>
+
+      <Pagination
+        onChange={doChangePagination}
+        disabled={loading}
+        pagination={pagination}
+        entriesPerPage
+        showTotalEntries
+      />
 
       {recordIdToDestroy && (
         <ConfirmModal

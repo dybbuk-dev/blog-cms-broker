@@ -98,6 +98,7 @@ function UserTable() {
               >
                 {hasRows && (
                   <Checkbox
+                    color={sidenavColor}
                     checked={Boolean(isAllSelected)}
                     onChange={() => doToggleAllSelected()}
                     size="small"
@@ -166,6 +167,7 @@ function UserTable() {
                 <TableRow key={row.id}>
                   <DataTableBodyCell padding="checkbox">
                     <Checkbox
+                      color={sidenavColor}
                       checked={selectedKeys.includes(
                         row.id,
                       )}
@@ -251,15 +253,15 @@ function UserTable() {
               ))}
           </TableBody>
         </Table>
-
-        <Pagination
-          onChange={doChangePagination}
-          disabled={loading}
-          pagination={pagination}
-          entriesPerPage
-          showTotalEntries
-        />
       </TableContainer>
+
+      <Pagination
+        onChange={doChangePagination}
+        disabled={loading}
+        pagination={pagination}
+        entriesPerPage
+        showTotalEntries
+      />
 
       {recordIdToDestroy && (
         <ConfirmModal

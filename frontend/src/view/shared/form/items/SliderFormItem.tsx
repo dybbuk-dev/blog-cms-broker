@@ -1,13 +1,13 @@
-import PropTypes from 'prop-types';
+import { i18n } from 'src/i18n';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { Slider, styled } from '@mui/material';
-import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { useState } from 'react';
 import colors from 'src/mui/assets/theme/base/colors';
+import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
-import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
-import { i18n } from 'src/i18n';
+import PropTypes from 'prop-types';
 
 export function generateSliderMarks(
   values,
@@ -95,12 +95,7 @@ function SliderFormItem(props) {
   };
 
   return (
-    <MDBox
-      pt={1}
-      sx={{
-        position: 'relative',
-      }}
-    >
+    <MDBox pt={1} position="relative">
       <MDBox
         display="flex"
         justifyContent="flex-start"

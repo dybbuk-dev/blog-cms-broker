@@ -125,7 +125,7 @@ const expertAdvisorTestListActions = {
     },
 
   doFetch:
-    (filter?, rawFilter?, keepPagination = false) =>
+    (filter?, rawFilter?, keepPagination = true) =>
     async (dispatch, getState) => {
       try {
         dispatch({

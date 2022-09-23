@@ -140,7 +140,7 @@ function CategoryListFilter(props) {
     dispatch(
       actions.doFetch(
         schema.cast(initialValues),
-        rawFilter,
+        initialValues,
       ),
     );
     // eslint-disable-next-line
@@ -148,7 +148,7 @@ function CategoryListFilter(props) {
 
   const onSubmit = (values) => {
     const rawValues = form.getValues();
-    dispatch(actions.doFetch(values, rawValues));
+    dispatch(actions.doFetch(values, rawValues, false));
     setExpanded(false);
     setRerender(rerender + 1);
   };

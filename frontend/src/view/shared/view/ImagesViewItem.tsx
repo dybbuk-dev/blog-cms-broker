@@ -28,21 +28,14 @@ function ImagesViewItem(props) {
   }
 
   return (
-    <MDBox
-      pt={2}
-      sx={{
-        position: 'relative',
-      }}
-    >
+    <MDBox position="relative">
       <MDTypography
         variant="caption"
         color={darkMode ? 'text' : 'secondary'}
         fontWeight="regular"
-        sx={{
-          lineHeight: 1,
-          position: 'absolute',
-          top: 0,
-        }}
+	lineHeight={1}
+	position="absolute"
+	top="0"
       >
         {props.label}
       </MDTypography>

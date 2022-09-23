@@ -24,15 +24,13 @@ function LogoViewItem(props) {
   }
 
   return (
-    <MDBox
-      textAlign="center"
-      pt={2}
-      sx={{
-        position: 'relative',
-      }}
-    >
-      <ImagesUploader readonly value={valueAsArray()} />
-      <MDBox textAlign="center" pb={3} px={3}>
+    <MDBox textAlign="center" position="relative">
+      <ImagesUploader
+        max={1}
+        readonly
+        value={valueAsArray()}
+      />
+      <MDBox textAlign="center">
         <MDTypography variant="h5" fontWeight="regular">
           {props.label}
         </MDTypography>

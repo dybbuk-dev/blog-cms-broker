@@ -31,7 +31,7 @@ function UserViewPage(props) {
             justifyContent="space-between"
             alignItems="flex-start"
           >
-            <MDTypography variant="h3">
+            <MDTypography variant="h3" mb={3}>
               {i18n('user.view.title')}
             </MDTypography>
             <UserViewToolbar match={match} />

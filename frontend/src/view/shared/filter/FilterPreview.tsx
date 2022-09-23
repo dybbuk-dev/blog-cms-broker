@@ -50,7 +50,7 @@ export default function FilterPreview(props) {
         alignItems="center"
         flexGrow={1}
         flexWrap="wrap"
-        gap={0.8}
+        gap={1}
       >
         {itemsNotEmpty.map((item) => (
           <Chip

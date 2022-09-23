@@ -28,9 +28,9 @@ type Types = any;
 const tableContainer: Types = {
   styleOverrides: {
     root: {
-      backgroundColor: white.main,
+      // backgroundColor: white.main,
       boxShadow: md,
-      borderRadius: borderRadius.xl,
+      // borderRadius: borderRadius.xl,
     },
   },
 };
