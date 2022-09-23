@@ -16,6 +16,7 @@ function OpenxListPage(props) {
             display="flex"
             justifyContent="space-between"
             alignItems="flex-start"
+            pb={3}
           >
             <MDTypography variant="h3">
               {i18n('entities.openx.list.title')}

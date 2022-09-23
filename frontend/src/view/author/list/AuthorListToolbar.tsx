@@ -1,23 +1,23 @@
-import { Tooltip } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import DeleteIcon from '@mui/icons-material/Delete';
-import DescriptionIcon from '@mui/icons-material/Description';
-import HistoryIcon from '@mui/icons-material/History';
 import { i18n } from 'src/i18n';
+import { Link } from 'react-router-dom';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { Tooltip } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
+import actions from 'src/modules/author/list/authorListActions';
+import AddIcon from '@mui/icons-material/Add';
 import auditLogSelectors from 'src/modules/auditLog/auditLogSelectors';
 import authorSelectors from 'src/modules/author/authorSelectors';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
+import DeleteIcon from '@mui/icons-material/Delete';
+import DescriptionIcon from '@mui/icons-material/Description';
 import destroyActions from 'src/modules/author/destroy/authorDestroyActions';
 import destroySelectors from 'src/modules/author/destroy/authorDestroySelectors';
-import actions from 'src/modules/author/list/authorListActions';
-import selectors from 'src/modules/author/list/authorListSelectors';
-import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
-import ToolbarWrapper from 'src/view/shared/styles/ToolbarWrapper';
+import HistoryIcon from '@mui/icons-material/History';
 import MDButton from 'src/mui/components/MDButton';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import selectors from 'src/modules/author/list/authorListSelectors';
+import ToolbarWrapper from 'src/view/shared/styles/ToolbarWrapper';
 
 function AuthorToolbar(props) {
   const { sidenavColor } = selectMuiSettings();

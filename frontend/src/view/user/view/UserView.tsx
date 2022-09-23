@@ -1,16 +1,14 @@
 import { Grid } from '@mui/material';
-import React from 'react';
+import { i18n } from 'src/i18n';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import CustomViewItem from 'src/view/shared/view/CustomViewItem';
+import LogoViewItem from 'src/view/shared/view/LogoViewItem';
+import MDBadgeDot from 'src/mui/components/MDBadgeDot';
+import MDBox from 'src/mui/components/MDBox';
 import Roles from 'src/security/roles';
 import Spinner from 'src/view/shared/Spinner';
-import CustomViewItem from 'src/view/shared/view/CustomViewItem';
-import ImagesViewItem from 'src/view/shared/view/ImagesViewItem';
 import TextViewItem from 'src/view/shared/view/TextViewItem';
 import UserStatusView from 'src/view/user/view/UserStatusView';
-import { i18n } from 'src/i18n';
-import MDBox from 'src/mui/components/MDBox';
-import MDBadge from 'src/mui/components/MDBadge';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
-import MDBadgeDot from 'src/mui/components/MDBadgeDot';
 
 function UserView(props) {
   const { user, loading } = props;
@@ -28,7 +26,7 @@ function UserView(props) {
           justifyContent="center"
           px={3}
         >
-          <ImagesViewItem
+          <LogoViewItem
             label={i18n('user.fields.avatars')}
             value={user.avatars}
           />
@@ -77,6 +75,7 @@ function UserView(props) {
               value.map((roleId) => (
                 <MDBadgeDot
                   key={roleId}
+                  width="max-content"
                   badgeContent={Roles.labelOf(roleId)}
                   color={sidenavColor}
                   variant="contained"

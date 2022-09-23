@@ -2,6 +2,7 @@ import { Autocomplete } from '@mui/material';
 import { i18n } from 'src/i18n';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import CustomAutocomplete from 'src/view/shared/components/Autocomplete';
 import FormErrors from 'src/view/shared/form/formErrors';
 import MDBox from 'src/mui/components/MDBox';
 import MDInput from 'src/mui/components/MDInput';
@@ -170,23 +171,25 @@ function SelectFormItem(props) {
 
   return (
     <MDBox position="relative">
-      <Autocomplete
-        multiple={mode === 'multiple'}
-        isOptionEqualToValue={(option, value) =>
-          option.value === value.value
-        }
-        disablePortal={false}
-        value={value()}
-        options={options}
-        onChange={(event: any, newValue: any) => {
-          handleSelect(newValue);
-        }}
-        renderOption={renderOption}
-        renderInput={renderInput ?? defaultRenderInput}
-        renderTags={renderTags}
-        loadingText={i18n('autocomplete.loading')}
-        noOptionsText={i18n('autocomplete.noOptions')}
-      />
+      <CustomAutocomplete>
+        <Autocomplete
+          multiple={mode === 'multiple'}
+          isOptionEqualToValue={(option, value) =>
+            option.value === value.value
+          }
+          disablePortal={false}
+          value={value()}
+          options={options}
+          onChange={(event: any, newValue: any) => {
+            handleSelect(newValue);
+          }}
+          renderOption={renderOption}
+          renderInput={renderInput ?? defaultRenderInput}
+          renderTags={renderTags}
+          loadingText={i18n('autocomplete.loading')}
+          noOptionsText={i18n('autocomplete.noOptions')}
+        />
+      </CustomAutocomplete>
       {errorMessage && (
         <MDBox mt={0.75}>
           <MDTypography

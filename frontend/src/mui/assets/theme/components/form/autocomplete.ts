@@ -87,7 +87,7 @@ const autocomplete: Types = {
       alignItems: 'center',
       height: 'auto',
       padding: pxToRem(4),
-      backgroundColor: gradients.dark.state,
+      // backgroundColor: gradients.dark.state,
       color: white.main,
 
       '& .MuiChip-label': {

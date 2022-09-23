@@ -47,9 +47,6 @@ const schema = yup.object().shape({
   meta_description: yupFilterSchemas.string(
     i18n('entities.generalPage.fields.meta_description'),
   ),
-  body: yupFilterSchemas.string(
-    i18n('entities.generalPage.fields.body'),
-  ),
   name: yupFilterSchemas.string(
     i18n('entities.generalPage.fields.name'),
   ),
@@ -71,7 +68,6 @@ const emptyValues = {
   link: null,
   meta_keywords: null,
   meta_description: null,
-  body: null,
   activated: null,
   author: null,
   pdf: null,
@@ -106,9 +102,6 @@ const previewRenders = {
   name: {
     label: i18n('entities.generalPage.fields.name'),
     render: filterRenders.generic(),
-  },
-  body: {
-    label: i18n('entities.generalPage.fields.body'),
   },
   activated: {
     label: i18n('entities.generalPage.fields.activated'),
@@ -158,7 +151,7 @@ function PageListFilter(props) {
     dispatch(
       actions.doFetch(
         schema.cast(initialValues),
-        rawFilter,
+        initialValues,
       ),
     );
     // eslint-disable-next-line
@@ -166,7 +159,7 @@ function PageListFilter(props) {
 
   const onSubmit = (values) => {
     const rawValues = form.getValues();
-    dispatch(actions.doFetch(values, rawValues));
+    dispatch(actions.doFetch(values, rawValues, false));
     setExpanded(false);
     setRerender(rerender + 1);
   };

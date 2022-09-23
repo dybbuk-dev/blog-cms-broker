@@ -114,6 +114,7 @@ function PageListTable(props) {
               >
                 {hasRows && (
                   <Checkbox
+                    color={sidenavColor}
                     checked={Boolean(isAllSelected)}
                     onChange={() => doToggleAllSelected()}
                     size="small"
@@ -204,6 +205,7 @@ function PageListTable(props) {
                 <TableRow key={row.id}>
                   <DataTableBodyCell padding="checkbox">
                     <Checkbox
+                      color={sidenavColor}
                       checked={selectedKeys.includes(
                         row.id,
                       )}
@@ -305,15 +307,15 @@ function PageListTable(props) {
               ))}
           </TableBody>
         </Table>
-
-        <Pagination
-          onChange={doChangePagination}
-          disabled={loading}
-          pagination={pagination}
-          entriesPerPage
-          showTotalEntries
-        />
       </TableContainer>
+
+      <Pagination
+        onChange={doChangePagination}
+        disabled={loading}
+        pagination={pagination}
+        entriesPerPage
+        showTotalEntries
+      />
 
       {recordIdToDestroy && (
         <ConfirmModal

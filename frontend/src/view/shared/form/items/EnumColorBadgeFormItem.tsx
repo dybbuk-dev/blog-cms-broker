@@ -9,21 +9,14 @@ function EnumColorBadgeFormItem(props) {
   const { darkMode } = selectMuiSettings();
   const { name, value, label } = props;
   return (
-    <MDBox
-      pt={2}
-      sx={{
-        position: 'relative',
-      }}
-    >
+    <MDBox position="relative" pt={2}>
       <MDTypography
         variant="caption"
         color={darkMode ? 'text' : 'secondary'}
         fontWeight="regular"
-        sx={{
-          lineHeight: 1,
-          position: 'absolute',
-          top: 0,
-        }}
+        lineHeight={1}
+        position="absolute"
+        top="0"
       >
         {label}
       </MDTypography>

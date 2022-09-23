@@ -1,4 +1,3 @@
-import { Icon } from '@mui/material';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import CheckSharpIcon from '@mui/icons-material/CheckSharp';
 import MDBox from 'src/mui/components/MDBox';
@@ -8,9 +7,11 @@ import RemoveSharpIcon from '@mui/icons-material/RemoveSharp';
 
 function CheckboxViewItem(props) {
   const { sidenavColor } = selectMuiSettings();
-  const label = `${props.prefix ? `${props.prefix} ` : ''}${
-    props.label
-  }`;
+  const label =
+    Boolean(props.label) &&
+    `${props.prefix ? `${props.prefix} ` : ''}${
+      props.label
+    }`;
 
   return (
     <MDBox display="flex" justifyContent="flex-start">
@@ -32,13 +33,15 @@ function CheckboxViewItem(props) {
           />
         )}
       </MDTypography>
-      <MDTypography
-        variant="button"
-        fontWeight="regular"
-        ml={1}
-      >
-        {label}
-      </MDTypography>
+      {Boolean(label) && (
+        <MDTypography
+          variant="button"
+          fontWeight="regular"
+          ml={1}
+        >
+          {label}
+        </MDTypography>
+      )}
     </MDBox>
   );
 }

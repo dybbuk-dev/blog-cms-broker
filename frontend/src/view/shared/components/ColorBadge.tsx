@@ -1,4 +1,5 @@
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import ClearSharpIcon from '@mui/icons-material/ClearSharp';
 import Color from 'color';
 import darkColors from 'src/mui/assets/theme-dark/base/colors';
 import lightColors from 'src/mui/assets/theme/base/colors';
@@ -22,30 +23,56 @@ export function getColorBadgeBack(color) {
 
 function ColorBadge(props) {
   const { sidenavColor, darkMode } = selectMuiSettings();
+  const { color, label, onDelete } = props;
   const defaultColor = darkMode
     ? darkColors[sidenavColor]?.main
     : lightColors[sidenavColor]?.main;
-  const { color, label } = props;
+  const backColor = getColorBadgeBack(
+    color || defaultColor,
+  );
+  const foreColor = getColorBadgeFore(
+    color || defaultColor,
+  );
   return (
-    <MDBox lineHeight={1}>
+    <MDBox
+      display="inline-block"
+      lineHeight={0}
+      color={foreColor}
+    >
       <MDTypography
-        display="inline-block"
-        variant="caption"
-        backgroundColor={getColorBadgeBack(
-          color || defaultColor,
-        )}
-        px={1}
-        py={0.75}
-        fontWeight="bold"
+        alignItems="center"
+        backgroundColor={backColor}
         borderRadius={1}
-        m={0}
-        textTransform="uppercase"
+        color="inherit"
+        display="flex"
+        flexWrap="nowrap"
+        fontWeight="bold"
+        gap={0.5}
         letterSpacing={1}
-        sx={{
-          color: getColorBadgeFore(color || defaultColor),
-        }}
+        lineHeight={1}
+        m={0}
+        px={1}
+        py={0.875}
+        textTransform="uppercase"
+        variant="caption"
       >
         {label}
+        {Boolean(onDelete) && (
+          <MDBox
+            bgColor={foreColor}
+            borderRadius="100%"
+            color={backColor}
+            height={1}
+            lineHeight={0}
+            onClick={onDelete}
+            width={1}
+            sx={{
+              cursor: 'pointer',
+            }}
+          >
+            <ClearSharpIcon />
+          </MDBox>
+        )}
       </MDTypography>
     </MDBox>
   );
@@ -54,6 +81,7 @@ function ColorBadge(props) {
 ColorBadge.propTypes = {
   color: PropTypes.string,
   label: PropTypes.string.isRequired,
+  onDelete: PropTypes.func,
 };
 
 export default ColorBadge;

@@ -10,6 +10,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import './assets/scrollbar.css';
+import GlobalDndContext from 'src/dnd-context';
 
 (async function () {
   const isSocialOnboardRequested =
@@ -24,9 +25,11 @@ import './assets/scrollbar.css';
   const App = require('./App').default;
   document.title = i18n('app.title');
   ReactDOM.render(
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>,
+    <GlobalDndContext>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </GlobalDndContext>,
     document.getElementById('root'),
   );
 })();
