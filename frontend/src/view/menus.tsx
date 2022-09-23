@@ -98,6 +98,13 @@ const menus = [
   },
 
   {
+    path: '/expert-advisor-test',
+    name: i18n('entities.expertAdvisorTest.menu'),
+    permissionRequired: permissions.expertAdvisorTestRead,
+    icon: <Icon fontSize="medium">card_travel</Icon>,
+  },
+
+  {
     path: '/news',
     name: i18n('entities.news.menu'),
     permissionRequired: permissions.newsRead,

@@ -42,6 +42,7 @@ function AuthorListTable(props) {
   const loading = findLoading || destroyLoading;
 
   const rows = useSelector(selectors.selectRows);
+  console.log(rows);
   const pagination = useSelector(
     selectors.selectPagination,
   );
@@ -219,9 +220,15 @@ function AuthorListTable(props) {
                     {Boolean(row.author_image[0]?.link) && (
                       <MaterialLink
                         component={Link}
-                        to={row.author_image[0]?.link}
+                        to={
+                          row.link
+                            ? row.link
+                            : row.author_image[0]?.link
+                        }
                       >
-                        {row.author_image[0]?.link}
+                        {row.link
+                          ? row.link
+                          : row.author_image[0]?.link}
                       </MaterialLink>
                     )}
                   </DataTableBodyCell>

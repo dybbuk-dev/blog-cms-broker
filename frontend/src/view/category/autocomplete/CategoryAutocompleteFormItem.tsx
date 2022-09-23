@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CategoryService from 'src/modules/category/categoryService';
 import CategoryFormModal from 'src/view/category/form/CategoryFormModal';
 import AutocompleteInMemoryFormItem from 'src/view/shared/form/items/AutocompleteInMemoryFormItem';
@@ -7,6 +7,18 @@ import { useSelector } from 'react-redux';
 import selectors from 'src/modules/category/categorySelectors';
 
 function CategoryAutocompleteFormItem(props) {
+  const {
+    autoFocus,
+    label,
+    margin,
+    mode,
+    name,
+    required,
+    rerender: parentRerender,
+    shrink,
+    size,
+    variant,
+  } = props;
   const { setValue, getValues } = useFormContext();
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -80,6 +92,10 @@ function CategoryAutocompleteFormItem(props) {
       };
     },
   };
+
+  useEffect(() => {
+    setRerender(rerender + 1);
+  }, [parentRerender]);
 
   return (
     <>

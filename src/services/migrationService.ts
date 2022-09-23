@@ -234,6 +234,25 @@ export default class MigrationService {
           ),
         ignoreDeleteOriginal: true,
       },
+      expert_advisor_test_image: {
+        belongsTo:
+          this.options.database.expert_advisor_test,
+        belongsToColumn: (row) =>
+          'expert_advisor_test_image',
+        belongsToId: 'id',
+        name: 'filename',
+        type: 'type',
+        link: 'link',
+        linkTitle: 'link_title',
+        privateUrl: (row) =>
+          [
+            'expert_advisor_test_screenshots/',
+            row.id,
+            '/',
+            row.filename,
+          ].join(''),
+        ignoreDeleteOriginal: true,
+      },
     };
 
     const modelNames = Object.keys(imageMigrations);

@@ -91,6 +91,7 @@ require('./broker').default(routes);
 require('./brokerArticle').default(routes);
 require('./brokerPost').default(routes);
 require('./category').default(routes);
+require('./expertAdvisorTest').default(routes);
 require('./file').default(routes);
 require('./mui').default(routes);
 require('./navigation').default(routes);

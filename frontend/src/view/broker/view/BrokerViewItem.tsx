@@ -40,7 +40,7 @@ function BrokerViewItem(props) {
             underline="hover"
             size="large"
           >
-            {record.title}
+            {record.name}
           </MDButton>
         </MDBox>
       );
@@ -53,7 +53,7 @@ function BrokerViewItem(props) {
           fontWeight="regular"
           mr={1}
         >
-          {record.title}
+          {record.name}
         </MDTypography>
       </MDBox>
     );

@@ -28,6 +28,7 @@ import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRang
 import BrokerAutocompleteFormItem from 'src/view/broker/autocomplete/BrokerAutocompleteFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import { filterBooleanOptions } from 'src/modules/utils';
+import NavigationAutocompleteFormItem from 'src/view/navigation/autocomplete/NavigationAutocompleteFormItem';
 
 const schema = yup.object().shape({
   idRange: yupFilterSchemas.integerRange(
@@ -63,10 +64,18 @@ const emptyValues = {
   idRange: [],
   name: null,
   title: null,
-  link: null,
+  name_normalized: null,
+  navigation: null,
   parent: null,
   type: null,
   activated: null,
+  is_broker: null,
+  is_compareable: null,
+  top_broker: null,
+  top_binary_broker: null,
+  featured_broker: null,
+  pdf: null,
+  top_forex_broker: null,
   show_user_logged_in: null,
   show_in_broker: null,
 };
@@ -127,6 +136,7 @@ function BrokerListFilter(props) {
   const rawFilter = useSelector(selectors.selectRawFilter);
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
+  const [rerender, setRerender] = useState(0);
 
   const [initialValues] = useState(() => {
     return {
@@ -155,6 +165,7 @@ function BrokerListFilter(props) {
     const rawValues = form.getValues();
     dispatch(actions.doFetch(values, rawValues));
     setExpanded(false);
+    setRerender(rerender + 1);
   };
 
   const onReset = () => {
@@ -163,6 +174,7 @@ function BrokerListFilter(props) {
     });
     dispatch(actions.doReset());
     setExpanded(false);
+    setRerender(rerender + 1);
   };
 
   const onRemove = (key) => {
@@ -199,15 +211,17 @@ function BrokerListFilter(props) {
                       'entities.broker.fields.idRange',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
-                  <BrokerAutocompleteFormItem
+                  <NavigationAutocompleteFormItem
                     name="navigation"
                     label={i18n(
                       'entities.broker.fields.navigation',
                     )}
                     variant="standard"
+                    rerender={rerender}
                     fullWidth
                   />
                 </Grid>
@@ -218,6 +232,7 @@ function BrokerListFilter(props) {
                       'entities.broker.fields.name',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -227,6 +242,7 @@ function BrokerListFilter(props) {
                       'entities.broker.fields.name_normalized',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={4} md={6} xs={12}>
@@ -237,6 +253,7 @@ function BrokerListFilter(props) {
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={4} md={6} xs={12}>
@@ -247,6 +264,7 @@ function BrokerListFilter(props) {
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={4} md={6} xs={12}>
@@ -257,6 +275,7 @@ function BrokerListFilter(props) {
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={4} md={6} xs={12}>
@@ -267,6 +286,7 @@ function BrokerListFilter(props) {
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={4} md={6} xs={12}>
@@ -277,6 +297,7 @@ function BrokerListFilter(props) {
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={4} md={6} xs={12}>
@@ -287,6 +308,7 @@ function BrokerListFilter(props) {
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={4} md={6} xs={12}>
@@ -297,6 +319,7 @@ function BrokerListFilter(props) {
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={4} md={6} xs={12}>
@@ -307,6 +330,7 @@ function BrokerListFilter(props) {
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
               </Grid>

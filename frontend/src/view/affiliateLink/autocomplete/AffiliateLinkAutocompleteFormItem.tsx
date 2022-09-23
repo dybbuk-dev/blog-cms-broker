@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AffiliateLinkService from 'src/modules/affiliateLink/affiliateLinkService';
 import AffiliateLinkFormModal from 'src/view/affiliateLink/form/AffiliateLinkFormModal';
 import AutocompleteInMemoryFormItem from 'src/view/shared/form/items/AutocompleteInMemoryFormItem';
@@ -7,6 +7,18 @@ import { useSelector } from 'react-redux';
 import selectors from 'src/modules/affiliateLink/affiliateLinkSelectors';
 
 function AffiliateLinkAutocompleteFormItem(props) {
+  const {
+    autoFocus,
+    label,
+    margin,
+    mode,
+    name,
+    required,
+    rerender: parentRerender,
+    shrink,
+    size,
+    variant,
+  } = props;
   const { setValue, getValues } = useFormContext();
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -83,6 +95,10 @@ function AffiliateLinkAutocompleteFormItem(props) {
       };
     },
   };
+
+  useEffect(() => {
+    setRerender(rerender + 1);
+  }, [parentRerender]);
 
   return (
     <>

@@ -156,7 +156,12 @@ function CategoryListTable(props) {
                 {i18n('entities.category.fields.activated')}
               </DataTableHeadCell>
               <DataTableHeadCell
-                sorted={false}
+                onClick={() => doChangeSort('sort')}
+                sorted={
+                  sorter.field === 'sort'
+                    ? sorter.order
+                    : 'none'
+                }
                 align="right"
                 width="0"
               >

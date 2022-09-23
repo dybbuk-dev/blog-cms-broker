@@ -67,6 +67,7 @@ function PageWarningListFilter(props) {
   const rawFilter = useSelector(selectors.selectRawFilter);
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
+  const [rerender, setRerender] = useState(0);
 
   const [initialValues] = useState(() => {
     return {
@@ -95,6 +96,7 @@ function PageWarningListFilter(props) {
     const rawValues = form.getValues();
     dispatch(actions.doFetch(values, rawValues));
     setExpanded(false);
+    setRerender(rerender + 1);
   };
 
   const onReset = () => {
@@ -103,6 +105,7 @@ function PageWarningListFilter(props) {
     });
     dispatch(actions.doReset());
     setExpanded(false);
+    setRerender(rerender + 1);
   };
 
   const onRemove = (key) => {
@@ -139,6 +142,7 @@ function PageWarningListFilter(props) {
                       'entities.pageWarning.fields.idRange',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -148,6 +152,7 @@ function PageWarningListFilter(props) {
                       'entities.pageWarning.fields.title',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -157,6 +162,7 @@ function PageWarningListFilter(props) {
                       'entities.pageWarning.fields.body',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
               </Grid>

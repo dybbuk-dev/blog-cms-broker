@@ -74,6 +74,7 @@ function UserFilter(props) {
   const rawFilter = useSelector(selectors.selectRawFilter);
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
+  const [rerender, setRerender] = useState(0);
 
   const [initialValues] = useState(() => {
     return {
@@ -92,7 +93,7 @@ function UserFilter(props) {
     dispatch(
       actions.doFetch(
         schema.cast(initialValues),
-        rawFilter,
+        initialValues,
       ),
     );
     // eslint-disable-next-line
@@ -100,8 +101,9 @@ function UserFilter(props) {
 
   const onSubmit = (values) => {
     const rawValues = form.getValues();
-    dispatch(actions.doFetch(values, rawValues));
+    dispatch(actions.doFetch(values, rawValues, false));
     setExpanded(false);
+    setRerender(rerender + 1);
   };
 
   const onReset = () => {
@@ -110,6 +112,7 @@ function UserFilter(props) {
     });
     dispatch(actions.doReset());
     setExpanded(false);
+    setRerender(rerender + 1);
   };
 
   const onRemove = (key) => {
@@ -150,6 +153,7 @@ function UserFilter(props) {
                     name={'email'}
                     label={i18n('user.fields.email')}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -157,6 +161,7 @@ function UserFilter(props) {
                     name={'fullName'}
                     label={i18n('user.fields.fullName')}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -170,6 +175,7 @@ function UserFilter(props) {
                       }),
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -183,6 +189,7 @@ function UserFilter(props) {
                       }),
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
               </Grid>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import OpenxService from 'src/modules/openx/openxService';
 import OpenxFormModal from 'src/view/openx/form/OpenxFormModal';
 import AutocompleteInMemoryFormItem from 'src/view/shared/form/items/AutocompleteInMemoryFormItem';
@@ -7,6 +7,18 @@ import { useSelector } from 'react-redux';
 import selectors from 'src/modules/openx/openxSelectors';
 
 function OpenxAutocompleteFormItem(props) {
+  const {
+    autoFocus,
+    label,
+    margin,
+    mode,
+    name,
+    required,
+    rerender: parentRerender,
+    shrink,
+    size,
+    variant,
+  } = props;
   const { setValue, getValues } = useFormContext();
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -80,6 +92,10 @@ function OpenxAutocompleteFormItem(props) {
       };
     },
   };
+
+  useEffect(() => {
+    setRerender(rerender + 1);
+  }, [parentRerender]);
 
   return (
     <>

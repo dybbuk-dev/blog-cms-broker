@@ -45,14 +45,14 @@ export function colorBadgeSelectFormItemRenderOption(
 
 function ColorBadgeSelectFormItem(props) {
   const {
-    options,
     label,
-    required,
-    size,
-    shrink,
     margin,
-    variant,
     onChange,
+    options,
+    required,
+    shrink,
+    size,
+    variant,
   } = props;
 
   const renderInput = (params) => {
@@ -115,25 +115,26 @@ function ColorBadgeSelectFormItem(props) {
 }
 
 ColorBadgeSelectFormItem.defaultProps = {
-  required: false,
   isClearable: true,
+  required: false,
 };
 
 ColorBadgeSelectFormItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  options: PropTypes.array.isRequired,
-  label: PropTypes.string,
-  hint: PropTypes.string,
-  required: PropTypes.bool,
   externalErrorMessage: PropTypes.string,
-  mode: PropTypes.string,
+  hint: PropTypes.string,
   isClearable: PropTypes.bool,
-  placeholder: PropTypes.string,
-  variant: PropTypes.string,
-  size: PropTypes.string,
-  shrink: PropTypes.bool,
+  label: PropTypes.string,
   margin: PropTypes.string,
+  mode: PropTypes.string,
+  name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
+  options: PropTypes.array.isRequired,
+  placeholder: PropTypes.string,
+  required: PropTypes.bool,
+  rerender: PropTypes.number,
+  shrink: PropTypes.bool,
+  size: PropTypes.string,
+  variant: PropTypes.string,
 };
 
 export default ColorBadgeSelectFormItem;

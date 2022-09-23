@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PromotionService from 'src/modules/promotion/promotionService';
 import PromotionFormModal from 'src/view/promotion/form/PromotionFormModal';
 import AutocompleteInMemoryFormItem from 'src/view/shared/form/items/AutocompleteInMemoryFormItem';
@@ -7,6 +7,19 @@ import { useSelector } from 'react-redux';
 import selectors from 'src/modules/promotion/promotionSelectors';
 
 function PromotionAutocompleteFormItem(props) {
+  const {
+    autoFocus,
+    label,
+    margin,
+    mode,
+    name,
+    required,
+    rerender: parentRerender,
+    shrink,
+    size,
+    variant,
+  } = props;
+
   const { setValue, getValues } = useFormContext();
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -80,6 +93,10 @@ function PromotionAutocompleteFormItem(props) {
       };
     },
   };
+
+  useEffect(() => {
+    setRerender(rerender + 1);
+  }, [parentRerender]);
 
   return (
     <>

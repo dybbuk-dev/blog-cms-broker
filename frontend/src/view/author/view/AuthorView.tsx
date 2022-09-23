@@ -46,7 +46,7 @@ function AuthorView(props) {
           </MDBox>
         </Grid>
         <Grid item xs={12}>
-          <HtmlViewItem
+          <TextViewItem
             label={i18n(
               'entities.author.fields.description',
             )}

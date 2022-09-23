@@ -22,6 +22,7 @@ function TextAreaFormItem(props) {
     name,
     placeholder,
     required,
+    rerender,
     rows,
     shrink,
     size,
@@ -43,9 +44,19 @@ function TextAreaFormItem(props) {
 
   const formValue = getValues(name);
 
+  const getInitialValue = () =>
+    formValue || value || defaultValues[name] || '';
+
   const [curValue, setCurValue] = useState(
-    formValue || value || defaultValues[name] || '',
+    getInitialValue(),
   );
+
+  if (forceValue) {
+    setValue(name, value, {
+      shouldValidate: false,
+      shouldDirty: true,
+    });
+  }
 
   useEffect(() => {
     register({ name });
@@ -56,6 +67,10 @@ function TextAreaFormItem(props) {
       setCurValue(value);
     }
   }, [value]);
+
+  useEffect(() => {
+    setCurValue(getInitialValue());
+  }, [rerender]);
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -124,7 +139,6 @@ function TextAreaFormItem(props) {
 
 TextAreaFormItem.defaultProps = {
   forceValue: false,
-  type: 'text',
   required: false,
 };
 
@@ -145,6 +159,7 @@ TextAreaFormItem.propTypes = {
   placeholder: PropTypes.string,
   prefix: PropTypes.string,
   required: PropTypes.bool,
+  rerender: PropTypes.number,
   rows: PropTypes.number,
   shrink: PropTypes.bool,
   size: PropTypes.string,

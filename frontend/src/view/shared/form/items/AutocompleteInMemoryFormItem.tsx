@@ -41,12 +41,12 @@ function AutocompleteInMemoryFormItem(props) {
   } = props;
 
   const {
-    errors,
     control: { defaultValuesRef },
-    setValue,
-    register,
+    errors,
     formState: { touched, isSubmitted },
     getValues,
+    register,
+    setValue,
   } = useFormContext();
 
   const defaultValues = defaultValuesRef.current || {};
@@ -74,6 +74,8 @@ function AutocompleteInMemoryFormItem(props) {
     register({ name });
   }, [register, name]);
 
+  let dismounted = false;
+
   useEffect(() => {
     const fetchAllResults = async () => {
       setLoading(true);
@@ -96,6 +98,9 @@ function AutocompleteInMemoryFormItem(props) {
     };
 
     fetchAllResults().then(() => {
+      if (dismounted) {
+        return;
+      }
       setRealValue(getValues(name) || defaultValues[name]);
       props.onChange &&
         props.onChange(
@@ -104,7 +109,10 @@ function AutocompleteInMemoryFormItem(props) {
           ),
         );
     });
-    // eslint-disable-next-line
+
+    return () => {
+      dismounted = true;
+    };
   }, [rerender]);
 
   const prioritizeFromDataSource = (selected) => {
@@ -252,7 +260,7 @@ function AutocompleteInMemoryFormItem(props) {
   );
 
   useEffect(() => {
-    if (props.onChange) {
+    if (!dismounted && props.onChange) {
       props.onChange(
         prioritizeFromDataSource(value() ?? {}),
       );

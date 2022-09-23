@@ -65,8 +65,7 @@ const emptyValues = {
   name: null,
   title: null,
   link: null,
-  author_name: null,
-  author_link: null,
+  author: null,
   activated: null,
   show_in_navigation: null,
   show_in_footer: null,
@@ -122,6 +121,7 @@ function CategoryListFilter(props) {
   const rawFilter = useSelector(selectors.selectRawFilter);
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
+  const [rerender, setRerender] = useState(0);
 
   const [initialValues] = useState(() => {
     return {
@@ -150,6 +150,7 @@ function CategoryListFilter(props) {
     const rawValues = form.getValues();
     dispatch(actions.doFetch(values, rawValues));
     setExpanded(false);
+    setRerender(rerender + 1);
   };
 
   const onReset = () => {
@@ -158,6 +159,7 @@ function CategoryListFilter(props) {
     });
     dispatch(actions.doReset());
     setExpanded(false);
+    setRerender(rerender + 1);
   };
 
   const onRemove = (key) => {
@@ -194,6 +196,7 @@ function CategoryListFilter(props) {
                       'entities.category.fields.idRange',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -203,6 +206,7 @@ function CategoryListFilter(props) {
                       'entities.category.fields.name',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -212,6 +216,7 @@ function CategoryListFilter(props) {
                       'entities.category.fields.title',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -221,6 +226,7 @@ function CategoryListFilter(props) {
                       'entities.category.fields.link',
                     )}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -230,6 +236,7 @@ function CategoryListFilter(props) {
                       'entities.category.fields.author',
                     )}
                     variant="standard"
+                    rerender={rerender}
                     fullWidth
                   />
                 </Grid>
@@ -242,6 +249,7 @@ function CategoryListFilter(props) {
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={4} xs={12}>
@@ -252,6 +260,7 @@ function CategoryListFilter(props) {
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={4} xs={12}>
@@ -262,6 +271,7 @@ function CategoryListFilter(props) {
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
+                    rerender={rerender}
                   />
                 </Grid>
               </Grid>

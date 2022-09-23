@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import UserService from 'src/modules/user/userService';
 import UserNewFormModal from 'src/view/user/new/UserNewFormModal';
 import AutocompleteInMemoryFormItem from 'src/view/shared/form/items/AutocompleteInMemoryFormItem';
@@ -10,12 +10,22 @@ import { Avatar, Box } from '@mui/material';
 import { getUserAvatar } from 'src/modules/utils';
 
 function UserAutocompleteFormItem(props) {
+  const {
+    autoFocus,
+    label,
+    margin,
+    mode,
+    name,
+    required,
+    rerender: parentRerender,
+    shrink,
+    size,
+    variant,
+  } = props;
+
   const { setValue, getValues } = useFormContext();
   const [modalVisible, setModalVisible] = useState(false);
   const [rerender, setRerender] = useState(0);
-
-  const { name, mode } = props;
-  const isMultiple = mode && mode === 'multiple';
 
   const [avatar, setAvatar] = useState(null);
 
@@ -28,7 +38,7 @@ function UserAutocompleteFormItem(props) {
   };
 
   const doCreateSuccess = (record) => {
-    if (isMultiple) {
+    if (mode && mode === 'multiple') {
       setValue(
         name,
         [...(getValues()[name] || []), record],
@@ -75,6 +85,10 @@ function UserAutocompleteFormItem(props) {
       };
     },
   };
+
+  useEffect(() => {
+    setRerender(rerender + 1);
+  }, [parentRerender]);
 
   return (
     <>

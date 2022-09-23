@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PageService from 'src/modules/page/pageService';
 import PageFormModal from 'src/view/page/form/PageFormModal';
 import AutocompleteInMemoryFormItem from 'src/view/shared/form/items/AutocompleteInMemoryFormItem';
@@ -7,6 +7,18 @@ import { useSelector } from 'react-redux';
 import selectors from 'src/modules/page/pageSelectors';
 
 function PageAutocompleteFormItem(props) {
+  const {
+    autoFocus,
+    label,
+    margin,
+    mode,
+    name,
+    required,
+    rerender: parentRerender,
+    shrink,
+    size,
+    variant,
+  } = props;
   const { setValue, getValues } = useFormContext();
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -81,6 +93,10 @@ function PageAutocompleteFormItem(props) {
     },
   };
 
+  useEffect(() => {
+    setRerender(rerender + 1);
+  }, [parentRerender]);
+
   return (
     <>
       <AutocompleteInMemoryFormItem
@@ -103,3 +119,6 @@ function PageAutocompleteFormItem(props) {
 }
 
 export default PageAutocompleteFormItem;
+function setRerender(arg0: number) {
+  throw new Error('Function not implemented.');
+}

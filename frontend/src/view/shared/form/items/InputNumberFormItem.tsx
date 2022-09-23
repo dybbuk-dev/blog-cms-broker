@@ -22,6 +22,7 @@ export function InputNumberFormItem(props) {
     name,
     placeholder,
     required,
+    rerender,
     shrink,
     size,
     startAdornment,
@@ -31,20 +32,23 @@ export function InputNumberFormItem(props) {
   } = props;
 
   const {
-    register,
+    control: { defaultValuesRef },
     errors,
     formState: { touched, isSubmitted },
-    setValue,
-    control: { defaultValuesRef },
     getValues,
+    register,
+    setValue,
   } = useFormContext();
 
   const defaultValues = defaultValuesRef.current || {};
 
   const formValue = getValues(name);
 
+  const getInitialValue = () =>
+    formValue || value || defaultValues[name] || '';
+
   const [curValue, setCurValue] = useState(
-    formValue || value || defaultValues[name] || '',
+    getInitialValue(),
   );
 
   if (forceValue) {
@@ -57,6 +61,16 @@ export function InputNumberFormItem(props) {
   useEffect(() => {
     register({ name });
   }, [register, name]);
+
+  useEffect(() => {
+    if (forceValue) {
+      setCurValue(value);
+    }
+  }, [value]);
+
+  useEffect(() => {
+    setCurValue(getInitialValue());
+  }, [rerender]);
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -106,10 +120,10 @@ export function InputNumberFormItem(props) {
           name,
         }}
         disabled={disabled}
-        value={forceValue ? value : formValue || curValue}
+        value={curValue}
       />
       {errorMessage && (
-        <MDBox mt={0.75}>
+        <MDBox mt={0.6}>
           <MDTypography
             component="div"
             variant="caption"
@@ -147,6 +161,7 @@ InputNumberFormItem.propTypes = {
   placeholder: PropTypes.string,
   prefix: PropTypes.string,
   required: PropTypes.bool,
+  rerender: PropTypes.number,
   shrink: PropTypes.bool,
   size: PropTypes.string,
   startAdornment: PropTypes.any,

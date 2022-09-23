@@ -23,6 +23,7 @@ import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
 import Storage from 'src/security/storage';
 import BrokerAutocompleteFormItem from 'src/view/broker/autocomplete/BrokerAutocompleteFormItem';
 import slug from 'slug';
+import ImagesFormItem from 'src/view/shared/form/items/ImagesFormItem';
 
 const schema = yup.object().shape({
   name_normalized: yupFormSchemas.string(
@@ -201,7 +202,7 @@ function BlogForm(props) {
               />
             </Grid>
             <Grid item md={12} xs={12}>
-              <LogoFormItem
+              <ImagesFormItem
                 name="blog_image"
                 label={i18n(
                   'entities.blog.fields.blog_image',

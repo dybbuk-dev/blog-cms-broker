@@ -24,6 +24,7 @@ function SelectFormItem(props) {
     renderOption,
     renderTags,
     required,
+    rerender,
     shrink,
     size,
     value: defaultValue,
@@ -39,6 +40,40 @@ function SelectFormItem(props) {
     setValue,
   } = useFormContext();
 
+  const defaultValues = defaultValuesRef.current || {};
+
+  const originalValue = defaultValues[name];
+
+  const formValue = getValues(name);
+
+  const getInitialValue = () =>
+    formValue || defaultValue || originalValue || [];
+
+  const [curValue, setCurValue] = useState(
+    getInitialValue(),
+  );
+
+  if (forceValue) {
+    setValue(name, defaultValue, {
+      shouldValidate: false,
+      shouldDirty: true,
+    });
+  }
+
+  useEffect(() => {
+    register({ name });
+  }, [register, name]);
+
+  useEffect(() => {
+    if (forceValue) {
+      setCurValue(defaultValue);
+    }
+  }, [defaultValue]);
+
+  useEffect(() => {
+    setCurValue(getInitialValue());
+  }, [rerender]);
+
   const errorMessage = FormErrors.errorMessage(
     name,
     errors,
@@ -47,29 +82,12 @@ function SelectFormItem(props) {
     externalErrorMessage,
   );
 
-  const defaultValues = defaultValuesRef.current || {};
-
-  const originalValue = defaultValues[name];
-
-  const formValue = getValues(name);
-
-  const [curValue, setCurValue] = useState(
-    formValue || defaultValue || originalValue,
-  );
-
-  useEffect(() => {
-    register({ name });
-  }, [register, name]);
-
   const value = () => {
     const { mode } = props;
-    const realValue = forceValue
-      ? defaultValue
-      : formValue || curValue;
     if (mode === 'multiple') {
-      return valueMultiple(realValue);
+      return valueMultiple(curValue);
     } else {
-      return valueOne(realValue);
+      return valueOne(curValue);
     }
   };
 
@@ -105,21 +123,7 @@ function SelectFormItem(props) {
     }
   };
 
-  const handleSelectMultiple = (values) => {
-    if (!values) {
-      setCurValue([]);
-      setValue(name, [], {
-        shouldValidate: false,
-        shouldDirty: true,
-      });
-      props.onChange && props.onChange([]);
-      return;
-    }
-
-    const newValue = values
-      .map((data) => (data ? data.value : data))
-      .filter((value) => value != null);
-
+  const updateCurValueAndOnChange = (newValue) => {
     setCurValue(newValue);
     setValue(name, newValue, {
       shouldValidate: false,
@@ -128,23 +132,26 @@ function SelectFormItem(props) {
     props.onChange && props.onChange(newValue);
   };
 
-  const handleSelectOne = (data) => {
-    if (!data) {
-      setCurValue(null);
-      setValue(name, null, {
-        shouldValidate: false,
-        shouldDirty: true,
-      });
-      props.onChange && props.onChange(null);
+  const handleSelectMultiple = (values) => {
+    if (!values) {
+      updateCurValueAndOnChange([]);
       return;
     }
 
-    setCurValue(data.value);
-    setValue(name, data.value, {
-      shouldValidate: false,
-      shouldDirty: true,
-    });
-    props.onChange && props.onChange(data.value);
+    const newValue = values
+      .map((data) => (data ? data.value : data))
+      .filter((value) => value != null);
+
+    updateCurValueAndOnChange(newValue);
+  };
+
+  const handleSelectOne = (data) => {
+    if (!data) {
+      updateCurValueAndOnChange(null);
+      return;
+    }
+
+    updateCurValueAndOnChange(data.value);
   };
 
   const defaultRenderInput = (params) => (
@@ -217,6 +224,7 @@ SelectFormItem.propTypes = {
   renderOption: PropTypes.func,
   renderTags: PropTypes.func,
   required: PropTypes.bool,
+  rerender: PropTypes.number,
   shrink: PropTypes.bool,
   size: PropTypes.string,
   value: PropTypes.any,
