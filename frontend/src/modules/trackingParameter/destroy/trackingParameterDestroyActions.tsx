@@ -34,7 +34,7 @@ const trackingParameterDestroyActions = {
 
       dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/tracking-parameter');
+      getHistory().push('/admin/tracking-parameter');
     } catch (error) {
       Errors.handle(error);
 
@@ -69,7 +69,7 @@ const trackingParameterDestroyActions = {
         ),
       );
 
-      getHistory().push('/tracking-parameter');
+      getHistory().push('/admin/tracking-parameter');
     } catch (error) {
       Errors.handle(error);
 

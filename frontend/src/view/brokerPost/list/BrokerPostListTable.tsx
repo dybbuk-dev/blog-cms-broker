@@ -324,7 +324,7 @@ function BrokerPostListTable(props) {
                           size="small"
                           component={Link}
                           color={sidenavColor}
-                          to={`/broker-post/${row.id}`}
+                          to={`/admin/broker-post/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>
@@ -338,7 +338,7 @@ function BrokerPostListTable(props) {
                               size="small"
                               color={sidenavColor}
                               component={Link}
-                              to={`/broker-post/${row.id}/edit`}
+                              to={`/admin/broker-post/${row.id}/edit`}
                             >
                               <EditIcon />
                             </IconButton>

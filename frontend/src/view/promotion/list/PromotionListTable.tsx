@@ -239,7 +239,7 @@ function PromotionListTable(props) {
                           size="small"
                           component={Link}
                           color={sidenavColor}
-                          to={`/promotion/${row.id}`}
+                          to={`/admin/promotion/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>
@@ -252,7 +252,7 @@ function PromotionListTable(props) {
                             size="small"
                             color={sidenavColor}
                             component={Link}
-                            to={`/promotion/${row.id}/edit`}
+                            to={`/admin/promotion/${row.id}/edit`}
                           >
                             <EditIcon />
                           </IconButton>

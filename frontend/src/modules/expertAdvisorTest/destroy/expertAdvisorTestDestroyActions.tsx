@@ -34,7 +34,7 @@ const expertAdvisorTestDestroyActions = {
 
       dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/expert-advisor-test');
+      getHistory().push('/admin/expert-advisor-test');
     } catch (error) {
       Errors.handle(error);
 
@@ -69,7 +69,7 @@ const expertAdvisorTestDestroyActions = {
         ),
       );
 
-      getHistory().push('/expert-advisor-test');
+      getHistory().push('/admin/expert-advisor-test');
     } catch (error) {
       Errors.handle(error);
 

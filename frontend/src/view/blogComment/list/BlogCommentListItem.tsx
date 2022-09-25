@@ -31,7 +31,7 @@ function BlogCommentListItem(props) {
         <div key={record.id}>
           <MaterialLink
             component={Link}
-            to={`/blogComment/${record.id}`}
+            to={`/admin/blogComment/${record.id}`}
             underline="hover"
           >
             {record.name}

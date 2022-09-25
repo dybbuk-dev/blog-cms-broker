@@ -54,7 +54,7 @@ function BrokerViewToolbar(props) {
       {hasPermissionToEdit && (
         <MDButton
           component={Link}
-          to={`/broker/${id}/edit`}
+          to={`/admin/broker/${id}/edit`}
           variant="gradient"
           color={sidenavColor}
           type="button"
@@ -84,7 +84,7 @@ function BrokerViewToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to={`/audit-logs?entityId=${encodeURIComponent(
+          to={`/admin/audit-logs?entityId=${encodeURIComponent(
             id,
           )}`}
           startIcon={<HistoryIcon />}

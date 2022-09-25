@@ -34,7 +34,7 @@ const pageDestroyActions = {
 
       dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/general-page');
+      getHistory().push('/admin/general-page');
     } catch (error) {
       Errors.handle(error);
 
@@ -67,7 +67,7 @@ const pageDestroyActions = {
         i18n('entities.page.destroyAll.success'),
       );
 
-      getHistory().push('/general-page');
+      getHistory().push('/admin/general-page');
     } catch (error) {
       Errors.handle(error);
 

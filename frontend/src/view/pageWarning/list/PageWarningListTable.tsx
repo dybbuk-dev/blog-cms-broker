@@ -201,7 +201,7 @@ function PageWarningListTable(props) {
                           size="small"
                           component={Link}
                           color={sidenavColor}
-                          to={`/page-warning/${row.id}`}
+                          to={`/admin/page-warning/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>
@@ -214,7 +214,7 @@ function PageWarningListTable(props) {
                             size="small"
                             color={sidenavColor}
                             component={Link}
-                            to={`/page-warning/${row.id}/edit`}
+                            to={`/admin/page-warning/${row.id}/edit`}
                           >
                             <EditIcon />
                           </IconButton>

@@ -54,7 +54,7 @@ function NavigationViewToolbar(props) {
       {hasPermissionToEdit && (
         <MDButton
           component={Link}
-          to={`/navigation/${id}/edit`}
+          to={`/admin/navigation/${id}/edit`}
           variant="gradient"
           color={sidenavColor}
           type="button"
@@ -84,7 +84,7 @@ function NavigationViewToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to={`/audit-logs?entityId=${encodeURIComponent(
+          to={`/admin/audit-logs?entityId=${encodeURIComponent(
             id,
           )}`}
           startIcon={<HistoryIcon />}

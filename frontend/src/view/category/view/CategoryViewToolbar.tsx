@@ -54,7 +54,7 @@ function CategoryViewToolbar(props) {
       {hasPermissionToEdit && (
         <MDButton
           component={Link}
-          to={`/category/${id}/edit`}
+          to={`/admin/category/${id}/edit`}
           variant="gradient"
           color={sidenavColor}
           type="button"
@@ -84,7 +84,7 @@ function CategoryViewToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to={`/audit-logs?entityId=${encodeURIComponent(
+          to={`/admin/audit-logs?entityId=${encodeURIComponent(
             id,
           )}`}
           startIcon={<HistoryIcon />}

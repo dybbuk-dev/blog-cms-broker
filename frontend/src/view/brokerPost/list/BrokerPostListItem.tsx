@@ -31,7 +31,7 @@ function BrokerPostListItem(props) {
         <div key={record.id}>
           <MaterialLink
             component={Link}
-            to={`/broker-post/${record.id}`}
+            to={`/admin/broker-post/${record.id}`}
             underline="hover"
           >
             {record.name}

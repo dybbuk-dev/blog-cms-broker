@@ -44,7 +44,7 @@ const authorFormActions = {
         type: authorFormActions.INIT_ERROR,
       });
 
-      getHistory().push('/author');
+      getHistory().push('/admin/author');
     }
   },
 
@@ -64,7 +64,7 @@ const authorFormActions = {
         i18n('entities.author.create.success'),
       );
 
-      getHistory().push('/author');
+      getHistory().push('/admin/author');
     } catch (error) {
       Errors.handle(error);
 
@@ -90,7 +90,7 @@ const authorFormActions = {
         i18n('entities.author.update.success'),
       );
 
-      getHistory().push('/author');
+      getHistory().push('/admin/author');
     } catch (error) {
       Errors.handle(error);
 

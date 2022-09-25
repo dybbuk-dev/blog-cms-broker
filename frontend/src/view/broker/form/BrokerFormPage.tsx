@@ -93,7 +93,7 @@ function BrokerFormPage(props) {
                   isEditing={isEditing}
                   onSubmit={doSubmit}
                   onCancel={() =>
-                    getHistory().push('/broker')
+                    getHistory().push('/admin/broker')
                   }
                 />
               </LazyLoad>

@@ -28,7 +28,7 @@ const brokerViewActions = {
         type: brokerViewActions.FIND_ERROR,
       });
 
-      getHistory().push('/broker');
+      getHistory().push('/admin/broker');
     }
   },
 };

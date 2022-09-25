@@ -36,7 +36,7 @@ function PageWarningViewItem(props) {
             component={Link}
             variant="contained"
             color={sidenavColor}
-            to={`/page-warning/${record.id}`}
+            to={`/admin/page-warning/${record.id}`}
             underline="hover"
             size="large"
           >

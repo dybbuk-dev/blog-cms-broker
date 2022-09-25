@@ -44,7 +44,7 @@ const brokerPostFormActions = {
         type: brokerPostFormActions.INIT_ERROR,
       });
 
-      getHistory().push('/broker-post');
+      getHistory().push('/admin/broker-post');
     }
   },
 
@@ -64,7 +64,7 @@ const brokerPostFormActions = {
         i18n('entities.brokerPost.create.success'),
       );
 
-      getHistory().push('/broker-post');
+      getHistory().push('/admin/broker-post');
     } catch (error) {
       Errors.handle(error);
 
@@ -90,7 +90,7 @@ const brokerPostFormActions = {
         i18n('entities.brokerPost.update.success'),
       );
 
-      getHistory().push('/broker-post');
+      getHistory().push('/admin/broker-post');
     } catch (error) {
       Errors.handle(error);
 

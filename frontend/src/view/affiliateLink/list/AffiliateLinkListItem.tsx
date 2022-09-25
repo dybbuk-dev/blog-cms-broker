@@ -30,7 +30,7 @@ function AffiliateLinkListItem(props) {
         <div key={record.id}>
           <MaterialLink
             component={Link}
-            to={`/affiliate-link/${record.id}`}
+            to={`/admin/affiliate-link/${record.id}`}
             underline="hover"
           >
             {record.link}

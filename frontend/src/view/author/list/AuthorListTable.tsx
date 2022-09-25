@@ -244,7 +244,7 @@ function AuthorListTable(props) {
                           size="small"
                           component={Link}
                           color={sidenavColor}
-                          to={`/author/${row.id}`}
+                          to={`/admin/author/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>
@@ -257,7 +257,7 @@ function AuthorListTable(props) {
                             size="small"
                             color={sidenavColor}
                             component={Link}
-                            to={`/author/${row.id}/edit`}
+                            to={`/admin/author/${row.id}/edit`}
                           >
                             <EditIcon />
                           </IconButton>

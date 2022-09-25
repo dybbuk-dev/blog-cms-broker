@@ -54,7 +54,7 @@ function TrackingParameterViewToolbar(props) {
       {hasPermissionToEdit && (
         <MDButton
           component={Link}
-          to={`/tracking-parameter/${id}/edit`}
+          to={`/admin/tracking-parameter/${id}/edit`}
           variant="gradient"
           color={sidenavColor}
           type="button"
@@ -84,7 +84,7 @@ function TrackingParameterViewToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to={`/audit-logs?entityId=${encodeURIComponent(
+          to={`/admin/audit-logs?entityId=${encodeURIComponent(
             id,
           )}`}
           startIcon={<HistoryIcon />}

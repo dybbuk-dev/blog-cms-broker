@@ -44,7 +44,7 @@ const navigationFormActions = {
         type: navigationFormActions.INIT_ERROR,
       });
 
-      getHistory().push('/navigation');
+      getHistory().push('/admin/navigation');
     }
   },
 
@@ -64,7 +64,7 @@ const navigationFormActions = {
         i18n('entities.navigation.create.success'),
       );
 
-      getHistory().push('/navigation');
+      getHistory().push('/admin/navigation');
     } catch (error) {
       Errors.handle(error);
 
@@ -90,7 +90,7 @@ const navigationFormActions = {
         i18n('entities.navigation.update.success'),
       );
 
-      getHistory().push('/navigation');
+      getHistory().push('/admin/navigation');
     } catch (error) {
       Errors.handle(error);
 

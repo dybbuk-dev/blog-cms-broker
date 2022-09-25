@@ -28,7 +28,7 @@ const newsViewActions = {
         type: newsViewActions.FIND_ERROR,
       });
 
-      getHistory().push('/news');
+      getHistory().push('/admin/news');
     }
   },
 };

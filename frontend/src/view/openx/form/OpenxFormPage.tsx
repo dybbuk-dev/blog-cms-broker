@@ -67,7 +67,7 @@ function OpenxFormPage(props) {
                 isEditing={isEditing}
                 onSubmit={doSubmit}
                 onCancel={() =>
-                  getHistory().push('/open-x')
+                  getHistory().push('/admin/open-x')
                 }
               />
             </MDBox>

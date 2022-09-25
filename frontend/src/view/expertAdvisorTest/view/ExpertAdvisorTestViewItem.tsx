@@ -36,7 +36,7 @@ function ExpertAdvisorTestViewItem(props) {
             component={Link}
             variant="contained"
             color={sidenavColor}
-            to={`/expert-advisor-test/${record.id}`}
+            to={`/admin/expert-advisor-test/${record.id}`}
             underline="hover"
             size="large"
           >

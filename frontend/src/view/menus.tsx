@@ -7,7 +7,7 @@ const permissions = Permissions.values;
 
 const menus = [
   {
-    path: '/',
+    path: '/admin',
     exact: true,
     icon: <Icon fontSize="medium">dashboard</Icon>,
     name: i18n('dashboard.menu'),
@@ -15,14 +15,14 @@ const menus = [
   },
 
   {
-    path: '/user',
+    path: '/admin/user',
     name: i18n('user.menu'),
     permissionRequired: permissions.userRead,
     icon: <Icon fontSize="medium">person</Icon>,
   },
 
   {
-    path: '/author',
+    path: '/admin/author',
     name: i18n('author.menu'),
     permissionRequired: permissions.authorRead,
     icon: <Icon fontSize="medium">recent_actors</Icon>,
@@ -34,12 +34,12 @@ const menus = [
     icon: <Icon fontSize="medium">share</Icon>,
     collapse: [
       {
-        path: '/affiliate-link',
+        path: '/admin/affiliate-link',
         permissionRequired: permissions.affiliateLinkRead,
         name: i18n('entities.affiliateLink.menu'),
       },
       {
-        path: '/tracking-parameter',
+        path: '/admin/tracking-parameter',
         permissionRequired:
           permissions.trackingParameterRead,
         name: i18n('entities.trackingParameter.menu'),
@@ -53,12 +53,12 @@ const menus = [
     icon: <Icon fontSize="medium">article</Icon>,
     collapse: [
       {
-        path: '/blog',
+        path: '/admin/blog',
         permissionRequired: permissions.blogRead,
         name: i18n('entities.blog.menu'),
       },
       {
-        path: '/blog-comment',
+        path: '/admin/blog-comment',
         permissionRequired: permissions.blogCommentRead,
         name: i18n('entities.blogComment.menu'),
       },
@@ -71,12 +71,12 @@ const menus = [
     icon: <Icon fontSize="medium">signpost</Icon>,
     collapse: [
       {
-        path: '/navigation',
+        path: '/admin/navigation',
         permissionRequired: permissions.navigationRead,
         name: i18n('entities.navigation.menu'),
       },
       {
-        path: '/category',
+        path: '/admin/category',
         permissionRequired: permissions.categoryRead,
         name: i18n('entities.category.menu'),
       },
@@ -84,28 +84,28 @@ const menus = [
   },
 
   {
-    path: '/broker',
+    path: '/admin/broker',
     name: i18n('entities.broker.menu'),
     permissionRequired: permissions.brokerRead,
     icon: <Icon fontSize="medium">badge</Icon>,
   },
 
   {
-    path: '/broker-post',
+    path: '/admin/broker-post',
     name: i18n('entities.brokerPost.menu'),
     permissionRequired: permissions.brokerPostRead,
     icon: <Icon fontSize="medium">comment</Icon>,
   },
 
   {
-    path: '/expert-advisor-test',
+    path: '/admin/expert-advisor-test',
     name: i18n('entities.expertAdvisorTest.menu'),
     permissionRequired: permissions.expertAdvisorTestRead,
     icon: <Icon fontSize="medium">card_travel</Icon>,
   },
 
   {
-    path: '/news',
+    path: '/admin/news',
     name: i18n('entities.news.menu'),
     permissionRequired: permissions.newsRead,
     icon: <Icon fontSize="medium">newspaper</Icon>,
@@ -117,12 +117,12 @@ const menus = [
     icon: <Icon fontSize="medium">view_carousel</Icon>,
     collapse: [
       {
-        path: '/open-x',
+        path: '/admin/open-x',
         permissionRequired: permissions.openxRead,
         name: i18n('entities.openx.menu'),
       },
       {
-        path: '/promotion',
+        path: '/admin/promotion',
         permissionRequired: permissions.promotionRead,
         name: i18n('entities.promotion.menu'),
       },
@@ -135,12 +135,12 @@ const menus = [
     icon: <Icon fontSize="medium">description</Icon>,
     collapse: [
       {
-        path: '/general-page',
+        path: '/admin/general-page',
         permissionRequired: permissions.generalPageRead,
         name: i18n('entities.generalPage.menu'),
       },
       {
-        path: '/page-warning',
+        path: '/admin/page-warning',
         permissionRequired: permissions.pageWarningRead,
         name: i18n('entities.pageWarning.menu'),
       },
@@ -154,14 +154,14 @@ const menus = [
     permissionRequired: permissions.settingsEdit,
     collapse: [
       {
-        path: '/settings',
+        path: '/admin/settings',
         name: i18n('settings.tenant'),
         permissionRequired: permissions.settingsEdit,
         icon: <Icon>room_preferences</Icon>,
       },
 
       {
-        path: '/audit-logs',
+        path: '/admin/audit-logs',
         name: i18n('auditLog.menu'),
         permissionRequired: permissions.auditLogRead,
         icon: <Icon>restore</Icon>,
@@ -173,12 +173,12 @@ const menus = [
 const profileRoutes = [
   {
     name: i18n('auth.profile.title'),
-    path: '/profile',
+    path: '/admin/profile',
     icon: <Icon>person_outline</Icon>,
   },
   {
     name: i18n('auth.passwordChange.title'),
-    path: '/password-change',
+    path: '/admin/password-change',
     icon: <Icon>lock</Icon>,
   },
 ].filter(Boolean);
@@ -186,7 +186,7 @@ const profileRoutes = [
 const tenantRoutes = [
   {
     name: i18n('tenant.list.title'),
-    path: '/tenant',
+    path: '/admin/tenant',
     icon: <Icon>apps</Icon>,
   },
 ].filter(Boolean);
@@ -195,7 +195,7 @@ const userRoutes = [].filter(Boolean);
 
 const planRoutes = [
   config.isPlanEnabled && {
-    path: '/plan',
+    path: '/admin/plan',
     permissionRequired: permissions.planRead,
     icon: (
       <Icon fontSize="medium">credit_card_outlined</Icon>

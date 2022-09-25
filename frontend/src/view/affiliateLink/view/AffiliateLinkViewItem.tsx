@@ -36,7 +36,7 @@ function AffiliateLinkViewItem(props) {
             component={Link}
             variant="contained"
             color={sidenavColor}
-            to={`/affiliate-link/${record.id}`}
+            to={`/admin/affiliate-link/${record.id}`}
             underline="hover"
             size="large"
           >

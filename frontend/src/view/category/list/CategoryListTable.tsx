@@ -259,7 +259,7 @@ function CategoryListTable(props) {
                           size="small"
                           component={Link}
                           color={sidenavColor}
-                          to={`/category/${row.id}`}
+                          to={`/admin/category/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>
@@ -272,7 +272,7 @@ function CategoryListTable(props) {
                             size="small"
                             color={sidenavColor}
                             component={Link}
-                            to={`/category/${row.id}/edit`}
+                            to={`/admin/category/${row.id}/edit`}
                           >
                             <EditIcon />
                           </IconButton>

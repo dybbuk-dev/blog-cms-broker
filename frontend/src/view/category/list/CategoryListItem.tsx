@@ -31,7 +31,7 @@ function CategoryListItem(props) {
         <div key={record.id}>
           <MaterialLink
             component={Link}
-            to={`/category/${record.id}`}
+            to={`/admin/category/${record.id}`}
             underline="hover"
           >
             {record.name}

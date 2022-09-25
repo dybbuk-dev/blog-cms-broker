@@ -36,7 +36,7 @@ function TrackingParameterViewItem(props) {
             component={Link}
             variant="contained"
             color={sidenavColor}
-            to={`/tracking-parameter/${record.id}`}
+            to={`/admin/tracking-parameter/${record.id}`}
             underline="hover"
             size="large"
           >

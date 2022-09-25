@@ -66,7 +66,9 @@ function NewsFormPage(props) {
                 record={record}
                 isEditing={isEditing}
                 onSubmit={doSubmit}
-                onCancel={() => getHistory().push('/news')}
+                onCancel={() =>
+                  getHistory().push('/admin/news')
+                }
               />
             </MDBox>
           )}

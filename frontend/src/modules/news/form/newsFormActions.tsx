@@ -44,7 +44,7 @@ const newsFormActions = {
         type: newsFormActions.INIT_ERROR,
       });
 
-      getHistory().push('/news');
+      getHistory().push('/admin/news');
     }
   },
 
@@ -62,7 +62,7 @@ const newsFormActions = {
 
       Message.success(i18n('entities.news.create.success'));
 
-      getHistory().push('/news');
+      getHistory().push('/admin/news');
     } catch (error) {
       Errors.handle(error);
 
@@ -86,7 +86,7 @@ const newsFormActions = {
 
       Message.success(i18n('entities.news.update.success'));
 
-      getHistory().push('/news');
+      getHistory().push('/admin/news');
     } catch (error) {
       Errors.handle(error);
 

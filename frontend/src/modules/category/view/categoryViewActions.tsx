@@ -28,7 +28,7 @@ const categoryViewActions = {
         type: categoryViewActions.FIND_ERROR,
       });
 
-      getHistory().push('/category');
+      getHistory().push('/admin/category');
     }
   },
 };

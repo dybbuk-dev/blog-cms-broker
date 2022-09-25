@@ -67,7 +67,7 @@ function PromotionFormPage(props) {
                 isEditing={isEditing}
                 onSubmit={doSubmit}
                 onCancel={() =>
-                  getHistory().push('/promotion')
+                  getHistory().push('/admin/promotion')
                 }
               />
             </MDBox>

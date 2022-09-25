@@ -252,7 +252,7 @@ function BrokerPostToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/broker-post/new"
+          to="/admin/broker-post/new"
           startIcon={<AddIcon />}
           size="small"
         >
@@ -265,7 +265,7 @@ function BrokerPostToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/broker-post/importer"
+          to="/admin/broker-post/importer"
           startIcon={<CloudUploadIcon />}
           size="small"
         >
@@ -282,7 +282,7 @@ function BrokerPostToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to="/audit-logs?entityNames=broker_post"
+          to="/admin/audit-logs?entityNames=broker_post"
           startIcon={<HistoryIcon />}
           size="small"
         >

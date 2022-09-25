@@ -31,7 +31,7 @@ function NewsListItem(props) {
         <div key={record.id}>
           <MaterialLink
             component={Link}
-            to={`/news/${record.id}`}
+            to={`/admin/news/${record.id}`}
             underline="hover"
           >
             {record.name}

@@ -218,7 +218,7 @@ function AffiliateLinkListTable(props) {
                           size="small"
                           component={Link}
                           color={sidenavColor}
-                          to={`/affiliate-link/${row.id}`}
+                          to={`/admin/affiliate-link/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>
@@ -231,7 +231,7 @@ function AffiliateLinkListTable(props) {
                             size="small"
                             color={sidenavColor}
                             component={Link}
-                            to={`/affiliate-link/${row.id}/edit`}
+                            to={`/admin/affiliate-link/${row.id}/edit`}
                           >
                             <EditIcon />
                           </IconButton>

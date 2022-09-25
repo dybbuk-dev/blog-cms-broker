@@ -31,7 +31,7 @@ function AuthorListItem(props) {
         <div key={record.id}>
           <MaterialLink
             component={Link}
-            to={`/author/${record.id}`}
+            to={`/admin/author/${record.id}`}
             underline="hover"
           >
             {record.name}

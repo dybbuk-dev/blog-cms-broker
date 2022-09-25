@@ -36,7 +36,7 @@ function NewsViewItem(props) {
             component={Link}
             variant="contained"
             color={sidenavColor}
-            to={`/news/${record.id}`}
+            to={`/admin/news/${record.id}`}
             underline="hover"
             size="large"
           >

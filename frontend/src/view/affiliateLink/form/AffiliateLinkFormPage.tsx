@@ -67,7 +67,7 @@ function AffiliateLinkFormPage(props) {
                 isEditing={isEditing}
                 onSubmit={doSubmit}
                 onCancel={() =>
-                  getHistory().push('/affiliate-link')
+                  getHistory().push('/admin/affiliate-link')
                 }
               />
             </MDBox>

@@ -32,7 +32,7 @@ function UserViewToolbar(props) {
       {hasPermissionToEdit && (
         <MDButton
           component={Link}
-          to={`/user/${id}/edit`}
+          to={`/admin/user/${id}/edit`}
           variant="gradient"
           color={sidenavColor}
           type="button"
@@ -46,7 +46,7 @@ function UserViewToolbar(props) {
       {hasPermissionToAuditLogs && (
         <MDButton
           component={Link}
-          to={`/audit-logs?entityId=${encodeURIComponent(
+          to={`/admin/audit-logs?entityId=${encodeURIComponent(
             id,
           )}`}
           color={sidenavColor}
@@ -64,7 +64,7 @@ function UserViewToolbar(props) {
           type="button"
           color={sidenavColor}
           variant="outlined"
-          to={`/audit-logs?createdByEmail=${encodeURIComponent(
+          to={`/admin/audit-logs?createdByEmail=${encodeURIComponent(
             user.email,
           )}`}
           startIcon={<VisibilityIcon />}

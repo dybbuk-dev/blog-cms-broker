@@ -28,7 +28,7 @@ const pageViewActions = {
         type: pageViewActions.FIND_ERROR,
       });
 
-      getHistory().push('/general-page');
+      getHistory().push('/admin/general-page');
     }
   },
 };

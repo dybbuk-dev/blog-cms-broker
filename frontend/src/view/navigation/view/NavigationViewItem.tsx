@@ -36,7 +36,7 @@ function NavigationViewItem(props) {
             component={Link}
             variant="contained"
             color={sidenavColor}
-            to={`/navigation/${record.id}`}
+            to={`/admin/navigation/${record.id}`}
             underline="hover"
             size="large"
           >

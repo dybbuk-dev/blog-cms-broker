@@ -36,7 +36,7 @@ function PageViewItem(props) {
             component={Link}
             variant="contained"
             color={sidenavColor}
-            to={`/page/${record.id}`}
+            to={`/admin/page/${record.id}`}
             underline="hover"
             size="large"
           >

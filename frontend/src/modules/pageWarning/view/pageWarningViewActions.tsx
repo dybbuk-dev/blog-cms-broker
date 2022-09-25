@@ -28,7 +28,7 @@ const pageWarningViewActions = {
         type: pageWarningViewActions.FIND_ERROR,
       });
 
-      getHistory().push('/page-warning');
+      getHistory().push('/admin/page-warning');
     }
   },
 };

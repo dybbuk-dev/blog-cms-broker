@@ -34,7 +34,7 @@ const promotionDestroyActions = {
 
       dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/promotion');
+      getHistory().push('/admin/promotion');
     } catch (error) {
       Errors.handle(error);
 
@@ -67,7 +67,7 @@ const promotionDestroyActions = {
         i18n('entities.promotion.destroyAll.success'),
       );
 
-      getHistory().push('/promotion');
+      getHistory().push('/admin/promotion');
     } catch (error) {
       Errors.handle(error);
 

@@ -139,7 +139,7 @@ function NewsToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/news/new"
+          to="/admin/news/new"
           startIcon={<AddIcon />}
           size="small"
         >
@@ -152,7 +152,7 @@ function NewsToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/news/importer"
+          to="/admin/news/importer"
           startIcon={<CloudUploadIcon />}
           size="small"
         >
@@ -167,7 +167,7 @@ function NewsToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to="/audit-logs?entityNames=news"
+          to="/admin/audit-logs?entityNames=news"
           startIcon={<HistoryIcon />}
           size="small"
         >

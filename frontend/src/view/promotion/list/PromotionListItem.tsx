@@ -31,7 +31,7 @@ function PromotionListItem(props) {
         <div key={record.id}>
           <MaterialLink
             component={Link}
-            to={`/promotion/${record.id}`}
+            to={`/admin/promotion/${record.id}`}
             underline="hover"
           >
             {record.name}

@@ -214,7 +214,7 @@ function UserTable() {
                       <Tooltip title={i18n('common.view')}>
                         <IconButton
                           component={Link}
-                          to={`/user/${row.id}`}
+                          to={`/admin/user/${row.id}`}
                           color={sidenavColor}
                         >
                           <SearchIcon />
@@ -226,7 +226,7 @@ function UserTable() {
                         >
                           <IconButton
                             component={Link}
-                            to={`/user/${row.id}/edit`}
+                            to={`/admin/user/${row.id}/edit`}
                             color={sidenavColor}
                           >
                             <EditIcon />

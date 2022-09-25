@@ -235,7 +235,7 @@ function BlogListTable(props) {
                           size="small"
                           component={Link}
                           color={sidenavColor}
-                          to={`/blog/${row.id}`}
+                          to={`/admin/blog/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>
@@ -248,7 +248,7 @@ function BlogListTable(props) {
                             size="small"
                             color={sidenavColor}
                             component={Link}
-                            to={`/blog/${row.id}/edit`}
+                            to={`/admin/blog/${row.id}/edit`}
                           >
                             <EditIcon />
                           </IconButton>

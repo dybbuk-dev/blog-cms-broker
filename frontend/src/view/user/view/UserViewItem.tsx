@@ -76,7 +76,7 @@ function UserViewItem(props) {
         <MDBox key={record.id}>
           <MaterialLink
             component={Link}
-            to={`/user/${record.id}`}
+            to={`/admin/user/${record.id}`}
           >
             {renderUser(record)}
           </MaterialLink>

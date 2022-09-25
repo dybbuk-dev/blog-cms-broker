@@ -137,7 +137,7 @@ function UserToolbar(props) {
           variant="contained"
           color={sidenavColor}
           component={Link}
-          to="/user/new"
+          to="/admin/user/new"
           startIcon={<EmailIcon />}
           size="small"
         >
@@ -150,7 +150,7 @@ function UserToolbar(props) {
           variant="contained"
           color={sidenavColor}
           component={Link}
-          to="/user/importer"
+          to="/admin/user/importer"
           startIcon={<CloudUploadIcon />}
           size="small"
         >
@@ -165,7 +165,7 @@ function UserToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to="/audit-logs?entityNames=user"
+          to="/admin/audit-logs?entityNames=user"
           startIcon={<HistoryIcon />}
           size="small"
         >

@@ -313,7 +313,7 @@ function BlogCommentListTable(props) {
                           size="small"
                           component={Link}
                           color={sidenavColor}
-                          to={`/blog-comment/${row.id}`}
+                          to={`/admin/blog-comment/${row.id}`}
                         >
                           <SearchIcon />
                         </IconButton>
@@ -327,7 +327,7 @@ function BlogCommentListTable(props) {
                               size="small"
                               color={sidenavColor}
                               component={Link}
-                              to={`/blog-comment/${row.id}/edit`}
+                              to={`/admin/blog-comment/${row.id}/edit`}
                             >
                               <EditIcon />
                             </IconButton>

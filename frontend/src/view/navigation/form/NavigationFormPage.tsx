@@ -67,7 +67,7 @@ function NavigationFormPage(props) {
                 isEditing={isEditing}
                 onSubmit={doSubmit}
                 onCancel={() =>
-                  getHistory().push('/navigation')
+                  getHistory().push('/admin/navigation')
                 }
               />
             </MDBox>

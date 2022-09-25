@@ -67,7 +67,7 @@ function BlogCommentFormPage(props) {
                 isEditing={isEditing}
                 onSubmit={doSubmit}
                 onCancel={() =>
-                  getHistory().push('/blog-comment')
+                  getHistory().push('/admin/blog-comment')
                 }
               />
             </MDBox>

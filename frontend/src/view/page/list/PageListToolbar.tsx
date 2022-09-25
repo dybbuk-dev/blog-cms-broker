@@ -139,7 +139,7 @@ function PageToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/general-page/new"
+          to="/admin/general-page/new"
           startIcon={<AddIcon />}
           size="small"
         >
@@ -152,7 +152,7 @@ function PageToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/general-page/importer"
+          to="/admin/general-page/importer"
           startIcon={<CloudUploadIcon />}
           size="small"
         >
@@ -167,7 +167,7 @@ function PageToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to="/audit-logs?entityNames=page"
+          to="/admin/audit-logs?entityNames=page"
           startIcon={<HistoryIcon />}
           size="small"
         >

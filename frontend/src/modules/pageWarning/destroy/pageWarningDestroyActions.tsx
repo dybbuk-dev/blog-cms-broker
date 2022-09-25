@@ -34,7 +34,7 @@ const pageWarningDestroyActions = {
 
       dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/page-warning');
+      getHistory().push('/admin/page-warning');
     } catch (error) {
       Errors.handle(error);
 
@@ -67,7 +67,7 @@ const pageWarningDestroyActions = {
         i18n('entities.pageWarning.destroyAll.success'),
       );
 
-      getHistory().push('/page-warning');
+      getHistory().push('/admin/page-warning');
     } catch (error) {
       Errors.handle(error);
 

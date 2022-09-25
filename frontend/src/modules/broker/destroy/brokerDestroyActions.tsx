@@ -34,7 +34,7 @@ const brokerDestroyActions = {
 
       dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/broker');
+      getHistory().push('/admin/broker');
     } catch (error) {
       Errors.handle(error);
 
@@ -67,7 +67,7 @@ const brokerDestroyActions = {
         i18n('entities.broker.destroyAll.success'),
       );
 
-      getHistory().push('/broker');
+      getHistory().push('/admin/broker');
     } catch (error) {
       Errors.handle(error);
 

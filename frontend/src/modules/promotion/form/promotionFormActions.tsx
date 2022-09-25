@@ -44,7 +44,7 @@ const promotionFormActions = {
         type: promotionFormActions.INIT_ERROR,
       });
 
-      getHistory().push('/promotion');
+      getHistory().push('/admin/promotion');
     }
   },
 
@@ -64,7 +64,7 @@ const promotionFormActions = {
         i18n('entities.promotion.create.success'),
       );
 
-      getHistory().push('/promotion');
+      getHistory().push('/admin/promotion');
     } catch (error) {
       Errors.handle(error);
 
@@ -90,7 +90,7 @@ const promotionFormActions = {
         i18n('entities.promotion.update.success'),
       );
 
-      getHistory().push('/promotion');
+      getHistory().push('/admin/promotion');
     } catch (error) {
       Errors.handle(error);
 

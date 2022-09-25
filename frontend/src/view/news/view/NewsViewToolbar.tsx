@@ -54,7 +54,7 @@ function NewsViewToolbar(props) {
       {hasPermissionToEdit && (
         <MDButton
           component={Link}
-          to={`/news/${id}/edit`}
+          to={`/admin/news/${id}/edit`}
           variant="gradient"
           color={sidenavColor}
           type="button"
@@ -84,7 +84,7 @@ function NewsViewToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to={`/audit-logs?entityId=${encodeURIComponent(
+          to={`/admin/audit-logs?entityId=${encodeURIComponent(
             id,
           )}`}
           startIcon={<HistoryIcon />}

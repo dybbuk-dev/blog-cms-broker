@@ -34,7 +34,7 @@ const blogCommentReviewActions = {
 
       dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/blog-comment');
+      getHistory().push('/admin/blog-comment');
     } catch (error) {
       Errors.handle(error);
 
@@ -67,7 +67,7 @@ const blogCommentReviewActions = {
         i18n('entities.blogComment.reviewAll.success'),
       );
 
-      getHistory().push('/blog-comment');
+      getHistory().push('/admin/blog-comment');
     } catch (error) {
       Errors.handle(error);
 

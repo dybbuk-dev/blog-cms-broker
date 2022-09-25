@@ -28,7 +28,7 @@ const promotionViewActions = {
         type: promotionViewActions.FIND_ERROR,
       });
 
-      getHistory().push('/promotion');
+      getHistory().push('/admin/promotion');
     }
   },
 };

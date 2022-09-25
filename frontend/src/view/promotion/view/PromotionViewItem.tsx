@@ -36,7 +36,7 @@ function PromotionViewItem(props) {
             component={Link}
             variant="contained"
             color={sidenavColor}
-            to={`/promotion/${record.id}`}
+            to={`/admin/promotion/${record.id}`}
             underline="hover"
             size="large"
           >

@@ -139,7 +139,7 @@ function NavigationToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/navigation/new"
+          to="/admin/navigation/new"
           startIcon={<AddIcon />}
           size="small"
         >
@@ -152,7 +152,7 @@ function NavigationToolbar(props) {
           variant="gradient"
           color={sidenavColor}
           component={Link}
-          to="/navigation/importer"
+          to="/admin/navigation/importer"
           startIcon={<CloudUploadIcon />}
           size="small"
         >
@@ -167,7 +167,7 @@ function NavigationToolbar(props) {
           variant="outlined"
           color={sidenavColor}
           component={Link}
-          to="/audit-logs?entityNames=navigation"
+          to="/admin/audit-logs?entityNames=navigation"
           startIcon={<HistoryIcon />}
           size="small"
         >

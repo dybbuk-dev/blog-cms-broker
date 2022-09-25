@@ -44,7 +44,7 @@ const trackingParameterFormActions = {
         type: trackingParameterFormActions.INIT_ERROR,
       });
 
-      getHistory().push('/tracking-parameter');
+      getHistory().push('/admin/tracking-parameter');
     }
   },
 
@@ -64,7 +64,7 @@ const trackingParameterFormActions = {
         i18n('entities.trackingParameter.create.success'),
       );
 
-      getHistory().push('/tracking-parameter');
+      getHistory().push('/admin/tracking-parameter');
     } catch (error) {
       Errors.handle(error);
 
@@ -90,7 +90,7 @@ const trackingParameterFormActions = {
         i18n('entities.trackingParameter.update.success'),
       );
 
-      getHistory().push('/tracking-parameter');
+      getHistory().push('/admin/tracking-parameter');
     } catch (error) {
       Errors.handle(error);
 

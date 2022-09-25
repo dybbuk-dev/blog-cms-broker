@@ -44,7 +44,7 @@ const affiliateLinkFormActions = {
         type: affiliateLinkFormActions.INIT_ERROR,
       });
 
-      getHistory().push('/affiliate-link');
+      getHistory().push('/admin/affiliate-link');
     }
   },
 
@@ -64,7 +64,7 @@ const affiliateLinkFormActions = {
         i18n('entities.affiliateLink.create.success'),
       );
 
-      getHistory().push('/affiliate-link');
+      getHistory().push('/admin/affiliate-link');
     } catch (error) {
       Errors.handle(error);
 
@@ -90,7 +90,7 @@ const affiliateLinkFormActions = {
         i18n('entities.affiliateLink.update.success'),
       );
 
-      getHistory().push('/affiliate-link');
+      getHistory().push('/admin/affiliate-link');
     } catch (error) {
       Errors.handle(error);
 

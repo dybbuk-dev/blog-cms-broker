@@ -34,7 +34,7 @@ const blogDestroyActions = {
 
       dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/blog');
+      getHistory().push('/admin/blog');
     } catch (error) {
       Errors.handle(error);
 
@@ -67,7 +67,7 @@ const blogDestroyActions = {
         i18n('entities.blog.destroyAll.success'),
       );
 
-      getHistory().push('/blog');
+      getHistory().push('/admin/blog');
     } catch (error) {
       Errors.handle(error);
 

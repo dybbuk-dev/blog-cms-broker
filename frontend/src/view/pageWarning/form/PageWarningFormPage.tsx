@@ -67,7 +67,7 @@ function PageWarningFormPage(props) {
                 isEditing={isEditing}
                 onSubmit={doSubmit}
                 onCancel={() =>
-                  getHistory().push('/page-warning')
+                  getHistory().push('/admin/page-warning')
                 }
               />
             </MDBox>

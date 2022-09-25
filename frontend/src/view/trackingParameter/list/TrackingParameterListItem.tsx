@@ -31,7 +31,7 @@ function TrackingParameterListItem(props) {
         <div key={record.id}>
           <MaterialLink
             component={Link}
-            to={`/tracking-parameter/${record.id}`}
+            to={`/admin/tracking-parameter/${record.id}`}
             underline="hover"
           >
             {record.param}

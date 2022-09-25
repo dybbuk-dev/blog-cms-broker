@@ -115,7 +115,7 @@ function ForgotPasswordPage() {
                 <MDTypography variant="button" color="text">
                   <MDTypography
                     component={Link}
-                    to="/auth/signin"
+                    to="/admin/auth/signin"
                     underline="hover"
                     variant="button"
                     color="info"

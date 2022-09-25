@@ -66,7 +66,9 @@ function BlogFormBlog(props) {
                 record={record}
                 isEditing={isEditing}
                 onSubmit={doSubmit}
-                onCancel={() => getHistory().push('/blog')}
+                onCancel={() =>
+                  getHistory().push('/admin/blog')
+                }
               />
             </MDBox>
           )}
