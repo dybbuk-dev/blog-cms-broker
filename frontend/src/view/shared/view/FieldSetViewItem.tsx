@@ -1,9 +1,11 @@
-import { grey } from '@mui/material/colors';
 import { Grid } from '@mui/material';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
+import lightColors from 'src/mui/assets/theme/base/colors';
+import darkColors from 'src/mui/assets/theme-dark/base/colors';
+import rgba from 'src/mui/assets/theme-dark/functions/rgba';
 
 function FieldSetViewItem(props) {
   const { children, description, label, noContainer } =
@@ -46,7 +48,11 @@ function FieldSetViewItem(props) {
   ) : (
     <MDBox
       p={3}
-      border={`1px solid ${grey[darkMode ? 700 : 300]}`}
+      border={`1px solid ${
+        darkMode
+          ? rgba(darkColors.inputBorderColor, 0.6)
+          : lightColors.inputBorderColor
+      }`}
       borderRadius="md"
     >
       {render()}

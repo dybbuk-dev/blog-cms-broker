@@ -1,4 +1,3 @@
-import { grey } from '@mui/material/colors';
 import { Grid, IconButton } from '@mui/material';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useEffect, useState } from 'react';
@@ -7,9 +6,12 @@ import AddIcon from '@mui/icons-material/Add';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ClearIcon from '@mui/icons-material/Clear';
+import darkColors from 'src/mui/assets/theme-dark/base/colors';
+import lightColors from 'src/mui/assets/theme/base/colors';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
+import rgba from 'src/mui/assets/theme-dark/functions/rgba';
 
 function GroupInputFormItem(props) {
   const {
@@ -317,7 +319,11 @@ function GroupFormItem(props) {
   ) : (
     <MDBox
       p={3}
-      border={`1px solid ${grey[darkMode ? 700 : 300]}`}
+      border={`1px solid ${
+        darkMode
+          ? rgba(darkColors.inputBorderColor, 0.6)
+          : lightColors.inputBorderColor
+      }`}
       borderRadius="md"
     >
       {render()}
