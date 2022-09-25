@@ -303,15 +303,15 @@ function TenantListTable() {
               ))}
           </TableBody>
         </Table>
-
-        <Pagination
-          onChange={doChangePagination}
-          disabled={loading}
-          pagination={pagination}
-          entriesPerPage
-          showTotalEntries
-        />
       </TableContainer>
+
+      <Pagination
+        onChange={doChangePagination}
+        disabled={loading}
+        pagination={pagination}
+        entriesPerPage
+        showTotalEntries
+      />
 
       {invitationTokenToDeclineInvitation && (
         <ConfirmModal

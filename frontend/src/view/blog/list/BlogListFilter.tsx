@@ -48,9 +48,6 @@ const schema = yup.object().shape({
   metadescription: yupFilterSchemas.string(
     i18n('entities.blog.fields.metadescription'),
   ),
-  content: yupFilterSchemas.string(
-    i18n('entities.blog.fields.content'),
-  ),
   name: yupFilterSchemas.string(
     i18n('entities.blog.fields.name'),
   ),
@@ -67,7 +64,6 @@ const emptyValues = {
   link: null,
   metakeywords: null,
   metadescription: null,
-  content: null,
   activated: null,
 };
 
@@ -95,9 +91,6 @@ const previewRenders = {
   name: {
     label: i18n('entities.blog.fields.name'),
     render: filterRenders.generic(),
-  },
-  content: {
-    label: i18n('entities.blog.fields.content'),
   },
   activated: {
     label: i18n('entities.blog.fields.activated'),
@@ -133,7 +126,7 @@ function BlogListFilter(props) {
     dispatch(
       actions.doFetch(
         schema.cast(initialValues),
-        rawFilter,
+        initialValues,
       ),
     );
     // eslint-disable-next-line
@@ -141,7 +134,7 @@ function BlogListFilter(props) {
 
   const onSubmit = (values) => {
     const rawValues = form.getValues();
-    dispatch(actions.doFetch(values, rawValues));
+    dispatch(actions.doFetch(values, rawValues, false));
     setExpanded(false);
     setRerender(rerender + 1);
   };

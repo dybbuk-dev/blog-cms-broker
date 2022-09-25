@@ -16,6 +16,9 @@ Coded by www.creative-tim.com
 // @mui material components
 import TextField from '@mui/material/TextField';
 import { styled, Theme } from '@mui/material/styles';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import darkColors from 'src/mui/assets/theme-dark/base/colors';
+import lightColors from 'src/mui/assets/theme/base/colors';
 
 export default styled(TextField)(
   ({
@@ -27,6 +30,10 @@ export default styled(TextField)(
   }) => {
     const { palette, functions } = theme;
     const { error, success, disabled } = ownerState;
+    const { sidenavColor, darkMode } = selectMuiSettings();
+    const color = darkMode
+      ? darkColors[sidenavColor]?.main
+      : lightColors[sidenavColor]?.main;
 
     const {
       grey,
@@ -36,6 +43,22 @@ export default styled(TextField)(
     } = palette;
     const { pxToRem } = functions;
 
+    // styles for normal
+    const normalStyles = () => ({
+      '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline':
+        {
+          borderColor: color,
+        },
+
+      '& .MuiInput-root:after': {
+        borderColor: color,
+      },
+
+      '& .MuiInputLabel-root.Mui-focused': {
+        color: color,
+      },
+    });
+
     // styles for the input with error={true}
     const errorStyles = () => ({
       backgroundImage:
@@ -44,10 +67,13 @@ export default styled(TextField)(
       backgroundPosition: `right ${pxToRem(12)} center`,
       backgroundSize: `${pxToRem(16)} ${pxToRem(16)}`,
 
-      '& .Mui-focused': {
-        '& .MuiOutlinedInput-notchedOutline, &:after': {
+      '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline':
+        {
           borderColor: colorError.main,
         },
+
+      '& .MuiInput-root:after': {
+        borderColor: colorError.main,
       },
 
       '& .MuiInputLabel-root.Mui-focused': {
@@ -63,10 +89,13 @@ export default styled(TextField)(
       backgroundPosition: `right ${pxToRem(12)} center`,
       backgroundSize: `${pxToRem(16)} ${pxToRem(16)}`,
 
-      '& .Mui-focused': {
-        '& .MuiOutlinedInput-notchedOutline, &:after': {
+      '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline':
+        {
           borderColor: colorSuccess.main,
         },
+
+      '& .MuiInput-root:after': {
+        borderColor: colorSuccess.main,
       },
 
       '& .MuiInputLabel-root.Mui-focused': {
@@ -81,6 +110,7 @@ export default styled(TextField)(
       pointerEvents: disabled ? 'none' : 'auto',
       ...(error && errorStyles()),
       ...(success && successStyles()),
+      ...(!error && !success && normalStyles()),
     };
   },
 );

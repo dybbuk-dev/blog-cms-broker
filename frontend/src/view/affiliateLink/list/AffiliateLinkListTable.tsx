@@ -113,6 +113,7 @@ function AffiliateLinkListTable(props) {
               >
                 {hasRows && (
                   <Checkbox
+                    color={sidenavColor}
                     checked={Boolean(isAllSelected)}
                     onChange={() => doToggleAllSelected()}
                     size="small"
@@ -186,6 +187,7 @@ function AffiliateLinkListTable(props) {
                 <TableRow key={row.id}>
                   <DataTableBodyCell padding="checkbox">
                     <Checkbox
+                      color={sidenavColor}
                       checked={selectedKeys.includes(
                         row.id,
                       )}
@@ -258,15 +260,15 @@ function AffiliateLinkListTable(props) {
               ))}
           </TableBody>
         </Table>
-
-        <Pagination
-          onChange={doChangePagination}
-          disabled={loading}
-          pagination={pagination}
-          entriesPerPage
-          showTotalEntries
-        />
       </TableContainer>
+
+      <Pagination
+        onChange={doChangePagination}
+        disabled={loading}
+        pagination={pagination}
+        entriesPerPage
+        showTotalEntries
+      />
 
       {recordIdToDestroy && (
         <ConfirmModal

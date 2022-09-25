@@ -60,8 +60,6 @@ function Configurator(): JSX.Element {
     | 'success'
     | 'warning'
     | 'error'
-    | 'light'
-    | 'dark'
   )[] = [
     'primary',
     'secondary',
@@ -69,8 +67,6 @@ function Configurator(): JSX.Element {
     'success',
     'warning',
     'error',
-    'light',
-    'dark',
   ];
 
   // Use the useEffect hook to change the button state for the sidenav type based on window size.

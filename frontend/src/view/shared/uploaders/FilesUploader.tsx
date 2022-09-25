@@ -1,6 +1,6 @@
 import { FileIcon, defaultStyles } from 'react-file-icon';
+import { Fragment, useState } from 'react';
 import { styleDefObj } from 'src/view/shared/styles/react-file-icon-styles';
-import { useState } from 'react';
 import ClearIcon from '@mui/icons-material/Close';
 import DragAndDropUploaderArea from 'src/view/shared/uploaders/DragAndDropUploaderArea';
 import Errors from 'src/modules/shared/error/errors';
@@ -8,11 +8,13 @@ import filesize from 'filesize';
 import FileUploader, {
   extractExtensionFrom,
 } from 'src/modules/shared/fileUpload/fileUploader';
+import HtmlTooltip from 'src/view/shared/components/HtmlTooltip';
 import MaterialLink from '@mui/material/Link';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
 import Spinner from 'src/view/shared/Spinner';
+import LazyLoad from 'react-lazy-load';
 
 function FilesUploader(props) {
   const [loading, setLoading] = useState(false);
@@ -92,85 +94,115 @@ function FilesUploader(props) {
       defaultStyles[ext] &&
       defaultStyles[ext]['labelColor'];
     return (
-      <MDBox
-        display="flex"
-        justifyContent="flex-start"
-        alignItems="center"
-        gap={1}
-        mb={1}
-        mr={2}
-      >
-        <MDBox minWidth="48px" maxWidth="48px">
-          <MaterialLink
-            href={file.downloadUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            sx={{
-              display: 'block',
-              lineHeight: 0,
-            }}
-            download
+      <LazyLoad>
+        <MDBox mb={1} mr={2}>
+          <HtmlTooltip
+            placement="top"
+            title={
+              <Fragment>
+                <MDTypography
+                  color="text"
+                  display="block"
+                  fontWeight="regular"
+                  textAlign="left"
+                  variant="button"
+                >
+                  {file.name}
+                  <br />
+                  {size(file.sizeInBytes)}
+                </MDTypography>
+              </Fragment>
+            }
           >
-            <FileIcon
-              extension={ext}
-              glyphColor={
-                libDefaultGlyphColor ??
-                customDefaultLabelColor
-              }
-              labelColor={customDefaultLabelColor}
-              {...defaultStyles[ext]}
-              {...styleDefObj[ext]}
-            />
-          </MaterialLink>
+            <MDBox
+              display="flex"
+              justifyContent="flex-start"
+              alignItems="center"
+              gap={1}
+            >
+              <MDBox minWidth="48px" maxWidth="48px">
+                <MaterialLink
+                  href={file.downloadUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    display: 'block',
+                    lineHeight: 0,
+                  }}
+                  download
+                >
+                  <FileIcon
+                    extension={ext}
+                    glyphColor={
+                      libDefaultGlyphColor ??
+                      customDefaultLabelColor
+                    }
+                    labelColor={customDefaultLabelColor}
+                    {...defaultStyles[ext]}
+                    {...styleDefObj[ext]}
+                  />
+                </MaterialLink>
+              </MDBox>
+              <MDBox
+                minWidth={`calc(100% - ${
+                  readonly ? '48' : '88'
+                }px)`}
+                maxWidth={`calc(100% - ${
+                  readonly ? '48' : '88'
+                }px)`}
+              >
+                <MDTypography
+                  display="block"
+                  variant="button"
+                  fontWeight="regular"
+                  color="text"
+                  overflow="hidden"
+                  whiteSpace="nowrap"
+                  textOverflow="ellipsis"
+                  minWidth="100%"
+                  maxWidth="100%"
+                >
+                  {file.name}
+                  <br />
+                  {size(file.sizeInBytes)}
+                </MDTypography>
+              </MDBox>
+              {!readonly && (
+                <MaterialLink
+                  component="a"
+                  color="secondary"
+                  onClick={() => handleRemove(file.id)}
+                  tabIndex={-1}
+                  sx={{
+                    cursor: 'pointer',
+                  }}
+                >
+                  <ClearIcon fontSize="small" />
+                </MaterialLink>
+              )}
+            </MDBox>
+          </HtmlTooltip>
         </MDBox>
-        <MDBox
-          minWidth={`calc(100% - ${
-            readonly ? '48' : '88'
-          }px)`}
-          maxWidth={`calc(100% - ${
-            readonly ? '48' : '88'
-          }px)`}
-        >
-          <MDTypography
-            display="block"
-            variant="button"
-            fontWeight="regular"
-            color="text"
-            overflow="hidden"
-            whiteSpace="nowrap"
-            textOverflow="ellipsis"
-            minWidth="100%"
-            maxWidth="100%"
-          >
-            {file.name}
-            <br />
-            {size(file.sizeInBytes)}
-          </MDTypography>
-        </MDBox>
-        {!readonly && (
-          <MaterialLink
-            component="button"
-            color="secondary"
-            onClick={() => handleRemove(file.id)}
-            underline="hover"
-          >
-            <ClearIcon fontSize="small" />
-          </MaterialLink>
-        )}
-      </MDBox>
+      </LazyLoad>
     );
   };
 
   return (
     <div>
       {value() && value().length ? (
-        <MDBox mt={1}>
+        <MDBox
+          mt={1}
+          display="inline-flex"
+          flexWrap="wrap"
+          width="100%"
+        >
           {value().map((item) => {
             return (
               <MDBox
                 key={item.id}
-                display="inline-block"
+                display="block"
                 width="25%"
+                alignItems="start"
               >
                 {renderFileIcon(item)}
               </MDBox>
@@ -184,12 +216,14 @@ function FilesUploader(props) {
       {loading ||
       readonly ||
       (max && fileList().length >= max) ? null : (
-        <DragAndDropUploaderArea
-          handleChange={handleChange}
-          // multiple={max !== 1}
-          storage={props.storage}
-          types={formats}
-        />
+        <LazyLoad>
+          <DragAndDropUploaderArea
+            handleChange={handleChange}
+            // multiple={max !== 1}
+            storage={props.storage}
+            types={formats}
+          />
+        </LazyLoad>
       )}
     </div>
   );

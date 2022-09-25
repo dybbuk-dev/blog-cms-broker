@@ -129,6 +129,7 @@ function BrokerArticleListTable(props) {
               >
                 {hasRows && (
                   <Checkbox
+                    color={sidenavColor}
                     checked={Boolean(isAllSelected)}
                     onChange={() => doToggleAllSelected()}
                     size="small"
@@ -195,6 +196,7 @@ function BrokerArticleListTable(props) {
                 <TableRow key={row.id}>
                   <DataTableBodyCell padding="checkbox">
                     <Checkbox
+                      color={sidenavColor}
                       checked={selectedKeys.includes(
                         row.id,
                       )}
@@ -214,6 +216,7 @@ function BrokerArticleListTable(props) {
                     {['activated'].map((field) => (
                       <MDBadgeDot
                         key={field}
+                        width="max-content"
                         badgeContent={i18n(
                           `entities.brokerArticle.fields.${field}`,
                         )}
@@ -279,15 +282,15 @@ function BrokerArticleListTable(props) {
               ))}
           </TableBody>
         </Table>
-
-        <Pagination
-          onChange={doChangePagination}
-          disabled={loading}
-          pagination={pagination}
-          entriesPerPage
-          showTotalEntries
-        />
       </TableContainer>
+
+      <Pagination
+        onChange={doChangePagination}
+        disabled={loading}
+        pagination={pagination}
+        entriesPerPage
+        showTotalEntries
+      />
 
       {recordIdToDestroy && (
         <ConfirmModal

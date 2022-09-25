@@ -14,9 +14,7 @@ interface StateTypes {
     | 'info'
     | 'success'
     | 'warning'
-    | 'error'
-    | 'light'
-    | 'dark';
+    | 'error';
   transparentNavbar: boolean;
   fixedNavbar: boolean;
   openConfigurator: boolean;
@@ -28,7 +26,7 @@ interface StateTypes {
 const initialState: StateTypes = {
   loading: false,
   miniSidenav: false,
-  transparentSidenav: false,
+  transparentSidenav: true,
   whiteSidenav: false,
   sidenavColor: 'info',
   transparentNavbar: true,

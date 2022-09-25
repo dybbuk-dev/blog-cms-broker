@@ -22,7 +22,15 @@ import pxToRem from 'src/mui/assets/theme-dark/functions/pxToRem';
 import linearGradient from 'src/mui/assets/theme-dark/functions/linearGradient';
 
 const { borderWidth, borderColor } = borders;
-const { transparent, info } = colors;
+const {
+  transparent,
+  primary,
+  secondary,
+  info,
+  success,
+  warning,
+  error,
+} = colors;
 
 // types
 type Types = any;
@@ -38,26 +46,58 @@ const checkbox: Types = {
         height: pxToRem(20),
         color: transparent.main,
         border: `${borderWidth[1]} solid ${borderColor}`,
-        borderRadius: pxToRem(5.6),
+        borderRadius: pxToRem(5),
       },
 
       '&:hover': {
         backgroundColor: transparent.main,
       },
 
-      '&.Mui-focusVisible': {
-        border: `${borderWidth[2]} solid ${info.main} !important`,
-      },
+      // '&.Mui-focusVisible': {
+      //   border: `${borderWidth[2]} solid ${info.main} !important`,
+      // },
     },
 
     colorPrimary: {
       color: borderColor,
 
       '&.Mui-checked': {
+        color: primary.main,
+
+        '& .MuiSvgIcon-root': {
+          backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -1 22 22'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='cap' stroke-linejoin='cap' stroke-width='3' d='M3 9l5 5l10-10'/%3e%3c/svg%3e"), ${linearGradient(
+            primary.main,
+            primary.main,
+          )}`,
+          borderColor: primary.main,
+        },
+      },
+    },
+
+    colorSecondary: {
+      color: borderColor,
+
+      '&.Mui-checked': {
+        color: secondary.main,
+
+        '& .MuiSvgIcon-root': {
+          backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -1 22 22'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='cap' stroke-linejoin='cap' stroke-width='3' d='M3 9l5 5l10-10'/%3e%3c/svg%3e"), ${linearGradient(
+            secondary.main,
+            secondary.main,
+          )}`,
+          borderColor: secondary.main,
+        },
+      },
+    },
+
+    colorInfo: {
+      color: borderColor,
+
+      '&.Mui-checked': {
         color: info.main,
 
         '& .MuiSvgIcon-root': {
-          backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -1 22 22'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M6 10l3 3l6-6'/%3e%3c/svg%3e"), ${linearGradient(
+          backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -1 22 22'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='cap' stroke-linejoin='cap' stroke-width='3' d='M3 9l5 5l10-10'/%3e%3c/svg%3e"), ${linearGradient(
             info.main,
             info.main,
           )}`,
@@ -66,17 +106,50 @@ const checkbox: Types = {
       },
     },
 
-    colorSecondary: {
+    colorSuccess: {
       color: borderColor,
 
-      '& .MuiSvgIcon-root': {
-        color: info.main,
-        '&.Mui-checked': {
-          backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -1 22 22'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M6 10l3 3l6-6'/%3e%3c/svg%3e"), ${linearGradient(
-            info.main,
-            info.main,
+      '&.Mui-checked': {
+        color: success.main,
+
+        '& .MuiSvgIcon-root': {
+          backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -1 22 22'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='cap' stroke-linejoin='cap' stroke-width='3' d='M3 9l5 5l10-10'/%3e%3c/svg%3e"), ${linearGradient(
+            success.main,
+            success.main,
           )}`,
-          borderColor: info.main,
+          borderColor: success.main,
+        },
+      },
+    },
+
+    colorWarning: {
+      color: borderColor,
+
+      '&.Mui-checked': {
+        color: warning.main,
+
+        '& .MuiSvgIcon-root': {
+          backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -1 22 22'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='cap' stroke-linejoin='cap' stroke-width='3' d='M3 9l5 5l10-10'/%3e%3c/svg%3e"), ${linearGradient(
+            warning.main,
+            warning.main,
+          )}`,
+          borderColor: warning.main,
+        },
+      },
+    },
+
+    colorError: {
+      color: borderColor,
+
+      '&.Mui-checked': {
+        color: error.main,
+
+        '& .MuiSvgIcon-root': {
+          backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -1 22 22'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='cap' stroke-linejoin='cap' stroke-width='3' d='M3 9l5 5l10-10'/%3e%3c/svg%3e"), ${linearGradient(
+            error.main,
+            error.main,
+          )}`,
+          borderColor: error.main,
         },
       },
     },

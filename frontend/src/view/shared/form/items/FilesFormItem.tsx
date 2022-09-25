@@ -100,7 +100,9 @@ function FilesFormItem(props) {
       />
 
       {formHelperText && (
-        <FormHelperText style={{ marginTop: 0 }}>
+        <FormHelperText
+          style={{ marginTop: 0, fontWeight: 400 }}
+        >
           {formHelperText}
         </FormHelperText>
       )}

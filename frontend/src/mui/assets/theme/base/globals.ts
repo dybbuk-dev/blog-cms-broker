@@ -27,7 +27,7 @@ const globals = {
     padding: 0,
   },
   'a, a:link, a:visited': {
-    textDecoration: 'none !important',
+    textDecoration: 'none',
   },
   'a.link, .link, a.link:link, .link:link, a.link:visited, .link:visited':
     {

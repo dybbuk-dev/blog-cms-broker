@@ -20,6 +20,7 @@ import { Theme } from '@mui/material/styles';
 
 // Material Dashboard 2 PRO React TS components
 import MDBox from 'src/mui/components/MDBox';
+import LazyLoad from 'react-lazy-load';
 
 // Declaring prop types for DataTableBodyCell
 interface Props {
@@ -47,21 +48,22 @@ function DataTableBodyCell({
         borders: { borderWidth },
       }: Theme) => ({
         fontSize: size.sm,
-        borderBottom: noBorder
+        borderTop: noBorder
           ? 'none'
           : `${borderWidth[1]} solid ${light.main}`,
       })}
       {...rest}
     >
-      <MDBox
-        display="inline-block"
-        // width="max-content"
-        maxWidth="100%"
-        color="text"
-        sx={{ verticalAlign: 'middle' }}
-      >
-        {children}
-      </MDBox>
+      <LazyLoad>
+        <MDBox
+          display="inline-block"
+          width="max-content"
+          color="text"
+          sx={{ verticalAlign: 'middle' }}
+        >
+          {children}
+        </MDBox>
+      </LazyLoad>
     </MDBox>
   );
 }

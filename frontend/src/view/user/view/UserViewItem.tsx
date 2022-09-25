@@ -1,12 +1,10 @@
-import { Avatar, Typography } from '@mui/material';
+import { Avatar } from '@mui/material';
 import MaterialLink from '@mui/material/Link';
 import selectors from 'src/modules/user/userSelectors';
 import PropTypes from 'prop-types';
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import MDBox from 'src/mui/components/MDBox';
-import MDButton from 'src/mui/components/MDButton';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import MDTypography from 'src/mui/components/MDTypography';
 import {
@@ -16,7 +14,7 @@ import {
 import { i18n } from 'src/i18n';
 
 function UserViewItem(props) {
-  const { sidenavColor, darkMode } = selectMuiSettings();
+  const { darkMode } = selectMuiSettings();
   const hasPermissionToRead = useSelector(
     selectors.selectPermissionToRead,
   );
@@ -44,26 +42,30 @@ function UserViewItem(props) {
     return (
       <Avatar
         src={getUserAvatar(record)}
-        sx={{ mr: 1, width: 24, height: 24 }}
+        sx={{ width: 24, height: 24 }}
       />
     );
   };
 
+  const renderUser = (record, italic = false) => (
+    <MDBox display="flex" alignItems="center" gap={1}>
+      {avatar(record)}
+      <MDTypography
+        variant="button"
+        fontWeight="regular"
+        fontStyle={italic ? 'italic' : null}
+        textTransform="capitalize"
+        width="max-content"
+      >
+        {label(record)}
+      </MDTypography>
+    </MDBox>
+  );
+
   const readOnly = (record, italic = false) => {
     return (
-      <MDBox key={record.id} mr={1}>
-        <MDTypography
-          display="flex"
-          variant="button"
-          fontWeight="regular"
-          fontStyle={italic ? 'italic' : null}
-          textTransform="capitalize"
-          alignItems="center"
-          mr={1}
-        >
-          {avatar(record)}
-          {label(record)}
-        </MDTypography>
+      <MDBox key={record.id}>
+        {renderUser(record, italic)}
       </MDBox>
     );
   };
@@ -71,20 +73,13 @@ function UserViewItem(props) {
   const displayableRecord = (record) => {
     if (hasPermissionToRead) {
       return (
-        <MDBox key={record.id} mr={1}>
-          <MDButton
+        <MDBox key={record.id}>
+          <MaterialLink
             component={Link}
-            variant="contained"
-            color={sidenavColor}
             to={`/admin/user/${record.id}`}
-            underline="hover"
-            sx={{
-              py: 0,
-            }}
           >
-            {avatar(record)}
-            {label(record)}
-          </MDButton>
+            {renderUser(record)}
+          </MaterialLink>
         </MDBox>
       );
     }
@@ -93,26 +88,22 @@ function UserViewItem(props) {
   };
 
   return (
-    <MDBox
-      pt={2}
-      sx={{
-        position: 'relative',
-      }}
-    >
+    <MDBox pt={2} position="relative">
       <MDTypography
         variant="caption"
         color={darkMode ? 'text' : 'secondary'}
         fontWeight="regular"
-        sx={{
-          lineHeight: 1,
-          position: 'absolute',
-          fontWeight: 400,
-          top: 0,
-        }}
+        lineHeight={1}
+        position="absolute"
+        top="0"
       >
         {props.label}
       </MDTypography>
-      <MDBox display="flex">
+      <MDBox
+        display="inline-flex"
+        flexWrap="wrap"
+        gap={1}
+      >
         {!!values.length &&
           values.map((value) => displayableRecord(value))}
         {!values.length &&

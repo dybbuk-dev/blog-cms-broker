@@ -40,8 +40,8 @@ import { Icon } from '@mui/material';
 import { i18n } from 'src/i18n';
 import MDBox from 'src/mui/components/MDBox';
 
-import colors from 'src/mui/assets/theme/base/colors';
-const { dark, white } = colors;
+import lightColors from 'src/mui/assets/theme/base/colors';
+import darkColors from 'src/mui/assets/theme-dark/base/colors';
 
 const store = configureStore();
 
@@ -108,6 +108,7 @@ function AppWithSnackbar(props) {
   const {
     miniSidenav,
     openConfigurator,
+    sidenavColor,
     direction,
     layout,
     darkMode,
@@ -151,6 +152,10 @@ function AppWithSnackbar(props) {
     document.scrollingElement.scrollTop = 0;
   }, [pathname]);
 
+  useEffect(() => {
+    document.documentElement.className = `${sidenavColor}-scrollbar`;
+  }, [sidenavColor]);
+
   const configsButton = (
     <MDBox
       display="flex"
@@ -158,7 +163,11 @@ function AppWithSnackbar(props) {
       alignItems="center"
       width="3.25rem"
       height="3.25rem"
-      bgColor={darkMode ? dark.main : white.main}
+      bgColor={
+        darkMode
+          ? darkColors.dark.main
+          : lightColors.light.main
+      }
       shadow="sm"
       borderRadius="50%"
       position="fixed"

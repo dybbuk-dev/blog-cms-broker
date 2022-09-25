@@ -9,21 +9,14 @@ function HtmlViewItem(props) {
   const htmlToReactParser = new HtmlToReactParser();
   const reactElement = htmlToReactParser.parse(value);
   return (
-    <MDBox
-      pt={2}
-      sx={{
-        position: 'relative',
-      }}
-    >
+    <MDBox pt={2} position="relative">
       <MDTypography
         variant="caption"
         color={darkMode ? 'text' : 'secondary'}
         fontWeight="regular"
-        sx={{
-          lineHeight: 1,
-          position: 'absolute',
-          top: 0,
-        }}
+        lineHeight={1}
+        position="absolute"
+        top="0"
       >
         {label}
       </MDTypography>
