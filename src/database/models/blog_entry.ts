@@ -136,6 +136,13 @@ export default function (sequelize) {
         belongsToColumn: 'blog_image',
       },
     });
+
+    models.blog_entry.hasMany(models.blog_comment, {
+      as: 'blog_comment',
+      foreignKey: 'blog_entry_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
+    });
   };
 
   return blog_entry;

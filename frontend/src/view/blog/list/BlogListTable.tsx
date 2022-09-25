@@ -206,7 +206,7 @@ function BlogListTable(props) {
                     {row.name}
                   </DataTableBodyCell>
                   <DataTableBodyCell align="right">
-                    {row.comment ?? 0}
+                    {row.comments ?? 0}
                   </DataTableBodyCell>
                   <DataTableBodyCell>
                     {['activated'].map((field) => (

@@ -10,6 +10,7 @@ import { orderByUtils } from '../utils/orderByUtils';
 import FileRepository from './fileRepository';
 import BlogBrokerRepository from './blogBrokerRepository';
 import BrokerRepository from './brokerRepository';
+import BlogCommentRepository from './blogCommentRepository';
 const Op = Sequelize.Op;
 
 class BlogRepository {
@@ -255,6 +256,19 @@ class BlogRepository {
         model: options.database.author,
         as: 'author',
       },
+      {
+        model: options.database.blog_comment,
+        as: 'blog_comment',
+        attributes: [
+          'blog_entry_id',
+          [
+            Sequelize.fn('COUNT', Sequelize.col('id')),
+            'comments',
+          ],
+        ],
+        separate: true,
+        limit: 1,
+      },
     ];
     if (filter) {
       if (filter.idRange) {
@@ -458,6 +472,12 @@ class BlogRepository {
     }
 
     const output = record.get({ plain: true });
+
+    output.comments =
+      (output.blog_comment &&
+        output.blog_comment.length &&
+        output.blog_comment[0]?.comments) ||
+      0;
 
     if (metaOnly) {
       return output;
