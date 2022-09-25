@@ -1,14 +1,20 @@
 import { FileUploader } from 'react-drag-drop-files';
 import { i18n } from 'src/i18n';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
+import darkColors from 'src/mui/assets/theme-dark/base/colors';
 import Errors from 'src/modules/shared/error/errors';
 import filesize from 'filesize';
+import lightColors from 'src/mui/assets/theme/base/colors';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
 
 function DragAndDropUploaderArea(props) {
+  const { sidenavColor, darkMode } = selectMuiSettings();
+  const colors = darkMode ? darkColors : lightColors;
+
   const {
     handleChange,
     hoverTitle,
@@ -44,23 +50,20 @@ function DragAndDropUploaderArea(props) {
       >
         <MDBox
           textAlign="center"
+          p={2}
           sx={{
-            background: 'rgba(0,0,0,.1)',
-            border: '2px dashed #777777',
+            border: `2px dashed ${colors[sidenavColor].main}`,
             cursor: 'pointer',
-            padding: 2,
-            color: '#777777',
           }}
         >
-          <CloudUploadIcon fontSize="large" />
           <MDTypography
             display="block"
             variant="button"
             fontWeight="regular"
-            sx={{
-              color: '#777777',
-            }}
+            color={sidenavColor}
           >
+            <CloudUploadIcon fontSize="large" />
+            <br />
             {i18n('fileUploader.placeholder.title')}
             {storage && storage.maxSizeInBytes && (
               <>
