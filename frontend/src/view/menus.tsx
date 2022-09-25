@@ -7,7 +7,7 @@ const permissions = Permissions.values;
 
 const menus = [
   {
-    path: '/admin',
+    path: '/admin/dashboard',
     exact: true,
     icon: <Icon fontSize="medium">dashboard</Icon>,
     name: i18n('dashboard.menu'),

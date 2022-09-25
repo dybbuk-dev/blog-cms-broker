@@ -113,6 +113,8 @@ function RoutesComponent(props) {
             component={CustomLoadable({
               loader: route.loader,
             })}
+            redirect={route.redirect}
+            virtual={route.virtual}
             exact={Boolean(route.exact)}
           />
         ))}

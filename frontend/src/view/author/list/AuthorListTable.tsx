@@ -42,7 +42,7 @@ function AuthorListTable(props) {
   const loading = findLoading || destroyLoading;
 
   const rows = useSelector(selectors.selectRows);
-  console.log(rows);
+
   const pagination = useSelector(
     selectors.selectPagination,
   );

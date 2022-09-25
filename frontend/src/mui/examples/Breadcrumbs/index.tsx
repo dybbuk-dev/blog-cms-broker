@@ -55,7 +55,7 @@ function Breadcrumbs({
           },
         }}
       >
-        <Link to="/">
+        <Link to="/admin">
           <MDTypography
             component="span"
             variant="body2"
@@ -66,47 +66,38 @@ function Breadcrumbs({
             <Icon>{icon}</Icon>
           </MDTypography>
         </Link>
-        {routes.map((el) => (
-          <Link
-            to={`${el.virtual ? el.redirect : el.path}`}
-            key={el.path}
-          >
-            <MDTypography
-              component="span"
-              variant="button"
-              fontWeight="regular"
-              // textTransform="capitalize"
-              color={light ? 'white' : 'dark'}
-              opacity={light ? 0.8 : 0.5}
-              sx={{ lineHeight: 0 }}
+        {routes
+          .filter((el) => !el.skipBreadcrumb)
+          .map((el) => (
+            <Link
+              to={`${el.virtual ? el.redirect : el.path}`}
+              key={el.path}
             >
-              {el.virtual
-                ? labels[el.labelCode] ||
-                  i18n(el.i18n) ||
-                  ''
-                : i18n(el.i18n)}
-            </MDTypography>
-          </Link>
-        ))}
+              <MDTypography
+                component="span"
+                variant="button"
+                fontWeight="regular"
+                color={light ? 'white' : 'dark'}
+                opacity={light ? 0.8 : 0.5}
+                sx={{ lineHeight: 0 }}
+              >
+                {el.virtual
+                  ? labels[el.labelCode] ||
+                    i18n(el.i18n) ||
+                    ''
+                  : i18n(el.i18n)}
+              </MDTypography>
+            </Link>
+          ))}
         <MDTypography
           variant="button"
           fontWeight="regular"
-          // textTransform="capitalize"
           color={light ? 'white' : 'dark'}
           sx={{ lineHeight: 0 }}
         >
           {i18n(current.i18n).replace('-', ' ')}
         </MDTypography>
       </MuiBreadcrumbs>
-      {/* <MDTypography
-        fontWeight="bold"
-        // textTransform="capitalize"
-        variant="h6"
-        color={light ? 'white' : 'dark'}
-        noWrap
-      >
-        {i18n(current.i18n).replace('-', ' ')}
-      </MDTypography> */}
     </MDBox>
   );
 }

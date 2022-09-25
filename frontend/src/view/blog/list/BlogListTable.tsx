@@ -142,15 +142,7 @@ function BlogListTable(props) {
               >
                 {i18n('entities.blog.fields.name')}
               </DataTableHeadCell>
-              <DataTableHeadCell
-                onClick={() => doChangeSort('comment')}
-                sorted={
-                  sorter.field === 'comment'
-                    ? sorter.order
-                    : 'none'
-                }
-                width="0"
-              >
+              <DataTableHeadCell sorted={false} width="0">
                 {i18n('entities.blog.fields.comment')}
               </DataTableHeadCell>
               <DataTableHeadCell sorted={false} width="0">

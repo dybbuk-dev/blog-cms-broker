@@ -65,6 +65,10 @@ function PrivateRoute({
           return <Redirect to="/403" />;
         }
 
+        if (rest.redirect) {
+          return <Redirect to={rest.redirect} />;
+        }
+
         return (
           <Layout {...props}>
             <Component {...props} />

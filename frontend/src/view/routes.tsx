@@ -7,6 +7,16 @@ const privateRoutes = [
     path: '/admin',
     i18n: 'dashboard.menu',
     parent: '/',
+    redirect: '/admin/dashboard',
+    permissionRequired: null,
+    skipBreadcrumb: true,
+    exact: true,
+  },
+
+  {
+    path: '/admin/dashboard',
+    i18n: 'dashboard.menu',
+    parent: '/admin',
     loader: () =>
       import('src/view/dashboard/DashboardPage'),
     permissionRequired: null,
