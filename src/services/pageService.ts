@@ -159,6 +159,10 @@ export default class PageService {
     return PageRepository.findById(id, this.options);
   }
 
+  async findByURL(url) {
+    return PageRepository.findByURL(url, this.options);
+  }
+
   async findAllAutocomplete(
     search,
     limit,

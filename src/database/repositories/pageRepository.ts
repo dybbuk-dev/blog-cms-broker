@@ -217,6 +217,58 @@ class PageRepository {
     );
   }
 
+  static async findByURL(url, options: IRepositoryOptions) {
+    const transaction =
+      SequelizeRepository.getTransaction(options);
+
+    const navigation =
+      await NavigationRepositoryEx.findByURL(url, options);
+
+    const include = [
+      {
+        model: options.database.author,
+        as: 'author',
+      },
+      {
+        model: options.database.navigation,
+        as: 'navigation',
+      },
+      {
+        model: options.database.page_warning,
+        as: 'page_warning',
+      },
+    ];
+
+    let record =
+      navigation &&
+      (await options.database.page.findOne({
+        where: {
+          navigation_id: navigation.id,
+        },
+        include,
+        transaction,
+      }));
+
+    if (!record) {
+      record = await options.database.page.findOne({
+        where: {
+          link: url,
+        },
+        include,
+        transaction,
+      });
+      if (!record) {
+        return null;
+      }
+    }
+
+    return this._fillWithRelationsAndFiles(
+      record,
+      options,
+      false,
+    );
+  }
+
   static async filterIdInTenant(
     id,
     options: IRepositoryOptions,

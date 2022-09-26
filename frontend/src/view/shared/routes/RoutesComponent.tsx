@@ -122,11 +122,11 @@ function RoutesComponent(props) {
       {routes.simpleRoutes.map((route) => (
         <Route
           key={route.path}
-          exact
           path={route.path}
           component={CustomLoadable({
             loader: route.loader,
           })}
+          exact
         />
       ))}
     </Switch>

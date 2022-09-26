@@ -1,4 +1,8 @@
 export default (app) => {
+  // #region front-end APIs
+  app.post(`/general-page`, require('./pageHome').default);
+  // #endregion
+  // #region back-end APIs
   app.post(
     `/tenant/:tenantId/general-page`,
     require('./pageCreate').default,
@@ -27,4 +31,5 @@ export default (app) => {
     `/tenant/:tenantId/general-page/:id`,
     require('./pageFind').default,
   );
+  // #endregion
 };

@@ -78,6 +78,7 @@ interface Props {
       | 'light';
     label: string;
   };
+  fixed?: boolean;
 }
 
 interface NewGrowTypes extends GrowProps {
@@ -95,6 +96,7 @@ function DefaultNavbar({
   transparent,
   light,
   action,
+  fixed = true,
 }: Props): JSX.Element {
   const { darkMode } = selectMuiSettings();
 
@@ -689,7 +691,7 @@ function DefaultNavbar({
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        position="absolute"
+        position={fixed ? 'absolute' : 'relative'}
         left={0}
         zIndex={3}
         sx={({

@@ -31,11 +31,13 @@ import DefaultNavbar from 'src/mui/examples/Navbars/DefaultNavbar';
 interface Props {
   background?: 'white' | 'light' | 'default';
   children?: ReactNode;
+  fixedNavBar?: boolean;
 }
 
 function PageLayout({
   background,
   children,
+  fixedNavBar = true,
 }: Props): JSX.Element {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
@@ -63,6 +65,7 @@ function PageLayout({
           routes={navigation}
           transparent
           light={background === 'light'}
+          fixed={fixedNavBar}
         />
       )}
       {children}

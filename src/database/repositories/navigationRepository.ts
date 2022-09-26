@@ -169,6 +169,33 @@ class NavigationRepository {
     return this._fillWithRelationsAndFiles(record, options);
   }
 
+  static async findByURL(url, options: IRepositoryOptions) {
+    const transaction =
+      SequelizeRepository.getTransaction(options);
+
+    const include = [
+      {
+        model: options.database.navigation,
+        as: 'parent',
+      },
+    ];
+
+    const record =
+      await options.database.navigation.findOne({
+        where: {
+          link: url,
+        },
+        include,
+        transaction,
+      });
+
+    if (!record) {
+      return null;
+    }
+
+    return this._fillWithRelationsAndFiles(record, options);
+  }
+
   static async filterIdInTenant(
     id,
     options: IRepositoryOptions,

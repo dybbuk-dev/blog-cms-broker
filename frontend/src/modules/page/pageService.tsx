@@ -76,6 +76,13 @@ export default class PageService {
     return response.data;
   }
 
+  static async findByURL(url) {
+    const response = await authAxios.post(`/general-page`, {
+      url,
+    });
+    return response.data;
+  }
+
   static async list(filter, orderBy, limit, offset) {
     const params = {
       filter,
