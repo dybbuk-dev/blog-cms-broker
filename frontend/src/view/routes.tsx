@@ -1283,6 +1283,14 @@ const simpleRoutes = [
       import('src/view/shared/errors/Error500Page'),
   },
   {
+    path: '/blog',
+    loader: () => import('src/view/home/BlogListPage'),
+  },
+  {
+    path: '/blog/**',
+    loader: () => import('src/view/home/BlogDetailPage'),
+  },
+  {
     path: '**',
     loader: () => import('src/view/home/GeneralPage'),
   },

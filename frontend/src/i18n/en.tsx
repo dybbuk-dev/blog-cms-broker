@@ -4,6 +4,7 @@ const en = {
     cancel: 'Cancel',
     continue: 'Continue',
     destroy: 'Delete',
+    detail: 'Detail',
     discard: 'Discard',
     edit: 'Edit',
     end: 'End',
