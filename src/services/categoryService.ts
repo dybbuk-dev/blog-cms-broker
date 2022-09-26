@@ -104,11 +104,21 @@ export default class CategoryService {
   }
 
   async findById(id) {
-    return CategoryRepository.findById(id, this.options);
+    return await CategoryRepository.findById(
+      id,
+      this.options,
+    );
+  }
+
+  async findByURL(url) {
+    return await CategoryRepository.findByURL(
+      url,
+      this.options,
+    );
   }
 
   async findAllAutocomplete(search, limit) {
-    return CategoryRepository.findAllAutocomplete(
+    return await CategoryRepository.findAllAutocomplete(
       search,
       limit,
       this.options,
@@ -116,7 +126,7 @@ export default class CategoryService {
   }
 
   async findAndCountAll(args) {
-    return CategoryRepository.findAndCountAll(
+    return await CategoryRepository.findAndCountAll(
       args,
       this.options,
     );

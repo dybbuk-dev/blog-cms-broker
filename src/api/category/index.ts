@@ -1,4 +1,8 @@
 export default (app) => {
+  // #region front-end APIs
+  app.post('/category', require('./categoryHome').default);
+  // #endregion
+  // #region back-end APIs
   app.post(
     `/tenant/:tenantId/category`,
     require('./categoryCreate').default,
@@ -27,4 +31,5 @@ export default (app) => {
     `/tenant/:tenantId/category/:id`,
     require('./categoryFind').default,
   );
+  // #endregion
 };

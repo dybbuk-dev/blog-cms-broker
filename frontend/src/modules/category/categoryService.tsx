@@ -76,6 +76,14 @@ export default class CategoryService {
     return response.data;
   }
 
+  static async findByURL(url) {
+    const response = await authAxios.post('/category', {
+      url,
+    });
+
+    return response.data;
+  }
+
   static async list(filter, orderBy, limit, offset) {
     const params = {
       filter,

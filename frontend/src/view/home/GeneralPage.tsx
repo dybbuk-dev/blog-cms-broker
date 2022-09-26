@@ -1,12 +1,13 @@
 import { Container } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { useRouteMatch } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import PageLayout from 'src/mui/examples/LayoutContainers/PageLayout';
-import pageHomeActions from 'src/modules/page/home/pageHomeActions';
-import pageHomeSelectors from 'src/modules/page/home/pageHomeSelectors';
-import Spinner from 'src/view/shared/Spinner';
+import { useRouteMatch } from 'react-router-dom';
+import categoryHomeActions from 'src/modules/category/home/categoryHomeActions';
+import categoryHomeSelectors from 'src/modules/category/home/categoryHomeSelectors';
 import HtmlView from 'src/view/shared/view/HtmlView';
+import pageHomeSelectors from 'src/modules/page/home/pageHomeSelectors';
+import PageLayout from 'src/mui/examples/LayoutContainers/PageLayout';
+import Spinner from 'src/view/shared/Spinner';
 
 const GeneralPage = () => {
   const [dispatched, setDispatched] = useState(false);
@@ -15,16 +16,22 @@ const GeneralPage = () => {
 
   const match = useRouteMatch();
 
-  const loading = useSelector(
+  const loadingCategory = useSelector(
+    categoryHomeSelectors.selectLoading,
+  );
+  const category = useSelector(
+    categoryHomeSelectors.selectRecord,
+  );
+
+  const loadingPage = useSelector(
     pageHomeSelectors.selectLoading,
   );
+  const page = useSelector(pageHomeSelectors.selectRecord);
 
-  const record = useSelector(
-    pageHomeSelectors.selectRecord,
-  );
+  const loading = loadingCategory || loadingPage;
 
   useEffect(() => {
-    dispatch(pageHomeActions.doFind(match.url));
+    dispatch(categoryHomeActions.doFind(match.url));
     setDispatched(true);
   }, [match.url]);
 
@@ -32,8 +39,11 @@ const GeneralPage = () => {
     <PageLayout fixedNavBar={false}>
       <Container>
         {loading && <Spinner />}
-        {dispatched && !loading && record && (
-          <HtmlView value={record.body} />
+        {dispatched && !loading && category && (
+          <HtmlView value={category.description} />
+        )}
+        {dispatched && !loading && !category && page && (
+          <HtmlView value={page.body} />
         )}
       </Container>
     </PageLayout>

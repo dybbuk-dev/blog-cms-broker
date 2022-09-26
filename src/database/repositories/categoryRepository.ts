@@ -167,6 +167,46 @@ class CategoryRepository {
     return this._fillWithRelationsAndFiles(record, options);
   }
 
+  static async findByURL(url, options: IRepositoryOptions) {
+    const transaction =
+      SequelizeRepository.getTransaction(options);
+
+    const include = [
+      {
+        model: options.database.author,
+        as: 'author',
+      },
+    ];
+
+    const record = await options.database.category.findOne({
+      where: {
+        link: url,
+      },
+      include,
+      transaction,
+    });
+
+    if (!record) {
+      return null;
+    }
+
+    const description_record =
+      await options.database.category_description.findOne({
+        where: {
+          id: record.id,
+        },
+        transaction,
+      });
+
+    record.dataValues = {
+      ...record.dataValues,
+      teaser: description_record.teaser,
+      description: description_record.description,
+    };
+
+    return this._fillWithRelationsAndFiles(record, options);
+  }
+
   static async filterIdInTenant(
     id,
     options: IRepositoryOptions,
