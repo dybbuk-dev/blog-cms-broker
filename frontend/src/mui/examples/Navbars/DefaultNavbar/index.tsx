@@ -478,12 +478,23 @@ function DefaultNavbar({
           {...TransitionProps}
           sx={{
             transformOrigin: 'left top',
-            background: ({ palette: { white } }: Theme) =>
-              white.main,
+            background: ({
+              palette: { mode, white, dark },
+            }: Theme) =>
+              mode === 'dark' ? dark.main : white.main,
           }}
         >
           <MDBox borderRadius="lg">
-            <MDTypography variant="h1" color="white">
+            <MDTypography
+              variant="h1"
+              textAlign="center"
+              sx={{
+                color: ({
+                  palette: { mode, white, dark },
+                }: Theme) =>
+                  mode === 'dark' ? dark.main : white.main,
+              }}
+            >
               <Icon ref={setArrowRef} sx={{ mt: -3 }}>
                 arrow_drop_up
               </Icon>
@@ -638,8 +649,10 @@ function DefaultNavbar({
           {...TransitionProps}
           sx={{
             transformOrigin: 'left top',
-            background: ({ palette: { white } }: Theme) =>
-              white.main,
+            background: ({
+              palette: { mode, white, dark },
+            }: Theme) =>
+              mode === 'dark' ? dark.main : white.main,
           }}
         >
           <MDBox ml={2.5} mt={-2.5} borderRadius="lg">
@@ -771,8 +784,8 @@ function DefaultNavbar({
           )}
         </MDBox>
       </MDBox>
-      {dropdownMenu}
-      {nestedDropdownMenu}
+      {dropdown && dropdownMenu}
+      {nestedDropdown && nestedDropdownMenu}
     </Container>
   );
 }

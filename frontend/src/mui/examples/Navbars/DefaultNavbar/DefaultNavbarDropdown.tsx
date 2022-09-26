@@ -76,17 +76,19 @@ function DefaultNavbarDropdown({
         {...(route && routeComponent)}
         {...(href && linkComponent)}
       >
-        <MDTypography
-          variant="body2"
-          lineHeight={1}
-          color="inherit"
-          sx={{
-            alignSelf: 'center',
-            '& *': { verticalAlign: 'middle' },
-          }}
-        >
-          {icon}
-        </MDTypography>
+        {icon && (
+          <MDTypography
+            variant="body2"
+            lineHeight={1}
+            color="inherit"
+            sx={{
+              alignSelf: 'center',
+              '& *': { verticalAlign: 'middle' },
+            }}
+          >
+            {icon}
+          </MDTypography>
+        )}
         <MDTypography
           variant="button"
           fontWeight="regular"

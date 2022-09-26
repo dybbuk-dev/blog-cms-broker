@@ -330,17 +330,14 @@ class NavigationRepository {
       {
         model: options.database.navigation,
         as: 'children',
-        attributes: [
-          ['title', 'name'],
-          ['link', 'route'],
-        ],
+        attributes: ['name', ['link', 'route']],
         where: {
           activated: true,
           show_in_navigation: true,
         },
         order: [
           ['sort', 'ASC'],
-          ['title', 'ASC'],
+          ['name', 'ASC'],
         ],
         separate: true,
       },
@@ -357,15 +354,12 @@ class NavigationRepository {
     const where = { [Op.and]: whereAnd };
 
     return await options.database.navigation.findAll({
-      attributes: [
-        ['title', 'name'],
-        ['link', 'route'],
-      ],
+      attributes: ['name', ['link', 'route']],
       where,
       include,
       order: [
         ['sort', 'ASC'],
-        ['title', 'ASC'],
+        ['name', 'ASC'],
       ],
     });
   }

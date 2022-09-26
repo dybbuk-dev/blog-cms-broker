@@ -17,9 +17,9 @@ function PublicRoute({
           currentUser,
         );
 
-        if (permissionChecker.isAuthenticated) {
-          return <Redirect to="/admin" />;
-        }
+        // if (permissionChecker.isAuthenticated) {
+        //   return <Redirect to="/admin" />;
+        // }
 
         return <Component {...props} />;
       }}
