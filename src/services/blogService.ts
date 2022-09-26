@@ -165,6 +165,14 @@ export default class BlogService {
     );
   }
 
+  async findBlogList(args) {
+    return BlogRepository.findBlogList(args, this.options);
+  }
+
+  async findByURL(url) {
+    return BlogRepository.findByURL(url, this.options);
+  }
+
   async import(data, importHash) {
     if (!importHash) {
       throw new Error400(
