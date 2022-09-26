@@ -63,7 +63,7 @@ function PageLayout({
       {!loading && (
         <DefaultNavbar
           routes={navigation}
-          transparent
+          transparent={fixedNavBar}
           light={background === 'light'}
           fixed={fixedNavBar}
         />

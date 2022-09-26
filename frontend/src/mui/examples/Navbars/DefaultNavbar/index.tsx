@@ -50,6 +50,7 @@ import breakpoints from 'src/mui/assets/theme/base/breakpoints';
 import muiActions from 'src/modules/mui/muiActions';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { i18n } from 'src/i18n';
+import { Card } from '@mui/material';
 
 // Declaring props types for DefaultNavbar
 interface Props {
@@ -673,8 +674,10 @@ function DefaultNavbar({
     </Popper>
   );
 
+  const TagRoot = fixed ? MDBox : Card;
+
   return (
-    <Container>
+    <TagRoot sx={{ m: fixed ? 0 : 2 }}>
       <MDBox
         py={1}
         px={{
@@ -682,113 +685,107 @@ function DefaultNavbar({
           sm: transparent ? 2 : 3,
           lg: transparent ? 0 : 2,
         }}
-        my={3}
-        mx={3}
-        width="calc(100% - 48px)"
-        borderRadius="lg"
-        shadow={transparent ? 'none' : 'md'}
-        color={light ? 'white' : 'dark'}
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
+        width={`calc(100% - ${fixed ? 16 : 0}px)`}
+        m={fixed ? 1 : 0}
+        color={light ? 'white' : 'text'}
         position={fixed ? 'absolute' : 'relative'}
         left={0}
         zIndex={3}
-        sx={({
-          palette: {
-            transparent: transparentColor,
-            white,
-            background,
-          },
-          functions: { rgba },
-        }: any) => ({
-          backgroundColor: transparent
-            ? transparentColor.main
-            : rgba(
-                darkMode ? background.sidenav : white.main,
-                0.8,
-              ),
-          backdropFilter: transparent
-            ? 'none'
-            : `saturate(200%) blur(30px)`,
-        })}
       >
-        <MDBox
-          component={Link}
-          to="/"
-          py={transparent ? 1.5 : 0.75}
-          lineHeight={1}
-          pl={{ xs: 0, lg: 1 }}
-        >
-          <MDTypography
-            variant="button"
-            fontWeight="bold"
-            color={light ? 'white' : 'dark'}
+        <Container>
+          <MDBox
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
           >
-            {brand}
-          </MDTypography>
-        </MDBox>
-        <MDBox
-          color="inherit"
-          display={{ xs: 'none', lg: 'flex' }}
-          m={0}
-          p={0}
-        >
-          {renderNavbarItems}
-        </MDBox>
-        {action &&
-          (action.type === 'internal' ? (
             <MDBox
-              display={{ xs: 'none', lg: 'inline-block' }}
+              component={Link}
+              to="/"
+              py={transparent ? 1.5 : 0.75}
+              lineHeight={1}
+              pl={{ xs: 0, lg: 1 }}
             >
-              <MDButton
-                component={Link}
-                to={action.route}
-                variant="gradient"
-                color={action.color ? action.color : 'info'}
-                size="small"
+              <MDTypography
+                variant="button"
+                fontWeight="bold"
+                color={light ? 'white' : 'dark'}
               >
-                {action.label}
-              </MDButton>
+                {brand}
+              </MDTypography>
             </MDBox>
-          ) : (
             <MDBox
-              display={{ xs: 'none', lg: 'inline-block' }}
+              color="inherit"
+              display={{ xs: 'none', lg: 'flex' }}
+              m={0}
+              p={0}
             >
-              <MDButton
-                component="a"
-                href={action.route}
-                target="_blank"
-                rel="noreferrer"
-                variant="gradient"
-                color={action.color ? action.color : 'info'}
-                size="small"
-                sx={{ mt: -0.3 }}
-              >
-                {action.label}
-              </MDButton>
+              {renderNavbarItems}
             </MDBox>
-          ))}
-        <MDBox
-          display={{ xs: 'inline-block', lg: 'none' }}
-          lineHeight={0}
-          py={1.5}
-          pl={1.5}
-          color="inherit"
-          sx={{ cursor: 'pointer' }}
-          onClick={openMobileNavbar}
-        >
-          {mobileView && (
-            <DefaultNavbarMobile
-              routes={routes}
-              open={mobileNavbar}
-            />
-          )}
-        </MDBox>
+            {action &&
+              (action.type === 'internal' ? (
+                <MDBox
+                  display={{
+                    xs: 'none',
+                    lg: 'inline-block',
+                  }}
+                >
+                  <MDButton
+                    component={Link}
+                    to={action.route}
+                    variant="gradient"
+                    color={
+                      action.color ? action.color : 'info'
+                    }
+                    size="small"
+                  >
+                    {action.label}
+                  </MDButton>
+                </MDBox>
+              ) : (
+                <MDBox
+                  display={{
+                    xs: 'none',
+                    lg: 'inline-block',
+                  }}
+                >
+                  <MDButton
+                    component="a"
+                    href={action.route}
+                    target="_blank"
+                    rel="noreferrer"
+                    variant="gradient"
+                    color={
+                      action.color ? action.color : 'info'
+                    }
+                    size="small"
+                    sx={{ mt: -0.3 }}
+                  >
+                    {action.label}
+                  </MDButton>
+                </MDBox>
+              ))}
+            <MDBox
+              display={{ xs: 'inline-block', lg: 'none' }}
+              lineHeight={0}
+              py={1.5}
+              pl={1.5}
+              color="inherit"
+              sx={{ cursor: 'pointer' }}
+              onClick={openMobileNavbar}
+            >
+              {mobileView && (
+                <DefaultNavbarMobile
+                  routes={routes}
+                  open={mobileNavbar}
+                />
+              )}
+            </MDBox>
+          </MDBox>
+        </Container>
       </MDBox>
       {dropdown && dropdownMenu}
       {nestedDropdown && nestedDropdownMenu}
-    </Container>
+    </TagRoot>
   );
 }
 
