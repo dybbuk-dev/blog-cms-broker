@@ -1,10 +1,8 @@
-import { Card } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
 
 const Content = styled('div')(() => ({
-  padding: '2rem',
   zoom: 0.8,
   '& ul, ol': {
     paddingLeft: '3rem',
@@ -16,11 +14,7 @@ const Content = styled('div')(() => ({
 }));
 
 function HtmlView({ value }) {
-  return (
-    <Card>
-      <Content>{parse(value)}</Content>
-    </Card>
-  );
+  return <Content>{parse(value)}</Content>;
 }
 
 HtmlView.propTypes = {
