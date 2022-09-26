@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import { Card, Container } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -8,6 +8,7 @@ import blogFindSelectors from 'src/modules/blog/find/blogFindSelectors';
 import Spinner from 'src/view/shared/Spinner';
 import HtmlView from 'src/view/shared/view/HtmlView';
 import SimpleBlogCard from 'src/mui/examples/Cards/BlogCards/SimpleBlogCard';
+import MDBox from 'src/mui/components/MDBox';
 
 const BlogDetailPage = () => {
   const [dispatched, setDispatched] = useState(false);
@@ -32,12 +33,14 @@ const BlogDetailPage = () => {
   return (
     <PageLayout fixedNavBar={false}>
       <Container>
-        {loading && <Spinner />}
-        {dispatched && !loading && record && (
-          <>
-            <HtmlView value={record.content} />
-          </>
-        )}
+        <Card>
+          <MDBox p={5} color="text">
+            {loading && <Spinner />}
+            {dispatched && !loading && record && (
+              <HtmlView value={record.content} />
+            )}
+          </MDBox>
+        </Card>
       </Container>
     </PageLayout>
   );

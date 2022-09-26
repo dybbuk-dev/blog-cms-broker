@@ -1,21 +1,16 @@
-import { Container, Grid } from '@mui/material';
-import MaterialLink from '@mui/material/Link';
+import { Card, Container } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { useRouteMatch, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import PageLayout from 'src/mui/examples/LayoutContainers/PageLayout';
+import { useRouteMatch, Link } from 'react-router-dom';
 import actions from 'src/modules/blog/home/blogHomeActions';
+import HtmlView from 'src/view/shared/view/HtmlView';
+import MaterialLink from '@mui/material/Link';
+import MDBox from 'src/mui/components/MDBox';
+import MDTypography from 'src/mui/components/MDTypography';
+import PageLayout from 'src/mui/examples/LayoutContainers/PageLayout';
+import Pagination from 'src/view/shared/table/Pagination';
 import selectors from 'src/modules/blog/home/blogHomeSelectors';
 import Spinner from 'src/view/shared/Spinner';
-import HtmlView from 'src/view/shared/view/HtmlView';
-import Pagination from 'src/view/shared/table/Pagination';
-import FieldSetViewItem from 'src/view/shared/view/FieldSetViewItem';
-import ImagesViewItem from 'src/view/shared/view/ImagesViewItem';
-import LogoViewItem from 'src/view/shared/view/LogoViewItem';
-import MDButton from 'src/mui/components/MDButton';
-import HtmlViewItem from 'src/view/shared/view/HtmlViewItem';
-import TextViewItem from 'src/view/shared/view/TextViewItem';
-import { i18n } from 'src/i18n';
 
 const BlogListPage = () => {
   const [dispatched, setDispatched] = useState(false);
@@ -44,59 +39,50 @@ const BlogListPage = () => {
   return (
     <PageLayout fixedNavBar={false}>
       <Container>
-        <Pagination
-          onChange={doChangePagination}
-          disabled={loading}
-          pagination={pagination}
-          entriesPerPage
-          showTotalEntries
-        />
-      </Container>
-      <Container>
-        {loading && <Spinner />}
-        {dispatched &&
-          !loading &&
-          records &&
-          records.map((record) => (
-            <FieldSetViewItem key={record.id}>
-              <MaterialLink
-                component={Link}
-                to={record.name_normalized}
+        <Card>
+          <MDBox p={5}>
+            {loading && <Spinner />}
+            {dispatched && !loading && records && (
+              <MDBox
+                display="flex"
+                flexDirection="column"
+                gap={5}
               >
-                <TextViewItem value={record.name} />
-              </MaterialLink>
-              <Grid container spacing={2}>
-                <Grid item md={4} xs={12}>
-                  <LogoViewItem
-                    value={record.blog_image[0]}
-                  />
-                </Grid>
-                <Grid item md={8} xs={12}>
-                  <HtmlViewItem value={record.teaser} />
-                </Grid>
-                <Grid item md={12} xs={12}>
-                  <MDButton
-                    variant="outlined"
-                    color={'primary'}
-                    component={Link}
-                    to={`/blog/${record.name_normalized}`}
-                    size="large"
+                {records.map((record) => (
+                  <MDBox
+                    key={record.id}
+                    display="flex"
+                    justifyContent="flex-start"
+                    gap={5}
                   >
-                    {i18n('common.detail')}
-                  </MDButton>
-                </Grid>
-              </Grid>
-            </FieldSetViewItem>
-          ))}
-      </Container>
-      <Container>
-        <Pagination
-          onChange={doChangePagination}
-          disabled={loading}
-          pagination={pagination}
-          entriesPerPage
-          showTotalEntries
-        />
+                    <img
+                      src={record.blog_image[0].downloadUrl}
+                    />
+                    <MDBox color="text">
+                      <MDTypography variant="h4">
+                        <MaterialLink
+                          component={Link}
+                          to={`/blog/${record.name_normalized}`}
+                          underline="hover"
+                        >
+                          {record.name}
+                        </MaterialLink>
+                      </MDTypography>
+                      <HtmlView value={record.teaser} />
+                    </MDBox>
+                  </MDBox>
+                ))}
+              </MDBox>
+            )}
+            <Pagination
+              onChange={doChangePagination}
+              disabled={loading}
+              pagination={pagination}
+              entriesPerPage
+              showTotalEntries
+            />
+          </MDBox>
+        </Card>
       </Container>
     </PageLayout>
   );

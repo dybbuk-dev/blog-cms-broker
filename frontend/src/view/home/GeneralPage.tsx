@@ -9,6 +9,7 @@ import pageHomeSelectors from 'src/modules/page/home/pageHomeSelectors';
 import PageLayout from 'src/mui/examples/LayoutContainers/PageLayout';
 import Spinner from 'src/view/shared/Spinner';
 import MDBox from 'src/mui/components/MDBox';
+import MDTypography from 'src/mui/components/MDTypography';
 
 const GeneralPage = () => {
   const [dispatched, setDispatched] = useState(false);
@@ -44,7 +45,9 @@ const GeneralPage = () => {
             {loading && <Spinner />}
             {dispatched && !loading && category && (
               <>
-                <h1>{category.title}</h1>
+                <MDTypography variant="h1">
+                  {category.title}
+                </MDTypography>
                 {category.teaser && (
                   <HtmlView value={category.teaser} />
                 )}
