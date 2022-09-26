@@ -1,4 +1,5 @@
 import { FormControl, FormHelperText } from '@mui/material';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import FormErrors from 'src/view/shared/form/formErrors';
@@ -7,6 +8,8 @@ import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
 
 function ImagesFormItem(props) {
+  const { darkMode } = selectMuiSettings();
+
   const {
     externalErrorMessage,
     forceValue,
@@ -79,9 +82,15 @@ function ImagesFormItem(props) {
       component="fieldset"
       size="small"
     >
-      <MDTypography variant="caption" fontWeight="regular">
-        {label}
-      </MDTypography>
+      {Boolean(label) && (
+        <MDTypography
+          variant="caption"
+          fontWeight="regular"
+          color={darkMode ? 'text' : 'secondary'}
+        >
+          {label}
+        </MDTypography>
+      )}
 
       <ImagesUploader
         storage={storage}
@@ -99,7 +108,7 @@ function ImagesFormItem(props) {
 
       {formHelperText && (
         <FormHelperText
-          style={{ marginTop: 0, fontWeight: 400 }}
+          style={{ fontWeight: 400, margin: 0 }}
         >
           {formHelperText}
         </FormHelperText>

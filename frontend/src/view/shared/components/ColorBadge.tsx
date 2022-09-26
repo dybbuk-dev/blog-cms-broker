@@ -55,6 +55,7 @@ function ColorBadge(props) {
         py={0.875}
         textTransform="uppercase"
         variant="caption"
+        whiteSpace="nowrap"
       >
         {label}
         {Boolean(onDelete) && (

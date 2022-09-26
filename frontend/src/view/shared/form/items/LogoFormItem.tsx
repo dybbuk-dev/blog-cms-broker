@@ -1,13 +1,15 @@
 import { FormControl, FormHelperText } from '@mui/material';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import FormErrors from 'src/view/shared/form/formErrors';
 import ImagesUploader from 'src/view/shared/uploaders/ImagesUploader';
-import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
 
 function LogoFormItem(props) {
+  const { darkMode } = selectMuiSettings();
+
   const {
     externalErrorMessage,
     forceValue,
@@ -80,13 +82,15 @@ function LogoFormItem(props) {
       component="fieldset"
       size="small"
     >
-      <MDTypography
-        variant="body2"
-        fontWeight="regular"
-        textAlign="center"
-      >
-        {label}
-      </MDTypography>
+      {Boolean(label) && (
+        <MDTypography
+          variant="caption"
+          fontWeight="regular"
+          color={darkMode ? 'text' : 'secondary'}
+        >
+          {label}
+        </MDTypography>
+      )}
 
       <ImagesUploader
         storage={storage}
@@ -103,9 +107,7 @@ function LogoFormItem(props) {
       />
 
       {formHelperText && (
-        <FormHelperText
-          sx={{ textAlign: 'center', fontWeight: 400 }}
-        >
+        <FormHelperText sx={{ fontWeight: 400, margin: 0 }}>
           {formHelperText}
         </FormHelperText>
       )}
