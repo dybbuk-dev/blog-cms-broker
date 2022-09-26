@@ -130,6 +130,14 @@ export default function (sequelize) {
       onDelete: 'NO ACTION',
       onUpdate: 'NO ACTION',
     });
+
+    models.navigation.hasMany(models.navigation, {
+      as: 'children',
+      constraints: true,
+      foreignKey: 'parent_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
+    });
   };
 
   return navigation;

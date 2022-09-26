@@ -1,23 +1,7 @@
-import React from 'react';
-import { Card } from '@mui/material';
-import MDBox from 'src/mui/components/MDBox';
+import PageLayout from 'src/mui/examples/LayoutContainers/PageLayout';
 
 function FirstPage(props) {
-  return (
-    <>
-      <Card>
-        <MDBox pt={3} px={3}>
-          <MDBox
-            display="flex"
-            justifyContent="space-between"
-            alignItems="flex-start"
-          >
-            {'Welcome'}
-          </MDBox>
-        </MDBox>
-      </Card>
-    </>
-  );
+  return <PageLayout></PageLayout>;
 }
 
 export default FirstPage;

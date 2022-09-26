@@ -1,4 +1,11 @@
 export default (app) => {
+  // #region front-end APIs
+  app.get(
+    `/navigation`,
+    require('./navigationHome').default,
+  );
+  // #endregion
+  // #region back-end APIs
   app.post(
     `/tenant/:tenantId/navigation`,
     require('./navigationCreate').default,
@@ -27,4 +34,5 @@ export default (app) => {
     `/tenant/:tenantId/navigation/:id`,
     require('./navigationFind').default,
   );
+  // #endregion
 };

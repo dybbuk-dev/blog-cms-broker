@@ -325,6 +325,51 @@ class NavigationRepository {
     return { rows, count };
   }
 
+  static async findForHome(options: IRepositoryOptions) {
+    let include = [
+      {
+        model: options.database.navigation,
+        as: 'children',
+        attributes: [
+          ['title', 'name'],
+          ['link', 'route'],
+        ],
+        where: {
+          activated: true,
+          show_in_navigation: true,
+        },
+        order: [
+          ['sort', 'ASC'],
+          ['title', 'ASC'],
+        ],
+        separate: true,
+      },
+    ];
+
+    const whereAnd: Array<any> = [
+      {
+        parent_id: { [Op.is]: null },
+        activated: true,
+        show_in_navigation: true,
+      },
+    ];
+
+    const where = { [Op.and]: whereAnd };
+
+    return await options.database.navigation.findAll({
+      attributes: [
+        ['title', 'name'],
+        ['link', 'route'],
+      ],
+      where,
+      include,
+      order: [
+        ['sort', 'ASC'],
+        ['title', 'ASC'],
+      ],
+    });
+  }
+
   static async findAllAutocomplete(
     query,
     limit,

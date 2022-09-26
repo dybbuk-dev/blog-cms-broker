@@ -96,6 +96,11 @@ export default class NavigationService {
     return response.data;
   }
 
+  static async home() {
+    const response = await authAxios.get(`/navigation`);
+    return response.data;
+  }
+
   static async listAutocomplete(
     query,
     limit,

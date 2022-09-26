@@ -52,7 +52,7 @@ function RoutesComponent(props) {
       {routes.publicRoutes.map((route) => (
         <PublicRoute
           key={route.path}
-          exact
+          exact={route.exact}
           path={route.path}
           currentUser={currentUser}
           currentTenant={currentTenant}

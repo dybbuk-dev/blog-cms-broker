@@ -23,11 +23,9 @@ import { Theme } from '@mui/material/styles';
 import MDBox from 'src/mui/components/MDBox';
 
 // Material Dashboard 2 PRO React TS examples components
-import DefaultNavbar from 'src/mui/examples/Navbars/DefaultNavbar';
 import PageLayout from 'src/mui/examples/LayoutContainers/PageLayout';
 
 // Material Dashboard 2 PRO React page layout routes
-import pageRoutes from 'src/mui/page.routes';
 
 // Authentication pages components
 import Footer from 'src/mui/layouts/authentication/components/Footer';
@@ -43,11 +41,13 @@ function BasicLayout({
   children,
 }: Props): JSX.Element {
   return (
-    <PageLayout>
+    <PageLayout background="light">
       <MDBox
-        position="absolute"
-        width="100%"
-        minHeight="100vh"
+        position="fixed"
+        left="0"
+        right="0"
+        top="0"
+        bottom="0"
         sx={{
           backgroundImage: ({
             functions: { linearGradient, rgba },
@@ -63,7 +63,7 @@ function BasicLayout({
           backgroundRepeat: 'no-repeat',
         }}
       />
-      <MDBox px={1} width="100%" height="100vh" mx="auto">
+      <MDBox px={1} height="100vh" mx="auto">
         <Grid
           container
           spacing={1}

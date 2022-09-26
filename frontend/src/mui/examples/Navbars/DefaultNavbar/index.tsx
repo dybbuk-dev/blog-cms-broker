@@ -146,22 +146,25 @@ function DefaultNavbar({
   }, []);
 
   const renderNavbarItems = routes.map(
-    ({ name, icon, href, route, collapse }: any) => (
+    ({ name, icon, href, route, children }: any) => (
       <DefaultNavbarDropdown
         key={name}
         name={name}
         icon={icon}
         href={href}
         route={route}
-        collapse={Boolean(collapse)}
+        collapse={Boolean(children && children.length)}
         onMouseEnter={({ currentTarget }: any) => {
-          if (collapse) {
+          if (Boolean(children && children.length)) {
             setDropdown(currentTarget);
             setDropdownEl(currentTarget);
             setDropdownName(name);
           }
         }}
-        onMouseLeave={() => collapse && setDropdown(null)}
+        onMouseLeave={() =>
+          Boolean(children && children.length) &&
+          setDropdown(null)
+        }
         light={light}
       />
     ),
@@ -169,12 +172,12 @@ function DefaultNavbar({
 
   // Render the routes on the dropdown menu
   const renderRoutes = routes.map(
-    ({ name, collapse, columns, rowsPerColumn }: any) => {
+    ({ name, children, columns, rowsPerColumn }: any) => {
       let template;
 
       // Render the dropdown menu that should be display as columns
-      if (collapse && columns && name === dropdownName) {
-        const calculateColumns = collapse.reduce(
+      if (children && columns && name === dropdownName) {
+        const calculateColumns = children.reduce(
           (resultArray: any, item: any, index: any) => {
             const chunkIndex = Math.floor(
               index / rowsPerColumn,
@@ -219,20 +222,22 @@ function DefaultNavbar({
                         py={1}
                         mt={index !== 0 ? 2 : 0}
                       >
-                        <MDBox
-                          display="flex"
-                          justifyContent="center"
-                          alignItems="center"
-                          width="1.5rem"
-                          height="1.5rem"
-                          borderRadius="md"
-                          color="text"
-                          mr={1}
-                          fontSize="1rem"
-                          lineHeight={1}
-                        >
-                          {col.icon}
-                        </MDBox>
+                        {col.icon && (
+                          <MDBox
+                            display="flex"
+                            justifyContent="center"
+                            alignItems="center"
+                            width="1.5rem"
+                            height="1.5rem"
+                            borderRadius="md"
+                            color="text"
+                            mr={1}
+                            fontSize="1rem"
+                            lineHeight={1}
+                          >
+                            {col.icon}
+                          </MDBox>
+                        )}
                         <MDTypography
                           display="block"
                           variant="button"
@@ -242,7 +247,7 @@ function DefaultNavbar({
                           {col.name}
                         </MDTypography>
                       </MDBox>
-                      {col.collapse.map((item: any) => (
+                      {col.children.map((item: any) => (
                         <MDTypography
                           key={item.name}
                           component={
@@ -308,8 +313,8 @@ function DefaultNavbar({
         );
 
         // Render the dropdown menu that should be display as list items
-      } else if (collapse && name === dropdownName) {
-        template = collapse.map((item: any) => {
+      } else if (children && name === dropdownName) {
+        template = children.map((item: any) => {
           const linkComponent = {
             component: MuiLink,
             href: item.href,
@@ -379,12 +384,18 @@ function DefaultNavbar({
                   fontSize="1rem"
                   color="text"
                 >
-                  {typeof item.icon === 'string' ? (
-                    <Icon color="inherit">{item.icon}</Icon>
-                  ) : (
-                    <MDBox color="inherit">
-                      {item.icon}
-                    </MDBox>
+                  {item.icon && (
+                    <>
+                      {typeof item.icon === 'string' ? (
+                        <Icon color="inherit">
+                          {item.icon}
+                        </Icon>
+                      ) : (
+                        <MDBox color="inherit">
+                          {item.icon}
+                        </MDBox>
+                      )}
+                    </>
                   )}
                   <MDBox pl={1} lineHeight={0}>
                     <MDTypography
@@ -410,11 +421,13 @@ function DefaultNavbar({
                   alignItems="center"
                   color="text"
                 >
-                  <Icon sx={{ mr: 1 }}>{item.icon}</Icon>
+                  {item.icon && (
+                    <Icon sx={{ mr: 1 }}>{item.icon}</Icon>
+                  )}
                   {item.name}
                 </MDBox>
               )}
-              {item.collapse && (
+              {item.children && (
                 <Icon
                   sx={{
                     fontWeight: 'normal',
@@ -440,7 +453,7 @@ function DefaultNavbar({
       anchorEl={dropdown}
       popperRef={null}
       open={Boolean(dropdown)}
-      placement="top-start"
+      placement="bottom-start"
       transition
       style={{ zIndex: 10 }}
       modifiers={[
@@ -491,12 +504,12 @@ function DefaultNavbar({
 
   // Render routes that are nested inside the dropdown menu routes
   const renderNestedRoutes = routes.map(
-    ({ collapse, columns }: any) =>
-      collapse && !columns
-        ? collapse.map(
+    ({ children, columns }: any) =>
+      children && !columns
+        ? children.map(
             ({
               name: parentName,
-              collapse: nestedCollapse,
+              children: nestedCollapse,
             }: any) => {
               let template;
 
@@ -579,7 +592,7 @@ function DefaultNavbar({
                         ) : (
                           item.name
                         )}
-                        {item.collapse && (
+                        {item.children && (
                           <Icon
                             fontSize="small"
                             sx={{
@@ -706,7 +719,7 @@ function DefaultNavbar({
           m={0}
           p={0}
         >
-          {/* {renderNavbarItems} */}
+          {renderNavbarItems}
         </MDBox>
         {action &&
           (action.type === 'internal' ? (

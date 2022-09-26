@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 */
 
 import { useEffect, ReactNode } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // react-router-dom components
 import { useLocation } from 'react-router-dom';
@@ -24,12 +24,13 @@ import MDBox from 'src/mui/components/MDBox';
 
 // for MUI 2 Dashboard
 import muiActions from 'src/modules/mui/muiActions';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import navigationHomeSelectors from 'src/modules/navigation/home/navigationHomeSelectors';
+import DefaultNavbar from 'src/mui/examples/Navbars/DefaultNavbar';
 
 // Declaring props types for PageLayout
 interface Props {
   background?: 'white' | 'light' | 'default';
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 function PageLayout({
@@ -39,18 +40,31 @@ function PageLayout({
   const dispatch = useDispatch();
   const { pathname } = useLocation();
 
+  const loading = useSelector(
+    navigationHomeSelectors.selectLoading,
+  );
+  const navigation = useSelector(
+    navigationHomeSelectors.selectNavigation,
+  );
+
   useEffect(() => {
     dispatch(muiActions.doLayout('page'));
   }, [pathname]);
 
   return (
     <MDBox
-      width="100vw"
       height="100%"
       minHeight="100vh"
       bgColor={background}
       sx={{ overflowX: 'hidden' }}
     >
+      {!loading && (
+        <DefaultNavbar
+          routes={navigation}
+          transparent
+          light={background === 'light'}
+        />
+      )}
       {children}
     </MDBox>
   );

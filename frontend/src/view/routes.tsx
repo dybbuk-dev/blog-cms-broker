@@ -1211,19 +1211,23 @@ const publicRoutes = [
   {
     path: '/',
     loader: () => import('src/view/home/FirstPage'),
+    exact: true,
   },
   {
     path: '/admin/auth/signin',
     loader: () => import('src/view/auth/SigninPage'),
+    exact: true,
   },
   {
     path: '/admin/auth/signup',
     loader: () => import('src/view/auth/SignupPage'),
+    exact: true,
   },
   {
     path: '/admin/auth/forgot-password',
     loader: () =>
       import('src/view/auth/ForgotPasswordPage'),
+    exact: true,
   },
 ].filter(Boolean);
 

@@ -42,6 +42,7 @@ import MDBox from 'src/mui/components/MDBox';
 
 import lightColors from 'src/mui/assets/theme/base/colors';
 import darkColors from 'src/mui/assets/theme-dark/base/colors';
+import navigationHomeActions from 'src/modules/navigation/home/navigationHomeActions';
 
 const store = configureStore();
 
@@ -56,6 +57,8 @@ export default function App(props) {
 function AppWithRedux(props) {
   const { direction, darkMode } = selectMuiSettings();
 
+  const dispatch = useDispatch();
+
   const [rtlCache, setRtlCache] = useState(null);
 
   // Cache for the rtl
@@ -67,6 +70,8 @@ function AppWithRedux(props) {
     });
 
     setRtlCache(cacheRtl);
+
+    dispatch(navigationHomeActions.doFetch());
   }, []);
 
   return direction === 'rtl' ? (

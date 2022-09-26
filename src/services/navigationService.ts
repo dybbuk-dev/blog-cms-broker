@@ -120,7 +120,10 @@ export default class NavigationService {
   }
 
   async findById(id) {
-    return NavigationRepository.findById(id, this.options);
+    return await NavigationRepository.findById(
+      id,
+      this.options,
+    );
   }
 
   async findAllAutocomplete(
@@ -140,7 +143,7 @@ export default class NavigationService {
           );
       }
     }
-    return NavigationRepository.findAllAutocomplete(
+    return await NavigationRepository.findAllAutocomplete(
       search,
       limit,
       this.options,
@@ -150,8 +153,14 @@ export default class NavigationService {
   }
 
   async findAndCountAll(args) {
-    return NavigationRepository.findAndCountAll(
+    return await NavigationRepository.findAndCountAll(
       args,
+      this.options,
+    );
+  }
+
+  async findForHome() {
+    return await NavigationRepository.findForHome(
       this.options,
     );
   }
