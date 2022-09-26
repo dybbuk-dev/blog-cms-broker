@@ -1,4 +1,13 @@
 export default (app) => {
+  // #region front-end APIs
+  app.get(`/blog`, require('./blogHome').default);
+  app.post(
+    `/individual-blog`,
+    require('./blogContent').default,
+  );
+  // #endregion
+
+  // #region back-end APIs
   app.post(
     `/tenant/:tenantId/blog`,
     require('./blogCreate').default,
@@ -27,4 +36,5 @@ export default (app) => {
     `/tenant/:tenantId/blog/:id`,
     require('./blogFind').default,
   );
+  // #endregion
 };

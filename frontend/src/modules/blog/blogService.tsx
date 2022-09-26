@@ -76,6 +76,17 @@ export default class BlogService {
     return response.data;
   }
 
+  static async findByURL(url) {
+    const response = await authAxios.post(
+      `/individual-blog`,
+      {
+        url,
+      },
+    );
+    console.log(response.data);
+    return response.data;
+  }
+
   static async list(filter, orderBy, limit, offset) {
     const params = {
       filter,
@@ -110,6 +121,19 @@ export default class BlogService {
         params,
       },
     );
+
+    return response.data;
+  }
+
+  static async findBlogList(limit, offset) {
+    const params = {
+      limit,
+      offset,
+    };
+
+    const response = await authAxios.get(`/blog`, {
+      params,
+    });
 
     return response.data;
   }

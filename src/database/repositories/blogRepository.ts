@@ -196,6 +196,36 @@ class BlogRepository {
     );
   }
 
+  static async findByURL(url, options: IRepositoryOptions) {
+    const transaction =
+      SequelizeRepository.getTransaction(options);
+    const include = [
+      {
+        model: options.database.author,
+        as: 'author',
+      },
+      {
+        model: options.database.blog_comment,
+        as: 'blog_comment',
+      },
+    ];
+    let record = await options.database.blog_entry.findOne({
+      where: {
+        name_normalized: url.substring(
+          url.lastIndexOf('/') + 1,
+        ),
+      },
+      include,
+      transaction,
+    });
+
+    return this._fillWithRelationsAndFiles(
+      record,
+      options,
+      false,
+    );
+  }
+
   static async filterIdInTenant(
     id,
     options: IRepositoryOptions,
@@ -498,18 +528,44 @@ class BlogRepository {
           transaction,
         }),
       );
-
     const { rows: blog_broker } =
       await BlogBrokerRepository.findAndCountAll(
         blogParam,
         options,
       );
-
     output.brokers =
       blog_broker.map((v) => ({
         id: v.broker_id,
       })) || [];
     return output;
+  }
+
+  static async findBlogList(
+    { limit = 0, offset = 0 },
+    options: IRepositoryOptions,
+  ) {
+    const whereAnd: Array<any> = [
+      {
+        activated: true,
+      },
+    ];
+    const where = { [Op.and]: whereAnd };
+    let { rows, count } =
+      await options.database.blog_entry.findAndCountAll({
+        where,
+        limit: limit ? Number(limit) : undefined,
+        offset: offset ? Number(offset) : undefined,
+        order: [['id', 'DESC']],
+        transaction:
+          SequelizeRepository.getTransaction(options),
+      });
+
+    rows = await this._fillWithRelationsAndFilesForRows(
+      rows,
+      options,
+      false,
+    );
+    return { rows, count };
   }
 }
 
