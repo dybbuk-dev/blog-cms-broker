@@ -154,8 +154,14 @@ function DefaultNavbar({
         key={name}
         name={name}
         icon={icon}
-        href={href}
-        route={route}
+        href={
+          Boolean(children && children.length) ? null : href
+        }
+        route={
+          Boolean(children && children.length)
+            ? null
+            : route
+        }
         collapse={Boolean(children && children.length)}
         onMouseEnter={({ currentTarget }: any) => {
           if (Boolean(children && children.length)) {
