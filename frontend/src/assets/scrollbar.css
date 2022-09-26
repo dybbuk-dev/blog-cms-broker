@@ -6,6 +6,10 @@
   display: none !important;
 }
 
+body {
+  overflow-y: scroll;
+}
+
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
 * {
