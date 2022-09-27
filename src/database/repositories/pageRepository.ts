@@ -10,6 +10,7 @@ import { orderByUtils } from '../utils/orderByUtils';
 import FileRepository from './fileRepository';
 import PageRelatedLinkRepository from './pageRelatedLinkRepository';
 import NavigationRepositoryEx from './extends/navigationRepositoryEx';
+import AuthorRepository from './authorRepository';
 
 const Op = Sequelize.Op;
 
@@ -228,6 +229,11 @@ class PageRepository {
       {
         model: options.database.author,
         as: 'author',
+        include: {
+          model: options.database.file,
+          as: 'author_image',
+          separate: true,
+        },
       },
       {
         model: options.database.navigation,
@@ -563,11 +569,19 @@ class PageRepository {
     if (metaOnly) {
       return output;
     }
+
+    output.author =
+      await AuthorRepository._fillWithRelationsAndFiles(
+        record.author,
+        options,
+      );
+
     const pageParam = {
       filter: {
         page_id: output.id,
       },
     };
+
     const transaction =
       SequelizeRepository.getTransaction(options);
 
@@ -577,6 +591,7 @@ class PageRepository {
           transaction,
         }),
       );
+
     const { rows: related_links } =
       await PageRelatedLinkRepository.findAndCountAll(
         pageParam,
@@ -584,6 +599,7 @@ class PageRepository {
       );
 
     output.related_links = related_links || null;
+
     return output;
   }
 }

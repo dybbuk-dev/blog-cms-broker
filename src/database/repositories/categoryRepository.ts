@@ -7,6 +7,7 @@ import SequelizeRepository from './sequelizeRepository';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import CategoryDescriptionRepository from './categoryDescriptionRepository';
 import { orderByUtils } from '../utils/orderByUtils';
+import AuthorRepository from './authorRepository';
 
 const Op = Sequelize.Op;
 
@@ -175,6 +176,11 @@ class CategoryRepository {
       {
         model: options.database.author,
         as: 'author',
+        include: {
+          model: options.database.file,
+          as: 'author_image',
+          separate: true,
+        },
       },
     ];
 
@@ -466,6 +472,12 @@ class CategoryRepository {
 
     const transaction =
       SequelizeRepository.getTransaction(options);
+
+    output.author =
+      await AuthorRepository._fillWithRelationsAndFiles(
+        record.author,
+        options,
+      );
 
     return output;
   }
