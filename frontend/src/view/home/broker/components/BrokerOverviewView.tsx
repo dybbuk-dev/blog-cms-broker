@@ -8,8 +8,13 @@ import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import ImageView from 'src/view/home/ImageView';
+import MDButton from 'src/mui/components/MDButton';
+import SendIcon from '@mui/icons-material/Send';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 
 function BrokerOverviewView({ record }) {
+  const { sidenavColor } = selectMuiSettings();
+  console.log(record);
   return (
     <Grid spacing={2} container>
       <Grid xs={12} item>
@@ -181,7 +186,57 @@ function BrokerOverviewView({ record }) {
               </MaterialLink>
             </MDTypography>
           ))}
+
+        <MDTypography variant="h4" mt={2}>
+          {i18n('entities.broker.fields.specialties')}
+        </MDTypography>
+        {(record.features || []).map((v) => (
+          <MDTypography
+            key={v.id}
+            variant="body2"
+            fontWeight="regular"
+            lineHeight="1.25"
+            position="relative"
+            my={1}
+            pl={3}
+          >
+            <MaterialLink
+              href={v.url}
+              target="_blank"
+              underline="hover"
+            >
+              {`${v.feature}`}
+            </MaterialLink>
+          </MDTypography>
+        ))}
       </Grid>
+      <Grid md={6} xs={12} item>
+        <MDButton
+          variant="contained"
+          href={record.meta?.homepage}
+          target="_blank"
+          color={sidenavColor}
+          startIcon={<SendIcon />}
+        >
+          {i18n('entities.broker.text.nowTo', record.name)}
+        </MDButton>
+      </Grid>
+      <Grid md={6} xs={12} item>
+        <MDButton
+          variant="contained"
+          target="_blank"
+          href={record.meta?.demo_url}
+          color="primary"
+          startIcon={<SendIcon />}
+        >
+          {i18n('entities.broker.text.freeDemoAccount')}
+        </MDButton>
+      </Grid>
+      <MDTypography variant="h2" py={3}>
+        {i18n(
+          'entities.broker.text.activeTraderExperience',
+        )}
+      </MDTypography>
     </Grid>
   );
 }
