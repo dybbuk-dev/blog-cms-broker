@@ -57,6 +57,7 @@ const BlogListPage = () => {
                   >
                     <img
                       src={record.blog_image[0].downloadUrl}
+                      width="150px"
                     />
                     <MDBox color="text">
                       <MDTypography variant="h4">

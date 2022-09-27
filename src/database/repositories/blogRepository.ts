@@ -207,6 +207,12 @@ class BlogRepository {
       {
         model: options.database.blog_comment,
         as: 'blog_comment',
+        where: {
+          deleted: 0,
+          spam: 0,
+          review_required: 0,
+        },
+        separate: true,
       },
     ];
     let record = await options.database.blog_entry.findOne({

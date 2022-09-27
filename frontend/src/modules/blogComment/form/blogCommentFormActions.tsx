@@ -64,7 +64,7 @@ const blogCommentFormActions = {
         i18n('entities.blogComment.create.success'),
       );
 
-      getHistory().push('/admin/blog-comment');
+      // getHistory().push('/');
     } catch (error) {
       Errors.handle(error);
 
