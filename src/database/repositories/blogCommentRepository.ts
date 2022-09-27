@@ -26,8 +26,11 @@ class BlogCommentRepository {
         {
           ...lodash.pick(data, this.ALL_FIELDS),
           ...this._relatedData(data),
-          created: data.created ? data.created : moment(),
-          modified: data.created ? data.created : moment(),
+          blog_entry_id: data.blog_entry_id,
+          email: data.email,
+          review_required: 1,
+          created: moment(),
+          modified: moment(),
         },
         {
           transaction,
