@@ -77,10 +77,34 @@ function BrokerListTable(props) {
                   'entities.broker.fields.minimum_deposit',
                 )}
               </DataTableHeadCell>
-              <DataTableHeadCell sorted={false}>
+              <DataTableHeadCell
+                onClick={() =>
+                  doChangeSort(
+                    'broker_rating.overall_reviews',
+                  )
+                }
+                sorted={
+                  sorter.field ===
+                  'broker_rating.overall_reviews'
+                    ? sorter.order
+                    : 'none'
+                }
+              >
                 {i18n('entities.brokerPost.fields.review')}
               </DataTableHeadCell>
-              <DataTableHeadCell sorted={false}>
+              <DataTableHeadCell
+                onClick={() =>
+                  doChangeSort(
+                    'broker_rating.overall_rating',
+                  )
+                }
+                sorted={
+                  sorter.field ===
+                  'broker_rating.overall_rating'
+                    ? sorter.order
+                    : 'none'
+                }
+              >
                 {i18n('entities.brokerPost.fields.rating')}
               </DataTableHeadCell>
               <DataTableHeadCell sorted={false}>
