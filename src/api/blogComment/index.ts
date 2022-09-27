@@ -1,8 +1,13 @@
 export default (app) => {
+  // #region front-end APIs
   app.post(
-    `/tenant/:tenantId/blog-comment`,
+    `/blog-comment`,
     require('./blogCommentCreate').default,
   );
+  // #endregion
+
+  // #region back-end APIs
+
   app.put(
     `/tenant/:tenantId/blog-comment/:id`,
     require('./blogCommentUpdate').default,
@@ -35,4 +40,5 @@ export default (app) => {
     `/tenant/:tenantId/blog-comment/:id`,
     require('./blogCommentFind').default,
   );
+  // #endregion
 };
