@@ -70,10 +70,8 @@ export default class BlogCommentService {
       data,
     };
 
-    const tenantId = AuthCurrentTenant.get();
-
     const response = await authAxios.post(
-      `/tenant/${tenantId}/blog-comment`,
+      `/blog-comment`,
       body,
     );
 
@@ -139,6 +137,14 @@ export default class BlogCommentService {
       },
     );
 
+    return response.data;
+  }
+
+  static async commentList() {
+    const response = await authAxios.get(
+      `/comment-list`,
+      {},
+    );
     return response.data;
   }
 }
