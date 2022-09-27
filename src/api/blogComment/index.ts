@@ -4,6 +4,10 @@ export default (app) => {
     `/blog-comment`,
     require('./blogCommentCreate').default,
   );
+  app.get(
+    `/comment-list`,
+    require('./blogCommentHome').default,
+  );
   // #endregion
 
   // #region back-end APIs
