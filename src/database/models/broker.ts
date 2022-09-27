@@ -193,6 +193,10 @@ export default function (sequelize) {
       as: 'meta',
       foreignKey: 'id',
     });
+    models.broker.hasOne(models.broker_rating, {
+      as: 'rating',
+      foreignKey: 'id',
+    });
     models.broker.hasOne(models.broker_phone, {
       as: 'phone',
       foreignKey: 'broker_id',

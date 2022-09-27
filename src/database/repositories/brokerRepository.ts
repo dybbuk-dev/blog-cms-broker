@@ -66,6 +66,10 @@ class BrokerRepository {
         model: options.database.broker_metas,
         as: 'meta',
       },
+      {
+        model: options.database.broker_rating,
+        as: 'rating',
+      },
       !metaOnly && {
         model: options.database.navigation,
         as: 'navigation',
@@ -434,6 +438,18 @@ class BrokerRepository {
         }
       }
 
+      if (filter.category) {
+        whereAnd.push({
+          id: {
+            [Op.in]:
+              await BrokersCategoryRepository.filterBrokerIdsByCatId(
+                filter.category,
+                options,
+              ),
+          },
+        });
+      }
+
       if (filter.parent) {
         whereAnd.push({
           ['parent_id']: filter.parent,
@@ -615,6 +631,22 @@ class BrokerRepository {
 
     output.categories = categories;
 
+    output.broker_image_broker_logo =
+      await FileRepository.fillDownloadUrl(
+        await record.getBroker_image_broker_logo({
+          transaction,
+        }),
+      );
+
+    const { rows: regulatory_authorities } =
+      await BrokerRegulatoryAuthorityRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.regulatory_authorities =
+      regulatory_authorities || null;
+
     if (metaOnly) {
       return output;
     }
@@ -645,13 +677,6 @@ class BrokerRepository {
         ),
       );
 
-    output.broker_image_broker_logo =
-      await FileRepository.fillDownloadUrl(
-        await record.getBroker_image_broker_logo({
-          transaction,
-        }),
-      );
-
     output.broker_image_broker_detail_logo =
       await FileRepository.fillDownloadUrl(
         await record.getBroker_image_broker_detail_logo({
@@ -667,15 +692,6 @@ class BrokerRepository {
       );
 
     output.upsides = upsides || null;
-
-    const { rows: regulatory_authorities } =
-      await BrokerRegulatoryAuthorityRepository.findAndCountAll(
-        brokerParam,
-        options,
-      );
-
-    output.regulatory_authorities =
-      regulatory_authorities || null;
 
     const { rows: deposit_guarantees } =
       await BrokerDepositGuaranteeRepository.findAndCountAll(

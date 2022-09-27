@@ -122,6 +122,30 @@ class BrokersCategoryRepository {
 
     return { rows, count };
   }
+
+  static async filterBrokerIdsByCatId(
+    category_id,
+    options: IRepositoryOptions,
+  ) {
+    const records =
+      await options.database.brokers_category.findAll({
+        attributes: [
+          [
+            Sequelize.fn(
+              'DISTINCT',
+              Sequelize.col('broker_id'),
+            ),
+            'id',
+          ],
+        ],
+        where: {
+          category_id,
+        },
+      });
+    return records.map(
+      (record) => record.id || record.dataValues.id,
+    );
+  }
 }
 
 export default BrokersCategoryRepository;

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import AuthorView from 'src/view/shared/view/AuthorView';
+import BrokerListTable from 'src/view/home/broker/BrokerListTable';
 import categoryHomeActions from 'src/modules/category/home/categoryHomeActions';
 import categoryHomeSelectors from 'src/modules/category/home/categoryHomeSelectors';
 import HtmlView from 'src/view/shared/view/HtmlView';
@@ -57,6 +58,7 @@ const GeneralPage = () => {
                 {category.teaser && (
                   <HtmlView value={category.teaser} />
                 )}
+                <BrokerListTable category={category.id} />
                 {category.description && (
                   <HtmlView value={category.description} />
                 )}

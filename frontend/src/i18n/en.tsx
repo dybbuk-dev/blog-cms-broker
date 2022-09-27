@@ -442,7 +442,7 @@ const en = {
         maximum_leverage: 'Maximum Leverage',
         minimum_deposit: 'Minimum Deposit',
         minimum_deposit_short:
-          'Minimum deposit (short for overview)',
+          'Minimum Deposit (Short For Overview)',
         custodian_fees: 'Custody Fees',
         mobile_trading: 'Mobile Trading',
         phone_order: 'Telephone Trading',
@@ -460,6 +460,7 @@ const en = {
         // #endregion
 
         // #region Regulatory Authority
+        regulation: 'Regulation',
         regulatory_authorities: 'Regulatory Authorities',
         regulatory_authority: {
           name: 'Name',
