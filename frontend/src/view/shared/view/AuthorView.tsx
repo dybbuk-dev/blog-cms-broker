@@ -44,7 +44,7 @@ function AuthorView(props) {
 }
 
 AuthorView.propTypes = {
-  value: PropTypes.object.isRequired,
+  value: PropTypes.object,
 };
 
 export default AuthorView;

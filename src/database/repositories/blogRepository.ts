@@ -303,7 +303,7 @@ class BlogRepository {
           ],
         ],
         separate: true,
-        limit: 1,
+        group: ['blog_entry_id'],
       },
     ];
     if (filter) {
