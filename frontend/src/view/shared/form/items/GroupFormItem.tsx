@@ -287,12 +287,12 @@ function GroupFormItem(props) {
                     ...rest
                   }) => (
                     <GroupInputFormItem
-                      key={`${idx}-${name}`}
+                      key={`${groupName}-${idx}-${name}`}
                       GroupInput={input}
                       fullWidth={fullWidth}
                       index={idx}
                       label={label}
-                      name={name}
+                      name={`${groupName}-${name}`}
                       required={required}
                       value={val[name]}
                       variant={variant || 'standard'}
