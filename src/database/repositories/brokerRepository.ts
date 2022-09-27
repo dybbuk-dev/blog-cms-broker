@@ -502,7 +502,11 @@ class BrokerRepository {
         limit: limit ? Number(limit) : undefined,
         offset: offset ? Number(offset) : undefined,
         order: orderBy
-          ? [orderByUtils(orderBy)]
+          ? [
+              orderByUtils(orderBy, options, {
+                broker_rating: 'rating',
+              }),
+            ]
           : [['id', 'DESC']],
         transaction:
           SequelizeRepository.getTransaction(options),

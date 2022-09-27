@@ -98,7 +98,7 @@ class PageRelatedLinkRepository {
           limit: limit ? Number(limit) : undefined,
           offset: offset ? Number(offset) : undefined,
           order: orderBy
-            ? [orderByUtils(orderBy)]
+            ? [orderByUtils(orderBy, options)]
             : [['id', 'ASC']],
           transaction:
             SequelizeRepository.getTransaction(options),
