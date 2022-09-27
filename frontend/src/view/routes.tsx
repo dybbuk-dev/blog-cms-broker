@@ -1291,6 +1291,11 @@ const simpleRoutes = [
     loader: () => import('src/view/home/BlogDetailPage'),
   },
   {
+    path: '/erfahrungsberichte/**',
+    loader: () =>
+      import('src/view/home/broker/BrokerViewPage'),
+  },
+  {
     path: '**',
     loader: () => import('src/view/home/GeneralPage'),
   },

@@ -777,11 +777,21 @@ export default class BrokerService {
   }
 
   async findById(id) {
-    return BrokerRepository.findById(id, this.options);
+    return await BrokerRepository.findById(
+      id,
+      this.options,
+    );
+  }
+
+  async findByURL(url) {
+    return await BrokerRepository.findByURL(
+      url,
+      this.options,
+    );
   }
 
   async findAllAutocomplete(search, limit) {
-    return BrokerRepository.findAllAutocomplete(
+    return await BrokerRepository.findAllAutocomplete(
       search,
       limit,
       this.options,
@@ -789,7 +799,7 @@ export default class BrokerService {
   }
 
   async findAndCountAll(args) {
-    return BrokerRepository.findAndCountAll(
+    return await BrokerRepository.findAndCountAll(
       args,
       this.options,
     );

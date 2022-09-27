@@ -798,6 +798,12 @@ const en = {
         fileName: 'broker_import_template',
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },
+      text: {
+        rating:
+          '{0} out of {1} points from {2} reviews from traders',
+        nowTo: 'Now to {0}',
+        upsides: 'Conclusion from trader reviews',
+      },
     },
 
     brokerArticle: {

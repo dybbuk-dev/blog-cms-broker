@@ -357,6 +357,31 @@ class BrokerRepository {
     );
   }
 
+  static async findByURL(url, options: IRepositoryOptions) {
+    const transaction =
+      SequelizeRepository.getTransaction(options);
+
+    const include = this.includes(options);
+
+    const record = await options.database.broker.findOne({
+      where: {
+        name_normalized: url,
+      },
+      include,
+      transaction,
+    });
+
+    if (!record) {
+      throw new Error404();
+    }
+
+    return this._fillWithRelationsAndFiles(
+      record,
+      options,
+      false,
+    );
+  }
+
   static async filterIdInTenant(
     id,
     options: IRepositoryOptions,

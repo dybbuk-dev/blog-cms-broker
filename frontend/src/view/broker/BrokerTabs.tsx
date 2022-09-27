@@ -3,23 +3,27 @@ import { i18n } from 'src/i18n';
 
 interface BrokerTabsProps {
   orientation?: 'horizontal' | 'vertical';
+  labels?: string[];
   value?: number;
   onChange?: any;
   broker?: number;
 }
 
 function BrokerTabs(props: BrokerTabsProps) {
-  const { orientation, value, onChange, broker } = props;
+  const { orientation, value, onChange, labels, broker } =
+    props;
   const tabLabels = [
-    'broker',
-    'overview',
-    'characteristics',
-    'platform',
-    'markets',
-    'spreads',
-    'service',
-    'test',
-    'old',
+    ...(labels || [
+      'broker',
+      'overview',
+      'characteristics',
+      'platform',
+      'markets',
+      'spreads',
+      'service',
+      'test',
+      'old',
+    ]),
     broker && 'articles',
   ].filter(Boolean);
   return (

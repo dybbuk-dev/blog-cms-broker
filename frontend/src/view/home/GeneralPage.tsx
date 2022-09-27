@@ -52,7 +52,7 @@ const GeneralPage = () => {
           {dispatched && !loading && category && (
             <>
               <PageContent>
-                <MDTypography variant="h1">
+                <MDTypography variant="h2">
                   {category.title}
                 </MDTypography>
                 {category.teaser && (

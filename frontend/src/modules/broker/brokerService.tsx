@@ -76,6 +76,14 @@ export default class BrokerService {
     return response.data;
   }
 
+  static async view(url) {
+    const response = await authAxios.post('/broker', {
+      url: url.replace(/^\/erfahrungsberichte\//g, ''),
+    });
+
+    return response.data;
+  }
+
   static async home(filter, orderBy, limit, offset) {
     const params = {
       filter,

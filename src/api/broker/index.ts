@@ -1,6 +1,7 @@
 export default (app) => {
   // #region front-end APIs
-  app.get(`/broker`, require('./brokerHome').default);
+  app.get('/broker', require('./brokerHome').default);
+  app.post('/broker', require('./brokerView').default);
   // #endregion
   // #region back-end APIs
   app.post(

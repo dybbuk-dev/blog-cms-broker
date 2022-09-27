@@ -1,6 +1,5 @@
 import BrokerService from 'src/modules/broker/brokerService';
 import Errors from 'src/modules/shared/error/errors';
-import { getHistory } from 'src/modules/store';
 
 const prefix = 'BROKER_VIEW';
 
@@ -9,13 +8,13 @@ const brokerViewActions = {
   FIND_SUCCESS: `${prefix}_FIND_SUCCESS`,
   FIND_ERROR: `${prefix}_FIND_ERROR`,
 
-  doFind: (id) => async (dispatch) => {
+  doFind: (url) => async (dispatch) => {
     try {
       dispatch({
         type: brokerViewActions.FIND_STARTED,
       });
 
-      const record = await BrokerService.find(id);
+      const record = await BrokerService.view(url);
 
       dispatch({
         type: brokerViewActions.FIND_SUCCESS,
@@ -27,8 +26,6 @@ const brokerViewActions = {
       dispatch({
         type: brokerViewActions.FIND_ERROR,
       });
-
-      getHistory().push('/admin/broker');
     }
   },
 };
