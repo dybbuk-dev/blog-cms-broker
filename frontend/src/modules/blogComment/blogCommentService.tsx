@@ -140,11 +140,15 @@ export default class BlogCommentService {
     return response.data;
   }
 
-  static async commentList() {
-    const response = await authAxios.get(
-      `/comment-list`,
-      {},
-    );
+  static async findCommentList(filter, limit, offset) {
+    const params = {
+      filter,
+      limit,
+      offset,
+    };
+    const response = await authAxios.get(`/comment-list`, {
+      params,
+    });
     return response.data;
   }
 }
