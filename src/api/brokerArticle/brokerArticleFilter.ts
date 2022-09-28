@@ -1,11 +1,11 @@
 import ApiResponseHandler from '../apiResponseHandler';
-import BrokerPostService from '../../services/brokerPostService';
+import BrokerArticleService from '../../services/brokerArticleService';
 
 export default async (req, res, next) => {
   try {
-    const payload = await new BrokerPostService(req).create(
-      req.body.data,
-    );
+    const payload = await new BrokerArticleService(
+      req,
+    ).findByFilter(req.body);
 
     await ApiResponseHandler.success(req, res, payload);
   } catch (error) {

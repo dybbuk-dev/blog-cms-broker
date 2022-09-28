@@ -6,6 +6,8 @@ import lodash from 'lodash';
 import Sequelize from 'sequelize';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import SequelizeRepository from './sequelizeRepository';
+import author from '../models/author';
+import AuthorRepository from './authorRepository';
 
 const Op = Sequelize.Op;
 
@@ -404,8 +406,45 @@ class BrokerArticleRepository {
 
     const transaction =
       SequelizeRepository.getTransaction(options);
-
+    output.author =
+      await AuthorRepository._fillWithRelationsAndFiles(
+        record.author,
+        options,
+      );
     return output;
+  }
+
+  static async findByFilter(
+    filter,
+    options: IRepositoryOptions,
+  ) {
+    const transaction =
+      SequelizeRepository.getTransaction(options);
+    const include = [
+      {
+        model: options.database.author,
+        as: 'author',
+        include: {
+          model: options.database.file,
+          as: 'author_image',
+          separate: true,
+        },
+      },
+    ];
+    const record =
+      await options.database.broker_article.findOne({
+        where: {
+          ...filter,
+        },
+        include,
+        transaction,
+      });
+
+    if (!record) {
+      throw new Error404();
+    }
+
+    return this._fillWithRelationsAndFiles(record, options);
   }
 }
 
