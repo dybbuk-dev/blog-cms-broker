@@ -113,4 +113,13 @@ export default class BrokerArticleService {
 
     return response.data;
   }
+
+  static async findByFilter(filter) {
+    const response = await authAxios.get(
+      `/broker-article`,
+      filter,
+    );
+
+    return response.data;
+  }
 }

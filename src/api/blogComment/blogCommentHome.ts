@@ -1,11 +1,11 @@
 import ApiResponseHandler from '../apiResponseHandler';
-import BrokerPostService from '../../services/brokerPostService';
+import BlogCommentService from '../../services/blogCommentService';
 
 export default async (req, res, next) => {
   try {
-    const payload = await new BrokerPostService(req).create(
-      req.body.data,
-    );
+    const payload = await new BlogCommentService(
+      req,
+    ).findAndCountAll(req.query);
 
     await ApiResponseHandler.success(req, res, payload);
   } catch (error) {

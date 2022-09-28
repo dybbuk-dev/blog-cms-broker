@@ -15,7 +15,7 @@ class BrokerPostRepository {
     'rating',
     'email',
     'created',
-    'content',
+    'review',
   ];
 
   static _relatedData(data) {
@@ -35,6 +35,13 @@ class BrokerPostRepository {
         {
           ...lodash.pick(data, this.ALL_FIELDS),
           ...this._relatedData(data),
+          broker_id: data.broker_id,
+          email: data.email || '',
+          review: data.review || '',
+          review_required: 1,
+          rating: data.rating || 0,
+          created: moment(),
+          modified: moment(),
         },
         {
           transaction,

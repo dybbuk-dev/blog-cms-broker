@@ -1,15 +1,21 @@
 import { Grid } from '@mui/material';
 import { i18n } from 'src/i18n';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import AttrTypography from 'src/view/home/broker/shared/AttrTypography';
+import BrokerArticlePage from 'src/view/home/broker/BrokerArticlePage';
 import BrokerAttrs from 'src/view/home/broker/shared/BrokerAttrs';
 import BrokerImages from 'src/view/home/broker/shared/BrokerImages';
+import BrokerPostPage from 'src/view/home/broker/BrokerPostPage';
 import BrokerUpsides from 'src/view/home/broker/shared/BrokerUpsides';
 import CheckboxViewItem from 'src/view/shared/view/CheckboxViewItem';
 import HtmlView from 'src/view/shared/view/HtmlView';
 import MDBox from 'src/mui/components/MDBox';
+import MDButton from 'src/mui/components/MDButton';
 import MDTypography from 'src/mui/components/MDTypography';
+import SendIcon from '@mui/icons-material/Send';
 
 function BrokerOverviewView({ record }) {
+  const { sidenavColor } = selectMuiSettings();
   return (
     <Grid spacing={2} container>
       <Grid xs={12} item>
@@ -80,6 +86,44 @@ function BrokerOverviewView({ record }) {
           }}
           filterFn={(v) => v.primary}
         />
+
+        <MDTypography variant="h4" mt={2}>
+          {i18n('entities.broker.fields.specialties')}
+        </MDTypography>
+        <BrokerAttrs
+          records={record.features}
+          attrs={{ link: 'url', title: 'feature' }}
+        />
+      </Grid>
+      <Grid md={6} xs={12} item>
+        <MDButton
+          variant="contained"
+          href={record.meta?.homepage}
+          target="_blank"
+          color={sidenavColor}
+          startIcon={<SendIcon />}
+          fullWidth
+        >
+          {i18n('entities.broker.text.nowTo', record.name)}
+        </MDButton>
+      </Grid>
+      <Grid md={6} xs={12} item>
+        <MDButton
+          variant="contained"
+          target="_blank"
+          href={record.meta?.demo_url}
+          color="primary"
+          startIcon={<SendIcon />}
+          fullWidth
+        >
+          {i18n('entities.broker.text.freeDemoAccount')}
+        </MDButton>
+      </Grid>
+      <Grid xs={12} item>
+        <BrokerPostPage record={record} />
+      </Grid>
+      <Grid xs={12} item>
+        <BrokerArticlePage record={record} />
       </Grid>
     </Grid>
   );

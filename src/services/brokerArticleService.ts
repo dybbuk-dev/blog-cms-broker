@@ -135,6 +135,13 @@ export default class BrokerArticleService {
     );
   }
 
+  async findByFilter(filter) {
+    return BrokerArticleRepository.findByFilter(
+      filter,
+      this.options,
+    );
+  }
+
   async findAllAutocomplete(search, limit) {
     return BrokerArticleRepository.findAllAutocomplete(
       search,

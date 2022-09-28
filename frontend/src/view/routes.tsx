@@ -1294,11 +1294,12 @@ const simpleRoutes = [
   },
   {
     path: '/blog',
-    loader: () => import('src/view/home/BlogListPage'),
+    loader: () => import('src/view/home/blog/BlogListPage'),
   },
   {
     path: '/blog/**',
-    loader: () => import('src/view/home/BlogDetailPage'),
+    loader: () =>
+      import('src/view/home/blog/BlogDetailPage'),
   },
   {
     path: '/erfahrungsberichte/**',

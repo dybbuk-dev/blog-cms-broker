@@ -11,6 +11,7 @@ import FileRepository from './fileRepository';
 import BlogBrokerRepository from './blogBrokerRepository';
 import BrokerRepository from './brokerRepository';
 import BlogCommentRepository from './blogCommentRepository';
+import AuthorRepository from './authorRepository';
 const Op = Sequelize.Op;
 
 class BlogRepository {
@@ -203,16 +204,11 @@ class BlogRepository {
       {
         model: options.database.author,
         as: 'author',
-      },
-      {
-        model: options.database.blog_comment,
-        as: 'blog_comment',
-        where: {
-          deleted: 0,
-          spam: 0,
-          review_required: 0,
+        include: {
+          model: options.database.file,
+          as: 'author_image',
+          separate: true,
         },
-        separate: true,
       },
     ];
     let record = await options.database.blog_entry.findOne({
@@ -518,7 +514,11 @@ class BlogRepository {
     if (metaOnly) {
       return output;
     }
-
+    output.author =
+      await AuthorRepository._fillWithRelationsAndFiles(
+        record.author,
+        options,
+      );
     const blogParam = {
       filter: {
         blog_entry_id: output.id,

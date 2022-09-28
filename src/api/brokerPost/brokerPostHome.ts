@@ -3,9 +3,9 @@ import BrokerPostService from '../../services/brokerPostService';
 
 export default async (req, res, next) => {
   try {
-    const payload = await new BrokerPostService(req).create(
-      req.body.data,
-    );
+    const payload = await new BrokerPostService(
+      req,
+    ).findAndCountAll(req.query);
 
     await ApiResponseHandler.success(req, res, payload);
   } catch (error) {

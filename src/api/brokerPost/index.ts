@@ -1,4 +1,16 @@
 export default (app) => {
+  // #region front-end APIs
+  app.post(
+    `/broker-post`,
+    require('./brokerPostCreate').default,
+  );
+  app.get(
+    `/brokerPost-list`,
+    require('./brokerPostHome').default,
+  );
+  // #endregion
+
+  // #region back-end APIs
   app.post(
     `/tenant/:tenantId/broker-post`,
     require('./brokerPostCreate').default,
@@ -35,4 +47,5 @@ export default (app) => {
     `/tenant/:tenantId/broker-post/:id`,
     require('./brokerPostFind').default,
   );
+  // #endregion
 };
