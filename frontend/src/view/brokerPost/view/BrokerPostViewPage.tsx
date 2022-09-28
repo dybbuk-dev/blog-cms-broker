@@ -10,7 +10,7 @@ import { Card } from '@mui/material';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 
-function BrokerPostPage() {
+function BrokerPostViewPage() {
   const dispatch = useDispatch();
   const match = useRouteMatch();
 
@@ -47,4 +47,4 @@ function BrokerPostPage() {
   );
 }
 
-export default BrokerPostPage;
+export default BrokerPostViewPage;

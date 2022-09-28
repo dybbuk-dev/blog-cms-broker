@@ -2,8 +2,10 @@ import { Grid } from '@mui/material';
 import { i18n } from 'src/i18n';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import AttrTypography from 'src/view/home/broker/shared/AttrTypography';
+import BrokerArticlePage from 'src/view/home/broker/BrokerArticlePage';
 import BrokerAttrs from 'src/view/home/broker/shared/BrokerAttrs';
 import BrokerImages from 'src/view/home/broker/shared/BrokerImages';
+import BrokerPostPage from 'src/view/home/broker/BrokerPostPage';
 import BrokerUpsides from 'src/view/home/broker/shared/BrokerUpsides';
 import CheckboxViewItem from 'src/view/shared/view/CheckboxViewItem';
 import HtmlView from 'src/view/shared/view/HtmlView';
@@ -14,7 +16,6 @@ import SendIcon from '@mui/icons-material/Send';
 
 function BrokerOverviewView({ record }) {
   const { sidenavColor } = selectMuiSettings();
-  console.log(record);
   return (
     <Grid spacing={2} container>
       <Grid xs={12} item>
@@ -118,11 +119,12 @@ function BrokerOverviewView({ record }) {
           {i18n('entities.broker.text.freeDemoAccount')}
         </MDButton>
       </Grid>
-      <MDTypography variant="h2" py={3}>
-        {i18n(
-          'entities.broker.text.activeTraderExperience',
-        )}
-      </MDTypography>
+      <Grid xs={12} item>
+        <BrokerPostPage record={record} />
+      </Grid>
+      <Grid xs={12} item>
+        <BrokerArticlePage record={record} />
+      </Grid>
     </Grid>
   );
 }

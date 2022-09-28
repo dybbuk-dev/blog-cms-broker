@@ -63,8 +63,6 @@ const brokerPostFormActions = {
       Message.success(
         i18n('entities.brokerPost.create.success'),
       );
-
-      getHistory().push('/admin/broker-post');
     } catch (error) {
       Errors.handle(error);
 

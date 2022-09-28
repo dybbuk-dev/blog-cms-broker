@@ -141,4 +141,19 @@ export default class BrokerPostService {
 
     return response.data;
   }
+
+  static async findBrokerPostList(filter, limit, offset) {
+    const params = {
+      filter,
+      limit,
+      offset,
+    };
+    const response = await authAxios.get(
+      `/brokerPost-list`,
+      {
+        params,
+      },
+    );
+    return response.data;
+  }
 }

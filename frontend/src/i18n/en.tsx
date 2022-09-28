@@ -24,6 +24,7 @@ const en = {
     noDataToExport: 'No data to export',
     or: 'or',
     pause: 'Pause',
+    rating: 'Valuation',
     reset: 'Reset',
     review: 'Review',
     save: 'Save',
@@ -32,6 +33,7 @@ const en = {
     spam: 'Spam',
     start: 'Start',
     view: 'View',
+    writeReview: 'Write a review',
     yes: 'Yes',
   },
 
@@ -517,12 +519,20 @@ const en = {
         },
         // #endregion
 
-        // #region Spread
-        features: 'Specialties',
+        // #region particularities
+        specialties: 'Particularities',
         feature: {
-          feature: 'Special Feature',
+          feature: 'Particularities Feature',
           url: 'Homepage',
         },
+        // #endregion
+
+        // #region Specialties
+        features: 'Specialties',
+        // feature: {
+        //   feature: 'Special Feature',
+        //   url: 'Homepage',
+        // },
         // #endregion
 
         // #region Bank
@@ -823,6 +833,9 @@ const en = {
         rating:
           '{0} out of {1} points from {2} reviews from traders',
         nowTo: 'Now to {0}',
+        freeDemoAccount: 'Free demo account',
+        activeTraderExperience:
+          "ActivTrade's trader experiences",
         upsides: 'Conclusion from trader reviews',
       },
     },
