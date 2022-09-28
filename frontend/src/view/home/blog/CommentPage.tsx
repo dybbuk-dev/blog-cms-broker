@@ -5,9 +5,11 @@ import { i18n } from 'src/i18n';
 import { Link } from 'react-router-dom';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import actions from 'src/modules/blogComment/home/blogCommentHomeActions';
 import blogCommentFormActions from 'src/modules/blogComment/form/blogCommentFormActions';
 import blogCommentFormSelectors from 'src/modules/blogComment/form/blogCommentFormSelectors';
 import blogFindSelectors from 'src/modules/blog/find/blogFindSelectors';
@@ -24,11 +26,8 @@ import moment from 'moment';
 import Pagination from 'src/view/shared/table/Pagination';
 import ReviewsIcon from '@mui/icons-material/Reviews';
 import SaveIcon from '@mui/icons-material/Save';
-import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import selectors from 'src/modules/blogComment/home/blogCommentHomeSelectors';
-import actions from 'src/modules/blogComment/home/blogCommentHomeActions';
-import { useEffect } from 'react';
-import Spinner from 'src/view/shared/Spinner';
+import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(i18n('common.name'), {
@@ -125,15 +124,13 @@ const CommentPage = ({ record }) => {
                     justifyContent="flex-start"
                   >
                     <MDTypography color="text" variant="h6">
-                      {comment.name}
-                    </MDTypography>
-                    <span color="text">
-                      {' (' +
+                      {comment.name +
+                        ' (' +
                         moment(comment.modified).format(
                           DEFAULT_MOMENT_FORMAT_DATE_ONLY,
                         ) +
                         ')'}
-                    </span>
+                    </MDTypography>
                   </MDBox>
                   <MDBox
                     display="flex"
@@ -198,11 +195,6 @@ const CommentPage = ({ record }) => {
             ))
           : i18n('common.noCommit')}
       </MDBox>
-      <MDBox color="text" py={4}>
-        <MDTypography variant="h4">
-          {i18n('common.toComment')}
-        </MDTypography>
-      </MDBox>
       <Pagination
         onChange={doChangePagination}
         disabled={loading}
@@ -210,6 +202,11 @@ const CommentPage = ({ record }) => {
         entriesPerPage
         showTotalEntries
       />
+      <MDBox color="text" py={4}>
+        <MDTypography variant="h4">
+          {i18n('common.toComment')}
+        </MDTypography>
+      </MDBox>
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <Grid spacing={2} container>
