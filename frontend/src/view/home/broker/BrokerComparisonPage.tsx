@@ -9,7 +9,8 @@ import {
 
 import { FormProvider, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouteMatch } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
@@ -34,6 +35,7 @@ import PageContent from 'src/view/shared/view/PageContent';
 import PageLayout from 'src/mui/examples/LayoutContainers/PageLayout';
 import Spinner from 'src/view/shared/Spinner';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
+import { getHistory } from 'src/modules/store';
 
 const schema = yup.object().shape({
   brokerA: yupFormSchemas.relationToOne(
@@ -52,6 +54,14 @@ const schema = yup.object().shape({
 
 function BrokerComparePage(props) {
   const dispatch = useDispatch();
+
+  const match = useRouteMatch();
+
+  const extracts =
+    /^\/forex-cfd-broker-vergleich\/([\w-]+)-versus-([\w-]+)$/.exec(
+      match.url,
+    );
+  const [, valueA, valueB] = extracts || [];
 
   const { sidenavColor } = selectMuiSettings();
 
@@ -73,8 +83,12 @@ function BrokerComparePage(props) {
 
   const [initialValues] = useState(() => {
     return {
-      brokerA: recordToValue(recordA),
-      brokerB: recordToValue(recordB),
+      brokerA:
+        (valueA && { id: valueA }) ||
+        recordToValue(recordA),
+      brokerB:
+        (valueB && { id: valueB }) ||
+        recordToValue(recordB),
     };
   });
 
@@ -85,14 +99,18 @@ function BrokerComparePage(props) {
   });
 
   const onSubmit = (values) => {
-    console.log(values);
-    dispatch(
-      brokerComparisonActions.doFind(
-        values.brokerA,
-        values.brokerB,
-      ),
+    getHistory().push(
+      `/forex-cfd-broker-vergleich/${values.brokerA}-versus-${values.brokerB}`,
     );
   };
+
+  useEffect(() => {
+    if (valueA && valueB) {
+      dispatch(
+        brokerComparisonActions.doFind(valueA, valueB),
+      );
+    }
+  }, [valueA, valueB]);
 
   return (
     <PageLayout fixedNavBar={false}>
