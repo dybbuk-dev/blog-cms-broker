@@ -48,12 +48,10 @@ BrokerImages.defaultProps = {
 BrokerImages.propTypes = {
   records: PropTypes.any,
   filterFn: PropTypes.func,
-  attrs: PropTypes.objectOf(
-    PropTypes.shape({
-      link: PropTypes.string,
-      image: PropTypes.string,
-    }),
-  ),
+  attrs: PropTypes.shape({
+    link: PropTypes.string,
+    image: PropTypes.string,
+  }),
   renderFn: PropTypes.func,
 };
 

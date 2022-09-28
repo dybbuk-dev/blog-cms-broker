@@ -34,12 +34,10 @@ BrokerAttrs.defaultProps = {
 BrokerAttrs.propTypes = {
   records: PropTypes.any,
   filterFn: PropTypes.func,
-  attrs: PropTypes.objectOf(
-    PropTypes.shape({
-      link: PropTypes.string,
-      title: PropTypes.string,
-    }),
-  ),
+  attrs: PropTypes.shape({
+    link: PropTypes.string,
+    title: PropTypes.string,
+  }),
   renderFn: PropTypes.func,
 };
 

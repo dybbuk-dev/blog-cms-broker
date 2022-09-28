@@ -7,7 +7,7 @@ function CompareSection({ children, name }) {
   return (
     <TableCell>
       <MDTypography
-        variant="h6"
+        variant="h5"
         color="warning"
         whiteSpace="nowrap"
         lineHeight="1.25"
