@@ -6,7 +6,6 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material';
-import MaterialLink from '@mui/material/Link';
 
 import { FormProvider, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,24 +15,21 @@ import * as yup from 'yup';
 
 import { i18n } from 'src/i18n';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
-import AttrTypography from 'src/view/home/broker/shared/AttrTypography';
 import BrokerAutocompleteFormItem from 'src/view/broker/autocomplete/BrokerAutocompleteFormItem';
 import brokerComparisonActions from 'src/modules/broker/comparison/brokerComparisonActions';
 import brokerComparisonSelectors from 'src/modules/broker/comparison/brokerComparisonSelectors';
 import CompareDetail from 'src/view/home/broker/comparisons/CompareDetail';
+import CompareOverview from 'src/view/home/broker/comparisons/CompareOverview';
+import CompareProfile from 'src/view/home/broker/comparisons/CompareProfile';
+import CompareRegulation from 'src/view/home/broker/comparisons/CompareRegulation';
 import CompareSection from 'src/view/home/broker/comparisons/CompareSection';
 import FormWrapper from 'src/view/shared/styles/FormWrapper';
-import ImageView from 'src/view/home/ImageView';
 import MDButton from 'src/mui/components/MDButton';
 import MDTypography from 'src/mui/components/MDTypography';
-import OverallRating from 'src/view/home/broker/shared/OverallRating';
 import PageContent from 'src/view/shared/view/PageContent';
 import PageLayout from 'src/mui/examples/LayoutContainers/PageLayout';
 import Spinner from 'src/view/shared/Spinner';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
-import BrokerLinks from 'src/view/home/broker/shared/BrokerLinks';
-import BrokerAttrs from 'src/view/home/broker/shared/BrokerAttrs';
-import BrokerUpsides from 'src/view/home/broker/shared/BrokerUpsides';
 
 const schema = yup.object().shape({
   brokerA: yupFormSchemas.relationToOne(
@@ -180,139 +176,18 @@ function BrokerComparePage(props) {
                       )}
                       {!loading && recordA && recordB && (
                         <>
-                          <TableRow>
-                            <CompareSection name="logo" />
-                            <CompareDetail
-                              childrenA={
-                                <ImageView
-                                  value={
-                                    recordA.broker_image_broker_detail_logo
-                                  }
-                                />
-                              }
-                              childrenB={
-                                <ImageView
-                                  value={
-                                    recordB.broker_image_broker_detail_logo
-                                  }
-                                />
-                              }
-                            />
-                          </TableRow>
-                          <TableRow>
-                            <CompareSection name="brokerType" />
-                            <CompareDetail
-                              childrenA={
-                                <AttrTypography>
-                                  {i18n(
-                                    `entities.broker.enumerators.meta.broker_type.${recordA.meta?.broker_type}`,
-                                  )}
-                                </AttrTypography>
-                              }
-                              childrenB={
-                                <AttrTypography>
-                                  {i18n(
-                                    `entities.broker.enumerators.meta.broker_type.${recordB.meta?.broker_type}`,
-                                  )}
-                                </AttrTypography>
-                              }
-                            />
-                          </TableRow>
-                          <TableRow>
-                            <CompareSection name="overallRating" />
-                            <CompareDetail
-                              childrenA={
-                                <OverallRating
-                                  record={recordA}
-                                />
-                              }
-                              childrenB={
-                                <OverallRating
-                                  record={recordB}
-                                />
-                              }
-                            />
-                          </TableRow>
-                          <TableRow>
-                            <CompareSection name="customerReviews" />
-                            <CompareDetail
-                              childrenA={
-                                <AttrTypography>
-                                  <MaterialLink
-                                    href={`/erfahrungsberichte/${recordA.name_normalized}`}
-                                    target="_blank"
-                                    underline="hover"
-                                  >
-                                    {recordA.name}
-                                  </MaterialLink>
-                                </AttrTypography>
-                              }
-                              childrenB={
-                                <AttrTypography>
-                                  <MaterialLink
-                                    href={`/erfahrungsberichte/${recordB.name_normalized}`}
-                                    target="_blank"
-                                    underline="hover"
-                                  >
-                                    {recordB.name}
-                                  </MaterialLink>
-                                </AttrTypography>
-                              }
-                            />
-                          </TableRow>
-                          <TableRow>
-                            <CompareSection name="links" />
-                            <CompareDetail
-                              childrenA={
-                                <BrokerLinks
-                                  record={recordA}
-                                />
-                              }
-                              childrenB={
-                                <BrokerLinks
-                                  record={recordB}
-                                />
-                              }
-                            />
-                          </TableRow>
-                          <TableRow>
-                            <CompareSection name="brokerFeature" />
-                            <CompareDetail
-                              childrenA={
-                                <BrokerAttrs
-                                  records={recordA.features}
-                                  attrs={{
-                                    link: 'url',
-                                    title: 'feature',
-                                  }}
-                                />
-                              }
-                              childrenB={
-                                <BrokerAttrs
-                                  records={recordB.features}
-                                  attrs={{
-                                    link: 'url',
-                                    title: 'feature',
-                                  }}
-                                />
-                              }
-                            />
-                          </TableRow>
-                          <TableRow>
-                            <CompareSection name="customerReviews" />
-                            <CompareDetail
-                              childrenA={
-                                <BrokerUpsides
-                                  record={recordA}
-                                />
-                              }
-                              childrenB={
-                                <BrokerUpsides
-                                  record={recordB}
-                                />
-                              }
-                            />
-                          </TableRow>
+                          <CompareOverview
+                            recordA={recordA}
+                            recordB={recordB}
+                          />
+                          <CompareRegulation
+                            recordA={recordA}
+                            recordB={recordB}
+                          />
+                          <CompareProfile
+                            recordA={recordA}
+                            recordB={recordB}
+                          />
                         </>
                       )}
                     </TableBody>

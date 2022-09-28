@@ -423,6 +423,28 @@ const en = {
         customerReviews: 'Kunden-bewertungen',
         links: 'Links',
         brokerFeature: 'Besonder-heiten',
+        scalping: 'Scalping',
+        region: {
+          regulationAndDepositInsurance:
+            'Regulierung und Einlagensicherung',
+          profileAndContact: 'Broker Profil und Kontakt',
+        },
+        regulation: 'Regulierung',
+        tooltip: {
+          regulation:
+            'Von welcher Aufsichtsbehörde wird der Broker reguliert und überwacht ? Wir empfehlen nur bei Brokern zu handeln, die entweder von der BaFin, der FCA oder der CySEC reguliert werden.',
+          depositProtection:
+            'Die Einlagensicherung gibt an, bis zu welchem Betrag ihre Einlagen im Falle einer Insolvenz des Brokers geschützt sind.',
+        },
+        depositProtection: 'Einlagen-sicherung',
+        profile: 'Broker-Profil',
+        address: 'Anschrift',
+        contact: 'Kontakt',
+        contacts: {
+          phone: 'Telefon',
+          fax: 'Fax',
+          email: 'E-Mail',
+        },
       },
       fields: {
         // #region Broker
