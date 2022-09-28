@@ -1,16 +1,16 @@
 import { Grid } from '@mui/material';
 import { i18n } from 'src/i18n';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import AttrTypography from 'src/view/home/broker/shared/AttrTypography';
+import BrokerAttrs from 'src/view/home/broker/shared/BrokerAttrs';
+import BrokerImages from 'src/view/home/broker/shared/BrokerImages';
+import BrokerUpsides from 'src/view/home/broker/shared/BrokerUpsides';
 import CheckboxViewItem from 'src/view/shared/view/CheckboxViewItem';
 import HtmlView from 'src/view/shared/view/HtmlView';
-import MaterialLink from '@mui/material/Link';
 import MDBox from 'src/mui/components/MDBox';
-import MDTypography from 'src/mui/components/MDTypography';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import ImageView from 'src/view/home/ImageView';
 import MDButton from 'src/mui/components/MDButton';
+import MDTypography from 'src/mui/components/MDTypography';
 import SendIcon from '@mui/icons-material/Send';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 
 function BrokerOverviewView({ record }) {
   const { sidenavColor } = selectMuiSettings();
@@ -24,48 +24,14 @@ function BrokerOverviewView({ record }) {
         <MDTypography variant="h4" mt={2}>
           {i18n('entities.broker.text.upsides')}
         </MDTypography>
-        {(record.upsides || []).map((upside) => (
-          <MDBox
-            key={upside.id}
-            position="relative"
-            my={1}
-            pl={3}
-          >
-            <MDBox
-              display="inline"
-              position="absolute"
-              left={0}
-              top={0}
-            >
-              {upside.type === 'UPSIDE' ? (
-                <AddCircleIcon color="success" />
-              ) : (
-                <RemoveCircleIcon color="secondary" />
-              )}
-            </MDBox>
-            <MDTypography
-              variant="body1"
-              fontWeight="regular"
-              lineHeight="1.25"
-            >
-              {upside.text}
-            </MDTypography>
-          </MDBox>
-        ))}
+        <BrokerUpsides record={record} />
 
         <MDTypography variant="h4" mt={2}>
           {i18n('entities.broker.fields.minimum_deposit')}
         </MDTypography>
-        <MDTypography
-          variant="body2"
-          fontWeight="regular"
-          lineHeight="1.25"
-          position="relative"
-          my={1}
-          pl={3}
-        >
+        <AttrTypography>
           {record.meta?.minimum_deposit}
-        </MDTypography>
+        </AttrTypography>
 
         <MDTypography variant="h4" mt={2}>
           {i18n('entities.broker.fields.scalping_allowed')}
@@ -79,136 +45,54 @@ function BrokerOverviewView({ record }) {
         <MDTypography variant="h4" mt={2}>
           {i18n('entities.broker.fields.regulation')}
         </MDTypography>
-        {(record.regulatory_authorities || []).map((v) => (
-          <MDTypography
-            key={v.id}
-            variant="body2"
-            fontWeight="regular"
-            lineHeight="1.25"
-            position="relative"
-            my={1}
-            pl={3}
-          >
-            <MaterialLink
-              href={v.url}
-              target="_blank"
-              underline="hover"
-            >
-              {v.name}
-            </MaterialLink>
-          </MDTypography>
-        ))}
+        <BrokerAttrs
+          records={record.regulatory_authorities}
+        />
 
         <MDTypography variant="h4" mt={2}>
           {i18n(
             'entities.broker.fields.deposit_guarantees',
           )}
         </MDTypography>
-        {(record.deposit_guarantees || []).map((v) => (
-          <MDTypography
-            key={v.id}
-            variant="body2"
-            fontWeight="regular"
-            lineHeight="1.25"
-            position="relative"
-            my={1}
-            pl={3}
-          >
-            <MaterialLink
-              href={v.url}
-              target="_blank"
-              underline="hover"
-            >
-              {`${v.name} ${v.text}`}
-            </MaterialLink>
-          </MDTypography>
-        ))}
+        <BrokerAttrs
+          records={record.deposit_guarantees}
+          renderFn={(v) => `${v.name} ${v.text}`}
+        />
       </Grid>
       <Grid md={6} xs={12} item>
         <MDTypography variant="h4" mt={2}>
           {i18n('entities.broker.fields.broker_type')}
         </MDTypography>
-        <MDTypography
-          variant="body2"
-          fontWeight="regular"
-          lineHeight="1.25"
-          position="relative"
-          my={1}
-          pl={3}
-        >
+        <AttrTypography>
           {i18n(
             `entities.broker.enumerators.meta.broker_type.${record.meta?.broker_type}`,
           )}
-        </MDTypography>
+        </AttrTypography>
 
         <MDTypography variant="h4" mt={2}>
           {i18n('entities.broker.fields.certificates')}
         </MDTypography>
-        <MDBox
-          display="inline-flex"
-          gap={1}
-          position="relative"
-          my={1}
-          pl={3}
-        >
-          {(record.certificates || []).map((v) => (
-            <MaterialLink
-              key={v.id}
-              href={v.url}
-              target="_blank"
-            >
-              <ImageView value={v.image} />
-            </MaterialLink>
-          ))}
-        </MDBox>
+        <BrokerImages records={record.certificates} />
 
         <MDTypography variant="h4" mt={2}>
           {i18n('entities.broker.fields.spreads')}
         </MDTypography>
-        {(record.spreads || [])
-          .filter((v) => v.primary)
-          .map((v) => (
-            <MDTypography
-              key={v.id}
-              variant="body2"
-              fontWeight="regular"
-              lineHeight="1.25"
-              position="relative"
-              my={1}
-              pl={3}
-            >
-              <MaterialLink
-                href={v.url}
-                target="_blank"
-                underline="hover"
-              >
-                {`${v.spread}`}
-              </MaterialLink>
-            </MDTypography>
-          ))}
+        <BrokerAttrs
+          records={record.spreads}
+          attrs={{
+            link: 'url',
+            title: 'spread',
+          }}
+          filterFn={(v) => v.primary}
+        />
 
         <MDTypography variant="h4" mt={2}>
           {i18n('entities.broker.fields.specialties')}
         </MDTypography>
-        {(record.features || []).map((v) => (
-          <MDTypography
-            key={v.id}
-            variant="body2"
-            fontWeight="regular"
-            lineHeight="1.25"
-            position="relative"
-            my={1}
-            pl={3}
-          >
-            <MaterialLink
-              href={v.url}
-              target="_blank"
-              underline="hover"
-            >
-              {`${v.feature}`}
-            </MaterialLink>
-          </MDTypography>
-        ))}
+        <BrokerAttrs
+          records={record.features}
+          attrs={{ link: 'url', title: 'feature' }}
+        />
       </Grid>
       <Grid md={6} xs={12} item>
         <MDButton
@@ -217,6 +101,7 @@ function BrokerOverviewView({ record }) {
           target="_blank"
           color={sidenavColor}
           startIcon={<SendIcon />}
+          fullWidth
         >
           {i18n('entities.broker.text.nowTo', record.name)}
         </MDButton>
@@ -228,6 +113,7 @@ function BrokerOverviewView({ record }) {
           href={record.meta?.demo_url}
           color="primary"
           startIcon={<SendIcon />}
+          fullWidth
         >
           {i18n('entities.broker.text.freeDemoAccount')}
         </MDButton>

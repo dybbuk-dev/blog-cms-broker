@@ -1,29 +1,27 @@
 import { Grid, InputAdornment } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import SaveIcon from '@mui/icons-material/Save';
-import UndoIcon from '@mui/icons-material/Undo';
-import { useState } from 'react';
 import { i18n } from 'src/i18n';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { useForm, FormProvider } from 'react-hook-form';
+import { useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import AuthorAutocompleteFormItem from 'src/view/author/autocomplete/AuthorAutocompleteFormItem';
+import BrokerAutocompleteFormItem from 'src/view/broker/autocomplete/BrokerAutocompleteFormItem';
+import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
+import CloseIcon from '@mui/icons-material/Close';
 import FormWrapper, {
   FormButtons,
 } from 'src/view/shared/styles/FormWrapper';
-import { useForm, FormProvider } from 'react-hook-form';
-import * as yup from 'yup';
-import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
-import { yupResolver } from '@hookform/resolvers/yup';
-import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
-import MDButton from 'src/mui/components/MDButton';
-import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
-import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
-import MDBox from 'src/mui/components/MDBox';
-import AuthorAutocompleteFormItem from 'src/view/author/autocomplete/AuthorAutocompleteFormItem';
-import LogoFormItem from 'src/view/shared/form/items/LogoFormItem';
 import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
-import Storage from 'src/security/storage';
-import BrokerAutocompleteFormItem from 'src/view/broker/autocomplete/BrokerAutocompleteFormItem';
-import slug from 'slug';
 import ImagesFormItem from 'src/view/shared/form/items/ImagesFormItem';
+import InputFormItem from 'src/view/shared/form/items/InputFormItem';
+import MDButton from 'src/mui/components/MDButton';
+import SaveIcon from '@mui/icons-material/Save';
+import slug from 'slug';
+import Storage from 'src/security/storage';
+import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
+import UndoIcon from '@mui/icons-material/Undo';
+import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 
 const schema = yup.object().shape({
   name_normalized: yupFormSchemas.string(
@@ -82,10 +80,14 @@ const schema = yup.object().shape({
     i18n('entities.blog.fields.activated'),
     {},
   ),
+  brokers: yupFormSchemas.relationToMany(
+    i18n('entities.blog.fields.brokers'),
+    {},
+  ),
 });
 
 function BlogForm(props) {
-  const { sidenavColor, darkMode } = selectMuiSettings();
+  const { sidenavColor } = selectMuiSettings();
   const { record } = props;
   const [normalizedName, setNormalizedName] = useState(
     slug(

@@ -790,10 +790,15 @@ export default class BrokerService {
     );
   }
 
-  async findAllAutocomplete(search, limit) {
+  async findAllAutocomplete(
+    search,
+    limit,
+    useLink = false,
+  ) {
     return await BrokerRepository.findAllAutocomplete(
       search,
       limit,
+      useLink,
       this.options,
     );
   }

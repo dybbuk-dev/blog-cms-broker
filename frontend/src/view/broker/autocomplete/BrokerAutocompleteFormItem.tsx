@@ -15,6 +15,7 @@ function BrokerAutocompleteFormItem(props) {
     mode,
     name,
     required,
+    useLink,
     rerender: parentRerender,
     shrink,
     size,
@@ -59,7 +60,11 @@ function BrokerAutocompleteFormItem(props) {
   };
 
   const fetchFn = (value, limit) => {
-    return BrokerService.listAutocomplete(value, limit);
+    return BrokerService.listAutocomplete(
+      value,
+      limit,
+      useLink,
+    );
   };
 
   const mapper = {

@@ -119,10 +119,15 @@ export default class BrokerService {
     return response.data;
   }
 
-  static async listAutocomplete(query, limit) {
+  static async listAutocomplete(
+    query,
+    limit,
+    useLink = false,
+  ) {
     const params = {
       query,
       limit,
+      useLink,
     };
 
     const tenantId = AuthCurrentTenant.get();
