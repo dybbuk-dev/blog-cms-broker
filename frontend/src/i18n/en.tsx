@@ -409,6 +409,21 @@ const en = {
       edit: {
         title: 'Edit Broker',
       },
+      comparison: {
+        title: 'Tool zum Vergleich von Online Brokern',
+        description:
+          'Mit unserem Broker Vergleichstool können Sie schnell und einfach alle bei uns gelisteten Forex und CFD Broker in allen Kategorien miteinander vergleichen.und so problemlos den Broker finden der für Sie am besten geeignet ist. Zudem finden Sie zu fast jedem Broker Erfahrungen und Bewertungen von Tradern, um ihnen die Auswahl noch weiter zu erleichtern.',
+        selectBrokers: 'Bitte auswählen',
+        logo: 'Logo',
+        compare: 'Broker vergleichen!',
+        brokerA: 'Broker A',
+        brokerB: 'Broker B',
+        brokerType: 'Broker-Typ',
+        overallRating: 'Gesamt-bewertung',
+        customerReviews: 'Kunden-bewertungen',
+        links: 'Links',
+        brokerFeature: 'Besonder-heiten',
+      },
       fields: {
         // #region Broker
         id: 'Id',

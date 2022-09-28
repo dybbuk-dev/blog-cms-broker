@@ -11,6 +11,7 @@ function ImageView({ value }) {
       alt={alt}
       sx={{
         margin: 0,
+        borderRadius: 0,
       }}
     />
   );

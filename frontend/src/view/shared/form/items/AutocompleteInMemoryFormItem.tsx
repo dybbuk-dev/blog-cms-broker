@@ -85,6 +85,10 @@ function AutocompleteInMemoryFormItem(props) {
       try {
         let fullDataSource = await fetchFn();
 
+        if (dismounted) {
+          return;
+        }
+
         fullDataSource = fullDataSource.map((data) =>
           mapper.toAutocomplete(data),
         );
@@ -114,6 +118,7 @@ function AutocompleteInMemoryFormItem(props) {
 
     return () => {
       dismounted = true;
+      setLoading(false);
     };
   }, [rerender]);
 

@@ -548,6 +548,7 @@ class BrokerRepository {
   static async findAllAutocomplete(
     query,
     limit,
+    useLink,
     options: IRepositoryOptions,
   ) {
     let whereAnd: Array<any> = [
@@ -575,14 +576,14 @@ class BrokerRepository {
     const where = { [Op.and]: whereAnd };
 
     const records = await options.database.broker.findAll({
-      attributes: ['id', 'name'],
+      attributes: ['id', 'name', 'name_normalized'],
       where,
       limit: limit ? Number(limit) : undefined,
       order: [['name', 'ASC']],
     });
 
     return records.map((record) => ({
-      id: record.id,
+      id: useLink ? record.name_normalized : record.id,
       label: record.name,
     }));
   }
