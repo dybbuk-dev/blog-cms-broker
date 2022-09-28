@@ -423,6 +423,160 @@ const en = {
         customerReviews: 'Kunden-bewertungen',
         links: 'Links',
         brokerFeature: 'Besonder-heiten',
+        scalping: 'Scalping',
+        region: {
+          regulationAndDepositInsurance:
+            'Regulierung und Einlagensicherung',
+          profileAndContact: 'Broker Profil und Kontakt',
+          tradableMarketsAndProducts:
+            'Handelbare Märkte und Produkte bei {0} und {1}',
+          spreadsAndFees:
+            'Spreads und Gebührenvergleich von {0} und {1}',
+          tradingPlatforms:
+            'Handelsplatformen bei {0} und {1}',
+          service: 'Service bei {0} und {1}',
+        },
+        awards: 'Aus-zeichnungen',
+        regulation: 'Regulierung',
+        tooltip: {
+          regulation:
+            'Von welcher Aufsichtsbehörde wird der Broker reguliert und überwacht ? Wir empfehlen nur bei Brokern zu handeln, die entweder von der BaFin, der FCA oder der CySEC reguliert werden.',
+          depositProtection:
+            'Die Einlagensicherung gibt an, bis zu welchem Betrag ihre Einlagen im Falle einer Insolvenz des Brokers geschützt sind.',
+        },
+        depositProtection: 'Einlagen-sicherung',
+        profile: 'Broker-Profil',
+        address: 'Anschrift',
+        contact: 'Kontakt',
+        contacts: {
+          phone: 'Telefon',
+          fax: 'Fax',
+          email: 'E-Mail',
+        },
+        checkbox: {
+          name: {
+            TRADE_PLATFORM: 'Handels-plat-formen',
+            FREE_DEMO_ACCOUNT: 'Kosten-loses Demo-konto',
+            METATRADER_4: 'Meta-Trader 4',
+            METATRADER_5: 'Meta-Trader 5',
+            WEB_PLATFORM: 'Web Plat-form',
+            MOBILE_TRADING_APPS: 'Mobile Trading Apps',
+            HEDGING_ALLOWED: 'Hedging möglich',
+            ADDITIONAL_TRADE_TOOLS:
+              'zusätz-liche Tools für den Handel',
+            AUTOMATED_TRADE_POSSIBLE:
+              'auto-mati-sierter Handel Möglich',
+            API_INTERFACES: 'API Schnitt-stellen',
+            RATE_ALARMS: 'Kurs-arlarme per SMS oder E-Mail',
+            PLATFORM_TUTORIALS:
+              'Anleit-ungen zur Trading Platform',
+            LAYOUT_SAVEABLE: 'Layout speicherbar',
+            ONE_CLICK_TRADING: 'One Click Trading',
+            TRADE_FROM_CHART: 'Handeln aus dem Chart',
+            ALL_POSITIONS_CLOSEABLE:
+              'Alle Positionen auf einmal schließbar',
+            GUARANTEED_STOPS:
+              'Garan-tierte Stops und Limit möglich',
+            PHONE_TRADE_POSSIBLE:
+              'Telefon-ischer Handel möglich',
+            COMMISSIONS: 'Kommissionen',
+            IMPORTANT_MARKET_SPREADS:
+              'Spreads der wichtigsten Märkte',
+            COST_FOR_OVERNIGHT:
+              'Finanzierungs-posten für Übernacht-positionen',
+            FEES_FOR_DEPOSIT_DISBURSAL:
+              'Gebühren für Einzahlungen und Auszahlungen',
+            FREE_ORDERCHANGE:
+              'Kostenlose Order-änderungen oder Stornierungen',
+            FREE_DEPOT: 'Depotführung kostenlos',
+            NO_PLATFORM_FEES:
+              'keine Gebühren für Plattform',
+            GERMAN_SUPPORT: 'Deutscher Support',
+            CONTACT: 'Kontakt-möglich-keiten',
+            DAILY_TRADE_HELP:
+              'Tägliche Handels-unter-stützungen',
+            GERMAN_WEBINAR:
+              'Regel-mäßige Webinare auf Deutsch verfügbar',
+            GERMAN_SEMINAR:
+              'Regel-mäßige Seminare verfügbar',
+            COACHINGS_AVAILABLE:
+              'Einzel-coachings verfügbar',
+            KNOWLEDGE_BASE:
+              'Umfang-reicher Wissens-bereich',
+            TRADEABLE_MARKETS: 'Handel-bare Märkte',
+            MARGIN: 'Hebel/Margin',
+            SOCIAL_TRADING: 'Social Trading',
+            MANAGED_ACCOUNTS: 'Managed Accounts',
+            INSTANT_EXECUTION:
+              'Instant Execution (keine Requotes)',
+            POSITIVE_SLIPPAGE_POSSIBLE:
+              'positive Slippage möglich',
+            ECN_ORDER_EXECUTION: 'ECN Order-ausführung',
+            LIQUIDITY_PRODIVER: 'Liqui-ditäts-provider',
+            MICRO_LOTS: 'Mini- oder Micro-Lots möglich',
+            INDEX_CFD_TRADEABLE_BELOW_POINT:
+              'Index-CFDs ab 1 € oder weniger pro Punkt handelbar',
+            RATE_SWITCH_24_5_INDEX_CFD:
+              '24/5 Kurs-stellung bei Index-CFDs',
+            NO_FINANCIAL_COST_INDEX_CFD:
+              'keine Finanzierungs-kosten auf Index-CFDs',
+            NO_FINANCIAL_COST_RAW_MATERIAL_CFD:
+              'keine Finanzierungs-kosten auf Rohstoff-CFDs',
+            CFD_CONTRACTS_AUTOMATIC_ROLL:
+              'CFD Kontrakte werden automatisch gerollt',
+            REAL_STOCKS_CFD_SPREADS:
+              'Börsen-echte Aktien CFD Spreads',
+            DMA_STOCKS: 'DMA Aktien CFDs',
+            MINIMAL_ORDERSIZE_STOCKS:
+              'Minimale Order-größe Aktien CFDs',
+            OFFICE_IN_GERMANY: 'Büro in Deutschland',
+            BONUS: 'Bonus',
+            REGULATION_AND_DEPOSIT_SECURITY:
+              'Regu-lierung und Einlagen-sicherung',
+            RESERVE_LIABILIRY: 'Nach-schuss-pflicht',
+            INTEREST_ON_DEPOSIT: 'Zinsen auf Konto-einlage',
+            SEGREGATED_ACCOUNTS:
+              'Kunden-gelder getrennt (segregated Accounts)',
+            ACCOUNT_CURRENCIES:
+              'Währungen für Konto-führung',
+            POSIBILITIES_FOR_WITHDRAWALS:
+              'Möglich-keiten für Ein-zahlungen und Aus-zahlungen',
+          },
+          tooltip: {
+            BONUS:
+              'Einige Broker bieten ihren Kunden Bonuszahlungen in Form von Willkommensbonus, Einzahlungsbonus oder ähnlichem an.',
+            RESERVE_LIABILIRY:
+              'Schließt ein Broker die Nachschusspflicht nicht ausdrücklich aus, ist es unter Umständen möglich mehr als seine eingezahlte Einlage zu verlieren, wenn das Konto aufgrund starker Kursschwankungen ins Minus gerät.Wir empfehlen, sich in diesem Fall noch einmal direkt beim jeweiligen Broker zu erkundigen',
+            SEGREGATED_ACCOUNTS:
+              'Bei einer Insolvenz des Brokers haben Gläubiger nur Zugriff auf das Firmenvermögen.Werden die Kundengelder getrennt vom Betriebsvermögen gehalten, sind diese bei einer Insolvenz des Brokers vor dem Zugriff der Gläubiger geschützt und können an Kunden zurück fließen',
+            HEDGING_ALLOWED:
+              'Hedging beispielsweise im MetaTrader erlaubt es Kunden in einem Konto im gleichen Markt gleichzeitig sowohl Long als auch Short Positionen eröffnen zu können.',
+            SOCIAL_TRADING:
+              'Einige Broker ermöglichen das Kopieren der Trades anderer Kunden.In der Regel kann man sich Statistiken zur Handelsaktivität und die Performance der anderern Trader ansehen und auf Wunsch die Trades dieser Trader auf das eigene Handelskonto "spiegeln". In der Regel werden die Positionsgrößen dann prozentual auf das eigene Kapital angepasst, so dass das Risiko und Moneymanagement von Signalgeber und Signalnehmer in etwa gleich bleibt.',
+            MANAGED_ACCOUNTS:
+              'Managed Accounts sind Konten, bei denen dritte ihr Kapital für Sie verwalten und anlegen.Der Verwalter verfügt über eine Vollmacht desKunden durch eigenständigen Handel Gewinne im Auftrag des Kunden zu erzielen.Im Regelfall fällt dafür eine geringe Grundgebühr und eine Beteiligung an den erzieten Gewinnen an.',
+            INSTANT_EXECUTION:
+              'Requotes sind Preisvorschläge des Brokers die Sie erhalten, wenn der von ihnen gewünschte Kurs sich während dem Absenden der Order bei ihnen und dem Eintreffen beim Broker geändert hat.Diesen Preisvorschlag können Sie akzeptieren oder ablehnen. Bei Instant Execution dürfen Requotes nicht vorkommen.',
+            ECN_ORDER_EXECUTION:
+              'Bei ECN/STP Brokern werden die Orders im Gegensatz zu Market-Makern nicht von einem Dealing Desk bearbeitet, sondern direkt an den Interbankenmarkt weitergeleitet.Das Resultat sind häufig schnellere Orderausführungen und bessere Spreads.Jedoch wird hier meist zusätzlich zum Spread noch eine Ordergebühr fällig.',
+            LIQUIDITY_PRODIVER:
+              'An welche Liquiditätsprovider (LPs) werden die Orders zu 100% weitergeleitet',
+            INDEX_CFD_TRADEABLE_BELOW_POINT:
+              'Kann der DAX30 Index mit 1 Euro oder weniger pro Punkt gehandelt werden ?',
+            RATE_SWITCH_24_5_INDEX_CFD:
+              'Einige Broker bieten die Möglichkeit auch nach Handelsschluss noch Orders zu platzieren.Meist werden hier die Spreads erweitert aber ein ausserbörslicher Handel ist möglich, um auf eventuelle Nachrichten reagieren zu können.',
+            NO_FINANCIAL_COST_INDEX_CFD:
+              'Einige Broker bieten ihren Kunden die Möglichkeit Positionen in Index-CFDs über Nacht zu halten ohne dafür Finanzierungskosten zahlen zu müssen',
+            NO_FINANCIAL_COST_RAW_MATERIAL_CFD:
+              'Einige Broker bieten ihren Kunden die Möglichkeit Positionen in Rohstoff-CFDs über Nacht zu halten ohne dafür Finanzierungskosten zahlen zu müssen',
+            REAL_STOCKS_CFD_SPREADS:
+              'Börsenechte 1:1 Spreads sind so ziemlich das Optimum für den Aktien-CFD handel, da diese eine faire Orderausführung und weitere Kosten erlauben.',
+            DMA_STOCKS:
+              'DMA (Direct Market Access) bedeutet Sie erhalten direkten Marktzugang zu den wichtigsten Börsen der Welt und können so die klassischen Vorteile des CFD Handels, wie den Handel auf Margin mit Hebelwirkung nutzen, wobei ihre Orders dennoch wie beim Handel von echten Aktien direkt an der jeweiligen Börse ausgeführt werden',
+            ALL_POSITIONS_CLOSEABLE:
+              'Die Handelsplattform erlaubt dass Schließen aller Positionen zum gleichen Zeitpunkt.',
+          },
+        },
       },
       fields: {
         // #region Broker

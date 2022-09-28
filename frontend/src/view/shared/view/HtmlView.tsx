@@ -3,7 +3,7 @@ import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
 
 const Content = styled('div')(() => ({
-  zoom: 0.8,
+  fontWeight: 400,
   '& ul, ol': {
     paddingLeft: '3rem',
   },

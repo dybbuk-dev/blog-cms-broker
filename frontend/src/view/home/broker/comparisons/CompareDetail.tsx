@@ -9,7 +9,7 @@ function CompareDetail({
   childrenB,
 }) {
   return (
-    <TableCell width="100%">
+    <TableCell width="75%">
       <Grid spacing={2} container>
         {Boolean(before) && (
           <Grid xs={12} item>
