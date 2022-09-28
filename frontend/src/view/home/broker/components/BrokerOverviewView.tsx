@@ -119,12 +119,6 @@ function BrokerOverviewView({ record }) {
           {i18n('entities.broker.text.freeDemoAccount')}
         </MDButton>
       </Grid>
-      <Grid xs={12} item>
-        <BrokerPostPage record={record} />
-      </Grid>
-      <Grid xs={12} item>
-        <BrokerArticlePage record={record} />
-      </Grid>
     </Grid>
   );
 }

@@ -9,6 +9,7 @@ import HtmlView from 'src/view/shared/view/HtmlView';
 import MDButton from 'src/mui/components/MDButton';
 import SendIcon from '@mui/icons-material/Send';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import PageContent from 'src/view/shared/view/PageContent';
 
 const BrokerArticlePage = ({ record }) => {
   const { sidenavColor } = selectMuiSettings();
@@ -25,39 +26,15 @@ const BrokerArticlePage = ({ record }) => {
   }, [record.id]);
   return (
     <>
-      {!loading && rows?.content !== undefined && (
-        <HtmlView value={rows?.content} />
-      )}
+      <PageContent>
+        {!loading && rows?.content !== undefined && (
+          <HtmlView value={rows?.content} />
+        )}
+      </PageContent>
+
       {!loading && rows?.author !== undefined && (
         <AuthorView value={rows?.author} />
       )}
-      <Grid spacing={2} container pt={3}>
-        <Grid md={6} xs={12} item>
-          <MDButton
-            variant="contained"
-            href={record.meta?.homepage}
-            target="_blank"
-            color={sidenavColor}
-            startIcon={<SendIcon />}
-          >
-            {i18n(
-              'entities.broker.text.nowTo',
-              record.name,
-            )}
-          </MDButton>
-        </Grid>
-        <Grid md={6} xs={12} item>
-          <MDButton
-            variant="contained"
-            target="_blank"
-            href={record.meta?.demo_url}
-            color="primary"
-            startIcon={<SendIcon />}
-          >
-            {i18n('entities.broker.text.freeDemoAccount')}
-          </MDButton>
-        </Grid>
-      </Grid>
     </>
   );
 };

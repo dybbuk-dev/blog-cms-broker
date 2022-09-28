@@ -214,7 +214,7 @@ const BrokerPostPage = ({ record }) => {
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <Grid spacing={2} container>
-            <Grid item md={12} xs={12}>
+            <Grid item md={6} xs={12}>
               <InputFormItem
                 name="name"
                 variant="standard"
@@ -222,7 +222,7 @@ const BrokerPostPage = ({ record }) => {
                 required={true}
               />
             </Grid>
-            <Grid item md={12} xs={12}>
+            <Grid item md={6} xs={12}>
               <InputFormItem
                 name="email"
                 variant="standard"
