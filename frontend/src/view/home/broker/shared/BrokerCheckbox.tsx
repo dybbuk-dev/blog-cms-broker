@@ -5,6 +5,15 @@ import MDBox from 'src/mui/components/MDBox';
 import PropTypes from 'prop-types';
 
 function BrokerCheckbox({ record, field }) {
+  const checkField = field.toLowerCase();
+  const textField = `text_${checkField}`;
+  if (
+    !record.checkbox ||
+    !record.checkbox[checkField] ||
+    !record.checkbox[textField]
+  ) {
+    return null;
+  }
   return (
     <MDBox
       lineHeight={0}
@@ -18,18 +27,14 @@ function BrokerCheckbox({ record, field }) {
           left={0}
           top="0.1rem"
         >
-          {record.checkbox[field.toLowerCase()] ===
-          'PRO' ? (
+          {record.checkbox[checkField] === 'PRO' ? (
             <CheckCircleIcon color="success" />
-          ) : record.checkbox[field.toLowerCase()] ===
-            'CONTRA' ? (
+          ) : record.checkbox[checkField] === 'CONTRA' ? (
             <CancelIcon color="secondary" />
           ) : null}
         </MDBox>
         <BrokerAttrs
-          records={
-            record.checkbox[`text_${field.toLowerCase()}`]
-          }
+          records={record.checkbox[textField]}
           attrs={{ link: 'url', title: 'text' }}
           noIndent
         />
