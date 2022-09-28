@@ -834,9 +834,11 @@ const en = {
           '{0} out of {1} points from {2} reviews from traders',
         nowTo: 'Now to {0}',
         freeDemoAccount: 'Free demo account',
+        portrait: 'Portrait',
         activeTraderExperience:
           "ActivTrade's trader experiences",
         upsides: 'Conclusion from trader reviews',
+        video: 'Broker Introduction',
       },
     },
 
