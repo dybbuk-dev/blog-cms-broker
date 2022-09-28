@@ -5,7 +5,11 @@ export default async (req, res, next) => {
   try {
     const payload = await new BrokerService(
       req,
-    ).findAllAutocomplete(req.query.query, req.query.limit);
+    ).findAllAutocomplete(
+      req.query.query,
+      req.query.limit,
+      req.query.useLink,
+    );
 
     await ApiResponseHandler.success(req, res, payload);
   } catch (error) {
