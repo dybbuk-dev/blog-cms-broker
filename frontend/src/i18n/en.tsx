@@ -1975,6 +1975,11 @@ const en = {
     labelDisplayedRows: '{0}-{1} of {2}',
     labelRowsPerPage: 'Per page:',
   },
+
+  footer: {
+    description:
+      'CFD sind komplexe Instrumente und gehen wegen der Hebelwirkung mit dem hohen Risiko einher, schnell Geld zu verlieren. Zwischen 74 % und 89 % der Kleinanlegerkonten verlieren beim Handel mit CFD Geld. Sie sollten überlegen, ob Sie verstehen, wie CFD funktionieren und ob Sie es sich leisten können, das hohe Risiko einzugehen, Ihr Geld zu verlieren.Informieren Sie sich vor der Kontoeröffnung bei einem Forex-Broker, CFD-Broker, ECN / STP Broker, Metatrader Broker oder vor dem Kauf eines Expert-Advisors in unserer Datenbanküber Erfahrungen und Bewertungen anderer Trader, lesen Sie die dazugehörigen Erfahrungsberichte und machen Sie einen Forex-Broker Vergleich. Helfen Sie anderen Nutzern beim Vergleich der gelisteten Forex-Broker und teilen Sie ihre bisherigen Erfahrungen auf {0} und schreiben Sie einen Erfahrungsbericht. Das Ranking der Broker basiert auf den abgegebenen Kundenbewertungen.',
+  },
 };
 
 export default en;

@@ -26,6 +26,7 @@ import MDBox from 'src/mui/components/MDBox';
 import muiActions from 'src/modules/mui/muiActions';
 import navigationHomeSelectors from 'src/modules/navigation/home/navigationHomeSelectors';
 import DefaultNavbar from 'src/mui/examples/Navbars/DefaultNavbar';
+import Footer from 'src/view/home/Footer';
 
 // Declaring props types for PageLayout
 interface Props {
@@ -69,6 +70,7 @@ function PageLayout({
         />
       )}
       {children}
+      <Footer />
     </MDBox>
   );
 }
