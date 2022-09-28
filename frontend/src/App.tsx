@@ -43,6 +43,7 @@ import MDBox from 'src/mui/components/MDBox';
 import lightColors from 'src/mui/assets/theme/base/colors';
 import darkColors from 'src/mui/assets/theme-dark/base/colors';
 import navigationHomeActions from 'src/modules/navigation/home/navigationHomeActions';
+import categoryFooterActions from 'src/modules/category/footer/categoryFooterActions';
 
 const store = configureStore();
 
@@ -72,6 +73,7 @@ function AppWithRedux(props) {
     setRtlCache(cacheRtl);
 
     dispatch(navigationHomeActions.doFetch());
+    dispatch(categoryFooterActions.doFetch());
   }, []);
 
   return direction === 'rtl' ? (

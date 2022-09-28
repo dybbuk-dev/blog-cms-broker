@@ -84,6 +84,14 @@ export default class CategoryService {
     return response.data;
   }
 
+  static async categoriesInFooter() {
+    const response = await authAxios.get(
+      '/category/footer',
+    );
+
+    return response.data;
+  }
+
   static async list(filter, orderBy, limit, offset) {
     const params = {
       filter,

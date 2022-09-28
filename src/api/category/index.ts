@@ -1,6 +1,10 @@
 export default (app) => {
   // #region front-end APIs
   app.post('/category', require('./categoryHome').default);
+  app.get(
+    '/category/footer',
+    require('./categoryFooter').default,
+  );
   // #endregion
   // #region back-end APIs
   app.post(

@@ -1,3 +1,4 @@
+import footer from 'src/modules/category/footer/categoryFooterReducers';
 import home from 'src/modules/category/home/categoryHomeReducers';
 import list from 'src/modules/category/list/categoryListReducers';
 import form from 'src/modules/category/form/categoryFormReducers';
@@ -7,6 +8,7 @@ import importerReducer from 'src/modules/category/importer/categoryImporterReduc
 import { combineReducers } from 'redux';
 
 export default combineReducers({
+  footer,
   home,
   list,
   form,
