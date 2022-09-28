@@ -1,5 +1,5 @@
+import AttachLink from 'src/view/home/broker/shared/AttachLink';
 import ImageView from 'src/view/home/ImageView';
-import MaterialLink from '@mui/material/Link';
 import MDBox from 'src/mui/components/MDBox';
 import PropTypes from 'prop-types';
 
@@ -19,17 +19,13 @@ function BrokerImages({
       pl={3}
     >
       {(records || []).filter(filterFn).map((v, idx) => (
-        <MaterialLink
-          key={idx}
-          href={v[link]}
-          target="_blank"
-        >
+        <AttachLink key={idx} link={v[link]}>
           {renderFn ? (
             renderFn(v)
           ) : (
             <ImageView value={v[image]} />
           )}
-        </MaterialLink>
+        </AttachLink>
       ))}
     </MDBox>
   );

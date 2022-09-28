@@ -1,5 +1,5 @@
+import AttachLink from 'src/view/home/broker/shared/AttachLink';
 import AttrTypography from 'src/view/home/broker/shared/AttrTypography';
-import MaterialLink from '@mui/material/Link';
 import PropTypes from 'prop-types';
 
 function BrokerAttrs({
@@ -11,13 +11,9 @@ function BrokerAttrs({
 }) {
   return (records || []).filter(filterFn).map((v, idx) => (
     <AttrTypography key={idx} noIndent={noIndent}>
-      <MaterialLink
-        href={v[link]}
-        target="_blank"
-        underline="hover"
-      >
+      <AttachLink link={v[link]}>
         {renderFn ? renderFn(v) : v[title]}
-      </MaterialLink>
+      </AttachLink>
     </AttrTypography>
   ));
 }

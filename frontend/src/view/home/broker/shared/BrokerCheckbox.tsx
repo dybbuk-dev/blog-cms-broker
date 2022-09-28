@@ -39,7 +39,8 @@ function BrokerCheckbox({ record, field }) {
 }
 
 BrokerCheckbox.propTypes = {
-  checkbox: PropTypes.any.isRequired,
+  record: PropTypes.any.isRequired,
+  field: PropTypes.string.isRequired,
 };
 
 export default BrokerCheckbox;
