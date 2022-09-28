@@ -6,6 +6,8 @@ import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
 import StyledRating from 'src/view/shared/styles/StyledRating';
+import { i18n } from 'src/i18n';
+import OutOf from 'src/view/shared/components/OutOf';
 
 export function RatingFormItem(props) {
   const { darkMode } = selectMuiSettings();
@@ -21,9 +23,11 @@ export function RatingFormItem(props) {
     icon,
     label,
     name,
+    precision,
     readOnly,
     required,
     rerender,
+    showValue,
     size,
     value,
   } = props;
@@ -47,6 +51,7 @@ export function RatingFormItem(props) {
   const [curValue, setCurValue] = useState(
     getInitialValue(),
   );
+  const [hover, setHover] = useState(-1);
 
   if (forceValue && name) {
     setValue(name, value, {
@@ -97,31 +102,42 @@ export function RatingFormItem(props) {
           {label}
         </MDTypography>
       )}
-      <StyledRating
-        name={name}
-        defaultValue={defaultValue}
-        value={curValue}
-        icon={icon}
-        emptyIcon={icon || emptyIcon}
-        max={count}
-        precision={allowHalf ? 0.5 : 1}
-        onChange={(evt, newVal) => {
-          if (!forceValue) {
-            setValue(name, newVal, {
-              shouldValidate: false,
-              shouldDirty: true,
-            });
-          }
-          setCurValue(newVal);
-          props.onChange && props.onChange(newVal);
-        }}
-        ownerState={{
-          color,
-        }}
-        disabled={disabled}
-        readOnly={readOnly}
-        size={size}
-      />
+      <MDBox display="flex" alignItems="center" gap={1}>
+        <StyledRating
+          name={name}
+          defaultValue={defaultValue}
+          value={curValue}
+          icon={icon}
+          emptyIcon={icon || emptyIcon}
+          max={count}
+          precision={precision || (allowHalf ? 0.5 : 1)}
+          onChange={(evt, newVal) => {
+            if (!forceValue) {
+              setValue(name, newVal, {
+                shouldValidate: false,
+                shouldDirty: true,
+              });
+            }
+            setCurValue(newVal);
+            props.onChange && props.onChange(newVal);
+          }}
+          onChangeActive={(event, newHover) => {
+            setHover(newHover);
+          }}
+          ownerState={{
+            color,
+          }}
+          disabled={disabled}
+          readOnly={readOnly}
+          size={size}
+        />
+        {showValue && (
+          <OutOf
+            value={hover !== -1 ? hover : curValue}
+            total={count}
+          />
+        )}
+      </MDBox>
       {errorMessage && (
         <MDBox mt={0.75}>
           <MDTypography
@@ -145,8 +161,10 @@ RatingFormItem.defaultProps = {
   defaultValue: 0,
   disabled: false,
   forceValue: false,
+  precision: 0,
   readOnly: false,
   required: false,
+  showValue: false,
   size: 'medium',
 };
 
@@ -171,9 +189,11 @@ RatingFormItem.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string,
   onChange: PropTypes.func,
+  precision: PropTypes.number,
   readOnly: PropTypes.bool,
   required: PropTypes.bool,
   rerender: PropTypes.number,
+  showValue: PropTypes.bool,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   value: PropTypes.number,
 };

@@ -20,8 +20,10 @@ function RatingRangeFormItem(props) {
     icon,
     label,
     name,
+    precision,
     required,
     rerender,
+    showValue,
     size,
     value,
   } = props;
@@ -134,44 +136,50 @@ function RatingRangeFormItem(props) {
       >
         <RatingFormItem
           allowHalf={allowHalf}
+          color={color}
           count={count}
           defaultValue={defaultValue}
           disabled={disabled}
           emptyIcon={emptyIcon}
           forceValue={true}
           icon={icon}
+          label={`${label} ${i18n('common.start')}`}
           name={`${name}Start`}
+          onChange={handleStartChanged}
+          precision={precision}
           required={required}
           rerender={rerender}
-          color={color}
-          label={`${label} ${i18n('common.start')}`}
-          onChange={(newValue) =>
-            handleStartChanged(newValue)
-          }
-          value={startValue()}
+          showValue={showValue}
           size={size}
+          value={startValue()}
         />
 
-        <MDTypography color="secondary">~</MDTypography>
+        <MDTypography
+          color="secondary"
+          mt={2}
+          lineHeight={1}
+        >
+          ~
+        </MDTypography>
 
         <RatingFormItem
           allowHalf={allowHalf}
+          color={color}
           count={count}
           defaultValue={defaultValue}
           disabled={disabled}
           emptyIcon={emptyIcon}
           forceValue={true}
           icon={icon}
+          label={`${label} ${i18n('common.end')}`}
           name={`${name}End`}
+          onChange={handleEndChanged}
+          precision={precision}
           required={required}
           rerender={rerender}
-          color={color}
-          label={`${label} ${i18n('common.end')}`}
-          onChange={(newValue) =>
-            handleEndChanged(newValue)
-          }
-          value={endValue()}
+          showValue={showValue}
           size={size}
+          value={endValue()}
         />
       </MDBox>
       {errorMessage && (
@@ -197,8 +205,10 @@ RatingRangeFormItem.defaultProps = {
   defaultValue: 0,
   disabled: false,
   forceValue: false,
+  precision: 0,
   readOnly: false,
   required: false,
+  showValue: false,
   size: 'medium',
 };
 
@@ -223,9 +233,11 @@ RatingRangeFormItem.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string,
   onChange: PropTypes.func,
+  precision: PropTypes.number,
   readOnly: PropTypes.bool,
   required: PropTypes.bool,
   rerender: PropTypes.number,
+  showValue: PropTypes.bool,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   value: PropTypes.number,
 };

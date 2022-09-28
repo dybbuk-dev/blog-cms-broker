@@ -20,6 +20,8 @@ PriceViewItem.defaultProps = {
   color: null,
   count: 4,
   icon: <AttachMoneyIcon />,
+  precision: 0,
+  showValue: false,
   size: 'medium',
 };
 
@@ -37,6 +39,8 @@ PriceViewItem.propTypes = {
   count: PropTypes.number,
   defaultValue: PropTypes.number,
   label: PropTypes.string,
+  precision: PropTypes.number,
+  showValue: PropTypes.bool,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   value: PropTypes.number,
 };

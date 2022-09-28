@@ -20,6 +20,8 @@ PriceRangeFormItem.defaultProps = {
   color: null,
   count: 4,
   icon: <AttachMoneyIcon />,
+  precision: 0,
+  showValue: false,
   size: 'medium',
 };
 
@@ -44,9 +46,11 @@ PriceRangeFormItem.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string,
   onChange: PropTypes.func,
+  precision: PropTypes.number,
   readOnly: PropTypes.bool,
   required: PropTypes.bool,
   rerender: PropTypes.number,
+  showValue: PropTypes.bool,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   value: PropTypes.number,
 };

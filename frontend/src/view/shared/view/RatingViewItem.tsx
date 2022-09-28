@@ -1,8 +1,9 @@
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
-import StyledRating from 'src/view/shared/styles/StyledRating';
+import OutOf from 'src/view/shared/components/OutOf';
 import PropTypes from 'prop-types';
+import StyledRating from 'src/view/shared/styles/StyledRating';
 
 function RatingViewItem(props) {
   const { darkMode } = selectMuiSettings();
@@ -16,6 +17,7 @@ function RatingViewItem(props) {
     icon,
     label,
     precision,
+    showValue,
     size,
     value,
   } = props;
@@ -37,19 +39,22 @@ function RatingViewItem(props) {
           {label}
         </MDTypography>
       )}
-      <StyledRating
-        defaultValue={defaultValue}
-        value={value}
-        icon={icon}
-        emptyIcon={icon || emptyIcon}
-        max={count}
-        precision={precision || (allowHalf ? 0.5 : 1)}
-        ownerState={{
-          color,
-        }}
-        size={size}
-        readOnly
-      />
+      <MDBox display="flex" alignItems="center" gap={1}>
+        <StyledRating
+          defaultValue={defaultValue}
+          value={value}
+          icon={icon}
+          emptyIcon={icon || emptyIcon}
+          max={count}
+          precision={precision || (allowHalf ? 0.5 : 1)}
+          ownerState={{
+            color,
+          }}
+          size={size}
+          readOnly
+        />
+        {showValue && <OutOf value={value} total={count} />}
+      </MDBox>
     </MDBox>
   );
 }
@@ -60,6 +65,7 @@ RatingViewItem.defaultProps = {
   count: 5,
   defaultValue: 0,
   precision: 0,
+  showValue: false,
   size: 'medium',
 };
 
@@ -80,6 +86,7 @@ RatingViewItem.propTypes = {
   icon: PropTypes.any,
   label: PropTypes.string,
   precision: PropTypes.number,
+  showValue: PropTypes.bool,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   value: PropTypes.number,
 };
