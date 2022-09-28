@@ -7,9 +7,10 @@ function BrokerAttrs({
   attrs: { link, title },
   filterFn,
   renderFn,
+  noIndent,
 }) {
   return (records || []).filter(filterFn).map((v, idx) => (
-    <AttrTypography key={idx}>
+    <AttrTypography key={idx} noIndent={noIndent}>
       <MaterialLink
         href={v[link]}
         target="_blank"
@@ -29,6 +30,7 @@ BrokerAttrs.defaultProps = {
   },
   filterFn: () => true,
   renderFn: null,
+  noIndent: false,
 };
 
 BrokerAttrs.propTypes = {
@@ -39,6 +41,7 @@ BrokerAttrs.propTypes = {
     title: PropTypes.string,
   }),
   renderFn: PropTypes.func,
+  noIndent: PropTypes.bool,
 };
 
 export default BrokerAttrs;

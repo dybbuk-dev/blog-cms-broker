@@ -23,6 +23,10 @@ import CompareOverview from 'src/view/home/broker/comparisons/CompareOverview';
 import CompareProfile from 'src/view/home/broker/comparisons/CompareProfile';
 import CompareRegulation from 'src/view/home/broker/comparisons/CompareRegulation';
 import CompareSection from 'src/view/home/broker/comparisons/CompareSection';
+import CompareService from 'src/view/home/broker/comparisons/CompareService';
+import CompareSpreadsAndFees from 'src/view/home/broker/comparisons/CompareSpreadsAndFees';
+import CompareTradable from 'src/view/home/broker/comparisons/CompareTradable';
+import CompareTradingPlatforms from 'src/view/home/broker/comparisons/CompareTradingPlatforms';
 import FormWrapper from 'src/view/shared/styles/FormWrapper';
 import MDButton from 'src/mui/components/MDButton';
 import MDTypography from 'src/mui/components/MDTypography';
@@ -185,6 +189,22 @@ function BrokerComparePage(props) {
                             recordB={recordB}
                           />
                           <CompareProfile
+                            recordA={recordA}
+                            recordB={recordB}
+                          />
+                          <CompareTradable
+                            recordA={recordA}
+                            recordB={recordB}
+                          />
+                          <CompareSpreadsAndFees
+                            recordA={recordA}
+                            recordB={recordB}
+                          />
+                          <CompareTradingPlatforms
+                            recordA={recordA}
+                            recordB={recordB}
+                          />
+                          <CompareService
                             recordA={recordA}
                             recordB={recordB}
                           />

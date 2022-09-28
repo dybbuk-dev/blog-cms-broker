@@ -1,7 +1,7 @@
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
 
-function AttrTypography({ children }) {
+function AttrTypography({ children, noIndent }) {
   return (
     <MDTypography
       variant="body1"
@@ -9,7 +9,7 @@ function AttrTypography({ children }) {
       lineHeight="1.25"
       position="relative"
       my={1}
-      pl={3}
+      pl={noIndent ? 0 : 3}
     >
       {children}
     </MDTypography>
@@ -18,10 +18,12 @@ function AttrTypography({ children }) {
 
 AttrTypography.defaultProps = {
   children: null,
+  noIndent: false,
 };
 
 AttrTypography.propTypes = {
   children: PropTypes.any,
+  noIndent: PropTypes.bool,
 };
 
 export default AttrTypography;

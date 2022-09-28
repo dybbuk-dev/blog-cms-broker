@@ -7,11 +7,10 @@ import Tooltip from '@mui/material/Tooltip';
 
 function CompareSection({ children, name, tooltip }) {
   return (
-    <TableCell>
+    <TableCell width="25%">
       <MDTypography
         variant="h5"
         color="warning"
-        whiteSpace="nowrap"
         lineHeight="1.25"
         my={1}
       >
@@ -21,9 +20,13 @@ function CompareSection({ children, name, tooltip }) {
           i18n(`entities.broker.comparison.${name}`)}
         {Boolean(tooltip) && (
           <Tooltip
-            title={i18n(
-              `entities.broker.comparison.${tooltip}`,
-            )}
+            title={
+              typeof tooltip === 'string'
+                ? i18n(
+                    `entities.broker.comparison.${tooltip}`,
+                  )
+                : tooltip
+            }
           >
             <Icon color="secondary">help</Icon>
           </Tooltip>
@@ -42,7 +45,7 @@ CompareSection.defaultProps = {
 CompareSection.propTypes = {
   children: PropTypes.any,
   name: PropTypes.string,
-  tooltip: PropTypes.string,
+  tooltip: PropTypes.any,
 };
 
 export default CompareSection;
