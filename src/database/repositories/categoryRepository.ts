@@ -206,8 +206,8 @@ class CategoryRepository {
 
     record.dataValues = {
       ...record.dataValues,
-      teaser: description_record.teaser,
-      description: description_record.description,
+      teaser: description_record?.teaser,
+      description: description_record?.description,
     };
 
     return this._fillWithRelationsAndFiles(record, options);
