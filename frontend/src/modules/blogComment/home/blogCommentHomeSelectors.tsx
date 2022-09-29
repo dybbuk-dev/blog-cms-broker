@@ -22,6 +22,38 @@ const selectHasRows = createSelector(
   (count) => count > 0,
 );
 
+const selectSorter = createSelector(
+  [selectRaw],
+  (raw) => raw.sorter || {},
+);
+
+const selectOrderBy = createSelector([selectRaw], (raw) => {
+  const sorter = raw.sorter;
+
+  if (!sorter) {
+    return null;
+  }
+
+  if (!sorter.field) {
+    return null;
+  }
+
+  let direction = sorter.order === 'desc' ? 'DESC' : 'ASC';
+
+  return `${sorter.field}_${direction}`;
+});
+
+const selectFilter = createSelector([selectRaw], (raw) => {
+  return raw.filter;
+});
+
+const selectRawFilter = createSelector(
+  [selectRaw],
+  (raw) => {
+    return raw.rawFilter;
+  },
+);
+
 const selectLimit = createSelector([selectRaw], (raw) => {
   const pagination = raw.pagination;
   return pagination.pageSize;
@@ -53,10 +85,14 @@ const blogCommentHomeSelectors = {
   selectLoading,
   selectRows,
   selectCount,
+  selectOrderBy,
   selectLimit,
+  selectFilter,
   selectOffset,
   selectPagination,
   selectHasRows,
+  selectRawFilter,
+  selectSorter,
 };
 
 export default blogCommentHomeSelectors;

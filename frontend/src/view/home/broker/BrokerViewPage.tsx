@@ -20,6 +20,7 @@ import MDBox from 'src/mui/components/MDBox';
 import PageContent from 'src/view/shared/view/PageContent';
 import Spinner from 'src/view/shared/Spinner';
 import TabPanel from 'src/view/shared/tab/TabPanel';
+import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
 
 const BrokerViewPage = () => {
   const [dispatched, setDispatched] = useState(false);
@@ -107,9 +108,10 @@ const BrokerViewPage = () => {
                 </PageContent>
               )}
             <AuthorView value={record.author} />
-            <MDBox>
+            <PageContent>
+              <TopBrokersView />
               <BrokerHomepageUrls record={record} />
-            </MDBox>
+            </PageContent>
           </>
         )}
       </MDBox>

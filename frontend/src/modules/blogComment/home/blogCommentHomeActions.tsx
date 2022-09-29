@@ -18,8 +18,23 @@ const blogCommentHomeActions = {
       payload: pagination,
     });
 
-    dispatch(blogCommentHomeActions.doFetch());
+    dispatch(blogCommentHomeActions.doFetchCurrentFilter());
   },
+
+  doFetchCurrentFilter:
+    () => async (dispatch, getState) => {
+      const filter = selectors.selectFilter(getState());
+      const rawFilter = selectors.selectRawFilter(
+        getState(),
+      );
+      dispatch(
+        blogCommentHomeActions.doFetch(
+          filter,
+          rawFilter,
+          true,
+        ),
+      );
+    },
 
   doFetch:
     (filter?, rawFilter?, keepPagination = true) =>
@@ -33,6 +48,7 @@ const blogCommentHomeActions = {
         const response =
           await BlogCommentService.findCommentList(
             filter,
+            selectors.selectOrderBy(getState()),
             selectors.selectLimit(getState()),
             selectors.selectOffset(getState()),
           );
