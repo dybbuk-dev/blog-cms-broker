@@ -1,7 +1,7 @@
-import PageLayout from 'src/mui/examples/LayoutContainers/PageLayout';
+import Layout from 'src/view/home/Layout';
 
 function FirstPage(props) {
-  return <PageLayout></PageLayout>;
+  return <Layout></Layout>;
 }
 
 export default FirstPage;

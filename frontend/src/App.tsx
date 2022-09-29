@@ -44,6 +44,7 @@ import lightColors from 'src/mui/assets/theme/base/colors';
 import darkColors from 'src/mui/assets/theme-dark/base/colors';
 import navigationHomeActions from 'src/modules/navigation/home/navigationHomeActions';
 import categoryFooterActions from 'src/modules/category/footer/categoryFooterActions';
+import brokerTopActions from 'src/modules/broker/top/brokerTopActions';
 
 const store = configureStore();
 
@@ -74,6 +75,7 @@ function AppWithRedux(props) {
 
     dispatch(navigationHomeActions.doFetch());
     dispatch(categoryFooterActions.doFetch());
+    dispatch(brokerTopActions.doFetch());
   }, []);
 
   return direction === 'rtl' ? (
