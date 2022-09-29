@@ -2,7 +2,8 @@ import { styled } from '@mui/material/styles';
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
 
-const Content = styled('div')(() => ({
+export const HtmlViewWrapper = styled('div')(() => ({
+  fontSize: '1rem',
   fontWeight: 400,
   '& ul, ol': {
     paddingLeft: '3rem',
@@ -14,11 +15,11 @@ const Content = styled('div')(() => ({
 }));
 
 function HtmlView({ value }) {
-  return <Content>{parse(value)}</Content>;
+  return <HtmlViewWrapper>{parse(value)}</HtmlViewWrapper>;
 }
 
 HtmlView.propTypes = {
-  value: PropTypes.string.isRequired,
+  value: PropTypes.any.isRequired,
 };
 
 export default HtmlView;
