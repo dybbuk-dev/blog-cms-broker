@@ -229,6 +229,9 @@ const en = {
         idRange: 'Id #',
         link: 'Link',
         comment: 'Comments',
+        deleted: 'Deleted',
+        spam: 'Spam',
+        review_required: 'Review required',
         pagetitle: 'Page title',
         metadescription: 'Meta Description',
         metakeywords: 'Meta Keywords',
@@ -411,6 +414,27 @@ const en = {
       edit: {
         title: 'Edit Broker',
       },
+      characteristics: {
+        fields: {
+          licensed_broker: 'Licensed Broker',
+          minimum_deposit: 'minimum deposit',
+          bonus: 'bonus',
+          accounting_bank: 'Accounting bank',
+          withholding_tax: 'withholding tax',
+        },
+        tooltip: {
+          licensed_broker:
+            'Verfügt der Broker über eine eigene Brokerlizenz oder handelt es sich um einen Introducing Broker. Bei IBs muss man sich bei Umstimmigkeiten immer mit der Muttergesellschaft an die man vermittelt wurde auseinander setzen',
+          customer_funds_separated:
+            'Bei einer Insolvenz des Brokers haben Gläubiger nur Zugriff auf das Firmenvermögen.Werden die Kundengelder getrennt vom Betriebsvermögen gehalten, sind diese bei einer Insolvenz des Brokers vor dem Zugriff der Gläubiger geschützt und können an Kunden zurück fließen',
+          bonus:
+            'Einige Broker bieten ihren Kunden Bonuszahlungen in Form von Willkommensbonus, Einzahlungsbonus oder ähnlichem an.',
+          accounting_bank:
+            'Auf welcher Bank und in welchem Land verwahrt der Broker die Gelder der Kunden',
+          obligation_to_make_additional_payments:
+            'Schließt ein Broker die Nachschusspflicht nicht ausdrücklich aus, ist es unter Umständen möglich mehr als seine eingezahlte Einlage zu verlieren, wenn das Konto aufgrund starker Kursschwankungen ins Minus gerät.Wir empfehlen, sich in diesem Fall noch einmal direkt beim jeweiligen Broker zu erkundigen',
+        },
+      },
       comparison: {
         title: 'Tool zum Vergleich von Online Brokern',
         description:
@@ -437,6 +461,10 @@ const en = {
           tradingPlatforms:
             'Handelsplatformen bei {0} und {1}',
           service: 'Service bei {0} und {1}',
+        },
+        single: {
+          tradableMarketsAndFees:
+            'Handelbare Märkte und Gebühren bei {0}',
         },
         awards: 'Aus-zeichnungen',
         regulation: 'Regulierung',
@@ -579,6 +607,28 @@ const en = {
               'Die Handelsplattform erlaubt dass Schließen aller Positionen zum gleichen Zeitpunkt.',
           },
         },
+      },
+      market: {
+        title: 'Tradable Markets and Fees at ActivTrades',
+        forex_trading_at_activities:
+          'Forex trading at ActivTrades',
+        cfd_trading_at_activTrades:
+          'CFD Trading at ActivTrades',
+      },
+      platform: {
+        title: 'ActivTrades Trading Platforms',
+        order_options: 'order options',
+        order_types: 'order types',
+      },
+      spread: {
+        title: 'Spreads at ActivTrades',
+      },
+      service: {
+        title: 'Spreads at ActivTrades',
+        homepage: 'home page',
+        contact: 'Contact',
+        address: 'Address',
+        training_opportunities: 'training opportunities',
       },
       fields: {
         // #region Broker
@@ -984,13 +1034,14 @@ const en = {
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },
       text: {
-        rating:
-          '{0} out of {1} points from {2} reviews from traders',
-        nowTo: 'Now to {0}',
-        freeDemoAccount: 'Free demo account',
-        portrait: 'Portrait',
         activeTraderExperience:
           "ActivTrade's trader experiences",
+        introduction: 'Broker Introduction',
+        freeDemoAccount: 'Free demo account',
+        nowTo: 'Now to {0}',
+        portrait: 'Portrait',
+        rating:
+          '{0} out of {1} points from {2} reviews from traders',
         upsides: 'Conclusion from trader reviews',
         video: 'Broker Introduction',
       },
