@@ -1,5 +1,74 @@
-function BrokerPlatformView(props) {
-  return null;
+import { Grid } from '@mui/material';
+import { i18n } from 'src/i18n';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import AttrTypography from 'src/view/home/broker/shared/AttrTypography';
+import BrokerHomepageUrls from 'src/view/home/broker/components/BrokerHomepageUrls';
+import MDTypography from 'src/mui/components/MDTypography';
+import SingleCheckbox from 'src/view/home/broker/components/SingleCheckbox';
+
+function BrokerPlatformView({ record }) {
+  const { sidenavColor } = selectMuiSettings();
+  return (
+    <>
+      <MDTypography variant="h4" pb={2}>
+        {i18n(
+          'entities.broker.comparison.single.tradableMarketsAndFees',
+          record.name,
+        )}
+      </MDTypography>
+      <SingleCheckbox
+        record={record}
+        fields={[
+          'TRADE_PLATFORM',
+          'FREE_DEMO_ACCOUNT',
+          'METATRADER_4',
+          'METATRADER_5',
+          'WEB_PLATFORM',
+          'MOBILE_TRADING_APPS',
+          'HEDGING_ALLOWED',
+          'ADDITIONAL_TRADE_TOOLS',
+          'AUTOMATED_TRADE_POSSIBLE',
+          'API_INTERFACES',
+          'SOCIAL_TRADING',
+          'RATE_ALARMS',
+          'PLATFORM_TUTORIALS',
+          'LAYOUT_SAVEABLE',
+        ]}
+      />
+      <Grid spacing={2} container>
+        <Grid md={4} xs={12} item>
+          <MDTypography
+            variant="h5"
+            color="text"
+            lineHeight="1.25"
+            my={1}
+          >
+            {i18n('entities.broker.platform.order_types')}
+          </MDTypography>
+        </Grid>
+        <Grid md={8} xs={12} item>
+          {record.order_types.map((v, idx) => (
+            <AttrTypography
+              key={idx}
+              children={v}
+              noIndent
+            ></AttrTypography>
+          ))}
+        </Grid>
+      </Grid>
+      <SingleCheckbox
+        record={record}
+        fields={[
+          'ONE_CLICK_TRADING',
+          'TRADE_FROM_CHART',
+          'ALL_POSITIONS_CLOSEABLE',
+          'GUARANTEED_STOPS',
+          'PHONE_TRADE_POSSIBLE',
+        ]}
+      />
+      <BrokerHomepageUrls record={record} />
+    </>
+  );
 }
 
 export default BrokerPlatformView;

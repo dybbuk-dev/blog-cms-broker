@@ -414,21 +414,9 @@ const en = {
       characteristics: {
         fields: {
           licensed_broker: 'Licensed Broker',
-          office_in_germany: 'Office in Germany',
-          regulation_deposit_insurance:
-            'regulation and deposit insurance',
-          customer_funds_separated:
-            'customer funds separated(segregated accounts)',
-          minimum_deposit: 'minimum deposit 1000 Euro',
+          minimum_deposit: 'minimum deposit',
           bonus: 'bonus',
           accounting_bank: 'Accounting bank',
-          accounting_currencies: 'Accounting currencies',
-          opportunities_for_deposits_and_withdrawals:
-            'Opportunities for deposits and withdrawals',
-          obligation_to_make_additional_payments:
-            'obligation to make additional payments',
-          interest_on_account_deposit:
-            'Interest on account deposit',
           withholding_tax: 'withholding tax',
         },
         tooltip: {
@@ -470,6 +458,10 @@ const en = {
           tradingPlatforms:
             'Handelsplatformen bei {0} und {1}',
           service: 'Service bei {0} und {1}',
+        },
+        single: {
+          tradableMarketsAndFees:
+            'Handelbare Märkte und Gebühren bei {0}',
         },
         awards: 'Aus-zeichnungen',
         regulation: 'Regulierung',
@@ -612,6 +604,28 @@ const en = {
               'Die Handelsplattform erlaubt dass Schließen aller Positionen zum gleichen Zeitpunkt.',
           },
         },
+      },
+      market: {
+        title: 'Tradable Markets and Fees at ActivTrades',
+        forex_trading_at_activities:
+          'Forex trading at ActivTrades',
+        cfd_trading_at_activTrades:
+          'CFD Trading at ActivTrades',
+      },
+      platform: {
+        title: 'ActivTrades Trading Platforms',
+        order_options: 'order options',
+        order_types: 'order types',
+      },
+      spread: {
+        title: 'Spreads at ActivTrades',
+      },
+      service: {
+        title: 'Spreads at ActivTrades',
+        homepage: 'home page',
+        contact: 'Contact',
+        address: 'Address',
+        training_opportunities: 'training opportunities',
       },
       fields: {
         // #region Broker
