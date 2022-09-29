@@ -202,6 +202,7 @@ const en = {
 
     blog: {
       name: 'blog',
+      title: 'Blog',
       label: 'All Blogs',
       menu: 'Articles',
       exporterFileName: 'blog_export',
@@ -1044,6 +1045,9 @@ const en = {
           '{0} out of {1} points from {2} reviews from traders',
         upsides: 'Conclusion from trader reviews',
         video: 'Broker Introduction',
+        broker_comparison: 'Broker Comparison',
+        broker_comparison_teaser:
+          'Den besten Broker zu finden ist nicht immer leicht. Auf Broker-Bewertungen.de finden Sie einen Vergleich aller großen Broker sortiert nach Broker Typ, Regulierung, Trading Plattform und Einzahlungsmethoden. Dabei finden Sie zu jedem Broker User Bewertungen von echten Tradern, um ihnen die Suche zu erleichtern.',
       },
     },
 

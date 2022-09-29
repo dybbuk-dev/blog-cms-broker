@@ -36,12 +36,12 @@ function Footer() {
               config.frontendUrl.host,
             )}
           </MDTypography>
-        </MDBox>
-        {!loading && categories && categories.count && (
-          <PageContent py={2}>
+
+          {!loading && categories && categories.count && (
             <MDBox
               display="inline-flex"
               flexWrap="wrap"
+              py={2}
               gap={2}
             >
               {categories.rows.map((cat) => (
@@ -62,8 +62,8 @@ function Footer() {
                 </MDTypography>
               ))}
             </MDBox>
-          </PageContent>
-        )}
+          )}
+        </MDBox>
       </MDBox>
     </Container>
   );
