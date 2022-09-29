@@ -45,6 +45,7 @@ import darkColors from 'src/mui/assets/theme-dark/base/colors';
 import navigationHomeActions from 'src/modules/navigation/home/navigationHomeActions';
 import categoryFooterActions from 'src/modules/category/footer/categoryFooterActions';
 import brokerTopActions from 'src/modules/broker/top/brokerTopActions';
+import ScrollTop from 'src/ScrollTop';
 
 const store = configureStore();
 
@@ -175,7 +176,7 @@ function AppWithSnackbar(props) {
       bgColor={
         darkMode
           ? darkColors.dark.main
-          : lightColors.light.main
+          : lightColors.white.main
       }
       shadow="sm"
       borderRadius="50%"
@@ -211,6 +212,7 @@ function AppWithSnackbar(props) {
       )}
       {layout === 'vr' && <Configurator />}
       <RoutesComponent />
+      <ScrollTop />
     </ConnectedRouter>
   );
 }
