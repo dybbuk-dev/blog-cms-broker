@@ -1,4 +1,11 @@
 export default (app) => {
+  // #region front-end APIs
+  app.post(
+    `/affiliate-link/home`,
+    require('./affiliateLinkHome').default,
+  );
+  // #endregion
+  // #region back-end APIs
   app.post(
     `/tenant/:tenantId/affiliate-link`,
     require('./affiliateLinkCreate').default,
@@ -27,4 +34,5 @@ export default (app) => {
     `/tenant/:tenantId/affiliate-link/:id`,
     require('./affiliateLinkFind').default,
   );
+  // #endregion
 };

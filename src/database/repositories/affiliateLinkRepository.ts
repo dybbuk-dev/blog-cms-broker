@@ -141,6 +141,29 @@ class AffiliateLinkRepository {
     return this._fillWithRelationsAndFiles(record, options);
   }
 
+  static async findByHash(
+    hash,
+    options: IRepositoryOptions,
+  ) {
+    const transaction =
+      SequelizeRepository.getTransaction(options);
+    const include = [];
+    const record =
+      await options.database.affiliate_link.findOne({
+        where: {
+          hash,
+        },
+        include,
+        transaction,
+      });
+
+    if (!record) {
+      throw new Error404();
+    }
+
+    return this._fillWithRelationsAndFiles(record, options);
+  }
+
   static async filterIdInTenant(
     id,
     options: IRepositoryOptions,

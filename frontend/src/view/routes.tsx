@@ -1283,6 +1283,10 @@ const simpleRoutes = [
       import('src/view/shared/errors/Error500Page'),
   },
   {
+    path: '/zu/**',
+    loader: () => import('src/view/home/Redirect'),
+  },
+  {
     path: '/forex-cfd-broker-vergleich',
     loader: () =>
       import('src/view/home/broker/BrokerComparisonPage'),

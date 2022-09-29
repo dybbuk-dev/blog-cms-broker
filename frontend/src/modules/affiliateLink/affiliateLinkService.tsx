@@ -75,6 +75,17 @@ export default class AffiliateLinkService {
     return response.data;
   }
 
+  static async home(url) {
+    const response = await authAxios.post(
+      '/affiliate-link/home',
+      {
+        url,
+      },
+    );
+
+    return response.data;
+  }
+
   static async list(filter, orderBy, limit, offset) {
     const params = {
       filter,
