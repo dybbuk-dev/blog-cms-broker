@@ -53,10 +53,13 @@ const BlogListPage = () => {
                 justifyContent="flex-start"
                 gap={5}
               >
-                <img
-                  src={record.blog_image[0].downloadUrl}
-                  width="150px"
-                />
+                {record.blog_image[0]?.downloadUrl && (
+                  <img
+                    src={record.blog_image[0].downloadUrl}
+                    width="150px"
+                  />
+                )}
+
                 <MDBox color="text">
                   <MDTypography variant="h4">
                     <MaterialLink

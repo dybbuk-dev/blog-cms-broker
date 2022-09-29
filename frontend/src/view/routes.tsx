@@ -1210,7 +1210,7 @@ const privateRoutes = [
 const publicRoutes = [
   {
     path: '/',
-    loader: () => import('src/view/home/FirstPage'),
+    loader: () => import('src/view/home/HomeViewPage'),
     exact: true,
   },
   {

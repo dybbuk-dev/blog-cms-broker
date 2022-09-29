@@ -1,12 +1,10 @@
-import { Grid } from '@mui/material';
-import { i18n } from 'src/i18n';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import AuthorView from 'src/view/shared/view/AuthorView';
 import BrokerCharacteristicsView from 'src/view/home/broker/components/BrokerCharacteristicsView';
 import BrokerHeader from 'src/view/home/broker/components/BrokerHeader';
+import BrokerHomepageUrls from 'src/view/home/broker/components/BrokerHomepageUrls';
 import BrokerMarketsView from 'src/view/home/broker/components/BrokerMarketsView';
 import BrokerOverviewView from 'src/view/home/broker/components/BrokerOverviewView';
 import BrokerPlatformView from 'src/view/home/broker/components/BrokerPlatformView';
@@ -16,18 +14,14 @@ import BrokerSpreadsView from 'src/view/home/broker/components/BrokerSpreadsView
 import BrokerTabs from 'src/view/broker/BrokerTabs';
 import brokerViewActions from 'src/modules/broker/view/brokerViewActions';
 import brokerViewSelectors from 'src/modules/broker/view/brokerViewSelectors';
+import HtmlView from 'src/view/shared/view/HtmlView';
 import Layout from 'src/view/home/Layout';
 import MDBox from 'src/mui/components/MDBox';
-import MDButton from 'src/mui/components/MDButton';
 import PageContent from 'src/view/shared/view/PageContent';
-import SendIcon from '@mui/icons-material/Send';
 import Spinner from 'src/view/shared/Spinner';
 import TabPanel from 'src/view/shared/tab/TabPanel';
-import HtmlView from 'src/view/shared/view/HtmlView';
-import BrokerHomepageUrls from 'src/view/home/broker/components/BrokerHomepageUrls';
 
 const BrokerViewPage = () => {
-  const { sidenavColor } = selectMuiSettings();
   const [dispatched, setDispatched] = useState(false);
 
   const dispatch = useDispatch();
@@ -113,37 +107,9 @@ const BrokerViewPage = () => {
                 </PageContent>
               )}
             <AuthorView value={record.author} />
-            <Grid spacing={2} container>
-              <Grid md={6} xs={12} item>
-                <MDButton
-                  variant="contained"
-                  href={record.meta?.homepage}
-                  target="_blank"
-                  color={sidenavColor}
-                  startIcon={<SendIcon />}
-                  fullWidth
-                >
-                  {i18n(
-                    'entities.broker.text.nowTo',
-                    record.name,
-                  )}
-                </MDButton>
-              </Grid>
-              <Grid md={6} xs={12} item>
-                <MDButton
-                  variant="contained"
-                  target="_blank"
-                  href={record.meta?.demo_url}
-                  color="primary"
-                  startIcon={<SendIcon />}
-                  fullWidth
-                >
-                  {i18n(
-                    'entities.broker.text.freeDemoAccount',
-                  )}
-                </MDButton>
-              </Grid>
-            </Grid>
+            <MDBox>
+              <BrokerHomepageUrls record={record} />
+            </MDBox>
           </>
         )}
       </MDBox>
