@@ -92,6 +92,14 @@ export default class CategoryService {
     return response.data;
   }
 
+  static async categoriesInSidebar() {
+    const response = await authAxios.get(
+      '/category/sidebar',
+    );
+
+    return response.data;
+  }
+
   static async list(filter, orderBy, limit, offset) {
     const params = {
       filter,

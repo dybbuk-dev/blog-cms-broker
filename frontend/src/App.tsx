@@ -46,6 +46,7 @@ import navigationHomeActions from 'src/modules/navigation/home/navigationHomeAct
 import categoryFooterActions from 'src/modules/category/footer/categoryFooterActions';
 import brokerTopActions from 'src/modules/broker/top/brokerTopActions';
 import ScrollTop from 'src/ScrollTop';
+import categorySidebarActions from 'src/modules/category/sidebar/categorySidebarActions';
 
 const store = configureStore();
 
@@ -76,6 +77,7 @@ function AppWithRedux(props) {
 
     dispatch(navigationHomeActions.doFetch());
     dispatch(categoryFooterActions.doFetch());
+    dispatch(categorySidebarActions.doFetch());
     dispatch(brokerTopActions.doFetch());
   }, []);
 
