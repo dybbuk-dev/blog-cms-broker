@@ -1221,6 +1221,36 @@ const en = {
       },
     },
 
+    home: {
+      title: 'Broker Bewertungen von Tradern für Trader',
+      subtitle:
+        'Wir helfen ihnen beim Broker Vergleich seit 2009!',
+      description:
+        'Wir sind selbst Trader und wissen wie schwer es ist einen guten Broker für den Handel von Forex, CFDs, Aktien, Futures oder Binären Optionen zu finden.Deshalb haben wir diese Seite ins Leben gerufen und alle Informationen zu den bekanntesten Brokern übersichtlich für unsere Besucher zusammengefasst.',
+      top_brokers: 'Von Tradern am besten bewertete Broker',
+      top_brokers_description:
+        'Zusätzlich zu Handelsplattform, Spreads und Co. finden Sie in unserem Broker Vergleich auch Erfahrungsberichte von Tradern zu fast jedem Anbieter, um ihnen die Suche nach dem richtigen Anbieter etwas zu erleichtern und die guten Broker von den mittelmäßigen zu unterscheiden.',
+      forex_broker: 'Forex Broker Vergleich',
+      cfd_broker: 'CFD Broker Vergleich',
+      cfd_broker_content:
+        'Vergleichen Sie alle grossen CFD Broker miteinander und lesen Sie Erfahrungsberichte von Tradern zu jedem Broker',
+      forex_broker_content:
+        'Finden Sie informationen zu allen grossen Forex Brokern inklusive Erfahrungen und Bewertungen von Tradern',
+      why_broker_comparison:
+        'Warum einen Broker Vergleich machen ?',
+      why_broker_comparison_content:
+        'In der heutigen Zeit entscheiden sich immer mehr spekulativ eingestellte Trader inzwischen für den Handel&nbsp; mit Devisen, CFDs oder anderen Finanzinstrumenten. Dabei ist der Start nicht immer ganz einfach, da es in Vorfeld zahlreiche Informationen gibt, die zuvor gesammelt werden müssen. Dazu gehört auch, dass sich der Trader mit der Frage beschäftigt, über welchen Anbieter er überhaupt Devisen, CFDs und andere Finanzprodukte handeln möchte. Selten ist es nämlich die Hausbank oder eine Direktbank, die solche Handelsmöglichkeiten im Angebot hat. Stattdessen sind es spezielle Forex- und CFD-Broker, die Anlegern den Zugang zu diesen Anlageformen anbieten. Daher sollte jeder Trader und solche die es noch werden wollen sich mit der Frage auseinander setzen, wie er den für sich beten Broker finden kann. Diese Aufgabe lässt sich am einfachsten durch einen ausführlichen <strong>Broker Vergleich</strong> bewältigen.',
+      find_right_broker:
+        'Durch einen Broker Vergleich den richtigen Broker finden',
+      find_right_broker_content:
+        'Wir sind selbst Trader und wissen daher wie schwierig es sein kann einen guten und seriösen Broker für den CFD-&nbsp; , <a href="https://broker-bewertungen.de/aktien-broker-vergleich"><strong>Aktien</strong></a> oder <strong><a href="https://broker-bewertungen.de/forex-broker-vergleich">Forex Broker</a></strong> zu finden.Auf&nbsp; broker-bewertungen.de bieten wir die Möglichkeit, den für Sie richtigen Broker einfach und schnell anhand von zahlreichen Kriterien zu ermitteln. Zu diesem Zweck stellen wir Ihnen einen umfangreichen Forex- und <strong><a href="http://broker-bewertungen.de/cfd-broker-vergleich">CFD-Broker Vergleich</a></strong> zur Verfügung. Dabei handelt es sich nicht nur um einen reinen Konditionenvergleich. Neben den Handelskonditionen spielen bei uns vor allem die Bewertungen von Kunden zu den jeweiligen Anbietern eine Rolle.Egal ob Forex Broker, CFD Broker, Aktien Broker oder Signalservice, in unserer Datenbank finden Sie wahrscheinlich Bewertungen von Kunden zu fast jedem Anbieter. Dabei können Sie als Trader von diesen Empfehlungen, Erfahrungsberichten und auch von den Meinungen anderer profitieren und in ihren Broker Vergleich mit einfließen lassen. Deshalb stellen diese Informationen sicherlich eine wichtige Hilfe dar, damit auch Sie den richtigen Broker finden können. Unabhängig davon, ob Sie unsere Broker Vergleiche nutzen oder sich anderweitig informieren möchten, sollten Sie beim Gegenüberstellen der Anbieter diverse Punkte beachten. Sicherlich ist es an dieser Stelle hilfreich, dass Sie bereits einige <strong><a href="https://broker-bewertungen.de/forex-schule">Grundkenntnisse</a></strong> haben, wodurch sich die Broker unterscheiden, auf welche Merkmale zu achten ist und was einen guten Anbieter von einem mittelmäßigen oder sogar schlechten Broker unterscheidet.',
+      pay_attention_to_various:
+        'Achten Sie beim Broker Vergleich auf diverse Kriterien',
+      pay_attention_to_various_content:
+        'Im Folgenden möchten wir etwas näher darauf eingehen, worauf Sie bei einem Broker Vergleich achten sollten und welche Kriterien sowie Merkmale von Bedeutung sind. Unter anderem sollten Sie sich in diesem Zusammenhang einige der folgenden Fragen stellen:',
+      what_trading_broker_offer: '',
+    },
+
     navigation: {
       name: 'navigation',
       label: 'Navigations',
