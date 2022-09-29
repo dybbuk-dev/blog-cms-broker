@@ -140,9 +140,15 @@ export default class BlogCommentService {
     return response.data;
   }
 
-  static async findCommentList(filter, limit, offset) {
+  static async findCommentList(
+    filter,
+    orderBy,
+    limit,
+    offset,
+  ) {
     const params = {
       filter,
+      orderBy,
       limit,
       offset,
     };

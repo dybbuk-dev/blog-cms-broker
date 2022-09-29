@@ -465,7 +465,7 @@ class BrokerRepository {
         }
       }
 
-      if (filter.category) {
+      if (filter.category && filter.category != 0) {
         whereAnd.push({
           id: {
             [Op.in]:

@@ -6,9 +6,15 @@ const initialData = {
   rows: [] as Array<any>,
   count: 0,
   loading: false,
+  filter: {},
+  rawFilter: {},
   pagination: {
     current: 1,
     pageSize: INITIAL_PAGE_SIZE,
+  },
+  sorter: {
+    field: 'id',
+    order: 'desc',
   },
 };
 
@@ -27,6 +33,8 @@ export default (state = initialData, { type, payload }) => {
     return {
       ...state,
       loading: true,
+      filter: payload ? payload.filter : {},
+      rawFilter: payload ? payload.rawFilter : {},
       pagination:
         payload && payload.keepPagination
           ? state.pagination

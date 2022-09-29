@@ -11,6 +11,7 @@ import PageContent from 'src/view/shared/view/PageContent';
 import Pagination from 'src/view/shared/table/Pagination';
 import selectors from 'src/modules/blog/home/blogHomeSelectors';
 import Spinner from 'src/view/shared/Spinner';
+import { i18n } from 'src/i18n';
 
 const BlogListPage = () => {
   const [dispatched, setDispatched] = useState(false);
@@ -41,40 +42,45 @@ const BlogListPage = () => {
       <PageContent>
         {loading && <Spinner />}
         {dispatched && !loading && records && (
-          <MDBox
-            display="flex"
-            flexDirection="column"
-            gap={5}
-          >
-            {records.map((record) => (
-              <MDBox
-                key={record.id}
-                display="flex"
-                justifyContent="flex-start"
-                gap={5}
-              >
-                {record.blog_image[0]?.downloadUrl && (
-                  <img
-                    src={record.blog_image[0].downloadUrl}
-                    width="150px"
-                  />
-                )}
+          <>
+            <MDTypography variant="h2" color="text" py={2}>
+              {i18n('entities.blog.title')}
+            </MDTypography>
+            <MDBox
+              display="flex"
+              flexDirection="column"
+              gap={5}
+            >
+              {records.map((record) => (
+                <MDBox
+                  key={record.id}
+                  display="flex"
+                  justifyContent="flex-start"
+                  gap={5}
+                >
+                  {record.blog_image[0]?.downloadUrl && (
+                    <img
+                      src={record.blog_image[0].downloadUrl}
+                      width="150px"
+                    />
+                  )}
 
-                <MDBox color="text">
-                  <MDTypography variant="h4">
-                    <MaterialLink
-                      component={Link}
-                      to={`/blog/${record.name_normalized}`}
-                      underline="hover"
-                    >
-                      {record.name}
-                    </MaterialLink>
-                  </MDTypography>
-                  <HtmlView value={record.teaser} />
+                  <MDBox color="text">
+                    <MDTypography variant="h4">
+                      <MaterialLink
+                        component={Link}
+                        to={`/blog/${record.name_normalized}`}
+                        underline="hover"
+                      >
+                        {record.name}
+                      </MaterialLink>
+                    </MDTypography>
+                    <HtmlView value={record.teaser} />
+                  </MDBox>
                 </MDBox>
-              </MDBox>
-            ))}
-          </MDBox>
+              ))}
+            </MDBox>
+          </>
         )}
         <Pagination
           onChange={doChangePagination}

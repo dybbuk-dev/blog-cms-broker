@@ -1287,6 +1287,11 @@ const simpleRoutes = [
     loader: () => import('src/view/home/Redirect'),
   },
   {
+    path: '/broker-vergleich',
+    loader: () =>
+      import('src/view/home/broker/ComparisonPage'),
+  },
+  {
     path: '/forex-cfd-broker-vergleich',
     loader: () =>
       import('src/view/home/broker/BrokerComparisonPage'),

@@ -273,6 +273,11 @@ class BlogCommentRepository {
       },
     ];
     if (filter) {
+      if (filter.blog_entry_id) {
+        whereAnd.push({
+          blog_entry_id: filter.blog_entry_id,
+        });
+      }
       if (filter.idRange) {
         const [start, end] = filter.idRange;
 
