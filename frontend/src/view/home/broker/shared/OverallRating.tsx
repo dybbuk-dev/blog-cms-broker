@@ -32,9 +32,9 @@ function OverallRating({
         >
           {i18n(
             'entities.broker.text.rating',
-            record.rating?.overall_rating?.toFixed(2),
+            record.rating?.overall_rating?.toFixed(2) ?? 0,
             5,
-            record.rating?.overall_reviews,
+            record.rating?.overall_reviews ?? 0,
           )}
         </MDTypography>
       )}

@@ -22,8 +22,12 @@ function BrokerRatingPercent({ value }) {
   );
 }
 
+BrokerRatingPercent.defaultProps = {
+  value: 0,
+};
+
 BrokerRatingPercent.propTypes = {
-  value: PropTypes.number.isRequired,
+  value: PropTypes.number,
 };
 
 export default BrokerRatingPercent;
