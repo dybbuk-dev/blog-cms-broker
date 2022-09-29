@@ -6,7 +6,7 @@ export default async (req, res, next) => {
     const payload = await new CategoryService(
       req,
     ).findAndCountAll({
-      filter: { activated: true, show_in_footer: true },
+      filter: { activated: true, show_in_navigation: true },
       orderBy: 'sort_asc',
     });
 

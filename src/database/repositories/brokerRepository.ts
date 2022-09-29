@@ -668,6 +668,13 @@ class BrokerRepository {
         }),
       );
 
+    output.broker_image_broker_detail_logo =
+      await FileRepository.fillDownloadUrl(
+        await record.getBroker_image_broker_detail_logo({
+          transaction,
+        }),
+      );
+
     const { rows: regulatory_authorities } =
       await BrokerRegulatoryAuthorityRepository.findAndCountAll(
         brokerParam,
@@ -705,13 +712,6 @@ class BrokerRepository {
             transaction,
           },
         ),
-      );
-
-    output.broker_image_broker_detail_logo =
-      await FileRepository.fillDownloadUrl(
-        await record.getBroker_image_broker_detail_logo({
-          transaction,
-        }),
       );
     // #endregion
 

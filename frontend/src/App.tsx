@@ -44,6 +44,9 @@ import lightColors from 'src/mui/assets/theme/base/colors';
 import darkColors from 'src/mui/assets/theme-dark/base/colors';
 import navigationHomeActions from 'src/modules/navigation/home/navigationHomeActions';
 import categoryFooterActions from 'src/modules/category/footer/categoryFooterActions';
+import brokerTopActions from 'src/modules/broker/top/brokerTopActions';
+import ScrollTop from 'src/ScrollTop';
+import categorySidebarActions from 'src/modules/category/sidebar/categorySidebarActions';
 
 const store = configureStore();
 
@@ -74,6 +77,8 @@ function AppWithRedux(props) {
 
     dispatch(navigationHomeActions.doFetch());
     dispatch(categoryFooterActions.doFetch());
+    dispatch(categorySidebarActions.doFetch());
+    dispatch(brokerTopActions.doFetch());
   }, []);
 
   return direction === 'rtl' ? (
@@ -173,7 +178,7 @@ function AppWithSnackbar(props) {
       bgColor={
         darkMode
           ? darkColors.dark.main
-          : lightColors.light.main
+          : lightColors.white.main
       }
       shadow="sm"
       borderRadius="50%"
@@ -209,6 +214,7 @@ function AppWithSnackbar(props) {
       )}
       {layout === 'vr' && <Configurator />}
       <RoutesComponent />
+      <ScrollTop />
     </ConnectedRouter>
   );
 }

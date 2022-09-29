@@ -5,6 +5,10 @@ export default (app) => {
     '/category/footer',
     require('./categoryFooter').default,
   );
+  app.get(
+    '/category/sidebar',
+    require('./categorySidebar').default,
+  );
   // #endregion
   // #region back-end APIs
   app.post(

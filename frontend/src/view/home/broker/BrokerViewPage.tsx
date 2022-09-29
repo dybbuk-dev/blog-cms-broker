@@ -14,7 +14,6 @@ import brokerViewActions from 'src/modules/broker/view/brokerViewActions';
 import brokerViewSelectors from 'src/modules/broker/view/brokerViewSelectors';
 import MDBox from 'src/mui/components/MDBox';
 import PageContent from 'src/view/shared/view/PageContent';
-import PageLayout from 'src/mui/examples/LayoutContainers/PageLayout';
 import Spinner from 'src/view/shared/Spinner';
 import TabPanel from 'src/view/shared/tab/TabPanel';
 import BrokerPostPage from 'src/view/home/broker/BrokerPostPage';
@@ -23,6 +22,7 @@ import MDButton from 'src/mui/components/MDButton';
 import SendIcon from '@mui/icons-material/Send';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { i18n } from 'src/i18n';
+import Layout from 'src/view/home/Layout';
 
 const BrokerViewPage = () => {
   const { sidenavColor } = selectMuiSettings();
@@ -50,55 +50,50 @@ const BrokerViewPage = () => {
     setTabValue(newValue);
 
   return (
-    <PageLayout fixedNavBar={false}>
-      <Container>
-        <MDBox
-          display="flex"
-          flexDirection="column"
-          gap={2}
-        >
-          {loading && <Spinner />}
-          {dispatched && !loading && record && (
-            <>
-              <PageContent>
-                <BrokerHeader record={record} />
-                <MDBox py={2}>
-                  <BrokerTabs
-                    labels={[
-                      'overview',
-                      'characteristics',
-                      'platform',
-                      'markets',
-                      'spreads',
-                      'service',
-                    ]}
-                    value={tabValue}
-                    onChange={handleSetTabValue}
+    <Layout>
+      <MDBox display="flex" flexDirection="column" gap={2}>
+        {loading && <Spinner />}
+        {dispatched && !loading && record && (
+          <>
+            <PageContent>
+              <BrokerHeader record={record} />
+              <MDBox py={2}>
+                <BrokerTabs
+                  labels={[
+                    'overview',
+                    'characteristics',
+                    'platform',
+                    'markets',
+                    'spreads',
+                    'service',
+                  ]}
+                  value={tabValue}
+                  onChange={handleSetTabValue}
+                />
+              </MDBox>
+              <MDBox py={3}>
+                <TabPanel value={tabValue} index={0}>
+                  <BrokerOverviewView record={record} />
+                </TabPanel>
+                <TabPanel value={tabValue} index={1}>
+                  <BrokerCharacteristicsView
+                    record={record}
                   />
-                </MDBox>
-                <MDBox py={3}>
-                  <TabPanel value={tabValue} index={0}>
-                    <BrokerOverviewView record={record} />
-                  </TabPanel>
-                  <TabPanel value={tabValue} index={1}>
-                    <BrokerCharacteristicsView
-                      record={record}
-                    />
-                  </TabPanel>
-                  <TabPanel value={tabValue} index={2}>
-                    <BrokerPlatformView record={record} />
-                  </TabPanel>
-                  <TabPanel value={tabValue} index={3}>
-                    <BrokerMarketsView record={record} />
-                  </TabPanel>
-                  <TabPanel value={tabValue} index={4}>
-                    <BrokerSpreadsView record={record} />
-                  </TabPanel>
-                  <TabPanel value={tabValue} index={5}>
-                    <BrokerServiceView record={record} />
-                  </TabPanel>
-                </MDBox>
-              </PageContent>
+                </TabPanel>
+                <TabPanel value={tabValue} index={2}>
+                  <BrokerPlatformView record={record} />
+                </TabPanel>
+                <TabPanel value={tabValue} index={3}>
+                  <BrokerMarketsView record={record} />
+                </TabPanel>
+                <TabPanel value={tabValue} index={4}>
+                  <BrokerSpreadsView record={record} />
+                </TabPanel>
+                <TabPanel value={tabValue} index={5}>
+                  <BrokerServiceView record={record} />
+                </TabPanel>
+              </MDBox>
+            </PageContent>
               <PageContent>
                 <BrokerPostPage record={record} />
               </PageContent>
@@ -134,11 +129,10 @@ const BrokerViewPage = () => {
                   </MDButton>
                 </Grid>
               </Grid>
-            </>
-          )}
-        </MDBox>
-      </Container>
-    </PageLayout>
+          </>
+        )}
+      </MDBox>
+    </Layout>
   );
 };
 

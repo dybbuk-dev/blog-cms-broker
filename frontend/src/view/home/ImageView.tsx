@@ -1,7 +1,7 @@
 import { CardMedia } from '@mui/material';
 import PropTypes from 'prop-types';
 
-function ImageView({ value }) {
+function ImageView({ value, sx }) {
   const url = value && value[0] && value[0].downloadUrl;
   const alt = value && value[0] && value[0].name;
   return (
@@ -12,6 +12,8 @@ function ImageView({ value }) {
       sx={{
         margin: 0,
         borderRadius: 0,
+        maxWidth: '100%',
+        ...sx,
       }}
     />
   );
@@ -19,6 +21,7 @@ function ImageView({ value }) {
 
 ImageView.propTypes = {
   value: PropTypes.any.isRequired,
+  sx: PropTypes.any,
 };
 
 export default ImageView;
