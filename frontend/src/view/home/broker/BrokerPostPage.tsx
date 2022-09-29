@@ -23,14 +23,15 @@ import MDBox from 'src/mui/components/MDBox';
 import MDButton from 'src/mui/components/MDButton';
 import MDTypography from 'src/mui/components/MDTypography';
 import moment from 'moment';
+import OverallRating from 'src/view/home/broker/shared/OverallRating';
 import Pagination from 'src/view/shared/table/Pagination';
+import RatingFormItem from 'src/view/shared/form/items/RatingFormItem';
+import RatingViewItem from 'src/view/shared/view/RatingViewItem';
 import ReviewsIcon from '@mui/icons-material/Reviews';
 import SaveIcon from '@mui/icons-material/Save';
 import selectors from 'src/modules/brokerPost/home/brokerPostHomeSelectors';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
-import OverallRating from 'src/view/home/broker/shared/OverallRating';
-import RatingViewItem from 'src/view/shared/view/RatingViewItem';
-import RatingFormItem from 'src/view/shared/form/items/RatingFormItem';
+import Spinner from 'src/view/shared/Spinner';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(i18n('common.name'), {
@@ -48,6 +49,7 @@ const schema = yup.object().shape({
   }),
   rating: yupFormSchemas.integer(i18n('common.rating'), {}),
 });
+
 const BrokerPostPage = ({ record }) => {
   const { sidenavColor } = selectMuiSettings();
   const form = useForm({
@@ -59,6 +61,7 @@ const BrokerPostPage = ({ record }) => {
     brokerPostFormSelectors.selectSaveLoading,
   );
   const loading = useSelector(selectors.selectLoading);
+  const hasRows = useSelector(selectors.selectHasRows);
   const rows = useSelector(selectors.selectRows);
   const pagination = useSelector(
     selectors.selectPagination,
@@ -68,7 +71,7 @@ const BrokerPostPage = ({ record }) => {
   );
 
   const onSubmit = (values) => {
-    values.broker_id = record.id;
+    values.broker_id = record;
     dispatch(brokerPostFormActions.doCreate(values));
   };
 
@@ -78,18 +81,14 @@ const BrokerPostPage = ({ record }) => {
 
   useEffect(() => {
     dispatch(
-      actions.doFetch(
-        {
-          spam: false,
-          review_required: false,
-          deleted: false,
-          broker_id: record.id,
-        },
-        null,
-        false,
-      ),
+      actions.doFetch({
+        spam: false,
+        review_required: false,
+        deleted: false,
+        broker: record,
+      }),
     );
-  }, [record.id]);
+  }, [record]);
 
   return (
     <>
@@ -102,101 +101,96 @@ const BrokerPostPage = ({ record }) => {
         display="flex"
         flexDirection="column"
         color="text"
-        gap={2}
+        gap={4}
       >
-        {!loading
-          ? rows.map((post) => (
+        {loading && <Spinner />}
+        {!loading &&
+          hasRows &&
+          rows.map((post) => (
+            <MDBox key={post.id}>
               <MDBox
-                key={post.id}
                 display="flex"
-                flexDirection="column"
-                color="text"
-                gap={1}
+                justifyContent="space-between"
+                alignItems="center"
               >
-                <MDBox
-                  display="flex"
-                  justifyContent="space-between"
-                >
-                  <MDBox
-                    display="flex"
-                    justifyContent="flex-start"
-                  >
-                    <MDTypography color="text" variant="h6">
-                      {post.name +
-                        ' (' +
-                        moment(post.modified).format(
-                          DEFAULT_MOMENT_FORMAT_DATE_ONLY,
-                        ) +
-                        ')'}
-                    </MDTypography>
-                  </MDBox>
-                  <MDBox
-                    display="flex"
-                    justifyContent="flex-end"
-                  >
-                    <RatingViewItem
-                      value={post.rating}
-                      precision={0.1}
-                      size="large"
-                    />
-                    {hasPermissionToEdit && (
-                      <>
-                        <Tooltip
-                          title={i18n('common.edit')}
+                <MDTypography variant="h5">
+                  {`${post.name} (${moment(
+                    post.modified,
+                  ).format(
+                    DEFAULT_MOMENT_FORMAT_DATE_ONLY,
+                  )})`}
+                </MDTypography>
+                <MDBox display="flex" gap={1}>
+                  <RatingViewItem
+                    value={post.rating}
+                    precision={0.1}
+                  />
+                  {hasPermissionToEdit && (
+                    <>
+                      <Tooltip title={i18n('common.edit')}>
+                        <IconButton
+                          size="small"
+                          color={sidenavColor}
+                          component={Link}
+                          to={`/admin/broker-post/${post.id}/edit`}
                         >
-                          <IconButton
-                            size="small"
-                            color={sidenavColor}
-                            component={Link}
-                            to={`/admin/broker-post/${post.id}/edit`}
-                          >
-                            <EditIcon />
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip
-                          title={i18n('common.spam')}
+                          <EditIcon />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title={i18n('common.spam')}>
+                        <IconButton
+                          size="small"
+                          color={sidenavColor}
+                          component={Link}
+                          to={`/admin/broker-post`}
                         >
-                          <IconButton
-                            size="small"
-                            color={sidenavColor}
-                            component={Link}
-                            to={`/admin/broker-post`}
-                          >
-                            <BugReportIcon />
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip
-                          title={i18n('common.review')}
+                          <BugReportIcon />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip
+                        title={i18n('common.review')}
+                      >
+                        <IconButton
+                          size="small"
+                          color={sidenavColor}
+                          component={Link}
+                          to={`/admin/broker-post`}
                         >
-                          <IconButton
-                            size="small"
-                            color={sidenavColor}
-                            component={Link}
-                            to={`/admin/broker-post`}
-                          >
-                            <ReviewsIcon />
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip
-                          title={i18n('common.destroy')}
+                          <ReviewsIcon />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip
+                        title={i18n('common.destroy')}
+                      >
+                        <IconButton
+                          size="small"
+                          color={sidenavColor}
+                          component={Link}
+                          to={`/admin/broker-post`}
                         >
-                          <IconButton
-                            size="small"
-                            color={sidenavColor}
-                            component={Link}
-                            to={`/admin/broker-post`}
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </Tooltip>
-                      </>
-                    )}
-                  </MDBox>
+                          <DeleteIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </>
+                  )}
                 </MDBox>
+              </MDBox>
+              <MDBox
+                color="text"
+                fontSize="1rem"
+                fontWeight="regular"
+                pt={1}
+                pl={5}
+              >
                 <HtmlView value={post.review} />
               </MDBox>
-            ))
-          : i18n('common.noCommit')}
+            </MDBox>
+          ))}
+        {!loading && !hasRows && (
+          <MDTypography variant="body2">
+            {i18n('common.noCommit')}
+          </MDTypography>
+        )}
       </MDBox>
       <Pagination
         onChange={doChangePagination}

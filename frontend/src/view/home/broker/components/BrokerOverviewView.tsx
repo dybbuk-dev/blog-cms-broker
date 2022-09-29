@@ -96,7 +96,6 @@ function BrokerOverviewView({ record }) {
           />
         </Grid>
       </Grid>
-      <BrokerHomepageUrls record={record} />
     </>
   );
 }

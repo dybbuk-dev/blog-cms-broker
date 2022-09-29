@@ -1,7 +1,9 @@
 import { IRepositoryOptions } from './IRepositoryOptions';
 import { orderByUtils } from '../utils/orderByUtils';
 import AuditLogRepository from './auditLogRepository';
+import AuthorRepository from './authorRepository';
 import BrokerAddressRepository from './brokerAddressRepository';
+import BrokerArticleRepository from './brokerArticleRepository';
 import BrokerBankRepository from './brokerBankRepository';
 import BrokerCertificateRepository from './brokerCertificateRepository';
 import BrokerCheckboxRepository from './brokerCheckboxRepository';
@@ -814,6 +816,12 @@ class BrokerRepository {
       );
 
     output.deposits = deposits || null;
+
+    output.author =
+      await AuthorRepository._fillWithRelationsAndFiles(
+        record.author,
+        options,
+      );
 
     return output;
   }

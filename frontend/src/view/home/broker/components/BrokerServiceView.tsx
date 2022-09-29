@@ -5,6 +5,7 @@ import AttrTypography from 'src/view/home/broker/shared/AttrTypography';
 import BrokerHomepageUrls from 'src/view/home/broker/components/BrokerHomepageUrls';
 import MDTypography from 'src/mui/components/MDTypography';
 import SingleCheckbox from 'src/view/home/broker/components/SingleCheckbox';
+import BrokerAddress from 'src/view/home/broker/shared/BrokerAddress';
 
 function BrokerServiceView({ record }) {
   return (
@@ -25,7 +26,7 @@ function BrokerServiceView({ record }) {
         </Grid>
         <Grid md={8} xs={12} item>
           <AttachLink link={record.meta?.homepage}>
-            {'https://afftracking.activetrades.com/'}
+            {record.meta?.homepage}
           </AttachLink>
         </Grid>
         <Grid md={4} xs={12} item>
@@ -39,30 +40,7 @@ function BrokerServiceView({ record }) {
           </MDTypography>
         </Grid>
         <Grid md={8} xs={12} item>
-          <AttrTypography
-            children={record.address?.line_0}
-            noIndent
-          ></AttrTypography>
-          <AttrTypography
-            children={record.address?.line_1}
-            noIndent
-          ></AttrTypography>
-          <AttrTypography
-            children={record.address?.line_2}
-            noIndent
-          ></AttrTypography>
-          <AttrTypography
-            children={record.address?.line_3}
-            noIndent
-          ></AttrTypography>
-          <AttrTypography
-            children={record.address?.line_4}
-            noIndent
-          ></AttrTypography>
-          <AttrTypography
-            children={record.address?.line_5}
-            noIndent
-          ></AttrTypography>
+          <BrokerAddress record={record} />
         </Grid>
       </Grid>
       <SingleCheckbox
@@ -87,7 +65,6 @@ function BrokerServiceView({ record }) {
           'KNOWLEDGE_BASE',
         ]}
       />
-      <BrokerHomepageUrls record={record} />
     </>
   );
 }

@@ -54,7 +54,6 @@ function BrokerMarketsView({ record }) {
           'MINIMAL_ORDERSIZE_STOCKS',
         ]}
       />
-      <BrokerHomepageUrls record={record} />
     </>
   );
 }

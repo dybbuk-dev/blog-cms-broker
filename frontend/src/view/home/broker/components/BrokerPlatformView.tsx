@@ -66,7 +66,6 @@ function BrokerPlatformView({ record }) {
           'PHONE_TRADE_POSSIBLE',
         ]}
       />
-      <BrokerHomepageUrls record={record} />
     </>
   );
 }

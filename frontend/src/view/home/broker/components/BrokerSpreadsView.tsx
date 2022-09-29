@@ -20,7 +20,6 @@ function BrokerSpreadsView({ record }) {
           'NO_PLATFORM_FEES',
         ]}
       />
-      <BrokerHomepageUrls record={record} />
     </>
   );
 }

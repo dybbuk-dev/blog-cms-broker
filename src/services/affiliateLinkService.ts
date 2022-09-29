@@ -113,6 +113,14 @@ export default class AffiliateLinkService {
     );
   }
 
+  async findByURL(url) {
+    const hash = url.replace(/^\/zu\//g, '');
+    return AffiliateLinkRepository.findByHash(
+      hash,
+      this.options,
+    );
+  }
+
   async findAllAutocomplete(search, limit) {
     return AffiliateLinkRepository.findAllAutocomplete(
       search,
