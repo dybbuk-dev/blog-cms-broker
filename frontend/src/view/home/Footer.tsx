@@ -26,7 +26,7 @@ function Footer() {
         gap={2}
         my={2}
       >
-        <PageContent>
+        <MDBox p={5} color="text">
           <MDTypography
             variant="body2"
             fontWeight="regular"
@@ -36,7 +36,7 @@ function Footer() {
               config.frontendUrl.host,
             )}
           </MDTypography>
-        </PageContent>
+        </MDBox>
         {!loading && categories && categories.count && (
           <PageContent py={2}>
             <MDBox

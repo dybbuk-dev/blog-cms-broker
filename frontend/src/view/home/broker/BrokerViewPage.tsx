@@ -23,6 +23,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { i18n } from 'src/i18n';
 import Layout from 'src/view/home/Layout';
+import BrokerHomepageUrls from 'src/view/home/broker/components/BrokerHomepageUrls';
 
 const BrokerViewPage = () => {
   const { sidenavColor } = selectMuiSettings();
@@ -94,41 +95,13 @@ const BrokerViewPage = () => {
                 </TabPanel>
               </MDBox>
             </PageContent>
-              <PageContent>
-                <BrokerPostPage record={record} />
-              </PageContent>
-              <BrokerArticlePage record={record} />
-              <Grid spacing={2} container pt={3}>
-                <Grid md={6} xs={12} item>
-                  <MDButton
-                    variant="contained"
-                    href={record.meta?.homepage}
-                    target="_blank"
-                    color={sidenavColor}
-                    startIcon={<SendIcon />}
-                    fullWidth
-                  >
-                    {i18n(
-                      'entities.broker.text.nowTo',
-                      record.name,
-                    )}
-                  </MDButton>
-                </Grid>
-                <Grid md={6} xs={12} item>
-                  <MDButton
-                    variant="contained"
-                    target="_blank"
-                    href={record.meta?.demo_url}
-                    color="primary"
-                    startIcon={<SendIcon />}
-                    fullWidth
-                  >
-                    {i18n(
-                      'entities.broker.text.freeDemoAccount',
-                    )}
-                  </MDButton>
-                </Grid>
-              </Grid>
+            <PageContent>
+              <BrokerPostPage record={record} />
+            </PageContent>
+            <BrokerArticlePage record={record} />
+            <PageContent>
+              <BrokerHomepageUrls record={record} />
+            </PageContent>
           </>
         )}
       </MDBox>

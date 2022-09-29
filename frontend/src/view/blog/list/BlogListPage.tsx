@@ -7,7 +7,7 @@ import { Card } from '@mui/material';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 
-function BlogListBlog(props) {
+function BlogListPage(props) {
   return (
     <>
       <Card>
@@ -31,4 +31,4 @@ function BlogListBlog(props) {
   );
 }
 
-export default BlogListBlog;
+export default BlogListPage;
