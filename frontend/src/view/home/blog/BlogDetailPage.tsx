@@ -1,3 +1,4 @@
+import { i18n } from 'src/i18n';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
@@ -6,10 +7,11 @@ import blogFindActions from 'src/modules/blog/find/blogFindActions';
 import blogFindSelectors from 'src/modules/blog/find/blogFindSelectors';
 import CommentPage from 'src/view/home/blog/CommentPage';
 import HtmlView from 'src/view/shared/view/HtmlView';
+import Layout from 'src/view/home/Layout';
 import MDBox from 'src/mui/components/MDBox';
 import PageContent from 'src/view/shared/view/PageContent';
 import Spinner from 'src/view/shared/Spinner';
-import Layout from 'src/view/home/Layout';
+import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
 
 const BlogDetailPage = () => {
   const [dispatched, setDispatched] = useState(false);
@@ -42,6 +44,10 @@ const BlogDetailPage = () => {
               <CommentPage record={record} />
             </PageContent>
             <AuthorView value={record.author} />
+            <PageContent>
+              <h3>{i18n('entities.home.top_brokers')}</h3>
+              <TopBrokersView />
+            </PageContent>
           </>
         )}
       </MDBox>

@@ -1,3 +1,4 @@
+import { i18n } from 'src/i18n';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
@@ -109,6 +110,7 @@ const BrokerViewPage = () => {
               )}
             <AuthorView value={record.author} />
             <PageContent>
+              <h3>{i18n('entities.home.top_brokers')}</h3>
               <TopBrokersView />
               <BrokerHomepageUrls record={record} />
             </PageContent>

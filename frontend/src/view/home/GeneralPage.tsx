@@ -1,3 +1,4 @@
+import { i18n } from 'src/i18n';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
@@ -12,7 +13,7 @@ import MDTypography from 'src/mui/components/MDTypography';
 import PageContent from 'src/view/shared/view/PageContent';
 import pageHomeSelectors from 'src/modules/page/home/pageHomeSelectors';
 import Spinner from 'src/view/shared/Spinner';
-
+import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
 const GeneralPage = () => {
   const [dispatched, setDispatched] = useState(false);
 
@@ -66,6 +67,10 @@ const GeneralPage = () => {
               <HtmlView value={page.body} />
             </PageContent>
             <AuthorView value={page.author} />
+            <PageContent>
+              <h3>{i18n('entities.home.top_brokers')}</h3>
+              <TopBrokersView />
+            </PageContent>
           </>
         )}
       </MDBox>

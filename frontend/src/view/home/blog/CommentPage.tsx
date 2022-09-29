@@ -27,8 +27,8 @@ import Pagination from 'src/view/shared/table/Pagination';
 import ReviewsIcon from '@mui/icons-material/Reviews';
 import SaveIcon from '@mui/icons-material/Save';
 import selectors from 'src/modules/blogComment/home/blogCommentHomeSelectors';
-import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import Spinner from 'src/view/shared/Spinner';
+import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(i18n('common.name'), {
