@@ -1,3 +1,4 @@
+import { i18n } from 'src/i18n';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
@@ -11,7 +12,6 @@ import PageContent from 'src/view/shared/view/PageContent';
 import Pagination from 'src/view/shared/table/Pagination';
 import selectors from 'src/modules/blog/home/blogHomeSelectors';
 import Spinner from 'src/view/shared/Spinner';
-import { i18n } from 'src/i18n';
 
 const BlogListPage = () => {
   const [dispatched, setDispatched] = useState(false);

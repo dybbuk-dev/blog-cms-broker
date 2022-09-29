@@ -58,18 +58,24 @@ function TopBrokersView() {
                     hideDescription
                     hidePercent
                   />
-                  <MDTypography
-                    variant="body2"
-                    fontWeight="regular"
+                  <MDBox
+                    display="flex"
+                    alignItems="center"
+                    gap={1}
                   >
-                    <MaterialLink
-                      component={Link}
-                      to={`/erfahrungsberichte/${row.name_normalized}`}
-                      underline="hover"
+                    <MDTypography
+                      variant="body2"
+                      fontWeight="regular"
                     >
-                      {row.name}
-                    </MaterialLink>
-                  </MDTypography>
+                      <MaterialLink
+                        component={Link}
+                        to={`/erfahrungsberichte/${row.name_normalized}`}
+                        underline="hover"
+                      >
+                        {row.name}
+                      </MaterialLink>
+                    </MDTypography>
+                  </MDBox>
                 </MDBox>
               </MDBox>
             </Grid>
