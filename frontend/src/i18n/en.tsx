@@ -30,6 +30,7 @@ const en = {
     save: 'Save',
     search: 'Search',
     select: 'Select',
+    send: 'Send',
     spam: 'Spam',
     start: 'Start',
     view: 'View',
@@ -256,6 +257,14 @@ const en = {
         title: 'Import Blogs',
         fileName: 'blog_import_template',
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
+      },
+    },
+
+    contact: {
+      fields: {
+        name: 'Name',
+        email: 'E-Mail',
+        subject: 'Betreff',
       },
     },
 
@@ -1703,6 +1712,7 @@ const en = {
     emailAddressVerificationEmail: {
       error: `Email not recognized`,
     },
+    contactSuccess: `Contact email successfully sent`,
     verificationEmailSuccess: `Verification email successfully sent`,
     passwordResetEmailSuccess: `Password reset email successfully sent`,
     passwordResetSuccess: `Password successfully changed`,

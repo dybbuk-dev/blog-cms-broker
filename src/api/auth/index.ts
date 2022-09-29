@@ -13,6 +13,12 @@ export default (app) => {
   });
 
   app.post(
+    `/auth/send-contact`,
+    emailRateLimiter,
+    require('./authContact').default,
+  );
+
+  app.post(
     `/auth/send-email-address-verification-email`,
     emailRateLimiter,
     require('./authSendEmailAddressVerificationEmail')

@@ -5,6 +5,7 @@ const initialData = {
   currentUser: null,
   currentTenant: null,
   loadingInit: true,
+  loadingContact: false,
   loadingEmailConfirmation: false,
   loadingPasswordResetEmail: false,
   loadingPasswordChange: false,
@@ -72,6 +73,27 @@ export default (state = initialData, { type, payload }) => {
       currentTenant: null,
       errorMessage: payload || null,
       loading: false,
+    };
+  }
+
+  if (type === actions.CONTACT_START) {
+    return {
+      ...state,
+      loadingContact: true,
+    };
+  }
+
+  if (type === actions.CONTACT_SUCCESS) {
+    return {
+      ...state,
+      loadingContact: false,
+    };
+  }
+
+  if (type === actions.CONTACT_ERROR) {
+    return {
+      ...state,
+      loadingContact: false,
     };
   }
 

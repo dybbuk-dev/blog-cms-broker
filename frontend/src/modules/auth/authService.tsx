@@ -5,6 +5,20 @@ import AuthInvitationToken from 'src/modules/auth/authInvitationToken';
 import { tenantSubdomain } from '../tenant/tenantSubdomain';
 
 export default class AuthService {
+  static async sendContact(name, email, subject, content) {
+    const response = await authAxios.post(
+      '/auth/send-contact',
+      {
+        name,
+        email,
+        subject,
+        content,
+      },
+    );
+
+    return response.data;
+  }
+
   static async sendEmailVerification() {
     const response = await authAxios.post(
       '/auth/send-email-address-verification-email',

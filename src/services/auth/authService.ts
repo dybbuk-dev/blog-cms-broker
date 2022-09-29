@@ -399,6 +399,25 @@ class AuthService {
     });
   }
 
+  static async sendContact(
+    language,
+    name,
+    email,
+    subject,
+    content,
+  ) {
+    if (!EmailSender.isConfigured) {
+      throw new Error400(language, 'email.error');
+    }
+
+    return new EmailSender(EmailSender.TEMPLATES.CONTACT, {
+      name,
+      email,
+      subject,
+      content,
+    }).sendTo(EmailSender.CONTACT_RECIPIENT);
+  }
+
   static async sendEmailAddressVerificationEmail(
     language,
     email,

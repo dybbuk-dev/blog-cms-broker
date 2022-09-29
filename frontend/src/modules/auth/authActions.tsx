@@ -49,11 +49,40 @@ const authActions = {
   EMAIL_CONFIRMATION_SUCCESS: `${prefix}_EMAIL_CONFIRMATION_SUCCESS`,
   EMAIL_CONFIRMATION_ERROR: `${prefix}_EMAIL_CONFIRMATION_ERROR`,
 
+  CONTACT_START: `${prefix}_CONTACT_START`,
+  CONTACT_SUCCESS: `${prefix}_CONTACT_SUCCESS`,
+  CONTACT_ERROR: `${prefix}_CONTACT_ERROR`,
+
   doClearErrorMessage() {
     return {
       type: authActions.ERROR_MESSAGE_CLEARED,
     };
   },
+
+  doSendContact:
+    (name, email, subject, content) =>
+    async (dispatch, getState) => {
+      try {
+        dispatch({
+          type: authActions.CONTACT_START,
+        });
+        await service.sendContact(
+          name,
+          email,
+          subject,
+          content,
+        );
+        Message.success(i18n('auth.contactSuccess'));
+        dispatch({
+          type: authActions.CONTACT_SUCCESS,
+        });
+      } catch (error) {
+        Errors.handle(error);
+        dispatch({
+          type: authActions.CONTACT_ERROR,
+        });
+      }
+    },
 
   doSendEmailConfirmation:
     () => async (dispatch, getState) => {

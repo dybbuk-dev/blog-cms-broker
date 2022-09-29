@@ -38,31 +38,64 @@ function Footer() {
           </MDTypography>
 
           {!loading && categories && categories.count && (
-            <MDBox
-              display="inline-flex"
-              flexWrap="wrap"
-              py={2}
-              gap={2}
-            >
-              {categories.rows.map((cat) => (
-                <MDTypography
-                  key={cat.id}
-                  variant="body2"
-                  color={sidenavColor}
-                  lineHeight={1}
-                  fontWeight="regular"
-                >
-                  <MaterialLink
-                    component={Link}
-                    to={cat.link}
-                    underline="hover"
+            <>
+              <MDBox
+                display="inline-flex"
+                flexWrap="wrap"
+                mt={3}
+                gap={2}
+              >
+                {categories.rows.map((cat) => (
+                  <MDTypography
+                    key={cat.id}
+                    variant="body2"
+                    color={sidenavColor}
+                    lineHeight={1}
+                    fontWeight="regular"
                   >
-                    {cat.name}
-                  </MaterialLink>
-                </MDTypography>
-              ))}
-            </MDBox>
+                    <MaterialLink
+                      component={Link}
+                      to={cat.link}
+                      underline="hover"
+                    >
+                      {cat.name}
+                    </MaterialLink>
+                  </MDTypography>
+                ))}
+              </MDBox>
+              <br />
+            </>
           )}
+
+          <MDBox
+            display="inline-flex"
+            flexWrap="wrap"
+            mt={3}
+            gap={2}
+          >
+            {[
+              'Kontakt',
+              'Nutzungsbedingungen',
+              'Risikobelehrung',
+              'Impressum',
+            ].map((cat) => (
+              <MDTypography
+                key={cat}
+                variant="body2"
+                color={sidenavColor}
+                lineHeight={1}
+                fontWeight="regular"
+              >
+                <MaterialLink
+                  component={Link}
+                  to={`/${cat.toLowerCase()}`}
+                  underline="hover"
+                >
+                  {cat}
+                </MaterialLink>
+              </MDTypography>
+            ))}
+          </MDBox>
         </MDBox>
       </MDBox>
     </Container>

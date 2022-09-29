@@ -13,7 +13,7 @@ import MDTypography from 'src/mui/components/MDTypography';
 
 interface HtmlEditorFormItemProps {
   name: string;
-  label: string;
+  label?: string;
   value?: string;
   required?: boolean;
   height: number;
@@ -92,24 +92,21 @@ function HtmlEditorFormItem({
   };
 
   return (
-    <MDBox
-      pt={2}
-      sx={{
-        position: 'relative',
-      }}
-    >
-      <MDTypography
-        variant="caption"
-        color={darkMode ? 'text' : 'secondary'}
-        fontWeight="regular"
-        sx={{
-          lineHeight: 1,
-          position: 'absolute',
-          top: 0,
-        }}
-      >
-        {`${label}${required ? ' *' : ''}`}
-      </MDTypography>
+    <MDBox pt={Boolean(label) ? 2 : 0} position="relative">
+      {Boolean(label) && (
+        <MDTypography
+          variant="caption"
+          color={darkMode ? 'text' : 'secondary'}
+          fontWeight="regular"
+          sx={{
+            lineHeight: 1,
+            position: 'absolute',
+            top: 0,
+          }}
+        >
+          {`${label}${required ? ' *' : ''}`}
+        </MDTypography>
+      )}
       <CKEditor
         initData={originalValue}
         config={ckeditorConfig}

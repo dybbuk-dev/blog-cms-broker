@@ -72,6 +72,11 @@ const selectLoadingInit = createSelector(
   (auth) => Boolean(auth.loadingInit),
 );
 
+const selectLoadingContact = createSelector(
+  [selectRaw],
+  (auth) => Boolean(auth.loadingContact),
+);
+
 const selectLoadingEmailConfirmation = createSelector(
   [selectRaw],
   (auth) => Boolean(auth.loadingEmailConfirmation),
@@ -237,32 +242,33 @@ const selectLogoUrl = createSelector(
 );
 
 const authSelectors = {
-  selectLoadingPasswordResetEmail,
-  selectLoadingEmailConfirmation,
-  selectLoadingInit,
-  selectLoadingUpdateProfile,
-  selectLoading,
-  selectRoles,
-  selectSignedIn,
-  selectCurrentUserFullName,
-  selectCurrentUserEmail,
-  selectCurrentUser,
   selectAuthenticationUser,
+  selectBackgroundImageUrl,
+  selectCurrentMui,
+  selectCurrentSettings,
+  selectCurrentTenant,
+  selectCurrentUser,
+  selectCurrentUserAvatar,
+  selectCurrentUserEmail,
+  selectCurrentUserFullName,
+  selectCurrentUserNameOrEmailPrefix,
+  selectDefaultTaskPriority,
   selectErrorMessage,
   selectErrorMessageVerifyEmail,
-  selectRaw,
-  selectCurrentUserNameOrEmailPrefix,
-  selectCurrentUserAvatar,
-  selectDefaultTaskPriority,
-  selectLoadingPasswordReset,
-  selectLoadingVerifyEmail,
-  selectLoadingPasswordChange,
-  selectCurrentTenant,
   selectInvitedTenants,
-  selectCurrentSettings,
-  selectCurrentMui,
+  selectLoading,
+  selectLoadingContact,
+  selectLoadingEmailConfirmation,
+  selectLoadingInit,
+  selectLoadingPasswordChange,
+  selectLoadingPasswordReset,
+  selectLoadingPasswordResetEmail,
+  selectLoadingUpdateProfile,
+  selectLoadingVerifyEmail,
   selectLogoUrl,
-  selectBackgroundImageUrl,
+  selectRaw,
+  selectRoles,
+  selectSignedIn,
 };
 
 export default authSelectors;

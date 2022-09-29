@@ -27,7 +27,15 @@ export default class EmailSender {
       INVITATION: getConfig().SENDGRID_TEMPLATE_INVITATION,
       PASSWORD_RESET:
         getConfig().SENDGRID_TEMPLATE_PASSWORD_RESET,
+      CONTACT: getConfig().SENDGRID_TEMPLATE_CONTACT,
     };
+  }
+
+  static get CONTACT_RECIPIENT() {
+    if (!EmailSender.isConfigured) {
+      return null;
+    }
+    return getConfig().SENDGRID_RECIPIENT_FOR_CONTACT;
   }
 
   async sendTo(recipient) {
