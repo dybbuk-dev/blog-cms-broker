@@ -7,7 +7,6 @@ import MDTypography from 'src/mui/components/MDTypography';
 import SingleCheckbox from 'src/view/home/broker/components/SingleCheckbox';
 
 function BrokerServiceView({ record }) {
-  console.log(record);
   return (
     <>
       <MDTypography variant="h4" pb={2}>
