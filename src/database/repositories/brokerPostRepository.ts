@@ -280,13 +280,16 @@ class BrokerPostRepository {
     options: IRepositoryOptions,
   ) {
     let whereAnd: Array<any> = [];
-    const include = [
-      {
-        model: options.database.broker,
-        as: 'broker',
-      },
-    ];
+
+    const include = [];
+
     if (filter) {
+      if (filter.broker) {
+        whereAnd.push({
+          broker_id: filter.broker,
+        });
+      }
+
       if (filter.idRange) {
         const [start, end] = filter.idRange;
 

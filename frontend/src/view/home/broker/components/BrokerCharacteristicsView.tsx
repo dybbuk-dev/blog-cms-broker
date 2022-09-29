@@ -158,7 +158,6 @@ function BrokerCharacteristicsView({ record }) {
           )}
         </Grid>
       </Grid>
-      <BrokerHomepageUrls record={record} />
     </>
   );
 }

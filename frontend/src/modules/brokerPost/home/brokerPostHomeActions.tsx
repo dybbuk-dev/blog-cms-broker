@@ -17,11 +17,27 @@ const brokerPostHomeActions = {
       payload: pagination,
     });
 
-    dispatch(brokerPostHomeActions.doFetch());
+    dispatch(brokerPostHomeActions.doFetchCurrentFilter());
   },
 
+  doFetchCurrentFilter:
+    () => async (dispatch, getState) => {
+      const filter = selectors.selectFilter(getState());
+      const rawFilter = selectors.selectRawFilter(
+        getState(),
+      );
+      console.log(filter);
+      dispatch(
+        brokerPostHomeActions.doFetch(
+          filter,
+          rawFilter,
+          true,
+        ),
+      );
+    },
+
   doFetch:
-    (filter?, rawFilter?, keepPagination = true) =>
+    (filter?, rawFilter?, keepPagination = false) =>
     async (dispatch, getState) => {
       try {
         dispatch({
@@ -32,6 +48,7 @@ const brokerPostHomeActions = {
         const response =
           await BrokerPostService.findBrokerPostList(
             filter,
+            selectors.selectOrderBy(getState()),
             selectors.selectLimit(getState()),
             selectors.selectOffset(getState()),
           );

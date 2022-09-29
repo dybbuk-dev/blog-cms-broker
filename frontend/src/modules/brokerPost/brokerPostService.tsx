@@ -142,9 +142,15 @@ export default class BrokerPostService {
     return response.data;
   }
 
-  static async findBrokerPostList(filter, limit, offset) {
+  static async findBrokerPostList(
+    filter,
+    orderBy,
+    limit,
+    offset,
+  ) {
     const params = {
       filter,
+      orderBy,
       limit,
       offset,
     };
