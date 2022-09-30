@@ -16,35 +16,37 @@ const brokerPostSpamActions = {
   SPAM_ALL_SUCCESS: `${prefix}_SPAM_ALL_SUCCESS`,
   SPAM_ALL_ERROR: `${prefix}_SPAM_ALL_ERROR`,
 
-  doSpam: (id) => async (dispatch) => {
-    try {
-      dispatch({
-        type: brokerPostSpamActions.SPAM_STARTED,
-      });
+  doSpam:
+    (id, redirect_url = '/admin/broker-post') =>
+    async (dispatch) => {
+      try {
+        dispatch({
+          type: brokerPostSpamActions.SPAM_STARTED,
+        });
 
-      await BrokerPostService.spamAll([id]);
+        await BrokerPostService.spamAll([id]);
 
-      dispatch({
-        type: brokerPostSpamActions.SPAM_SUCCESS,
-      });
+        dispatch({
+          type: brokerPostSpamActions.SPAM_SUCCESS,
+        });
 
-      Message.success(
-        i18n('entities.brokerPost.spam.success'),
-      );
+        Message.success(
+          i18n('entities.brokerPost.spam.success'),
+        );
 
-      dispatch(listActions.doFetchCurrentFilter());
+        dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/admin/broker-post');
-    } catch (error) {
-      Errors.handle(error);
+        getHistory().push(redirect_url);
+      } catch (error) {
+        Errors.handle(error);
 
-      dispatch(listActions.doFetchCurrentFilter());
+        dispatch(listActions.doFetchCurrentFilter());
 
-      dispatch({
-        type: brokerPostSpamActions.SPAM_ERROR,
-      });
-    }
-  },
+        dispatch({
+          type: brokerPostSpamActions.SPAM_ERROR,
+        });
+      }
+    },
 
   doSpamAll: (ids) => async (dispatch) => {
     try {

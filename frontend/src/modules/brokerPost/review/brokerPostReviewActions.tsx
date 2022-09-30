@@ -16,35 +16,37 @@ const brokerPostReviewActions = {
   REVIEW_ALL_SUCCESS: `${prefix}_REVIEW_ALL_SUCCESS`,
   REVIEW_ALL_ERROR: `${prefix}_REVIEW_ALL_ERROR`,
 
-  doReview: (id) => async (dispatch) => {
-    try {
-      dispatch({
-        type: brokerPostReviewActions.REVIEW_STARTED,
-      });
+  doReview:
+    (id, redirect_url = '/admin/broker-post') =>
+    async (dispatch) => {
+      try {
+        dispatch({
+          type: brokerPostReviewActions.REVIEW_STARTED,
+        });
 
-      await BrokerPostService.reviewAll([id]);
+        await BrokerPostService.reviewAll([id]);
 
-      dispatch({
-        type: brokerPostReviewActions.REVIEW_SUCCESS,
-      });
+        dispatch({
+          type: brokerPostReviewActions.REVIEW_SUCCESS,
+        });
 
-      Message.success(
-        i18n('entities.brokerPost.review.success'),
-      );
+        Message.success(
+          i18n('entities.brokerPost.review.success'),
+        );
 
-      dispatch(listActions.doFetchCurrentFilter());
+        dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/admin/broker-post');
-    } catch (error) {
-      Errors.handle(error);
+        getHistory().push(redirect_url);
+      } catch (error) {
+        Errors.handle(error);
 
-      dispatch(listActions.doFetchCurrentFilter());
+        dispatch(listActions.doFetchCurrentFilter());
 
-      dispatch({
-        type: brokerPostReviewActions.REVIEW_ERROR,
-      });
-    }
-  },
+        dispatch({
+          type: brokerPostReviewActions.REVIEW_ERROR,
+        });
+      }
+    },
 
   doReviewAll: (ids) => async (dispatch) => {
     try {

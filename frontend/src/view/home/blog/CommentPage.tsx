@@ -121,13 +121,12 @@ const CommentPage = ({ record }) => {
                   display="flex"
                   justifyContent="flex-start"
                 >
-                  <MDTypography color="text" variant="h6">
-                    {comment.name +
-                      ' (' +
-                      moment(comment.modified).format(
-                        DEFAULT_MOMENT_FORMAT_DATE_ONLY,
-                      ) +
-                      ')'}
+                  <MDTypography variant="h5">
+                    {`${comment.name} (${moment(
+                      comment.modified,
+                    ).format(
+                      DEFAULT_MOMENT_FORMAT_DATE_ONLY,
+                    )})`}
                   </MDTypography>
                 </MDBox>
                 <MDBox

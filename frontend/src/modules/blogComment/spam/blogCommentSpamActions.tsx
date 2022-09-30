@@ -16,35 +16,36 @@ const blogCommentSpamActions = {
   SPAM_ALL_SUCCESS: `${prefix}_SPAM_ALL_SUCCESS`,
   SPAM_ALL_ERROR: `${prefix}_SPAM_ALL_ERROR`,
 
-  doSpam: (id) => async (dispatch) => {
-    try {
-      dispatch({
-        type: blogCommentSpamActions.SPAM_STARTED,
-      });
+  doSpam:
+    (id, redirect_url = '/admin/blog-comment') =>
+    async (dispatch) => {
+      try {
+        dispatch({
+          type: blogCommentSpamActions.SPAM_STARTED,
+        });
 
-      await BlogCommentService.spamAll([id]);
+        await BlogCommentService.spamAll([id]);
 
-      dispatch({
-        type: blogCommentSpamActions.SPAM_SUCCESS,
-      });
+        dispatch({
+          type: blogCommentSpamActions.SPAM_SUCCESS,
+        });
 
-      Message.success(
-        i18n('entities.blogComment.spam.success'),
-      );
+        Message.success(
+          i18n('entities.blogComment.spam.success'),
+        );
 
-      dispatch(listActions.doFetchCurrentFilter());
+        dispatch(listActions.doFetchCurrentFilter());
+        getHistory().push(redirect_url);
+      } catch (error) {
+        Errors.handle(error);
 
-      getHistory().push('/admin/blog-comment');
-    } catch (error) {
-      Errors.handle(error);
+        dispatch(listActions.doFetchCurrentFilter());
 
-      dispatch(listActions.doFetchCurrentFilter());
-
-      dispatch({
-        type: blogCommentSpamActions.SPAM_ERROR,
-      });
-    }
-  },
+        dispatch({
+          type: blogCommentSpamActions.SPAM_ERROR,
+        });
+      }
+    },
 
   doSpamAll: (ids) => async (dispatch) => {
     try {
