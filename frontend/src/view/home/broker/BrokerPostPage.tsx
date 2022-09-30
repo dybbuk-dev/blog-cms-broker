@@ -5,7 +5,7 @@ import { i18n } from 'src/i18n';
 import { Link } from 'react-router-dom';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -32,7 +32,11 @@ import SaveIcon from '@mui/icons-material/Save';
 import selectors from 'src/modules/brokerPost/home/brokerPostHomeSelectors';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import Spinner from 'src/view/shared/Spinner';
-
+import postDestroyActions from 'src/modules/brokerPost/destroy/brokerPostDestroyActions';
+import postReviewActions from 'src/modules/brokerPost/review/brokerPostReviewActions';
+import postSpamActions from 'src/modules/brokerPost/spam/brokerPostSpamActions';
+import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
+import { useRouteMatch } from 'react-router-dom';
 const schema = yup.object().shape({
   name: yupFormSchemas.string(i18n('common.name'), {
     required: true,
@@ -52,10 +56,19 @@ const schema = yup.object().shape({
 
 const BrokerPostPage = ({ record }) => {
   const { sidenavColor } = selectMuiSettings();
+  const [dispatched, setDispatched] = useState(false);
+  const [postRecordIdToDestroy, setPostRecordIdToDestroy] =
+    useState(null);
+  const [postRecordIdToSpam, setPostRecordIdToSpam] =
+    useState(null);
+  const [postRecordIdToReview, setPostRecordIdToReview] =
+    useState(null);
   const form = useForm({
     resolver: yupResolver(schema),
     mode: 'onSubmit',
   });
+  const match = useRouteMatch();
+
   const dispatch = useDispatch();
   const saveLoading = useSelector(
     brokerPostFormSelectors.selectSaveLoading,
@@ -79,6 +92,47 @@ const BrokerPostPage = ({ record }) => {
     dispatch(actions.doChangePagination(pagination));
   };
 
+  const doOpenDestroyConfirmModal = (id) => {
+    setPostRecordIdToDestroy(id);
+  };
+
+  const doCloseDestroyConfirmModal = () => {
+    setPostRecordIdToDestroy(null);
+  };
+
+  const doOpenSpamConfirmModal = (id) => {
+    setPostRecordIdToSpam(id);
+  };
+
+  const doCloseSpamConfirmModal = () => {
+    setPostRecordIdToSpam(null);
+  };
+
+  const doOpenReviewConfirmModal = (id) => {
+    setPostRecordIdToReview(id);
+  };
+
+  const doCloseReviewConfirmModal = () => {
+    setPostRecordIdToReview(null);
+  };
+
+  const doDestroy = (id) => {
+    doCloseDestroyConfirmModal();
+    dispatch(postDestroyActions.doDestroy(id, match.url));
+    setDispatched(!dispatched);
+  };
+
+  const doSpam = (id) => {
+    doCloseSpamConfirmModal();
+    dispatch(postSpamActions.doSpam(id, match.url));
+    setDispatched(!dispatched);
+  };
+
+  const doReview = (id) => {
+    doCloseReviewConfirmModal();
+    dispatch(postReviewActions.doReview(id, match.url));
+    setDispatched(!dispatched);
+  };
   useEffect(() => {
     dispatch(
       actions.doFetch({
@@ -88,7 +142,7 @@ const BrokerPostPage = ({ record }) => {
         broker: record,
       }),
     );
-  }, [record]);
+  }, [dispatched]);
 
   return (
     <>
@@ -141,8 +195,9 @@ const BrokerPostPage = ({ record }) => {
                         <IconButton
                           size="small"
                           color={sidenavColor}
-                          component={Link}
-                          to={`/admin/broker-post`}
+                          onClick={() =>
+                            doOpenSpamConfirmModal(post.id)
+                          }
                         >
                           <BugReportIcon />
                         </IconButton>
@@ -153,8 +208,11 @@ const BrokerPostPage = ({ record }) => {
                         <IconButton
                           size="small"
                           color={sidenavColor}
-                          component={Link}
-                          to={`/admin/broker-post`}
+                          onClick={() =>
+                            doOpenReviewConfirmModal(
+                              post.id,
+                            )
+                          }
                         >
                           <ReviewsIcon />
                         </IconButton>
@@ -165,8 +223,11 @@ const BrokerPostPage = ({ record }) => {
                         <IconButton
                           size="small"
                           color={sidenavColor}
-                          component={Link}
-                          to={`/admin/broker-post`}
+                          onClick={() =>
+                            doOpenDestroyConfirmModal(
+                              post.id,
+                            )
+                          }
                         >
                           <DeleteIcon />
                         </IconButton>
@@ -254,6 +315,33 @@ const BrokerPostPage = ({ record }) => {
           </FormButtons>
         </form>
       </FormProvider>
+      {postRecordIdToDestroy && (
+        <ConfirmModal
+          title={i18n('common.areYouSure')}
+          onConfirm={() => doDestroy(postRecordIdToDestroy)}
+          onClose={() => doCloseDestroyConfirmModal()}
+          okText={i18n('common.yes')}
+          cancelText={i18n('common.no')}
+        />
+      )}
+      {postRecordIdToSpam && (
+        <ConfirmModal
+          title={i18n('common.areYouSure')}
+          onConfirm={() => doSpam(postRecordIdToSpam)}
+          onClose={() => doCloseSpamConfirmModal()}
+          okText={i18n('common.yes')}
+          cancelText={i18n('common.no')}
+        />
+      )}
+      {postRecordIdToReview && (
+        <ConfirmModal
+          title={i18n('common.areYouSure')}
+          onConfirm={() => doReview(postRecordIdToReview)}
+          onClose={() => doCloseReviewConfirmModal()}
+          okText={i18n('common.yes')}
+          cancelText={i18n('common.no')}
+        />
+      )}
     </>
   );
 };

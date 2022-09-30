@@ -5,8 +5,9 @@ import { i18n } from 'src/i18n';
 import { Link } from 'react-router-dom';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
+import { useRouteMatch } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import actions from 'src/modules/blogComment/home/blogCommentHomeActions';
@@ -14,6 +15,10 @@ import blogCommentFormActions from 'src/modules/blogComment/form/blogCommentForm
 import blogCommentFormSelectors from 'src/modules/blogComment/form/blogCommentFormSelectors';
 import blogFindSelectors from 'src/modules/blog/find/blogFindSelectors';
 import BugReportIcon from '@mui/icons-material/BugReport';
+import commentDestroyActions from 'src/modules/blogComment/destroy/blogCommentDestroyActions';
+import commentReviewActions from 'src/modules/blogComment/review/blogCommentReviewActions';
+import commentSpamActions from 'src/modules/blogComment/spam/blogCommentSpamActions';
+import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
@@ -47,10 +52,20 @@ const schema = yup.object().shape({
 });
 const CommentPage = ({ record }) => {
   const { sidenavColor } = selectMuiSettings();
+  const [dispatched, setDispatched] = useState(false);
+  const [blogRecordIdToDestroy, setBlogRecordIdToDestroy] =
+    useState(null);
+  const [blogRecordIdToSpam, setBlogRecordIdToSpam] =
+    useState(null);
+  const [blogRecordIdToReview, setBlogRecordIdToReview] =
+    useState(null);
   const form = useForm({
     resolver: yupResolver(schema),
     mode: 'onSubmit',
   });
+
+  const match = useRouteMatch();
+
   const dispatch = useDispatch();
   const saveLoading = useSelector(
     blogCommentFormSelectors.selectSaveLoading,
@@ -74,6 +89,49 @@ const CommentPage = ({ record }) => {
     dispatch(actions.doChangePagination(pagination));
   };
 
+  const doOpenDestroyConfirmModal = (id) => {
+    setBlogRecordIdToDestroy(id);
+  };
+
+  const doCloseDestroyConfirmModal = () => {
+    setBlogRecordIdToDestroy(null);
+  };
+
+  const doOpenSpamConfirmModal = (id) => {
+    setBlogRecordIdToSpam(id);
+  };
+
+  const doCloseSpamConfirmModal = () => {
+    setBlogRecordIdToSpam(null);
+  };
+
+  const doOpenReviewConfirmModal = (id) => {
+    setBlogRecordIdToReview(id);
+  };
+
+  const doCloseReviewConfirmModal = () => {
+    setBlogRecordIdToReview(null);
+  };
+
+  const doDestroy = (id) => {
+    doCloseDestroyConfirmModal();
+    dispatch(
+      commentDestroyActions.doDestroy(id, match.url),
+    );
+    setDispatched(!dispatched);
+  };
+
+  const doSpam = (id) => {
+    doCloseSpamConfirmModal();
+    dispatch(commentSpamActions.doSpam(id, match.url));
+    setDispatched(!dispatched);
+  };
+
+  const doReview = (id) => {
+    doCloseReviewConfirmModal();
+    dispatch(commentReviewActions.doReview(id, match.url));
+    setDispatched(!dispatched);
+  };
   useEffect(() => {
     dispatch(
       actions.doFetch(
@@ -87,7 +145,7 @@ const CommentPage = ({ record }) => {
         false,
       ),
     );
-  }, [record.id]);
+  }, [dispatched]);
 
   return (
     <>
@@ -149,8 +207,11 @@ const CommentPage = ({ record }) => {
                         <IconButton
                           size="small"
                           color={sidenavColor}
-                          component={Link}
-                          to={`/admin/blog-comment`}
+                          onClick={() =>
+                            doOpenSpamConfirmModal(
+                              comment.id,
+                            )
+                          }
                         >
                           <BugReportIcon />
                         </IconButton>
@@ -161,8 +222,11 @@ const CommentPage = ({ record }) => {
                         <IconButton
                           size="small"
                           color={sidenavColor}
-                          component={Link}
-                          to={`/admin/blog-comment`}
+                          onClick={() =>
+                            doOpenReviewConfirmModal(
+                              comment.id,
+                            )
+                          }
                         >
                           <ReviewsIcon />
                         </IconButton>
@@ -173,8 +237,11 @@ const CommentPage = ({ record }) => {
                         <IconButton
                           size="small"
                           color={sidenavColor}
-                          component={Link}
-                          to={`/admin/blog-comment`}
+                          onClick={() =>
+                            doOpenDestroyConfirmModal(
+                              comment.id,
+                            )
+                          }
                         >
                           <DeleteIcon />
                         </IconButton>
@@ -254,6 +321,33 @@ const CommentPage = ({ record }) => {
           </FormButtons>
         </form>
       </FormProvider>
+      {blogRecordIdToDestroy && (
+        <ConfirmModal
+          title={i18n('common.areYouSure')}
+          onConfirm={() => doDestroy(blogRecordIdToDestroy)}
+          onClose={() => doCloseDestroyConfirmModal()}
+          okText={i18n('common.yes')}
+          cancelText={i18n('common.no')}
+        />
+      )}
+      {blogRecordIdToSpam && (
+        <ConfirmModal
+          title={i18n('common.areYouSure')}
+          onConfirm={() => doSpam(blogRecordIdToSpam)}
+          onClose={() => doCloseSpamConfirmModal()}
+          okText={i18n('common.yes')}
+          cancelText={i18n('common.no')}
+        />
+      )}
+      {blogRecordIdToReview && (
+        <ConfirmModal
+          title={i18n('common.areYouSure')}
+          onConfirm={() => doReview(blogRecordIdToReview)}
+          onClose={() => doCloseReviewConfirmModal()}
+          okText={i18n('common.yes')}
+          cancelText={i18n('common.no')}
+        />
+      )}
     </>
   );
 };
