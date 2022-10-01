@@ -324,7 +324,7 @@ const privateRoutes = [
     path: '/admin/affiliate-link/new',
     collapseName: 'affiliateLinks',
     i18n: 'entities.affiliateLink.new.title',
-    parent: '/admin/affiliate-links',
+    parent: '/admin/affiliate-link',
     loader: () =>
       import(
         'src/view/affiliateLink/form/AffiliateLinkFormPage'
@@ -337,7 +337,7 @@ const privateRoutes = [
     path: '/admin/affiliate-link/importer',
     collapseName: 'affiliateLinks',
     i18n: 'entities.affiliateLink.importer.title',
-    parent: '/admin/affiliate-links',
+    parent: '/admin/affiliate-link',
     loader: () =>
       import(
         'src/view/affiliateLink/importer/AffiliateLinkImporterPage'
@@ -350,7 +350,7 @@ const privateRoutes = [
     path: '/admin/affiliate-link/:id/edit',
     collapseName: 'affiliateLinks',
     i18n: 'entities.affiliateLink.edit.title',
-    parent: '/admin/affiliate-links',
+    parent: '/admin/affiliate-link',
     loader: () =>
       import(
         'src/view/affiliateLink/form/AffiliateLinkFormPage'
@@ -363,7 +363,7 @@ const privateRoutes = [
     path: '/admin/affiliate-link/:id',
     collapseName: 'affiliateLinks',
     i18n: 'entities.affiliateLink.view.title',
-    parent: '/admin/affiliate-links',
+    parent: '/admin/affiliate-link',
     loader: () =>
       import(
         'src/view/affiliateLink/view/AffiliateLinkViewPage'
@@ -390,7 +390,7 @@ const privateRoutes = [
     path: '/admin/tracking-parameter/new',
     collapseName: 'affiliateLinks',
     i18n: 'entities.trackingParameter.new.title',
-    parent: '/admin/affiliate-links',
+    parent: '/admin/tracking-parameter',
     loader: () =>
       import(
         'src/view/trackingParameter/form/TrackingParameterFormPage'
@@ -403,7 +403,7 @@ const privateRoutes = [
     path: '/admin/tracking-parameter/importer',
     collapseName: 'affiliateLinks',
     i18n: 'entities.trackingParameter.importer.title',
-    parent: '/admin/affiliate-links',
+    parent: '/admin/tracking-parameter',
     loader: () =>
       import(
         'src/view/trackingParameter/importer/TrackingParameterImporterPage'
@@ -416,7 +416,7 @@ const privateRoutes = [
     path: '/admin/tracking-parameter/:id/edit',
     collapseName: 'affiliateLinks',
     i18n: 'entities.trackingParameter.edit.title',
-    parent: '/admin/affiliate-links',
+    parent: '/admin/tracking-parameter',
     loader: () =>
       import(
         'src/view/trackingParameter/form/TrackingParameterFormPage'
@@ -429,7 +429,7 @@ const privateRoutes = [
     path: '/admin/tracking-parameter/:id',
     collapseName: 'affiliateLinks',
     i18n: 'entities.trackingParameter.view.title',
-    parent: '/admin/affiliate-links',
+    parent: '/admin/tracking-parameter',
     loader: () =>
       import(
         'src/view/trackingParameter/view/TrackingParameterViewPage'
@@ -521,7 +521,7 @@ const privateRoutes = [
     path: '/admin/blog-comment/new',
     collapseName: 'blog',
     i18n: 'entities.blogComment.new.title',
-    parent: '/admin/blogComment',
+    parent: '/admin/blog-comment',
     loader: () =>
       import(
         'src/view/blogComment/form/BlogCommentFormPage'
@@ -534,7 +534,7 @@ const privateRoutes = [
     path: '/admin/blog-comment/importer',
     collapseName: 'blog',
     i18n: 'entities.blogComment.importer.title',
-    parent: '/admin/blogComment',
+    parent: '/admin/blog-comment',
     loader: () =>
       import(
         'src/view/blogComment/importer/BlogCommentImporterPage'
@@ -547,7 +547,7 @@ const privateRoutes = [
     path: '/admin/blog-comment/:id/edit',
     collapseName: 'blog',
     i18n: 'entities.blogComment.edit.title',
-    parent: '/admin/blogComment',
+    parent: '/admin/blog-comment',
     loader: () =>
       import(
         'src/view/blogComment/form/BlogCommentFormPage'
@@ -560,7 +560,7 @@ const privateRoutes = [
     path: '/admin/blog-comment/:id',
     collapseName: 'blog',
     i18n: 'entities.blogComment.view.title',
-    parent: '/admin/blogComment',
+    parent: '/admin/blog-comment',
     loader: () =>
       import(
         'src/view/blogComment/view/BlogCommentViewPage'
