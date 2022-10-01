@@ -20,6 +20,8 @@ import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
 import AuthorAutocompleteFormItem from 'src/view/author/autocomplete/AuthorAutocompleteFormItem';
+import formActions from 'src/modules/form/formActions';
+import { useDispatch } from 'react-redux';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(
@@ -87,6 +89,7 @@ const schema = yup.object().shape({
 
 function CategoryForm(props) {
   const { sidenavColor } = selectMuiSettings();
+  const dispatch = useDispatch();
   const [initialValues] = useState(() => {
     const record = props.record || {};
 
@@ -119,6 +122,7 @@ function CategoryForm(props) {
     Object.keys(initialValues).forEach((key) => {
       form.setValue(key, initialValues[key]);
     });
+    dispatch(formActions.doRefresh());
   };
 
   const { saveLoading, modal } = props;

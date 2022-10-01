@@ -25,6 +25,8 @@ import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
 import BrokerAutocompleteFormItem from 'src/view/broker/autocomplete/BrokerAutocompleteFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import ImagesFormItem from 'src/view/shared/form/items/ImagesFormItem';
+import formActions from 'src/modules/form/formActions';
+import { useDispatch } from 'react-redux';
 
 const schema = yup.object().shape({
   id: yupFormSchemas.integer(
@@ -101,6 +103,7 @@ const schema = yup.object().shape({
 
 function ExpertAdvisorTestForm(props) {
   const { sidenavColor } = selectMuiSettings();
+  const dispatch = useDispatch();
   const [initialValues] = useState(() => {
     const record = props.record || {};
 
@@ -150,6 +153,7 @@ function ExpertAdvisorTestForm(props) {
     Object.keys(initialValues).forEach((key) => {
       form.setValue(key, initialValues[key]);
     });
+    dispatch(formActions.doRefresh());
   };
 
   const { saveLoading, modal } = props;

@@ -17,6 +17,8 @@ import MDButton from 'src/mui/components/MDButton';
 import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
+import formActions from 'src/modules/form/formActions';
+import { useDispatch } from 'react-redux';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(
@@ -54,6 +56,7 @@ const schema = yup.object().shape({
 
 function BrokerPostForm(props) {
   const { sidenavColor } = selectMuiSettings();
+  const dispatch = useDispatch();
   const [initialValues] = useState(() => {
     const record = props.record || {};
 
@@ -80,6 +83,7 @@ function BrokerPostForm(props) {
     Object.keys(initialValues).forEach((key) => {
       form.setValue(key, initialValues[key]);
     });
+    dispatch(formActions.doRefresh());
   };
 
   const { saveLoading, modal } = props;

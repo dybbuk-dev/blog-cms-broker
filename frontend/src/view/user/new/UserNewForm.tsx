@@ -1,10 +1,10 @@
-import { Button, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import SaveIcon from '@mui/icons-material/Save';
 import UndoIcon from '@mui/icons-material/Undo';
 import { useForm, FormProvider } from 'react-hook-form';
 import { i18n } from 'src/i18n';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import TagsFormItem from 'src/view/shared/form/items/TagsFormItem';
@@ -15,9 +15,10 @@ import * as yup from 'yup';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import userEnumerators from 'src/modules/user/userEnumerators';
 import { yupResolver } from '@hookform/resolvers/yup';
-import MDBox from 'src/mui/components/MDBox';
 import MDButton from 'src/mui/components/MDButton';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import formActions from 'src/modules/form/formActions';
+import { useDispatch } from 'react-redux';
 
 const singleSchema = yup.object().shape({
   email: yupFormSchemas.email(i18n('user.fields.email')),
@@ -52,6 +53,7 @@ const multipleSchema = yup.object().shape({
 
 function UserNewForm(props) {
   const { sidenavColor } = selectMuiSettings();
+  const dispatch = useDispatch();
   const { single, saveLoading, modal } = props;
 
   const schema = props.single
@@ -85,6 +87,7 @@ function UserNewForm(props) {
     Object.keys(initialValues).forEach((key) => {
       form.setValue(key, initialValues[key]);
     });
+    dispatch(formActions.doRefresh());
   };
 
   return (

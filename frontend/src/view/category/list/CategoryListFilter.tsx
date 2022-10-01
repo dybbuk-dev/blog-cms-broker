@@ -29,6 +29,7 @@ import CategoryAutocompleteFormItem from 'src/view/category/autocomplete/Categor
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import { filterBooleanOptions } from 'src/modules/utils';
 import AuthorAutocompleteFormItem from 'src/view/author/autocomplete/AuthorAutocompleteFormItem';
+import formActions from 'src/modules/form/formActions';
 
 const schema = yup.object().shape({
   idRange: yupFilterSchemas.integerRange(
@@ -121,7 +122,6 @@ function CategoryListFilter(props) {
   const rawFilter = useSelector(selectors.selectRawFilter);
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
-  const [rerender, setRerender] = useState(0);
 
   const [initialValues] = useState(() => {
     return {
@@ -150,7 +150,7 @@ function CategoryListFilter(props) {
     const rawValues = form.getValues();
     dispatch(actions.doFetch(values, rawValues, false));
     setExpanded(false);
-    setRerender(rerender + 1);
+    dispatch(formActions.doRefresh());
   };
 
   const onReset = () => {
@@ -159,7 +159,7 @@ function CategoryListFilter(props) {
     });
     dispatch(actions.doReset());
     setExpanded(false);
-    setRerender(rerender + 1);
+    dispatch(formActions.doRefresh());
   };
 
   const onRemove = (key) => {
@@ -196,7 +196,6 @@ function CategoryListFilter(props) {
                       'entities.category.fields.idRange',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -206,7 +205,6 @@ function CategoryListFilter(props) {
                       'entities.category.fields.name',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -216,7 +214,6 @@ function CategoryListFilter(props) {
                       'entities.category.fields.title',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -226,7 +223,6 @@ function CategoryListFilter(props) {
                       'entities.category.fields.link',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -236,7 +232,6 @@ function CategoryListFilter(props) {
                       'entities.category.fields.author',
                     )}
                     variant="standard"
-                    rerender={rerender}
                     fullWidth
                   />
                 </Grid>
@@ -249,7 +244,6 @@ function CategoryListFilter(props) {
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={4} xs={12}>
@@ -260,7 +254,6 @@ function CategoryListFilter(props) {
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={4} xs={12}>
@@ -271,7 +264,6 @@ function CategoryListFilter(props) {
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
               </Grid>

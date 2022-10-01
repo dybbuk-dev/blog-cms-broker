@@ -1,23 +1,22 @@
-import { Button, Grid } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import SaveIcon from '@mui/icons-material/Save';
-import UndoIcon from '@mui/icons-material/Undo';
-import { useForm, FormProvider } from 'react-hook-form';
+import { FormButtons } from 'src/view/shared/styles/FormWrapper';
+import { Grid } from '@mui/material';
 import { i18n } from 'src/i18n';
-import actions from 'src/modules/auth/authActions';
-import selectors from 'src/modules/auth/authSelectors';
-import React, { useState } from 'react';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { useForm, FormProvider } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
-import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import FormWrapper, {
-  FormButtons,
-} from 'src/view/shared/styles/FormWrapper';
-import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
-import * as yup from 'yup';
+import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import actions from 'src/modules/auth/authActions';
+import CloseIcon from '@mui/icons-material/Close';
+import formActions from 'src/modules/form/formActions';
+import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import MDBox from 'src/mui/components/MDBox';
 import MDButton from 'src/mui/components/MDButton';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import SaveIcon from '@mui/icons-material/Save';
+import selectors from 'src/modules/auth/authSelectors';
+import UndoIcon from '@mui/icons-material/Undo';
+import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 
 const schema = yup.object().shape({
   oldPassword: yupFormSchemas.string(
@@ -74,6 +73,7 @@ function PasswordChangeFormPage(props) {
     Object.keys(initialValues).forEach((key: any) => {
       form.setValue(key, initialValues[key]);
     });
+    dispatch(formActions.doRefresh());
   };
 
   const { sidenavColor } = selectMuiSettings();

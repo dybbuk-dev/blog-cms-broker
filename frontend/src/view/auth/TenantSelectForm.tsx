@@ -1,16 +1,16 @@
-import { useForm, FormProvider } from 'react-hook-form';
 import { i18n } from 'src/i18n';
-import actions from 'src/modules/tenant/invitation/tenantInvitationActions';
-import selectors from 'src/modules/tenant/invitation/tenantInvitationSelectors';
-import authSelectors from 'src/modules/auth/authSelectors';
-import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
-import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { useForm, FormProvider } from 'react-hook-form';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import actions from 'src/modules/tenant/invitation/tenantInvitationActions';
+import authSelectors from 'src/modules/auth/authSelectors';
 import MDButton from 'src/mui/components/MDButton';
+import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
+import selectors from 'src/modules/tenant/invitation/tenantInvitationSelectors';
+import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 
 const schema = yup.object().shape({
   id: yupFormSchemas.string(i18n('tenant.fields.tenantId')),

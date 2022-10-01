@@ -1,29 +1,24 @@
 import { Grid } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import SaveIcon from '@mui/icons-material/Save';
-import UndoIcon from '@mui/icons-material/Undo';
-import { useState } from 'react';
 import { i18n } from 'src/i18n';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { useDispatch } from 'react-redux';
+import { useForm, FormProvider } from 'react-hook-form';
+import { useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import CloseIcon from '@mui/icons-material/Close';
+import formActions from 'src/modules/form/formActions';
 import FormWrapper, {
   FormButtons,
 } from 'src/view/shared/styles/FormWrapper';
-import { useForm, FormProvider } from 'react-hook-form';
-import * as yup from 'yup';
-import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
-import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
-import MDButton from 'src/mui/components/MDButton';
-import authorEnumerators from '../../../modules/author/authorEnumerators';
-import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
-import AuthorAutocompleteFormItem from 'src/view/author/autocomplete/AuthorAutocompleteFormItem';
-import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
-import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
-import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
-import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
-import Storage from 'src/security/storage';
 import LogoFormItem from 'src/view/shared/form/items/LogoFormItem';
-import MDBox from 'src/mui/components/MDBox';
+import MDButton from 'src/mui/components/MDButton';
+import SaveIcon from '@mui/icons-material/Save';
+import Storage from 'src/security/storage';
+import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
+import UndoIcon from '@mui/icons-material/Undo';
+import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(
@@ -60,6 +55,7 @@ const schema = yup.object().shape({
 
 function AuthorForm(props) {
   const { sidenavColor } = selectMuiSettings();
+  const dispatch = useDispatch();
   const [initialValues] = useState(() => {
     const record = props.record || {};
 
@@ -89,6 +85,7 @@ function AuthorForm(props) {
     Object.keys(initialValues).forEach((key) => {
       form.setValue(key, initialValues[key]);
     });
+    dispatch(formActions.doRefresh());
   };
 
   const { saveLoading, modal } = props;

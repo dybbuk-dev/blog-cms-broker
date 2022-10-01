@@ -1,26 +1,25 @@
-import { Button, TextField, Grid } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import SaveIcon from '@mui/icons-material/Save';
-import UndoIcon from '@mui/icons-material/Undo';
-import { useForm, FormProvider } from 'react-hook-form';
+import { FormButtons } from 'src/view/shared/styles/FormWrapper';
+import { Grid } from '@mui/material';
 import { i18n } from 'src/i18n';
-import actions from 'src/modules/auth/authActions';
-import selectors from 'src/modules/auth/authSelectors';
-import React, { useState } from 'react';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { useForm, FormProvider } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import actions from 'src/modules/auth/authActions';
+import CloseIcon from '@mui/icons-material/Close';
+import formActions from 'src/modules/form/formActions';
 import ImagesFormItem from 'src/view/shared/form/items/ImagesFormItem';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import FormWrapper, {
-  FormButtons,
-} from 'src/view/shared/styles/FormWrapper';
-import * as yup from 'yup';
-import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
-import Storage from 'src/security/storage';
-import { yupResolver } from '@hookform/resolvers/yup';
 import MDBox from 'src/mui/components/MDBox';
-import MDInput from 'src/mui/components/MDInput';
 import MDButton from 'src/mui/components/MDButton';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import MDInput from 'src/mui/components/MDInput';
+import SaveIcon from '@mui/icons-material/Save';
+import selectors from 'src/modules/auth/authSelectors';
+import Storage from 'src/security/storage';
+import UndoIcon from '@mui/icons-material/Undo';
+import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 
 const schema = yup.object().shape({
   firstName: yupFormSchemas.string(
@@ -86,6 +85,7 @@ function ProfileFormPage(props) {
     Object.keys(initialValues).forEach((key) => {
       form.setValue(key, initialValues[key]);
     });
+    dispatch(formActions.doRefresh());
   };
 
   const { sidenavColor } = selectMuiSettings();

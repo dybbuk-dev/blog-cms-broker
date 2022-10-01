@@ -28,6 +28,7 @@ import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRang
 import TrackingParameterAutocompleteFormItem from 'src/view/trackingParameter/autocomplete/TrackingParameterAutocompleteFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import { filterBooleanOptions } from 'src/modules/utils';
+import formActions from 'src/modules/form/formActions';
 
 const schema = yup.object().shape({
   idRange: yupFilterSchemas.integerRange(
@@ -69,7 +70,6 @@ function TrackingParameterListFilter(props) {
   const rawFilter = useSelector(selectors.selectRawFilter);
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
-  const [rerender, setRerender] = useState(0);
 
   const [initialValues] = useState(() => {
     return {
@@ -98,7 +98,7 @@ function TrackingParameterListFilter(props) {
     const rawValues = form.getValues();
     dispatch(actions.doFetch(values, rawValues, false));
     setExpanded(false);
-    setRerender(rerender + 1);
+    dispatch(formActions.doRefresh());
   };
 
   const onReset = () => {
@@ -107,7 +107,7 @@ function TrackingParameterListFilter(props) {
     });
     dispatch(actions.doReset());
     setExpanded(false);
-    setRerender(rerender + 1);
+    dispatch(formActions.doRefresh());
   };
 
   const onRemove = (key) => {
@@ -144,7 +144,6 @@ function TrackingParameterListFilter(props) {
                       'entities.trackingParameter.fields.idRange',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -154,7 +153,6 @@ function TrackingParameterListFilter(props) {
                       'entities.trackingParameter.fields.param',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -164,7 +162,6 @@ function TrackingParameterListFilter(props) {
                       'entities.trackingParameter.fields.value',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
               </Grid>

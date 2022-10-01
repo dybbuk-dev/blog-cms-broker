@@ -1,10 +1,10 @@
-import { Button, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import SaveIcon from '@mui/icons-material/Save';
 import UndoIcon from '@mui/icons-material/Undo';
 import { useForm, FormProvider } from 'react-hook-form';
 import { i18n } from 'src/i18n';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import FormWrapper, {
   FormButtons,
 } from 'src/view/shared/styles/FormWrapper';
@@ -17,8 +17,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import MDButton from 'src/mui/components/MDButton';
-import MDBox from 'src/mui/components/MDBox';
-import MDTypography from 'src/mui/components/MDTypography';
+import { useDispatch } from 'react-redux';
+import formActions from 'src/modules/form/formActions';
 
 const schemaWithUrl = yup.object().shape({
   name: yupFormSchemas.string(
@@ -55,6 +55,7 @@ const schema = tenantSubdomain.isEnabled
 
 function TenantForm(props) {
   const { sidenavColor, darkMode } = selectMuiSettings();
+  const dispatch = useDispatch();
   const color = darkMode ? 'light' : 'dark';
 
   const [initialValues] = useState(
@@ -75,6 +76,7 @@ function TenantForm(props) {
     Object.keys(initialValues).forEach((key) => {
       form.setValue(key, initialValues[key]);
     });
+    dispatch(formActions.doRefresh());
   };
 
   const { saveLoading, modal } = props;

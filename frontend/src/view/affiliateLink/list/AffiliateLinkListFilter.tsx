@@ -25,6 +25,7 @@ import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import MDButton from 'src/mui/components/MDButton';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
+import formActions from 'src/modules/form/formActions';
 
 const schema = yup.object().shape({
   idRange: yupFilterSchemas.integerRange(
@@ -82,7 +83,6 @@ function AffiliateLinkListFilter(props) {
   const rawFilter = useSelector(selectors.selectRawFilter);
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
-  const [rerender, setRerender] = useState(0);
 
   const [initialValues] = useState(() => {
     return {
@@ -111,7 +111,7 @@ function AffiliateLinkListFilter(props) {
     const rawValues = form.getValues();
     dispatch(actions.doFetch(values, rawValues, false));
     setExpanded(false);
-    setRerender(rerender + 1);
+    dispatch(formActions.doRefresh());
   };
 
   const onReset = () => {
@@ -120,7 +120,7 @@ function AffiliateLinkListFilter(props) {
     });
     dispatch(actions.doReset());
     setExpanded(false);
-    setRerender(rerender + 1);
+    dispatch(formActions.doRefresh());
   };
 
   const onRemove = (key) => {
@@ -157,7 +157,6 @@ function AffiliateLinkListFilter(props) {
                       'entities.affiliateLink.fields.idRange',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -167,7 +166,6 @@ function AffiliateLinkListFilter(props) {
                       'entities.affiliateLink.fields.hash',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -177,7 +175,6 @@ function AffiliateLinkListFilter(props) {
                       'entities.affiliateLink.fields.link',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -187,7 +184,6 @@ function AffiliateLinkListFilter(props) {
                       'entities.affiliateLink.fields.display_hash',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -197,7 +193,6 @@ function AffiliateLinkListFilter(props) {
                       'entities.affiliateLink.fields.meta_info',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
               </Grid>

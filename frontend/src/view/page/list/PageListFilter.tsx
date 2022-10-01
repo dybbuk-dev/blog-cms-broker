@@ -30,6 +30,7 @@ import { filterBooleanOptions } from 'src/modules/utils';
 import AuthorAutocompleteFormItem from 'src/view/author/autocomplete/AuthorAutocompleteFormItem';
 import { navigationTypeOptions } from 'src/modules/navigation/navigationUtils';
 import MDBox from 'src/mui/components/MDBox';
+import formActions from 'src/modules/form/formActions';
 
 const schema = yup.object().shape({
   idRange: yupFilterSchemas.integerRange(
@@ -132,7 +133,6 @@ function PageListFilter(props) {
   const rawFilter = useSelector(selectors.selectRawFilter);
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
-  const [rerender, setRerender] = useState(0);
 
   const [initialValues] = useState(() => {
     return {
@@ -161,7 +161,7 @@ function PageListFilter(props) {
     const rawValues = form.getValues();
     dispatch(actions.doFetch(values, rawValues, false));
     setExpanded(false);
-    setRerender(rerender + 1);
+    dispatch(formActions.doRefresh());
   };
 
   const onReset = () => {
@@ -170,7 +170,7 @@ function PageListFilter(props) {
     });
     dispatch(actions.doReset());
     setExpanded(false);
-    setRerender(rerender + 1);
+    dispatch(formActions.doRefresh());
   };
 
   const onRemove = (key) => {
@@ -235,7 +235,6 @@ function PageListFilter(props) {
                       'entities.generalPage.fields.idRange',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -246,7 +245,6 @@ function PageListFilter(props) {
                     )}
                     options={navigationTypeOptions}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -256,7 +254,6 @@ function PageListFilter(props) {
                       'entities.generalPage.fields.link',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -266,7 +263,6 @@ function PageListFilter(props) {
                       'entities.generalPage.fields.title',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -276,7 +272,6 @@ function PageListFilter(props) {
                       'entities.generalPage.fields.meta_keywords',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -286,7 +281,6 @@ function PageListFilter(props) {
                       'entities.generalPage.fields.meta_description',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -296,7 +290,6 @@ function PageListFilter(props) {
                       'entities.generalPage.fields.name',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -306,7 +299,6 @@ function PageListFilter(props) {
                       'entities.generalPage.fields.author',
                     )}
                     variant="standard"
-                    rerender={rerender}
                     fullWidth
                   />
                 </Grid>
@@ -318,7 +310,6 @@ function PageListFilter(props) {
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -329,7 +320,6 @@ function PageListFilter(props) {
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
               </Grid>

@@ -15,6 +15,8 @@ import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import MDButton from 'src/mui/components/MDButton';
 import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
+import formActions from 'src/modules/form/formActions';
+import { useDispatch } from 'react-redux';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(
@@ -43,6 +45,7 @@ const schema = yup.object().shape({
 
 function BlogCommentForm(props) {
   const { sidenavColor } = selectMuiSettings();
+  const dispatch = useDispatch();
   const [initialValues] = useState(() => {
     const record = props.record || {};
 
@@ -67,6 +70,7 @@ function BlogCommentForm(props) {
     Object.keys(initialValues).forEach((key) => {
       form.setValue(key, initialValues[key]);
     });
+    dispatch(formActions.doRefresh());
   };
 
   const { saveLoading, modal } = props;

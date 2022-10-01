@@ -29,6 +29,7 @@ import FilterAccordion from 'src/view/shared/filter/FilterAccordion';
 import MDBox from 'src/mui/components/MDBox';
 import MDButton from 'src/mui/components/MDButton';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import formActions from 'src/modules/form/formActions';
 
 const schema = yup.object().shape({
   timestampRange: yupFilterSchemas.datetimeRange(
@@ -85,7 +86,6 @@ function AuditLogFilter(props) {
   const dispatch = useDispatch();
   const location = useLocation();
   const [expanded, setExpanded] = useState(false);
-  const [rerender, setRerender] = useState(0);
 
   const [initialValues] = useState(() => {
     const initialValues = {
@@ -136,7 +136,7 @@ function AuditLogFilter(props) {
     const rawValues = form.getValues();
     dispatch(actions.doFetch(values, rawValues, false));
     setExpanded(false);
-    setRerender(rerender + 1);
+    dispatch(formActions.doRefresh());
   };
 
   const onReset = () => {
@@ -145,7 +145,7 @@ function AuditLogFilter(props) {
     });
     dispatch(actions.doReset());
     setExpanded(false);
-    setRerender(rerender + 1);
+    dispatch(formActions.doRefresh());
   };
 
   const onRemove = (key) => {
@@ -192,7 +192,6 @@ function AuditLogFilter(props) {
                     )}
                     variant="standard"
                     showTime
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -202,7 +201,6 @@ function AuditLogFilter(props) {
                       'auditLog.fields.createdByEmail',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -210,7 +208,6 @@ function AuditLogFilter(props) {
                     name="entityId"
                     label={i18n('auditLog.fields.entityId')}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -218,7 +215,6 @@ function AuditLogFilter(props) {
                     name="action"
                     label={i18n('auditLog.fields.action')}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item lg={6} xs={12}>
@@ -231,7 +227,6 @@ function AuditLogFilter(props) {
                       'auditLog.entityNamesHint',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
               </Grid>

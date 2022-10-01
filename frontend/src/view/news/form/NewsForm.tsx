@@ -26,6 +26,8 @@ import LogoFormItem from 'src/view/shared/form/items/LogoFormItem';
 import Storage from 'src/security/storage';
 import FieldSetViewItem from 'src/view/shared/view/FieldSetViewItem';
 import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
+import formActions from 'src/modules/form/formActions';
+import { useDispatch } from 'react-redux';
 
 const schema = yup.object().shape({
   link: yupFormSchemas.string(
@@ -115,6 +117,7 @@ const schema = yup.object().shape({
 
 function NewsForm(props) {
   const { sidenavColor, darkMode } = selectMuiSettings();
+  const dispatch = useDispatch();
   const [initialValues] = useState(() => {
     const record = props.record || {};
 
@@ -156,6 +159,7 @@ function NewsForm(props) {
     Object.keys(initialValues).forEach((key) => {
       form.setValue(key, initialValues[key]);
     });
+    dispatch(formActions.doRefresh());
   };
 
   const { saveLoading, modal } = props;

@@ -24,6 +24,8 @@ import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import LogoFormItem from 'src/view/shared/form/items/LogoFormItem';
 import Storage from 'src/security/storage';
+import formActions from 'src/modules/form/formActions';
+import { useDispatch } from 'react-redux';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(
@@ -56,6 +58,7 @@ const schema = yup.object().shape({
 
 function PromotionForm(props) {
   const { sidenavColor } = selectMuiSettings();
+  const dispatch = useDispatch();
   const [initialValues] = useState(() => {
     const record = props.record || {};
 
@@ -83,6 +86,7 @@ function PromotionForm(props) {
     Object.keys(initialValues).forEach((key) => {
       form.setValue(key, initialValues[key]);
     });
+    dispatch(formActions.doRefresh());
   };
 
   const { saveLoading, modal } = props;

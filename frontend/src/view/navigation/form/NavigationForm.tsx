@@ -20,6 +20,8 @@ import NavigationAutocompleteFormItem from 'src/view/navigation/autocomplete/Nav
 import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import { navigationTypeOptions } from 'src/modules/navigation/navigationUtils';
+import formActions from 'src/modules/form/formActions';
+import { useDispatch } from 'react-redux';
 
 const schema = yup.object().shape({
   parent: yupFormSchemas.relationToOne(
@@ -78,6 +80,7 @@ const schema = yup.object().shape({
 
 function NavigationForm(props) {
   const { sidenavColor } = selectMuiSettings();
+  const dispatch = useDispatch();
   const [initialValues] = useState(() => {
     const record = props.record || {};
 
@@ -109,6 +112,7 @@ function NavigationForm(props) {
     Object.keys(initialValues).forEach((key) => {
       form.setValue(key, initialValues[key]);
     });
+    dispatch(formActions.doRefresh());
   };
 
   const { saveLoading, modal } = props;

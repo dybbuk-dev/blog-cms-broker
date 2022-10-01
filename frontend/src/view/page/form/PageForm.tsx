@@ -25,6 +25,8 @@ import Storage from 'src/security/storage';
 import GroupFormItem from 'src/view/shared/form/items/GroupFormItem';
 import FieldSetViewItem from 'src/view/shared/view/FieldSetViewItem';
 import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
+import formActions from 'src/modules/form/formActions';
+import { useDispatch } from 'react-redux';
 
 const schema = yup.object().shape({
   link: yupFormSchemas.string(
@@ -105,6 +107,7 @@ const schema = yup.object().shape({
 
 function PageForm(props) {
   const { sidenavColor } = selectMuiSettings();
+  const dispatch = useDispatch();
   const [initialValues] = useState(() => {
     const record = props.record || {};
 
@@ -147,6 +150,7 @@ function PageForm(props) {
     Object.keys(initialValues).forEach((key) => {
       form.setValue(key, initialValues[key]);
     });
+    dispatch(formActions.doRefresh());
   };
 
   const { saveLoading, modal } = props;

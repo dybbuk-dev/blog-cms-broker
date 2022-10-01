@@ -22,6 +22,8 @@ import Storage from 'src/security/storage';
 import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
 import UndoIcon from '@mui/icons-material/Undo';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
+import formActions from 'src/modules/form/formActions';
+import { useDispatch } from 'react-redux';
 
 const schema = yup.object().shape({
   name_normalized: yupFormSchemas.string(
@@ -88,6 +90,7 @@ const schema = yup.object().shape({
 
 function BlogForm(props) {
   const { sidenavColor } = selectMuiSettings();
+  const dispatch = useDispatch();
   const { record } = props;
   const [normalizedName, setNormalizedName] = useState(
     slug(
@@ -127,6 +130,7 @@ function BlogForm(props) {
     Object.keys(initialValues).forEach((key) => {
       form.setValue(key, initialValues[key]);
     });
+    dispatch(formActions.doRefresh());
   };
 
   const { saveLoading, modal } = props;

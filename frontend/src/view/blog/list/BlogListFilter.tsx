@@ -31,6 +31,7 @@ import { filterBooleanOptions } from 'src/modules/utils';
 import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
 import NavigationAutocompleteFormItem from 'src/view/navigation/autocomplete/NavigationAutocompleteFormItem';
 import AuthorAutocompleteFormItem from 'src/view/author/autocomplete/AuthorAutocompleteFormItem';
+import formActions from 'src/modules/form/formActions';
 
 const schema = yup.object().shape({
   idRange: yupFilterSchemas.integerRange(
@@ -107,7 +108,6 @@ function BlogListFilter(props) {
   const rawFilter = useSelector(selectors.selectRawFilter);
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
-  const [rerender, setRerender] = useState(0);
 
   const [initialValues] = useState(() => {
     return {
@@ -136,7 +136,7 @@ function BlogListFilter(props) {
     const rawValues = form.getValues();
     dispatch(actions.doFetch(values, rawValues, false));
     setExpanded(false);
-    setRerender(rerender + 1);
+    dispatch(formActions.doRefresh());
   };
 
   const onReset = () => {
@@ -145,7 +145,7 @@ function BlogListFilter(props) {
     });
     dispatch(actions.doReset());
     setExpanded(false);
-    setRerender(rerender + 1);
+    dispatch(formActions.doRefresh());
   };
 
   const onRemove = (key) => {
@@ -182,7 +182,6 @@ function BlogListFilter(props) {
                       'entities.blog.fields.idRange',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -192,7 +191,6 @@ function BlogListFilter(props) {
                       'entities.blog.fields.name',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -202,7 +200,6 @@ function BlogListFilter(props) {
                       'entities.blog.fields.link',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -212,7 +209,6 @@ function BlogListFilter(props) {
                       'entities.blog.fields.metakeywords',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -222,7 +218,6 @@ function BlogListFilter(props) {
                       'entities.blog.fields.metadescription',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -232,7 +227,6 @@ function BlogListFilter(props) {
                       'entities.blog.fields.pagetitle',
                     )}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -242,7 +236,6 @@ function BlogListFilter(props) {
                       'entities.blog.fields.author',
                     )}
                     variant="standard"
-                    rerender={rerender}
                     fullWidth
                   />
                 </Grid>
@@ -254,7 +247,6 @@ function BlogListFilter(props) {
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
-                    rerender={rerender}
                   />
                 </Grid>
               </Grid>

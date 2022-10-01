@@ -18,6 +18,8 @@ import SaveIcon from '@mui/icons-material/Save';
 import slug from 'slug';
 import UndoIcon from '@mui/icons-material/Undo';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
+import formActions from 'src/modules/form/formActions';
+import { useDispatch } from 'react-redux';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(
@@ -68,6 +70,7 @@ const schema = yup.object().shape({
 
 function BrokerArticleForm(props) {
   const { sidenavColor, darkMode } = selectMuiSettings();
+  const dispatch = useDispatch();
   const [initialValues] = useState(() => {
     const record = props.record || {};
 
@@ -97,6 +100,7 @@ function BrokerArticleForm(props) {
     Object.keys(initialValues).forEach((key) => {
       form.setValue(key, initialValues[key]);
     });
+    dispatch(formActions.doRefresh());
   };
 
   const { saveLoading, modal } = props;

@@ -1,4 +1,3 @@
-import { Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import SaveIcon from '@mui/icons-material/Save';
 import UndoIcon from '@mui/icons-material/Undo';
@@ -6,7 +5,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { i18n } from 'src/i18n';
 import actions from 'src/modules/settings/settingsActions';
 import selectors from 'src/modules/settings/settingsSelectors';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import FormWrapper, {
   FormButtons,
@@ -20,6 +19,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import MDButton from 'src/mui/components/MDButton';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import MDBox from 'src/mui/components/MDBox';
+import formActions from 'src/modules/form/formActions';
 
 const schema = yup.object().shape({
   theme: yup
@@ -46,12 +46,11 @@ const schema = yup.object().shape({
 
 function SettingsForm(props) {
   const { sidenavColor } = selectMuiSettings();
+  const dispatch = useDispatch();
   const [
     materialUIColorToolKey,
     setMaterialUIColorToolKey,
   ] = useState(0);
-
-  const dispatch = useDispatch();
 
   const saveLoading = useSelector(
     selectors.selectSaveLoading,
@@ -88,6 +87,7 @@ function SettingsForm(props) {
       form.setValue(key, initialValues[key]);
     });
     setMaterialUIColorToolKey((prevState) => prevState + 1);
+    dispatch(formActions.doRefresh());
   };
 
   return (

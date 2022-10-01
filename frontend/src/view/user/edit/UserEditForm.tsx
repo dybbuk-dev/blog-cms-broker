@@ -17,6 +17,7 @@ import userEnumerators from 'src/modules/user/userEnumerators';
 import { yupResolver } from '@hookform/resolvers/yup';
 import MDButton from 'src/mui/components/MDButton';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import formActions from 'src/modules/form/formActions';
 
 const schema = yup.object().shape({
   roles: yupFormSchemas.stringArray(
@@ -50,6 +51,7 @@ function UserEditForm(props) {
     Object.keys(initialValues).forEach((key) => {
       form.setValue(key, initialValues[key]);
     });
+    dispatch(formActions.doRefresh());
   };
 
   return (

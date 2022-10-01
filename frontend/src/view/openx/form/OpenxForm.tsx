@@ -20,6 +20,8 @@ import OpenxAutocompleteFormItem from 'src/view/openx/autocomplete/OpenxAutocomp
 import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
 import { openxZoneOptions } from 'src/modules/openx/openxUtils';
 import TextAreaFormItem from 'src/view/shared/form/items/TextAreaFormItem';
+import formActions from 'src/modules/form/formActions';
+import { useDispatch } from 'react-redux';
 
 const schema = yup.object().shape({
   code: yupFormSchemas.string(
@@ -47,6 +49,7 @@ const schema = yup.object().shape({
 
 function OpenxForm(props) {
   const { sidenavColor } = selectMuiSettings();
+  const dispatch = useDispatch();
   const [initialValues] = useState(() => {
     const record = props.record || {};
 
@@ -72,6 +75,7 @@ function OpenxForm(props) {
     Object.keys(initialValues).forEach((key) => {
       form.setValue(key, initialValues[key]);
     });
+    dispatch(formActions.doRefresh());
   };
 
   const { saveLoading, modal } = props;
