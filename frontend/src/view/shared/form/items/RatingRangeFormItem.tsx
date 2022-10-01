@@ -6,6 +6,8 @@ import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
 import RatingFormItem from 'src/view/shared/form/items/RatingFormItem';
+import { useSelector } from 'react-redux';
+import formSelectors from 'src/modules/form/formSelectors';
 
 function RatingRangeFormItem(props) {
   const {
@@ -42,7 +44,9 @@ function RatingRangeFormItem(props) {
   const formValue = getValues(name);
 
   const getInitialValue = () =>
-    formValue || value || defaultValues[name] || [];
+    ![null, undefined].includes(formValue)
+      ? formValue
+      : value || defaultValues[name] || [];
 
   const [curValue, setCurValue] = useState(
     getInitialValue(),
@@ -65,9 +69,11 @@ function RatingRangeFormItem(props) {
     }
   }, [value]);
 
+  const refresh = useSelector(formSelectors.selectRefresh);
+
   useEffect(() => {
     setCurValue(getInitialValue());
-  }, [rerender]);
+  }, [rerender, refresh]);
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -148,7 +154,6 @@ function RatingRangeFormItem(props) {
           onChange={handleStartChanged}
           precision={precision}
           required={required}
-          rerender={rerender}
           showValue={showValue}
           size={size}
           value={startValue()}
@@ -176,7 +181,6 @@ function RatingRangeFormItem(props) {
           onChange={handleEndChanged}
           precision={precision}
           required={required}
-          rerender={rerender}
           showValue={showValue}
           size={size}
           value={endValue()}

@@ -1,10 +1,12 @@
 import { i18n } from 'src/i18n';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { Slider, styled } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import colors from 'src/mui/assets/theme/base/colors';
-import InputFormItem from 'src/view/shared/form/items/InputFormItem';
+import FormErrors from 'src/view/shared/form/formErrors';
+import formSelectors from 'src/modules/form/formSelectors';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
@@ -49,23 +51,24 @@ const CustomColorSlider = styled(Slider)(
 
 function SliderFormItem(props) {
   const {
-    name,
+    defaultValue,
+    externalErrorMessage,
     label,
     marks,
-    valuetext,
-    step,
-    defaultValue,
+    name,
     renderValue,
+    step,
+    value: originalValue,
+    valuetext,
     ...rest
   } = props;
 
-  const { setValue } = useFormContext();
-
-  const { sidenavColor } = selectMuiSettings();
-
-  const [sliderValue, setSliderValue] = useState(
-    rest.value,
-  );
+  const toValue = (value) => {
+    return (
+      (marks || []).find(({ key }) => key === value)
+        ?.value ?? value
+    );
+  };
 
   const safeValue = (value) => {
     return (marks && marks[value]?.key) ?? value;
@@ -74,11 +77,36 @@ function SliderFormItem(props) {
   const safeTitle = (value) => {
     return (
       (marks &&
-        (marks[sliderValue]?.title ??
-          marks[sliderValue]?.key)) ??
-      sliderValue
+        (marks[value]?.title ?? marks[value]?.key)) ??
+      value
     );
   };
+
+  const refresh = useSelector(formSelectors.selectRefresh);
+
+  const {
+    control: { defaultValuesRef },
+    errors,
+    formState: { touched, isSubmitted },
+    getValues,
+    register,
+    setValue,
+  } = useFormContext();
+
+  const defaultValues = defaultValuesRef.current || 0;
+
+  const formValue = name ? toValue(getValues(name)) : 0;
+
+  const getInitialValue = () =>
+    ![null, undefined].includes(formValue)
+      ? formValue
+      : originalValue || toValue(defaultValues[name]) || 0;
+
+  const { sidenavColor } = selectMuiSettings();
+
+  const [sliderValue, setSliderValue] = useState(
+    getInitialValue(),
+  );
 
   const onChange = (
     event: Event,
@@ -93,6 +121,24 @@ function SliderFormItem(props) {
       props.onChange && props.onChange(safeValue(newValue));
     }
   };
+
+  useEffect(() => {
+    if (name) {
+      register({ name });
+    }
+  }, [register, name]);
+
+  useEffect(() => {
+    onChange(null, getInitialValue());
+  }, [refresh]);
+
+  const errorMessage = FormErrors.errorMessage(
+    name,
+    errors,
+    touched,
+    isSubmitted,
+    externalErrorMessage,
+  );
 
   return (
     <MDBox pt={1} position="relative">
@@ -131,14 +177,24 @@ function SliderFormItem(props) {
         onChange={onChange}
         marks={marks}
       />
-      <MDBox display="none">
-        <InputFormItem name={name} label={label} />
-      </MDBox>
+      {errorMessage && (
+        <MDBox>
+          <MDTypography
+            component="div"
+            variant="caption"
+            color="error"
+            fontWeight="regular"
+          >
+            {errorMessage}
+          </MDTypography>
+        </MDBox>
+      )}
     </MDBox>
   );
 }
 
 SliderFormItem.propTypes = {
+  externalErrorMessage: PropTypes.string,
   label: PropTypes.string.isRequired,
   marks: PropTypes.array,
   max: PropTypes.number,

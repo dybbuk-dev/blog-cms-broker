@@ -8,6 +8,8 @@ import PropTypes from 'prop-types';
 import StyledRating from 'src/view/shared/styles/StyledRating';
 import { i18n } from 'src/i18n';
 import OutOf from 'src/view/shared/components/OutOf';
+import { useSelector } from 'react-redux';
+import formSelectors from 'src/modules/form/formSelectors';
 
 export function RatingFormItem(props) {
   const { darkMode } = selectMuiSettings();
@@ -46,7 +48,9 @@ export function RatingFormItem(props) {
   const formValue = name ? getValues(name) : null;
 
   const getInitialValue = () =>
-    formValue || value || defaultValues[name] || 0;
+    ![null, undefined].includes(formValue)
+      ? formValue
+      : value || defaultValues[name] || 0;
 
   const [curValue, setCurValue] = useState(
     getInitialValue(),
@@ -72,9 +76,11 @@ export function RatingFormItem(props) {
     }
   }, [value]);
 
+  const refresh = useSelector(formSelectors.selectRefresh);
+
   useEffect(() => {
     setCurValue(getInitialValue());
-  }, [rerender]);
+  }, [rerender, refresh]);
 
   const errorMessage = FormErrors.errorMessage(
     name,

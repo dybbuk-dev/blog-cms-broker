@@ -12,6 +12,8 @@ import MDButton from 'src/mui/components/MDButton';
 import MDInput from 'src/mui/components/MDInput';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import formSelectors from 'src/modules/form/formSelectors';
 
 function AutocompleteInMemoryFormItem(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -51,7 +53,7 @@ function AutocompleteInMemoryFormItem(props) {
     setValue,
   } = useFormContext();
 
-  const defaultValues = defaultValuesRef.current || {};
+  const defaultValues = defaultValuesRef.current || null;
 
   const formValue = getValues(name);
 
@@ -77,6 +79,8 @@ function AutocompleteInMemoryFormItem(props) {
   }, [register, name]);
 
   let dismounted = false;
+
+  const refresh = useSelector(formSelectors.selectRefresh);
 
   useEffect(() => {
     const fetchAllResults = async () => {
@@ -107,11 +111,17 @@ function AutocompleteInMemoryFormItem(props) {
       if (dismounted) {
         return;
       }
-      setRealValue(getValues(name) || defaultValues[name]);
+      setRealValue(
+        ![null, undefined].includes(getValues(name))
+          ? getValues(name)
+          : defaultValues[name] || null,
+      );
       props.onChange &&
         props.onChange(
           prioritizeFromDataSource(
-            getValues(name) ?? defaultValues[name] ?? {},
+            ![null, undefined].includes(getValues(name))
+              ? getValues(name)
+              : defaultValues[name] || null,
           ),
         );
     });
@@ -120,9 +130,12 @@ function AutocompleteInMemoryFormItem(props) {
       dismounted = true;
       setLoading(false);
     };
-  }, [rerender]);
+  }, [rerender, refresh]);
 
   const prioritizeFromDataSource = (selected) => {
+    if (!selected) {
+      return selected;
+    }
     return (
       (fullDataSource || []).find(
         (item) => item.value === selected.value,
@@ -269,7 +282,7 @@ function AutocompleteInMemoryFormItem(props) {
   useEffect(() => {
     if (!dismounted && props.onChange) {
       props.onChange(
-        prioritizeFromDataSource(value() ?? {}),
+        prioritizeFromDataSource(value() ?? null),
       );
     }
   }, [fullDataSource]);

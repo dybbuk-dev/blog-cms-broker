@@ -8,6 +8,8 @@ import MDBox from 'src/mui/components/MDBox';
 import MDInput from 'src/mui/components/MDInput';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import formSelectors from 'src/modules/form/formSelectors';
 
 function SelectFormItem(props) {
   const {
@@ -43,12 +45,12 @@ function SelectFormItem(props) {
 
   const defaultValues = defaultValuesRef.current || {};
 
-  const originalValue = defaultValues[name];
-
   const formValue = getValues(name);
 
   const getInitialValue = () =>
-    formValue || defaultValue || originalValue || [];
+    ![null, undefined].includes(formValue)
+      ? formValue
+      : defaultValue || defaultValues[name] || [];
 
   const [curValue, setCurValue] = useState(
     getInitialValue(),
@@ -71,9 +73,11 @@ function SelectFormItem(props) {
     }
   }, [defaultValue]);
 
+  const refresh = useSelector(formSelectors.selectRefresh);
+
   useEffect(() => {
     setCurValue(getInitialValue());
-  }, [rerender]);
+  }, [rerender, refresh]);
 
   const errorMessage = FormErrors.errorMessage(
     name,

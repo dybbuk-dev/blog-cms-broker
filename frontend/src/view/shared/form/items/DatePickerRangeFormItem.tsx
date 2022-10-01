@@ -14,6 +14,8 @@ import {
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import { i18n } from 'src/i18n';
+import { useSelector } from 'react-redux';
+import formSelectors from 'src/modules/form/formSelectors';
 
 function DatePickerRangeFormItem(props) {
   const {
@@ -49,7 +51,9 @@ function DatePickerRangeFormItem(props) {
   const formValue = getValues(name);
 
   const getInitialValue = () =>
-    formValue || value || defaultValues[name] || [];
+    ![null, undefined].includes(formValue)
+      ? formValue
+      : value || defaultValues[name] || [];
 
   const [curValue, setCurValue] = useState(
     getInitialValue(),
@@ -72,9 +76,11 @@ function DatePickerRangeFormItem(props) {
     }
   }, [value]);
 
+  const refresh = useSelector(formSelectors.selectRefresh);
+
   useEffect(() => {
     setCurValue(getInitialValue());
-  }, [rerender]);
+  }, [rerender, refresh]);
 
   const errorMessage = FormErrors.errorMessage(
     name,

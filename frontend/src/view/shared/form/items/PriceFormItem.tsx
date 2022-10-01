@@ -1,23 +1,13 @@
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import PropTypes from 'prop-types';
 import RatingFormItem from 'src/view/shared/form/items/RatingFormItem';
 
 function PriceFormItem(props) {
-  const { color } = props;
-
-  const { sidenavColor } = selectMuiSettings();
-
-  return (
-    <RatingFormItem
-      {...props}
-      color={color || sidenavColor}
-    />
-  );
+  return <RatingFormItem {...props} />;
 }
 
 PriceFormItem.defaultProps = {
-  color: null,
+  color: 'success',
   count: 4,
   icon: <AttachMoneyIcon />,
   precision: 0,

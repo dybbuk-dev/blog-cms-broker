@@ -10,6 +10,8 @@ import {
 import MDInput from 'src/mui/components/MDInput';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
+import { useSelector } from 'react-redux';
+import formSelectors from 'src/modules/form/formSelectors';
 
 interface Option {
   value: string;
@@ -76,9 +78,11 @@ function TagsFormItem(props) {
     }
   }, [defaultValue]);
 
+  const refresh = useSelector(formSelectors.selectRefresh);
+
   useEffect(() => {
     setCurValue(getInitialValue());
-  }, [rerender]);
+  }, [rerender, refresh]);
 
   const errorMessage = FormErrors.errorMessage(
     name,

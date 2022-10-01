@@ -14,6 +14,8 @@ import {
 import moment from 'moment';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
+import { useSelector } from 'react-redux';
+import formSelectors from 'src/modules/form/formSelectors';
 
 function DatePickerFormItem(props) {
   const {
@@ -72,9 +74,11 @@ function DatePickerFormItem(props) {
     }
   }, [value]);
 
+  const refresh = useSelector(formSelectors.selectRefresh);
+
   useEffect(() => {
     setCurValue(getInitialValue());
-  }, [rerender]);
+  }, [rerender, refresh]);
 
   const errorMessage = FormErrors.errorMessage(
     name,

@@ -8,6 +8,8 @@ import {
 } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { useSelector } from 'react-redux';
+import formSelectors from 'src/modules/form/formSelectors';
 
 function SwitchFormItem(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -66,9 +68,11 @@ function SwitchFormItem(props) {
     }
   }, [value]);
 
+  const refresh = useSelector(formSelectors.selectRefresh);
+
   useEffect(() => {
     setCurValue(getInitialValue());
-  }, [rerender]);
+  }, [rerender, refresh]);
 
   const errorMessage = FormErrors.errorMessage(
     name,

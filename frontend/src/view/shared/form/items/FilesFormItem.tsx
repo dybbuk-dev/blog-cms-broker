@@ -1,12 +1,17 @@
 import { FormControl, FormHelperText } from '@mui/material';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import FilesUploader from 'src/view/shared/uploaders/FilesUploader';
 import FormErrors from 'src/view/shared/form/formErrors';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import formSelectors from 'src/modules/form/formSelectors';
 
 function FilesFormItem(props) {
+  const { darkMode } = selectMuiSettings();
+
   const {
     externalErrorMessage,
     forceValue,
@@ -35,7 +40,9 @@ function FilesFormItem(props) {
   const formValue = getValues(name);
 
   const getInitialValue = () =>
-    formValue || value || defaultValues[name] || [];
+    ![null, undefined].includes(formValue)
+      ? formValue
+      : value || defaultValues[name] || [];
 
   const [curValue, setCurValue] = useState(
     getInitialValue(),
@@ -58,9 +65,11 @@ function FilesFormItem(props) {
     }
   }, [value]);
 
+  const refresh = useSelector(formSelectors.selectRefresh);
+
   useEffect(() => {
     setCurValue(getInitialValue());
-  }, [rerender]);
+  }, [rerender, refresh]);
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -80,9 +89,15 @@ function FilesFormItem(props) {
       component="fieldset"
       size="small"
     >
-      <MDTypography variant="caption" fontWeight="regular">
-        {label}
-      </MDTypography>
+      {Boolean(label) && (
+        <MDTypography
+          variant="caption"
+          fontWeight="regular"
+          color={darkMode ? 'text' : 'secondary'}
+        >
+          {label}
+        </MDTypography>
+      )}
 
       <FilesUploader
         storage={storage}

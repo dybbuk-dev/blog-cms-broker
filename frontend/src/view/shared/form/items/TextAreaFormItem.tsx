@@ -5,6 +5,8 @@ import MDBox from 'src/mui/components/MDBox';
 import MDInput from 'src/mui/components/MDInput';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import formSelectors from 'src/modules/form/formSelectors';
 
 function TextAreaFormItem(props) {
   const {
@@ -45,7 +47,9 @@ function TextAreaFormItem(props) {
   const formValue = getValues(name);
 
   const getInitialValue = () =>
-    formValue || value || defaultValues[name] || '';
+    ![null, undefined].includes(formValue)
+      ? formValue
+      : value || defaultValues[name] || '';
 
   const [curValue, setCurValue] = useState(
     getInitialValue(),
@@ -68,9 +72,11 @@ function TextAreaFormItem(props) {
     }
   }, [value]);
 
+  const refresh = useSelector(formSelectors.selectRefresh);
+
   useEffect(() => {
     setCurValue(getInitialValue());
-  }, [rerender]);
+  }, [rerender, refresh]);
 
   const errorMessage = FormErrors.errorMessage(
     name,

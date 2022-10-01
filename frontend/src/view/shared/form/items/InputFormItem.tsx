@@ -5,6 +5,8 @@ import MDBox from 'src/mui/components/MDBox';
 import MDInput from 'src/mui/components/MDInput';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import formSelectors from 'src/modules/form/formSelectors';
 
 export function InputFormItem(props) {
   const {
@@ -43,16 +45,18 @@ export function InputFormItem(props) {
 
   const defaultValues = defaultValuesRef.current || {};
 
-  const formValue = getValues(name);
+  const formValue = name ? getValues(name) : null;
 
   const getInitialValue = () =>
-    formValue || value || defaultValues[name] || '';
+    ![null, undefined].includes(formValue)
+      ? formValue
+      : value || defaultValues[name] || '';
 
   const [curValue, setCurValue] = useState(
     getInitialValue(),
   );
 
-  if (forceValue) {
+  if (forceValue && name) {
     setValue(name, value, {
       shouldValidate: false,
       shouldDirty: true,
@@ -60,7 +64,9 @@ export function InputFormItem(props) {
   }
 
   useEffect(() => {
-    register({ name });
+    if (name) {
+      register({ name });
+    }
   }, [register, name]);
 
   useEffect(() => {
@@ -69,9 +75,11 @@ export function InputFormItem(props) {
     }
   }, [value]);
 
+  const refresh = useSelector(formSelectors.selectRefresh);
+
   useEffect(() => {
     setCurValue(getInitialValue());
-  }, [rerender]);
+  }, [rerender, refresh]);
 
   const errorMessage = FormErrors.errorMessage(
     name,
