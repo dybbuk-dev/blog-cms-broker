@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
+import affiliateLink from 'src/modules/affiliateLink/affiliateLinkReducers';
 import auditLog from 'src/modules/auditLog/auditLogReducers';
 import auth from 'src/modules/auth/authReducers';
 import author from 'src/modules/author/authorReducers';
-import affiliateLink from 'src/modules/affiliateLink/affiliateLinkReducers';
 import blog from 'src/modules/blog/blogReducers';
 import blogComment from 'src/modules/blogComment/blogCommentReducers';
 import broker from 'src/modules/broker/brokerReducers';
@@ -11,10 +11,11 @@ import brokerArticle from 'src/modules/brokerArticle/brokerArticleReducers';
 import brokerPost from 'src/modules/brokerPost/brokerPostReducers';
 import category from 'src/modules/category/categoryReducers';
 import expertAdvisorTest from 'src/modules/expertAdvisorTest/expertAdvisorTestReducers';
+import form from 'src/modules/form/formReducers';
 import layout from 'src/modules/layout/layoutReducers';
 import mui from 'src/modules/mui/muiReducers';
-import news from 'src/modules/news/newsReducers';
 import navigation from 'src/modules/navigation/navigationReducers';
+import news from 'src/modules/news/newsReducers';
 import openx from 'src/modules/openx/openxReducers';
 import page from 'src/modules/page/pageReducers';
 import pageWarning from 'src/modules/pageWarning/pageWarningReducers';
@@ -39,6 +40,7 @@ export default (history) =>
     brokerPost,
     category,
     expertAdvisorTest,
+    form,
     layout,
     mui,
     navigation,
