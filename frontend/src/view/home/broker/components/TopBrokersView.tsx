@@ -48,8 +48,7 @@ function TopBrokersView() {
                         row.broker_image_broker_detail_logo
                       }
                       sx={{
-                        width: '141px',
-                        height: '70px',
+                        width: '250px',
                       }}
                     />
                   </MaterialLink>
