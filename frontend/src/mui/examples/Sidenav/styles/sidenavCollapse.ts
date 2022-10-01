@@ -30,6 +30,8 @@ function collapseItem(theme: Theme, ownerState: any) {
     transparentSidenav,
     whiteSidenav,
     darkMode,
+    color,
+    noCollapse,
   } = ownerState;
 
   const { white, transparent, dark, grey } = palette;
@@ -41,7 +43,9 @@ function collapseItem(theme: Theme, ownerState: any) {
     background: () => {
       let backgroundValue;
 
-      if (transparentSidenav && darkMode) {
+      if (noCollapse && active) {
+        backgroundValue = palette[color].main;
+      } else if (transparentSidenav && darkMode) {
         backgroundValue = active
           ? rgba(white.main, 0.2)
           : transparent.main;
@@ -62,7 +66,9 @@ function collapseItem(theme: Theme, ownerState: any) {
       return backgroundValue;
     },
     color:
-      (transparentSidenav && !darkMode) || whiteSidenav
+      active && noCollapse
+        ? white.main
+        : (transparentSidenav && !darkMode) || whiteSidenav
         ? dark.main
         : white.main,
     display: 'flex',
@@ -93,7 +99,9 @@ function collapseItem(theme: Theme, ownerState: any) {
 
     '&:hover, &:focus': {
       backgroundColor:
-        transparentSidenav && !darkMode
+        active && noCollapse
+          ? palette[color].main
+          : transparentSidenav && !darkMode
           ? grey[300]
           : rgba(
               whiteSidenav ? grey[400] : white.main,
@@ -106,8 +114,13 @@ function collapseItem(theme: Theme, ownerState: any) {
 function collapseIconBox(theme: Theme, ownerState: any) {
   const { palette, transitions, borders, functions } =
     theme;
-  const { transparentSidenav, whiteSidenav, darkMode } =
-    ownerState;
+  const {
+    transparentSidenav,
+    whiteSidenav,
+    darkMode,
+    active,
+    noCollapse,
+  } = ownerState;
 
   const { white, dark } = palette;
   const { borderRadius } = borders;
@@ -117,7 +130,9 @@ function collapseIconBox(theme: Theme, ownerState: any) {
     minWidth: pxToRem(32),
     minHeight: pxToRem(32),
     color:
-      (transparentSidenav && !darkMode) || whiteSidenav
+      active && noCollapse
+        ? white.main
+        : (transparentSidenav && !darkMode) || whiteSidenav
         ? dark.main
         : white.main,
     borderRadius: borderRadius.md,
@@ -130,7 +145,10 @@ function collapseIconBox(theme: Theme, ownerState: any) {
 
     '& svg, svg g, span.MuiIcon-root': {
       color:
-        (transparentSidenav && !darkMode) || whiteSidenav
+        active && noCollapse
+          ? white.main
+          : (transparentSidenav && !darkMode) ||
+            whiteSidenav
           ? dark.main
           : white.main,
     },
@@ -139,9 +157,14 @@ function collapseIconBox(theme: Theme, ownerState: any) {
 
 const collapseIcon = (
   { palette: { white, gradients } }: Theme,
-  { active }: any,
+  { active, noCollapse }: any,
 ) => ({
-  color: active ? white.main : gradients.dark.state,
+  color:
+    active && noCollapse
+      ? white.main
+      : active
+      ? white.main
+      : gradients.dark.state,
 });
 
 function collapseText(theme: any, ownerState: any) {

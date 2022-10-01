@@ -6,11 +6,10 @@ import {
   menus,
   profileRoutes,
   tenantRoutes,
-  userRoutes,
   planRoutes,
 } from 'src/view/menus';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // react-router-dom components
 import { useLocation, NavLink } from 'react-router-dom';
@@ -37,11 +36,9 @@ import SidenavRoot from 'src/mui/examples/Sidenav/SidenavRoot';
 import muiActions from 'src/modules/mui/muiActions';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { findRoute, matchedRoutes } from 'src/view/routes';
-import { Avatar, CardMedia } from '@mui/material';
+import { Avatar } from '@mui/material';
 import config from 'src/config';
-import { BrandLogo } from 'src/assets/resources';
 
-import Scrollbar from 'react-smooth-scrollbar-z';
 import { i18n } from 'src/i18n';
 
 // Declaring props types for Sidenav
@@ -308,7 +305,7 @@ function Menu({
               <SidenavItem
                 color={color}
                 name={name}
-                active={!!findRoute(path, currentRoutes)}
+                active={active}
                 icon={icon}
                 disabled={disabled}
               />
@@ -322,7 +319,7 @@ function Menu({
               <SidenavItem
                 color={color}
                 name={name}
-                active={!!findRoute(path, currentRoutes)}
+                active={active}
                 icon={icon}
                 disabled={disabled}
               />
@@ -377,6 +374,7 @@ function Menu({
                 <SidenavCollapse
                   name={name}
                   icon={icon}
+                  color={color}
                   active={key === collapseName}
                   noCollapse={noCollapse}
                   disabled={disabled}
@@ -393,6 +391,7 @@ function Menu({
                 <SidenavCollapse
                   name={name}
                   icon={icon}
+                  color={color}
                   noCollapse={noCollapse}
                   active={active}
                   disabled={disabled}
@@ -409,6 +408,7 @@ function Menu({
                 key={key}
                 name={name}
                 icon={icon}
+                color={color}
                 active={key === collapseName}
                 open={openCollapse === key}
                 disabled={disabled}

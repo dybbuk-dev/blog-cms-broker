@@ -52,6 +52,7 @@ interface Props {
 function SidenavCollapse({
   icon,
   name,
+  color,
   children,
   active,
   noCollapse,
@@ -76,6 +77,8 @@ function SidenavCollapse({
               transparentSidenav,
               whiteSidenav,
               darkMode,
+              color,
+              noCollapse,
             })
           }
         >
@@ -85,13 +88,18 @@ function SidenavCollapse({
                 transparentSidenav,
                 whiteSidenav,
                 darkMode,
+                active,
+                noCollapse,
               })
             }
           >
             {typeof icon === 'string' ? (
               <Icon
                 sx={(theme) =>
-                  collapseIcon(theme, { active })
+                  collapseIcon(theme, {
+                    active,
+                    noCollapse,
+                  })
                 }
               >
                 {icon}

@@ -120,6 +120,8 @@ function SidenavItem({
                   transparentSidenav,
                   whiteSidenav,
                   darkMode,
+                  active,
+                  noCollapse: true,
                 })
               }
             >
