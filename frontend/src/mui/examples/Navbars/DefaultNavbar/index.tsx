@@ -680,7 +680,8 @@ function DefaultNavbar({
     </Popper>
   );
 
-  const TagRoot = fixed ? MDBox : Card;
+  // const TagRoot = fixed ? MDBox : Card;
+  const TagRoot = MDBox;
 
   return (
     <TagRoot sx={{ m: fixed ? 0 : 2 }}>
