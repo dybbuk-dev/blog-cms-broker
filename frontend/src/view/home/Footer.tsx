@@ -26,10 +26,11 @@ function Footer() {
         gap={2}
         my={2}
       >
-        <MDBox p={5} color="text">
+        <MDBox p={5}>
           <MDTypography
             variant="body2"
             fontWeight="regular"
+            color="text"
           >
             {i18n(
               'footer.description',

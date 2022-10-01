@@ -1,6 +1,7 @@
 import { styled } from '@mui/material/styles';
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
+import MDBox from 'src/mui/components/MDBox';
 
 export const HtmlViewWrapper = styled('div')(() => ({
   fontSize: '1rem',
@@ -15,7 +16,11 @@ export const HtmlViewWrapper = styled('div')(() => ({
 }));
 
 function HtmlView({ value }) {
-  return <HtmlViewWrapper>{parse(value)}</HtmlViewWrapper>;
+  return (
+    <MDBox color="text">
+      <HtmlViewWrapper>{parse(value)}</HtmlViewWrapper>
+    </MDBox>
+  );
 }
 
 HtmlView.propTypes = {
