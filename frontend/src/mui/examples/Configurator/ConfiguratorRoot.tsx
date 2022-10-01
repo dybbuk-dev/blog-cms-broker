@@ -61,6 +61,7 @@ export default styled(Drawer)(
         borderRadius: 0,
         boxShadow: lg,
         overflowY: 'auto',
+        overflowX: 'hidden',
         ...(openConfigurator
           ? drawerOpenStyles()
           : drawerCloseStyles()),

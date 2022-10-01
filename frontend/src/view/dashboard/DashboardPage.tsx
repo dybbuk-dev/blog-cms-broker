@@ -203,21 +203,15 @@ function DashboardPage() {
     <>
       <Grid spacing={2} container>
         <Grid md={6} xs={12} item>
-          <PageContent>
-            <MDTypography variant="h2" color="text" pb={2}>
+          <PageContent p={3}>
+            <MDTypography variant="h3" mb={3}>
               {'Blog Comments'}
             </MDTypography>
             {blogCommentLoading && <Spinner />}
             {!blogCommentLoading &&
               blogCommentHasRows &&
               blogComments.map((comment) => (
-                <MDBox
-                  key={comment.id}
-                  display="flex"
-                  flexDirection="column"
-                  color="text"
-                  gap={1}
-                >
+                <MDBox key={comment.id}>
                   <MDBox
                     display="flex"
                     justifyContent="space-between"
@@ -308,8 +302,9 @@ function DashboardPage() {
                     color="text"
                     fontSize="1rem"
                     fontWeight="regular"
-                    pt={1}
-                    pl={5}
+                    mt={1}
+                    ml={5}
+                    mb={3}
                   >
                     <HtmlView value={comment.content} />
                   </MDBox>
@@ -323,8 +318,8 @@ function DashboardPage() {
           </PageContent>
         </Grid>
         <Grid md={6} xs={12} item>
-          <PageContent>
-            <MDTypography variant="h2" color="text" pb={2}>
+          <PageContent p={3}>
+            <MDTypography variant="h3" mb={3}>
               {'Broker Posts'}
             </MDTypography>
             {brokerPostLoading && <Spinner />}
@@ -419,8 +414,9 @@ function DashboardPage() {
                     color="text"
                     fontSize="1rem"
                     fontWeight="regular"
-                    pt={1}
-                    pl={5}
+                    mt={1}
+                    ml={5}
+                    mb={3}
                   >
                     <HtmlView value={post.review} />
                   </MDBox>
