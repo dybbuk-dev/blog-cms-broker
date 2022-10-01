@@ -22,6 +22,7 @@ const en = {
     no: 'No',
     noCommit: 'No comments. Be the first!',
     noDataToExport: 'No data to export',
+    noRecord: 'No Record',
     or: 'or',
     pause: 'Pause',
     rating: 'Valuation',

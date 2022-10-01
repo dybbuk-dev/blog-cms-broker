@@ -16,35 +16,36 @@ const blogCommentReviewActions = {
   REVIEW_ALL_SUCCESS: `${prefix}_REVIEW_ALL_SUCCESS`,
   REVIEW_ALL_ERROR: `${prefix}_REVIEW_ALL_ERROR`,
 
-  doReview: (id) => async (dispatch) => {
-    try {
-      dispatch({
-        type: blogCommentReviewActions.REVIEW_STARTED,
-      });
+  doReview:
+    (id, redirect_url = '/admin/blog-comment') =>
+    async (dispatch) => {
+      try {
+        dispatch({
+          type: blogCommentReviewActions.REVIEW_STARTED,
+        });
 
-      await BlogCommentService.reviewAll([id]);
+        await BlogCommentService.reviewAll([id]);
 
-      dispatch({
-        type: blogCommentReviewActions.REVIEW_SUCCESS,
-      });
+        dispatch({
+          type: blogCommentReviewActions.REVIEW_SUCCESS,
+        });
 
-      Message.success(
-        i18n('entities.blogComment.review.success'),
-      );
+        Message.success(
+          i18n('entities.blogComment.review.success'),
+        );
 
-      dispatch(listActions.doFetchCurrentFilter());
+        dispatch(listActions.doFetchCurrentFilter());
+        getHistory().push(redirect_url);
+      } catch (error) {
+        Errors.handle(error);
 
-      getHistory().push('/admin/blog-comment');
-    } catch (error) {
-      Errors.handle(error);
+        dispatch(listActions.doFetchCurrentFilter());
 
-      dispatch(listActions.doFetchCurrentFilter());
-
-      dispatch({
-        type: blogCommentReviewActions.REVIEW_ERROR,
-      });
-    }
-  },
+        dispatch({
+          type: blogCommentReviewActions.REVIEW_ERROR,
+        });
+      }
+    },
 
   doReviewAll: (ids) => async (dispatch) => {
     try {

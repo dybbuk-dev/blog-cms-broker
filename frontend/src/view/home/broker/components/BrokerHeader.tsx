@@ -32,6 +32,7 @@ function BrokerHeader({ record }) {
             variant="contained"
             href={record.meta?.homepage}
             color={sidenavColor}
+            target="_blank"
             startIcon={<SendIcon />}
           >
             {i18n(

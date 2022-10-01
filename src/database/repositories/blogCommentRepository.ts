@@ -273,6 +273,10 @@ class BlogCommentRepository {
       },
     ];
     if (filter) {
+      if (filter.limit) {
+        limit = filter.limit;
+      }
+
       if (filter.blog_entry_id) {
         whereAnd.push({
           blog_entry_id: filter.blog_entry_id,
@@ -345,7 +349,10 @@ class BlogCommentRepository {
         offset: offset ? Number(offset) : undefined,
         order: orderBy
           ? [orderByUtils(orderBy, options)]
-          : [['id', 'DESC']],
+          : [
+              ['modified', 'DESC'],
+              ['id', 'DESC'],
+            ],
         transaction:
           SequelizeRepository.getTransaction(options),
       });

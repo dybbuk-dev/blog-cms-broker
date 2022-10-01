@@ -16,35 +16,37 @@ const blogCommentDestroyActions = {
   DESTROY_ALL_SUCCESS: `${prefix}_DESTROY_ALL_SUCCESS`,
   DESTROY_ALL_ERROR: `${prefix}_DESTROY_ALL_ERROR`,
 
-  doDestroy: (id) => async (dispatch) => {
-    try {
-      dispatch({
-        type: blogCommentDestroyActions.DESTROY_STARTED,
-      });
+  doDestroy:
+    (id, redirect_url = '/admin/blog-comment') =>
+    async (dispatch) => {
+      try {
+        dispatch({
+          type: blogCommentDestroyActions.DESTROY_STARTED,
+        });
 
-      await BlogCommentService.destroyAll([id]);
+        await BlogCommentService.destroyAll([id]);
 
-      dispatch({
-        type: blogCommentDestroyActions.DESTROY_SUCCESS,
-      });
+        dispatch({
+          type: blogCommentDestroyActions.DESTROY_SUCCESS,
+        });
 
-      Message.success(
-        i18n('entities.blogComment.destroy.success'),
-      );
+        Message.success(
+          i18n('entities.blogComment.destroy.success'),
+        );
 
-      dispatch(listActions.doFetchCurrentFilter());
+        dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/admin/blog-comment');
-    } catch (error) {
-      Errors.handle(error);
+        getHistory().push(redirect_url);
+      } catch (error) {
+        Errors.handle(error);
 
-      dispatch(listActions.doFetchCurrentFilter());
+        dispatch(listActions.doFetchCurrentFilter());
 
-      dispatch({
-        type: blogCommentDestroyActions.DESTROY_ERROR,
-      });
-    }
-  },
+        dispatch({
+          type: blogCommentDestroyActions.DESTROY_ERROR,
+        });
+      }
+    },
 
   doDestroyAll: (ids) => async (dispatch) => {
     try {

@@ -284,6 +284,9 @@ class BrokerPostRepository {
     const include = [];
 
     if (filter) {
+      if (filter.limit) {
+        limit = filter.limit;
+      }
       if (filter.broker) {
         whereAnd.push({
           broker_id: filter.broker,
@@ -357,7 +360,10 @@ class BrokerPostRepository {
         offset: offset ? Number(offset) : undefined,
         order: orderBy
           ? [orderByUtils(orderBy, options)]
-          : [['id', 'DESC']],
+          : [
+              ['modified', 'DESC'],
+              ['id', 'DESC'],
+            ],
         transaction:
           SequelizeRepository.getTransaction(options),
       });

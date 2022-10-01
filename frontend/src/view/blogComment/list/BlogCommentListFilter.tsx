@@ -25,6 +25,8 @@ import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import MDButton from 'src/mui/components/MDButton';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
+import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
+import { filterBooleanOptions } from 'src/modules/utils';
 
 const schema = yup.object().shape({
   idRange: yupFilterSchemas.integerRange(
@@ -36,12 +38,24 @@ const schema = yup.object().shape({
   email: yupFilterSchemas.string(
     i18n('entities.blogComment.fields.email'),
   ),
+  deleted: yupFilterSchemas.boolean(
+    i18n('entities.blogComment.fields.deleted'),
+  ),
+  spam: yupFilterSchemas.boolean(
+    i18n('entities.blogComment.fields.spam'),
+  ),
+  review_required: yupFilterSchemas.boolean(
+    i18n('entities.blogComment.fields.review_required'),
+  ),
 });
 
 const emptyValues = {
   idRange: [],
   name: null,
   email: null,
+  deleted: null,
+  spam: null,
+  review_required: null,
 };
 
 const previewRenders = {
@@ -56,6 +70,20 @@ const previewRenders = {
   email: {
     label: i18n('entities.blogComment.fields.email'),
     render: filterRenders.generic(),
+  },
+  deleted: {
+    label: i18n('entities.blogComment.fields.deleted'),
+    render: filterRenders.boolean(),
+  },
+  spam: {
+    label: i18n('entities.blogComment.fields.spam'),
+    render: filterRenders.boolean(),
+  },
+  review_required: {
+    label: i18n(
+      'entities.blogComment.fields.review_required',
+    ),
+    render: filterRenders.boolean(),
   },
 };
 
@@ -159,6 +187,39 @@ function BlogCommentListFilter(props) {
                     label={i18n(
                       'entities.blogComment.fields.email',
                     )}
+                    variant="standard"
+                    rerender={rerender}
+                  />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                  <SelectFormItem
+                    name="deleted"
+                    label={i18n(
+                      'entities.blogComment.fields.deleted',
+                    )}
+                    options={filterBooleanOptions}
+                    variant="standard"
+                    rerender={rerender}
+                  />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                  <SelectFormItem
+                    name="spam"
+                    label={i18n(
+                      'entities.blogComment.fields.spam',
+                    )}
+                    options={filterBooleanOptions}
+                    variant="standard"
+                    rerender={rerender}
+                  />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                  <SelectFormItem
+                    name="review_required"
+                    label={i18n(
+                      'entities.blogComment.fields.review_required',
+                    )}
+                    options={filterBooleanOptions}
                     variant="standard"
                     rerender={rerender}
                   />

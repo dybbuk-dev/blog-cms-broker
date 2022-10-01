@@ -81,15 +81,17 @@ const previewRenders = {
     render: filterRenders.generic(),
   },
   deleted: {
-    label: i18n('entities.blog.fields.deleted'),
+    label: i18n('entities.brokerPost.fields.deleted'),
     render: filterRenders.boolean(),
   },
   spam: {
-    label: i18n('entities.blog.fields.spam'),
+    label: i18n('entities.brokerPost.fields.spam'),
     render: filterRenders.boolean(),
   },
   review_required: {
-    label: i18n('entities.blog.fields.review_required'),
+    label: i18n(
+      'entities.brokerPost.fields.review_required',
+    ),
     render: filterRenders.boolean(),
   },
 };
@@ -211,7 +213,7 @@ function BrokerPostListFilter(props) {
                   <SelectFormItem
                     name="deleted"
                     label={i18n(
-                      'entities.blog.fields.deleted',
+                      'entities.brokerPost.fields.deleted',
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
@@ -222,7 +224,7 @@ function BrokerPostListFilter(props) {
                   <SelectFormItem
                     name="spam"
                     label={i18n(
-                      'entities.blog.fields.spam',
+                      'entities.brokerPost.fields.spam',
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
@@ -233,7 +235,7 @@ function BrokerPostListFilter(props) {
                   <SelectFormItem
                     name="review_required"
                     label={i18n(
-                      'entities.blog.fields.review_required',
+                      'entities.brokerPost.fields.review_required',
                     )}
                     options={filterBooleanOptions}
                     variant="standard"
