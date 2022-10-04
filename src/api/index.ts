@@ -41,34 +41,30 @@ app.use(defaultRateLimiter);
 
 // Enables Helmet, a set of tools to
 // increase security.
-const cspDirectives = {
-  ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-  'script-src': [
-    "'self'",
-    "'unsafe-eval'",
-    "'https:'",
-    "'unsafe-inline'",
-  ],
-  'script-src-elem': ['*'],
-  // 'connect-src': ['self'],
-  // 'style-src': ['self', 'unsafe-inline'],
-  'frame-src': ['*'],
-  // 'img-src': ['*', 'data:'],
-};
+// const cspDirectives = {
+//   ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+//   'script-src': [
+//     "'self'",
+//     "'unsafe-eval'",
+//     "'unsafe-inline'",
+//   ],
+//   'script-src-elem': ['*'],
+//   'frame-src': ['*'],
+// };
 
-console.log('----- Content Security Policy -----');
-console.log(cspDirectives);
+// console.log('----- Content Security Policy -----');
+// console.log(cspDirectives);
 
-app.use(
-  helmet({
-    contentSecurityPolicy: {
-      useDefaults: false,
-      directives: {
-        ...cspDirectives,
-      },
-    },
-  }),
-);
+// app.use(
+//   helmet({
+//     contentSecurityPolicy: {
+//       useDefaults: false,
+//       directives: {
+//         ...cspDirectives,
+//       },
+//     },
+//   }),
+// );
 
 // Parses the body of POST/PUT request
 // to JSON
