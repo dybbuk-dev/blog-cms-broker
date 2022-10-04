@@ -1209,11 +1209,6 @@ const privateRoutes = [
 
 const publicRoutes = [
   {
-    path: '/',
-    loader: () => import('src/view/home/HomeViewPage'),
-    exact: true,
-  },
-  {
     path: '/admin/auth/signin',
     loader: () => import('src/view/auth/SigninPage'),
     exact: true,
@@ -1282,6 +1277,13 @@ const simpleRoutes = [
     loader: () =>
       import('src/view/shared/errors/Error500Page'),
   },
+].filter(Boolean);
+
+const frontEndRoutes = [
+  {
+    path: '/',
+    loader: () => import('src/view/home/HomeViewPage'),
+  },
   {
     path: '/kontakt',
     loader: () => import('src/view/home/Contact'),
@@ -1326,11 +1328,12 @@ const simpleRoutes = [
 ].filter(Boolean);
 
 export default {
+  emailUnverifiedRoutes,
+  emptyPermissionsRoutes,
+  emptyTenantRoutes,
+  frontEndRoutes,
   privateRoutes,
   publicRoutes,
-  emptyTenantRoutes,
-  emptyPermissionsRoutes,
-  emailUnverifiedRoutes,
   simpleRoutes,
 };
 

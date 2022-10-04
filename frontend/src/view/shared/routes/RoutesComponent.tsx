@@ -13,6 +13,7 @@ import EmptyPermissionsRoute from 'src/view/shared/routes/EmptyPermissionsRoute'
 
 // for MUI 2 Dashboard
 import muiSelectors from 'src/modules/mui/muiSelectors';
+import FrontEndRoute from 'src/view/shared/routes/FrontEndRoute';
 
 function RoutesComponent(props) {
   const isInitialMount = useRef(true);
@@ -118,6 +119,19 @@ function RoutesComponent(props) {
             exact={Boolean(route.exact)}
           />
         ))}
+
+      {routes.frontEndRoutes.map((route) => (
+        <FrontEndRoute
+          key={route.path}
+          exact={true}
+          path={route.path}
+          currentUser={currentUser}
+          currentTenant={currentTenant}
+          component={CustomLoadable({
+            loader: route.loader,
+          })}
+        />
+      ))}
 
       {routes.simpleRoutes.map((route) => (
         <Route
