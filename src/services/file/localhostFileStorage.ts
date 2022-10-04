@@ -1,10 +1,11 @@
-import path from 'path';
-import fs from 'fs';
-import os from 'os';
-import jwt from 'jsonwebtoken';
 import { getConfig } from '../../config';
-import mv from 'mv';
+import { getRealPath } from '../../utils/pathUtils';
 import Error403 from '../../errors/Error403';
+import fs from 'fs';
+import jwt from 'jsonwebtoken';
+import mv from 'mv';
+import os from 'os';
+import path from 'path';
 
 /**
  * The directory where the files should be uploaded.
@@ -12,7 +13,7 @@ import Error403 from '../../errors/Error403';
  */
 
 const UPLOAD_DIR =
-  getConfig().FILE_STORAGE_PATH || os.tmpdir();
+  getRealPath(getConfig().FILE_STORAGE_PATH) || os.tmpdir();
 
 export default class LocalFileStorage {
   /**
