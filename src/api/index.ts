@@ -45,11 +45,14 @@ const cspDirectives = {
   ...helmet.contentSecurityPolicy.getDefaultDirectives(),
   'script-src': ["'self'", "'unsafe-eval'"],
   'script-src-elem': ["'self'", "'unsafe-eval'"],
-  'frame-src': ["'self'", "'unsafe-eval'"],
+  'connect-src': ['self'],
+  'style-src': ['self', 'unsafe-inline'],
+  'frame-src': ['*'],
+  'img-src': ['*', 'data:'],
 };
 
-// console.log('----- Content Security Policy -----');
-// console.log(cspDirectives);
+console.log('----- Content Security Policy -----');
+console.log(cspDirectives);
 
 app.use(
   helmet({
