@@ -11,7 +11,7 @@ const apiDocumentationUrl = false;
  * Frontend URL.
  */
 const frontendUrl = {
-  host: 'broker-bewertungen.de',
+  host: 'broker-bewertungen-de.herokuapp.com',
   protocol: 'https',
 };
 
