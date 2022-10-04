@@ -27,6 +27,8 @@ import muiActions from 'src/modules/mui/muiActions';
 import navigationHomeSelectors from 'src/modules/navigation/home/navigationHomeSelectors';
 import DefaultNavbar from 'src/mui/examples/Navbars/DefaultNavbar';
 import Footer from 'src/view/home/Footer';
+import PermissionChecker from 'src/modules/auth/permissionChecker';
+import authSelectors from 'src/modules/auth/authSelectors';
 
 // Declaring props types for PageLayout
 interface Props {
@@ -50,6 +52,18 @@ function PageLayout({
     navigationHomeSelectors.selectNavigation,
   );
 
+  const currentTenant = useSelector(
+    authSelectors.selectCurrentTenant,
+  );
+  const currentUser = useSelector(
+    authSelectors.selectCurrentUser,
+  );
+
+  const permissionChecker = new PermissionChecker(
+    currentTenant,
+    currentUser,
+  );
+
   useEffect(() => {
     dispatch(muiActions.doLayout('page'));
   }, [pathname]);
@@ -61,7 +75,7 @@ function PageLayout({
       bgColor={background}
       sx={{ overflowX: 'hidden' }}
     >
-      {!loading && (
+      {!loading && permissionChecker.isAuthenticated && (
         <DefaultNavbar
           routes={navigation}
           transparent={fixedNavBar}
@@ -70,7 +84,7 @@ function PageLayout({
         />
       )}
       {children}
-      <Footer />
+      {permissionChecker.isAuthenticated && <Footer />}
     </MDBox>
   );
 }
