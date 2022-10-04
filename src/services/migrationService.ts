@@ -83,12 +83,13 @@ export default class MigrationService {
       );
 
       for (const row of rows) {
-        const internalUrl = LocalFileStorage.internalUrl(
-          imageMigration.privateUrl(row),
-        );
+        const privateUrl = imageMigration.privateUrl(row);
+
+        const internalUrl =
+          LocalFileStorage.internalUrl(privateUrl);
 
         if (!fs.existsSync(internalUrl)) {
-          console.log(`  >>> missed - \`${internalUrl}\``);
+          console.log(`  >>> missed - \`${privateUrl}\``);
           continue;
         }
 

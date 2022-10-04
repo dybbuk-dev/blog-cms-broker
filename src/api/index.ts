@@ -128,7 +128,6 @@ app.get(
 
     // only if file exists
     if (!fs.existsSync(gzUrl)) {
-      // console.log(`not found - "${req.url}.gz"`);
       return next();
     }
 
@@ -138,10 +137,15 @@ app.get(
       mimes[ext] ||
       contentType(ext) ||
       'application/octet-stream';
-    // console.log(ext, ctnType);
     res.set('Content-Type', ctnType);
     res.sendFile(gzUrl);
   },
+);
+
+app.use(
+  express.static(
+    path.resolve(__dirname, '../../uploads'),
+  ),
 );
 
 app.use(
