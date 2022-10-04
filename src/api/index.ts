@@ -43,12 +43,17 @@ app.use(defaultRateLimiter);
 // increase security.
 const cspDirectives = {
   ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-  'script-src': ["'self'", "'unsafe-eval'"],
-  'script-src-elem': ["'self'", "'unsafe-eval'"],
-  'connect-src': ['self'],
-  'style-src': ['self', 'unsafe-inline'],
+  'script-src': [
+    "'self'",
+    "'unsafe-eval'",
+    "'https:'",
+    "'unsafe-inline'",
+  ],
+  'script-src-elem': ['*'],
+  // 'connect-src': ['self'],
+  // 'style-src': ['self', 'unsafe-inline'],
   'frame-src': ['*'],
-  'img-src': ['*', 'data:'],
+  // 'img-src': ['*', 'data:'],
 };
 
 console.log('----- Content Security Policy -----');
