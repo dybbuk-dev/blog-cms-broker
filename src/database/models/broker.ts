@@ -192,101 +192,147 @@ export default function (sequelize) {
     models.broker.hasOne(models.broker_metas, {
       as: 'meta',
       foreignKey: 'id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
     models.broker.hasOne(models.broker_rating, {
       as: 'rating',
       foreignKey: 'id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
     models.broker.hasOne(models.broker_phone, {
       as: 'phone',
       foreignKey: 'broker_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
     models.broker.hasOne(models.broker_fax, {
       as: 'fax',
       foreignKey: 'broker_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
     models.broker.hasOne(models.broker_email, {
       as: 'email',
       foreignKey: 'broker_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
     models.broker.hasOne(models.broker_address, {
       as: 'address',
       foreignKey: 'broker_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
     models.broker.hasOne(models.broker_video, {
       as: 'video',
       foreignKey: 'id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
     models.broker.hasOne(models.broker_checkbox, {
       as: 'checkbox',
       foreignKey: 'id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
     models.broker.hasOne(models.broker_creterias, {
       as: 'creteria',
       foreignKey: 'broker_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
     models.broker.hasOne(models.broker_forex_signal, {
       as: 'forex_signal',
       foreignKey: 'id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
 
     models.broker.hasMany(models.broker_upside, {
       as: 'upsides',
       foreignKey: 'broker_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
     models.broker.hasMany(
       models.broker_regulatory_authority,
       {
         as: 'regulatory_authorities',
         foreignKey: 'broker_id',
+        onDelete: 'NO ACTION',
+        onUpdate: 'NO ACTION',
       },
     );
     models.broker.hasMany(models.broker_deposit_guarantee, {
       as: 'deposit_guarantees',
       foreignKey: 'broker_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
     models.broker.hasMany(models.broker_certificate, {
       as: 'certificates',
       foreignKey: 'broker_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
     models.broker.hasMany(models.broker_spread, {
       as: 'spreads',
       foreignKey: 'broker_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
     models.broker.hasMany(models.broker_feature, {
       as: 'features',
       foreignKey: 'broker_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
     models.broker.hasMany(models.broker_bank, {
       as: 'banks',
       foreignKey: 'broker_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
     models.broker.hasMany(models.broker_order_type, {
       as: 'order_types',
       foreignKey: 'broker_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
     models.broker.hasMany(
       models.broker_minimum_trading_unit,
       {
         as: 'minimum_trading_units',
         foreignKey: 'broker_id',
+        onDelete: 'NO ACTION',
+        onUpdate: 'NO ACTION',
       },
     );
     models.broker.hasMany(models.broker_currency_pair, {
       as: 'currency_pairs',
       foreignKey: 'broker_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
     models.broker.hasMany(models.broker_trade_platform, {
       as: 'trade_platforms',
       foreignKey: 'broker_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
     models.broker.hasMany(models.broker_trade_store, {
       as: 'trade_stores',
       foreignKey: 'broker_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
     models.broker.hasMany(models.broker_deposit, {
       as: 'deposits',
       foreignKey: 'broker_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
     });
   };
 

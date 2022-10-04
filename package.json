@@ -38,6 +38,7 @@
     "helmet": "5.1.0",
     "jsonwebtoken": "8.5.1",
     "lodash": "^4.17.21",
+    "mariadb": "^3.0.1",
     "moment": "^2.29.3",
     "mv": "2.1.1",
     "mysql2": "^2.3.3",

@@ -100,7 +100,7 @@ export default function (sequelize) {
         defaultValue: false,
       },
       author_id: {
-        type: DataTypes.BIGINT,
+        type: DataTypes.BIGINT.UNSIGNED,
         allowNull: true,
       },
       author_name: {

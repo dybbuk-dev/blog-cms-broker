@@ -58,7 +58,7 @@ export default class UserRepository {
       options,
     );
 
-    return this.findById(user.id, {
+    return await this.findById(user.id, {
       ...options,
       bypassPermissionValidation: true,
     });
@@ -94,7 +94,7 @@ export default class UserRepository {
       options,
     );
 
-    return this.findById(user.id, {
+    return await this.findById(user.id, {
       ...options,
       bypassPermissionValidation: true,
     });
@@ -148,7 +148,7 @@ export default class UserRepository {
       options,
     );
 
-    return this.findById(user.id, options);
+    return await this.findById(user.id, options);
   }
 
   static async updatePassword(
@@ -190,7 +190,7 @@ export default class UserRepository {
       options,
     );
 
-    return this.findById(user.id, {
+    return await this.findById(user.id, {
       ...options,
       bypassPermissionValidation: true,
     });
