@@ -77,7 +77,7 @@ function CoverLayout({
           </Grid>
         </Grid>
       </MDBox>
-      <Footer />
+      {/* <Footer /> */}
     </PageLayout>
   );
 }

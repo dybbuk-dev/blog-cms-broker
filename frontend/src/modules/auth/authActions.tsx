@@ -146,6 +146,10 @@ const authActions = {
             currentUser,
           },
         });
+
+        dispatch(muiActions.doInit());
+
+        getHistory().push('/admin');
       } catch (error) {
         await service.signout();
 
