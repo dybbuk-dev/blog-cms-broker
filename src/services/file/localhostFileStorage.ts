@@ -83,7 +83,7 @@ export default class LocalFileStorage {
    * Downloads the file.
    */
   static async download(privateUrl) {
-    let finalPath = path.join(UPLOAD_DIR, privateUrl);
+    let finalPath = this.internalUrl(privateUrl);
     if (!isPathInsideUploadDir(finalPath)) {
       throw new Error403();
     }
