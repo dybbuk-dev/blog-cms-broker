@@ -27,14 +27,18 @@ function HomeViewPage(props) {
             {i18n('entities.home.subtitle')}
           </MDTypography>
           <Grid xs={12} item>
-            <p>{i18n('entities.home.description')}</p>
-            <h3>{i18n('entities.home.top_brokers')}</h3>
+            <HtmlViewWrapper>
+              <p>{i18n('entities.home.description')}</p>
+              <h3>{i18n('entities.home.top_brokers')}</h3>
+            </HtmlViewWrapper>
             <TopBrokersView />
-            <p>
-              {i18n(
-                'entities.home.top_brokers_description',
-              )}
-            </p>
+            <HtmlViewWrapper>
+              <p>
+                {i18n(
+                  'entities.home.top_brokers_description',
+                )}
+              </p>
+            </HtmlViewWrapper>
           </Grid>
           <Grid md={6} xs={12} item>
             <Card>
