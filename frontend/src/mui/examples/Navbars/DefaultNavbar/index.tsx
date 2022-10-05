@@ -1,56 +1,27 @@
-/* eslint-disable no-param-reassign */
-/**
-=========================================================
-* Material Dashboard 2 PRO React TS - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-2-pro-react-ts
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
+import { Card } from '@mui/material';
+import { i18n } from 'src/i18n';
+import { Link } from 'react-router-dom';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { Theme } from '@mui/material/styles';
 import {
   useState,
   useEffect,
   ReactNode,
   Fragment,
 } from 'react';
-
-// react-router components
-import { Link } from 'react-router-dom';
-
-// @mui material components
-import Icon from '@mui/material/Icon';
-import Popper from '@mui/material/Popper';
-import Grow, { GrowProps } from '@mui/material/Grow';
-import Grid from '@mui/material/Grid';
-import Divider from '@mui/material/Divider';
-import MuiLink from '@mui/material/Link';
+import breakpoints from 'src/mui/assets/theme/base/breakpoints';
 import Container from '@mui/material/Container';
-import { Theme } from '@mui/material/styles';
-
-// Material Dashboard 2 PRO React TS components
-import MDBox from 'src/mui/components/MDBox';
-import MDTypography from 'src/mui/components/MDTypography';
-import MDButton from 'src/mui/components/MDButton';
-
-// Material Dashboard 2 PRO React TS examples components
 import DefaultNavbarDropdown from 'src/mui/examples/Navbars/DefaultNavbar/DefaultNavbarDropdown';
 import DefaultNavbarMobile from 'src/mui/examples/Navbars/DefaultNavbar/DefaultNavbarMobile';
-
-// Material Dashboard 2 PRO React TS Base Styles
-import breakpoints from 'src/mui/assets/theme/base/breakpoints';
-
-// for MUI 2 Dashboard
-import muiActions from 'src/modules/mui/muiActions';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
-import { i18n } from 'src/i18n';
-import { Card } from '@mui/material';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import Grow, { GrowProps } from '@mui/material/Grow';
+import Icon from '@mui/material/Icon';
+import MDBox from 'src/mui/components/MDBox';
+import MDButton from 'src/mui/components/MDButton';
+import MDTypography from 'src/mui/components/MDTypography';
+import MuiLink from '@mui/material/Link';
+import Popper from '@mui/material/Popper';
 
 // Declaring props types for DefaultNavbar
 interface Props {
@@ -705,21 +676,73 @@ function DefaultNavbar({
             justifyContent="space-between"
             alignItems="center"
           >
-            <MDBox
-              component={Link}
-              to="/"
-              py={transparent ? 1.5 : 0.75}
-              lineHeight={1}
-              pl={{ xs: 0, lg: 1 }}
-            >
+            <MDBox component={Link} to="/">
               <MDTypography
-                variant="button"
+                display="block"
+                component="span"
+                color="warning"
+                fontSize="32px"
                 fontWeight="bold"
-                color={light ? 'white' : 'dark'}
+                lineHeight={1}
               >
-                {brand}
+                Broker-Bewertungen.de
+              </MDTypography>
+              <MDTypography
+                display="block"
+                component="span"
+                fontSize="15px"
+                fontWeight="regular"
+                lineHeight={1}
+                my={1}
+              >
+                Erfahrungen & Tests von Tradern für Trader
+                seit 2009
               </MDTypography>
             </MDBox>
+            <MDBox display="flex" gap={2}>
+              {[
+                {
+                  img: '/images/crowd-of-users.png',
+                  title: 'Echte Erfahrungen',
+                  desc: 'von Tradern',
+                },
+                {
+                  img: '/images/balance.png',
+                  title: '100% unabhängig',
+                  desc: 'von Tradern für Trader',
+                },
+                {
+                  img: '/images/all-infos.png',
+                  title: 'Alle Infos',
+                  desc: 'zoom FX & CFD Trading',
+                },
+              ].map(({ img, title, desc }) => (
+                <MDBox
+                  key={title}
+                  display="flex"
+                  alignItems="center"
+                  opacity={0.5}
+                  gap={1}
+                >
+                  <img src={img} height="48px" />
+                  <MDTypography
+                    color="text"
+                    fontSize="0.75rem"
+                    lineHeight={1.25}
+                  >
+                    <b>{title}</b>
+                    <br />
+                    {desc}
+                  </MDTypography>
+                </MDBox>
+              ))}
+            </MDBox>
+          </MDBox>
+          <MDBox
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
             <MDBox
               color="inherit"
               display={{ xs: 'none', lg: 'flex' }}
