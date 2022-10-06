@@ -1,17 +1,16 @@
 import { Grid } from '@mui/material';
 import { i18n } from 'src/i18n';
 import AttachLink from 'src/view/home/broker/shared/AttachLink';
-import AttrTypography from 'src/view/home/broker/shared/AttrTypography';
-import BrokerHomepageUrls from 'src/view/home/broker/components/BrokerHomepageUrls';
+import BrokerAddress from 'src/view/home/broker/shared/BrokerAddress';
+import BrokerContact from 'src/view/home/broker/shared/BrokerContact';
 import MDTypography from 'src/mui/components/MDTypography';
 import SingleCheckbox from 'src/view/home/broker/components/SingleCheckbox';
-import BrokerAddress from 'src/view/home/broker/shared/BrokerAddress';
 
 function BrokerServiceView({ record }) {
   return (
     <>
       <MDTypography variant="h4" pb={2}>
-        {i18n('entities.broker.service.title')}
+        {i18n('entities.broker.service.title', record.name)}
       </MDTypography>
       <Grid spacing={2} container>
         <Grid md={4} xs={12} item>
@@ -28,6 +27,19 @@ function BrokerServiceView({ record }) {
           <AttachLink link={record.meta?.homepage}>
             {record.meta?.homepage}
           </AttachLink>
+        </Grid>
+        <Grid md={4} xs={12} item>
+          <MDTypography
+            variant="h5"
+            color="text"
+            lineHeight="1.25"
+            my={1}
+          >
+            {i18n('entities.broker.service.contact')}
+          </MDTypography>
+        </Grid>
+        <Grid md={8} xs={12} item>
+          <BrokerContact record={record} />
         </Grid>
         <Grid md={4} xs={12} item>
           <MDTypography

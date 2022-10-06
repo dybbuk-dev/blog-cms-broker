@@ -7,6 +7,7 @@ import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
+import { useRouteMatch } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import actions from 'src/modules/brokerPost/home/brokerPostHomeActions';
@@ -14,6 +15,7 @@ import brokerPostFormActions from 'src/modules/brokerPost/form/brokerPostFormAct
 import brokerPostFormSelectors from 'src/modules/brokerPost/form/brokerPostFormSelectors';
 import brokerPostSelectors from 'src/modules/brokerPost/brokerPostSelectors';
 import BugReportIcon from '@mui/icons-material/BugReport';
+import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
@@ -25,18 +27,17 @@ import MDTypography from 'src/mui/components/MDTypography';
 import moment from 'moment';
 import OverallRating from 'src/view/home/broker/shared/OverallRating';
 import Pagination from 'src/view/shared/table/Pagination';
+import postDestroyActions from 'src/modules/brokerPost/destroy/brokerPostDestroyActions';
+import postReviewActions from 'src/modules/brokerPost/review/brokerPostReviewActions';
+import postSpamActions from 'src/modules/brokerPost/spam/brokerPostSpamActions';
 import RatingFormItem from 'src/view/shared/form/items/RatingFormItem';
 import RatingViewItem from 'src/view/shared/view/RatingViewItem';
 import ReviewsIcon from '@mui/icons-material/Reviews';
 import SaveIcon from '@mui/icons-material/Save';
 import selectors from 'src/modules/brokerPost/home/brokerPostHomeSelectors';
-import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import Spinner from 'src/view/shared/Spinner';
-import postDestroyActions from 'src/modules/brokerPost/destroy/brokerPostDestroyActions';
-import postReviewActions from 'src/modules/brokerPost/review/brokerPostReviewActions';
-import postSpamActions from 'src/modules/brokerPost/spam/brokerPostSpamActions';
-import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
-import { useRouteMatch } from 'react-router-dom';
+import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
+
 const schema = yup.object().shape({
   name: yupFormSchemas.string(i18n('common.name'), {
     required: true,
@@ -133,6 +134,7 @@ const BrokerPostPage = ({ brokerId, name }) => {
     dispatch(postReviewActions.doReview(id, match.url));
     setDispatched(!dispatched);
   };
+
   useEffect(() => {
     dispatch(
       actions.doFetch({
@@ -318,7 +320,6 @@ const BrokerPostPage = ({ brokerId, name }) => {
               <HtmlEditorFormItem
                 name="review"
                 required={true}
-                label={i18n('common.review')}
               />
             </Grid>
           </Grid>
@@ -332,7 +333,7 @@ const BrokerPostPage = ({ brokerId, name }) => {
               startIcon={<SaveIcon />}
               size="small"
             >
-              {i18n('common.save')}
+              Erfahrungsbericht speichern
             </MDButton>
           </FormButtons>
         </form>

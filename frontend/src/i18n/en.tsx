@@ -19,13 +19,13 @@ const en = {
     mustSelectARow: 'Must select a row',
     name: 'Name',
     new: 'New',
-    no: 'No',
+    no: 'Nein',
     noCommit: 'No comments. Be the first!',
     noDataToExport: 'No data to export',
     noRecord: 'No Record',
     or: 'or',
     pause: 'Pause',
-    rating: 'Valuation',
+    rating: 'Bewertung',
     reset: 'Reset',
     review: 'Review',
     save: 'Save',
@@ -36,7 +36,7 @@ const en = {
     start: 'Start',
     view: 'View',
     writeReview: 'Write a review',
-    yes: 'Yes',
+    yes: 'Ja',
   },
 
   app: {
@@ -427,11 +427,11 @@ const en = {
       },
       characteristics: {
         fields: {
-          licensed_broker: 'Licensed Broker',
-          minimum_deposit: 'minimum deposit',
-          bonus: 'bonus',
-          accounting_bank: 'Accounting bank',
-          withholding_tax: 'withholding tax',
+          licensed_broker: 'Lizensierter Broker',
+          minimum_deposit: 'Mindesteinlage',
+          bonus: 'Bonus',
+          accounting_bank: 'Kontoführende Bank',
+          withholding_tax: 'Abgeltungssteuer',
         },
         tooltip: {
           licensed_broker:
@@ -620,26 +620,26 @@ const en = {
         },
       },
       market: {
-        title: 'Tradable Markets and Fees at ActivTrades',
+        title: 'Handelbare Märkte und Gebühren bei {0}',
         forex_trading_at_activities:
-          'Forex trading at ActivTrades',
-        cfd_trading_at_activTrades:
-          'CFD Trading at ActivTrades',
+          'Forex Trading bei {0}',
+        cfd_trading_at_activTrades: 'CFD Trading bei {0}',
       },
       platform: {
-        title: 'ActivTrades Trading Platforms',
+        title: 'Handelsplattformen von {0}',
         order_options: 'order options',
         order_types: 'order types',
       },
       spread: {
-        title: 'Spreads at ActivTrades',
+        title: 'Spreads bei {0}',
       },
       service: {
-        title: 'Spreads at ActivTrades',
-        homepage: 'home page',
-        contact: 'Contact',
-        address: 'Address',
-        training_opportunities: 'training opportunities',
+        title: 'Service bei {0}',
+        homepage: 'Homepage',
+        contact: 'Kontakt',
+        address: 'Anschrift',
+        training_opportunities:
+          'Weiterbildungsmöglichkeiten',
       },
       fields: {
         // #region Broker
@@ -672,21 +672,21 @@ const en = {
         homepage: 'Homepage',
         homepage_title: 'homepage_title',
         homepage_impression: 'Impression Script',
-        broker_type: 'Broker Type',
+        broker_type: 'Broker-Typ',
         description: 'Description',
         teaser: 'Teaser Text',
         demo_url: 'Demo account',
         account_url: 'Live Account',
         maximum_leverage: 'Maximum Leverage',
-        minimum_deposit: 'Minimum Deposit',
+        minimum_deposit: 'Mindesteinlage',
         minimum_deposit_short:
-          'Minimum Deposit (Short For Overview)',
+          'Mindesteinlage (Short For Overview)',
         custodian_fees: 'Custody Fees',
         mobile_trading: 'Mobile Trading',
         phone_order: 'Telephone Trading',
-        licensed_broker: 'Licensed Broker',
+        licensed_broker: 'Lizensierter Broker',
         withholding_tax: 'Withholding Tax',
-        scalping_allowed: 'Scalping Allowed',
+        scalping_allowed: 'Scalping erlaubt',
         // #endregion
 
         // #region Upside
@@ -698,7 +698,7 @@ const en = {
         // #endregion
 
         // #region Regulatory Authority
-        regulation: 'Regulation',
+        regulation: 'Regulierung',
         regulatory_authorities: 'Regulatory Authorities',
         regulatory_authority: {
           name: 'Name',
@@ -708,7 +708,7 @@ const en = {
         // #endregion
 
         // #region Deposit Guarantee
-        deposit_guarantees: 'Deposit Guarantees',
+        deposit_guarantees: 'Einlagensicherung',
         deposit_guarantee: {
           name: 'Name',
           url: 'Homepage',
@@ -717,7 +717,7 @@ const en = {
         // #endregion
 
         // #region Certificate
-        certificates: 'Certificates',
+        certificates: 'Auszeichnungen',
         certificate: {
           name: 'Name',
           url: 'Homepage',
@@ -735,7 +735,7 @@ const en = {
         // #endregion
 
         // #region particularities
-        specialties: 'Particularities',
+        specialties: 'Besonderheiten',
         feature: {
           feature: 'Particularities Feature',
           url: 'Homepage',
@@ -959,10 +959,10 @@ const en = {
       },
       tabs: {
         broker: 'Broker',
-        overview: 'Overview',
-        characteristics: 'Characteristics',
-        platform: 'Platform',
-        markets: 'Markets',
+        overview: 'Broker Übersicht',
+        characteristics: 'Steckbrief',
+        platform: 'Plattform',
+        markets: 'Märkte',
         spreads: 'Spreads',
         service: 'Service',
         test: 'Test',
@@ -995,7 +995,7 @@ const en = {
             WITHHOLDING_TAX_1:
               'Withheld directly by the broker',
             WITHHOLDING_TAX_2:
-              'Must be paid by the customer himself',
+              'Muss vom Kunden selbst abgeführt werden',
           },
         },
         checkbox: {
@@ -1047,14 +1047,14 @@ const en = {
       text: {
         activeTraderExperience:
           "ActivTrade's trader experiences",
-        introduction: 'Broker Introduction',
-        freeDemoAccount: 'Free demo account',
-        nowTo: 'Now to {0}',
+        introduction: 'Broker Vorstellung',
+        freeDemoAccount: 'kostenloses Demokonto',
+        nowTo: 'Jetzt zu {0}',
         portrait: 'Portrait',
         rating:
-          '{0} out of {1} points from {2} reviews from traders',
-        upsides: 'Conclusion from trader reviews',
-        video: 'Broker Introduction',
+          '{0} von {1} Punkten aus {2} Bewertungen von Tradern',
+        upsides: 'Fazit aus Trader Bewertungen',
+        video: 'Broker Vorstellung',
         broker_comparison: 'Broker Comparison',
         broker_comparison_teaser:
           'Den besten Broker zu finden ist nicht immer leicht. Auf Broker-Bewertungen.de finden Sie einen Vergleich aller großen Broker sortiert nach Broker Typ, Regulierung, Trading Plattform und Einzahlungsmethoden. Dabei finden Sie zu jedem Broker User Bewertungen von echten Tradern, um ihnen die Suche zu erleichtern.',

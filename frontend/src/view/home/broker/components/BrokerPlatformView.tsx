@@ -1,18 +1,15 @@
 import { Grid } from '@mui/material';
 import { i18n } from 'src/i18n';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import AttrTypography from 'src/view/home/broker/shared/AttrTypography';
-import BrokerHomepageUrls from 'src/view/home/broker/components/BrokerHomepageUrls';
 import MDTypography from 'src/mui/components/MDTypography';
 import SingleCheckbox from 'src/view/home/broker/components/SingleCheckbox';
 
 function BrokerPlatformView({ record }) {
-  const { sidenavColor } = selectMuiSettings();
   return (
     <>
       <MDTypography variant="h4" pb={2}>
         {i18n(
-          'entities.broker.comparison.single.tradableMarketsAndFees',
+          'entities.broker.platform.title',
           record.name,
         )}
       </MDTypography>

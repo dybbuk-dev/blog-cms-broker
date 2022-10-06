@@ -1,5 +1,4 @@
 import { i18n } from 'src/i18n';
-import BrokerHomepageUrls from 'src/view/home/broker/components/BrokerHomepageUrls';
 import MDTypography from 'src/mui/components/MDTypography';
 import SingleCheckbox from 'src/view/home/broker/components/SingleCheckbox';
 
@@ -7,7 +6,7 @@ function BrokerSpreadsView({ record }) {
   return (
     <>
       <MDTypography variant="h4" pb={2}>
-        {i18n('entities.broker.spread.title')}
+        {i18n('entities.broker.spread.title', record.name)}
       </MDTypography>
       <SingleCheckbox
         record={record}

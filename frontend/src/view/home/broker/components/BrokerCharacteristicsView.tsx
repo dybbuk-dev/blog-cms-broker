@@ -1,19 +1,17 @@
 import { CardMedia } from '@mui/material';
 import { Grid } from '@mui/material';
 import { i18n } from 'src/i18n';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import BrokerAttrs from 'src/view/home/broker/shared/BrokerAttrs';
 import BrokerCheckbox from 'src/view/home/broker/shared/BrokerCheckbox';
-import BrokerHomepageUrls from 'src/view/home/broker/components/BrokerHomepageUrls';
 import HtmlView from 'src/view/shared/view/HtmlView';
 import Icon from '@mui/material/Icon';
 import MDTypography from 'src/mui/components/MDTypography';
 import Tooltip from '@mui/material/Tooltip';
 import SingleCheckbox from 'src/view/home/broker/components/SingleCheckbox';
 import AttrTypography from 'src/view/home/broker/shared/AttrTypography';
+import MDBox from 'src/mui/components/MDBox';
 
 function BrokerCharacteristicsView({ record }) {
-  const { sidenavColor } = selectMuiSettings();
   return (
     <>
       <Grid spacing={2} container>
@@ -27,9 +25,20 @@ function BrokerCharacteristicsView({ record }) {
           <MDTypography variant="h4" mt={2}>
             {i18n('entities.broker.text.introduction')}
           </MDTypography>
-          <CardMedia
-            src={`https://www.youtube.com/watch?v=${record.video?.youtube_hash}`}
-          />
+          <MDBox position="relative" pb="56.25%">
+            <iframe
+              src={`https://www.youtube.com/watch?v=${record.video?.youtube_hash}`}
+              frameBorder={0}
+              width="100%"
+              height="100%"
+              allowFullScreen
+              style={{
+                left: 0,
+                top: 0,
+                position: 'absolute',
+              }}
+            />
+          </MDBox>
         </Grid>
         <Grid md={4} xs={12} item>
           <MDTypography

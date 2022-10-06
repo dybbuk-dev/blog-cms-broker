@@ -12,7 +12,7 @@ function BrokerHeader({ record }) {
   return (
     <MDBox>
       <MDTypography variant="h2">
-        {record.name}
+        {`${record.name} Erfahrungen und Test`}
       </MDTypography>
       <MDBox
         display="flex"

@@ -38,7 +38,7 @@ const ComparisonPage = () => {
       {loading && <Spinner />}
       {dispatched && !loading && category && (
         <Layout
-          title={`Broker Vergleich Vergleich ${moment().year()} » 100% unabhängiger Test`}
+          title={`Broker Vergleich ${moment().year()} » 100% unabhängiger Test`}
           keywords={[
             'broker bewertung',
             'broker erfahrungen',
@@ -58,9 +58,7 @@ const ComparisonPage = () => {
               ]}
             />
             <MDTypography variant="h2" pb={2}>
-              {i18n(
-                'entities.broker.text.broker_comparison',
-              )}
+              Broker Vergleich
             </MDTypography>
             <HtmlViewWrapper>
               <p>
