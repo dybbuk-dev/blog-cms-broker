@@ -96,6 +96,13 @@ export default class NavigationService {
     return response.data;
   }
 
+  static async forexSchool() {
+    const response = await authAxios.get(
+      `/navigation/forex-school`,
+    );
+    return response.data;
+  }
+
   static async mostRead() {
     const response = await authAxios.get(
       `/navigation/most-read`,

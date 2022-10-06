@@ -49,6 +49,7 @@ import ScrollTop from 'src/ScrollTop';
 import categorySidebarActions from 'src/modules/category/sidebar/categorySidebarActions';
 import brokerFeaturedActions from 'src/modules/broker/featured/brokerFeaturedActions';
 import navigationMostReadActions from 'src/modules/navigation/mostRead/navigationMostReadActions';
+import navigationForexSchoolActions from 'src/modules/navigation/forexSchool/navigationForexSchoolActions';
 
 const store = configureStore();
 
@@ -79,6 +80,7 @@ function AppWithRedux(props) {
 
     dispatch(navigationHomeActions.doFetch());
     dispatch(navigationMostReadActions.doFetch());
+    dispatch(navigationForexSchoolActions.doFetch());
     dispatch(categoryFooterActions.doFetch());
     dispatch(categorySidebarActions.doFetch());
     dispatch(brokerFeaturedActions.doFetch());

@@ -6,6 +6,7 @@ import MostRead from 'src/view/home/sidebar/MostRead';
 import PageLayout from 'src/mui/examples/LayoutContainers/PageLayout';
 import PropTypes from 'prop-types';
 import TopBrokers from 'src/view/home/sidebar/TopBrokers';
+import ForexSchool from 'src/view/home/sidebar/ForexSchool';
 
 function Layout({ children }) {
   return (
@@ -28,6 +29,9 @@ function Layout({ children }) {
               </Grid>
               <Grid xs={12} item>
                 <MostRead />
+              </Grid>
+              <Grid xs={12} item>
+                <ForexSchool />
               </Grid>
             </Grid>
           </Grid>

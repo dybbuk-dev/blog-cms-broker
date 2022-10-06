@@ -1,3 +1,4 @@
+import forexSchool from 'src/modules/navigation/forexSchool/navigationForexSchoolReducers';
 import mostRead from 'src/modules/navigation/mostRead/navigationMostReadReducers';
 import home from 'src/modules/navigation/home/navigationHomeReducers';
 import list from 'src/modules/navigation/list/navigationListReducers';
@@ -8,6 +9,7 @@ import importerReducer from 'src/modules/navigation/importer/navigationImporterR
 import { combineReducers } from 'redux';
 
 export default combineReducers({
+  forexSchool,
   mostRead,
   home,
   list,

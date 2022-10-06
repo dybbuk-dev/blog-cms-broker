@@ -8,6 +8,10 @@ export default (app) => {
     `/navigation/most-read`,
     require('./navigationMostRead').default,
   );
+  app.get(
+    `/navigation/forex-school`,
+    require('./navigationForexSchool').default,
+  );
   // #endregion
   // #region back-end APIs
   app.post(
