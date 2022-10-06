@@ -58,7 +58,9 @@ const BrokerViewPage = () => {
             <PageContent>
               <Breadcrumb
                 items={[
-                  {
+                  Boolean(
+                    record.categories[0]?.category,
+                  ) && {
                     name: record.categories[0]?.category
                       ?.name,
                     route:
@@ -68,7 +70,7 @@ const BrokerViewPage = () => {
                     name: record.name,
                     route: match.url,
                   },
-                ]}
+                ].filter(Boolean)}
               />
               <BrokerHeader record={record} />
               <MDBox py={2}>
