@@ -20,10 +20,14 @@ const ComparisonPage = () => {
                   'entities.broker.text.broker_comparison',
                 )}
               </MDTypography>
-              {i18n(
-                'entities.broker.text.broker_comparison_teaser',
-              )}
-              <h3>{i18n('entities.home.top_brokers')}</h3>
+              <HtmlViewWrapper>
+                {i18n(
+                  'entities.broker.text.broker_comparison_teaser',
+                )}
+              </HtmlViewWrapper>
+              <MDTypography variant="h3">
+                {i18n('entities.home.top_brokers')}
+              </MDTypography>
               <TopBrokersView />
               <Grid xs={12} item>
                 <BrokerListTable category={0} />

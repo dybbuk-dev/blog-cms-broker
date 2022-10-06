@@ -44,7 +44,7 @@ function RatingViewItem(props) {
           defaultValue={defaultValue}
           value={value}
           icon={icon}
-          emptyIcon={icon || emptyIcon}
+          emptyIcon={emptyIcon || icon}
           max={count}
           precision={precision || (allowHalf ? 0.5 : 1)}
           ownerState={{

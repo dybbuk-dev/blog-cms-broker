@@ -21,6 +21,8 @@ function OverallRating({
         <RatingViewItem
           value={record.rating?.overall_rating}
           precision={0.1}
+          emptyIcon={<img src="/images/star-grey.png" />}
+          icon={<img src="/images/star-fill.png" />}
           size="large"
         />
       </MDBox>
