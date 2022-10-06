@@ -1,4 +1,5 @@
 import comparison from 'src/modules/broker/comparison/brokerComparisonReducers';
+import featured from 'src/modules/broker/featured/brokerFeaturedReducers';
 import top from 'src/modules/broker/top/brokerTopReducers';
 import home from 'src/modules/broker/home/brokerHomeReducers';
 import list from 'src/modules/broker/list/brokerListReducers';
@@ -10,6 +11,7 @@ import { combineReducers } from 'redux';
 
 export default combineReducers({
   comparison,
+  featured,
   top,
   home,
   list,

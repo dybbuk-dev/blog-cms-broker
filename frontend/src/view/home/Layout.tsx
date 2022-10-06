@@ -1,9 +1,10 @@
+import Category from 'src/view/home/sidebar/Category';
 import Container from '@mui/material/Container';
+import FeaturedBrokers from 'src/view/home/sidebar/FeaturedBrokers';
 import Grid from '@mui/material/Grid';
 import PageLayout from 'src/mui/examples/LayoutContainers/PageLayout';
 import PropTypes from 'prop-types';
 import TopBrokers from 'src/view/home/sidebar/TopBrokers';
-import Category from 'src/view/home/sidebar/Category';
 
 function Layout({ children }) {
   return (
@@ -17,6 +18,9 @@ function Layout({ children }) {
             <Grid spacing={2} container>
               <Grid xs={12} item>
                 <TopBrokers />
+              </Grid>
+              <Grid xs={12} item>
+                <FeaturedBrokers />
               </Grid>
               <Grid xs={12} item>
                 <Category />

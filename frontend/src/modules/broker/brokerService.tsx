@@ -84,6 +84,14 @@ export default class BrokerService {
     return response.data;
   }
 
+  static async featured() {
+    const response = await authAxios.get(
+      `/broker/featured`,
+    );
+
+    return response.data;
+  }
+
   static async top() {
     const response = await authAxios.get(`/broker/top`);
 
