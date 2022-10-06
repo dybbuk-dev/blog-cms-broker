@@ -52,6 +52,9 @@ import navigationMostReadActions from 'src/modules/navigation/mostRead/navigatio
 import navigationForexSchoolActions from 'src/modules/navigation/forexSchool/navigationForexSchoolActions';
 import navigationForexStrategyActions from 'src/modules/navigation/forexStrategy/navigationForexStrategyActions';
 
+import $ from 'jquery';
+import urlParse from 'url-parse';
+
 const store = configureStore();
 
 export default function App(props) {
@@ -175,6 +178,36 @@ function AppWithSnackbar(props) {
   useEffect(() => {
     document.documentElement.className = `${sidenavColor}-scrollbar`;
   }, [sidenavColor]);
+
+  useEffect(() => {
+    const handleOnClickA = (evt) => {
+      if (evt.target.tagName.toLowerCase() === 'a') {
+        const parsedUrl = urlParse(evt.target.href);
+        if (
+          parsedUrl.pathname === pathname &&
+          parsedUrl.hash !== ''
+        ) {
+          evt.preventDefault();
+          evt.stopPropagation();
+          evt.stopImmediatePropagation();
+          const els = $(
+            `[id='${decodeURI(
+              parsedUrl.hash.substring(1),
+            )}']`,
+          );
+          if (els.length > 0) {
+            window.scrollTo({
+              top: els.eq(0).offset().top,
+              behavior: 'smooth',
+            });
+          }
+        }
+      }
+    };
+    window.addEventListener('click', handleOnClickA);
+    return () =>
+      window.removeEventListener('click', handleOnClickA);
+  }, []);
 
   const configsButton = (
     <MDBox

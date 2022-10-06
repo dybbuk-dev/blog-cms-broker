@@ -5,41 +5,55 @@ import MDButton from 'src/mui/components/MDButton';
 import MDTypography from 'src/mui/components/MDTypography';
 import OverallRating from 'src/view/home/broker/shared/OverallRating';
 import SendIcon from '@mui/icons-material/Send';
+import lColors from 'src/mui/assets/theme/base/colors';
+import dColors from 'src/mui/assets/theme-dark/base/colors';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { Grid } from '@mui/material';
 
 function BrokerHeader({ record }) {
+  const { darkMode } = selectMuiSettings();
+  const colors = darkMode ? dColors : lColors;
   return (
-    <MDBox>
-      <MDTypography variant="h2">
+    <MDBox
+      pb={2}
+      borderBottom={`1px dashed ${colors.inputBorderColor}`}
+    >
+      <MDTypography variant="h2" mb={2}>
         {`${record.name} Erfahrungen und Test`}
       </MDTypography>
-      <MDBox
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <ImageView
-          value={record.broker_image_broker_detail_logo}
-        />
-        <MDBox
-          display="flex"
-          flexDirection="column"
-          gap={1}
-        >
-          <OverallRating record={record} />
-          <MDButton
-            variant="contained"
-            href={record.meta?.homepage}
-            color="warning"
-            target="_blank"
-            startIcon={<SendIcon />}
+      <Grid spacing={3} alignItems="center" container>
+        <Grid md={6} xs={12} item>
+          <ImageView
+            value={record.broker_image_broker_detail_logo}
+            sx={{
+              width: '100%',
+            }}
+          />
+        </Grid>
+        <Grid md={6} xs={12} item>
+          <MDBox
+            display="flex"
+            flexWrap="wrap"
+            justifyContent="flex-end"
+            gap={1}
           >
-            {i18n(
-              'entities.broker.text.nowTo',
-              record.name,
-            )}
-          </MDButton>
-        </MDBox>
-      </MDBox>
+            <OverallRating record={record} />
+            <MDButton
+              variant="contained"
+              href={record.meta?.homepage}
+              color="warning"
+              target="_blank"
+              startIcon={<SendIcon />}
+              fullWidth
+            >
+              {i18n(
+                'entities.broker.text.nowTo',
+                record.name,
+              )}
+            </MDButton>
+          </MDBox>
+        </Grid>
+      </Grid>
     </MDBox>
   );
 }

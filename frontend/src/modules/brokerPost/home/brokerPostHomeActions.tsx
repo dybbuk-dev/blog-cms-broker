@@ -26,7 +26,6 @@ const brokerPostHomeActions = {
       const rawFilter = selectors.selectRawFilter(
         getState(),
       );
-      console.log(filter);
       dispatch(
         brokerPostHomeActions.doFetch(
           filter,

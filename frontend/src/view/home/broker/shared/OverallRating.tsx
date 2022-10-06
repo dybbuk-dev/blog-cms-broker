@@ -28,7 +28,7 @@ function OverallRating({
       </MDBox>
       {!hideDescription && (
         <MDTypography
-          variant="body2"
+          variant="button"
           color="text"
           fontWeight="regular"
         >

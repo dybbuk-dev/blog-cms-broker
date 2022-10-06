@@ -148,20 +148,26 @@ function BrokerListTable(props) {
               rows.map((row) => (
                 <TableRow key={row.id}>
                   <DataTableBodyCell>
-                    <CardMedia
-                      component="img"
-                      image={
-                        row.broker_image_broker_logo[0]
-                          ?.downloadUrl
-                      }
-                      alt={row.name}
-                      sx={{
-                        margin: 0,
-                        borderRadius: 0,
-                        width: 115,
-                        height: 45,
-                      }}
-                    />
+                    <MaterialLink
+                      href={row.meta?.homepage}
+                      target="_blank"
+                      underline="hover"
+                    >
+                      <CardMedia
+                        component="img"
+                        image={
+                          row.broker_image_broker_logo[0]
+                            ?.downloadUrl
+                        }
+                        alt={row.name}
+                        sx={{
+                          margin: 0,
+                          borderRadius: 0,
+                          width: 115,
+                          height: 45,
+                        }}
+                      />
+                    </MaterialLink>
                   </DataTableBodyCell>
                   <DataTableBodyCell>
                     {row.meta?.minimum_deposit}

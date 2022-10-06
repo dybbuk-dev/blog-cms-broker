@@ -17,7 +17,9 @@ function BrokerCharacteristicsView({ record }) {
       <Grid spacing={2} container>
         <Grid xs={12} item>
           <MDTypography variant="h4" pb={2}>
-            {i18n('entities.broker.text.portrait')}
+            {`${record.name} ${i18n(
+              'entities.broker.text.portrait',
+            )}`}
           </MDTypography>
           <HtmlView value={record.meta?.description} />
         </Grid>
