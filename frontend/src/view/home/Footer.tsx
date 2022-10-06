@@ -26,7 +26,7 @@ function Footer() {
         gap={2}
         my={2}
       >
-        <MDBox p={5}>
+        <MDBox py={5}>
           <MDTypography
             variant="body2"
             fontWeight="regular"
