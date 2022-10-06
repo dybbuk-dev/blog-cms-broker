@@ -28,10 +28,10 @@ function Layout({
       />
       <Container>
         <Grid spacing={2} container>
-          <Grid lg={9} md={8} xs={12} item>
+          <Grid xl={9} lg={8} md={12} xs={12} item>
             {children}
           </Grid>
-          <Grid lg={3} md={4} xs={12} item>
+          <Grid xl={3} lg={4} md={12} xs={12} item>
             <Grid spacing={2} container>
               <Grid xs={12} item>
                 <TopBrokers />

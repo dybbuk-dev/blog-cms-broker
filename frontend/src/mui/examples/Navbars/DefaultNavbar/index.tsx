@@ -655,167 +655,164 @@ function DefaultNavbar({
   const TagRoot = MDBox;
 
   return (
-    <TagRoot sx={{ m: fixed ? 0 : 2 }}>
+    <Container>
       <MDBox
-        py={1}
-        px={{
-          xs: 4,
-          sm: transparent ? 2 : 3,
-          lg: transparent ? 0 : 2,
-        }}
-        width={`calc(100% - ${fixed ? 16 : 0}px)`}
+        pt={3}
+        pb={2}
         m={fixed ? 1 : 0}
         color={light ? 'white' : 'text'}
         position={fixed ? 'absolute' : 'relative'}
         left={0}
         zIndex={3}
       >
-        <Container>
-          <MDBox
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <MDBox component={Link} to="/">
-              <MDTypography
-                display="block"
-                component="span"
-                color="warning"
-                fontSize="32px"
-                fontWeight="bold"
-                lineHeight={1}
-              >
-                Broker-Bewertungen.de
-              </MDTypography>
-              <MDTypography
-                display="block"
-                component="span"
-                fontSize="15px"
-                fontWeight="regular"
-                lineHeight={1}
-                my={1}
-              >
-                Erfahrungen & Tests von Tradern für Trader
-                seit 2009
-              </MDTypography>
-            </MDBox>
-            <MDBox display="flex" gap={2}>
-              {[
-                {
-                  img: '/images/crowd-of-users.png',
-                  title: 'Echte Erfahrungen',
-                  desc: 'von Tradern',
-                },
-                {
-                  img: '/images/balance.png',
-                  title: '100% unabhängig',
-                  desc: 'von Tradern für Trader',
-                },
-                {
-                  img: '/images/all-infos.png',
-                  title: 'Alle Infos',
-                  desc: 'zoom FX & CFD Trading',
-                },
-              ].map(({ img, title, desc }) => (
-                <MDBox
-                  key={title}
-                  display="flex"
-                  alignItems="center"
-                  opacity={0.5}
-                  gap={1}
-                >
-                  <img src={img} height="48px" />
-                  <MDTypography
-                    color="text"
-                    fontSize="0.75rem"
-                    lineHeight={1.25}
-                  >
-                    <b>{title}</b>
-                    <br />
-                    {desc}
-                  </MDTypography>
-                </MDBox>
-              ))}
-            </MDBox>
-          </MDBox>
-          <MDBox
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <MDBox
-              color="inherit"
-              display={{ xs: 'none', lg: 'flex' }}
-              m={0}
-              p={0}
+        <MDBox
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <MDBox component={Link} to="/">
+            <MDTypography
+              display="block"
+              component="span"
+              color="warning"
+              fontSize="32px"
+              fontWeight="bold"
+              lineHeight={1}
             >
-              {renderNavbarItems}
-            </MDBox>
-            {action &&
-              (action.type === 'internal' ? (
-                <MDBox
-                  display={{
-                    xs: 'none',
-                    lg: 'inline-block',
-                  }}
-                >
-                  <MDButton
-                    component={Link}
-                    to={action.route}
-                    variant="gradient"
-                    color={
-                      action.color ? action.color : 'info'
-                    }
-                    size="small"
-                  >
-                    {action.label}
-                  </MDButton>
-                </MDBox>
-              ) : (
-                <MDBox
-                  display={{
-                    xs: 'none',
-                    lg: 'inline-block',
-                  }}
-                >
-                  <MDButton
-                    component="a"
-                    href={action.route}
-                    target="_blank"
-                    rel="noreferrer"
-                    variant="gradient"
-                    color={
-                      action.color ? action.color : 'info'
-                    }
-                    size="small"
-                    sx={{ mt: -0.3 }}
-                  >
-                    {action.label}
-                  </MDButton>
-                </MDBox>
-              ))}
-            <MDBox
-              display={{ xs: 'inline-block', lg: 'none' }}
-              lineHeight={0}
-              py={1.5}
-              pl={1.5}
-              color="inherit"
-              sx={{ cursor: 'pointer' }}
-              onClick={openMobileNavbar}
+              Broker-Bewertungen.de
+            </MDTypography>
+            <MDTypography
+              display="block"
+              component="span"
+              fontSize="15px"
+              fontWeight="regular"
+              lineHeight={1}
+              my={1}
             >
-              {mobileView && (
-                <DefaultNavbarMobile
-                  routes={routes}
-                  open={mobileNavbar}
-                />
-              )}
-            </MDBox>
+              Erfahrungen & Tests von Tradern für Trader
+              seit 2009
+            </MDTypography>
           </MDBox>
-        </Container>
+          <MDBox display="flex" gap={2}>
+            {[
+              {
+                img: '/images/crowd-of-users.png',
+                title: 'Echte Erfahrungen',
+                desc: 'von Tradern',
+              },
+              {
+                img: '/images/balance.png',
+                title: '100% unabhängig',
+                desc: 'von Tradern für Trader',
+              },
+              {
+                img: '/images/all-infos.png',
+                title: 'Alle Infos',
+                desc: 'zoom FX & CFD Trading',
+              },
+            ].map(({ img, title, desc }) => (
+              <MDBox
+                key={title}
+                display="flex"
+                alignItems="center"
+                opacity={0.5}
+                gap={1}
+              >
+                <img src={img} height="48px" />
+                <MDTypography
+                  color="text"
+                  fontSize="0.75rem"
+                  lineHeight={1.25}
+                >
+                  <b>{title}</b>
+                  <br />
+                  {desc}
+                </MDTypography>
+              </MDBox>
+            ))}
+          </MDBox>
+        </MDBox>
+        <MDBox
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          mt={1}
+        >
+          <MDBox></MDBox>
+          <MDBox
+            color="inherit"
+            flexGrow={1}
+            display={{ xs: 'none', lg: 'flex' }}
+            m={0}
+            p={0}
+          >
+            {renderNavbarItems}
+          </MDBox>
+          {action &&
+            (action.type === 'internal' ? (
+              <MDBox
+                display={{
+                  xs: 'none',
+                  lg: 'inline-block',
+                }}
+              >
+                <MDButton
+                  component={Link}
+                  to={action.route}
+                  variant="gradient"
+                  color={
+                    action.color ? action.color : 'info'
+                  }
+                  size="small"
+                >
+                  {action.label}
+                </MDButton>
+              </MDBox>
+            ) : (
+              <MDBox
+                display={{
+                  xs: 'none',
+                  lg: 'inline-block',
+                }}
+              >
+                <MDButton
+                  component="a"
+                  href={action.route}
+                  target="_blank"
+                  rel="noreferrer"
+                  variant="gradient"
+                  color={
+                    action.color ? action.color : 'info'
+                  }
+                  size="small"
+                  sx={{ mt: -0.3 }}
+                >
+                  {action.label}
+                </MDButton>
+              </MDBox>
+            ))}
+          <MDBox
+            display={{ xs: 'inline-block', lg: 'none' }}
+            lineHeight={0}
+            py={1.5}
+            pl={1.5}
+            color="inherit"
+            sx={{ cursor: 'pointer' }}
+            onClick={openMobileNavbar}
+          >
+            <Icon>{mobileNavbar ? 'close' : 'menu'}</Icon>
+          </MDBox>
+        </MDBox>
       </MDBox>
       {dropdown && dropdownMenu}
       {nestedDropdown && nestedDropdownMenu}
-    </TagRoot>
+      {mobileView && (
+        <DefaultNavbarMobile
+          routes={routes}
+          open={mobileNavbar}
+        />
+      )}
+    </Container>
   );
 }
 

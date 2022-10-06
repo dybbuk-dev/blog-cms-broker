@@ -66,15 +66,15 @@ function DefaultNavbarDropdown({
     <>
       <MDBox
         {...rest}
-        mx={1}
+        // mx={1}
         p={1}
         display="flex"
         alignItems="baseline"
         color={light ? 'white' : 'dark'}
-        opacity={light ? 1 : 0.6}
+        // opacity={light ? 1 : 0.6}
         sx={{ cursor: 'pointer', userSelect: 'none' }}
-        {...(route && routeComponent)}
-        {...(href && linkComponent)}
+        {...(!collapse && route && routeComponent)}
+        {...(!collapse && href && linkComponent)}
       >
         {icon && (
           <MDTypography
@@ -94,7 +94,7 @@ function DefaultNavbarDropdown({
           fontWeight="regular"
           textTransform="capitalize"
           color={light ? 'white' : 'dark'}
-          sx={{ fontWeight: '100%', ml: 1, mr: 0.25 }}
+          sx={{ fontWeight: '100%', mx: 1 }}
         >
           {name}
         </MDTypography>

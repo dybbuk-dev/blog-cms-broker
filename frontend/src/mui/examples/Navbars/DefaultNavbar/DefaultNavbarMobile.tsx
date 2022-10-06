@@ -29,6 +29,7 @@ import MDTypography from 'src/mui/components/MDTypography';
 
 // Material Dashboard 2 PRO React TS exampless
 import DefaultNavbarDropdown from 'src/mui/examples/Navbars/DefaultNavbar/DefaultNavbarDropdown';
+import { Card } from '@mui/material';
 
 // Declaring props types for DefaultNavbarMobile
 interface Props {
@@ -53,10 +54,10 @@ function DefaultNavbarMobile({
     ({
       name,
       icon,
-      collapse: routeCollapses,
+      children: routeCollapses,
       href,
       route,
-      collapse: navCollapse,
+      children: navCollapse,
     }: any) => (
       <DefaultNavbarDropdown
         key={name}
@@ -66,18 +67,21 @@ function DefaultNavbarMobile({
         onClick={() => handleSetCollapse(name)}
         href={href}
         route={route}
-        collapse={Boolean(navCollapse)}
+        collapse={Boolean(
+          navCollapse && navCollapse.length,
+        )}
       >
         <MDBox
           sx={{
             height: '15rem',
             maxHeight: '15rem',
             overflowY: 'scroll',
+            mx: 2,
           }}
         >
           {routeCollapses &&
             routeCollapses.map((item: any) => (
-              <MDBox key={item.name} px={2}>
+              <MDBox key={item.name}>
                 {item.collapse ? (
                   <>
                     <MDTypography
@@ -151,7 +155,7 @@ function DefaultNavbarMobile({
                       cursor: 'pointer',
                       transition: 'all 300ms linear',
                       py: 1,
-                      px: 1.625,
+                      px: 3,
 
                       '&:hover': {
                         backgroundColor: grey[200],
@@ -166,7 +170,7 @@ function DefaultNavbarMobile({
                     <MDTypography
                       display="block"
                       variant="button"
-                      fontWeight="bold"
+                      fontWeight="regular"
                       textTransform="capitalize"
                     >
                       {item.name}
@@ -197,9 +201,9 @@ function DefaultNavbarMobile({
       timeout="auto"
       unmountOnExit
     >
-      <MDBox width="calc(100% + 1.625rem)" my={2} ml={-2}>
-        {renderNavbarItems}
-      </MDBox>
+      <Card sx={{ mb: 2 }}>
+        <MDBox m={2}>{renderNavbarItems}</MDBox>
+      </Card>
     </Collapse>
   );
 }
