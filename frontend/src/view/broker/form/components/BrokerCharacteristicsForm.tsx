@@ -2,6 +2,7 @@ import { Grid, InputAdornment } from '@mui/material';
 import { i18n } from 'src/i18n';
 import brokerEnumerators from 'src/modules/broker/brokerEnumerators';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import MDBox from 'src/mui/components/MDBox';
 import BrokerCheckboxFormInput from 'src/view/broker/form/components/BrokerCheckboxFormInput';
 import CheckboxFormItem from 'src/view/shared/form/items/CheckboxFormItem';
 import GroupFormItem from 'src/view/shared/form/items/GroupFormItem';
@@ -130,6 +131,20 @@ function BrokerCharacteristicsForm(props) {
           )}
           label={i18n('entities.broker.fields.video')}
         >
+          <MDBox position="relative" pb="56.25%" mb={2}>
+            <iframe
+              src={`https://www.youtube.com/watch?v=${record.video?.youtube_hash}`}
+              frameBorder={0}
+              width="100%"
+              height="100%"
+              allowFullScreen
+              style={{
+                left: 0,
+                top: 0,
+                position: 'absolute',
+              }}
+            />
+          </MDBox>
           <InputFormItem
             name="youtube_hash"
             label={i18n(
