@@ -39,6 +39,7 @@ function TopBrokers() {
                   justifyContent="flex-start"
                   alignItems="center"
                   gap={2}
+                  mb={1}
                 >
                   <CircleNumber>{idx + 1}</CircleNumber>
                   <MDBox flexGrow={1}>
