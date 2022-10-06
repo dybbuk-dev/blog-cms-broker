@@ -1,9 +1,7 @@
 import { Grid } from '@mui/material';
 import { i18n } from 'src/i18n';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import AttrTypography from 'src/view/home/broker/shared/AttrTypography';
 import BrokerAttrs from 'src/view/home/broker/shared/BrokerAttrs';
-import BrokerHomepageUrls from 'src/view/home/broker/components/BrokerHomepageUrls';
 import BrokerImages from 'src/view/home/broker/shared/BrokerImages';
 import BrokerUpsides from 'src/view/home/broker/shared/BrokerUpsides';
 import CheckboxViewItem from 'src/view/shared/view/CheckboxViewItem';
@@ -12,7 +10,6 @@ import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 
 function BrokerOverviewView({ record }) {
-  const { sidenavColor } = selectMuiSettings();
   return (
     <>
       <Grid spacing={2} container>

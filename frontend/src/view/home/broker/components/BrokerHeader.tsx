@@ -1,5 +1,4 @@
 import { i18n } from 'src/i18n';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import ImageView from 'src/view/home/ImageView';
 import MDBox from 'src/mui/components/MDBox';
 import MDButton from 'src/mui/components/MDButton';
@@ -8,7 +7,6 @@ import OverallRating from 'src/view/home/broker/shared/OverallRating';
 import SendIcon from '@mui/icons-material/Send';
 
 function BrokerHeader({ record }) {
-  const { sidenavColor } = selectMuiSettings();
   return (
     <MDBox>
       <MDTypography variant="h2">
@@ -31,7 +29,7 @@ function BrokerHeader({ record }) {
           <MDButton
             variant="contained"
             href={record.meta?.homepage}
-            color={sidenavColor}
+            color="warning"
             target="_blank"
             startIcon={<SendIcon />}
           >

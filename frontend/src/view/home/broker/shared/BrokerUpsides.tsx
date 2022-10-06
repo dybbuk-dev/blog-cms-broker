@@ -22,7 +22,7 @@ function BrokerUpsides({ record }) {
             display="inline"
             position="absolute"
             left={0}
-            top="0.1rem"
+            top="-0.05rem"
           >
             {upside.type === 'UPSIDE' ? (
               <AddCircleIcon color="success" />
@@ -31,7 +31,7 @@ function BrokerUpsides({ record }) {
             )}
           </MDBox>
           <MDTypography
-            variant="body1"
+            variant="body2"
             fontWeight="regular"
             lineHeight="1.25"
           >

@@ -7,6 +7,8 @@ function AttachLink({ link, children }) {
   const { sidenavColor } = selectMuiSettings();
   return Boolean(link) && link.trim() !== '' ? (
     <MDTypography
+      variant="body2"
+      fontWeight="regular"
       component="span"
       color={sidenavColor}
       lineHeight={1}

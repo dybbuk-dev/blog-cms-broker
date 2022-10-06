@@ -25,7 +25,7 @@ function BrokerCheckbox({ record, field }) {
           display="inline"
           position="absolute"
           left={0}
-          top="0.1rem"
+          top="-0.05rem"
         >
           {record.checkbox[checkField] === 'PRO' ? (
             <CheckCircleIcon color="success" />

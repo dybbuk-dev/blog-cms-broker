@@ -1,7 +1,6 @@
-import React from 'react';
 import _get from 'lodash/get';
-import moment from 'moment';
 import { setLocale as setYupLocale } from 'yup';
+import moment from 'moment';
 
 let currentLanguageCode = '';
 
@@ -14,13 +13,6 @@ const languages: {
     dictionary: any;
   };
 } = {
-  en: {
-    id: 'en',
-    label: 'English',
-    flag: '/images/flags/United-States.png',
-    dateFns: null,
-    dictionary: null,
-  },
   de: {
     id: 'de',
     label: 'Deutsch',
@@ -32,12 +24,8 @@ const languages: {
 
 export async function init() {
   currentLanguageCode =
-    localStorage.getItem('language') || 'en';
+    localStorage.getItem('language') || 'de';
   setLanguageCode(currentLanguageCode);
-
-  if (currentLanguageCode === 'en') {
-    await initEn();
-  }
 
   if (currentLanguageCode === 'de') {
     await initDe();
@@ -60,20 +48,6 @@ async function initDe() {
   ).default;
 
   moment.locale('de', momentLocale);
-
-  if (language.dictionary.validation) {
-    setYupLocale(language.dictionary.validation);
-  }
-
-  return language;
-}
-
-async function initEn() {
-  const language = languages['en'];
-
-  language.dictionary = (
-    await import('src/i18n/en')
-  ).default;
 
   if (language.dictionary.validation) {
     setYupLocale(language.dictionary.validation);

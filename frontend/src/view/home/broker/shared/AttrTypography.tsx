@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function AttrTypography({ children, noIndent }) {
   return (
     <MDTypography
-      variant="body1"
+      variant="body2"
       fontWeight="regular"
       lineHeight="1.25"
       position="relative"

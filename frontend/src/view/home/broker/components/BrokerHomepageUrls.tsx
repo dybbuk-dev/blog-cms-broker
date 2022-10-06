@@ -1,12 +1,10 @@
 import { Grid } from '@mui/material';
 import { i18n } from 'src/i18n';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import MDButton from 'src/mui/components/MDButton';
 import PropTypes from 'prop-types';
 import SendIcon from '@mui/icons-material/Send';
 
 function BrokerHomepageUrls({ record }) {
-  const { sidenavColor } = selectMuiSettings();
   return (
     <>
       <Grid spacing={2} container pt={3}>
@@ -15,7 +13,7 @@ function BrokerHomepageUrls({ record }) {
             variant="contained"
             href={record.meta?.homepage}
             target="_blank"
-            color={sidenavColor}
+            color="warning"
             startIcon={<SendIcon />}
             fullWidth
           >
@@ -30,7 +28,7 @@ function BrokerHomepageUrls({ record }) {
             variant="contained"
             target="_blank"
             href={record.meta?.demo_url}
-            color="primary"
+            color="info"
             startIcon={<SendIcon />}
             fullWidth
           >
