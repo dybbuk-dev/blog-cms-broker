@@ -68,15 +68,16 @@ function BrokerListTable(props) {
         <Table>
           <MDBox component="thead">
             <TableRow>
-              <DataTableHeadCell sorted={false}>
+              <DataTableHeadCell sorted={false} px={1}>
                 {' '}
               </DataTableHeadCell>
-              <DataTableHeadCell sorted={false}>
+              <DataTableHeadCell sorted={false} px={1}>
                 {i18n(
                   'entities.broker.fields.minimum_deposit',
                 )}
               </DataTableHeadCell>
               <DataTableHeadCell
+                px={1}
                 onClick={() =>
                   doChangeSort(
                     'broker_rating.overall_reviews',
@@ -92,6 +93,7 @@ function BrokerListTable(props) {
                 {i18n('entities.brokerPost.fields.review')}
               </DataTableHeadCell>
               <DataTableHeadCell
+                px={1}
                 onClick={() =>
                   doChangeSort(
                     'broker_rating.overall_rating',
@@ -106,10 +108,11 @@ function BrokerListTable(props) {
               >
                 {i18n('entities.brokerPost.fields.rating')}
               </DataTableHeadCell>
-              <DataTableHeadCell sorted={false}>
+              <DataTableHeadCell sorted={false} px={1}>
                 {i18n('entities.broker.fields.regulation')}
               </DataTableHeadCell>
               <DataTableHeadCell
+                px={1}
                 onClick={() => doChangeSort('name')}
                 sorted={
                   sorter.field === 'name'
@@ -147,7 +150,7 @@ function BrokerListTable(props) {
             {!loading &&
               rows.map((row) => (
                 <TableRow key={row.id}>
-                  <DataTableBodyCell>
+                  <DataTableBodyCell width="auto" px={1}>
                     <MaterialLink
                       href={row.meta?.homepage}
                       target="_blank"
@@ -169,26 +172,38 @@ function BrokerListTable(props) {
                       />
                     </MaterialLink>
                   </DataTableBodyCell>
-                  <DataTableBodyCell>
+                  <DataTableBodyCell width="auto" px={1}>
                     {row.meta?.minimum_deposit}
                   </DataTableBodyCell>
-                  <DataTableBodyCell>
+                  <DataTableBodyCell width="auto" px={1}>
                     {row.rating?.overall_reviews}
                   </DataTableBodyCell>
-                  <DataTableBodyCell>
+                  <DataTableBodyCell width="auto" px={1}>
                     <RatingListItem
                       precision={0.1}
                       value={
                         row.rating?.overall_rating ?? 0
                       }
+                      emptyIcon={
+                        <img
+                          src="/images/star-grey.png"
+                          height="16px"
+                        />
+                      }
+                      icon={
+                        <img
+                          src="/images/star-fill.png"
+                          height="16px"
+                        />
+                      }
                     />
                   </DataTableBodyCell>
-                  <DataTableBodyCell>
+                  <DataTableBodyCell width="auto" px={1}>
                     {(row.regulatory_authorities || [])
                       .map((v) => v.abbreviation)
                       .join(', ')}
                   </DataTableBodyCell>
-                  <DataTableBodyCell>
+                  <DataTableBodyCell width="auto" px={1}>
                     <MaterialLink
                       component={Link}
                       to={`/erfahrungsberichte/${row.name_normalized}`}

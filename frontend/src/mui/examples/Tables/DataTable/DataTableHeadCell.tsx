@@ -57,6 +57,7 @@ function DataTableHeadCell({
       }: Theme) => ({
         borderBottom: `${borderWidth[1]} solid ${light.main}`,
       })}
+      {...rest}
     >
       <MDBox
         {...rest}
@@ -73,8 +74,8 @@ function DataTableHeadCell({
           cursor: sorted && 'pointer',
           userSelect: sorted && 'none',
           whiteSpace: noWrap ? 'nowrap' : null,
-          pr: sorted && align !== 'right' ? 2 : null,
-          pl: sorted && align === 'right' ? 2 : null,
+          pr: sorted && align !== 'right' ? 2 : 0,
+          pl: sorted && align === 'right' ? 2 : 0,
         })}
       >
         {children}

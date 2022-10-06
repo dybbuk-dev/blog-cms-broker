@@ -57,7 +57,7 @@ function DataTableBodyCell({
       <LazyLoad>
         <MDBox
           display="inline-block"
-          width="max-content"
+          width={rest.width || 'max-content'}
           color="text"
           sx={{ verticalAlign: 'middle' }}
         >
