@@ -8,8 +8,9 @@ export default async (req, res, next) => {
     ).findAndCountAll({
       filter: {
         type: 'MOST_READ',
-        orderBy: 'name_asc',
+        activated: true,
       },
+      orderBy: 'sort_asc',
     });
 
     await ApiResponseHandler.success(req, res, payload);
