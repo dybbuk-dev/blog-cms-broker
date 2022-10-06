@@ -1,12 +1,13 @@
 import Category from 'src/view/home/sidebar/Category';
 import Container from '@mui/material/Container';
 import FeaturedBrokers from 'src/view/home/sidebar/FeaturedBrokers';
+import ForexSchool from 'src/view/home/sidebar/ForexSchool';
+import ForexStrategy from 'src/view/home/sidebar/ForexStrategy';
 import Grid from '@mui/material/Grid';
 import MostRead from 'src/view/home/sidebar/MostRead';
 import PageLayout from 'src/mui/examples/LayoutContainers/PageLayout';
 import PropTypes from 'prop-types';
 import TopBrokers from 'src/view/home/sidebar/TopBrokers';
-import ForexSchool from 'src/view/home/sidebar/ForexSchool';
 
 function Layout({ children }) {
   return (
@@ -32,6 +33,9 @@ function Layout({ children }) {
               </Grid>
               <Grid xs={12} item>
                 <ForexSchool />
+              </Grid>
+              <Grid xs={12} item>
+                <ForexStrategy />
               </Grid>
             </Grid>
           </Grid>

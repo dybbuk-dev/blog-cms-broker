@@ -50,6 +50,7 @@ import categorySidebarActions from 'src/modules/category/sidebar/categorySidebar
 import brokerFeaturedActions from 'src/modules/broker/featured/brokerFeaturedActions';
 import navigationMostReadActions from 'src/modules/navigation/mostRead/navigationMostReadActions';
 import navigationForexSchoolActions from 'src/modules/navigation/forexSchool/navigationForexSchoolActions';
+import navigationForexStrategyActions from 'src/modules/navigation/forexStrategy/navigationForexStrategyActions';
 
 const store = configureStore();
 
@@ -81,6 +82,7 @@ function AppWithRedux(props) {
     dispatch(navigationHomeActions.doFetch());
     dispatch(navigationMostReadActions.doFetch());
     dispatch(navigationForexSchoolActions.doFetch());
+    dispatch(navigationForexStrategyActions.doFetch());
     dispatch(categoryFooterActions.doFetch());
     dispatch(categorySidebarActions.doFetch());
     dispatch(brokerFeaturedActions.doFetch());

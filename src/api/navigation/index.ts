@@ -12,6 +12,10 @@ export default (app) => {
     `/navigation/forex-school`,
     require('./navigationForexSchool').default,
   );
+  app.get(
+    `/navigation/forex-strategy`,
+    require('./navigationForexStrategy').default,
+  );
   // #endregion
   // #region back-end APIs
   app.post(
