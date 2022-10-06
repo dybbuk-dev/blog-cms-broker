@@ -117,6 +117,10 @@ const BrokerViewPage = () => {
                 <BrokerTabs
                   labels={[
                     'overview',
+                    {
+                      raw: true,
+                      label: `${record.name} Erfahrungen`,
+                    },
                     'characteristics',
                     'platform',
                     'markets',
@@ -127,36 +131,39 @@ const BrokerViewPage = () => {
                   onChange={handleSetTabValue}
                 />
               </MDBox>
-              <MDBox py={3}>
-                <TabPanel value={tabValue} index={0}>
-                  <BrokerOverviewView record={record} />
-                </TabPanel>
-                <TabPanel value={tabValue} index={1}>
-                  <BrokerCharacteristicsView
-                    record={record}
-                  />
-                </TabPanel>
-                <TabPanel value={tabValue} index={2}>
-                  <BrokerPlatformView record={record} />
-                </TabPanel>
-                <TabPanel value={tabValue} index={3}>
-                  <BrokerMarketsView record={record} />
-                </TabPanel>
-                <TabPanel value={tabValue} index={4}>
-                  <BrokerSpreadsView record={record} />
-                </TabPanel>
-                <TabPanel value={tabValue} index={5}>
-                  <BrokerServiceView record={record} />
-                </TabPanel>
-              </MDBox>
-              <MDBox>
-                <BrokerHomepageUrls record={record} />
-              </MDBox>
+              {tabValue !== 1 && (
+                <MDBox py={2}>
+                  <TabPanel value={tabValue} index={0}>
+                    <BrokerOverviewView record={record} />
+                  </TabPanel>
+                  <TabPanel value={tabValue} index={2}>
+                    <BrokerCharacteristicsView
+                      record={record}
+                    />
+                  </TabPanel>
+                  <TabPanel value={tabValue} index={3}>
+                    <BrokerPlatformView record={record} />
+                  </TabPanel>
+                  <TabPanel value={tabValue} index={4}>
+                    <BrokerMarketsView record={record} />
+                  </TabPanel>
+                  <TabPanel value={tabValue} index={5}>
+                    <BrokerSpreadsView record={record} />
+                  </TabPanel>
+                  <TabPanel value={tabValue} index={6}>
+                    <BrokerServiceView record={record} />
+                  </TabPanel>
+                </MDBox>
+              )}
+              <BrokerHomepageUrls record={record} />
             </PageContent>
             <PageContent>
               <BrokerPostPage
                 brokerId={record.id}
                 name={record.name}
+                middle={
+                  <BrokerHomepageUrls record={record} />
+                }
               />
             </PageContent>
             {Boolean(record.creteria) &&

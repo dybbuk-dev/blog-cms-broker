@@ -55,7 +55,7 @@ const schema = yup.object().shape({
   rating: yupFormSchemas.integer(i18n('common.rating'), {}),
 });
 
-const BrokerPostPage = ({ brokerId, name }) => {
+const BrokerPostPage = ({ brokerId, name, middle }) => {
   const { sidenavColor } = selectMuiSettings();
   const [dispatched, setDispatched] = useState(false);
   const [postRecordIdToDestroy, setPostRecordIdToDestroy] =
@@ -160,7 +160,7 @@ const BrokerPostPage = ({ brokerId, name }) => {
         {loading && <Spinner />}
         {!loading &&
           hasRows &&
-          rows.map((post) => (
+          rows.map((post, idx, arr) => (
             <MDBox key={post.id}>
               <MDBox
                 display="flex"
@@ -268,6 +268,9 @@ const BrokerPostPage = ({ brokerId, name }) => {
               >
                 <HtmlView value={post.review} />
               </MDBox>
+              {idx + 1 ===
+                Number((arr.length / 2).toFixed(0)) &&
+                middle}
             </MDBox>
           ))}
         {!loading && !hasRows && (

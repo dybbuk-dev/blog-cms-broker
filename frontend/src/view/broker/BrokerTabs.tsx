@@ -3,7 +3,7 @@ import { i18n } from 'src/i18n';
 
 interface BrokerTabsProps {
   orientation?: 'horizontal' | 'vertical';
-  labels?: string[];
+  labels?: any[];
   value?: number;
   onChange?: any;
   broker?: number;
@@ -33,12 +33,18 @@ function BrokerTabs(props: BrokerTabsProps) {
         value={value}
         onChange={onChange}
       >
-        {tabLabels.map((tabLabel) => (
-          <Tab
-            key={tabLabel}
-            label={i18n(`entities.broker.tabs.${tabLabel}`)}
-          />
-        ))}
+        {tabLabels.map((tabLabel) =>
+          Boolean(tabLabel.raw) ? (
+            <Tab key={tabLabel} label={tabLabel.label} />
+          ) : (
+            <Tab
+              key={tabLabel}
+              label={i18n(
+                `entities.broker.tabs.${tabLabel}`,
+              )}
+            />
+          ),
+        )}
       </Tabs>
     </AppBar>
   );
