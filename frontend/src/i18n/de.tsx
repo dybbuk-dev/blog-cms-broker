@@ -27,7 +27,7 @@ const en = {
     pause: 'Pause',
     rating: 'Bewertung',
     reset: 'Reset',
-    review: 'Review',
+    review: 'Erfahrungsbericht',
     save: 'Save',
     search: 'Search',
     select: 'Select',
@@ -35,7 +35,7 @@ const en = {
     spam: 'Spam',
     start: 'Start',
     view: 'View',
-    writeReview: 'Write a review',
+    writeReview: 'Erfahrungsbericht schreiben',
     yes: 'Ja',
   },
 

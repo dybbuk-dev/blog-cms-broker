@@ -92,6 +92,9 @@ function Contact() {
           Um uns eine Nachricht zukommen zu lassen benutzen
           Sie bitte das Formular.
         </MDTypography>
+        <MDTypography variant="h4" my={2}>
+          Kontakt
+        </MDTypography>
         <FormWrapper>
           <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -127,7 +130,20 @@ function Contact() {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <HtmlEditorFormItem name="content" />
+                  <HtmlEditorFormItem
+                    name="content"
+                    toolbars={[
+                      {
+                        name: 'basicstyles',
+                        groups: ['basicstyles'],
+                      },
+                      {
+                        name: 'paragraph',
+                        groups: ['list'],
+                      },
+                      { name: 'colors' },
+                    ]}
+                  />
                 </Grid>
               </Grid>
               <FormButtons>
@@ -140,7 +156,7 @@ function Contact() {
                   startIcon={<SaveIcon />}
                   size="small"
                 >
-                  {i18n('common.send')}
+                  Absenden
                 </MDButton>
               </FormButtons>
             </form>

@@ -4,7 +4,6 @@ import { getLanguageCode } from 'src/i18n';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import $ from 'jquery';
 import AuthCurrentTenant from 'src/modules/auth/authCurrentTenant';
 import config from 'src/config';
 import FormErrors from 'src/view/shared/form/formErrors';
@@ -18,6 +17,10 @@ interface HtmlEditorFormItemProps {
   required?: boolean;
   height: number;
   externalErrorMessage?: string;
+  toolbars?: {
+    name: string;
+    groups?: string[];
+  }[];
 }
 
 function HtmlEditorFormItem({
@@ -27,11 +30,17 @@ function HtmlEditorFormItem({
   required,
   height,
   externalErrorMessage,
+  toolbars,
 }: HtmlEditorFormItemProps) {
   const token = AuthToken.get();
 
-  const ckeditorConfig = {
-    extraPlugins: ['image2', 'uploadimage'],
+  const ckeditorConfig: any = {
+    extraPlugins: [
+      'image2',
+      'uploadimage',
+      'colorbutton',
+      'colordialog',
+    ],
     height,
     resize_minHeight: height,
     resize_maxHeight: height * 2,
@@ -46,6 +55,10 @@ function HtmlEditorFormItem({
       'Accept-Language': getLanguageCode(),
     },
   };
+
+  if (toolbars) {
+    ckeditorConfig.toolbarGroups = toolbars;
+  }
 
   const {
     setValue,

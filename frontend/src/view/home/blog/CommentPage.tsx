@@ -303,6 +303,17 @@ const CommentPage = ({ record }) => {
                 name="content"
                 required={true}
                 label={i18n('common.content')}
+                toolbars={[
+                  {
+                    name: 'basicstyles',
+                    groups: ['basicstyles'],
+                  },
+                  {
+                    name: 'paragraph',
+                    groups: ['list'],
+                  },
+                  { name: 'colors' },
+                ]}
               />
             </Grid>
           </Grid>

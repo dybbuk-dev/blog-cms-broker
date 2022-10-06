@@ -1,4 +1,4 @@
-import { DEFAULT_MOMENT_FORMAT_DATE_ONLY_FOR_DE } from 'src/config/common';
+import { DEFAULT_MOMENT_FORMAT_DATE_ONLY } from 'src/config/common';
 import { FormButtons } from 'src/view/shared/styles/FormWrapper';
 import { Grid, IconButton, Tooltip } from '@mui/material';
 import { i18n } from 'src/i18n';
@@ -25,7 +25,6 @@ import MDBox from 'src/mui/components/MDBox';
 import MDButton from 'src/mui/components/MDButton';
 import MDTypography from 'src/mui/components/MDTypography';
 import moment from 'moment';
-import OverallRating from 'src/view/home/broker/shared/OverallRating';
 import Pagination from 'src/view/shared/table/Pagination';
 import postDestroyActions from 'src/modules/brokerPost/destroy/brokerPostDestroyActions';
 import postReviewActions from 'src/modules/brokerPost/review/brokerPostReviewActions';
@@ -36,6 +35,7 @@ import ReviewsIcon from '@mui/icons-material/Reviews';
 import SaveIcon from '@mui/icons-material/Save';
 import selectors from 'src/modules/brokerPost/home/brokerPostHomeSelectors';
 import Spinner from 'src/view/shared/Spinner';
+import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 
 const schema = yup.object().shape({
@@ -182,7 +182,7 @@ const BrokerPostPage = ({ brokerId, name }) => {
                     {`Verfasst am: ${moment(
                       post.modified,
                     ).format(
-                      DEFAULT_MOMENT_FORMAT_DATE_ONLY_FOR_DE,
+                      DEFAULT_MOMENT_FORMAT_DATE_ONLY,
                     )}`}
                   </MDTypography>
                 </MDBox>
@@ -277,6 +277,7 @@ const BrokerPostPage = ({ brokerId, name }) => {
           </MDTypography>
         )}
       </MDBox>
+
       <Pagination
         onChange={doChangePagination}
         disabled={loading}
@@ -284,11 +285,15 @@ const BrokerPostPage = ({ brokerId, name }) => {
         entriesPerPage
         showTotalEntries
       />
-      <MDBox color="text" py={4}>
-        <MDTypography variant="h4">
-          {i18n('common.writeReview')}
-        </MDTypography>
-      </MDBox>
+
+      <MDTypography variant="h4" my={2}>
+        {i18n('entities.home.top_brokers')}
+      </MDTypography>
+      <TopBrokersView />
+
+      <MDTypography variant="h4">
+        {i18n('common.writeReview')}
+      </MDTypography>
 
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -313,6 +318,10 @@ const BrokerPostPage = ({ brokerId, name }) => {
               <RatingFormItem
                 color={sidenavColor}
                 name="rating"
+                emptyIcon={
+                  <img src="/images/star-grey.png" />
+                }
+                icon={<img src="/images/star-fill.png" />}
                 label={i18n('common.rating')}
               />
             </Grid>
@@ -320,6 +329,18 @@ const BrokerPostPage = ({ brokerId, name }) => {
               <HtmlEditorFormItem
                 name="review"
                 required={true}
+                label={i18n('common.review')}
+                toolbars={[
+                  {
+                    name: 'basicstyles',
+                    groups: ['basicstyles'],
+                  },
+                  {
+                    name: 'paragraph',
+                    groups: ['list'],
+                  },
+                  { name: 'colors' },
+                ]}
               />
             </Grid>
           </Grid>

@@ -27,17 +27,19 @@ function HomeViewPage(props) {
     >
       <PageContent>
         <Grid spacing={2} container>
-          <MDTypography variant="h2" color="text">
-            {i18n('entities.home.title')}
-          </MDTypography>
-          <MDTypography variant="h3" color="text">
-            {i18n('entities.home.subtitle')}
-          </MDTypography>
           <Grid xs={12} item>
+            <MDTypography variant="h2">
+              {i18n('entities.home.title')}
+            </MDTypography>
+            <MDTypography variant="h3">
+              {i18n('entities.home.subtitle')}
+            </MDTypography>
             <HtmlViewWrapper>
               <p>{i18n('entities.home.description')}</p>
-              <h3>{i18n('entities.home.top_brokers')}</h3>
             </HtmlViewWrapper>
+            <MDTypography variant="h4" my={2}>
+              {i18n('entities.home.top_brokers')}
+            </MDTypography>
             <TopBrokersView />
             <HtmlViewWrapper>
               <p>
