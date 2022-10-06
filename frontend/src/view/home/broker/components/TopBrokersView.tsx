@@ -37,7 +37,7 @@ function TopBrokersView() {
                   display="flex"
                   flexGrow={1}
                   flexDirection="row"
-                  gap={1}
+                  gap={2}
                 >
                   <MaterialLink
                     href={row.meta?.homepage}
@@ -49,29 +49,41 @@ function TopBrokersView() {
                       }
                       sx={{
                         width: '250px',
+                        objectFit: 'contain',
                       }}
                     />
                   </MaterialLink>
-                  <OverallRating
-                    record={row}
-                    hideDescription
-                    hidePercent
+                  <ImageView
+                    value={
+                      row.broker_image_broker_regulation_image
+                    }
+                    sx={{
+                      objectFit: 'contain',
+                    }}
                   />
                   <MDBox
                     display="flex"
-                    alignItems="center"
-                    gap={1}
+                    flexDirection="column"
+                    justifyContent="center"
+                    mb={0.4}
                   >
+                    <OverallRating
+                      record={row}
+                      hideDescription
+                      hidePercent
+                    />
                     <MDTypography
-                      variant="body2"
+                      variant="button"
+                      color="text"
                       fontWeight="regular"
+                      lineHeight={1}
                     >
                       <MaterialLink
                         component={Link}
                         to={`/erfahrungsberichte/${row.name_normalized}`}
                         underline="hover"
                       >
-                        {row.name}
+                        {`${row.rating?.overall_reviews} Erfahrungsberichte lesen`}
                       </MaterialLink>
                     </MDTypography>
                   </MDBox>
