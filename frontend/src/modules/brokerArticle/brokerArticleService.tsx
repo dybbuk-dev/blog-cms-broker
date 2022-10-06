@@ -66,6 +66,17 @@ export default class BrokerArticleService {
     return response.data;
   }
 
+  static async findByURL(url) {
+    const response = await authAxios.post(
+      '/broker-article',
+      {
+        url,
+      },
+    );
+
+    return response.data;
+  }
+
   static async find(id) {
     const tenantId = AuthCurrentTenant.get();
 
@@ -109,15 +120,6 @@ export default class BrokerArticleService {
       {
         params,
       },
-    );
-
-    return response.data;
-  }
-
-  static async findByFilter(filter) {
-    const response = await authAxios.get(
-      `/broker-article`,
-      filter,
     );
 
     return response.data;

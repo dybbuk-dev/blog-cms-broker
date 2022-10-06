@@ -1,32 +1,32 @@
 import actions from 'src/modules/brokerArticle/home/brokerArticleHomeActions';
 
 const initialData = {
-  initLoading: false,
+  loading: false,
   record: null,
 };
 
 export default (state = initialData, { type, payload }) => {
-  if (type === actions.INIT_STARTED) {
+  if (type === actions.FIND_STARTED) {
     return {
       ...state,
       record: null,
-      initLoading: true,
+      loading: true,
     };
   }
 
-  if (type === actions.INIT_SUCCESS) {
+  if (type === actions.FIND_SUCCESS) {
     return {
       ...state,
       record: payload,
-      initLoading: false,
+      loading: false,
     };
   }
 
-  if (type === actions.INIT_ERROR) {
+  if (type === actions.FIND_ERROR) {
     return {
       ...state,
       record: null,
-      initLoading: false,
+      loading: false,
     };
   }
 

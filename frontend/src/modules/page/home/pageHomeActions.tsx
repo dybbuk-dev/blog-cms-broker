@@ -1,6 +1,6 @@
-import { getHistory } from 'src/modules/store';
 import Errors from 'src/modules/shared/error/errors';
 import PageService from 'src/modules/page/pageService';
+import brokerArticleHomeActions from 'src/modules/brokerArticle/home/brokerArticleHomeActions';
 
 const prefix = 'PAGE_HOME';
 
@@ -19,16 +19,13 @@ const pageHomeActions = {
 
       if (record === '') {
         record = null;
+        dispatch(brokerArticleHomeActions.doFind(url));
       }
 
       dispatch({
         type: pageHomeActions.FIND_SUCCESS,
         payload: record,
       });
-
-      if (!record) {
-        getHistory().push('/404');
-      }
     } catch (error) {
       Errors.handle(error);
 

@@ -8,6 +8,7 @@ import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import SequelizeRepository from './sequelizeRepository';
 import author from '../models/author';
 import AuthorRepository from './authorRepository';
+import BrokerRepository from './brokerRepository';
 
 const Op = Sequelize.Op;
 
@@ -158,6 +159,41 @@ class BrokerArticleRepository {
 
     if (!record) {
       throw new Error404();
+    }
+
+    return this._fillWithRelationsAndFiles(record, options);
+  }
+
+  static async findByURL(url, options: IRepositoryOptions) {
+    const transaction =
+      SequelizeRepository.getTransaction(options);
+
+    const els = url.split(/\//);
+
+    const broker = await BrokerRepository.count(
+      { name_normalized: els[1], activated: true },
+      options,
+    );
+
+    if (!Boolean(broker)) {
+      return null;
+    }
+
+    const record =
+      await options.database.broker_article.findOne({
+        where: {
+          name_normalized: els[2],
+          activated: true,
+        },
+        include: this.includes(options, false),
+        transaction,
+      });
+
+    if (
+      !record ||
+      record.broker.name_normalized !== els[1]
+    ) {
+      return null;
     }
 
     return this._fillWithRelationsAndFiles(record, options);
@@ -412,39 +448,6 @@ class BrokerArticleRepository {
         options,
       );
     return output;
-  }
-
-  static async findByFilter(
-    filter,
-    options: IRepositoryOptions,
-  ) {
-    const transaction =
-      SequelizeRepository.getTransaction(options);
-    const include = [
-      {
-        model: options.database.author,
-        as: 'author',
-        include: {
-          model: options.database.file,
-          as: 'author_image',
-          separate: true,
-        },
-      },
-    ];
-    const record =
-      await options.database.broker_article.findOne({
-        where: {
-          ...filter,
-        },
-        include,
-        transaction,
-      });
-
-    if (!record) {
-      throw new Error404();
-    }
-
-    return this._fillWithRelationsAndFiles(record, options);
   }
 }
 

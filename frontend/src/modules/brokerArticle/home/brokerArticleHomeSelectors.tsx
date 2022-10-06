@@ -7,13 +7,12 @@ const selectRecord = createSelector(
   (raw) => raw.record,
 );
 
-const selectInitLoading = createSelector(
-  [selectRaw],
-  (raw) => Boolean(raw.initLoading),
+const selectLoading = createSelector([selectRaw], (raw) =>
+  Boolean(raw.loading),
 );
 
 const brokerArticleHomeSelectors = {
-  selectInitLoading,
+  selectLoading,
   selectRecord,
   selectRaw,
 };

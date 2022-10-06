@@ -216,6 +216,7 @@ class BlogRepository {
         name_normalized: url.substring(
           url.lastIndexOf('/') + 1,
         ),
+        activated: true,
       },
       include,
       transaction,

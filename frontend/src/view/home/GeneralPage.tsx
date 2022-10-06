@@ -16,6 +16,7 @@ import Spinner from 'src/view/shared/Spinner';
 import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
 import Breadcrumb from 'src/view/home/Breadcrumb';
 import moment from 'moment';
+import brokerArticleHomeSelectors from 'src/modules/brokerArticle/home/brokerArticleHomeSelectors';
 
 const GeneralPage = () => {
   const [dispatched, setDispatched] = useState(false);
@@ -27,7 +28,6 @@ const GeneralPage = () => {
   const loadingCategory = useSelector(
     categoryHomeSelectors.selectLoading,
   );
-
   const category = useSelector(
     categoryHomeSelectors.selectRecord,
   );
@@ -37,7 +37,15 @@ const GeneralPage = () => {
   );
   const page = useSelector(pageHomeSelectors.selectRecord);
 
-  const loading = loadingCategory || loadingPage;
+  const loadingArticle = useSelector(
+    brokerArticleHomeSelectors.selectLoading,
+  );
+  const brokerArticle = useSelector(
+    brokerArticleHomeSelectors.selectRecord,
+  );
+
+  const loading =
+    loadingCategory || loadingPage || loadingArticle;
 
   useEffect(() => {
     dispatch(categoryHomeActions.doFind(match.url));
@@ -109,12 +117,54 @@ const GeneralPage = () => {
             </PageContent>
             <AuthorView value={page.author} />
             <PageContent>
-              <h3>{i18n('entities.home.top_brokers')}</h3>
+              <MDTypography variant="h4" mb={2}>
+                {i18n('entities.home.top_brokers')}
+              </MDTypography>
               <TopBrokersView />
             </PageContent>
           </MDBox>
         </Layout>
       )}
+      {dispatched &&
+        !loading &&
+        !category &&
+        !page &&
+        brokerArticle && (
+          <Layout
+            title={brokerArticle.pagetitle}
+            keywords={[brokerArticle.metakeywords]}
+            description={brokerArticle.metadescription}
+          >
+            <MDBox
+              display="flex"
+              flexDirection="column"
+              gap={2}
+            >
+              <PageContent>
+                <Breadcrumb
+                  items={[
+                    {
+                      name: brokerArticle.broker.name,
+                      route: `/erfahrungsberichte/${brokerArticle.broker.name_normalized}`,
+                    },
+                    {
+                      name: brokerArticle.name,
+                      route: `/${brokerArticle.broker.name_normalized}/${brokerArticle.name_normalized}`,
+                    },
+                  ]}
+                />
+                <HtmlView value={brokerArticle.content} />
+              </PageContent>
+              <AuthorView value={brokerArticle.author} />
+              <PageContent>
+                <MDTypography variant="h4" mb={2}>
+                  {i18n('entities.home.top_brokers')}
+                </MDTypography>
+                <TopBrokersView />
+              </PageContent>
+            </MDBox>
+          </Layout>
+        )}
     </>
   );
 };

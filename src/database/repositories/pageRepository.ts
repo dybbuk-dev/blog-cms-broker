@@ -250,6 +250,7 @@ class PageRepository {
       (await options.database.page.findOne({
         where: {
           navigation_id: navigation.id,
+          activated: true,
         },
         include,
         transaction,
@@ -259,6 +260,7 @@ class PageRepository {
       record = await options.database.page.findOne({
         where: {
           link: url,
+          activated: true,
         },
         include,
         transaction,

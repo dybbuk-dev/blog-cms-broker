@@ -1,34 +1,41 @@
+import { getHistory } from 'src/modules/store';
 import BrokerArticleService from 'src/modules/brokerArticle/brokerArticleService';
 import Errors from 'src/modules/shared/error/errors';
 
-const prefix = 'BROKER_HOME';
+const prefix = 'BROKER_ARTICLE_HOME';
 
 const brokerArticleHomeActions = {
-  INIT_STARTED: `${prefix}_INIT_STARTED`,
-  INIT_SUCCESS: `${prefix}_INIT_SUCCESS`,
-  INIT_ERROR: `${prefix}_INIT_ERROR`,
+  FIND_STARTED: `${prefix}_FIND_STARTED`,
+  FIND_SUCCESS: `${prefix}_FIND_SUCCESS`,
+  FIND_ERROR: `${prefix}_FIND_ERROR`,
 
-  doInit: (filter) => async (dispatch) => {
+  doFind: (url) => async (dispatch) => {
     try {
       dispatch({
-        type: brokerArticleHomeActions.INIT_STARTED,
+        type: brokerArticleHomeActions.FIND_STARTED,
       });
 
-      let record = {};
-
-      record = await BrokerArticleService.findByFilter(
-        filter,
+      let record = await BrokerArticleService.findByURL(
+        url,
       );
 
+      if (record === '') {
+        record = null;
+      }
+
       dispatch({
-        type: brokerArticleHomeActions.INIT_SUCCESS,
+        type: brokerArticleHomeActions.FIND_SUCCESS,
         payload: record,
       });
+
+      if (!record) {
+        getHistory().push('/404');
+      }
     } catch (error) {
       Errors.handle(error);
 
       dispatch({
-        type: brokerArticleHomeActions.INIT_ERROR,
+        type: brokerArticleHomeActions.FIND_ERROR,
       });
     }
   },

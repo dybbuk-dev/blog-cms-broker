@@ -129,21 +129,21 @@ export default class BrokerArticleService {
   }
 
   async findById(id) {
-    return BrokerArticleRepository.findById(
+    return await BrokerArticleRepository.findById(
       id,
       this.options,
     );
   }
 
-  async findByFilter(filter) {
-    return BrokerArticleRepository.findByFilter(
-      filter,
+  async findByURL(url) {
+    return await BrokerArticleRepository.findByURL(
+      url,
       this.options,
     );
   }
 
   async findAllAutocomplete(search, limit) {
-    return BrokerArticleRepository.findAllAutocomplete(
+    return await BrokerArticleRepository.findAllAutocomplete(
       search,
       limit,
       this.options,
@@ -151,7 +151,7 @@ export default class BrokerArticleService {
   }
 
   async findAndCountAll(args) {
-    return BrokerArticleRepository.findAndCountAll(
+    return await BrokerArticleRepository.findAndCountAll(
       args,
       this.options,
     );
@@ -177,7 +177,7 @@ export default class BrokerArticleService {
       importHash,
     };
 
-    return this.create(dataToCreate);
+    return await this.create(dataToCreate);
   }
 
   async _isImportHashExistent(importHash) {
