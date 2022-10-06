@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import AuthorView from 'src/view/shared/view/AuthorView';
+import Breadcrumb from 'src/view/home/Breadcrumb';
 import BrokerCharacteristicsView from 'src/view/home/broker/components/BrokerCharacteristicsView';
 import BrokerHeader from 'src/view/home/broker/components/BrokerHeader';
 import BrokerHomepageUrls from 'src/view/home/broker/components/BrokerHomepageUrls';
@@ -22,6 +23,7 @@ import PageContent from 'src/view/shared/view/PageContent';
 import Spinner from 'src/view/shared/Spinner';
 import TabPanel from 'src/view/shared/tab/TabPanel';
 import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
+import categoriesListData from 'src/mui/layouts/pages/rtl/data/categoriesListData';
 
 const BrokerViewPage = () => {
   const [dispatched, setDispatched] = useState(false);
@@ -54,6 +56,20 @@ const BrokerViewPage = () => {
         {dispatched && !loading && record && (
           <>
             <PageContent>
+              <Breadcrumb
+                items={[
+                  {
+                    name: record.categories[0]?.category
+                      ?.name,
+                    route:
+                      record.categories[0]?.category?.link,
+                  },
+                  {
+                    name: record.name,
+                    route: match.url,
+                  },
+                ]}
+              />
               <BrokerHeader record={record} />
               <MDBox py={2}>
                 <BrokerTabs

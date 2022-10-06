@@ -14,6 +14,8 @@ import PageContent from 'src/view/shared/view/PageContent';
 import pageHomeSelectors from 'src/modules/page/home/pageHomeSelectors';
 import Spinner from 'src/view/shared/Spinner';
 import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
+import Breadcrumb from 'src/view/home/Breadcrumb';
+
 const GeneralPage = () => {
   const [dispatched, setDispatched] = useState(false);
 
@@ -47,6 +49,14 @@ const GeneralPage = () => {
         {dispatched && !loading && category && (
           <>
             <PageContent>
+              <Breadcrumb
+                items={[
+                  {
+                    name: category.name,
+                    route: category.link,
+                  },
+                ]}
+              />
               <MDTypography variant="h2">
                 {category.title}
               </MDTypography>
@@ -64,6 +74,7 @@ const GeneralPage = () => {
         {dispatched && !loading && !category && page && (
           <>
             <PageContent>
+              <Breadcrumb />
               <HtmlView value={page.body} />
             </PageContent>
             <AuthorView value={page.author} />
