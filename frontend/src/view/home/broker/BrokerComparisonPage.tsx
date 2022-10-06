@@ -112,7 +112,11 @@ function BrokerComparePage(props) {
   }, [valueA, valueB]);
 
   return (
-    <Layout>
+    <Layout
+      title={i18n('entities.broker.comparison.title')}
+      keywords={['forex', 'cfd', 'broker', 'vergleich']}
+      description="Vergleichen Sie Forex- und CFD-Broker miteinander und finden Sie so den besten Broker für Ihre Bedürfnisse."
+    >
       <PageContent>
         <MDTypography variant="h2">
           {i18n('entities.broker.comparison.title')}

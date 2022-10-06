@@ -7,7 +7,6 @@ import actions from 'src/modules/broker/home/brokerHomeActions';
 import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
 import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
 import MaterialLink from '@mui/material/Link';
-import MDBadgeDot from 'src/mui/components/MDBadgeDot';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import Pagination from 'src/view/shared/table/Pagination';

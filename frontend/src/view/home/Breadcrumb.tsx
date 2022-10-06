@@ -1,4 +1,5 @@
 import { Link, useRouteMatch } from 'react-router-dom';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useSelector } from 'react-redux';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import MaterialLink from '@mui/material/Link';
@@ -8,6 +9,7 @@ import navigationHomeSelectors from 'src/modules/navigation/home/navigationHomeS
 import PropTypes from 'prop-types';
 
 function Breadcrumb({ items }) {
+  const { sidenavColor } = selectMuiSettings();
   const match = useRouteMatch();
   const loading = useSelector(
     navigationHomeSelectors.selectLoading,
@@ -37,7 +39,7 @@ function Breadcrumb({ items }) {
       mb={2}
     >
       {Boolean(navItems.length) &&
-        result.map((item, idx) => (
+        result.map((item, idx, arr) => (
           <MDBox
             key={item.route}
             display="flex"
@@ -50,7 +52,11 @@ function Breadcrumb({ items }) {
             )}
             <MDTypography
               variant="body2"
-              color="text"
+              color={
+                idx + 1 !== arr.length
+                  ? sidenavColor
+                  : 'text'
+              }
               fontWeight="regular"
             >
               <MaterialLink

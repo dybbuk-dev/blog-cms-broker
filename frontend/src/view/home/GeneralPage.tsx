@@ -15,6 +15,7 @@ import pageHomeSelectors from 'src/modules/page/home/pageHomeSelectors';
 import Spinner from 'src/view/shared/Spinner';
 import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
 import Breadcrumb from 'src/view/home/Breadcrumb';
+import moment from 'moment';
 
 const GeneralPage = () => {
   const [dispatched, setDispatched] = useState(false);
@@ -43,11 +44,25 @@ const GeneralPage = () => {
   }, [match.url]);
 
   return (
-    <Layout>
-      <MDBox display="flex" flexDirection="column" gap={2}>
-        {loading && <Spinner />}
-        {dispatched && !loading && category && (
-          <>
+    <>
+      {loading && <Spinner />}
+      {dispatched && !loading && category && (
+        <Layout
+          title={`${
+            category.title
+          } Vergleich ${moment().year()} » 100% unabhängiger Test`}
+          keywords={[category.name, 'Vergleich', 'Test']}
+          description={`100% unabhängiger ${
+            category.title
+          } Vergleich ✚✚ Über ${category.count ?? 0} ${
+            category.title
+          } im Test mit Erfahrungsberichten von Tradern ➔ Jetzt lesen!`}
+        >
+          <MDBox
+            display="flex"
+            flexDirection="column"
+            gap={2}
+          >
             <PageContent>
               <Breadcrumb
                 items={[
@@ -63,16 +78,30 @@ const GeneralPage = () => {
               {category.teaser && (
                 <HtmlView value={category.teaser} />
               )}
+              <MDTypography variant="h4" my={2}>
+                {i18n('entities.home.top_brokers')}
+              </MDTypography>
+              <TopBrokersView />
               <BrokerListTable category={category.id} />
               {category.description && (
                 <HtmlView value={category.description} />
               )}
             </PageContent>
             <AuthorView value={category.author} />
-          </>
-        )}
-        {dispatched && !loading && !category && page && (
-          <>
+          </MDBox>
+        </Layout>
+      )}
+      {dispatched && !loading && !category && page && (
+        <Layout
+          title={page.title}
+          keywords={[page.meta_keywords]}
+          description={page.meta_description}
+        >
+          <MDBox
+            display="flex"
+            flexDirection="column"
+            gap={2}
+          >
             <PageContent>
               <Breadcrumb />
               <HtmlView value={page.body} />
@@ -82,10 +111,10 @@ const GeneralPage = () => {
               <h3>{i18n('entities.home.top_brokers')}</h3>
               <TopBrokersView />
             </PageContent>
-          </>
-        )}
-      </MDBox>
-    </Layout>
+          </MDBox>
+        </Layout>
+      )}
+    </>
   );
 };
 

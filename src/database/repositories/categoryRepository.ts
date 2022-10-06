@@ -8,6 +8,8 @@ import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import CategoryDescriptionRepository from './categoryDescriptionRepository';
 import { orderByUtils } from '../utils/orderByUtils';
 import AuthorRepository from './authorRepository';
+import BrokerRepository from './brokerRepository';
+import BrokersCategoryRepository from './brokersCategoryRepository';
 
 const Op = Sequelize.Op;
 
@@ -192,6 +194,33 @@ class CategoryRepository {
       transaction,
     });
 
+    const whereAnd: Array<any> = [{ activated: true }];
+
+    if (record) {
+      whereAnd.push({
+        id: {
+          [Op.in]:
+            await BrokersCategoryRepository.filterBrokerIdsByCatId(
+              record.id,
+              options,
+            ),
+        },
+      });
+    }
+
+    const where = { [Op.and]: whereAnd };
+
+    const count = await BrokerRepository.count(
+      where,
+      options,
+    );
+
+    if (url === '/broker-vergleich') {
+      return {
+        count,
+      };
+    }
+
     if (!record) {
       return null;
     }
@@ -203,6 +232,8 @@ class CategoryRepository {
         },
         transaction,
       });
+
+    record.dataValues.count = count;
 
     record.dataValues = {
       ...record.dataValues,

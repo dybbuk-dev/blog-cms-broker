@@ -23,7 +23,8 @@ import PageContent from 'src/view/shared/view/PageContent';
 import Spinner from 'src/view/shared/Spinner';
 import TabPanel from 'src/view/shared/tab/TabPanel';
 import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
-import categoriesListData from 'src/mui/layouts/pages/rtl/data/categoriesListData';
+import MDTypography from 'src/mui/components/MDTypography';
+import moment from 'moment';
 
 const BrokerViewPage = () => {
   const [dispatched, setDispatched] = useState(false);
@@ -39,6 +40,41 @@ const BrokerViewPage = () => {
     brokerViewSelectors.selectRecord,
   );
 
+  let title = '';
+  let keywords = ['erfahrungen', 'bewertungen', 'test'];
+  let description = null;
+
+  if (record) {
+    keywords.unshift(record.name);
+    const stars = [];
+    for (
+      let i = 0;
+      i <
+      Number(
+        (record.rating?.overall_rating ?? 0).toFixed(0),
+      );
+      i++, stars.push('✪')
+    );
+    title = `${
+      record.name
+    } Erfahrungen ${moment().year()} » unabhängiger Test`;
+    description = record.is_broker
+      ? `${
+          record.name
+        } Erfahrungen » Fazit von Tradern: ${stars.join(
+          '',
+        )} aus ${
+          record.rating?.overall_reviews ?? 0
+        } Bewertungen » Unser Test zu Spreads ✚ Plattform ✚ Orderausführung ✚ Service ➔ Jetzt lesen!`
+      : `${
+          record.name
+        } Erfahrungen & Test » Fazit von Tradern: ${stars.join(
+          '',
+        )} aus ${
+          record.rating?.overall_reviews ?? 0
+        } Bewertungen ➔ Jetzt lesen!`;
+  }
+
   useEffect(() => {
     dispatch(brokerViewActions.doFind(match.url));
     setDispatched(true);
@@ -50,7 +86,11 @@ const BrokerViewPage = () => {
     setTabValue(newValue);
 
   return (
-    <Layout>
+    <Layout
+      title={title}
+      keywords={keywords}
+      description={description}
+    >
       <MDBox display="flex" flexDirection="column" gap={2}>
         {loading && <Spinner />}
         {dispatched && !loading && record && (
@@ -114,7 +154,10 @@ const BrokerViewPage = () => {
               </MDBox>
             </PageContent>
             <PageContent>
-              <BrokerPostPage record={record.id} />
+              <BrokerPostPage
+                brokerId={record.id}
+                name={record.name}
+              />
             </PageContent>
             {Boolean(record.creteria) &&
               Boolean(record.creteria.body) && (
@@ -128,7 +171,9 @@ const BrokerViewPage = () => {
               )}
             <AuthorView value={record.author} />
             <PageContent>
-              <h3>{i18n('entities.home.top_brokers')}</h3>
+              <MDTypography variant="h3">
+                {i18n('entities.home.top_brokers')}
+              </MDTypography>
               <TopBrokersView />
               <BrokerHomepageUrls record={record} />
             </PageContent>

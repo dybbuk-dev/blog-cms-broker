@@ -1,4 +1,4 @@
-import { DEFAULT_MOMENT_FORMAT_DATE_ONLY } from 'src/config/common';
+import { DEFAULT_MOMENT_FORMAT_DATE_ONLY_FOR_DE } from 'src/config/common';
 import { FormButtons } from 'src/view/shared/styles/FormWrapper';
 import { Grid, IconButton, Tooltip } from '@mui/material';
 import { i18n } from 'src/i18n';
@@ -54,7 +54,7 @@ const schema = yup.object().shape({
   rating: yupFormSchemas.integer(i18n('common.rating'), {}),
 });
 
-const BrokerPostPage = ({ record }) => {
+const BrokerPostPage = ({ brokerId, name }) => {
   const { sidenavColor } = selectMuiSettings();
   const [dispatched, setDispatched] = useState(false);
   const [postRecordIdToDestroy, setPostRecordIdToDestroy] =
@@ -84,7 +84,7 @@ const BrokerPostPage = ({ record }) => {
   );
 
   const onSubmit = (values) => {
-    values.broker_id = record;
+    values.broker_id = brokerId;
     dispatch(brokerPostFormActions.doCreate(values));
   };
 
@@ -139,7 +139,7 @@ const BrokerPostPage = ({ record }) => {
         spam: false,
         review_required: false,
         deleted: false,
-        broker: record,
+        broker: brokerId,
       }),
     );
   }, [dispatched]);
@@ -147,9 +147,7 @@ const BrokerPostPage = ({ record }) => {
   return (
     <>
       <MDTypography variant="h2" py={3}>
-        {i18n(
-          'entities.broker.text.activeTraderExperience',
-        )}
+        {`${name} Erfahrungen von Tradern`}
       </MDTypography>
       <MDBox
         display="flex"
@@ -167,17 +165,41 @@ const BrokerPostPage = ({ record }) => {
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <MDTypography variant="h5">
-                  {`${post.name} (${moment(
-                    post.modified,
-                  ).format(
-                    DEFAULT_MOMENT_FORMAT_DATE_ONLY,
-                  )})`}
-                </MDTypography>
+                <MDBox>
+                  <MDTypography
+                    variant="h5"
+                    color="warning"
+                  >
+                    {`${name} Erfahrungen von: ${post.name}`}
+                  </MDTypography>
+                  <MDTypography
+                    variant="button"
+                    color="info"
+                    fontWeight="bold"
+                  >
+                    {`Verfasst am: ${moment(
+                      post.modified,
+                    ).format(
+                      DEFAULT_MOMENT_FORMAT_DATE_ONLY_FOR_DE,
+                    )}`}
+                  </MDTypography>
+                </MDBox>
                 <MDBox display="flex" gap={1}>
                   <RatingViewItem
                     value={post.rating}
                     precision={0.1}
+                    emptyIcon={
+                      <img
+                        src="/images/star-grey.png"
+                        height="24px"
+                      />
+                    }
+                    icon={
+                      <img
+                        src="/images/star-fill.png"
+                        height="24px"
+                      />
+                    }
                   />
                   {hasPermissionToEdit && (
                     <>

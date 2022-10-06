@@ -19,7 +19,7 @@ function TopBrokersView() {
   );
   const rows = useSelector(brokerTopSelectors.selectRows);
   return (
-    <CardContent>
+    <>
       {loading && <Spinner />}
       {!loading && hasRows && (
         <Grid spacing={2} container>
@@ -93,7 +93,7 @@ function TopBrokersView() {
           ))}
         </Grid>
       )}
-    </CardContent>
+    </>
   );
 }
 

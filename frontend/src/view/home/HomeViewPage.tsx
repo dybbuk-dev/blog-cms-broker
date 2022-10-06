@@ -1,23 +1,30 @@
 import { Card, Grid } from '@mui/material';
-import { ISO_8601 } from 'moment';
+import { HtmlViewWrapper } from 'src/view/shared/view/HtmlView';
 import { i18n } from 'src/i18n';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import Layout from 'src/view/home/Layout';
+import MDBox from 'src/mui/components/MDBox';
 import MDButton from 'src/mui/components/MDButton';
 import MDTypography from 'src/mui/components/MDTypography';
-import Content from 'src/view/auth/styles/Content';
-import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
-import Layout from 'src/view/home/Layout';
-import HtmlView, {
-  HtmlViewWrapper,
-} from 'src/view/shared/view/HtmlView';
 import PageContent from 'src/view/shared/view/PageContent';
 import SendIcon from '@mui/icons-material/Send';
-import MDBox from 'src/mui/components/MDBox';
+import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
 
 function HomeViewPage(props) {
   const { sidenavColor } = selectMuiSettings();
   return (
-    <Layout>
+    <Layout
+      title={i18n('entities.home.title')}
+      keywords={[
+        'Broker',
+        'Erfahrungen',
+        'Bewertungen',
+        'Meinungen',
+        'Test',
+        'Kritik',
+      ]}
+      description="Ihr Bewertungsportal für Forex Broker und CFD Broker ✓Erfahrungen und Bewertungen ✓ Von Tradern für Trader ✓ Alles auf www.broker-bewertungen.de"
+    >
       <PageContent>
         <Grid spacing={2} container>
           <MDTypography variant="h2" color="text">

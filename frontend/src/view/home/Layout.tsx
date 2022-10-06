@@ -4,14 +4,25 @@ import FeaturedBrokers from 'src/view/home/sidebar/FeaturedBrokers';
 import ForexSchool from 'src/view/home/sidebar/ForexSchool';
 import ForexStrategy from 'src/view/home/sidebar/ForexStrategy';
 import Grid from '@mui/material/Grid';
+import Meta from 'src/view/home/Meta';
 import MostRead from 'src/view/home/sidebar/MostRead';
 import PageLayout from 'src/mui/examples/LayoutContainers/PageLayout';
 import PropTypes from 'prop-types';
 import TopBrokers from 'src/view/home/sidebar/TopBrokers';
 
-function Layout({ children }) {
+function Layout({
+  title,
+  keywords,
+  description,
+  children,
+}) {
   return (
     <PageLayout fixedNavBar={false}>
+      <Meta
+        title={title}
+        keywords={keywords}
+        description={description}
+      />
       <Container>
         <Grid spacing={2} container>
           <Grid lg={9} md={8} xs={12} item>
@@ -46,6 +57,9 @@ function Layout({ children }) {
 }
 
 Layout.propTypes = {
+  title: PropTypes.string,
+  keywords: PropTypes.arrayOf(PropTypes.string),
+  description: PropTypes.string,
   children: PropTypes.any,
 };
 

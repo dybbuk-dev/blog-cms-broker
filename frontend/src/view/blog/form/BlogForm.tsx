@@ -103,8 +103,8 @@ function BlogForm(props) {
 
     return {
       pagetitle: record.pagetitle || null,
-      meta_keywords: record.metakeywords || null,
-      meta_description: record.metadescription || null,
+      metakeywords: record.metakeywords || null,
+      metadescription: record.metadescription || null,
       author: record.author,
       related_links: record.related_links,
       blog_image: record.blog_image || null,

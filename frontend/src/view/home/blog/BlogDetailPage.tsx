@@ -12,6 +12,7 @@ import MDBox from 'src/mui/components/MDBox';
 import PageContent from 'src/view/shared/view/PageContent';
 import Spinner from 'src/view/shared/Spinner';
 import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
+import Breadcrumb from 'src/view/home/Breadcrumb';
 
 const BlogDetailPage = () => {
   const [dispatched, setDispatched] = useState(false);
@@ -34,24 +35,46 @@ const BlogDetailPage = () => {
   }, [match.url]);
 
   return (
-    <Layout>
-      <MDBox display="flex" flexDirection="column" gap={2}>
-        {loading && <Spinner />}
-        {dispatched && !loading && record && (
-          <>
-            <PageContent>
-              <HtmlView value={record.content} />
-              <CommentPage record={record} />
-            </PageContent>
-            <AuthorView value={record.author} />
-            <PageContent>
-              <h3>{i18n('entities.home.top_brokers')}</h3>
-              <TopBrokersView />
-            </PageContent>
-          </>
-        )}
-      </MDBox>
-    </Layout>
+    <>
+      {loading && <Spinner />}
+      {dispatched && !loading && record && (
+        <Layout
+          title={record.name}
+          keywords={[record.metakeywords]}
+          description={record.metadescription}
+        >
+          <MDBox
+            display="flex"
+            flexDirection="column"
+            gap={2}
+          >
+            <>
+              <PageContent>
+                <Breadcrumb
+                  items={[
+                    {
+                      name: 'Broker Blog',
+                      route: '/blog',
+                    },
+                    {
+                      name: record.name,
+                      route: `/blog/${record.name_normalized}`,
+                    },
+                  ]}
+                />
+                <HtmlView value={record.content} />
+                <CommentPage record={record} />
+              </PageContent>
+              <AuthorView value={record.author} />
+              <PageContent>
+                <h3>{i18n('entities.home.top_brokers')}</h3>
+                <TopBrokersView />
+              </PageContent>
+            </>
+          </MDBox>
+        </Layout>
+      )}
+    </>
   );
 };
 
