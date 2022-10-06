@@ -663,6 +663,7 @@ class BrokerRepository {
 
     output.categories = categories;
 
+    // #region Images
     output.broker_image_broker_logo =
       await FileRepository.fillDownloadUrl(
         await record.getBroker_image_broker_logo({
@@ -686,20 +687,6 @@ class BrokerRepository {
         ),
       );
 
-    const { rows: regulatory_authorities } =
-      await BrokerRegulatoryAuthorityRepository.findAndCountAll(
-        brokerParam,
-        options,
-      );
-
-    output.regulatory_authorities =
-      regulatory_authorities || null;
-
-    if (metaOnly) {
-      return output;
-    }
-
-    // #region Images
     output.broker_image_top_broker_logo =
       await FileRepository.fillDownloadUrl(
         await record.getBroker_image_top_broker_logo({
@@ -716,6 +703,19 @@ class BrokerRepository {
         ),
       );
     // #endregion
+
+    const { rows: regulatory_authorities } =
+      await BrokerRegulatoryAuthorityRepository.findAndCountAll(
+        brokerParam,
+        options,
+      );
+
+    output.regulatory_authorities =
+      regulatory_authorities || null;
+
+    if (metaOnly) {
+      return output;
+    }
 
     const { rows: upsides } =
       await BrokerUpsideRepository.findAndCountAll(

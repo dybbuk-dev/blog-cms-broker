@@ -171,7 +171,7 @@ const BrokerViewPage = () => {
               )}
             <AuthorView value={record.author} />
             <PageContent>
-              <MDTypography variant="h3">
+              <MDTypography variant="h4" mb={2}>
                 {i18n('entities.home.top_brokers')}
               </MDTypography>
               <TopBrokersView />

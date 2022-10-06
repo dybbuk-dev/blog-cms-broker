@@ -8,7 +8,7 @@ import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import OverallRating from 'src/view/home/broker/shared/OverallRating';
 import Spinner from 'src/view/shared/Spinner';
-import ThemeColorAvatar from 'src/view/home/shared/ThemeColorAvatar';
+import CircleNumber from 'src/view/home/shared/CircleNumber';
 
 function TopBrokersView() {
   const loading = useSelector(
@@ -28,11 +28,10 @@ function TopBrokersView() {
               <MDBox
                 display="flex"
                 justifyContent="flex-start"
+                alignItems="center"
                 gap={2}
               >
-                <ThemeColorAvatar>
-                  {idx + 1}
-                </ThemeColorAvatar>
+                <CircleNumber>{idx + 1}</CircleNumber>
                 <MDBox
                   display="flex"
                   flexGrow={1}
@@ -65,7 +64,6 @@ function TopBrokersView() {
                     display="flex"
                     flexDirection="column"
                     justifyContent="center"
-                    mb={0.4}
                   >
                     <OverallRating
                       record={row}
@@ -76,7 +74,7 @@ function TopBrokersView() {
                       variant="button"
                       color="text"
                       fontWeight="regular"
-                      lineHeight={1}
+                      lineHeight={1.5}
                     >
                       <MaterialLink
                         component={Link}

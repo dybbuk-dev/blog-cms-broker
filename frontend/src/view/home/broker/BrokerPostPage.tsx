@@ -148,7 +148,7 @@ const BrokerPostPage = ({ brokerId, name }) => {
 
   return (
     <>
-      <MDTypography variant="h2" py={3}>
+      <MDTypography variant="h3" pb={3}>
         {`${name} Erfahrungen von Tradern`}
       </MDTypography>
       <MDBox
@@ -265,7 +265,6 @@ const BrokerPostPage = ({ brokerId, name }) => {
                 fontSize="1rem"
                 fontWeight="regular"
                 pt={1}
-                pl={5}
               >
                 <HtmlView value={post.review} />
               </MDBox>

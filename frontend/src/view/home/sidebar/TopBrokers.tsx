@@ -14,7 +14,7 @@ import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import OverallRating from 'src/view/home/broker/shared/OverallRating';
 import Spinner from 'src/view/shared/Spinner';
-import ThemeColorAvatar from 'src/view/home/shared/ThemeColorAvatar';
+import CircleNumber from 'src/view/home/shared/CircleNumber';
 
 function TopBrokers() {
   const { sidenavColor } = selectMuiSettings();
@@ -37,30 +37,51 @@ function TopBrokers() {
                 <MDBox
                   display="flex"
                   justifyContent="flex-start"
+                  alignItems="center"
                   gap={2}
                 >
-                  <ThemeColorAvatar>
-                    {idx + 1}
-                  </ThemeColorAvatar>
+                  <CircleNumber>{idx + 1}</CircleNumber>
+                  <MDBox flexGrow={1}>
+                    <MaterialLink
+                      href={row.meta?.homepage}
+                      target="_blank"
+                    >
+                      <MDBox
+                        position="relative"
+                        width="100%"
+                        pb="46.67%"
+                      >
+                        <ImageView
+                          value={
+                            row.broker_image_top_broker_logo
+                          }
+                          sx={{
+                            position: 'absolute',
+                            left: 0,
+                            top: 0,
+                            width: '100%',
+                            height: '100%',
+                          }}
+                        />
+                      </MDBox>
+                    </MaterialLink>
+                  </MDBox>
+                </MDBox>
+                <MDBox
+                  display="flex"
+                  justifyContent="flex-start"
+                  gap={2}
+                >
+                  <MDBox
+                    width="50px"
+                    flexShrink={0}
+                  ></MDBox>
                   <MDBox
                     display="flex"
                     flexGrow={1}
                     flexDirection="column"
                     gap={1}
                   >
-                    <MaterialLink
-                      href={row.meta?.homepage}
-                      target="_blank"
-                    >
-                      <ImageView
-                        value={
-                          row.broker_image_broker_detail_logo
-                        }
-                        sx={{
-                          width: '100%',
-                        }}
-                      />
-                    </MaterialLink>
                     <OverallRating
                       record={row}
                       hideDescription
@@ -69,6 +90,7 @@ function TopBrokers() {
                     <MDTypography
                       variant="body2"
                       fontWeight="regular"
+                      lineHeight={1}
                       color={sidenavColor}
                     >
                       <MaterialLink
@@ -76,7 +98,9 @@ function TopBrokers() {
                         to={`/erfahrungsberichte/${row.name_normalized}`}
                         underline="hover"
                       >
-                        {`${row.name} Erfahrungen`}
+                        {`${row.name
+                          .replace(/\([\w\d\s]+\)/g, '')
+                          .trim()} Erfahrungen`}
                       </MaterialLink>
                     </MDTypography>
                   </MDBox>
