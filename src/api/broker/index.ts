@@ -3,6 +3,10 @@ export default (app) => {
   app.get('/broker', require('./brokerHome').default);
   app.post('/broker', require('./brokerView').default);
   app.get(
+    '/broker/comparable',
+    require('./brokerComparable').default,
+  );
+  app.get(
     '/broker/featured',
     require('./brokerFeatured').default,
   );

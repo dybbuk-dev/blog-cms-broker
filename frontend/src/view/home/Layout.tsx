@@ -9,11 +9,14 @@ import MostRead from 'src/view/home/sidebar/MostRead';
 import PageLayout from 'src/mui/examples/LayoutContainers/PageLayout';
 import PropTypes from 'prop-types';
 import TopBrokers from 'src/view/home/sidebar/TopBrokers';
+import ComparableBrokers from 'src/view/home/sidebar/ComparableBrokers';
+import Advisors from 'src/view/home/sidebar/Advisors';
 
 function Layout({
   title,
   keywords,
   description,
+  record,
   children,
 }) {
   return (
@@ -33,6 +36,16 @@ function Layout({
               <Grid xs={12} item>
                 <TopBrokers />
               </Grid>
+              {Boolean(record) && (
+                <>
+                  <Grid xs={12} item>
+                    <ComparableBrokers record={record} />
+                  </Grid>
+                  <Grid xs={12} item>
+                    <Advisors record={record} />
+                  </Grid>
+                </>
+              )}
               <Grid xs={12} item>
                 <FeaturedBrokers />
               </Grid>
@@ -60,6 +73,7 @@ Layout.propTypes = {
   title: PropTypes.string,
   keywords: PropTypes.arrayOf(PropTypes.string),
   description: PropTypes.string,
+  record: PropTypes.any,
   children: PropTypes.any,
 };
 

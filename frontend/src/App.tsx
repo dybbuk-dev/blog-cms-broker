@@ -54,6 +54,7 @@ import navigationForexStrategyActions from 'src/modules/navigation/forexStrategy
 
 import $ from 'jquery';
 import urlParse from 'url-parse';
+import brokerComparableActions from 'src/modules/broker/comparable/brokerComparableActions';
 
 const store = configureStore();
 
@@ -88,6 +89,7 @@ function AppWithRedux(props) {
     dispatch(navigationForexStrategyActions.doFetch());
     dispatch(categoryFooterActions.doFetch());
     dispatch(categorySidebarActions.doFetch());
+    dispatch(brokerComparableActions.doFetch());
     dispatch(brokerFeaturedActions.doFetch());
     dispatch(brokerTopActions.doFetch());
   }, []);

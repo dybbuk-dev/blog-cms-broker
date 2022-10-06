@@ -27,6 +27,7 @@ const GeneralPage = () => {
   const loadingCategory = useSelector(
     categoryHomeSelectors.selectLoading,
   );
+
   const category = useSelector(
     categoryHomeSelectors.selectRecord,
   );

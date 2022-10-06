@@ -33,6 +33,7 @@ import moment from 'moment';
 import Sequelize from 'sequelize';
 import SequelizeFilterUtils from '../utils/sequelizeFilterUtils';
 import SequelizeRepository from './sequelizeRepository';
+import BlogRepository from './blogRepository';
 
 const Op = Sequelize.Op;
 
@@ -376,6 +377,32 @@ class BrokerRepository {
     if (!record) {
       throw new Error404();
     }
+
+    record.dataValues.articles = (
+      await BrokerArticleRepository.findAndCountAll(
+        {
+          filter: {
+            broker: record.id,
+          },
+        },
+        options,
+      )
+    ).rows.map((row) =>
+      lodash.pick(row, ['id', 'name', 'name_normalized']),
+    );
+
+    record.dataValues.blogs = (
+      await BlogRepository.findAndCountAll(
+        {
+          filter: {
+            broker: record.id,
+          },
+        },
+        options,
+      )
+    ).rows.map((row) =>
+      lodash.pick(row, ['id', 'name', 'name_normalized']),
+    );
 
     return this._fillWithRelationsAndFiles(
       record,

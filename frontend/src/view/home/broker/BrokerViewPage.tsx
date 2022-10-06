@@ -90,103 +90,102 @@ const BrokerViewPage = () => {
       title={title}
       keywords={keywords}
       description={description}
+      record={record}
     >
-      <MDBox display="flex" flexDirection="column" gap={2}>
-        {loading && <Spinner />}
-        {dispatched && !loading && record && (
-          <>
-            <PageContent>
-              <Breadcrumb
-                items={[
-                  Boolean(
-                    record.categories[0]?.category,
-                  ) && {
-                    name: record.categories[0]?.category
-                      ?.name,
-                    route:
-                      record.categories[0]?.category?.link,
-                  },
+      {loading && <Spinner />}
+      {dispatched && !loading && record && (
+        <MDBox
+          display="flex"
+          flexDirection="column"
+          gap={2}
+        >
+          <PageContent>
+            <Breadcrumb
+              items={[
+                Boolean(record.categories[0]?.category) && {
+                  name: record.categories[0]?.category
+                    ?.name,
+                  route:
+                    record.categories[0]?.category?.link,
+                },
+                {
+                  name: record.name,
+                  route: match.url,
+                },
+              ].filter(Boolean)}
+            />
+            <BrokerHeader record={record} />
+            <MDBox py={2}>
+              <BrokerTabs
+                labels={[
+                  'overview',
                   {
-                    name: record.name,
-                    route: match.url,
+                    raw: true,
+                    label: `${record.name} Erfahrungen`,
                   },
-                ].filter(Boolean)}
+                  'characteristics',
+                  'platform',
+                  'markets',
+                  'spreads',
+                  'service',
+                ]}
+                value={tabValue}
+                onChange={handleSetTabValue}
               />
-              <BrokerHeader record={record} />
+            </MDBox>
+            {tabValue !== 1 && (
               <MDBox py={2}>
-                <BrokerTabs
-                  labels={[
-                    'overview',
-                    {
-                      raw: true,
-                      label: `${record.name} Erfahrungen`,
-                    },
-                    'characteristics',
-                    'platform',
-                    'markets',
-                    'spreads',
-                    'service',
-                  ]}
-                  value={tabValue}
-                  onChange={handleSetTabValue}
-                />
+                <TabPanel value={tabValue} index={0}>
+                  <BrokerOverviewView record={record} />
+                </TabPanel>
+                <TabPanel value={tabValue} index={2}>
+                  <BrokerCharacteristicsView
+                    record={record}
+                  />
+                </TabPanel>
+                <TabPanel value={tabValue} index={3}>
+                  <BrokerPlatformView record={record} />
+                </TabPanel>
+                <TabPanel value={tabValue} index={4}>
+                  <BrokerMarketsView record={record} />
+                </TabPanel>
+                <TabPanel value={tabValue} index={5}>
+                  <BrokerSpreadsView record={record} />
+                </TabPanel>
+                <TabPanel value={tabValue} index={6}>
+                  <BrokerServiceView record={record} />
+                </TabPanel>
               </MDBox>
-              {tabValue !== 1 && (
-                <MDBox py={2}>
-                  <TabPanel value={tabValue} index={0}>
-                    <BrokerOverviewView record={record} />
-                  </TabPanel>
-                  <TabPanel value={tabValue} index={2}>
-                    <BrokerCharacteristicsView
-                      record={record}
-                    />
-                  </TabPanel>
-                  <TabPanel value={tabValue} index={3}>
-                    <BrokerPlatformView record={record} />
-                  </TabPanel>
-                  <TabPanel value={tabValue} index={4}>
-                    <BrokerMarketsView record={record} />
-                  </TabPanel>
-                  <TabPanel value={tabValue} index={5}>
-                    <BrokerSpreadsView record={record} />
-                  </TabPanel>
-                  <TabPanel value={tabValue} index={6}>
-                    <BrokerServiceView record={record} />
-                  </TabPanel>
+            )}
+            <BrokerHomepageUrls record={record} />
+          </PageContent>
+          <PageContent>
+            <BrokerPostPage
+              brokerId={record.id}
+              name={record.name}
+              middle={
+                <BrokerHomepageUrls record={record} />
+              }
+            />
+          </PageContent>
+          {Boolean(record.creteria) &&
+            Boolean(record.creteria.body) && (
+              <PageContent>
+                <MDBox fontSize="1rem">
+                  <HtmlView value={record.creteria?.body} />
                 </MDBox>
-              )}
-              <BrokerHomepageUrls record={record} />
-            </PageContent>
-            <PageContent>
-              <BrokerPostPage
-                brokerId={record.id}
-                name={record.name}
-                middle={
-                  <BrokerHomepageUrls record={record} />
-                }
-              />
-            </PageContent>
-            {Boolean(record.creteria) &&
-              Boolean(record.creteria.body) && (
-                <PageContent>
-                  <MDBox fontSize="1rem">
-                    <HtmlView
-                      value={record.creteria?.body}
-                    />
-                  </MDBox>
-                </PageContent>
-              )}
-            <AuthorView value={record.author} />
-            <PageContent>
-              <MDTypography variant="h4" mb={2}>
-                {i18n('entities.home.top_brokers')}
-              </MDTypography>
-              <TopBrokersView />
-              <BrokerHomepageUrls record={record} />
-            </PageContent>
-          </>
-        )}
-      </MDBox>
+              </PageContent>
+            )}
+          <AuthorView value={record.author} />
+          <PageContent>
+            <MDTypography variant="h4" mb={2}>
+              {i18n('entities.home.top_brokers')}
+            </MDTypography>
+            <TopBrokersView />
+            <BrokerHomepageUrls record={record} />
+          </PageContent>
+        </MDBox>
+      )}
     </Layout>
   );
 };

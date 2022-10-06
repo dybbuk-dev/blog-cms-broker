@@ -372,6 +372,19 @@ class BlogRepository {
         }
       });
 
+      if (filter.broker) {
+        whereAnd.push({
+          id: {
+            [Op.in]: (
+              await BlogBrokerRepository.findAndCountAll(
+                { filter: { broker_id: filter.broker } },
+                options,
+              )
+            ).rows.map((row) => row.id),
+          },
+        });
+      }
+
       ['activated'].forEach((field) => {
         if (
           filter[field] === true ||

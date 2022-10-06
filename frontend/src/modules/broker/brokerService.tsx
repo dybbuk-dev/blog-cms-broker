@@ -84,6 +84,14 @@ export default class BrokerService {
     return response.data;
   }
 
+  static async comparable() {
+    const response = await authAxios.get(
+      `/broker/comparable`,
+    );
+
+    return response.data;
+  }
+
   static async featured() {
     const response = await authAxios.get(
       `/broker/featured`,
