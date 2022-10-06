@@ -96,6 +96,13 @@ export default class NavigationService {
     return response.data;
   }
 
+  static async mostRead() {
+    const response = await authAxios.get(
+      `/navigation/most-read`,
+    );
+    return response.data;
+  }
+
   static async home() {
     const response = await authAxios.get(`/navigation`);
     return response.data;

@@ -4,6 +4,10 @@ export default (app) => {
     `/navigation`,
     require('./navigationHome').default,
   );
+  app.get(
+    `/navigation/most-read`,
+    require('./navigationMostRead').default,
+  );
   // #endregion
   // #region back-end APIs
   app.post(

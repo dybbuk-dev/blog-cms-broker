@@ -48,6 +48,7 @@ import brokerTopActions from 'src/modules/broker/top/brokerTopActions';
 import ScrollTop from 'src/ScrollTop';
 import categorySidebarActions from 'src/modules/category/sidebar/categorySidebarActions';
 import brokerFeaturedActions from 'src/modules/broker/featured/brokerFeaturedActions';
+import navigationMostReadActions from 'src/modules/navigation/mostRead/navigationMostReadActions';
 
 const store = configureStore();
 
@@ -77,6 +78,7 @@ function AppWithRedux(props) {
     setRtlCache(cacheRtl);
 
     dispatch(navigationHomeActions.doFetch());
+    dispatch(navigationMostReadActions.doFetch());
     dispatch(categoryFooterActions.doFetch());
     dispatch(categorySidebarActions.doFetch());
     dispatch(brokerFeaturedActions.doFetch());
