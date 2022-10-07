@@ -296,7 +296,9 @@ class PageRepository {
       ensureDirectoryExistence(pdfPathname);
       try {
         const fs = require('fs');
-        const conversion = require('phantom-html-to-pdf')();
+        const conversion = require('phantom-html-to-pdf')({
+          phantomPath: require('phantomjs-prebuilt').path,
+        });
         let processing = true;
         conversion(
           {
