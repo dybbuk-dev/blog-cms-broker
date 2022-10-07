@@ -1,5 +1,4 @@
 import RateLimit from 'express-rate-limit';
-import urlParse from 'url-parse';
 // import MongoStore from 'rate-limit-mongo';
 // import { getConfig } from '../config';
 
