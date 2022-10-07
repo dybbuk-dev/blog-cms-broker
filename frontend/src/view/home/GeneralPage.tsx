@@ -20,6 +20,8 @@ import pageHomeSelectors from 'src/modules/page/home/pageHomeSelectors';
 import Spinner from 'src/view/shared/Spinner';
 import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
 import config from 'src/config';
+import PageService from 'src/modules/page/pageService';
+import pageHomeActions from 'src/modules/page/home/pageHomeActions';
 
 const GeneralPage = () => {
   const { sidenavColor } = selectMuiSettings();
@@ -55,6 +57,16 @@ const GeneralPage = () => {
     dispatch(categoryHomeActions.doFind(match.url));
     setDispatched(true);
   }, [match.url]);
+
+  const handleDownloadPagePDF = () => {
+    if (page?.navigation) {
+      dispatch(
+        pageHomeActions.doDownload(
+          `${page.navigation.link}.pdf`,
+        ),
+      );
+    }
+  };
 
   return (
     <>
@@ -172,10 +184,11 @@ const GeneralPage = () => {
                     height="20px"
                   />
                   <MaterialLink
-                    href={`${config.frontendUrl.protocol}://${config.frontendUrl.host}${page.navigation.link}.pdf`}
-                    target="_blank"
+                    onClick={handleDownloadPagePDF}
+                    underline="hover"
+                    style={{ cursor: 'pointer' }}
                   >
-                    {page.name}
+                    {`${page.name} als PDF speichern`}
                   </MaterialLink>
                 </MDTypography>
               )}

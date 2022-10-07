@@ -34,6 +34,17 @@ const pageHomeActions = {
       });
     }
   },
+
+  doDownload: (url) => async (dispatch) => {
+    try {
+      const record = await PageService.findByURL(url);
+      if (record?.downloadPdf) {
+        window.location.href = record.downloadUrl;
+      }
+    } catch (error) {
+      Errors.handle(error);
+    }
+  },
 };
 
 export default pageHomeActions;

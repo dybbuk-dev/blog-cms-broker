@@ -7,6 +7,9 @@ node_modules/
 /data
 dist/
 
+/uploads/files/pages
+uploads/files/pages/
+
 *.sh
 
 # testing

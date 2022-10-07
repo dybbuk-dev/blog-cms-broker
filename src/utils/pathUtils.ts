@@ -1,4 +1,5 @@
 import appRootPath from 'app-root-path';
+import fs from 'fs';
 import path from 'path';
 
 const patterns = [
@@ -19,4 +20,15 @@ export function getRealPath(url) {
   return result
     .replace(/\//g, path.sep)
     .replace(/\\/g, path.sep);
+}
+
+export function ensureDirectoryExistence(filePath) {
+  var dirname = path.dirname(filePath);
+
+  if (fs.existsSync(dirname)) {
+    return true;
+  }
+
+  ensureDirectoryExistence(dirname);
+  fs.mkdirSync(dirname);
 }

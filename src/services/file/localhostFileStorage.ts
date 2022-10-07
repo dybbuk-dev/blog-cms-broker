@@ -1,7 +1,9 @@
 import { getConfig } from '../../config';
-import { getRealPath } from '../../utils/pathUtils';
+import {
+  ensureDirectoryExistence,
+  getRealPath,
+} from '../../utils/pathUtils';
 import Error403 from '../../errors/Error403';
-import fs from 'fs';
 import jwt from 'jsonwebtoken';
 import mv from 'mv';
 import os from 'os';
@@ -89,17 +91,6 @@ export default class LocalFileStorage {
     }
     return finalPath;
   }
-}
-
-function ensureDirectoryExistence(filePath) {
-  var dirname = path.dirname(filePath);
-
-  if (fs.existsSync(dirname)) {
-    return true;
-  }
-
-  ensureDirectoryExistence(dirname);
-  fs.mkdirSync(dirname);
 }
 
 function isPathInsideUploadDir(privateUrl) {

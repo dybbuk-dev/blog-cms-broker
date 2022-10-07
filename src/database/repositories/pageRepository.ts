@@ -11,6 +11,15 @@ import FileRepository from './fileRepository';
 import PageRelatedLinkRepository from './pageRelatedLinkRepository';
 import NavigationRepositoryEx from './extends/navigationRepositoryEx';
 import AuthorRepository from './authorRepository';
+import { PDFGenerator, PDFOptions } from 'easy-html-to-pdf';
+import { getConfig } from '../../config';
+import {
+  ensureDirectoryExistence,
+  getRealPath,
+} from '../../utils/pathUtils';
+import path from 'path';
+import LocalFileStorage from '../../services/file/localhostFileStorage';
+import slug from 'slug';
 
 const Op = Sequelize.Op;
 
@@ -222,6 +231,9 @@ class PageRepository {
     const transaction =
       SequelizeRepository.getTransaction(options);
 
+    const pdf = /.pdf$/.test(url);
+    url = url.replace(/.pdf$/, '');
+
     const navigation =
       await NavigationRepositoryEx.findByURL(url, options);
 
@@ -267,6 +279,52 @@ class PageRepository {
       });
       if (!record) {
         return null;
+      }
+    }
+
+    if (pdf && record.pdf) {
+      const privateUrl = `pages/${record.id}/${slug(
+        record.name,
+      )}.pdf`;
+      const pathname = path.join(
+        getRealPath(getConfig().FILE_STORAGE_PATH),
+        privateUrl,
+      );
+      ensureDirectoryExistence(pathname);
+      const options: PDFOptions = {
+        format: 'A4',
+        headerTemplate: '<p></p>',
+        footerTemplate: '<p></p>',
+        displayHeaderFooter: false,
+        margin: {
+          top: '40px',
+          bottom: '40px',
+          right: '40px',
+          left: '40px',
+        },
+        landscape: false,
+        printBackground: true,
+        path: pathname,
+      };
+      try {
+        await PDFGenerator.convertToPdf(
+          record.body.replace(
+            / src=\"\/files\//gi,
+            ` src="${getConfig().FRONTEND_URL}/files/`,
+          ),
+          options,
+        );
+        console.log(privateUrl);
+        return {
+          downloadPdf: true,
+          downloadUrl: await LocalFileStorage.downloadUrl(
+            privateUrl,
+          ),
+        };
+      } catch (error) {
+        console.log(error);
+        console.log(pathname);
+        throw error;
       }
     }
 
