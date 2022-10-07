@@ -64,7 +64,10 @@ function BrokerListTable(props) {
 
   return (
     <MDBox my={3}>
-      <TableContainer sx={{ boxShadow: 'none' }}>
+      <TableContainer
+        id="list-top-4-pagination"
+        sx={{ boxShadow: 'none' }}
+      >
         <Table>
           <MDBox component="thead">
             <TableRow>

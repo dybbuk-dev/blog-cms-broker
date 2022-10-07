@@ -149,8 +149,11 @@ const CommentPage = ({ record }) => {
 
   return (
     <>
-      <MDBox color="text" py={4}>
-        <MDTypography variant="h4">
+      <MDBox py={4}>
+        <MDTypography
+          id="list-top-4-pagination"
+          variant="h4"
+        >
           {i18n('common.comment') + '(' + rows.length + ')'}
         </MDTypography>
       </MDBox>

@@ -52,9 +52,9 @@ import navigationMostReadActions from 'src/modules/navigation/mostRead/navigatio
 import navigationForexSchoolActions from 'src/modules/navigation/forexSchool/navigationForexSchoolActions';
 import navigationForexStrategyActions from 'src/modules/navigation/forexStrategy/navigationForexStrategyActions';
 
-import $ from 'jquery';
 import urlParse from 'url-parse';
 import brokerComparableActions from 'src/modules/broker/comparable/brokerComparableActions';
+import ScrollTo from 'src/ScrollTo';
 
 const store = configureStore();
 
@@ -192,17 +192,7 @@ function AppWithSnackbar(props) {
           evt.preventDefault();
           evt.stopPropagation();
           evt.stopImmediatePropagation();
-          const els = $(
-            `[id='${decodeURI(
-              parsedUrl.hash.substring(1),
-            )}']`,
-          );
-          if (els.length > 0) {
-            window.scrollTo({
-              top: els.eq(0).offset().top,
-              behavior: 'smooth',
-            });
-          }
+          ScrollTo(decodeURI(parsedUrl.hash.substring(1)));
         }
       }
     };

@@ -148,7 +148,11 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
 
   return (
     <>
-      <MDTypography variant="h3" pb={3}>
+      <MDTypography
+        id="list-top-4-pagination"
+        variant="h3"
+        pb={3}
+      >
         {`${name} Erfahrungen von Tradern`}
       </MDTypography>
       <MDBox

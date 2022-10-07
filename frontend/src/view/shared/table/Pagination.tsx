@@ -6,6 +6,7 @@ import MDInput from 'src/mui/components/MDInput';
 import MDPagination from 'src/mui/components/MDPagination';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
+import ScrollTo from 'src/ScrollTo';
 
 function Pagination(props) {
   const { entriesPerPage, showTotalEntries, pagination } =
@@ -33,6 +34,7 @@ function Pagination(props) {
   };
 
   const onChangePage = (current) => {
+    ScrollTo('list-top-4-pagination');
     const pageSize = Number(
       props.pagination.pageSize || 10,
     );
@@ -188,18 +190,20 @@ function Pagination(props) {
             }
           >
             <MDPagination
+              onClick={() =>
+                canPreviousPage && onChangePage(1)
+              }
               item
-              onClick={() => onChangePage(1)}
-              disabled={!canPreviousPage}
             >
               <Icon sx={{ fontWeight: 'bold' }}>
                 first_page
               </Icon>
             </MDPagination>
             <MDPagination
+              onClick={() =>
+                canPreviousPage && onChangePage(current - 1)
+              }
               item
-              onClick={() => onChangePage(current - 1)}
-              disabled={!canPreviousPage}
             >
               <Icon sx={{ fontWeight: 'bold' }}>
                 chevron_left
@@ -225,18 +229,20 @@ function Pagination(props) {
               renderPagination
             )}
             <MDPagination
+              onClick={() =>
+                canNextPage && onChangePage(current + 1)
+              }
               item
-              onClick={() => onChangePage(current + 1)}
-              disabled={!canNextPage}
             >
               <Icon sx={{ fontWeight: 'bold' }}>
                 chevron_right
               </Icon>
             </MDPagination>
             <MDPagination
+              onClick={() =>
+                canNextPage && onChangePage(last)
+              }
               item
-              onClick={() => onChangePage(last)}
-              disabled={!canNextPage}
             >
               <Icon sx={{ fontWeight: 'bold' }}>
                 last_page
