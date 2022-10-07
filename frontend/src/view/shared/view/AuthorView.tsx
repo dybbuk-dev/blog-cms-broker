@@ -1,4 +1,5 @@
 import { Avatar } from '@mui/material';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import MDBox from 'src/mui/components/MDBox';
 import MaterialLink from '@mui/material/Link';
@@ -12,6 +13,9 @@ function AuthorView(props) {
   }
   return (
     <PageContent>
+      <Helmet>
+        <link href={value.link} rel="author" />
+      </Helmet>
       <MDBox display="flex" gap={3}>
         {value.author_image && value.author_image[0] && (
           <Avatar
