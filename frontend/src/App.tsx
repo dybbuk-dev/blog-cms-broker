@@ -51,10 +51,7 @@ import brokerFeaturedActions from 'src/modules/broker/featured/brokerFeaturedAct
 import navigationMostReadActions from 'src/modules/navigation/mostRead/navigationMostReadActions';
 import navigationForexSchoolActions from 'src/modules/navigation/forexSchool/navigationForexSchoolActions';
 import navigationForexStrategyActions from 'src/modules/navigation/forexStrategy/navigationForexStrategyActions';
-
-import urlParse from 'url-parse';
 import brokerComparableActions from 'src/modules/broker/comparable/brokerComparableActions';
-import ScrollTo from 'src/ScrollTo';
 
 const store = configureStore();
 
@@ -180,26 +177,6 @@ function AppWithSnackbar(props) {
   useEffect(() => {
     document.documentElement.className = `${sidenavColor}-scrollbar`;
   }, [sidenavColor]);
-
-  useEffect(() => {
-    const handleOnClickA = (evt) => {
-      if (evt.target.tagName.toLowerCase() === 'a') {
-        const parsedUrl = urlParse(evt.target.href);
-        if (
-          parsedUrl.pathname === pathname &&
-          parsedUrl.hash !== ''
-        ) {
-          evt.preventDefault();
-          evt.stopPropagation();
-          evt.stopImmediatePropagation();
-          ScrollTo(decodeURI(parsedUrl.hash.substring(1)));
-        }
-      }
-    };
-    window.addEventListener('click', handleOnClickA);
-    return () =>
-      window.removeEventListener('click', handleOnClickA);
-  }, []);
 
   const configsButton = (
     <MDBox

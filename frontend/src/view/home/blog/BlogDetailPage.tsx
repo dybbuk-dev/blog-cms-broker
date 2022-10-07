@@ -13,6 +13,8 @@ import PageContent from 'src/view/shared/view/PageContent';
 import Spinner from 'src/view/shared/Spinner';
 import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
 import Breadcrumb from 'src/view/home/Breadcrumb';
+import urlParse from 'url-parse';
+import ScrollTo from 'src/ScrollTo';
 
 const BlogDetailPage = () => {
   const [dispatched, setDispatched] = useState(false);
@@ -32,6 +34,23 @@ const BlogDetailPage = () => {
   useEffect(() => {
     dispatch(blogFindActions.doFind(match.url));
     setDispatched(true);
+    const handleOnClickA = (evt) => {
+      if (evt.target.tagName.toLowerCase() === 'a') {
+        const parsedUrl = urlParse(evt.target.href);
+        if (
+          parsedUrl.pathname === match.url &&
+          parsedUrl.hash !== ''
+        ) {
+          evt.preventDefault();
+          evt.stopPropagation();
+          evt.stopImmediatePropagation();
+          ScrollTo(decodeURI(parsedUrl.hash.substring(1)));
+        }
+      }
+    };
+    window.addEventListener('click', handleOnClickA);
+    return () =>
+      window.removeEventListener('click', handleOnClickA);
   }, [match.url]);
 
   return (

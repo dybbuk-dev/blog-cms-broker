@@ -25,6 +25,8 @@ import TabPanel from 'src/view/shared/tab/TabPanel';
 import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
 import MDTypography from 'src/mui/components/MDTypography';
 import moment from 'moment';
+import ScrollTo from 'src/ScrollTo';
+import urlParse from 'url-parse';
 
 const BrokerViewPage = () => {
   const [dispatched, setDispatched] = useState(false);
@@ -78,6 +80,23 @@ const BrokerViewPage = () => {
   useEffect(() => {
     dispatch(brokerViewActions.doFind(match.url));
     setDispatched(true);
+    const handleOnClickA = (evt) => {
+      if (evt.target.tagName.toLowerCase() === 'a') {
+        const parsedUrl = urlParse(evt.target.href);
+        if (
+          parsedUrl.pathname === match.url &&
+          parsedUrl.hash !== ''
+        ) {
+          evt.preventDefault();
+          evt.stopPropagation();
+          evt.stopImmediatePropagation();
+          ScrollTo(decodeURI(parsedUrl.hash.substring(1)));
+        }
+      }
+    };
+    window.addEventListener('click', handleOnClickA);
+    return () =>
+      window.removeEventListener('click', handleOnClickA);
   }, [match.url]);
 
   const [tabValue, setTabValue] = useState(0);

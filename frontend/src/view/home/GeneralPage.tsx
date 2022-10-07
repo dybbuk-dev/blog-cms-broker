@@ -22,6 +22,8 @@ import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
 import config from 'src/config';
 import PageService from 'src/modules/page/pageService';
 import pageHomeActions from 'src/modules/page/home/pageHomeActions';
+import urlParse from 'url-parse';
+import ScrollTo from 'src/ScrollTo';
 
 const GeneralPage = () => {
   const { sidenavColor } = selectMuiSettings();
@@ -56,6 +58,23 @@ const GeneralPage = () => {
   useEffect(() => {
     dispatch(categoryHomeActions.doFind(match.url));
     setDispatched(true);
+    const handleOnClickA = (evt) => {
+      if (evt.target.tagName.toLowerCase() === 'a') {
+        const parsedUrl = urlParse(evt.target.href);
+        if (
+          parsedUrl.pathname === match.url &&
+          parsedUrl.hash !== ''
+        ) {
+          evt.preventDefault();
+          evt.stopPropagation();
+          evt.stopImmediatePropagation();
+          ScrollTo(decodeURI(parsedUrl.hash.substring(1)));
+        }
+      }
+    };
+    window.addEventListener('click', handleOnClickA);
+    return () =>
+      window.removeEventListener('click', handleOnClickA);
   }, [match.url]);
 
   const handleDownloadPagePDF = () => {
