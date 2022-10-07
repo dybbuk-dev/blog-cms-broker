@@ -157,7 +157,7 @@ const GeneralPage = () => {
                       ? 'Weitere Forex Strategien'
                       : page.navigation.type === 'DOWNLOADS'
                       ? 'Weitere MetaTrader Indikatoren'
-                      : ''}
+                      : 'Weiterführende Links'}
                   </MDTypography>
                   {page.related_links.map(
                     ({ name, url }, idx) => (
