@@ -78,3 +78,8 @@ export default class DateTimeUtils {
     return rule.all();
   }
 }
+
+export const sleep = (ms: any) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });

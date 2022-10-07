@@ -11,7 +11,6 @@ import FileRepository from './fileRepository';
 import PageRelatedLinkRepository from './pageRelatedLinkRepository';
 import NavigationRepositoryEx from './extends/navigationRepositoryEx';
 import AuthorRepository from './authorRepository';
-import { PDFGenerator, PDFOptions } from 'easy-html-to-pdf';
 import { getConfig } from '../../config';
 import {
   ensureDirectoryExistence,
@@ -20,6 +19,7 @@ import {
 import path from 'path';
 import LocalFileStorage from '../../services/file/localhostFileStorage';
 import slug from 'slug';
+import { sleep } from '../../utils/dateTimeUtils';
 
 const Op = Sequelize.Op;
 
@@ -283,47 +283,67 @@ class PageRepository {
     }
 
     if (pdf && record.pdf) {
-      const privateUrl = `pages/${record.id}/${slug(
+      const privatePdf = `pages/${record.id}/${slug(
         record.name,
       )}.pdf`;
-      const pathname = path.join(
-        getRealPath(getConfig().FILE_STORAGE_PATH),
-        privateUrl,
+      const localStoragePath = getRealPath(
+        getConfig().FILE_STORAGE_PATH,
       );
-      ensureDirectoryExistence(pathname);
-      const options: PDFOptions = {
-        format: 'A4',
-        headerTemplate: '<p></p>',
-        footerTemplate: '<p></p>',
-        displayHeaderFooter: false,
-        margin: {
-          top: '40px',
-          bottom: '40px',
-          right: '40px',
-          left: '40px',
-        },
-        landscape: false,
-        printBackground: true,
-        path: pathname,
-      };
+      const pdfPathname = path.join(
+        localStoragePath,
+        privatePdf,
+      );
+      ensureDirectoryExistence(pdfPathname);
       try {
-        await PDFGenerator.convertToPdf(
-          record.body.replace(
-            / src=\"\/files\//gi,
-            ` src="${getConfig().FRONTEND_URL}/files/`,
-          ),
-          options,
+        const fs = require('fs');
+        const conversion = require('phantom-html-to-pdf')();
+        let processing = true;
+        conversion(
+          {
+            html: [
+              '<!DOCTYPE html>',
+              '<html>',
+              '<head>',
+              '<meta charset="utf-8" />',
+              '<style>',
+              'body { font-family: "Roboto", "Helvetica", "Arial", sans-serif; }',
+              '</style>',
+              '</head>',
+              '<body>',
+              record.body.replace(
+                / src=\"\/files\//gi,
+                ` src="${getConfig().FRONTEND_URL}/files/`,
+              ),
+              '</body>',
+              '</html>',
+            ].join(''),
+          },
+          function (err, pdf) {
+            if (err) {
+              console.log(err);
+              throw err;
+            }
+            var output = fs.createWriteStream(pdfPathname);
+            pdf.stream.pipe(output);
+            processing = false;
+          },
         );
-        console.log(privateUrl);
+
+        while (processing) {
+          await sleep(1000);
+          console.log('waiting...');
+        }
+
+        console.log(privatePdf);
         return {
           downloadPdf: true,
           downloadUrl: await LocalFileStorage.downloadUrl(
-            privateUrl,
+            privatePdf,
           ),
         };
       } catch (error) {
         console.log(error);
-        console.log(pathname);
+        console.log(pdfPathname);
         throw error;
       }
     }
