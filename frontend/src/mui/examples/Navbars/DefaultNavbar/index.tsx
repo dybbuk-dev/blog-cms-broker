@@ -693,7 +693,12 @@ function DefaultNavbar({
               seit 2009
             </MDTypography>
           </MDBox>
-          <MDBox display="flex" gap={2}>
+          <MDBox
+            display="flex"
+            flexWrap="wrap"
+            gap={2}
+            overflow="hidden"
+          >
             {[
               {
                 img: '/images/crowd-of-users.png',
@@ -743,6 +748,8 @@ function DefaultNavbar({
             color="inherit"
             flexGrow={1}
             display={{ xs: 'none', lg: 'flex' }}
+            flexWrap="wrap"
+            gap={3}
             m={0}
             p={0}
           >

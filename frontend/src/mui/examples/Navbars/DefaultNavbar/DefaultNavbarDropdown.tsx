@@ -67,7 +67,8 @@ function DefaultNavbarDropdown({
       <MDBox
         {...rest}
         // mx={1}
-        p={1}
+        px={{ sm: 1, md: 0 }}
+        py={1}
         display="flex"
         alignItems="baseline"
         color={light ? 'white' : 'dark'}
@@ -94,24 +95,27 @@ function DefaultNavbarDropdown({
           fontWeight="regular"
           textTransform="capitalize"
           color={light ? 'white' : 'dark'}
-          sx={{ fontWeight: '100%', mx: 1 }}
+          sx={{ fontWeight: '100%' }}
         >
           {name}
         </MDTypography>
-        <MDTypography
-          variant="body2"
-          color={light ? 'white' : 'dark'}
-          ml="auto"
-        >
-          <Icon
-            sx={{
-              fontWeight: 'normal',
-              verticalAlign: 'middle',
-            }}
+        {collapse && (
+          <MDTypography
+            variant="body2"
+            color={light ? 'white' : 'dark'}
+            lineHeight={0}
+            ml="auto"
           >
-            {collapse && 'keyboard_arrow_down'}
-          </Icon>
-        </MDTypography>
+            <Icon
+              sx={{
+                fontWeight: 'normal',
+                verticalAlign: 'middle',
+              }}
+            >
+              keyboard_arrow_down
+            </Icon>
+          </MDTypography>
+        )}
       </MDBox>
       {children && (
         <Collapse
