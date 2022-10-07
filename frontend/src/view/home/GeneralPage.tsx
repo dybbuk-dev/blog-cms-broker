@@ -198,10 +198,7 @@ const GeneralPage = () => {
                   alignItems="center"
                   gap={1}
                 >
-                  <img
-                    src="/images/files/pdf.png"
-                    height="20px"
-                  />
+                  <img src="/images/files/pdf.png" />
                   <MaterialLink
                     onClick={handleDownloadPagePDF}
                     underline="hover"
