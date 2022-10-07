@@ -1,24 +1,28 @@
 import { i18n } from 'src/i18n';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import AuthorView from 'src/view/shared/view/AuthorView';
+import Breadcrumb from 'src/view/home/Breadcrumb';
+import brokerArticleHomeSelectors from 'src/modules/brokerArticle/home/brokerArticleHomeSelectors';
 import BrokerListTable from 'src/view/home/broker/BrokerListTable';
 import categoryHomeActions from 'src/modules/category/home/categoryHomeActions';
 import categoryHomeSelectors from 'src/modules/category/home/categoryHomeSelectors';
 import HtmlView from 'src/view/shared/view/HtmlView';
 import Layout from 'src/view/home/Layout';
+import MaterialLink from '@mui/material/Link';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
+import moment from 'moment';
 import PageContent from 'src/view/shared/view/PageContent';
 import pageHomeSelectors from 'src/modules/page/home/pageHomeSelectors';
 import Spinner from 'src/view/shared/Spinner';
 import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
-import Breadcrumb from 'src/view/home/Breadcrumb';
-import moment from 'moment';
-import brokerArticleHomeSelectors from 'src/modules/brokerArticle/home/brokerArticleHomeSelectors';
+import config from 'src/config';
 
 const GeneralPage = () => {
+  const { sidenavColor } = selectMuiSettings();
   const [dispatched, setDispatched] = useState(false);
 
   const dispatch = useDispatch();
@@ -114,6 +118,67 @@ const GeneralPage = () => {
             <PageContent>
               <Breadcrumb />
               <HtmlView value={page.body} />
+              {Boolean(page.related_links.length) && (
+                <>
+                  <MDTypography variant="h4" my={2}>
+                    {page.navigation.type ===
+                    'FOREX_STRATEGY'
+                      ? 'Weitere Forex Strategien'
+                      : page.navigation.type === 'DOWNLOADS'
+                      ? 'Weitere MetaTrader Indikatoren'
+                      : ''}
+                  </MDTypography>
+                  {page.related_links.map(
+                    ({ name, url }, idx) => (
+                      <MDTypography
+                        key={idx}
+                        variant="body2"
+                        color={sidenavColor}
+                        fontWeight="regular"
+                      >
+                        <MaterialLink
+                          href={url}
+                          target="_blank"
+                        >
+                          {name}
+                        </MaterialLink>
+                      </MDTypography>
+                    ),
+                  )}
+                </>
+              )}
+              {Boolean(page.page_warning) && (
+                <>
+                  <MDTypography variant="h4" my={2}>
+                    Warnung
+                  </MDTypography>
+                  <HtmlView
+                    value={page.page_warning.body}
+                  />
+                </>
+              )}
+              {Boolean(page.pdf) && (
+                <MDTypography
+                  variant="body2"
+                  color={sidenavColor}
+                  fontWeight="regular"
+                  mt={2}
+                  display="flex"
+                  alignItems="center"
+                  gap={1}
+                >
+                  <img
+                    src="/images/files/pdf.svg"
+                    height="20px"
+                  />
+                  <MaterialLink
+                    href={`${config.frontendUrl.protocol}://${config.frontendUrl.host}${page.navigation.link}.pdf`}
+                    target="_blank"
+                  >
+                    {page.name}
+                  </MaterialLink>
+                </MDTypography>
+              )}
             </PageContent>
             <AuthorView value={page.author} />
             <PageContent>
