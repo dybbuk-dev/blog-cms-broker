@@ -31,6 +31,7 @@ import postReviewActions from 'src/modules/brokerPost/review/brokerPostReviewAct
 import postSpamActions from 'src/modules/brokerPost/spam/brokerPostSpamActions';
 import RatingFormItem from 'src/view/shared/form/items/RatingFormItem';
 import RatingViewItem from 'src/view/shared/view/RatingViewItem';
+import ReCaptchaV2FormItem from 'src/view/shared/form/items/ReCaptchaV2FormItem';
 import ReviewsIcon from '@mui/icons-material/Reviews';
 import SaveIcon from '@mui/icons-material/Save';
 import selectors from 'src/modules/brokerPost/home/brokerPostHomeSelectors';
@@ -53,6 +54,10 @@ const schema = yup.object().shape({
     required: true,
   }),
   rating: yupFormSchemas.integer(i18n('common.rating'), {}),
+  recaptcha: yupFormSchemas.string(
+    i18n('common.recaptcha'),
+    { required: true },
+  ),
 });
 
 const BrokerPostPage = ({ brokerId, name, middle }) => {
@@ -320,7 +325,7 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
                 required={true}
               />
             </Grid>
-            <Grid item md={12} xs={12}>
+            <Grid item xs={12}>
               <RatingFormItem
                 color={sidenavColor}
                 name="rating"
@@ -331,7 +336,7 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
                 label={i18n('common.rating')}
               />
             </Grid>
-            <Grid item md={12} xs={12}>
+            <Grid item xs={12}>
               <HtmlEditorFormItem
                 name="review"
                 required={true}
@@ -348,6 +353,9 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
                   { name: 'colors' },
                 ]}
               />
+            </Grid>
+            <Grid item xs={12} mb={2}>
+              <ReCaptchaV2FormItem />
             </Grid>
           </Grid>
           <FormButtons>
