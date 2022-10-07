@@ -126,7 +126,7 @@ const authActions = {
   },
 
   doRegisterEmailAndPassword:
-    (email, password) => async (dispatch) => {
+    (email, password, recaptcha) => async (dispatch) => {
       try {
         dispatch({ type: authActions.AUTH_START });
 
@@ -134,6 +134,7 @@ const authActions = {
           await service.registerWithEmailAndPassword(
             email,
             password,
+            recaptcha
           );
 
         AuthToken.set(token, true);

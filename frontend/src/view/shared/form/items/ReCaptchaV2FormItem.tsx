@@ -7,7 +7,7 @@ import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-function ReCaptchaFormItem(props) {
+function ReCaptchaV2FormItem(props) {
   const { externalErrorMessage, name } = props;
 
   const {
@@ -63,13 +63,13 @@ function ReCaptchaFormItem(props) {
   );
 }
 
-ReCaptchaFormItem.defaultProps = {
+ReCaptchaV2FormItem.defaultProps = {
   name: 'recaptcha',
 };
 
-ReCaptchaFormItem.propTypes = {
+ReCaptchaV2FormItem.propTypes = {
   externalErrorMessage: PropTypes.string,
   name: PropTypes.string,
 };
 
-export default ReCaptchaFormItem;
+export default ReCaptchaV2FormItem;

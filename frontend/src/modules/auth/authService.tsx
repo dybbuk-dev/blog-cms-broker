@@ -49,12 +49,14 @@ export default class AuthService {
   static async registerWithEmailAndPassword(
     email,
     password,
+    recaptcha,
   ) {
     const invitationToken = AuthInvitationToken.get();
 
     const response = await authAxios.post('/auth/sign-up', {
       email,
       password,
+      recaptcha,
       invitationToken,
       tenantId: tenantSubdomain.isSubdomain
         ? AuthCurrentTenant.get()

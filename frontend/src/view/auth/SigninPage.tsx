@@ -18,7 +18,7 @@ import MDButton from 'src/mui/components/MDButton';
 import MDTypography from 'src/mui/components/MDTypography';
 import Message from 'src/view/shared/message';
 import queryString from 'query-string';
-import ReCaptchaFormItem from 'src/view/shared/form/items/ReCaptchaFormItem';
+import ReCaptchaV2FormItem from 'src/view/shared/form/items/ReCaptchaV2FormItem';
 import selectors from 'src/modules/auth/authSelectors';
 import Switch from '@mui/material/Switch';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
@@ -183,7 +183,7 @@ function SigninPage(): JSX.Element {
                 </MDTypography>
               </MDBox>
               <MDBox mb={2}>
-                <ReCaptchaFormItem />
+                <ReCaptchaV2FormItem />
               </MDBox>
               <MDBox mt={3} mb={1}>
                 <MDButton

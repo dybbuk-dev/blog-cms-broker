@@ -41,7 +41,7 @@ function CoverLayout({
   children,
 }: Props): JSX.Element {
   return (
-    <PageLayout background="light">
+    <PageLayout background="light" hideNavbar hideFooter>
       <MDBox
         width="calc(100% - 2rem)"
         minHeight={coverHeight}

@@ -1,35 +1,23 @@
-import { Button } from '@mui/material';
-import MaterialLink from '@mui/material/Link';
-import queryString from 'query-string';
-import React, { useEffect, useState } from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
-import { i18n } from 'src/i18n';
-import actions from 'src/modules/auth/authActions';
-import selectors from 'src/modules/auth/authSelectors';
-import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-
-// @mui material components
-import Card from '@mui/material/Card';
-import Checkbox from '@mui/material/Checkbox';
-
-// Material Dashboard 2 PRO React TS components
-import MDBox from 'src/mui/components/MDBox';
-import MDTypography from 'src/mui/components/MDTypography';
-import MDInput from 'src/mui/components/MDInput';
-import MDButton from 'src/mui/components/MDButton';
-
-// Authentication layout components
-import CoverLayout from 'src/mui/layouts/authentication/components/CoverLayout';
-
-// Images
-import bgImage from 'src/mui/assets/images/bg-sign-up-cover.jpeg';
-import MDAvatar from 'src/mui/components/MDAvatar';
 import { BrandLogo } from 'src/assets/resources';
+import { i18n } from 'src/i18n';
+import { Link, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useForm, FormProvider } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import actions from 'src/modules/auth/authActions';
+import bgImage from 'src/mui/assets/images/bg-sign-up-cover.jpeg';
+import Card from '@mui/material/Card';
+import CoverLayout from 'src/mui/layouts/authentication/components/CoverLayout';
+import InputFormItem from 'src/view/shared/form/items/InputFormItem';
+import MDBox from 'src/mui/components/MDBox';
+import MDButton from 'src/mui/components/MDButton';
+import MDTypography from 'src/mui/components/MDTypography';
+import queryString from 'query-string';
+import ReCaptchaV2FormItem from 'src/view/shared/form/items/ReCaptchaV2FormItem';
+import selectors from 'src/modules/auth/authSelectors';
+import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 
 const schema = yup.object().shape({
   email: yupFormSchemas.string(i18n('user.fields.email'), {
@@ -40,6 +28,10 @@ const schema = yup.object().shape({
     {
       required: true,
     },
+  ),
+  recaptcha: yupFormSchemas.string(
+    i18n('common.recaptcha'),
+    { required: true },
   ),
 });
 
@@ -69,6 +61,7 @@ function SignupPage(): JSX.Element {
   const [initialValues] = useState({
     email: emailFromInvitation || '',
     password: '',
+    recaptcha: '',
   });
 
   const form = useForm({
@@ -77,9 +70,13 @@ function SignupPage(): JSX.Element {
     defaultValues: initialValues,
   });
 
-  const onSubmit = ({ email, password }) => {
+  const onSubmit = ({ email, password, recaptcha }) => {
     dispatch(
-      actions.doRegisterEmailAndPassword(email, password),
+      actions.doRegisterEmailAndPassword(
+        email,
+        password,
+        recaptcha,
+      ),
     );
   };
 
@@ -130,6 +127,9 @@ function SignupPage(): JSX.Element {
                   autoComplete="password"
                   type="password"
                 />
+              </MDBox>
+              <MDBox mb={2}>
+                <ReCaptchaV2FormItem />
               </MDBox>
               <MDBox mt={4} mb={1}>
                 <MDButton
