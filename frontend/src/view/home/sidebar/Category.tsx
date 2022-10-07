@@ -25,8 +25,8 @@ function Category() {
       <CardContent>
         {loading && <Spinner />}
         {!loading &&
-          record.count > 0 &&
-          record.rows.map((cat) => (
+          record?.count > 0 &&
+          record?.rows.map((cat) => (
             <MDTypography
               key={cat.id}
               variant="body2"

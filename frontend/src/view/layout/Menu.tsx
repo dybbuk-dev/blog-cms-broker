@@ -489,8 +489,8 @@ function Menu({
               </MDTypography>
             </MDBox>
             <MDBox
-              component={NavLink}
-              to="/"
+              component={Link}
+              href="/"
               display="flex"
               alignItems="center"
             >

@@ -199,7 +199,7 @@ const GeneralPage = () => {
                   gap={1}
                 >
                   <img
-                    src="/images/files/pdf.svg"
+                    src="/images/files/pdf.png"
                     height="20px"
                   />
                   <MaterialLink
