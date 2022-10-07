@@ -1,24 +1,25 @@
 import { Grid } from '@mui/material';
-import SaveIcon from '@mui/icons-material/Save';
-import { useState } from 'react';
 import { i18n } from 'src/i18n';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm, FormProvider } from 'react-hook-form';
+import { useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import authActions from 'src/modules/auth/authActions';
+import authSelectors from 'src/modules/auth/authSelectors';
 import FormWrapper, {
   FormButtons,
 } from 'src/view/shared/styles/FormWrapper';
-import { useForm, FormProvider } from 'react-hook-form';
-import * as yup from 'yup';
-import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
-import { yupResolver } from '@hookform/resolvers/yup';
-import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
-import MDButton from 'src/mui/components/MDButton';
 import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
-import { useDispatch, useSelector } from 'react-redux';
-import authActions from 'src/modules/auth/authActions';
-import authSelectors from 'src/modules/auth/authSelectors';
+import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import Layout from 'src/view/home/Layout';
-import PageContent from 'src/view/shared/view/PageContent';
+import MDButton from 'src/mui/components/MDButton';
 import MDTypography from 'src/mui/components/MDTypography';
+import PageContent from 'src/view/shared/view/PageContent';
+import ReCaptchaV2FormItem from 'src/view/shared/form/items/ReCaptchaV2FormItem';
+import SaveIcon from '@mui/icons-material/Save';
+import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(
@@ -41,6 +42,10 @@ const schema = yup.object().shape({
       max: 255,
     },
   ),
+  recaptcha: yupFormSchemas.string(
+    i18n('common.recaptcha'),
+    { required: true },
+  ),
 });
 
 function Contact() {
@@ -54,6 +59,7 @@ function Contact() {
       email: '',
       subject: '',
       content: '',
+      recaptcha: '',
     };
   });
 
@@ -74,6 +80,7 @@ function Contact() {
         values.email,
         values.subject,
         values.content,
+        values.recaptcha,
       ),
     );
   };
@@ -144,6 +151,9 @@ function Contact() {
                       { name: 'colors' },
                     ]}
                   />
+                </Grid>
+                <Grid item xs={12} mb={2}>
+                  <ReCaptchaV2FormItem />
                 </Grid>
               </Grid>
               <FormButtons>

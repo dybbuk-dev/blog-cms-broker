@@ -60,7 +60,7 @@ const authActions = {
   },
 
   doSendContact:
-    (name, email, subject, content) =>
+    (name, email, subject, content, recaptcha) =>
     async (dispatch, getState) => {
       try {
         dispatch({
@@ -71,6 +71,7 @@ const authActions = {
           email,
           subject,
           content,
+          recaptcha,
         );
         Message.success(i18n('auth.contactSuccess'));
         dispatch({
@@ -134,7 +135,7 @@ const authActions = {
           await service.registerWithEmailAndPassword(
             email,
             password,
-            recaptcha
+            recaptcha,
           );
 
         AuthToken.set(token, true);

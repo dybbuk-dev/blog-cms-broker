@@ -1,9 +1,11 @@
 import ApiResponseHandler from '../apiResponseHandler';
-
 import AuthService from '../../services/auth/authService';
+import ReCaptchaV2Service from '../../services/recaptcha/ReCaptchaV2Service';
 
 export default async (req, res, next) => {
   try {
+    await ReCaptchaV2Service.verify(req);
+
     await AuthService.sendContact(
       req.language,
       req.body.name,
