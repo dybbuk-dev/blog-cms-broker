@@ -29,6 +29,7 @@ import MDButton from 'src/mui/components/MDButton';
 import MDTypography from 'src/mui/components/MDTypography';
 import moment from 'moment';
 import Pagination from 'src/view/shared/table/Pagination';
+import ReCaptchaV2FormItem from 'src/view/shared/form/items/ReCaptchaV2FormItem';
 import ReviewsIcon from '@mui/icons-material/Reviews';
 import SaveIcon from '@mui/icons-material/Save';
 import selectors from 'src/modules/blogComment/home/blogCommentHomeSelectors';
@@ -49,6 +50,10 @@ const schema = yup.object().shape({
   content: yupFormSchemas.string(i18n('common.content'), {
     required: true,
   }),
+  recaptcha: yupFormSchemas.string(
+    i18n('common.recaptcha'),
+    { required: true },
+  ),
 });
 const CommentPage = ({ record }) => {
   const { sidenavColor } = selectMuiSettings();
@@ -301,7 +306,7 @@ const CommentPage = ({ record }) => {
                 required={true}
               />
             </Grid>
-            <Grid item md={12} xs={12}>
+            <Grid item xs={12}>
               <HtmlEditorFormItem
                 name="content"
                 required={true}
@@ -318,6 +323,9 @@ const CommentPage = ({ record }) => {
                   { name: 'colors' },
                 ]}
               />
+            </Grid>
+            <Grid item xs={12} mb={2}>
+              <ReCaptchaV2FormItem />
             </Grid>
           </Grid>
           <FormButtons>
