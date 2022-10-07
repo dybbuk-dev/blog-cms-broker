@@ -601,6 +601,11 @@ capitalize@^2.0.4:
   resolved "https://registry.yarnpkg.com/capitalize/-/capitalize-2.0.4.tgz#eed7f94c6699a318eeef6e68967fe139c764b866"
   integrity sha512-wcSyiFqXRYyCoqu0o0ekXzJAKCLMkqWS5QWGlgTJFJKwRmI6pzcN2hBl5VPq9RzLW5Uf4FF/V/lcFfjCtVak2w==
 
+captcha-verifier@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/captcha-verifier/-/captcha-verifier-1.1.2.tgz#c3e0f99ee328ec3dd2e83873ab942e974d95cfe8"
+  integrity sha512-oJtjHLDVIi244P6IqW2v1XTfLoUwQwYOeT1JS6ioVcPP1cQ8bFL2kQxnMVOv6UKJeA+S1HdGnFawO3Tcd5DLVw==
+
 caseless@~0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.11.0.tgz#715b96ea9841593cc33067923f5ec60ebda4f7d7"

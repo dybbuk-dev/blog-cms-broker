@@ -26,6 +26,7 @@ const en = {
     or: 'or',
     pause: 'Pause',
     rating: 'Bewertung',
+    recaptcha: 'ReCAPTCHA',
     reset: 'Reset',
     review: 'Erfahrungsbericht',
     save: 'Save',

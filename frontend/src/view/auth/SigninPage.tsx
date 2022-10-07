@@ -1,42 +1,27 @@
-import { useForm, FormProvider } from 'react-hook-form';
-import actions from 'src/modules/auth/authActions';
-import selectors from 'src/modules/auth/authSelectors';
-import { i18n } from 'src/i18n';
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
-import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import config from 'src/config';
-
-import queryString from 'query-string';
-import Message from 'src/view/shared/message';
-
-// @mui material components
-import Card from '@mui/material/Card';
-import Switch from '@mui/material/Switch';
-import Grid from '@mui/material/Grid';
-import MuiLink from '@mui/material/Link';
-
-// @mui icons
-import FacebookIcon from '@mui/icons-material/Facebook';
-import GoogleIcon from '@mui/icons-material/Google';
-
-// Material Dashboard 2 PRO React TS components
-import MDBox from 'src/mui/components/MDBox';
-import MDTypography from 'src/mui/components/MDTypography';
-import MDButton from 'src/mui/components/MDButton';
-
-// Authentication layout components
-import BasicLayout from 'src/mui/layouts/authentication/components/BasicLayout';
-
-// Images
-import bgImage from 'src/mui/assets/images/bg-sign-in-basic.jpeg';
-import { FormControlLabel } from '@mui/material';
 import { BrandLogo } from 'src/assets/resources';
+import { FormControlLabel } from '@mui/material';
+import { i18n } from 'src/i18n';
+import { Link, useLocation } from 'react-router-dom';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { useEffect } from 'react';
+import { useForm, FormProvider } from 'react-hook-form';
+import { useSelector, useDispatch } from 'react-redux';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import actions from 'src/modules/auth/authActions';
+import BasicLayout from 'src/mui/layouts/authentication/components/BasicLayout';
+import bgImage from 'src/mui/assets/images/bg-sign-in-basic.jpeg';
+import Card from '@mui/material/Card';
+import InputFormItem from 'src/view/shared/form/items/InputFormItem';
+import MDBox from 'src/mui/components/MDBox';
+import MDButton from 'src/mui/components/MDButton';
+import MDTypography from 'src/mui/components/MDTypography';
+import Message from 'src/view/shared/message';
+import queryString from 'query-string';
+import ReCaptchaFormItem from 'src/view/shared/form/items/ReCaptchaFormItem';
+import selectors from 'src/modules/auth/authSelectors';
+import Switch from '@mui/material/Switch';
+import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 
 const schema = yup.object().shape({
   email: yupFormSchemas.string(i18n('user.fields.email'), {
@@ -50,6 +35,10 @@ const schema = yup.object().shape({
   ),
   rememberMe: yupFormSchemas.boolean(
     i18n('user.fields.rememberMe'),
+  ),
+  recaptcha: yupFormSchemas.string(
+    i18n('common.recaptcha'),
+    { required: true },
   ),
 });
 
@@ -95,6 +84,7 @@ function SigninPage(): JSX.Element {
       email: '',
       password: '',
       rememberMe: true,
+      recaptcha: '',
     },
   });
 
@@ -104,6 +94,7 @@ function SigninPage(): JSX.Element {
         values.email,
         values.password,
         values.rememberMe,
+        values.recaptcha,
       ),
     );
   };
@@ -164,6 +155,7 @@ function SigninPage(): JSX.Element {
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
+                mb={2}
               >
                 <FormControlLabel
                   control={
@@ -189,6 +181,9 @@ function SigninPage(): JSX.Element {
                     {i18n('auth.forgotPassword')}
                   </MDTypography>
                 </MDTypography>
+              </MDBox>
+              <MDBox mb={2}>
+                <ReCaptchaFormItem />
               </MDBox>
               <MDBox mt={3} mb={1}>
                 <MDButton

@@ -27,6 +27,7 @@
     "aws-sdk": "^2.1147.0",
     "bcrypt": "5.0.1",
     "capitalize": "^2.0.4",
+    "captcha-verifier": "^1.1.2",
     "cli-highlight": "^2.1.11",
     "copyfiles": "^2.4.1",
     "cors": "2.8.5",

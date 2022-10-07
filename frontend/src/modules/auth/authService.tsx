@@ -66,12 +66,17 @@ export default class AuthService {
     return response.data;
   }
 
-  static async signinWithEmailAndPassword(email, password) {
+  static async signinWithEmailAndPassword(
+    email,
+    password,
+    recaptcha,
+  ) {
     const invitationToken = AuthInvitationToken.get();
 
     const response = await authAxios.post('/auth/sign-in', {
       email,
       password,
+      recaptcha,
       invitationToken,
       tenantId: tenantSubdomain.isSubdomain
         ? AuthCurrentTenant.get()

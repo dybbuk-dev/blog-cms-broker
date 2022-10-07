@@ -5,6 +5,9 @@ const backendUrl = `http://localhost:8080/api`;
 const apiDocumentationUrl = false;
 // const apiDocumentationUrl = `http://localhost:8080/documentation`;
 
+const reCaptchaSiteKey =
+  '6LcSjmIiAAAAABZ0EGkmeeY9ChO3XsNmN--fjlfb';
+
 /**
  * Frontend Url.
  */
@@ -34,4 +37,5 @@ export default {
   tenantMode,
   isPlanEnabled,
   stripePublishableKey,
+  reCaptchaSiteKey,
 };

@@ -165,7 +165,8 @@ const authActions = {
     },
 
   doSigninWithEmailAndPassword:
-    (email, password, rememberMe) => async (dispatch) => {
+    (email, password, rememberMe, recaptcha) =>
+    async (dispatch) => {
       try {
         dispatch({ type: authActions.AUTH_START });
 
@@ -175,6 +176,7 @@ const authActions = {
           await service.signinWithEmailAndPassword(
             email,
             password,
+            recaptcha,
           );
 
         AuthToken.set(token, rememberMe);
