@@ -35,12 +35,16 @@ interface Props {
   background?: 'white' | 'light' | 'default';
   children?: ReactNode;
   fixedNavBar?: boolean;
+  hideNavbar?: boolean;
+  hideFooter?: boolean;
 }
 
 function PageLayout({
   background,
   children,
   fixedNavBar = true,
+  hideNavbar,
+  hideFooter,
 }: Props): JSX.Element {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
@@ -75,16 +79,20 @@ function PageLayout({
       bgColor={background}
       sx={{ overflowX: 'hidden' }}
     >
-      {!loading && permissionChecker.isAuthenticated && (
-        <DefaultNavbar
-          routes={navigation}
-          transparent={fixedNavBar}
-          light={background === 'light'}
-          fixed={fixedNavBar}
-        />
-      )}
+      {!hideNavbar &&
+        !loading &&
+        permissionChecker.isAuthenticated && (
+          <DefaultNavbar
+            routes={navigation}
+            transparent={fixedNavBar}
+            light={background === 'light'}
+            fixed={fixedNavBar}
+          />
+        )}
       {children}
-      {permissionChecker.isAuthenticated && <Footer />}
+      {!hideFooter && permissionChecker.isAuthenticated && (
+        <Footer />
+      )}
     </MDBox>
   );
 }
@@ -92,6 +100,8 @@ function PageLayout({
 // Declaring default props for PageLayout
 PageLayout.defaultProps = {
   background: 'default',
+  hideNavbar: false,
+  hideFooter: false,
 };
 
 export default PageLayout;

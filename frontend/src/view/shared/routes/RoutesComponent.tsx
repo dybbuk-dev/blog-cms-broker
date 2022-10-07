@@ -120,6 +120,17 @@ function RoutesComponent(props) {
           />
         ))}
 
+      {routes.simpleRoutes.map((route) => (
+        <Route
+          key={route.path}
+          path={route.path}
+          component={CustomLoadable({
+            loader: route.loader,
+          })}
+          exact
+        />
+      ))}
+
       {routes.frontEndRoutes.map((route) => (
         <FrontEndRoute
           key={route.path}
@@ -130,17 +141,6 @@ function RoutesComponent(props) {
           component={CustomLoadable({
             loader: route.loader,
           })}
-        />
-      ))}
-
-      {routes.simpleRoutes.map((route) => (
-        <Route
-          key={route.path}
-          path={route.path}
-          component={CustomLoadable({
-            loader: route.loader,
-          })}
-          exact
         />
       ))}
     </Switch>

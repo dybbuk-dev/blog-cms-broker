@@ -41,7 +41,7 @@ function BasicLayout({
   children,
 }: Props): JSX.Element {
   return (
-    <PageLayout background="light">
+    <PageLayout background="light" hideNavbar hideFooter>
       <MDBox
         position="fixed"
         left="0"
