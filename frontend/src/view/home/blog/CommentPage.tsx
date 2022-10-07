@@ -275,13 +275,15 @@ const CommentPage = ({ record }) => {
           </MDTypography>
         )}
       </MDBox>
-      <Pagination
-        onChange={doChangePagination}
-        disabled={loading}
-        pagination={pagination}
-        entriesPerPage
-        showTotalEntries
-      />
+      {!loading && hasRows && (
+        <Pagination
+          onChange={doChangePagination}
+          disabled={loading}
+          pagination={pagination}
+          entriesPerPage
+          showTotalEntries
+        />
+      )}
       <MDBox color="text" py={4}>
         <MDTypography variant="h4">
           {i18n('common.toComment')}
