@@ -17,7 +17,10 @@ class SitemapUrl {
   lastmod: string = '';
   changefreq: string = 'daily';
 
-  constructor(url: string, modified: string | null = null) {
+  constructor(
+    url: string,
+    modified: string | undefined = undefined,
+  ) {
     this.loc = url;
     this.lastmod = moment(modified).toISOString();
   }
