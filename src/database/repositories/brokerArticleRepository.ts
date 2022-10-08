@@ -328,6 +328,13 @@ class BrokerArticleRepository {
       await options.database.broker_article.findAndCountAll(
         {
           where,
+          include: [
+            {
+              model: options.database.broker,
+              as: 'broker',
+              attributes: ['id', 'name', 'name_normalized'],
+            },
+          ],
           limit: limit ? Number(limit) : undefined,
           offset: offset ? Number(offset) : undefined,
           order: orderBy

@@ -189,6 +189,7 @@ class CategoryRepository {
     const record = await options.database.category.findOne({
       where: {
         link: url,
+        activated: true,
       },
       include,
       transaction,

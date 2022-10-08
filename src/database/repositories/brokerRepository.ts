@@ -369,6 +369,7 @@ class BrokerRepository {
     const record = await options.database.broker.findOne({
       where: {
         name_normalized: url,
+        activated: true,
       },
       include,
       transaction,
@@ -383,6 +384,7 @@ class BrokerRepository {
         {
           filter: {
             broker: record.id,
+            activated: true,
           },
         },
         options,
@@ -396,6 +398,7 @@ class BrokerRepository {
         {
           filter: {
             broker: record.id,
+            activated: true,
           },
         },
         options,
