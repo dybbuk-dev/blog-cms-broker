@@ -22,6 +22,7 @@ import pageWarning from 'src/modules/pageWarning/pageWarningReducers';
 import plan from 'src/modules/plan/planReducers';
 import promotion from 'src/modules/promotion/promotionReducers';
 import settings from 'src/modules/settings/settingsReducers';
+import sitemap from 'src/modules/sitemap/sitemapReducers';
 import tenant from 'src/modules/tenant/tenantReducers';
 import trackingParameter from 'src/modules/trackingParameter/trackingParameterReducers';
 import user from 'src/modules/user/userReducers';
@@ -51,6 +52,7 @@ export default (history) =>
     plan,
     promotion,
     settings,
+    sitemap,
     tenant,
     trackingParameter,
     user,

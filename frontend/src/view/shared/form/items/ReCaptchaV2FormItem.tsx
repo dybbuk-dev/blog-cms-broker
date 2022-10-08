@@ -1,3 +1,4 @@
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import config from 'src/config';
@@ -8,7 +9,9 @@ import PropTypes from 'prop-types';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 function ReCaptchaV2FormItem(props) {
-  const { externalErrorMessage, name } = props;
+  const { darkMode } = selectMuiSettings();
+  const { externalErrorMessage, name, recaptchaRef } =
+    props;
 
   const {
     errors,
@@ -37,13 +40,16 @@ function ReCaptchaV2FormItem(props) {
         width="100%"
       >
         <ReCAPTCHA
-          sitekey={config.reCaptchaV2SiteKey}
           onChange={(value) => {
             setValue(name, value, {
               shouldValidate: false,
               shouldDirty: true,
             });
           }}
+          ref={recaptchaRef}
+          // {...(Boolean(recaptchaRef) && { ref: recaptchaRef })}
+          sitekey={config.reCaptchaV2SiteKey}
+          theme={darkMode ? 'dark' : 'light'}
         />
       </MDBox>
       {errorMessage && (
@@ -65,11 +71,13 @@ function ReCaptchaV2FormItem(props) {
 
 ReCaptchaV2FormItem.defaultProps = {
   name: 'recaptcha',
+  recaptchaRef: null,
 };
 
 ReCaptchaV2FormItem.propTypes = {
   externalErrorMessage: PropTypes.string,
   name: PropTypes.string,
+  recaptchaRef: PropTypes.any,
 };
 
 export default ReCaptchaV2FormItem;
