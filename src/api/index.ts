@@ -108,6 +108,7 @@ require('./pageWarning').default(routes);
 require('./plan').default(routes);
 require('./promotion').default(routes);
 require('./settings').default(routes);
+require('./sitemap').default(routes);
 require('./tenant').default(routes);
 require('./trackingParameter').default(routes);
 require('./user').default(routes);
