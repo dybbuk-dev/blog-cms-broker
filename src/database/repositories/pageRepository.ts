@@ -283,6 +283,12 @@ class PageRepository {
     }
 
     if (pdf && record.pdf) {
+      if (
+        String(getConfig().CONVERT_PDF).toLowerCase() !==
+        'true'
+      ) {
+        return null;
+      }
       const privatePdf = `pages/${record.id}/${slug(
         record.name,
       )}.pdf`;
