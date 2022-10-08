@@ -11,6 +11,12 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import './assets/scrollbar.css';
 import GlobalDndContext from 'src/dnd-context';
+import PiwikPro from '@piwikpro/react-piwik-pro';
+
+PiwikPro.initialize(
+  '4179c8e9-a123-4f38-abef-02433321deba',
+  'https://broker-bewertungen.containers.piwik.pro',
+);
 
 (async function () {
   const isSocialOnboardRequested =
