@@ -1,4 +1,8 @@
 export default (app) => {
+  // #region front-end APIs
+  app.get('/author', require('./authorFirst').default);
+  // #endregion
+  // #region back-end APIs
   app.post(
     `/tenant/:tenantId/author`,
     require('./authorCreate').default,
@@ -27,4 +31,5 @@ export default (app) => {
     `/tenant/:tenantId/author/:id`,
     require('./authorFind').default,
   );
+  // #endregion
 };

@@ -2,6 +2,17 @@ import RateLimit from 'express-rate-limit';
 // import MongoStore from 'rate-limit-mongo';
 // import { getConfig } from '../config';
 
+const skipREs: Array<RegExp> = [
+  /\/import$/,
+  /^\/api\/author/,
+  /^\/api\/blog/,
+  /^\/api\/broker/,
+  /^\/api\/category/,
+  /^\/api\/comment/,
+  /^\/api\/general-page/,
+  /^\/api\/navigation/,
+];
+
 export function createRateLimiter({
   max,
   windowMs,
@@ -23,18 +34,11 @@ export function createRateLimiter({
         return true;
       }
 
-      if (
-        req.originalUrl.endsWith('/import') ||
-        req.originalUrl.indexOf('/api/navigation') === 0 ||
-        req.originalUrl.indexOf('/api/category') === 0 ||
-        req.originalUrl.indexOf('/api/general-page') ===
-          0 ||
-        req.originalUrl.indexOf('/api/broker') === 0 ||
-        req.originalUrl.indexOf('/api/blog') === 0 ||
-        req.originalUrl.indexOf('/api/comment') === 0
-      ) {
-        console.log('skipped', req.originalUrl);
-        return true;
+      for (const skipRE of skipREs) {
+        if (skipRE.test(req.originalUrl)) {
+          console.log('skipped', req.originalUrl);
+          return true;
+        }
       }
 
       return false;

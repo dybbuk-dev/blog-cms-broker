@@ -103,12 +103,19 @@ export default class AuthorService {
     }
   }
 
+  async first() {
+    return await AuthorRepository.first(this.options);
+  }
+
   async findById(id) {
-    return AuthorRepository.findById(id, this.options);
+    return await AuthorRepository.findById(
+      id,
+      this.options,
+    );
   }
 
   async findAllAutocomplete(search, limit) {
-    return AuthorRepository.findAllAutocomplete(
+    return await AuthorRepository.findAllAutocomplete(
       search,
       limit,
       this.options,

@@ -139,6 +139,14 @@ class AuthorRepository {
     );
   }
 
+  static async first(options: IRepositoryOptions) {
+    const { rows } = await this.findAndCountAll(
+      { filter: {}, limit: 1 },
+      options,
+    );
+    return rows[0] || {};
+  }
+
   static async findById(id, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);

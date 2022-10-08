@@ -66,6 +66,12 @@ export default class AuthorService {
     return response.data;
   }
 
+  static async first() {
+    const response = await authAxios.get('/author');
+
+    return response.data;
+  }
+
   static async find(id) {
     const tenantId = AuthCurrentTenant.get();
 
