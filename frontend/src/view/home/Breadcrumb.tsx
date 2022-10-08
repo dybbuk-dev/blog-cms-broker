@@ -23,7 +23,11 @@ function Breadcrumb({ items }) {
   const navItems = [];
   const currentRoute = match.url;
   const selectNavigationItemFn = (item) => {
-    if (currentRoute.indexOf(item.route) === 0) {
+    if (
+      currentRoute.indexOf(
+        item.route.replace(/\/*$/, ''),
+      ) === 0
+    ) {
       navItems.push(item);
       (item.children || []).forEach(selectNavigationItemFn);
     }
@@ -61,7 +65,7 @@ function Breadcrumb({ items }) {
             >
               <MaterialLink
                 component={Link}
-                to={item.route}
+                to={item.route.replace(/\/*$/, '')}
                 underline="hover"
               >
                 {item.name}

@@ -23,6 +23,13 @@ import { sleep } from '../../utils/dateTimeUtils';
 
 const Op = Sequelize.Op;
 
+const redirects = [
+  {
+    source: '/downloads/metatrader-indikatoren',
+    target: '/downloads/meta-trader-indikatoren',
+  },
+];
+
 class PageRepository {
   static ALL_FIELDS = [
     'link',
@@ -232,7 +239,11 @@ class PageRepository {
       SequelizeRepository.getTransaction(options);
 
     const pdf = /.pdf$/.test(url);
-    url = url.replace(/.pdf$/, '');
+    url = url.replace(/.pdf$/, '').replace(/\/*$/, '');
+
+    url =
+      redirects.find(({ source }) => source === url)
+        ?.target || url;
 
     const navigation =
       await NavigationRepositoryEx.findByURL(url, options);
