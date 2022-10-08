@@ -37,7 +37,7 @@ function ReCaptchaV2FormItem(props) {
         width="100%"
       >
         <ReCAPTCHA
-          sitekey={config.reCaptchaSiteKey}
+          sitekey={config.reCaptchaV2SiteKey}
           onChange={(value) => {
             setValue(name, value, {
               shouldValidate: false,

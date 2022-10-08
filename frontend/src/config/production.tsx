@@ -7,7 +7,7 @@ const backendUrl = `/api`;
 const apiDocumentationUrl = false;
 // const apiDocumentationUrl = `/documentation`;
 
-const reCaptchaSiteKey =
+const reCaptchaV2SiteKey =
   '6LcSjmIiAAAAABZ0EGkmeeY9ChO3XsNmN--fjlfb';
 
 /**
@@ -39,5 +39,5 @@ export default {
   tenantMode,
   isPlanEnabled,
   stripePublishableKey,
-  reCaptchaSiteKey,
+  reCaptchaV2SiteKey,
 };
