@@ -55,13 +55,13 @@ const BlogDetailPage = () => {
 
   return (
     <>
-      {loading && <Spinner />}
-      {dispatched && !loading && record && (
-        <Layout
-          title={record.name}
-          keywords={[record.metakeywords]}
-          description={record.metadescription}
-        >
+      <Layout
+        title={record?.name}
+        keywords={[record?.metakeywords]}
+        description={record?.metadescription}
+      >
+        {loading && <Spinner />}
+        {dispatched && !loading && record && (
           <MDBox
             display="flex"
             flexDirection="column"
@@ -91,8 +91,8 @@ const BlogDetailPage = () => {
               </PageContent>
             </>
           </MDBox>
-        </Layout>
-      )}
+        )}
+      </Layout>
     </>
   );
 };

@@ -78,30 +78,54 @@ const GeneralPage = () => {
   }, [match.url]);
 
   const handleDownloadPagePDF = () => {
-    if (page?.navigation) {
+    if (page?.navigation || page.link !== '') {
       dispatch(
         pageHomeActions.doDownload(
-          `${page.navigation.link}.pdf`,
+          `${page.navigation?.link || page.link}.pdf`,
         ),
       );
     }
   };
 
+  let title = '';
+  let keywords = [];
+  let description = '';
+
+  if (dispatched && !loading) {
+    if (category) {
+      title = `${
+        category.title
+      } Vergleich ${moment().year()} » 100% unabhängiger Test`;
+      keywords = [category.name, 'Vergleich', 'Test'];
+      description = `100% unabhängiger ${
+        category.title
+      } Vergleich ✚✚ Über ${category.count ?? 0} ${
+        category.title
+      } im Test mit Erfahrungsberichten von Tradern ➔ Jetzt lesen!`;
+    }
+
+    if (page) {
+      title = page.title;
+      keywords = [page.meta_keywords];
+      description = page.meta_description;
+    }
+
+    if (brokerArticle) {
+      title = brokerArticle.pagetitle;
+      keywords = [brokerArticle.metakeywords];
+      description = brokerArticle.metadescription;
+    }
+  }
+
   return (
     <>
-      {loading && <Spinner />}
-      {dispatched && !loading && category && (
-        <Layout
-          title={`${
-            category.title
-          } Vergleich ${moment().year()} » 100% unabhängiger Test`}
-          keywords={[category.name, 'Vergleich', 'Test']}
-          description={`100% unabhängiger ${
-            category.title
-          } Vergleich ✚✚ Über ${category.count ?? 0} ${
-            category.title
-          } im Test mit Erfahrungsberichten von Tradern ➔ Jetzt lesen!`}
-        >
+      <Layout
+        title={title}
+        keywords={keywords}
+        description={description}
+      >
+        {loading && <Spinner />}
+        {dispatched && !loading && category && (
           <MDBox
             display="flex"
             flexDirection="column"
@@ -133,14 +157,8 @@ const GeneralPage = () => {
             </PageContent>
             <AuthorView value={category.author} />
           </MDBox>
-        </Layout>
-      )}
-      {dispatched && !loading && !category && page && (
-        <Layout
-          title={page.title}
-          keywords={[page.meta_keywords]}
-          description={page.meta_description}
-        >
+        )}
+        {dispatched && !loading && !category && page && (
           <MDBox
             display="flex"
             flexDirection="column"
@@ -217,18 +235,12 @@ const GeneralPage = () => {
               <TopBrokersView />
             </PageContent>
           </MDBox>
-        </Layout>
-      )}
-      {dispatched &&
-        !loading &&
-        !category &&
-        !page &&
-        brokerArticle && (
-          <Layout
-            title={brokerArticle.pagetitle}
-            keywords={[brokerArticle.metakeywords]}
-            description={brokerArticle.metadescription}
-          >
+        )}
+        {dispatched &&
+          !loading &&
+          !category &&
+          !page &&
+          brokerArticle && (
             <MDBox
               display="flex"
               flexDirection="column"
@@ -257,8 +269,8 @@ const GeneralPage = () => {
                 <TopBrokersView />
               </PageContent>
             </MDBox>
-          </Layout>
-        )}
+          )}
+      </Layout>
     </>
   );
 };

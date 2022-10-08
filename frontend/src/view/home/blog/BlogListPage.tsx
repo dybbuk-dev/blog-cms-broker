@@ -38,14 +38,14 @@ const BlogListPage = () => {
   };
 
   return (
-    <Layout>
+    <Layout title="Broker-Bewertungen Blog">
       <PageContent>
+        <MDTypography variant="h2" pb={5}>
+          {i18n('entities.blog.title')}
+        </MDTypography>
         {loading && <Spinner />}
         {dispatched && !loading && records && (
           <>
-            <MDTypography variant="h2" color="text" py={2}>
-              {i18n('entities.blog.title')}
-            </MDTypography>
             <MDBox
               display="flex"
               flexDirection="column"
