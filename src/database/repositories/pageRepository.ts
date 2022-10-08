@@ -314,7 +314,7 @@ class PageRepository {
               '<head>',
               '<meta charset="utf-8" />',
               '<style>',
-              'body { font-family: "Roboto", "Helvetica", "Arial", sans-serif; }',
+              'body { font-family: "Roboto", "Helvetica", "Arial", sans-serif; line-height: 1.625; }',
               '</style>',
               '</head>',
               '<body>',
@@ -343,12 +343,9 @@ class PageRepository {
         }
 
         console.log(privatePdf);
-        return {
-          downloadPdf: true,
-          downloadUrl: await LocalFileStorage.downloadUrl(
-            privatePdf,
-          ),
-        };
+        record.dataValues.downloadPdf = true;
+        record.dataValues.downloadUrl =
+          await LocalFileStorage.downloadUrl(privatePdf);
       } catch (error) {
         console.log(error);
         console.log(pdfPathname);

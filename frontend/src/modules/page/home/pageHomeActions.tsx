@@ -22,6 +22,10 @@ const pageHomeActions = {
         dispatch(brokerArticleHomeActions.doFind(url));
       }
 
+      if (record?.downloadPdf) {
+        window.location.href = record.downloadUrl;
+      }
+
       dispatch({
         type: pageHomeActions.FIND_SUCCESS,
         payload: record,
