@@ -27,7 +27,7 @@ function BrokerCharacteristicsView({ record }) {
           </MDTypography>
           <MDBox position="relative" pb="56.25%">
             <iframe
-              src={`https://www.youtube.com/watch?v=${record.video?.youtube_hash}`}
+              src={`https://www.youtube.com/embed/${record.video?.youtube_hash}`}
               frameBorder={0}
               width="100%"
               height="100%"
