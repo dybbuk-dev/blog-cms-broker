@@ -77,6 +77,9 @@ const BrokerViewPage = () => {
         } Bewertungen ➔ Jetzt lesen!`;
   }
 
+  const [tabValue, setTabValue] = useState(0);
+  const [gotoPosts, setGotoPosts] = useState(false);
+
   useEffect(() => {
     dispatch(brokerViewActions.doFind(match.url));
     setDispatched(true);
@@ -95,12 +98,10 @@ const BrokerViewPage = () => {
       }
     };
     window.addEventListener('click', handleOnClickA);
+    setTabValue(0);
     return () =>
       window.removeEventListener('click', handleOnClickA);
   }, [match.url]);
-
-  const [tabValue, setTabValue] = useState(0);
-  const [gotoPosts, setGotoPosts] = useState(false);
 
   useEffect(() => {
     if (tabValue === 0) {

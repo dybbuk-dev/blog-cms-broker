@@ -713,7 +713,7 @@ function DefaultNavbar({
               {
                 img: '/images/all-infos.png',
                 title: 'Alle Infos',
-                desc: 'zoom FX & CFD Trading',
+                desc: 'zum FX & CFD Trading',
               },
             ].map(({ img, title, desc }) => (
               <MDBox

@@ -22,9 +22,12 @@ import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
 import pageHomeActions from 'src/modules/page/home/pageHomeActions';
 import urlParse from 'url-parse';
 import ScrollTo from 'src/ScrollTo';
+import lColors from 'src/mui/assets/theme/base/colors';
+import dColors from 'src/mui/assets/theme-dark/base/colors';
 
 const GeneralPage = () => {
-  const { sidenavColor } = selectMuiSettings();
+  const { sidenavColor, darkMode } = selectMuiSettings();
+  const colors = darkMode ? dColors : lColors;
   const [dispatched, setDispatched] = useState(false);
 
   const dispatch = useDispatch();
@@ -166,8 +169,13 @@ const GeneralPage = () => {
               <Breadcrumb />
               <HtmlView value={page.body} />
               {Boolean(page.related_links.length) && (
-                <>
-                  <MDTypography variant="h4" my={2}>
+                <MDBox
+                  py={2}
+                  my={2}
+                  borderTop={`1px dashed ${colors.inputBorderColor}`}
+                  borderBottom={`1px dashed ${colors.inputBorderColor}`}
+                >
+                  <MDTypography variant="h4">
                     {page.navigation.type ===
                     'FOREX_STRATEGY'
                       ? 'Weitere Forex Strategien'
@@ -189,11 +197,11 @@ const GeneralPage = () => {
                       </MDTypography>
                     ),
                   )}
-                </>
+                </MDBox>
               )}
               {Boolean(page.page_warning) && (
                 <>
-                  <MDTypography variant="h4" my={2}>
+                  <MDTypography variant="h4">
                     Warnung
                   </MDTypography>
                   <HtmlView
