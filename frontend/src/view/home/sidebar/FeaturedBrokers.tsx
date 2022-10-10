@@ -14,6 +14,7 @@ import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import OverallRating from 'src/view/home/broker/shared/OverallRating';
 import Spinner from 'src/view/shared/Spinner';
+import RatingViewItem from 'src/view/shared/view/RatingViewItem';
 
 function FeaturedBrokers() {
   const { sidenavColor } = selectMuiSettings();
@@ -28,8 +29,11 @@ function FeaturedBrokers() {
   );
   return (
     <Card>
-      <CardHeader title="Broker vorgestellt" />
-      <CardContent>
+      <CardHeader
+        title="Broker vorgestellt"
+        sx={{ pb: 1, px: 3, pt: 3 }}
+      />
+      <CardContent sx={{ pt: 0 }}>
         {loading && <Spinner />}
         {!loading && hasRows && (
           <Grid spacing={2} container>
@@ -53,15 +57,30 @@ function FeaturedBrokers() {
                       }}
                     />
                   </MaterialLink>
-                  <OverallRating
-                    record={row}
-                    hideDescription
-                    hidePercent
-                  />
+                  <MDBox mx="auto">
+                    <RatingViewItem
+                      value={row.rating?.overall_rating}
+                      precision={0.1}
+                      emptyIcon={
+                        <img
+                          src="/images/star-grey.png"
+                          height="24px"
+                        />
+                      }
+                      icon={
+                        <img
+                          src="/images/star-fill.png"
+                          height="24px"
+                        />
+                      }
+                      size="large"
+                    />
+                  </MDBox>
                   <MDTypography
                     variant="body2"
                     fontWeight="regular"
                     color={sidenavColor}
+                    mx="auto"
                   >
                     <MaterialLink
                       component={Link}

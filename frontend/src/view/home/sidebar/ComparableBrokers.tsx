@@ -28,8 +28,9 @@ function ComparableBrokers({ record }) {
         title={`${record.name
           .replace(/\([\w\d\s]+\)/g, '')
           .trim()} vergleichen mit`}
+        sx={{ pb: 1, px: 3, pt: 3 }}
       />
-      <CardContent>
+      <CardContent sx={{ pt: 0 }}>
         {loading && <Spinner />}
         {!loading &&
           hasRows &&
@@ -47,7 +48,7 @@ function ComparableBrokers({ record }) {
                   to={`/forex-cfd-broker-vergleich/${record.name_normalized}-versus-${row.name_normalized}`}
                   underline="hover"
                 >
-                  {`${row.name} Erfahrungen`}
+                  {row.name}
                 </MaterialLink>
               </MDTypography>
             ))}

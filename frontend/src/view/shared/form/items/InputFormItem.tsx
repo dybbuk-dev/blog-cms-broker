@@ -17,6 +17,7 @@ export function InputFormItem(props) {
     externalErrorMessage,
     forceValue,
     fullWidth,
+    hideLabel,
     hint,
     id,
     label,
@@ -95,7 +96,7 @@ export function InputFormItem(props) {
         id={name}
         name={name}
         type={type}
-        label={label}
+        label={hideLabel ? undefined : label}
         required={required}
         // inputRef={register}
         onChange={(event) => {
@@ -150,6 +151,7 @@ export function InputFormItem(props) {
 
 InputFormItem.defaultProps = {
   forceValue: false,
+  hideLabel: false,
   readOnly: false,
   required: false,
   type: 'text',
@@ -163,6 +165,7 @@ InputFormItem.propTypes = {
   externalErrorMessage: PropTypes.string,
   forceValue: PropTypes.bool,
   fullWidth: PropTypes.bool,
+  hideLabel: PropTypes.bool,
   hint: PropTypes.string,
   id: PropTypes.string,
   label: PropTypes.string,

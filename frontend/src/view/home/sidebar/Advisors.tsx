@@ -12,8 +12,11 @@ function Advisors({ record }) {
   const { sidenavColor } = selectMuiSettings();
   return (
     <Card>
-      <CardHeader title="Ratgeber" />
-      <CardContent>
+      <CardHeader
+        title="Ratgeber"
+        sx={{ pb: 1, px: 3, pt: 3 }}
+      />
+      <CardContent sx={{ pt: 0 }}>
         {record.blogs.map((row, idx) => (
           <MDTypography
             key={idx}

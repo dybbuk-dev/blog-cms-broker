@@ -689,8 +689,8 @@ function DefaultNavbar({
               lineHeight={1}
               my={1}
             >
-              Erfahrungen & Tests von Tradern für Trader
-              seit 2009
+              Broker Erfahrungen & Tests von Tradern für
+              Trader - seit 2009
             </MDTypography>
           </MDBox>
           <MDBox

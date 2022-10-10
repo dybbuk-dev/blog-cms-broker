@@ -3,6 +3,7 @@ import { i18n } from 'src/i18n';
 import AttrTypography from 'src/view/home/broker/shared/AttrTypography';
 import MDTypography from 'src/mui/components/MDTypography';
 import SingleCheckbox from 'src/view/home/broker/components/SingleCheckbox';
+import BrokerSection from 'src/view/home/broker/components/BrokerSection';
 
 function BrokerPlatformView({ record }) {
   return (
@@ -33,23 +34,12 @@ function BrokerPlatformView({ record }) {
         ]}
       />
       <Grid spacing={2} container>
-        <Grid md={4} xs={12} item>
-          <MDTypography
-            variant="h5"
-            color="text"
-            lineHeight="1.25"
-            my={1}
-          >
-            {i18n('entities.broker.platform.order_types')}
-          </MDTypography>
-        </Grid>
+        <BrokerSection>
+          {i18n('entities.broker.platform.order_types')}
+        </BrokerSection>
         <Grid md={8} xs={12} item>
           {record.order_types.map((v, idx) => (
-            <AttrTypography
-              key={idx}
-              children={v}
-              noIndent
-            ></AttrTypography>
+            <AttrTypography key={idx} children={v} />
           ))}
         </Grid>
       </Grid>

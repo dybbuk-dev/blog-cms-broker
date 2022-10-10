@@ -100,9 +100,22 @@ const BrokerViewPage = () => {
   }, [match.url]);
 
   const [tabValue, setTabValue] = useState(0);
+  const [gotoPosts, setGotoPosts] = useState(false);
 
-  const handleSetTabValue = (event: any, newValue: any) =>
+  useEffect(() => {
+    if (tabValue === 0) {
+      ScrollTo('list-top-4-pagination');
+    }
+  }, [gotoPosts]);
+
+  const handleSetTabValue = (event: any, newValue: any) => {
+    if (newValue === 1) {
+      newValue = 0;
+      setTabValue(newValue);
+      setGotoPosts(!gotoPosts);
+    }
     setTabValue(newValue);
+  };
 
   return (
     <Layout
@@ -178,7 +191,7 @@ const BrokerViewPage = () => {
             )}
             <BrokerHomepageUrls record={record} />
           </PageContent>
-          <PageContent>
+          <PageContent pt={4}>
             <BrokerPostPage
               brokerId={record.id}
               name={record.name}
@@ -201,7 +214,6 @@ const BrokerViewPage = () => {
               {i18n('entities.home.top_brokers')}
             </MDTypography>
             <TopBrokersView />
-            <BrokerHomepageUrls record={record} />
           </PageContent>
         </MDBox>
       )}

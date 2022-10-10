@@ -8,6 +8,7 @@ function BrokerImages({
   attrs: { link, image },
   filterFn,
   renderFn,
+  noIndent,
 }) {
   return (
     <MDBox
@@ -16,7 +17,7 @@ function BrokerImages({
       position="relative"
       gap={1}
       my={1}
-      pl={3}
+      pl={noIndent ? 0 : 3}
     >
       {(records || []).filter(filterFn).map((v, idx) => (
         <AttachLink key={idx} link={v[link]}>
@@ -39,6 +40,7 @@ BrokerImages.defaultProps = {
   },
   filterFn: () => true,
   renderFn: null,
+  noIndent: false,
 };
 
 BrokerImages.propTypes = {
@@ -49,6 +51,7 @@ BrokerImages.propTypes = {
     image: PropTypes.string,
   }),
   renderFn: PropTypes.func,
+  noIndent: PropTypes.bool,
 };
 
 export default BrokerImages;

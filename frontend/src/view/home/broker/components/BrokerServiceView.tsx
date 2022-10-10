@@ -1,8 +1,10 @@
 import { Grid } from '@mui/material';
 import { i18n } from 'src/i18n';
 import AttachLink from 'src/view/home/broker/shared/AttachLink';
+import AttrTypography from 'src/view/home/broker/shared/AttrTypography';
 import BrokerAddress from 'src/view/home/broker/shared/BrokerAddress';
 import BrokerContact from 'src/view/home/broker/shared/BrokerContact';
+import BrokerSection from 'src/view/home/broker/components/BrokerSection';
 import MDTypography from 'src/mui/components/MDTypography';
 import SingleCheckbox from 'src/view/home/broker/components/SingleCheckbox';
 
@@ -13,44 +15,25 @@ function BrokerServiceView({ record }) {
         {i18n('entities.broker.service.title', record.name)}
       </MDTypography>
       <Grid spacing={2} container>
-        <Grid md={4} xs={12} item>
-          <MDTypography
-            variant="h5"
-            color="text"
-            lineHeight="1.25"
-            my={1}
-          >
-            {i18n('entities.broker.service.homepage')}
-          </MDTypography>
-        </Grid>
+        <BrokerSection>
+          {i18n('entities.broker.service.homepage')}
+        </BrokerSection>
         <Grid md={8} xs={12} item>
-          <AttachLink link={record.meta?.homepage}>
-            {record.meta?.homepage}
-          </AttachLink>
+          <AttrTypography>
+            <AttachLink link={record.meta?.homepage}>
+              {record.meta?.homepage}
+            </AttachLink>
+          </AttrTypography>
         </Grid>
-        <Grid md={4} xs={12} item>
-          <MDTypography
-            variant="h5"
-            color="text"
-            lineHeight="1.25"
-            my={1}
-          >
-            {i18n('entities.broker.service.contact')}
-          </MDTypography>
-        </Grid>
+        <BrokerSection>
+          {i18n('entities.broker.service.contact')}
+        </BrokerSection>
         <Grid md={8} xs={12} item>
           <BrokerContact record={record} />
         </Grid>
-        <Grid md={4} xs={12} item>
-          <MDTypography
-            variant="h5"
-            color="text"
-            lineHeight="1.25"
-            my={1}
-          >
-            {i18n('entities.broker.service.address')}
-          </MDTypography>
-        </Grid>
+        <BrokerSection>
+          {i18n('entities.broker.service.address')}
+        </BrokerSection>
         <Grid md={8} xs={12} item>
           <BrokerAddress record={record} />
         </Grid>

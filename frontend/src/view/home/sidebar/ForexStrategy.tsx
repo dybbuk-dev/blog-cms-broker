@@ -21,8 +21,11 @@ function ForexStrategy() {
   );
   return (
     <Card>
-      <CardHeader title="Forex-Strategien" />
-      <CardContent>
+      <CardHeader
+        title="Forex-Strategien"
+        sx={{ pb: 1, px: 3, pt: 3 }}
+      />
+      <CardContent sx={{ pt: 0 }}>
         {loading && <Spinner />}
         {!loading &&
           record.count > 0 &&

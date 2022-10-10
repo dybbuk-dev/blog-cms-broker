@@ -15,6 +15,7 @@ import MDTypography from 'src/mui/components/MDTypography';
 import OverallRating from 'src/view/home/broker/shared/OverallRating';
 import Spinner from 'src/view/shared/Spinner';
 import CircleNumber from 'src/view/home/shared/CircleNumber';
+import RatingViewItem from 'src/view/shared/view/RatingViewItem';
 
 function TopBrokers() {
   const { sidenavColor } = selectMuiSettings();
@@ -27,8 +28,11 @@ function TopBrokers() {
   const rows = useSelector(brokerTopSelectors.selectRows);
   return (
     <Card>
-      <CardHeader title="Von Tradern am besten bewertet" />
-      <CardContent>
+      <CardHeader
+        title="Von Tradern am besten bewertet"
+        sx={{ pb: 1, px: 3, pt: 3 }}
+      />
+      <CardContent sx={{ pt: 0 }}>
         {loading && <Spinner />}
         {!loading && hasRows && (
           <Grid spacing={2} container>
@@ -83,16 +87,31 @@ function TopBrokers() {
                     flexDirection="column"
                     gap={1}
                   >
-                    <OverallRating
-                      record={row}
-                      hideDescription
-                      hidePercent
-                    />
+                    <MDBox mx="auto">
+                      <RatingViewItem
+                        value={row.rating?.overall_rating}
+                        precision={0.1}
+                        emptyIcon={
+                          <img
+                            src="/images/star-grey.png"
+                            height="24px"
+                          />
+                        }
+                        icon={
+                          <img
+                            src="/images/star-fill.png"
+                            height="24px"
+                          />
+                        }
+                        size="large"
+                      />
+                    </MDBox>
                     <MDTypography
                       variant="body2"
                       fontWeight="regular"
                       lineHeight={1}
                       color={sidenavColor}
+                      mx="auto"
                     >
                       <MaterialLink
                         component={Link}

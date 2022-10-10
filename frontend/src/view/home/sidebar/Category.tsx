@@ -21,8 +21,11 @@ function Category() {
   );
   return (
     <Card>
-      <CardHeader title="Broker-Kategorien" />
-      <CardContent>
+      <CardHeader
+        title="Broker-Kategorien"
+        sx={{ pb: 1, px: 3, pt: 3 }}
+      />
+      <CardContent sx={{ pt: 0 }}>
         {loading && <Spinner />}
         {!loading &&
           record?.count > 0 &&

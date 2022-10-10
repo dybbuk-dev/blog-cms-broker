@@ -38,6 +38,8 @@ import selectors from 'src/modules/brokerPost/home/brokerPostHomeSelectors';
 import Spinner from 'src/view/shared/Spinner';
 import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
+import lColors from 'src/mui/assets/theme/base/colors';
+import dColors from 'src/mui/assets/theme-dark/base/colors';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(i18n('common.name'), {
@@ -61,14 +63,12 @@ const schema = yup.object().shape({
 });
 
 const BrokerPostPage = ({ brokerId, name, middle }) => {
-  const { sidenavColor } = selectMuiSettings();
+  const { sidenavColor, darkMode } = selectMuiSettings();
+  const colors = darkMode ? dColors : lColors;
   const [dispatched, setDispatched] = useState(false);
-  const [postRecordIdToDestroy, setPostRecordIdToDestroy] =
-    useState(null);
-  const [postRecordIdToSpam, setPostRecordIdToSpam] =
-    useState(null);
-  const [postRecordIdToReview, setPostRecordIdToReview] =
-    useState(null);
+  const [idToDestroy, setIdToDestroy] = useState(null);
+  const [idToSpam, setIdToSpam] = useState(null);
+  const [idToReview, setIdToReview] = useState(null);
   const form = useForm({
     resolver: yupResolver(schema),
     mode: 'onSubmit',
@@ -99,27 +99,27 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
   };
 
   const doOpenDestroyConfirmModal = (id) => {
-    setPostRecordIdToDestroy(id);
+    setIdToDestroy(id);
   };
 
   const doCloseDestroyConfirmModal = () => {
-    setPostRecordIdToDestroy(null);
+    setIdToDestroy(null);
   };
 
   const doOpenSpamConfirmModal = (id) => {
-    setPostRecordIdToSpam(id);
+    setIdToSpam(id);
   };
 
   const doCloseSpamConfirmModal = () => {
-    setPostRecordIdToSpam(null);
+    setIdToSpam(null);
   };
 
   const doOpenReviewConfirmModal = (id) => {
-    setPostRecordIdToReview(id);
+    setIdToReview(id);
   };
 
   const doCloseReviewConfirmModal = () => {
-    setPostRecordIdToReview(null);
+    setIdToReview(null);
   };
 
   const doDestroy = (id) => {
@@ -164,13 +164,16 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
         display="flex"
         flexDirection="column"
         color="text"
-        gap={4}
       >
         {loading && <Spinner />}
         {!loading &&
           hasRows &&
           rows.map((post, idx, arr) => (
-            <MDBox key={post.id}>
+            <MDBox
+              key={post.id}
+              py={2}
+              borderTop={`1px dashed ${colors.inputBorderColor}`}
+            >
               <MDBox
                 display="flex"
                 justifyContent="space-between"
@@ -278,8 +281,15 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
                 <HtmlView value={post.review} />
               </MDBox>
               {idx + 1 ===
-                Number((arr.length / 2).toFixed(0)) &&
-                middle}
+                Number((arr.length / 2).toFixed(0)) && (
+                <MDBox
+                  mt={2}
+                  pb={1}
+                  borderTop={`1px dashed ${colors.inputBorderColor}`}
+                >
+                  {middle}
+                </MDBox>
+              )}
             </MDBox>
           ))}
         {!loading && !hasRows && (
@@ -289,112 +299,156 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
         )}
       </MDBox>
 
-      <Pagination
-        onChange={doChangePagination}
-        disabled={loading}
-        pagination={pagination}
-        entriesPerPage
-        showTotalEntries
-      />
+      {!loading && hasRows && (
+        <MDBox
+          borderTop={`1px dashed ${colors.inputBorderColor}`}
+        >
+          <Pagination
+            onChange={doChangePagination}
+            disabled={loading}
+            pagination={pagination}
+            entriesPerPage
+            showTotalEntries
+          />
+        </MDBox>
+      )}
 
-      <MDTypography variant="h4" my={2}>
-        {i18n('entities.home.top_brokers')}
-      </MDTypography>
-      <TopBrokersView />
+      <MDBox
+        pb={2}
+        borderTop={`1px dashed ${colors.inputBorderColor}`}
+      >
+        <MDTypography variant="h4" my={2}>
+          {i18n('entities.home.top_brokers')}
+        </MDTypography>
+        <TopBrokersView />
+      </MDBox>
 
-      <MDTypography variant="h4">
-        {i18n('common.writeReview')}
-      </MDTypography>
-
-      <FormProvider {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <Grid spacing={2} container>
-            <Grid item md={6} xs={12}>
-              <InputFormItem
-                name="name"
-                variant="standard"
-                label={i18n('common.name')}
-                required={true}
-              />
+      <MDBox
+        pt={2}
+        borderTop={`1px dashed ${colors.inputBorderColor}`}
+      >
+        <MDTypography variant="h4" pb={2}>
+          {i18n('common.writeReview')}
+        </MDTypography>
+        <FormProvider {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <Grid spacing={2} container>
+              <Grid item md={6} xs={12}>
+                <MDTypography
+                  variant="body2"
+                  fontWeight="regular"
+                >
+                  {i18n('common.name')} *
+                </MDTypography>
+                <InputFormItem
+                  name="name"
+                  variant="standard"
+                  label={i18n('common.name')}
+                  required={true}
+                  hideLabel
+                />
+              </Grid>
+              <Grid item md={6} xs={12}>
+                <MDTypography
+                  variant="body2"
+                  fontWeight="regular"
+                >
+                  {i18n('common.email')} *
+                </MDTypography>
+                <InputFormItem
+                  name="email"
+                  variant="standard"
+                  label={i18n('common.email')}
+                  required={true}
+                  hideLabel
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <MDTypography
+                  variant="body2"
+                  fontWeight="regular"
+                >
+                  {i18n('common.rating')}
+                </MDTypography>
+                <RatingFormItem
+                  color={sidenavColor}
+                  name="rating"
+                  emptyIcon={
+                    <img src="/images/star-grey.png" />
+                  }
+                  icon={<img src="/images/star-fill.png" />}
+                  label={i18n('common.rating')}
+                  hideLabel
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <MDTypography
+                  variant="body2"
+                  fontWeight="regular"
+                >
+                  {i18n('common.review')} *
+                </MDTypography>
+                <HtmlEditorFormItem
+                  name="review"
+                  required={true}
+                  label={i18n('common.review')}
+                  toolbars={[
+                    {
+                      name: 'basicstyles',
+                      groups: ['basicstyles'],
+                    },
+                    {
+                      name: 'paragraph',
+                      groups: ['list'],
+                    },
+                    { name: 'colors' },
+                  ]}
+                  hideLabel
+                />
+              </Grid>
+              <Grid item xs={12} mb={2}>
+                <ReCaptchaV2FormItem />
+              </Grid>
             </Grid>
-            <Grid item md={6} xs={12}>
-              <InputFormItem
-                name="email"
-                variant="standard"
-                label={i18n('common.email')}
-                required={true}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <RatingFormItem
+            <FormButtons>
+              <MDButton
+                variant="gradient"
                 color={sidenavColor}
-                name="rating"
-                emptyIcon={
-                  <img src="/images/star-grey.png" />
-                }
-                icon={<img src="/images/star-fill.png" />}
-                label={i18n('common.rating')}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <HtmlEditorFormItem
-                name="review"
-                required={true}
-                label={i18n('common.review')}
-                toolbars={[
-                  {
-                    name: 'basicstyles',
-                    groups: ['basicstyles'],
-                  },
-                  {
-                    name: 'paragraph',
-                    groups: ['list'],
-                  },
-                  { name: 'colors' },
-                ]}
-              />
-            </Grid>
-            <Grid item xs={12} mb={2}>
-              <ReCaptchaV2FormItem />
-            </Grid>
-          </Grid>
-          <FormButtons>
-            <MDButton
-              variant="gradient"
-              color={sidenavColor}
-              disabled={saveLoading}
-              type="button"
-              onClick={form.handleSubmit(onSubmit)}
-              startIcon={<SaveIcon />}
-              size="small"
-            >
-              Erfahrungsbericht speichern
-            </MDButton>
-          </FormButtons>
-        </form>
-      </FormProvider>
-      {postRecordIdToDestroy && (
+                disabled={saveLoading}
+                type="button"
+                onClick={form.handleSubmit(onSubmit)}
+                startIcon={<SaveIcon />}
+                size="small"
+              >
+                Erfahrungsbericht speichern
+              </MDButton>
+            </FormButtons>
+          </form>
+        </FormProvider>
+      </MDBox>
+
+      {idToDestroy && (
         <ConfirmModal
           title={i18n('common.areYouSure')}
-          onConfirm={() => doDestroy(postRecordIdToDestroy)}
+          onConfirm={() => doDestroy(idToDestroy)}
           onClose={() => doCloseDestroyConfirmModal()}
           okText={i18n('common.yes')}
           cancelText={i18n('common.no')}
         />
       )}
-      {postRecordIdToSpam && (
+      {idToSpam && (
         <ConfirmModal
           title={i18n('common.areYouSure')}
-          onConfirm={() => doSpam(postRecordIdToSpam)}
+          onConfirm={() => doSpam(idToSpam)}
           onClose={() => doCloseSpamConfirmModal()}
           okText={i18n('common.yes')}
           cancelText={i18n('common.no')}
         />
       )}
-      {postRecordIdToReview && (
+      {idToReview && (
         <ConfirmModal
           title={i18n('common.areYouSure')}
-          onConfirm={() => doReview(postRecordIdToReview)}
+          onConfirm={() => doReview(idToReview)}
           onClose={() => doCloseReviewConfirmModal()}
           okText={i18n('common.yes')}
           cancelText={i18n('common.no')}

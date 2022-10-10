@@ -1,4 +1,8 @@
+import { useEffect } from 'react';
+import { useRouteMatch } from 'react-router-dom';
+import Advisors from 'src/view/home/sidebar/Advisors';
 import Category from 'src/view/home/sidebar/Category';
+import ComparableBrokers from 'src/view/home/sidebar/ComparableBrokers';
 import Container from '@mui/material/Container';
 import FeaturedBrokers from 'src/view/home/sidebar/FeaturedBrokers';
 import ForexSchool from 'src/view/home/sidebar/ForexSchool';
@@ -8,9 +12,8 @@ import Meta from 'src/view/home/Meta';
 import MostRead from 'src/view/home/sidebar/MostRead';
 import PageLayout from 'src/mui/examples/LayoutContainers/PageLayout';
 import PropTypes from 'prop-types';
+import ScrollTo from 'src/ScrollTo';
 import TopBrokers from 'src/view/home/sidebar/TopBrokers';
-import ComparableBrokers from 'src/view/home/sidebar/ComparableBrokers';
-import Advisors from 'src/view/home/sidebar/Advisors';
 
 function Layout({
   title,
@@ -19,6 +22,10 @@ function Layout({
   record,
   children,
 }) {
+  const match = useRouteMatch();
+  useEffect(() => {
+    ScrollTo();
+  }, [match.url]);
   return (
     <PageLayout fixedNavBar={false}>
       <Meta

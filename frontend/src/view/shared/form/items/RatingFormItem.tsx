@@ -22,6 +22,7 @@ export function RatingFormItem(props) {
     emptyIcon,
     externalErrorMessage,
     forceValue,
+    hideLabel,
     icon,
     label,
     name,
@@ -92,11 +93,11 @@ export function RatingFormItem(props) {
 
   return (
     <MDBox
-      pt={Boolean(label) ? 2 : 0}
+      pt={!hideLabel && Boolean(label) ? 2 : 0}
       position="relative"
       lineHeight={0}
     >
-      {Boolean(label) && (
+      {!hideLabel && Boolean(label) && (
         <MDTypography
           variant="caption"
           color={darkMode ? 'text' : 'secondary'}
@@ -167,6 +168,7 @@ RatingFormItem.defaultProps = {
   defaultValue: 0,
   disabled: false,
   forceValue: false,
+  hideLabel: false,
   precision: 0,
   readOnly: false,
   required: false,
@@ -191,6 +193,7 @@ RatingFormItem.propTypes = {
   emptyIcon: PropTypes.any,
   externalErrorMessage: PropTypes.string,
   forceValue: PropTypes.bool,
+  hideLabel: PropTypes.bool,
   icon: PropTypes.any,
   label: PropTypes.string,
   name: PropTypes.string,

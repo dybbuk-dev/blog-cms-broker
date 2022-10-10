@@ -21,8 +21,11 @@ function ForexSchool() {
   );
   return (
     <Card>
-      <CardHeader title="Forex-Schule" />
-      <CardContent>
+      <CardHeader
+        title="Forex-Schule"
+        sx={{ pb: 1, px: 3, pt: 3 }}
+      />
+      <CardContent sx={{ pt: 0 }}>
         {loading && <Spinner />}
         {!loading &&
           record.count > 0 &&

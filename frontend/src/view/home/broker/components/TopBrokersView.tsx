@@ -1,14 +1,14 @@
-import { CardContent, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import brokerTopSelectors from 'src/modules/broker/top/brokerTopSelectors';
+import CircleNumber from 'src/view/home/shared/CircleNumber';
 import ImageView from 'src/view/home/ImageView';
 import MaterialLink from '@mui/material/Link';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import OverallRating from 'src/view/home/broker/shared/OverallRating';
 import Spinner from 'src/view/shared/Spinner';
-import CircleNumber from 'src/view/home/shared/CircleNumber';
 
 function TopBrokersView() {
   const loading = useSelector(
@@ -36,9 +36,11 @@ function TopBrokersView() {
                   display="flex"
                   flexGrow={1}
                   flexDirection="row"
+                  flexWrap="wrap"
                   gap={2}
                 >
                   <MaterialLink
+                    flexShrink={0}
                     href={row.meta?.homepage}
                     target="_blank"
                   >
@@ -47,7 +49,7 @@ function TopBrokersView() {
                         row.broker_image_broker_detail_logo
                       }
                       sx={{
-                        width: '250px',
+                        height: '60px',
                         objectFit: 'contain',
                       }}
                     />
@@ -57,6 +59,7 @@ function TopBrokersView() {
                       row.broker_image_broker_regulation_image
                     }
                     sx={{
+                      height: '60px',
                       objectFit: 'contain',
                     }}
                   />
@@ -74,7 +77,8 @@ function TopBrokersView() {
                       variant="button"
                       color="text"
                       fontWeight="regular"
-                      lineHeight={1.5}
+                      mt={0.5}
+                      lineHeight={1}
                     >
                       <MaterialLink
                         component={Link}

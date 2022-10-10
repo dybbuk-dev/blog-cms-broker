@@ -16,6 +16,7 @@ interface HtmlEditorFormItemProps {
   value?: string;
   required?: boolean;
   height: number;
+  hideLabel?: boolean;
   externalErrorMessage?: string;
   toolbars?: {
     name: string;
@@ -29,6 +30,7 @@ function HtmlEditorFormItem({
   value,
   required,
   height,
+  hideLabel,
   externalErrorMessage,
   toolbars,
 }: HtmlEditorFormItemProps) {
@@ -105,8 +107,11 @@ function HtmlEditorFormItem({
   };
 
   return (
-    <MDBox pt={Boolean(label) ? 2 : 0} position="relative">
-      {Boolean(label) && (
+    <MDBox
+      pt={!hideLabel && Boolean(label) ? 2 : 0}
+      position="relative"
+    >
+      {!hideLabel && Boolean(label) && (
         <MDTypography
           variant="caption"
           color={darkMode ? 'text' : 'secondary'}
@@ -142,9 +147,10 @@ function HtmlEditorFormItem({
 }
 
 HtmlEditorFormItem.defaultProps = {
-  value: '',
-  required: false,
   height: 300,
+  hideLabel: false,
+  required: false,
+  value: '',
 };
 
 export default HtmlEditorFormItem;

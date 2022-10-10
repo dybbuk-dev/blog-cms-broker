@@ -212,7 +212,9 @@ function BrokerListTable(props) {
                       to={`/erfahrungsberichte/${row.name_normalized}`}
                       underline="hover"
                     >
-                      {row.name}
+                      {`${row.name
+                        .replace(/\([\w\d\s]+\)/g, '')
+                        .trim()} Erfahrungen`}
                     </MaterialLink>
                   </DataTableBodyCell>
                 </TableRow>

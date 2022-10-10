@@ -40,7 +40,9 @@ function HomeViewPage(props) {
             <MDTypography variant="h4" my={2}>
               {i18n('entities.home.top_brokers')}
             </MDTypography>
-            <TopBrokersView />
+            <MDBox pb={3}>
+              <TopBrokersView />
+            </MDBox>
             <HtmlViewWrapper>
               <p>
                 {i18n(
@@ -49,7 +51,7 @@ function HomeViewPage(props) {
               </p>
             </HtmlViewWrapper>
           </Grid>
-          <Grid md={6} xs={12} item>
+          <Grid lg={6} xs={12} item>
             <Card>
               <MDButton
                 variant="contained"
@@ -58,14 +60,13 @@ function HomeViewPage(props) {
                 startIcon={<SendIcon />}
                 fullWidth
               >
-                <h3>
-                  {i18n('entities.home.forex_broker')}
-                </h3>
+                {i18n('entities.home.forex_broker')}
               </MDButton>
               <MDBox
                 display="flex"
                 justifyContent="flex-start"
-                gap={5}
+                alignItems="center"
+                gap={3}
                 p={2}
               >
                 <img
@@ -73,7 +74,11 @@ function HomeViewPage(props) {
                   width="115px"
                   height="115px"
                 />
-                <MDTypography variant="h6" color="text">
+                <MDTypography
+                  color="text"
+                  overflow="hidden"
+                  variant="h6"
+                >
                   {i18n(
                     'entities.home.forex_broker_content',
                   )}
@@ -81,7 +86,7 @@ function HomeViewPage(props) {
               </MDBox>
             </Card>
           </Grid>
-          <Grid md={6} xs={12} item>
+          <Grid lg={6} xs={12} item>
             <Card>
               <MDButton
                 variant="contained"
@@ -90,12 +95,13 @@ function HomeViewPage(props) {
                 startIcon={<SendIcon />}
                 fullWidth
               >
-                <h3>{i18n('entities.home.cfd_broker')}</h3>
+                {i18n('entities.home.cfd_broker')}
               </MDButton>
               <MDBox
                 display="flex"
                 justifyContent="flex-start"
-                gap={5}
+                alignItems="center"
+                gap={3}
                 p={2}
               >
                 <img
@@ -103,7 +109,11 @@ function HomeViewPage(props) {
                   width="115px"
                   height="115px"
                 />
-                <MDTypography variant="h6" color="text">
+                <MDTypography
+                  color="text"
+                  overflow="hidden"
+                  variant="h6"
+                >
                   {i18n('entities.home.cfd_broker_content')}
                 </MDTypography>
               </MDBox>

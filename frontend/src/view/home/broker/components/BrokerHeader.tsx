@@ -15,7 +15,8 @@ function BrokerHeader({ record }) {
   const colors = darkMode ? dColors : lColors;
   return (
     <MDBox
-      pb={2}
+      py={2}
+      borderTop={`1px dashed ${colors.inputBorderColor}`}
       borderBottom={`1px dashed ${colors.inputBorderColor}`}
     >
       <MDTypography variant="h2" mb={2}>
@@ -41,7 +42,7 @@ function BrokerHeader({ record }) {
             <MDButton
               variant="contained"
               href={record.meta?.homepage}
-              color="warning"
+              color="info"
               target="_blank"
               startIcon={<SendIcon />}
               fullWidth

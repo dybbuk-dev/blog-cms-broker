@@ -21,8 +21,11 @@ function MostRead() {
   );
   return (
     <Card>
-      <CardHeader title="Meist gelesen" />
-      <CardContent>
+      <CardHeader
+        title="Meist gelesen"
+        sx={{ pb: 1, px: 3, pt: 3 }}
+      />
+      <CardContent sx={{ pt: 0 }}>
         {loading && <Spinner />}
         {!loading &&
           record.count > 0 &&

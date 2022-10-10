@@ -19,8 +19,6 @@ import PageContent from 'src/view/shared/view/PageContent';
 import pageHomeSelectors from 'src/modules/page/home/pageHomeSelectors';
 import Spinner from 'src/view/shared/Spinner';
 import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
-import config from 'src/config';
-import PageService from 'src/modules/page/pageService';
 import pageHomeActions from 'src/modules/page/home/pageHomeActions';
 import urlParse from 'url-parse';
 import ScrollTo from 'src/ScrollTo';
@@ -185,10 +183,7 @@ const GeneralPage = () => {
                         color={sidenavColor}
                         fontWeight="regular"
                       >
-                        <MaterialLink
-                          href={url}
-                          target="_blank"
-                        >
+                        <MaterialLink href={url}>
                           {name}
                         </MaterialLink>
                       </MDTypography>
