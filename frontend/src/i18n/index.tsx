@@ -1,6 +1,6 @@
 import _get from 'lodash/get';
 import { setLocale as setYupLocale } from 'yup';
-import moment from 'moment';
+import moment, { lang } from 'moment';
 
 let currentLanguageCode = '';
 
@@ -23,8 +23,14 @@ const languages: {
 };
 
 export async function init() {
-  currentLanguageCode =
-    localStorage.getItem('language') || 'de';
+  currentLanguageCode = localStorage.getItem('language');
+  if (
+    !currentLanguageCode ||
+    !languages[currentLanguageCode]
+  ) {
+    currentLanguageCode = 'de';
+  }
+
   setLanguageCode(currentLanguageCode);
 
   if (currentLanguageCode === 'de') {
