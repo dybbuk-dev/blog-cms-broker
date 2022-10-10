@@ -27,6 +27,66 @@ class BrokerPostRepository {
     };
   }
 
+  static async updateRating(
+    id,
+    options: IRepositoryOptions,
+  ) {
+    const transaction =
+      SequelizeRepository.getTransaction(options);
+    await options.database.broker_rating.destroy({
+      where: {
+        id: id,
+      },
+      transaction,
+    });
+    const result =
+      await options.database.broker_post.findAll({
+        attributes: [
+          [
+            Sequelize.fn('COUNT', Sequelize.col('id')),
+            'overall_reviews',
+          ],
+          [
+            Sequelize.fn(
+              'SUM',
+              Sequelize.literal('IF(rating > 0, 1, 0)'),
+            ),
+            'rated_reviews',
+          ],
+          [
+            Sequelize.fn('SUM', Sequelize.col('rating')),
+            'sum_rating',
+          ],
+        ],
+        where: {
+          broker_id: id,
+          deleted: false,
+          spam: false,
+          review_required: false,
+        },
+      });
+    const summary = result[0]?.dataValues;
+    const rated_reviews = Number(
+      summary?.rated_reviews || 0,
+    );
+    const overall_rating =
+      Number(summary?.sum_rating || 0) /
+      (rated_reviews || 1);
+    await options.database.broker_rating.create(
+      {
+        id: id,
+        overall_rating: overall_rating,
+        overall_reviews: summary?.overall_reviews || 0,
+        rated_reviews: rated_reviews,
+        ip: '',
+        created: moment(),
+        modified: moment(),
+        last_modified: moment(),
+      },
+      { transaction },
+    );
+  }
+
   static async create(data, options: IRepositoryOptions) {
     const transaction =
       SequelizeRepository.getTransaction(options);
@@ -261,6 +321,46 @@ class BrokerPostRepository {
       });
 
     return records.map((record) => record.id);
+  }
+
+  static async filterBrokerIdInTenant(
+    id,
+    options: IRepositoryOptions,
+  ) {
+    return lodash.get(
+      await this.filterBrokerIdsInTenant([id], options),
+      '[0]',
+      null,
+    );
+  }
+
+  static async filterBrokerIdsInTenant(
+    ids,
+    options: IRepositoryOptions,
+  ) {
+    if (!ids || !ids.length) {
+      return [];
+    }
+
+    const where = {
+      id: {
+        [Op.in]: ids,
+      },
+    };
+
+    const records =
+      await options.database.broker_post.findAll({
+        attributes: [
+          Sequelize.fn(
+            'DISTINCT',
+            Sequelize.col('broker_id'),
+          ),
+          'broker_id',
+        ],
+        where,
+      });
+
+    return records.map((record) => record.broker_id);
   }
 
   static async count(filter, options: IRepositoryOptions) {

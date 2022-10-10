@@ -29,6 +29,8 @@ export default class BrokerPostService {
         transaction,
       );
 
+      await this.ratingAll([record.id]);
+
       return record;
     } catch (error) {
       await SequelizeRepository.rollbackTransaction(
@@ -65,6 +67,8 @@ export default class BrokerPostService {
         transaction,
       );
 
+      await this.ratingAll([id]);
+
       return record;
     } catch (error) {
       await SequelizeRepository.rollbackTransaction(
@@ -98,6 +102,8 @@ export default class BrokerPostService {
       await SequelizeRepository.commitTransaction(
         transaction,
       );
+
+      await this.ratingAll(ids);
     } catch (error) {
       await SequelizeRepository.rollbackTransaction(
         transaction,
@@ -123,6 +129,8 @@ export default class BrokerPostService {
       await SequelizeRepository.commitTransaction(
         transaction,
       );
+
+      await this.ratingAll(ids);
     } catch (error) {
       await SequelizeRepository.rollbackTransaction(
         transaction,
@@ -140,6 +148,38 @@ export default class BrokerPostService {
     try {
       for (const id of ids) {
         await BrokerPostRepository.review(id, {
+          ...this.options,
+          transaction,
+        });
+      }
+
+      await SequelizeRepository.commitTransaction(
+        transaction,
+      );
+
+      await this.ratingAll(ids);
+    } catch (error) {
+      await SequelizeRepository.rollbackTransaction(
+        transaction,
+      );
+      throw error;
+    }
+  }
+
+  async ratingAll(ids) {
+    const transaction =
+      await SequelizeRepository.createTransaction(
+        this.options.database,
+      );
+
+    try {
+      const brokers =
+        await BrokerPostRepository.filterBrokerIdsInTenant(
+          ids,
+          { ...this.options, transaction },
+        );
+      for (const broker of brokers) {
+        await BrokerPostRepository.updateRating(broker, {
           ...this.options,
           transaction,
         });
