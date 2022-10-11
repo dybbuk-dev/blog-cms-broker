@@ -27,7 +27,7 @@ const root = {
   display: 'inline-flex',
   justifyContent: 'center',
   alignItems: 'center',
-  fontSize: size.xs,
+  fontSize: size.md,
   fontWeight: fontWeightBold,
   borderRadius: borderRadius.lg,
   padding: `${pxToRem(6.302)} ${pxToRem(16.604)}`,
