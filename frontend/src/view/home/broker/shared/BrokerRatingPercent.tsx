@@ -8,7 +8,13 @@ function BrokerRatingPercent({ value }) {
   return (
     <MDBox
       display="flex"
-      bgColor={percent >= 50 ? 'info' : 'error'}
+      bgColor={
+        percent >= 80
+          ? 'success'
+          : percent >= 50
+          ? 'info'
+          : 'error'
+      }
       color="white"
       borderRadius="md"
       alignItems="center"
