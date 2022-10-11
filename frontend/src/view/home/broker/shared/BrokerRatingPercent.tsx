@@ -3,7 +3,7 @@ import MDBox from 'src/mui/components/MDBox';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
-function BrokerRatingPercent({ value }) {
+function BrokerRatingPercent({ value, size }) {
   const percent = Number(((value / 5) * 100).toFixed(0));
   return (
     <MDBox
@@ -16,9 +16,11 @@ function BrokerRatingPercent({ value }) {
           : 'error'
       }
       color="white"
+      fontSize={(size * 2) / 3}
       borderRadius="md"
       alignItems="center"
       fontWeight="bold"
+      height={size}
       gap={1}
       px={1}
     >
@@ -30,10 +32,12 @@ function BrokerRatingPercent({ value }) {
 
 BrokerRatingPercent.defaultProps = {
   value: 0,
+  size: 32,
 };
 
 BrokerRatingPercent.propTypes = {
   value: PropTypes.number,
+  size: PropTypes.number,
 };
 
 export default BrokerRatingPercent;

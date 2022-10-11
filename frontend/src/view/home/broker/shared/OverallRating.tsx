@@ -9,26 +9,44 @@ function OverallRating({
   record,
   hideDescription,
   hidePercent,
+  size,
 }) {
   return (
     <>
-      <MDBox display="flex" alignItems="center" gap={1}>
+      <MDBox
+        display="inline-flex"
+        alignItems="center"
+        flexWrap="wrap"
+        gap={1}
+      >
         {!hidePercent && (
           <BrokerRatingPercent
             value={record.rating?.overall_rating}
+            size={size}
           />
         )}
         <RatingViewItem
           value={record.rating?.overall_rating}
           precision={0.1}
-          emptyIcon={<img src="/images/star-grey.png" />}
-          icon={<img src="/images/star-fill.png" />}
+          emptyIcon={
+            <img
+              src="/images/star-grey.png"
+              height={size}
+            />
+          }
+          icon={
+            <img
+              src="/images/star-fill.png"
+              height={size}
+            />
+          }
           size="large"
         />
       </MDBox>
       {!hideDescription && (
         <MDTypography
-          variant="button"
+          variant="body2"
+          fontSize={size / 3}
           color="text"
           fontWeight="regular"
         >
@@ -47,12 +65,14 @@ function OverallRating({
 OverallRating.defaultProps = {
   hideDescription: false,
   hidePercent: false,
+  size: 38,
 };
 
 OverallRating.propTypes = {
   record: PropTypes.any.isRequired,
   hideDescription: PropTypes.bool,
   hidePercent: PropTypes.bool,
+  size: PropTypes.number,
 };
 
 export default OverallRating;
