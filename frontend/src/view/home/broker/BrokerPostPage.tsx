@@ -163,11 +163,10 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
       <MDBox
         display="flex"
         flexDirection="column"
+        position="relative"
         color="text"
       >
-        {loading && <Spinner />}
-        {!loading &&
-          hasRows &&
+        {hasRows &&
           rows.map((post, idx, arr) => (
             <MDBox
               key={post.id}
@@ -296,6 +295,16 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
           <MDTypography variant="body2">
             {i18n('common.noCommit')}
           </MDTypography>
+        )}
+        {loading && (
+          <MDBox
+            position="absolute"
+            left="0"
+            right="0"
+            top="0"
+          >
+            <Spinner />
+          </MDBox>
         )}
       </MDBox>
 
