@@ -22,12 +22,19 @@ function BrokerHeader({ record }) {
       <MDTypography variant="h2" mb={2}>
         {`${record.name} Erfahrungen und Test`}
       </MDTypography>
-      <Grid spacing={3} alignItems="center" container>
+      <Grid spacing={3} alignItems="stretch" container>
         <Grid md={6} xs={12} item>
           <ImageView
             value={record.broker_image_broker_detail_logo}
             sx={{
-              width: '100%',
+              width: {
+                xs: '100%',
+                sm: undefined,
+              },
+              height: {
+                xs: undefined,
+                sm: '100%',
+              },
             }}
           />
         </Grid>
@@ -36,7 +43,7 @@ function BrokerHeader({ record }) {
             display="flex"
             flexWrap="wrap"
             justifyContent="flex-end"
-            gap={1}
+            gap={{ xs: 1, md: 1.5, lg: 2 }}
           >
             <OverallRating record={record} />
             <MDButton

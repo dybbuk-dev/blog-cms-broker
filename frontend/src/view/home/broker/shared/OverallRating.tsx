@@ -46,7 +46,7 @@ function OverallRating({
       {!hideDescription && (
         <MDTypography
           variant="body2"
-          fontSize={size / 3}
+          fontSize={(size * 3) / 7}
           color="text"
           fontWeight="regular"
         >
@@ -65,7 +65,7 @@ function OverallRating({
 OverallRating.defaultProps = {
   hideDescription: false,
   hidePercent: false,
-  size: 38,
+  size: 32,
 };
 
 OverallRating.propTypes = {
