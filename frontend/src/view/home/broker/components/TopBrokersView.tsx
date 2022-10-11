@@ -47,7 +47,7 @@ function TopBrokersView() {
                   >
                     <ImageView
                       value={
-                        row.broker_image_top_broker_logo
+                        row.broker_image_broker_detail_logo
                       }
                       sx={{
                         height: '70px',
