@@ -663,11 +663,13 @@ function DefaultNavbar({
           position: fixed ? 'absolute' : 'relative',
           zIndex: 3,
           left: 0,
+          borderTopLeftRadius: 0,
+          borderTopRightRadius: 0,
         }}
       >
         <MDBox
           pt={3}
-          pb={2}
+          pb={1}
           px={3}
           color={light ? 'white' : 'text'}
         >
@@ -675,6 +677,7 @@ function DefaultNavbar({
             display="flex"
             justifyContent="space-between"
             alignItems="center"
+            mb={2}
           >
             <MDBox component={Link} to="/">
               <MDTypography
@@ -747,7 +750,7 @@ function DefaultNavbar({
             display="flex"
             justifyContent="space-between"
             alignItems="center"
-            mt={1}
+            mt={2}
           >
             <MDBox></MDBox>
             <MDBox
