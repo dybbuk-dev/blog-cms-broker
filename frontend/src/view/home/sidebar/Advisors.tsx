@@ -1,11 +1,8 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-} from '@mui/material';
+import { Card, CardHeader } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import MaterialLink from '@mui/material/Link';
+import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 
 function Advisors({ record }) {
@@ -14,9 +11,9 @@ function Advisors({ record }) {
     <Card>
       <CardHeader
         title="Ratgeber"
-        sx={{ pb: 1, px: 3, pt: 3 }}
+        sx={{ pb: 1, px: 3, pt: 2 }}
       />
-      <CardContent sx={{ pt: 0 }}>
+      <MDBox sx={{ pt: 0, px: 3, pb: 2 }}>
         {record.blogs.map((row, idx) => (
           <MDTypography
             key={idx}
@@ -49,7 +46,7 @@ function Advisors({ record }) {
             </MaterialLink>
           </MDTypography>
         ))}
-      </CardContent>
+      </MDBox>
     </Card>
   );
 }

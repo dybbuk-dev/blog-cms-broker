@@ -1,13 +1,10 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-} from '@mui/material';
+import { Card, CardHeader } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useSelector } from 'react-redux';
 import brokerComparableSelectors from 'src/modules/broker/comparable/brokerComparableSelectors';
 import MaterialLink from '@mui/material/Link';
+import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import Spinner from 'src/view/shared/Spinner';
 
@@ -28,9 +25,9 @@ function ComparableBrokers({ record }) {
         title={`${record.name
           .replace(/\([\w\d\s]+\)/g, '')
           .trim()} vergleichen mit`}
-        sx={{ pb: 1, px: 3, pt: 3 }}
+        sx={{ pb: 1, px: 3, pt: 2 }}
       />
-      <CardContent sx={{ pt: 0 }}>
+      <MDBox sx={{ pt: 0, px: 3, pb: 2 }}>
         {loading && <Spinner />}
         {!loading &&
           hasRows &&
@@ -52,7 +49,7 @@ function ComparableBrokers({ record }) {
                 </MaterialLink>
               </MDTypography>
             ))}
-      </CardContent>
+      </MDBox>
     </Card>
   );
 }

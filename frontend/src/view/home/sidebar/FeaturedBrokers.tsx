@@ -1,9 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Grid,
-} from '@mui/material';
+import { Card, CardHeader, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useSelector } from 'react-redux';
@@ -31,9 +26,9 @@ function FeaturedBrokers() {
     <Card>
       <CardHeader
         title="Broker vorgestellt"
-        sx={{ pb: 1, px: 3, pt: 3 }}
+        sx={{ pb: 1, px: 3, pt: 2 }}
       />
-      <CardContent sx={{ pt: 0 }}>
+      <MDBox sx={{ pt: 0, px: 3, pb: 2 }}>
         {loading && <Spinner />}
         {!loading && hasRows && (
           <Grid spacing={2} container>
@@ -95,7 +90,7 @@ function FeaturedBrokers() {
             ))}
           </Grid>
         )}
-      </CardContent>
+      </MDBox>
     </Card>
   );
 }

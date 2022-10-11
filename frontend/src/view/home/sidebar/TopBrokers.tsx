@@ -1,21 +1,15 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Grid,
-} from '@mui/material';
+import { Card, CardHeader, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useSelector } from 'react-redux';
 import brokerTopSelectors from 'src/modules/broker/top/brokerTopSelectors';
+import CircleNumber from 'src/view/home/shared/CircleNumber';
 import ImageView from 'src/view/home/ImageView';
 import MaterialLink from '@mui/material/Link';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
-import OverallRating from 'src/view/home/broker/shared/OverallRating';
-import Spinner from 'src/view/shared/Spinner';
-import CircleNumber from 'src/view/home/shared/CircleNumber';
 import RatingViewItem from 'src/view/shared/view/RatingViewItem';
+import Spinner from 'src/view/shared/Spinner';
 
 function TopBrokers() {
   const { sidenavColor } = selectMuiSettings();
@@ -30,9 +24,9 @@ function TopBrokers() {
     <Card>
       <CardHeader
         title="Von Tradern am besten bewertet"
-        sx={{ pb: 1, px: 3, pt: 3 }}
+        sx={{ pb: 1, px: 3, pt: 2 }}
       />
-      <CardContent sx={{ pt: 0 }}>
+      <MDBox sx={{ pt: 0, px: 3, pb: 2 }}>
         {loading && <Spinner />}
         {!loading && hasRows && (
           <Grid spacing={2} container>
@@ -129,7 +123,7 @@ function TopBrokers() {
             ))}
           </Grid>
         )}
-      </CardContent>
+      </MDBox>
     </Card>
   );
 }
