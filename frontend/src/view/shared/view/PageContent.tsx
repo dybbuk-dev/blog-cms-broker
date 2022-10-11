@@ -4,7 +4,7 @@ import MDBox from 'src/mui/components/MDBox';
 function PageContent({ children, ...rest }) {
   return (
     <Card>
-      <MDBox p={5} color="text" {...rest}>
+      <MDBox px={5} py={3} {...rest}>
         {children}
       </MDBox>
     </Card>
