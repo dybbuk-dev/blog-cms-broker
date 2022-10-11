@@ -185,8 +185,8 @@ const colors: Types = {
   },
 
   text: {
-    main: '#7b809a',
-    focus: '#7b809a',
+    main: '#000000cc',
+    focus: '#000000cc',
   },
 
   transparent: {
@@ -305,7 +305,7 @@ const colors: Types = {
   /**complete: {
     main: green[700],
     focus: green[700],
-  }, 
+  },
 
   active: {
     main: green[700],

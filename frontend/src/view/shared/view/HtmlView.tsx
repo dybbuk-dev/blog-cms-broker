@@ -3,7 +3,7 @@ import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
 import MDBox from 'src/mui/components/MDBox';
 
-export const HtmlViewWrapper = styled('div')(() => ({
+const HtmlStyled = styled('div')(() => ({
   fontSize: '1rem',
   fontWeight: 400,
   '& ul, ol': {
@@ -41,12 +41,16 @@ export const HtmlViewWrapper = styled('div')(() => ({
   },
 }));
 
-function HtmlView({ value }) {
+export const HtmlViewWrapper = ({ children }) => {
   return (
     <MDBox color="text">
-      <HtmlViewWrapper>{parse(value)}</HtmlViewWrapper>
+      <HtmlStyled>{children}</HtmlStyled>
     </MDBox>
   );
+};
+
+function HtmlView({ value }) {
+  return <HtmlViewWrapper>{parse(value)}</HtmlViewWrapper>;
 }
 
 HtmlView.propTypes = {
