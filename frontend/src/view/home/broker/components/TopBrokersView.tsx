@@ -59,6 +59,7 @@ function TopBrokersView() {
                       row.broker_image_broker_regulation_image
                     }
                     sx={{
+                      display: { xs: 'none', md: 'block' },
                       height: '60px',
                       objectFit: 'contain',
                     }}
