@@ -38,11 +38,13 @@ function HtmlEditorFormItem({
 
   const ckeditorConfig: any = {
     extraPlugins: [
+      'iframe',
       'image2',
       'uploadimage',
       'colorbutton',
       'colordialog',
     ],
+    extraAllowedContent: 'iframe[*]',
     height,
     resize_minHeight: height,
     resize_maxHeight: height * 2,
