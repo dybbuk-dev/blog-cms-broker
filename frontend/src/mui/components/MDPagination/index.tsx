@@ -88,7 +88,11 @@ const MDPagination: FC<Props | any> = forwardRef(
             color={active ? context.color : 'secondary'}
             iconOnly
             circular
-            ownerState={{ variant, active, paginationSize }}
+            ownerState={{
+              variant,
+              active: false,
+              paginationSize,
+            }}
           >
             {children}
           </MDPaginationItemRoot>

@@ -33,19 +33,22 @@ function Pagination(props) {
     });
   };
 
-  const onChangePage = (current) => {
+  const onChangePage = (pageNum) => {
     ScrollTo('list-top-4-pagination');
+    if (pageNum === current) {
+      return;
+    }
     const pageSize = Number(
       props.pagination.pageSize || 10,
     );
-    if (current > last) {
-      current = last;
+    if (pageNum > last) {
+      pageNum = last;
     }
-    if (current < 1) {
-      current = 1;
+    if (pageNum < 1) {
+      pageNum = 1;
     }
     props.onChange({
-      current: current,
+      current: pageNum,
       pageSize,
     });
   };
