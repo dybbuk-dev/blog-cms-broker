@@ -44,18 +44,18 @@ function Layout({
                 <TopBrokers />
               </Grid>
               {Boolean(record) && (
-                <>
-                  <Grid xs={12} item>
-                    <ComparableBrokers record={record} />
-                  </Grid>
-                  <Grid xs={12} item>
-                    <Advisors record={record} />
-                  </Grid>
-                </>
+                <Grid xs={12} item>
+                  <ComparableBrokers record={record} />
+                </Grid>
               )}
               <Grid xs={12} item>
                 <FeaturedBrokers />
               </Grid>
+              {Boolean(record) && (
+                <Grid xs={12} item>
+                  <Advisors record={record} />
+                </Grid>
+              )}
               <Grid xs={12} item>
                 <Category />
               </Grid>
