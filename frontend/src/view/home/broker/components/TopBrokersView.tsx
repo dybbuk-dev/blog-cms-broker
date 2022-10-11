@@ -37,6 +37,7 @@ function TopBrokersView() {
                   flexGrow={1}
                   flexDirection="row"
                   flexWrap="wrap"
+                  alignItems="center"
                   gap={2}
                 >
                   <MaterialLink
@@ -46,10 +47,10 @@ function TopBrokersView() {
                   >
                     <ImageView
                       value={
-                        row.broker_image_broker_detail_logo
+                        row.broker_image_top_broker_logo
                       }
                       sx={{
-                        height: '60px',
+                        height: '70px',
                         objectFit: 'contain',
                       }}
                     />
@@ -71,6 +72,7 @@ function TopBrokersView() {
                   >
                     <OverallRating
                       record={row}
+                      size={32}
                       hideDescription
                       hidePercent
                     />
