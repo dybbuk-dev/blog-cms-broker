@@ -147,7 +147,11 @@ const GeneralPage = () => {
               {category.teaser && (
                 <HtmlView value={category.teaser} />
               )}
-              <MDTypography variant="h4" my={2}>
+              <MDTypography
+                display="block"
+                variant="h4"
+                my={2}
+              >
                 {i18n('entities.home.top_brokers')}
               </MDTypography>
               <TopBrokersView />
@@ -231,8 +235,17 @@ const GeneralPage = () => {
               )}
             </PageContent>
             <AuthorView value={page.author} />
-            <PageContent>
-              <MDTypography variant="h4" mb={2}>
+            <PageContent
+              display={{
+                xs: 'none',
+                lg: 'block',
+              }}
+            >
+              <MDTypography
+                display="block"
+                variant="h4"
+                mb={2}
+              >
                 {i18n('entities.home.top_brokers')}
               </MDTypography>
               <TopBrokersView />
@@ -265,8 +278,17 @@ const GeneralPage = () => {
                 <HtmlView value={brokerArticle.content} />
               </PageContent>
               <AuthorView value={brokerArticle.author} />
-              <PageContent>
-                <MDTypography variant="h4" mb={2}>
+              <PageContent
+                display={{
+                  xs: 'none',
+                  lg: 'block',
+                }}
+              >
+                <MDTypography
+                  display="block"
+                  variant="h4"
+                  mb={2}
+                >
                   {i18n('entities.home.top_brokers')}
                 </MDTypography>
                 <TopBrokersView />

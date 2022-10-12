@@ -37,7 +37,11 @@ function HomeViewPage(props) {
             <HtmlViewWrapper>
               <p>{i18n('entities.home.description')}</p>
             </HtmlViewWrapper>
-            <MDTypography variant="h4" my={2}>
+            <MDTypography
+              display="block"
+              variant="h4"
+              my={2}
+            >
               {i18n('entities.home.top_brokers')}
             </MDTypography>
             <MDBox pb={3}>

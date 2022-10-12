@@ -331,7 +331,7 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
         pb={2}
         borderTop={`1px dashed ${colors.inputBorderColor}`}
       >
-        <MDTypography variant="h4" my={2}>
+        <MDTypography display="block" variant="h4" my={2}>
           {i18n('entities.home.top_brokers')}
         </MDTypography>
         <TopBrokersView />

@@ -15,6 +15,7 @@ import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
 import Breadcrumb from 'src/view/home/Breadcrumb';
 import urlParse from 'url-parse';
 import ScrollTo from 'src/ScrollTo';
+import MDTypography from 'src/mui/components/MDTypography';
 
 const BlogDetailPage = () => {
   const [dispatched, setDispatched] = useState(false);
@@ -85,8 +86,19 @@ const BlogDetailPage = () => {
                 <CommentPage record={record} />
               </PageContent>
               <AuthorView value={record.author} />
-              <PageContent>
-                <h3>{i18n('entities.home.top_brokers')}</h3>
+              <PageContent
+                display={{
+                  xs: 'none',
+                  lg: 'block',
+                }}
+              >
+                <MDTypography
+                  display="block"
+                  variant="h4"
+                  mb={2}
+                >
+                  {i18n('entities.home.top_brokers')}
+                </MDTypography>
                 <TopBrokersView />
               </PageContent>
             </>

@@ -9,6 +9,7 @@ import MaterialLink from '@mui/material/Link';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import PageContent from 'src/view/shared/view/PageContent';
+import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
 
 function Footer() {
   const { sidenavColor } = selectMuiSettings();
@@ -26,6 +27,17 @@ function Footer() {
         gap={2}
         my={2}
       >
+        <PageContent
+          display={{
+            xs: 'block',
+            lg: 'none',
+          }}
+        >
+          <MDTypography display="block" variant="h4" mb={2}>
+            {i18n('entities.home.top_brokers')}
+          </MDTypography>
+          <TopBrokersView />
+        </PageContent>
         <MDBox py={5}>
           <MDTypography
             variant="body2"

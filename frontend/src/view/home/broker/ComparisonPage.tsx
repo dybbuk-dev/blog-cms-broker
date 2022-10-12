@@ -79,7 +79,11 @@ const ComparisonPage = () => {
                 )}
               </p>
             </HtmlViewWrapper>
-            <MDTypography variant="h4" my={2}>
+            <MDTypography
+              display="block"
+              variant="h4"
+              my={2}
+            >
               {i18n('entities.home.top_brokers')}
             </MDTypography>
             <TopBrokersView />
