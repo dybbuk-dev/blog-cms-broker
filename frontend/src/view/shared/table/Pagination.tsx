@@ -142,9 +142,9 @@ function Pagination(props) {
     <>
       <MDBox
         display="flex"
-        flexDirection={{ xs: 'column', sm: 'row' }}
+        flexDirection={{ xs: 'column', md: 'row' }}
         justifyContent="space-between"
-        alignItems={{ xs: 'flex-start', sm: 'center' }}
+        alignItems={{ xs: 'flex-start', md: 'center' }}
         p={!showTotalEntries && last === 1 ? 0 : 3}
       >
         {entriesPerPage && (

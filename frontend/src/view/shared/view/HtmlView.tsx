@@ -39,6 +39,12 @@ const HtmlStyled = styled('div')(() => ({
   '& .table-hover > tbody > tr:hover': {
     backgroundColor: '#f5f5f5',
   },
+  '& iframe': {
+    maxWidth: '100% !important',
+  },
+  '& img': {
+    maxWidth: '100% !important',
+  },
 }));
 
 export const HtmlViewWrapper = ({ children }) => {

@@ -197,7 +197,12 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
                     )}`}
                   </MDTypography>
                 </MDBox>
-                <MDBox display="flex" gap={1}>
+                <MDBox
+                  display="inline-flex"
+                  flexWrap="wrap"
+                  justifyContent="flex-end"
+                  gap={1}
+                >
                   <RatingViewItem
                     value={post.rating}
                     precision={0.1}
@@ -215,7 +220,7 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
                     }
                   />
                   {hasPermissionToEdit && (
-                    <>
+                    <MDBox>
                       <Tooltip title={i18n('common.edit')}>
                         <IconButton
                           size="small"
@@ -267,7 +272,7 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
                           <DeleteIcon />
                         </IconButton>
                       </Tooltip>
-                    </>
+                    </MDBox>
                   )}
                 </MDBox>
               </MDBox>
