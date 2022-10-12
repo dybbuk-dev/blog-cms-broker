@@ -1,17 +1,18 @@
-import express from 'express';
-import cors from 'cors';
 import { authMiddleware } from '../middlewares/authMiddleware';
-import { tenantMiddleware } from '../middlewares/tenantMiddleware';
-import { databaseMiddleware } from '../middlewares/databaseMiddleware';
-import bodyParser from 'body-parser';
-import helmet from 'helmet';
-import { createRateLimiter } from './apiRateLimiter';
-import { languageMiddleware } from '../middlewares/languageMiddleware';
-import authSocial from './auth/authSocial';
-import setupSwaggerUI from './apiDocumentation';
-import path from 'path';
-import * as fs from 'fs';
 import { contentType } from 'mime-types';
+import { createRateLimiter } from './apiRateLimiter';
+import { databaseMiddleware } from '../middlewares/databaseMiddleware';
+import { languageMiddleware } from '../middlewares/languageMiddleware';
+import { tenantMiddleware } from '../middlewares/tenantMiddleware';
+import * as fs from 'fs';
+import authSocial from './auth/authSocial';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import express from 'express';
+import helmet from 'helmet';
+import path from 'path';
+import setupSwaggerUI from './apiDocumentation';
+import { handleSEO } from '../seo';
 
 const app = express();
 
@@ -159,14 +160,16 @@ app.use(
   ),
 );
 
-app.get('*', function (req, res) {
-  res.sendFile(
-    path.resolve(
-      __dirname,
-      '../../frontend/build',
-      'index.html',
-    ),
-  );
+app.get('*', async (req, res) => {
+  if (!(await handleSEO(req, res))) {
+    res.sendFile(
+      path.resolve(
+        __dirname,
+        '../../frontend/build',
+        'index.html',
+      ),
+    );
+  }
 });
 
 export default app;
