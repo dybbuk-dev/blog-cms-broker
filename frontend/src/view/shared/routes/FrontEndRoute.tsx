@@ -1,7 +1,7 @@
 import PermissionChecker from 'src/modules/auth/permissionChecker';
 import { Redirect, Route } from 'react-router-dom';
 
-const isAuthenticated = false;
+const isAuthenticated = true;
 
 function FrontEndRoute({
   component: Component,
