@@ -37,7 +37,11 @@ function FeaturedBrokers() {
                 <MDBox
                   display="flex"
                   flexDirection="column"
-                  gap={1}
+                  sx={{
+                    '& > * + *': {
+                      mt: 1,
+                    },
+                  }}
                 >
                   <MaterialLink
                     href={row.meta?.homepage}
@@ -76,6 +80,7 @@ function FeaturedBrokers() {
                     fontWeight="regular"
                     color={sidenavColor}
                     mx="auto"
+                    mt={1}
                   >
                     <MaterialLink
                       component={Link}

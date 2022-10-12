@@ -66,42 +66,44 @@ const BlogDetailPage = () => {
           <MDBox
             display="flex"
             flexDirection="column"
-            gap={2}
+            sx={{
+              '& > * + *': {
+                mt: 2,
+              },
+            }}
           >
-            <>
-              <PageContent>
-                <Breadcrumb
-                  items={[
-                    {
-                      name: 'Broker Blog',
-                      route: '/blog',
-                    },
-                    {
-                      name: record.name,
-                      route: `/blog/${record.name_normalized}`,
-                    },
-                  ]}
-                />
-                <HtmlView value={record.content} />
-                <CommentPage record={record} />
-              </PageContent>
-              <AuthorView value={record.author} />
-              <PageContent
-                display={{
-                  xs: 'none',
-                  lg: 'block',
-                }}
+            <PageContent>
+              <Breadcrumb
+                items={[
+                  {
+                    name: 'Broker Blog',
+                    route: '/blog',
+                  },
+                  {
+                    name: record.name,
+                    route: `/blog/${record.name_normalized}`,
+                  },
+                ]}
+              />
+              <HtmlView value={record.content} />
+              <CommentPage record={record} />
+            </PageContent>
+            <AuthorView value={record.author} />
+            <PageContent
+              display={{
+                xs: 'none',
+                lg: 'block',
+              }}
+            >
+              <MDTypography
+                display="block"
+                variant="h4"
+                mb={2}
               >
-                <MDTypography
-                  display="block"
-                  variant="h4"
-                  mb={2}
-                >
-                  {i18n('entities.home.top_brokers')}
-                </MDTypography>
-                <TopBrokersView />
-              </PageContent>
-            </>
+                {i18n('entities.home.top_brokers')}
+              </MDTypography>
+              <TopBrokersView />
+            </PageContent>
           </MDBox>
         )}
       </Layout>

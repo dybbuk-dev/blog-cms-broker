@@ -130,7 +130,11 @@ const BrokerViewPage = () => {
         <MDBox
           display="flex"
           flexDirection="column"
-          gap={2}
+          sx={{
+            '& > * + *': {
+              mt: 2,
+            },
+          }}
         >
           <PageContent>
             <Breadcrumb

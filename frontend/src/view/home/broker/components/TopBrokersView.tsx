@@ -29,7 +29,11 @@ function TopBrokersView() {
                 display="flex"
                 justifyContent="flex-start"
                 alignItems="center"
-                gap={2}
+                sx={{
+                  '& > * + *': {
+                    ml: 2,
+                  },
+                }}
               >
                 <CircleNumber>{idx + 1}</CircleNumber>
                 <MDBox
@@ -38,9 +42,15 @@ function TopBrokersView() {
                   flexDirection="row"
                   flexWrap="wrap"
                   alignItems="center"
-                  gap={2}
+                  sx={{
+                    '& > * + *': {
+                      ml: 2,
+                      my: 1,
+                    },
+                  }}
                 >
                   <MaterialLink
+                    display="block"
                     flexShrink={0}
                     href={row.meta?.homepage}
                     target="_blank"
@@ -63,6 +73,7 @@ function TopBrokersView() {
                       display: { xs: 'none', md: 'block' },
                       height: '60px',
                       objectFit: 'contain',
+                      ml: 2,
                     }}
                   />
                   <MDBox

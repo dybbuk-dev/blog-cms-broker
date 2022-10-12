@@ -16,7 +16,14 @@ function AuthorView(props) {
       <Helmet>
         <link href={value.link} rel="author" />
       </Helmet>
-      <MDBox display="flex" gap={3}>
+      <MDBox
+        display="flex"
+        sx={{
+          '& > * + *': {
+            ml: 3,
+          },
+        }}
+      >
         {value.author_image && value.author_image[0] && (
           <Avatar
             alt={value.name}

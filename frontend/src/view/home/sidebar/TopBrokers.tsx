@@ -69,7 +69,11 @@ function TopBrokers() {
                 <MDBox
                   display="flex"
                   justifyContent="flex-start"
-                  gap={2}
+                  sx={{
+                    '& > * + *': {
+                      ml: 2,
+                    },
+                  }}
                 >
                   <MDBox
                     width="50px"
@@ -79,7 +83,11 @@ function TopBrokers() {
                     display="flex"
                     flexGrow={1}
                     flexDirection="column"
-                    gap={1}
+                    sx={{
+                      '& > * + *': {
+                        mt: 1,
+                      },
+                    }}
                   >
                     <MDBox mx="auto">
                       <RatingViewItem
@@ -106,6 +114,7 @@ function TopBrokers() {
                       lineHeight={1}
                       color={sidenavColor}
                       mx="auto"
+                      mt={1}
                     >
                       <MaterialLink
                         component={Link}
