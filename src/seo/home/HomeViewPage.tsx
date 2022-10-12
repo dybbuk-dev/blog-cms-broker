@@ -27,7 +27,7 @@ function HomeViewPage(props) {
           <Typography variant="h2">
             {i18n('entities.home.title')}
           </Typography>
-          <Typography variant="h3">
+          <Typography variant="h4">
             {i18n('entities.home.subtitle')}
           </Typography>
           <p>{i18n('entities.home.description')}</p>

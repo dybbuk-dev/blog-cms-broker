@@ -31,7 +31,7 @@ function HomeViewPage(props) {
             <MDTypography variant="h2">
               {i18n('entities.home.title')}
             </MDTypography>
-            <MDTypography variant="h3">
+            <MDTypography variant="h4">
               {i18n('entities.home.subtitle')}
             </MDTypography>
             <HtmlViewWrapper>
