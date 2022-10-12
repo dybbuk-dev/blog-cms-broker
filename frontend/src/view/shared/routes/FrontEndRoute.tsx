@@ -1,6 +1,8 @@
 import PermissionChecker from 'src/modules/auth/permissionChecker';
 import { Redirect, Route } from 'react-router-dom';
 
+const isAuthenticated = false;
+
 function FrontEndRoute({
   component: Component,
   currentTenant,
@@ -11,13 +13,15 @@ function FrontEndRoute({
     <Route
       {...rest}
       render={(props) => {
-        const permissionChecker = new PermissionChecker(
-          currentTenant,
-          currentUser,
-        );
+        if (isAuthenticated) {
+          const permissionChecker = new PermissionChecker(
+            currentTenant,
+            currentUser,
+          );
 
-        if (!permissionChecker.isAuthenticated) {
-          return <Redirect to="/admin/auth/signin" />;
+          if (!permissionChecker.isAuthenticated) {
+            return <Redirect to="/admin/auth/signin" />;
+          }
         }
 
         return <Component {...props} />;
