@@ -21,7 +21,7 @@ function Meta({ title, keywords, description }) {
       )}
       <meta
         name="google-site-verification"
-        content="I_jL14WylpufCX7gSmoJDN2qui2xvtoL0UvpB4oV0_A"
+        content="YeSUBnOtUX8EGYSKrwgVVgVU6myTY5UPLOrY6PdE464"
       />
       <meta name="robots" content="index,follow" />
     </Helmet>
