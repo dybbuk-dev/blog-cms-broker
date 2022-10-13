@@ -46,7 +46,7 @@ function BrokerHeader({ record }) {
             justifyContent="flex-end"
             gap={{ xs: 1, md: 1.5, lg: 2 }}
           >
-            <OverallRating record={record} />
+            <OverallRating record={record} size={42} />
             <MDButton
               variant="contained"
               href={record.meta?.homepage}
