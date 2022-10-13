@@ -231,12 +231,14 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
                       <img
                         src="/images/star-grey.png"
                         height="24px"
+                        alt="star-grey"
                       />
                     }
                     icon={
                       <img
                         src="/images/star-fill.png"
                         height="24px"
+                        alt="star-fill"
                       />
                     }
                   />

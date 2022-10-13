@@ -51,7 +51,12 @@ function Meta({
       {Boolean(author) && (
         <link href={author.link} rel="author" />
       )}
-      {Boolean(url) && <link rel="canonical" href={url} />}
+      {Boolean(url) && (
+        <link
+          rel="canonical"
+          href={`${getConfig().FRONTEND_URL}${url}`}
+        />
+      )}
       <script type="application/ld+json">
         {JSON.stringify({
           '@context': 'http://schema.org',

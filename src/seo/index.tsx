@@ -16,6 +16,11 @@ import PageService from '../services/pageService';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
+const renderToString = (children) =>
+  `<!DOCTYPE html>${ReactDOMServer.renderToString(
+    children,
+  )}`;
+
 export const handleSEO = async (req, res) => {
   if (!isbot(req.get('user-agent'))) {
     return false;
@@ -40,21 +45,17 @@ export const handleSEO = async (req, res) => {
 
   if (url === '') {
     return res.send(
-      ReactDOMServer.renderToString(
-        <HomeViewPage {...props} />,
-      ),
+      renderToString(<HomeViewPage {...props} url="/" />),
     );
   } else if (url === '/kontakt') {
-    return res.send(
-      ReactDOMServer.renderToString(<Contact {...props} />),
-    );
+    return res.send(renderToString(<Contact {...props} />));
   } else if (url === '/broker-vergleich') {
     const category = await new CategoryService(
       req,
     ).findByURL(url);
     const author = await new AuthorService(req).first();
     return res.send(
-      ReactDOMServer.renderToString(
+      renderToString(
         <ComparisonPage
           category={category}
           author={author}
@@ -64,23 +65,21 @@ export const handleSEO = async (req, res) => {
     );
   } else if (url === '/forex-cfd-broker-vergleich') {
     return res.send(
-      ReactDOMServer.renderToString(
-        <BrokerComparePage {...props} />,
-      ),
+      renderToString(<BrokerComparePage {...props} />),
     );
   } else if (req.url === '/blog') {
     const { rows: blogs } = await new BlogService(
       req,
     ).findBlogList({ limit: 10 });
     return res.send(
-      ReactDOMServer.renderToString(
+      renderToString(
         <BlogListPage records={blogs} {...props} />,
       ),
     );
   } else if (/^\/blog\//.test(url)) {
     const blog = await new BlogService(req).findByURL(url);
     return res.send(
-      ReactDOMServer.renderToString(
+      renderToString(
         <BlogDetailPage record={blog} {...props} />,
       ),
     );
@@ -89,7 +88,7 @@ export const handleSEO = async (req, res) => {
       url.replace(/^\/erfahrungsberichte\//g, ''),
     );
     return res.send(
-      ReactDOMServer.renderToString(
+      renderToString(
         <BrokerViewPage record={broker} {...props} />,
       ),
     );
@@ -108,7 +107,7 @@ export const handleSEO = async (req, res) => {
           );
     if (category || page || brokerArticle) {
       return res.send(
-        ReactDOMServer.renderToString(
+        renderToString(
           <GeneralPage
             category={category}
             page={page}

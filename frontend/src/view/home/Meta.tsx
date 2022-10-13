@@ -34,7 +34,10 @@ function Meta({ title, keywords, description, noIndex }) {
       {!noIndex && (
         <meta name="robots" content="index,follow" />
       )}
-      <link rel="canonical" href={match.url} />
+      <link
+        rel="canonical"
+        href={`${config.frontendUrl.protocol}://${config.frontendUrl.host}${match.url}`}
+      />
       <script type="application/ld+json">
         {JSON.stringify({
           '@context': 'http://schema.org',

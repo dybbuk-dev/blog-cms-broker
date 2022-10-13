@@ -105,12 +105,14 @@ function TopBrokers() {
                         emptyIcon={
                           <img
                             src="/images/star-grey.png"
+                            alt="star-grey"
                             height="24px"
                           />
                         }
                         icon={
                           <img
                             src="/images/star-fill.png"
+                            alt="star-fill"
                             height="24px"
                           />
                         }
