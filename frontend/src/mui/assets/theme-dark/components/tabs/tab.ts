@@ -43,7 +43,7 @@ const tab: Types = {
       fontWeight: fontWeightRegular,
       textTransform: 'none',
       lineHeight: 'inherit',
-      padding: pxToRem(4),
+      padding: `${pxToRem(4)} ${pxToRem(8)}`,
       borderRadius: borderRadius.lg,
       color: `${white.main} !important`,
       opacity: '1 !important',
