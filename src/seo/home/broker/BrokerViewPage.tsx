@@ -62,6 +62,7 @@ const BrokerViewPage = ({ record, ...props }) => {
       keywords={keywords}
       description={description}
       author={author}
+      url={props.url}
     >
       {record && (
         <Box display="flex" flexDirection="column" gap={2}>
@@ -99,7 +100,7 @@ const BrokerViewPage = ({ record, ...props }) => {
             )}
           <AuthorView value={record.author} />
           <>
-            <Typography variant="h4" mb={2}>
+            <Typography variant="h3" mb={2}>
               {i18n('entities.home.top_brokers')}
             </Typography>
             <TopBrokersView rows={props.topBrokers} />

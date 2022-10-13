@@ -8,8 +8,8 @@ import Typography from '@mui/material/Typography';
 
 const BlogListPage = ({ records }) => {
   return (
-    <Layout title="Broker-Bewertungen Blog">
-      <Typography variant="h2" pb={5}>
+    <Layout title="Broker-Bewertungen Blog" url={props.url}>
+      <Typography variant="h1" pb={5}>
         {i18n('entities.blog.title')}
       </Typography>
       <>
@@ -29,7 +29,10 @@ const BlogListPage = ({ records }) => {
               )}
 
               <Box color="text">
-                <Typography variant="h4">
+                <Typography
+                  variant="body1"
+                  fontWeight="bold"
+                >
                   <MaterialLink
                     href={`/blog/${record.name_normalized}`}
                     underline="hover"

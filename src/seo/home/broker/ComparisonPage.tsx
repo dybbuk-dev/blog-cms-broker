@@ -21,11 +21,12 @@ const ComparisonPage = ({ category, author, ...props }) => {
         category?.count ?? 0
       } Broker Vergleich im Test mit Erfahrungsberichten von Tradern ➔ Jetzt lesen!`}
       author={author}
+      url={props.url}
     >
       <Box display="flex" flexDirection="column" gap={2}>
         {category && (
           <>
-            <Typography variant="h2" pb={2}>
+            <Typography variant="h1" pb={2}>
               Broker Vergleich
             </Typography>
             <HtmlViewWrapper>
@@ -35,7 +36,7 @@ const ComparisonPage = ({ category, author, ...props }) => {
                 )}
               </p>
             </HtmlViewWrapper>
-            <Typography variant="h4" my={2}>
+            <Typography variant="h3" my={2}>
               {i18n('entities.home.top_brokers')}
             </Typography>
             <TopBrokersView rows={props.topBrokers} />

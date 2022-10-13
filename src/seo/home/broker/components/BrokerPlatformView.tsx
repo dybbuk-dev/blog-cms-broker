@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 function BrokerPlatformView({ record }) {
   return (
     <>
-      <Typography variant="h4" pb={2}>
+      <Typography variant="h3" pb={2}>
         {i18n(
           'entities.broker.platform.title',
           record.name,

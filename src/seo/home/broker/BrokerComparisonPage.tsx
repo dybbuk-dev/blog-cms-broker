@@ -9,9 +9,10 @@ function BrokerComparePage(props) {
       title={i18n('entities.broker.comparison.title')}
       keywords={['forex', 'cfd', 'broker', 'vergleich']}
       description="Vergleichen Sie Forex- und CFD-Broker miteinander und finden Sie so den besten Broker für Ihre Bedürfnisse."
+      url={props.url}
     >
       <>
-        <Typography variant="h2">
+        <Typography variant="h1">
           {i18n('entities.broker.comparison.title')}
         </Typography>
         <Typography

@@ -31,13 +31,14 @@ export const handleSEO = async (req, res) => {
     orderBy: 'broker_rating.overall_rating_desc',
   });
 
-  const props = {
-    topBrokers,
-  };
-
   const url = req.url.replace(/\/$/, '');
 
-  if (req.url === '') {
+  const props = {
+    topBrokers,
+    url,
+  };
+
+  if (url === '') {
     return res.send(
       ReactDOMServer.renderToString(
         <HomeViewPage {...props} />,
@@ -45,7 +46,7 @@ export const handleSEO = async (req, res) => {
     );
   } else if (url === '/kontakt') {
     return res.send(
-      ReactDOMServer.renderToString(<Contact />),
+      ReactDOMServer.renderToString(<Contact {...props} />),
     );
   } else if (url === '/broker-vergleich') {
     const category = await new CategoryService(
@@ -63,7 +64,9 @@ export const handleSEO = async (req, res) => {
     );
   } else if (url === '/forex-cfd-broker-vergleich') {
     return res.send(
-      ReactDOMServer.renderToString(<BrokerComparePage />),
+      ReactDOMServer.renderToString(
+        <BrokerComparePage {...props} />,
+      ),
     );
   } else if (req.url === '/blog') {
     const { rows: blogs } = await new BlogService(
@@ -71,7 +74,7 @@ export const handleSEO = async (req, res) => {
     ).findBlogList({ limit: 10 });
     return res.send(
       ReactDOMServer.renderToString(
-        <BlogListPage records={blogs} />,
+        <BlogListPage records={blogs} {...props} />,
       ),
     );
   } else if (/^\/blog\//.test(url)) {

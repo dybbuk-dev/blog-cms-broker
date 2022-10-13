@@ -8,16 +8,20 @@ function Layout({
   description,
   author,
   children,
+  url = '',
+  noIndex = false,
 }) {
   return (
     <>
-      <html>
+      <html lang="de">
         <head>
           <Meta
             title={title}
             keywords={keywords}
             description={description}
             author={author}
+            url={url}
+            noIndex={noIndex}
           />
         </head>
         <body>{children}</body>
@@ -32,6 +36,8 @@ Layout.propTypes = {
   description: PropTypes.string,
   author: PropTypes.any,
   children: PropTypes.any,
+  url: PropTypes.string,
+  noIndex: PropTypes.bool,
 };
 
 export default Layout;

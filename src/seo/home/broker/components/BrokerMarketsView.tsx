@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 function BrokerMarketsView({ record }) {
   return (
     <>
-      <Typography variant="h4" pb={2}>
+      <Typography variant="h3" pb={2}>
         {i18n('entities.broker.market.title', record.name)}
       </Typography>
       <SingleCheckbox
@@ -18,7 +18,7 @@ function BrokerMarketsView({ record }) {
           'MANAGED_ACCOUNTS',
         ]}
       />
-      <Typography variant="h4" py={2}>
+      <Typography variant="h3" py={2}>
         {i18n(
           'entities.broker.market.forex_trading_at_activities',
           record.name,
@@ -35,7 +35,7 @@ function BrokerMarketsView({ record }) {
           'MICRO_LOTS',
         ]}
       />
-      <Typography variant="h4" py={2}>
+      <Typography variant="h3" py={2}>
         {i18n(
           'entities.broker.market.cfd_trading_at_activTrades',
           record.name,

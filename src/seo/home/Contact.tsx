@@ -1,14 +1,17 @@
 import React from 'react';
 import Layout from './Layout';
+import Typography from '@mui/material/Typography';
 
-function Contact() {
+function Contact({ ...props }) {
   return (
-    <Layout>
-      <h2>Kontakt zu broker-bewertungen.de aufnehmen</h2>
-      <p>
+    <Layout url={props.url} noIndex>
+      <Typography variant="h3">
+        Kontakt zu broker-bewertungen.de aufnehmen
+      </Typography>
+      <Typography variant="body2" fontWeight="regular">
         Um uns eine Nachricht zukommen zu lassen benutzen
         Sie bitte das Formular.
-      </p>
+      </Typography>
     </Layout>
   );
 }

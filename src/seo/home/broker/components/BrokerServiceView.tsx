@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 function BrokerServiceView({ record }) {
   return (
     <>
-      <Typography variant="h4" pb={2}>
+      <Typography variant="h3" pb={2}>
         {i18n('entities.broker.service.title', record.name)}
       </Typography>
       <Grid spacing={2} container>
@@ -47,7 +47,7 @@ function BrokerServiceView({ record }) {
           'DAILY_TRADE_HELP',
         ]}
       />
-      <Typography variant="h4" py={2}>
+      <Typography variant="h3" py={2}>
         {i18n(
           'entities.broker.service.training_opportunities',
         )}

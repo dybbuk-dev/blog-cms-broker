@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 function BrokerHeader({ record }) {
   return (
     <Box py={2}>
-      <Typography variant="h2" mb={2}>
+      <Typography variant="h1" mb={2}>
         {`${record.name} Erfahrungen und Test`}
       </Typography>
       <Grid spacing={3} alignItems="stretch" container>

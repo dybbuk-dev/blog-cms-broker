@@ -21,17 +21,18 @@ function HomeViewPage(props) {
         'Kritik',
       ]}
       description="Ihr Bewertungsportal für Forex Broker und CFD Broker ✓Erfahrungen und Bewertungen ✓ Von Tradern für Trader ✓ Alles auf www.broker-bewertungen.de"
+      url={props.url}
     >
       <Grid spacing={2} container>
         <Grid xs={12} item>
-          <Typography variant="h2">
+          <Typography variant="h1">
             {i18n('entities.home.title')}
           </Typography>
-          <Typography variant="h4">
+          <Typography variant="h2">
             {i18n('entities.home.subtitle')}
           </Typography>
           <p>{i18n('entities.home.description')}</p>
-          <Typography variant="h4" my={2}>
+          <Typography variant="h3" my={2}>
             {i18n('entities.home.top_brokers')}
           </Typography>
           <TopBrokersView rows={props.topBrokers} />
@@ -63,7 +64,8 @@ function HomeViewPage(props) {
               <Typography
                 color="text"
                 overflow="hidden"
-                variant="h6"
+                variant="body2"
+                fontWeight="bold"
               >
                 {i18n('entities.home.forex_broker_content')}
               </Typography>
@@ -94,7 +96,8 @@ function HomeViewPage(props) {
               <Typography
                 color="text"
                 overflow="hidden"
-                variant="h6"
+                variant="body2"
+                fontWeight="bold"
               >
                 {i18n('entities.home.cfd_broker_content')}
               </Typography>

@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 function BrokerSpreadsView({ record }) {
   return (
     <>
-      <Typography variant="h4" pb={2}>
+      <Typography variant="h3" pb={2}>
         {i18n('entities.broker.spread.title', record.name)}
       </Typography>
       <SingleCheckbox

@@ -8,29 +8,26 @@ import TopBrokersView from '../broker/components/TopBrokersView';
 
 const BlogDetailPage = ({ record, ...props }) => {
   return (
-    <>
-      <Layout
-        title={record?.name}
-        keywords={[record?.metakeywords]}
-        description={record?.metadescription}
-        author={record?.author}
-      >
-        {record && (
-          <Box
-            display="flex"
-            flexDirection="column"
-            gap={2}
-          >
-            <>
-              <HtmlView value={record.content} />
-              <AuthorView value={record.author} />
-              <h3>{i18n('entities.home.top_brokers')}</h3>
-              <TopBrokersView rows={props.topBrokers} />
-            </>
-          </Box>
-        )}
-      </Layout>
-    </>
+    <Layout
+      title={record?.name}
+      keywords={[record?.metakeywords]}
+      description={record?.metadescription}
+      author={record?.author}
+      url={props.url}
+    >
+      {record && (
+        <Box display="flex" flexDirection="column" gap={2}>
+          <>
+            <HtmlView value={record.content} />
+            <AuthorView value={record.author} />
+            <Typography variant="h3">
+              {i18n('entities.home.top_brokers')}
+            </Typography>
+            <TopBrokersView rows={props.topBrokers} />
+          </>
+        </Box>
+      )}
+    </Layout>
   );
 };
 
