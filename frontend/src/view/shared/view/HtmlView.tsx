@@ -1,3 +1,4 @@
+import colors from 'src/mui/assets/theme/base/colors';
 import { styled } from '@mui/material/styles';
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
@@ -6,6 +7,9 @@ import MDBox from 'src/mui/components/MDBox';
 const HtmlStyled = styled('div')(() => ({
   fontSize: '1rem',
   fontWeight: 400,
+  '& a': {
+    color: colors.info.main,
+  },
   '& ul, ol': {
     paddingLeft: '3rem',
   },
