@@ -155,7 +155,7 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
     <>
       <MDTypography
         id="list-top-4-pagination"
-        variant="h3"
+        variant="h2"
         pb={3}
       >
         {`${name} Erfahrungen von Tradern`}
@@ -180,7 +180,7 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
               >
                 <MDBox>
                   <MDTypography
-                    variant="h5"
+                    variant="h4"
                     color="warning"
                   >
                     {`${name} Erfahrungen von: ${post.name}`}
@@ -331,7 +331,7 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
         pb={2}
         borderTop={`1px dashed ${colors.inputBorderColor}`}
       >
-        <MDTypography display="block" variant="h4" my={2}>
+        <MDTypography display="block" variant="h3" my={2}>
           {i18n('entities.home.top_brokers')}
         </MDTypography>
         <TopBrokersView />
@@ -341,7 +341,11 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
         pt={2}
         borderTop={`1px dashed ${colors.inputBorderColor}`}
       >
-        <MDTypography variant="h4" pb={2}>
+        <MDTypography
+          variant="body1"
+          fontWeight="bold"
+          pb={2}
+        >
           {i18n('common.writeReview')}
         </MDTypography>
         <FormProvider {...form}>

@@ -86,9 +86,9 @@ function Contact() {
   };
 
   return (
-    <Layout>
+    <Layout noIndex>
       <PageContent>
-        <MDTypography variant="h2">
+        <MDTypography variant="h3">
           Kontakt zu broker-bewertungen.de aufnehmen
         </MDTypography>
         <MDTypography
@@ -99,7 +99,11 @@ function Contact() {
           Um uns eine Nachricht zukommen zu lassen benutzen
           Sie bitte das Formular.
         </MDTypography>
-        <MDTypography variant="h4" my={2}>
+        <MDTypography
+          variant="body1"
+          fontWeight="bold"
+          my={2}
+        >
           Kontakt
         </MDTypography>
         <FormWrapper>

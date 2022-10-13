@@ -222,7 +222,7 @@ const BrokerViewPage = () => {
           >
             <MDTypography
               display="block"
-              variant="h4"
+              variant="h3"
               mb={2}
             >
               {i18n('entities.home.top_brokers')}

@@ -153,7 +153,7 @@ const GeneralPage = () => {
               )}
               <MDTypography
                 display="block"
-                variant="h4"
+                variant="h3"
                 my={2}
               >
                 {i18n('entities.home.top_brokers')}
@@ -187,7 +187,7 @@ const GeneralPage = () => {
                   borderTop={`1px dashed ${colors.inputBorderColor}`}
                   borderBottom={`1px dashed ${colors.inputBorderColor}`}
                 >
-                  <MDTypography variant="h4">
+                  <MDTypography variant="h3">
                     {page.navigation.type ===
                     'FOREX_STRATEGY'
                       ? 'Weitere Forex Strategien'
@@ -213,7 +213,7 @@ const GeneralPage = () => {
               )}
               {Boolean(page.page_warning) && (
                 <>
-                  <MDTypography variant="h4">
+                  <MDTypography variant="h3">
                     Warnung
                   </MDTypography>
                   <HtmlView
@@ -251,7 +251,7 @@ const GeneralPage = () => {
             >
               <MDTypography
                 display="block"
-                variant="h4"
+                variant="h3"
                 mb={2}
               >
                 {i18n('entities.home.top_brokers')}
@@ -298,7 +298,7 @@ const GeneralPage = () => {
               >
                 <MDTypography
                   display="block"
-                  variant="h4"
+                  variant="h3"
                   mb={2}
                 >
                   {i18n('entities.home.top_brokers')}

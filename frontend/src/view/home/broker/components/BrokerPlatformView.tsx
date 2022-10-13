@@ -8,7 +8,7 @@ import BrokerSection from 'src/view/home/broker/components/BrokerSection';
 function BrokerPlatformView({ record }) {
   return (
     <>
-      <MDTypography variant="h4" pb={2}>
+      <MDTypography variant="h3" pb={2}>
         {i18n(
           'entities.broker.platform.title',
           record.name,

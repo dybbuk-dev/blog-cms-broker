@@ -9,7 +9,7 @@ function BrokerSection({ children, name, tooltip }) {
   return (
     <Grid md={4} xs={12} item>
       <MDTypography
-        variant="h6"
+        variant="h5"
         color="text"
         lineHeight="1.25"
         my={1}

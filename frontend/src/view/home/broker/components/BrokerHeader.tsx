@@ -19,7 +19,7 @@ function BrokerHeader({ record }) {
       borderTop={`1px dashed ${colors.inputBorderColor}`}
       borderBottom={`1px dashed ${colors.inputBorderColor}`}
     >
-      <MDTypography variant="h2" mb={2}>
+      <MDTypography variant="h1" mb={2}>
         {`${record.name} Erfahrungen und Test`}
       </MDTypography>
       <Grid spacing={3} alignItems="stretch" container>

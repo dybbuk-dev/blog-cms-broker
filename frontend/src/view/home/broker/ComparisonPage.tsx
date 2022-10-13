@@ -69,7 +69,7 @@ const ComparisonPage = () => {
                 },
               ]}
             />
-            <MDTypography variant="h2" pb={2}>
+            <MDTypography variant="h1" pb={2}>
               Broker Vergleich
             </MDTypography>
             <HtmlViewWrapper>
@@ -81,7 +81,7 @@ const ComparisonPage = () => {
             </HtmlViewWrapper>
             <MDTypography
               display="block"
-              variant="h4"
+              variant="h3"
               my={2}
             >
               {i18n('entities.home.top_brokers')}

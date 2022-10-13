@@ -5,7 +5,7 @@ import SingleCheckbox from 'src/view/home/broker/components/SingleCheckbox';
 function BrokerMarketsView({ record }) {
   return (
     <>
-      <MDTypography variant="h4" pb={2}>
+      <MDTypography variant="h3" pb={2}>
         {i18n('entities.broker.market.title', record.name)}
       </MDTypography>
       <SingleCheckbox
@@ -17,7 +17,7 @@ function BrokerMarketsView({ record }) {
           'MANAGED_ACCOUNTS',
         ]}
       />
-      <MDTypography variant="h4" py={2}>
+      <MDTypography variant="h3" py={2}>
         {i18n(
           'entities.broker.market.forex_trading_at_activities',
           record.name,
@@ -34,7 +34,7 @@ function BrokerMarketsView({ record }) {
           'MICRO_LOTS',
         ]}
       />
-      <MDTypography variant="h4" py={2}>
+      <MDTypography variant="h3" py={2}>
         {i18n(
           'entities.broker.market.cfd_trading_at_activTrades',
           record.name,

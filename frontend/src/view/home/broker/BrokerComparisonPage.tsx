@@ -118,7 +118,7 @@ function BrokerComparePage(props) {
       description="Vergleichen Sie Forex- und CFD-Broker miteinander und finden Sie so den besten Broker für Ihre Bedürfnisse."
     >
       <PageContent>
-        <MDTypography variant="h2">
+        <MDTypography variant="h1">
           {i18n('entities.broker.comparison.title')}
         </MDTypography>
         <MDTypography

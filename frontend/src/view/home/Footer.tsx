@@ -33,7 +33,7 @@ function Footer() {
             lg: 'none',
           }}
         >
-          <MDTypography display="block" variant="h4" mb={2}>
+          <MDTypography display="block" variant="h3" mb={2}>
             {i18n('entities.home.top_brokers')}
           </MDTypography>
           <TopBrokersView />

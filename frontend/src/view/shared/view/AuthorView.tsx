@@ -32,14 +32,8 @@ function AuthorView(props) {
           />
         )}
         <MDBox>
-          <MDTypography variant="h4">
-            <MaterialLink
-              href={value.link}
-              target="_blank"
-              underline="hover"
-            >
-              {value.name}
-            </MaterialLink>
+          <MDTypography variant="body1" fontWeight="bold">
+            {`Über ${value.name}`}
           </MDTypography>
           <MDTypography
             variant="body2"
@@ -47,6 +41,19 @@ function AuthorView(props) {
             fontWeight="regular"
           >
             {value.description}
+          </MDTypography>
+          <MDTypography
+            variant="body2"
+            color="text"
+            fontWeight="bold"
+          >
+            <MaterialLink
+              href={value.link}
+              target="_blank"
+              underline="hover"
+            >
+              {`Mehr über ${value.name}`}
+            </MaterialLink>
           </MDTypography>
         </MDBox>
       </MDBox>

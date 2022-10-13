@@ -157,7 +157,8 @@ const CommentPage = ({ record }) => {
       <MDBox py={4}>
         <MDTypography
           id="list-top-4-pagination"
-          variant="h4"
+          variant="body1"
+          fontWeight="bold"
         >
           {i18n('common.comment') + '(' + rows.length + ')'}
         </MDTypography>
@@ -187,7 +188,10 @@ const CommentPage = ({ record }) => {
                   display="flex"
                   justifyContent="flex-start"
                 >
-                  <MDTypography variant="h5">
+                  <MDTypography
+                    variant="body1"
+                    fontWeight="bold"
+                  >
                     {`${comment.name} (${moment(
                       comment.modified,
                     ).format(
@@ -270,7 +274,10 @@ const CommentPage = ({ record }) => {
             </MDBox>
           ))}
         {!loading && !hasRows && (
-          <MDTypography variant="body2">
+          <MDTypography
+            variant="body2"
+            fontWeight="regular"
+          >
             {i18n('common.noCommit')}
           </MDTypography>
         )}
@@ -285,7 +292,7 @@ const CommentPage = ({ record }) => {
         />
       )}
       <MDBox color="text" py={4}>
-        <MDTypography variant="h4">
+        <MDTypography variant="body1" fontWeight="bold">
           {i18n('common.toComment')}
         </MDTypography>
       </MDBox>

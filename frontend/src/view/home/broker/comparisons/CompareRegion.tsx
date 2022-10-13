@@ -9,7 +9,7 @@ function CompareRegion({ children, name }) {
     <TableRow>
       <TableCell colSpan={100}>
         <MDTypography
-          variant="h5"
+          variant="h3"
           color="text"
           whiteSpace="nowrap"
           lineHeight="1.25"

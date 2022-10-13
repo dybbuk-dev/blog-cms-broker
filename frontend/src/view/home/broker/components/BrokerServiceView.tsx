@@ -11,7 +11,7 @@ import SingleCheckbox from 'src/view/home/broker/components/SingleCheckbox';
 function BrokerServiceView({ record }) {
   return (
     <>
-      <MDTypography variant="h4" pb={2}>
+      <MDTypography variant="h3" pb={2}>
         {i18n('entities.broker.service.title', record.name)}
       </MDTypography>
       <Grid spacing={2} container>
@@ -46,7 +46,7 @@ function BrokerServiceView({ record }) {
           'DAILY_TRADE_HELP',
         ]}
       />
-      <MDTypography variant="h4" py={2}>
+      <MDTypography variant="h3" py={2}>
         {i18n(
           'entities.broker.service.training_opportunities',
         )}

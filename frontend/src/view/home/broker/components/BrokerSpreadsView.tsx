@@ -5,7 +5,7 @@ import SingleCheckbox from 'src/view/home/broker/components/SingleCheckbox';
 function BrokerSpreadsView({ record }) {
   return (
     <>
-      <MDTypography variant="h4" pb={2}>
+      <MDTypography variant="h3" pb={2}>
         {i18n('entities.broker.spread.title', record.name)}
       </MDTypography>
       <SingleCheckbox

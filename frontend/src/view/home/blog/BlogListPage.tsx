@@ -40,7 +40,7 @@ const BlogListPage = () => {
   return (
     <Layout title="Broker-Bewertungen Blog">
       <PageContent>
-        <MDTypography variant="h2" pb={5}>
+        <MDTypography variant="h1" pb={5}>
           {i18n('entities.blog.title')}
         </MDTypography>
         {loading && <Spinner />}
@@ -66,7 +66,10 @@ const BlogListPage = () => {
                   )}
 
                   <MDBox color="text">
-                    <MDTypography variant="h4">
+                    <MDTypography
+                      variant="body1"
+                      fontWeight="bold"
+                    >
                       <MaterialLink
                         component={Link}
                         to={`/blog/${record.name_normalized}`}

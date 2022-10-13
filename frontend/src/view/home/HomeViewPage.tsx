@@ -28,10 +28,10 @@ function HomeViewPage(props) {
       <PageContent>
         <Grid spacing={2} container>
           <Grid xs={12} item>
-            <MDTypography variant="h2">
+            <MDTypography variant="h1">
               {i18n('entities.home.title')}
             </MDTypography>
-            <MDTypography variant="h4">
+            <MDTypography variant="h2">
               {i18n('entities.home.subtitle')}
             </MDTypography>
             <HtmlViewWrapper>
@@ -39,7 +39,7 @@ function HomeViewPage(props) {
             </HtmlViewWrapper>
             <MDTypography
               display="block"
-              variant="h4"
+              variant="h3"
               my={2}
             >
               {i18n('entities.home.top_brokers')}
@@ -64,7 +64,9 @@ function HomeViewPage(props) {
                 startIcon={<SendIcon />}
                 fullWidth
               >
-                {i18n('entities.home.forex_broker')}
+                <MDTypography variant="h3" color="inherit">
+                  {i18n('entities.home.forex_broker')}
+                </MDTypography>
               </MDButton>
               <MDBox
                 display="flex"
@@ -81,7 +83,8 @@ function HomeViewPage(props) {
                 <MDTypography
                   color="text"
                   overflow="hidden"
-                  variant="h6"
+                  variant="body2"
+                  fontWeight="bold"
                 >
                   {i18n(
                     'entities.home.forex_broker_content',
@@ -99,7 +102,9 @@ function HomeViewPage(props) {
                 startIcon={<SendIcon />}
                 fullWidth
               >
-                {i18n('entities.home.cfd_broker')}
+                <MDTypography variant="h3" color="inherit">
+                  {i18n('entities.home.cfd_broker')}
+                </MDTypography>
               </MDButton>
               <MDBox
                 display="flex"
@@ -116,7 +121,8 @@ function HomeViewPage(props) {
                 <MDTypography
                   color="text"
                   overflow="hidden"
-                  variant="h6"
+                  variant="body2"
+                  fontWeight="bold"
                 >
                   {i18n('entities.home.cfd_broker_content')}
                 </MDTypography>

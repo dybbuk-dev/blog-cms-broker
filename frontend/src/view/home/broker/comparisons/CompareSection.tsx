@@ -9,8 +9,9 @@ function CompareSection({ children, name, tooltip }) {
   return (
     <TableCell width="25%">
       <MDTypography
-        variant="h5"
+        variant="body1"
         color="warning"
+        fontWeight="bold"
         lineHeight="1.25"
         my={1}
       >
