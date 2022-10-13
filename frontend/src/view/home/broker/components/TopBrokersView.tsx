@@ -22,7 +22,7 @@ function TopBrokersView() {
     <>
       {loading && <Spinner />}
       {!loading && hasRows && (
-        <Grid spacing={2} container>
+        <Grid container>
           {rows.map((row, idx) => (
             <Grid key={row.id} xs={12} item>
               <MDBox

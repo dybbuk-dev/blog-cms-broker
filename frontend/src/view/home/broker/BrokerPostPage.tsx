@@ -350,7 +350,7 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
         </MDTypography>
         <FormProvider {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <Grid spacing={2} container>
+            <Grid container>
               <Grid item md={6} xs={12}>
                 <MDTypography
                   variant="body2"

@@ -20,7 +20,12 @@ function BrokerCheckbox({ record, field }) {
       position="relative"
       fontSize="20px"
     >
-      <MDBox position="relative" my={1} pl={3}>
+      <MDBox
+        position="relative"
+        my={1}
+        pl={3}
+        minHeight="20px"
+      >
         <MDBox
           display="inline"
           position="absolute"

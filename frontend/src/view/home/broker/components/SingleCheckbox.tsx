@@ -3,7 +3,6 @@ import { i18n } from 'src/i18n';
 import BrokerCheckbox from 'src/view/home/broker/shared/BrokerCheckbox';
 import BrokerSection from 'src/view/home/broker/components/BrokerSection';
 import PropTypes from 'prop-types';
-import TableRow from '@mui/material/TableRow';
 
 function SingleCheckbox({ record, fields }) {
   return (
@@ -13,7 +12,7 @@ function SingleCheckbox({ record, fields }) {
         const tooltip = i18n(tooltipKey);
 
         return (
-          <Grid key={field} spacing={2} container>
+          <Grid key={field} container>
             <BrokerSection
               tooltip={
                 tooltip === tooltipKey ? null : (

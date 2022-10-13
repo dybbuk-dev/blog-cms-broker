@@ -12,7 +12,7 @@ function BrokerSection({ children, name, tooltip }) {
         variant="h5"
         color="text"
         lineHeight="1.25"
-        my={1}
+        py={1}
       >
         {Boolean(children) && children}
         {!children &&

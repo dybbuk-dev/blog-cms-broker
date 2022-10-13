@@ -12,7 +12,7 @@ import MDTypography from 'src/mui/components/MDTypography';
 function BrokerOverviewView({ record }) {
   return (
     <>
-      <Grid spacing={2} container>
+      <Grid container>
         <Grid xs={12} item>
           <HtmlView value={record.meta?.teaser} />
         </Grid>

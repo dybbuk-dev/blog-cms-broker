@@ -14,7 +14,7 @@ function BrokerServiceView({ record }) {
       <MDTypography variant="h3" pb={2}>
         {i18n('entities.broker.service.title', record.name)}
       </MDTypography>
-      <Grid spacing={2} container>
+      <Grid container>
         <BrokerSection>
           {i18n('entities.broker.service.homepage')}
         </BrokerSection>

@@ -12,7 +12,7 @@ import SingleCheckbox from 'src/view/home/broker/components/SingleCheckbox';
 function BrokerCharacteristicsView({ record }) {
   return (
     <>
-      <Grid spacing={2} container>
+      <Grid container>
         <Grid xs={12} item>
           <MDTypography variant="h5" pb={2}>
             {`${record.name} ${i18n(

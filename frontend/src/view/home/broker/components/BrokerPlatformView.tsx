@@ -33,7 +33,7 @@ function BrokerPlatformView({ record }) {
           'LAYOUT_SAVEABLE',
         ]}
       />
-      <Grid spacing={2} container>
+      <Grid container>
         <BrokerSection>
           {i18n('entities.broker.platform.order_types')}
         </BrokerSection>
