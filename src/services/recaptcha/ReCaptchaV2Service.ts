@@ -9,7 +9,7 @@ verifier.config({
 class ReCaptchaV2Service {
   static async verify(req) {
     const [success, response] = await verifier.reCaptchaV2(
-      req.body.recaptcha,
+      req.body.recaptcha || req.body.data.recaptcha,
       req.ip,
     );
 

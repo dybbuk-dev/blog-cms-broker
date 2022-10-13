@@ -48,29 +48,33 @@ const brokerPostFormActions = {
     }
   },
 
-  doCreate: (values) => async (dispatch) => {
-    try {
-      dispatch({
-        type: brokerPostFormActions.CREATE_STARTED,
-      });
+  doCreate:
+    (values, fnSuccess = null) =>
+    async (dispatch) => {
+      try {
+        dispatch({
+          type: brokerPostFormActions.CREATE_STARTED,
+        });
 
-      await BrokerPostService.create(values);
+        await BrokerPostService.create(values);
 
-      dispatch({
-        type: brokerPostFormActions.CREATE_SUCCESS,
-      });
+        dispatch({
+          type: brokerPostFormActions.CREATE_SUCCESS,
+        });
 
-      Message.success(
-        i18n('entities.brokerPost.create.success'),
-      );
-    } catch (error) {
-      Errors.handle(error);
+        Message.success(
+          i18n('entities.brokerPost.create.success'),
+        );
 
-      dispatch({
-        type: brokerPostFormActions.CREATE_ERROR,
-      });
-    }
-  },
+        fnSuccess && fnSuccess();
+      } catch (error) {
+        Errors.handle(error);
+
+        dispatch({
+          type: brokerPostFormActions.CREATE_ERROR,
+        });
+      }
+    },
 
   doUpdate: (id, values) => async (dispatch, getState) => {
     try {

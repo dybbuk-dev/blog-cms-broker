@@ -9,6 +9,8 @@ import config from 'src/config';
 import FormErrors from 'src/view/shared/form/formErrors';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
+import { useSelector } from 'react-redux';
+import formSelectors from 'src/modules/form/formSelectors';
 
 interface HtmlEditorFormItemProps {
   name: string;
@@ -65,17 +67,26 @@ function HtmlEditorFormItem({
   }
 
   const {
-    setValue,
+    control: { defaultValuesRef },
     errors,
     formState: { touched, isSubmitted },
-    control: { defaultValuesRef },
-    register,
     getValues,
+    register,
+    setValue,
   } = useFormContext();
 
   const defaultValues = defaultValuesRef.current || {};
 
-  const formValue = getValues(name);
+  const formValue = name ? getValues(name) : null;
+
+  const getInitialValue = () =>
+    ![null, undefined].includes(formValue)
+      ? formValue
+      : value || defaultValues[name] || '';
+
+  const [curValue, setCurValue] = useState(
+    getInitialValue(),
+  );
 
   const errorMessage = FormErrors.errorMessage(
     name,
@@ -85,26 +96,33 @@ function HtmlEditorFormItem({
     externalErrorMessage,
   );
 
+  useEffect(() => {
+    if (name) {
+      register({ name });
+    }
+  }, [register, name]);
+
+  const refresh = useSelector(formSelectors.selectRefresh);
+
+  const [editor, setEditor] = useState(null);
+
+  useEffect(() => {
+    editor?.setData(getInitialValue());
+    setCurValue(getInitialValue());
+  }, [refresh]);
+
   const { darkMode } = selectMuiSettings();
 
-  const [originalValue, setOriginalValue] = useState(
-    formValue || value || defaultValues[name] || '',
-  );
-
   const updateValue = (value) => {
-    setOriginalValue(value);
+    setCurValue(value);
     setValue(name, value, {
       shouldValidate: false,
       shouldDirty: true,
     });
   };
 
-  useEffect(() => {
-    register({ name });
-    // updateValue(value || originalValue);
-  }, [register, name]);
-
   const onChangeEditor = (evt) => {
+    setEditor(evt.editor);
     updateValue(evt.editor?.getData());
   };
 
@@ -128,7 +146,7 @@ function HtmlEditorFormItem({
         </MDTypography>
       )}
       <CKEditor
-        initData={originalValue}
+        initData={curValue}
         config={ckeditorConfig}
         onChange={onChangeEditor}
       />

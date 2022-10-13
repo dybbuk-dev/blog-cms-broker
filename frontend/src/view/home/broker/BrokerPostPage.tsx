@@ -5,7 +5,7 @@ import { i18n } from 'src/i18n';
 import { Link } from 'react-router-dom';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useRouteMatch } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -40,6 +40,7 @@ import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import lColors from 'src/mui/assets/theme/base/colors';
 import dColors from 'src/mui/assets/theme-dark/base/colors';
+import formActions from 'src/modules/form/formActions';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(i18n('common.name'), {
@@ -69,9 +70,18 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
   const [idToDestroy, setIdToDestroy] = useState(null);
   const [idToSpam, setIdToSpam] = useState(null);
   const [idToReview, setIdToReview] = useState(null);
+  const [initialValues] = useState({
+    name: '',
+    email: '',
+    rating: 0,
+    review: '',
+    recapture: '',
+  });
+
   const form = useForm({
     resolver: yupResolver(schema),
     mode: 'onSubmit',
+    defaultValues: initialValues as any,
   });
   const match = useRouteMatch();
 
@@ -89,9 +99,20 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
     brokerPostSelectors.selectPermissionToEdit,
   );
 
+  const recaptchaRef = useRef(null);
+
   const onSubmit = (values) => {
     values.broker_id = brokerId;
-    dispatch(brokerPostFormActions.doCreate(values));
+    dispatch(
+      brokerPostFormActions.doCreate(values, () => {
+        Object.keys(initialValues).forEach((key) => {
+          form.register({ name: key });
+          form.setValue(key, initialValues[key]);
+        });
+        dispatch(formActions.doRefresh());
+        recaptchaRef?.current?.reset();
+      }),
+    );
   };
 
   const doChangePagination = (pagination) => {
@@ -350,7 +371,7 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
         </MDTypography>
         <FormProvider {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <Grid container>
+            <Grid spacing={2} container>
               <Grid item md={6} xs={12}>
                 <MDTypography
                   variant="body2"
@@ -425,7 +446,9 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
                 />
               </Grid>
               <Grid item xs={12} mb={2}>
-                <ReCaptchaV2FormItem />
+                <ReCaptchaV2FormItem
+                  recaptchaRef={recaptchaRef}
+                />
               </Grid>
             </Grid>
             <FormButtons>
