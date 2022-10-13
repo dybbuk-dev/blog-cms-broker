@@ -499,55 +499,54 @@ const en = {
         },
         checkbox: {
           name: {
-            TRADE_PLATFORM: 'Handels-plat-formen',
-            FREE_DEMO_ACCOUNT: 'Kosten-loses Demo-konto',
-            METATRADER_4: 'Meta-Trader 4',
-            METATRADER_5: 'Meta-Trader 5',
-            WEB_PLATFORM: 'Web Plat-form',
+            TRADE_PLATFORM: 'Handelsplatformen',
+            FREE_DEMO_ACCOUNT: 'Kostenloses Demokonto',
+            METATRADER_4: 'MetaTrader 4',
+            METATRADER_5: 'MetaTrader 5',
+            WEB_PLATFORM: 'Web Platform',
             MOBILE_TRADING_APPS: 'Mobile Trading Apps',
             HEDGING_ALLOWED: 'Hedging möglich',
             ADDITIONAL_TRADE_TOOLS:
-              'zusätz-liche Tools für den Handel',
+              'zusätzliche Tools für den Handel',
             AUTOMATED_TRADE_POSSIBLE:
-              'auto-mati-sierter Handel Möglich',
-            API_INTERFACES: 'API Schnitt-stellen',
-            RATE_ALARMS: 'Kurs-arlarme per SMS oder E-Mail',
+              'automatisierter Handel Möglich',
+            API_INTERFACES: 'API Schnittstellen',
+            RATE_ALARMS: 'Kursarlarme per SMS oder E-Mail',
             PLATFORM_TUTORIALS:
-              'Anleit-ungen zur Trading Platform',
+              'Anleitungen zur Trading Platform',
             LAYOUT_SAVEABLE: 'Layout speicherbar',
             ONE_CLICK_TRADING: 'One Click Trading',
             TRADE_FROM_CHART: 'Handeln aus dem Chart',
             ALL_POSITIONS_CLOSEABLE:
               'Alle Positionen auf einmal schließbar',
             GUARANTEED_STOPS:
-              'Garan-tierte Stops und Limit möglich',
+              'Garantierte Stops und Limit möglich',
             PHONE_TRADE_POSSIBLE:
-              'Telefon-ischer Handel möglich',
+              'Telefonischer Handel möglich',
             COMMISSIONS: 'Kommissionen',
             IMPORTANT_MARKET_SPREADS:
               'Spreads der wichtigsten Märkte',
             COST_FOR_OVERNIGHT:
-              'Finanzierungs-posten für Übernacht-positionen',
+              'Finanzierungsposten für Übernachtpositionen',
             FEES_FOR_DEPOSIT_DISBURSAL:
               'Gebühren für Einzahlungen und Auszahlungen',
             FREE_ORDERCHANGE:
-              'Kostenlose Order-änderungen oder Stornierungen',
+              'Kostenlose Orderänderungen oder Stornierungen',
             FREE_DEPOT: 'Depotführung kostenlos',
             NO_PLATFORM_FEES:
               'keine Gebühren für Plattform',
             GERMAN_SUPPORT: 'Deutscher Support',
-            CONTACT: 'Kontakt-möglich-keiten',
+            CONTACT: 'Kontaktmöglichkeiten',
             DAILY_TRADE_HELP:
-              'Tägliche Handels-unter-stützungen',
+              'Tägliche Handelsunterstützungen',
             GERMAN_WEBINAR:
-              'Regel-mäßige Webinare auf Deutsch verfügbar',
+              'Regelmäßige Webinare auf Deutsch verfügbar',
             GERMAN_SEMINAR:
-              'Regel-mäßige Seminare verfügbar',
+              'Regelmäßige Seminare verfügbar',
             COACHINGS_AVAILABLE:
-              'Einzel-coachings verfügbar',
-            KNOWLEDGE_BASE:
-              'Umfang-reicher Wissens-bereich',
-            TRADEABLE_MARKETS: 'Handel-bare Märkte',
+              'Einzelcoachings verfügbar',
+            KNOWLEDGE_BASE: 'Umfangreicher Wissensbereich',
+            TRADEABLE_MARKETS: 'Handelbare Märkte',
             MARGIN: 'Hebel/Margin',
             SOCIAL_TRADING: 'Social Trading',
             MANAGED_ACCOUNTS: 'Managed Accounts',
@@ -555,36 +554,38 @@ const en = {
               'Instant Execution (keine Requotes)',
             POSITIVE_SLIPPAGE_POSSIBLE:
               'positive Slippage möglich',
-            ECN_ORDER_EXECUTION: 'ECN Order-ausführung',
-            LIQUIDITY_PRODIVER: 'Liqui-ditäts-provider',
-            MICRO_LOTS: 'Mini- oder Micro-Lots möglich',
+            ECN_ORDER_EXECUTION: 'ECN Orderausführung',
+            LIQUIDITY_PRODIVER: 'Liquiditätsprovider',
+            MICRO_LOTS: 'Mini- oder MicroLots möglich',
             INDEX_CFD_TRADEABLE_BELOW_POINT:
               'Index-CFDs ab 1 € oder weniger pro Punkt handelbar',
             RATE_SWITCH_24_5_INDEX_CFD:
-              '24/5 Kurs-stellung bei Index-CFDs',
+              '24/5 Kursstellung bei Index-CFDs',
             NO_FINANCIAL_COST_INDEX_CFD:
-              'keine Finanzierungs-kosten auf Index-CFDs',
+              'keine Finanzierungskosten auf Index-CFDs',
             NO_FINANCIAL_COST_RAW_MATERIAL_CFD:
-              'keine Finanzierungs-kosten auf Rohstoff-CFDs',
+              'keine Finanzierungskosten auf Rohstoff-CFDs',
             CFD_CONTRACTS_AUTOMATIC_ROLL:
               'CFD Kontrakte werden automatisch gerollt',
             REAL_STOCKS_CFD_SPREADS:
-              'Börsen-echte Aktien CFD Spreads',
+              'Börsenechte Aktien CFD Spreads',
             DMA_STOCKS: 'DMA Aktien CFDs',
             MINIMAL_ORDERSIZE_STOCKS:
-              'Minimale Order-größe Aktien CFDs',
+              'Minimale Ordergröße Aktien CFDs',
+            COMPANY: 'Unternehmen',
             OFFICE_IN_GERMANY: 'Büro in Deutschland',
             BONUS: 'Bonus',
             REGULATION_AND_DEPOSIT_SECURITY:
-              'Regu-lierung und Einlagen-sicherung',
-            RESERVE_LIABILIRY: 'Nach-schuss-pflicht',
-            INTEREST_ON_DEPOSIT: 'Zinsen auf Konto-einlage',
+              'Regulierung und Einlagensicherung',
+            RESERVE_LIABILIRY: 'Nachschusspflicht',
+            INTEREST_ON_DEPOSIT: 'Zinsen auf Kontoeinlage',
+            WITHOLDING_TAX: 'Abgeltungssteuer',
             SEGREGATED_ACCOUNTS:
-              'Kunden-gelder getrennt (segregated Accounts)',
+              'Kundengelder getrennt (segregated Accounts)',
             ACCOUNT_CURRENCIES:
-              'Währungen für Konto-führung',
+              'Währungen für Kontoführung',
             POSIBILITIES_FOR_WITHDRAWALS:
-              'Möglich-keiten für Ein-zahlungen und Aus-zahlungen',
+              'Möglichkeiten für Einzahlungen und Auszahlungen',
           },
           tooltip: {
             BONUS:
