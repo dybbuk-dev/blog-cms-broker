@@ -14,7 +14,7 @@ import GlobalDndContext from 'src/dnd-context';
 import PiwikPro from '@piwikpro/react-piwik-pro';
 
 PiwikPro.initialize(
-  '4179c8e9-a123-4f38-abef-02433321deba',
+  '09d3bdbb-12de-4363-85b3-d9b2ec1a8b40',
   'https://broker-bewertungen.containers.piwik.pro',
 );
 

@@ -683,7 +683,7 @@ function DefaultNavbar({
           opacity={0.5}
           gap={1}
         >
-          <img src={img} height="48px" />
+          <img src={img} height="48px" alt={title} />
           <MDTypography
             color="text"
             fontSize="0.75rem"

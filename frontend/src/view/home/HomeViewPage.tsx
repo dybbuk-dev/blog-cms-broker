@@ -83,6 +83,7 @@ function HomeViewPage(props) {
                   src="/images/home-box-forex.png"
                   width="115px"
                   height="115px"
+                  alt="home-box-forex"
                 />
                 <MDTypography
                   color="text"
@@ -125,6 +126,7 @@ function HomeViewPage(props) {
                   src="/images/home-box-cfd.png"
                   width="115px"
                   height="115px"
+                  alt="home-box-cfd"
                 />
                 <MDTypography
                   color="text"
