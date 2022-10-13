@@ -187,32 +187,32 @@ const typography: Types = {
   fontWeightBold: baseProperties.fontWeightBold,
 
   h1: {
-    fontSize: pxToRem(48),
-    lineHeight: 1.25,
-    ...baseHeadingProperties,
-  },
-
-  h2: {
     fontSize: pxToRem(36),
     lineHeight: 1.3,
     ...baseHeadingProperties,
   },
 
-  h3: {
-    fontSize: pxToRem(30),
-    lineHeight: 1.375,
-    ...baseHeadingProperties,
-  },
-
-  h4: {
+  h2: {
     fontSize: pxToRem(24),
     lineHeight: 1.375,
     ...baseHeadingProperties,
   },
 
-  h5: {
+  h3: {
+    fontSize: pxToRem(24),
+    lineHeight: 1.375,
+    ...baseHeadingProperties,
+  },
+
+  h4: {
     fontSize: pxToRem(20),
     lineHeight: 1.375,
+    ...baseHeadingProperties,
+  },
+
+  h5: {
+    fontSize: pxToRem(16),
+    lineHeight: 1.625,
     ...baseHeadingProperties,
   },
 

@@ -19,7 +19,15 @@ function Category() {
   return (
     <Card>
       <CardHeader
-        title="Broker-Kategorien"
+        title={
+          <MDTypography
+            variant="body1"
+            fontWeight="bold"
+            lineHeight={1.35}
+          >
+            Broker-Kategorien
+          </MDTypography>
+        }
         sx={{ pb: 1, px: 3, pt: 2 }}
       />
       <MDBox sx={{ pt: 0, px: 3, pb: 2 }}>

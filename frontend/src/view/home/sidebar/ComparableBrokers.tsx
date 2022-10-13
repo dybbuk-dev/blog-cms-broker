@@ -22,9 +22,17 @@ function ComparableBrokers({ record }) {
   return (
     <Card>
       <CardHeader
-        title={`${record.name
-          .replace(/\([\w\d\s]+\)/g, '')
-          .trim()} vergleichen mit`}
+        title={
+          <MDTypography
+            variant="body1"
+            fontWeight="bold"
+            lineHeight={1.35}
+          >
+            {`${record.name
+              .replace(/\([\w\d\s]+\)/g, '')
+              .trim()} vergleichen mit`}
+          </MDTypography>
+        }
         sx={{ pb: 1, px: 3, pt: 2 }}
       />
       <MDBox sx={{ pt: 0, px: 3, pb: 2 }}>
