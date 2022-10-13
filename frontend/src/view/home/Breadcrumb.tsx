@@ -67,6 +67,9 @@ function Breadcrumb({ items }) {
                 component={Link}
                 to={item.route.replace(/\/*$/, '')}
                 underline="hover"
+                sx={{
+                  color: 'inherit !important',
+                }}
               >
                 {item.name}
               </MaterialLink>
