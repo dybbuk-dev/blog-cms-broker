@@ -62,6 +62,7 @@ function TopBrokers() {
                           value={
                             row.broker_image_top_broker_logo
                           }
+                          alt={row.name}
                           sx={{
                             position: 'absolute',
                             left: 0,

@@ -26,6 +26,7 @@ function BrokerHeader({ record }) {
         <Grid md={6} xs={12} item>
           <ImageView
             value={record.broker_image_broker_detail_logo}
+            alt={record.name}
             sx={{
               width: {
                 xs: '100%',

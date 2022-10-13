@@ -22,7 +22,7 @@ function TopBrokersView() {
     <>
       {loading && <Spinner />}
       {!loading && hasRows && (
-        <Grid container>
+        <Grid spacing={2} container>
           {rows.map((row, idx) => (
             <Grid key={row.id} xs={12} item>
               <MDBox
@@ -59,6 +59,7 @@ function TopBrokersView() {
                       value={
                         row.broker_image_broker_detail_logo
                       }
+                      alt={row.name}
                       sx={{
                         height: '70px',
                         objectFit: 'contain',

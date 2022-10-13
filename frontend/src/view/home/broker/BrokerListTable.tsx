@@ -191,12 +191,14 @@ function BrokerListTable(props) {
                         <img
                           src="/images/star-grey.png"
                           height="16px"
+                          alt="star-grey"
                         />
                       }
                       icon={
                         <img
                           src="/images/star-fill.png"
                           height="16px"
+                          alt="star-fill"
                         />
                       }
                     />
