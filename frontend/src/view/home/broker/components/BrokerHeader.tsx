@@ -44,7 +44,7 @@ function BrokerHeader({ record }) {
             display="flex"
             flexWrap="wrap"
             justifyContent="flex-end"
-            gap={{ xs: 1, md: 1.5, lg: 2 }}
+            gap={{ xs: 1, lg: 1.5 }}
           >
             <OverallRating record={record} size={42} />
             <MDButton

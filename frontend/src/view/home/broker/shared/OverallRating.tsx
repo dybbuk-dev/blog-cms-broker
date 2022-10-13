@@ -48,7 +48,7 @@ function OverallRating({
       {!hideDescription && (
         <MDTypography
           variant="body2"
-          fontSize={size * 0.4}
+          fontSize={size * 0.34}
           color="text"
           fontWeight="regular"
         >
