@@ -1,4 +1,4 @@
-import { Card } from '@mui/material';
+import { Card, CardMedia } from '@mui/material';
 import { i18n } from 'src/i18n';
 import { Link } from 'react-router-dom';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
@@ -674,16 +674,29 @@ function DefaultNavbar({
           img: '/images/all-infos.png',
           title: 'Alle Infos',
           desc: 'zum FX & CFD Trading',
+          display: {
+            xs: 'none',
+            lg: 'flex',
+          },
         },
-      ].map(({ img, title, desc }) => (
+      ].map(({ img, title, desc, display }) => (
         <MDBox
           key={title}
-          display="flex"
+          display={display || 'flex'}
           alignItems="center"
           opacity={0.5}
           gap={1}
         >
-          <img src={img} height="48px" alt={title} />
+          <CardMedia
+            component="img"
+            width="48px"
+            height="48px"
+            src={img}
+            alt={title}
+            sx={{
+              m: 0,
+            }}
+          />
           <MDTypography
             color="text"
             fontSize="0.75rem"
