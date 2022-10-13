@@ -64,7 +64,11 @@ function HomeViewPage(props) {
                 startIcon={<SendIcon />}
                 fullWidth
               >
-                <MDTypography variant="h3" color="inherit">
+                <MDTypography
+                  variant="h3"
+                  fontSize="inherit"
+                  color="inherit"
+                >
                   {i18n('entities.home.forex_broker')}
                 </MDTypography>
               </MDButton>
@@ -102,7 +106,11 @@ function HomeViewPage(props) {
                 startIcon={<SendIcon />}
                 fullWidth
               >
-                <MDTypography variant="h3" color="inherit">
+                <MDTypography
+                  variant="h3"
+                  fontSize="inherit"
+                  color="inherit"
+                >
                   {i18n('entities.home.cfd_broker')}
                 </MDTypography>
               </MDButton>
