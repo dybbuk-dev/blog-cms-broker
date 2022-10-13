@@ -3,3 +3,4 @@ build/
 .eslintcache
 *.sh
 /public/sitemap.xml
+/public/sitemap.txt
