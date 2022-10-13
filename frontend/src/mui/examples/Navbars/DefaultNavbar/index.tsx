@@ -651,6 +651,53 @@ function DefaultNavbar({
     </Popper>
   );
 
+  const siteAwards = (display, mb = 0) => (
+    <MDBox
+      display={display}
+      // flexWrap="wrap"
+      gap={2}
+      overflow="hidden"
+      mb={mb}
+    >
+      {[
+        {
+          img: '/images/crowd-of-users.png',
+          title: 'Echte Erfahrungen',
+          desc: 'von Tradern',
+        },
+        {
+          img: '/images/balance.png',
+          title: '100% unabhängig',
+          desc: 'von Tradern für Trader',
+        },
+        {
+          img: '/images/all-infos.png',
+          title: 'Alle Infos',
+          desc: 'zum FX & CFD Trading',
+        },
+      ].map(({ img, title, desc }) => (
+        <MDBox
+          key={title}
+          display="flex"
+          alignItems="center"
+          opacity={0.5}
+          gap={1}
+        >
+          <img src={img} height="48px" />
+          <MDTypography
+            color="text"
+            fontSize="0.75rem"
+            lineHeight={1.25}
+          >
+            <b>{title}</b>
+            <br />
+            {desc}
+          </MDTypography>
+        </MDBox>
+      ))}
+    </MDBox>
+  );
+
   // const TagRoot = fixed ? MDBox : Card;
   const TagRoot = MDBox;
 
@@ -673,6 +720,14 @@ function DefaultNavbar({
           px={3}
           color={light ? 'white' : 'text'}
         >
+          {siteAwards(
+            {
+              xs: 'flex',
+              lg: 'none',
+            },
+            2,
+          )}
+
           <MDBox
             display="flex"
             justifyContent="space-between"
@@ -702,55 +757,19 @@ function DefaultNavbar({
                 Trader - seit 2009
               </MDTypography>
             </MDBox>
-            <MDBox
-              display="flex"
-              flexWrap="wrap"
-              gap={2}
-              overflow="hidden"
-            >
-              {[
-                {
-                  img: '/images/crowd-of-users.png',
-                  title: 'Echte Erfahrungen',
-                  desc: 'von Tradern',
-                },
-                {
-                  img: '/images/balance.png',
-                  title: '100% unabhängig',
-                  desc: 'von Tradern für Trader',
-                },
-                {
-                  img: '/images/all-infos.png',
-                  title: 'Alle Infos',
-                  desc: 'zum FX & CFD Trading',
-                },
-              ].map(({ img, title, desc }) => (
-                <MDBox
-                  key={title}
-                  display="flex"
-                  alignItems="center"
-                  opacity={0.5}
-                  gap={1}
-                >
-                  <img src={img} height="48px" />
-                  <MDTypography
-                    color="text"
-                    fontSize="0.75rem"
-                    lineHeight={1.25}
-                  >
-                    <b>{title}</b>
-                    <br />
-                    {desc}
-                  </MDTypography>
-                </MDBox>
-              ))}
-            </MDBox>
+            {siteAwards({
+              xs: 'none',
+              lg: 'flex',
+            })}
           </MDBox>
           <MDBox
             display="flex"
             justifyContent="space-between"
             alignItems="center"
-            mt={2}
+            mt={{
+              xs: -4,
+              lg: 2,
+            }}
           >
             <MDBox></MDBox>
             <MDBox
