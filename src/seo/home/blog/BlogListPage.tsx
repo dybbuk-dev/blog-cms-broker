@@ -6,7 +6,7 @@ import MaterialLink from '@mui/material/Link';
 import React from 'react';
 import Typography from '@mui/material/Typography';
 
-const BlogListPage = ({ records }) => {
+const BlogListPage = ({ records, ...props }) => {
   return (
     <Layout title="Broker-Bewertungen Blog" url={props.url}>
       <Typography variant="h1" pb={5}>

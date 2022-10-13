@@ -5,6 +5,7 @@ import HtmlView from '../shared/HtmlView';
 import Layout from '../Layout';
 import React from 'react';
 import TopBrokersView from '../broker/components/TopBrokersView';
+import Typography from '@mui/material/Typography';
 
 const BlogDetailPage = ({ record, ...props }) => {
   return (
