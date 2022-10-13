@@ -1241,7 +1241,7 @@ const en = {
     home: {
       title: 'Broker Bewertungen von Tradern für Trader',
       subtitle:
-        'Mit mittlerweile über 7000 Bewertungen von Tradern zu Online Brokern und Trading Services größtes deutschsprachiges Broker Vergleichsportal - seit 2009!',
+        'Mit bereits über 8000 Erfahrungsberichten & Bewertungen von Tradern sind wir das größte deutschsprachige Vergleichsportal für Online Broker und Trading Services- seit 2009!',
       description:
         'Wir sind selbst Trader und wissen wie schwer es ist einen guten Broker für den Handel von Forex, CFDs, Aktien, Futures oder Binären Optionen zu finden.Deshalb haben wir diese Seite ins Leben gerufen und alle Informationen zu den bekanntesten Brokern übersichtlich für unsere Besucher zusammengefasst.',
       top_brokers: 'Von Tradern am besten bewertete Broker',
