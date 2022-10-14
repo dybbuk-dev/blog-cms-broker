@@ -92,7 +92,7 @@ function DefaultNavbarDropdown({
         )}
         <MDTypography
           variant="button"
-          fontWeight="regular"
+          fontWeight="bold"
           textTransform="capitalize"
           color={light ? 'white' : 'dark'}
           sx={{ fontWeight: '100%' }}
