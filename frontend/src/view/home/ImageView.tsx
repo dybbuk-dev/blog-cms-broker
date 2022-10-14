@@ -10,6 +10,7 @@ function ImageView({ value, sx, alt: originalAlt }) {
       component="img"
       src={url}
       alt={alt}
+      title={alt}
       sx={{
         margin: 0,
         borderRadius: 0,
