@@ -50,7 +50,7 @@ function OverallRating({
       {!hideDescription && (
         <MDTypography
           variant="body2"
-          fontSize={size * 0.34}
+          fontSize={size * 0.3}
           color="text"
           fontWeight="regular"
           flexGrow={1}
