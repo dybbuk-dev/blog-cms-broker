@@ -44,7 +44,7 @@ function Meta({ title, keywords, description, noIndex }) {
           '@type': 'WebSite',
           name: 'Broker Bewertungen',
           alternateName: 'Broker-Bewertungen',
-          url: 'https://broker-bewertungen.de',
+          url: `${config.frontendUrl.protocol}://${config.frontendUrl.host}`,
         })}
       </script>
     </Helmet>
