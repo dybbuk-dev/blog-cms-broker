@@ -104,7 +104,7 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
   const onSubmit = (values) => {
     values.broker_id = brokerId;
     dispatch(
-      brokerPostFormActions.doCreate(values, () => {
+      brokerPostFormActions.doCreate(values, name, () => {
         Object.keys(initialValues).forEach((key) => {
           form.register({ name: key });
           form.setValue(key, initialValues[key]);

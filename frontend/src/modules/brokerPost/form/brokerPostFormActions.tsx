@@ -49,7 +49,7 @@ const brokerPostFormActions = {
   },
 
   doCreate:
-    (values, fnSuccess = null) =>
+    (values, brokerName = null, fnSuccess = null) =>
     async (dispatch) => {
       try {
         dispatch({
@@ -63,7 +63,10 @@ const brokerPostFormActions = {
         });
 
         Message.success(
-          i18n('entities.brokerPost.create.success'),
+          i18n(
+            'entities.brokerPost.create.success',
+            brokerName,
+          ),
         );
 
         fnSuccess && fnSuccess();
