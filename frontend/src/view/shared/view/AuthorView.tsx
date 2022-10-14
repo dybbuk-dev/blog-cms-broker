@@ -15,6 +15,21 @@ function AuthorView(props) {
     <PageContent>
       <Helmet>
         <link href={value.link} rel="author" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'http://schema.org',
+              author: [
+                {
+                  '@type': 'Person',
+                  name: value.name,
+                  url: value.link,
+                },
+              ],
+            }),
+          }}
+        />
       </Helmet>
       <MDBox
         display="flex"

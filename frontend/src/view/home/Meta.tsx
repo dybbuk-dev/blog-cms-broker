@@ -38,15 +38,18 @@ function Meta({ title, keywords, description, noIndex }) {
         rel="canonical"
         href={`${config.frontendUrl.protocol}://${config.frontendUrl.host}${match.url}`}
       />
-      <script type="application/ld+json">
-        {JSON.stringify({
-          '@context': 'http://schema.org',
-          '@type': 'WebSite',
-          name: 'Broker Bewertungen',
-          alternateName: 'Broker-Bewertungen',
-          url: `${config.frontendUrl.protocol}://${config.frontendUrl.host}`,
-        })}
-      </script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'http://schema.org',
+            '@type': 'WebSite',
+            name: 'Broker Bewertungen',
+            alternateName: 'Broker-Bewertungen',
+            url: `${config.frontendUrl.protocol}://${config.frontendUrl.host}`,
+          }),
+        }}
+      />
     </Helmet>
   );
 }
