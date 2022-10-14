@@ -45,6 +45,39 @@ function BrokerHeader({ record }) {
       borderTop={`1px dashed ${colors.inputBorderColor}`}
       borderBottom={`1px dashed ${colors.inputBorderColor}`}
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org/',
+            '@type': 'Product',
+            name: record.name,
+            brand: record.name,
+            logo: record.broker_image_broker_detail_logo[0]
+              .downloadUrl,
+            image:
+              record.broker_image_broker_detail_logo[0]
+                .downloadUrl,
+            review: {
+              '@type': 'Review',
+              reviewBody: record.meta?.teaser || '',
+              author: 'Paul Steward',
+            },
+            sku: record.name_normalized,
+            offers: { '@type': 'Demand' },
+            description:
+              record.meta?.teaser ||
+              `Erfahrungen von ${record.name}`,
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: record.rating?.overall_rating,
+              worstRating: 1,
+              bestRating: 5,
+              ratingCount: record.rating?.overall_reviews,
+            },
+          }),
+        }}
+      />
       <MDTypography variant="h1" mb={2}>
         {`${record.name} Erfahrungen und Test`}
       </MDTypography>
