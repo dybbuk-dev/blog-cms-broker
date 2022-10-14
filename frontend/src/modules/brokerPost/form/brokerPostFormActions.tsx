@@ -68,7 +68,7 @@ const brokerPostFormActions = {
           <MDBox
             color="inherit"
             width={{
-              lg: '500px',
+              md: '500px',
             }}
           >
             {parse(
