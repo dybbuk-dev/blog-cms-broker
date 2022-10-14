@@ -1,4 +1,7 @@
-import { DEFAULT_MOMENT_FORMAT } from 'src/config/common';
+import {
+  DEFAULT_MOMENT_FORMAT_DATE_ONLY,
+  DEFAULT_MOMENT_FORMAT_TIME_ONLY,
+} from 'src/config/common';
 import { i18n } from 'src/i18n';
 import { Link } from 'react-router-dom';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
@@ -172,7 +175,11 @@ function BrokerPostListTable(props) {
         <DataTableBodyCell>{row.rating}</DataTableBodyCell>
         <DataTableBodyCell>
           {moment(row.created).format(
-            DEFAULT_MOMENT_FORMAT,
+            DEFAULT_MOMENT_FORMAT_DATE_ONLY,
+          )}
+          <br />
+          {moment(row.created).format(
+            DEFAULT_MOMENT_FORMAT_TIME_ONLY,
           )}
         </DataTableBodyCell>
         <DataTableBodyCell>
@@ -195,6 +202,32 @@ function BrokerPostListTable(props) {
         </DataTableBodyCell>
         <DataTableBodyCell>
           <MDBox display="flex" justifyContent="flex-end">
+            {hasPermissionToEdit && (
+              <>
+                <Tooltip title={i18n('common.review')}>
+                  <IconButton
+                    size="small"
+                    color={sidenavColor}
+                    onClick={() =>
+                      doOpenReviewConfirmModal(row.id)
+                    }
+                  >
+                    <ReviewsIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title={i18n('common.destroy')}>
+                  <IconButton
+                    size="small"
+                    color={sidenavColor}
+                    onClick={() =>
+                      doOpenDestroyConfirmModal(row.id)
+                    }
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </Tooltip>
+              </>
+            )}
             <Tooltip title={i18n('common.view')}>
               <IconButton
                 size="small"
@@ -228,36 +261,13 @@ function BrokerPostListTable(props) {
                     <BugReportIcon />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title={i18n('common.review')}>
-                  <IconButton
-                    size="small"
-                    color={sidenavColor}
-                    onClick={() =>
-                      doOpenReviewConfirmModal(row.id)
-                    }
-                  >
-                    <ReviewsIcon />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title={i18n('common.destroy')}>
-                  <IconButton
-                    size="small"
-                    color={sidenavColor}
-                    onClick={() =>
-                      doOpenDestroyConfirmModal(row.id)
-                    }
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </Tooltip>
               </>
             )}
           </MDBox>
         </DataTableBodyCell>
       </TableRow>
       <TableRow>
-        <DataTableBodyCell> </DataTableBodyCell>
-        <DataTableBodyCell> </DataTableBodyCell>
+        <DataTableBodyCell colSpan={5}> </DataTableBodyCell>
         <DataTableBodyCell colSpan={100} width="auto">
           <HtmlView value={row.review} />
         </DataTableBodyCell>
