@@ -27,8 +27,6 @@ const authorHomeActions = {
       dispatch({
         type: authorHomeActions.FIND_ERROR,
       });
-
-      getHistory().push('/admin/author');
     }
   },
 };

@@ -52,6 +52,7 @@ import navigationMostReadActions from 'src/modules/navigation/mostRead/navigatio
 import navigationForexSchoolActions from 'src/modules/navigation/forexSchool/navigationForexSchoolActions';
 import navigationForexStrategyActions from 'src/modules/navigation/forexStrategy/navigationForexStrategyActions';
 import brokerComparableActions from 'src/modules/broker/comparable/brokerComparableActions';
+import authorHomeActions from 'src/modules/author/home/authorHomeActions';
 
 const store = configureStore();
 
@@ -89,6 +90,7 @@ function AppWithRedux(props) {
     dispatch(brokerComparableActions.doFetch());
     dispatch(brokerFeaturedActions.doFetch());
     dispatch(brokerTopActions.doFetch());
+    dispatch(authorHomeActions.doFind());
   }, []);
 
   return direction === 'rtl' ? (
