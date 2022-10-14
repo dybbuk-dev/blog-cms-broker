@@ -48,6 +48,7 @@ const HtmlStyled = styled('div')(() => ({
   },
   '& img': {
     maxWidth: '100% !important',
+    height: 'auto !important',
   },
 }));
 
