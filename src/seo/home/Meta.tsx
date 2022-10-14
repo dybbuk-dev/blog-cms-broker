@@ -57,15 +57,18 @@ function Meta({
           href={`${getConfig().FRONTEND_URL}${url}`}
         />
       )}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          '@context': 'http://schema.org',
-          '@type': 'WebSite',
-          name: 'Broker Bewertungen',
-          alternateName: 'Broker-Bewertungen',
-          url: 'https://broker-bewertungen.de',
-        })}
-      </script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'http://schema.org',
+            '@type': 'WebSite',
+            name: 'Broker Bewertungen',
+            alternateName: 'Broker-Bewertungen',
+            url: 'https://broker-bewertungen.de',
+          }),
+        }}
+      />
     </>
   );
 }
