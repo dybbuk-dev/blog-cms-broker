@@ -2,6 +2,7 @@ import { Link, useRouteMatch } from 'react-router-dom';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useSelector } from 'react-redux';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import config from 'src/config';
 import MaterialLink from '@mui/material/Link';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
@@ -41,10 +42,33 @@ function Breadcrumb({ items }) {
       flexWrap="wrap"
       gap={1}
       mb={2}
-      vocab="https://schema.org/"
-      typeof="BreadcrumbList"
     >
-      {Boolean(navItems.length) &&
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: (result || []).map(
+              (item, idx, arr) => ({
+                '@type': 'ListItem',
+                position: idx + 1,
+                name: item.name,
+                ...(idx + 1 < arr.length
+                  ? {
+                      item: `${
+                        config.frontendUrl.protocol
+                      }://${
+                        config.frontendUrl.host
+                      }${item.route.replace(/\/*$/, '')}`,
+                    }
+                  : {}),
+              }),
+            ),
+          }),
+        }}
+      />
+      {Boolean(result.length) &&
         result.map((item, idx, arr) => (
           <MDBox
             key={item.route}
@@ -52,8 +76,6 @@ function Breadcrumb({ items }) {
             flexWrap="wrap"
             alignItems="center"
             gap={1}
-            property="itemListElement"
-            typeof="ListItem"
           >
             {Boolean(idx) && (
               <ArrowRightIcon color="secondary" />
@@ -66,8 +88,6 @@ function Breadcrumb({ items }) {
                   : 'text'
               }
               fontWeight="regular"
-              property="item"
-              typeof="WebPage"
             >
               <MaterialLink
                 component={Link}
@@ -76,12 +96,10 @@ function Breadcrumb({ items }) {
                 sx={{
                   color: 'inherit !important',
                 }}
-                property="name"
               >
                 {item.name}
               </MaterialLink>
             </MDTypography>
-            <meta property="position" content={idx + 1} />
           </MDBox>
         ))}
     </MDBox>
