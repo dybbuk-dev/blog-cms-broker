@@ -44,10 +44,17 @@ function TopBrokers() {
                   display="flex"
                   justifyContent="flex-start"
                   alignItems="center"
-                  gap={2}
+                  sx={{
+                    '& > * + *': {
+                      ml: 1.5,
+                    },
+                  }}
                   mb={1}
+                  mr={1.5}
                 >
-                  <CircleNumber>{idx + 1}</CircleNumber>
+                  <CircleNumber size={45}>
+                    {idx + 1}
+                  </CircleNumber>
                   <MDBox flexGrow={1}>
                     <MaterialLink
                       href={row.meta?.homepage}
@@ -80,12 +87,13 @@ function TopBrokers() {
                   justifyContent="flex-start"
                   sx={{
                     '& > * + *': {
-                      ml: 2,
+                      ml: 1.5,
                     },
                   }}
+                  mr={1.5}
                 >
                   <MDBox
-                    width="50px"
+                    width="45px"
                     flexShrink={0}
                   ></MDBox>
                   <MDBox
