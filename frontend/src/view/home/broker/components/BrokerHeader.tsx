@@ -70,7 +70,9 @@ function BrokerHeader({ record }) {
               `Erfahrungen von ${record.name}`,
             aggregateRating: {
               '@type': 'AggregateRating',
-              ratingValue: record.rating?.overall_rating,
+              ratingValue: Number(
+                record.rating?.overall_rating || 0,
+              ).toFixed(2),
               worstRating: 1,
               bestRating: 5,
               ratingCount: record.rating?.overall_reviews,
