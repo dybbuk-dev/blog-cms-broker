@@ -9,6 +9,7 @@ import MDTypography from 'src/mui/components/MDTypography';
 import PageContent from 'src/view/shared/view/PageContent';
 import SendIcon from '@mui/icons-material/Send';
 import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
+import Breadcrumb from 'src/view/home/Breadcrumb';
 
 function HomeViewPage(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -26,6 +27,16 @@ function HomeViewPage(props) {
       description="Ihr Bewertungsportal für Forex Broker und CFD Broker ✓Erfahrungen und Bewertungen ✓ Von Tradern für Trader ✓ Alles auf www.broker-bewertungen.de"
     >
       <PageContent>
+        <MDBox display="none">
+          <Breadcrumb
+            items={[
+              {
+                name: i18n('entities.home.title'),
+                route: '/',
+              },
+            ]}
+          />
+        </MDBox>
         <Grid spacing={2} container>
           <Grid xs={12} item>
             <MDTypography variant="h1">

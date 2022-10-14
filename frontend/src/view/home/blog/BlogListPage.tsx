@@ -12,6 +12,7 @@ import PageContent from 'src/view/shared/view/PageContent';
 import Pagination from 'src/view/shared/table/Pagination';
 import selectors from 'src/modules/blog/home/blogHomeSelectors';
 import Spinner from 'src/view/shared/Spinner';
+import Breadcrumb from 'src/view/home/Breadcrumb';
 
 const BlogListPage = () => {
   const [dispatched, setDispatched] = useState(false);
@@ -40,6 +41,16 @@ const BlogListPage = () => {
   return (
     <Layout title="Broker-Bewertungen Blog">
       <PageContent>
+        <MDBox display="none">
+          <Breadcrumb
+            items={[
+              {
+                name: i18n('entities.blog.title'),
+                route: '/blog',
+              },
+            ]}
+          />
+        </MDBox>
         <MDTypography variant="h1" pb={5}>
           {i18n('entities.blog.title')}
         </MDTypography>

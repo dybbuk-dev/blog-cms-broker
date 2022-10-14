@@ -35,6 +35,8 @@ import Spinner from 'src/view/shared/Spinner';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import { getHistory } from 'src/modules/store';
 import Layout from 'src/view/home/Layout';
+import Breadcrumb from 'src/view/home/Breadcrumb';
+import MDBox from 'src/mui/components/MDBox';
 
 const schema = yup.object().shape({
   brokerA: yupFormSchemas.relationToOne(
@@ -118,6 +120,18 @@ function BrokerComparePage(props) {
       description="Vergleichen Sie Forex- und CFD-Broker miteinander und finden Sie so den besten Broker für Ihre Bedürfnisse."
     >
       <PageContent>
+        <MDBox display="none">
+          <Breadcrumb
+            items={[
+              {
+                name: i18n(
+                  'entities.broker.comparison.title',
+                ),
+                route: '/forex-cfd-broker-vergleich',
+              },
+            ]}
+          />
+        </MDBox>
         <MDTypography variant="h1">
           {i18n('entities.broker.comparison.title')}
         </MDTypography>
