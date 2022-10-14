@@ -81,6 +81,11 @@ function TopBrokersView() {
                     display="flex"
                     flexDirection="column"
                     justifyContent="center"
+                    sx={{
+                      '& > * + *': {
+                        mt: 1,
+                      },
+                    }}
                   >
                     <OverallRating
                       record={row}
