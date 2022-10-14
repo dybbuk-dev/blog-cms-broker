@@ -55,7 +55,7 @@ function OverallRating({
           fontWeight="regular"
           flexGrow={1}
           textAlign="center"
-          mt={{ xs: 1, lg: 1.5 }}
+          mt={{ xs: 1, lg: 0.6, xl: 0.6 }}
         >
           {i18n(
             'entities.broker.text.rating',

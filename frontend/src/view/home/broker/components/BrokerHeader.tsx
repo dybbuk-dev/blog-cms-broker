@@ -9,10 +9,36 @@ import lColors from 'src/mui/assets/theme/base/colors';
 import dColors from 'src/mui/assets/theme-dark/base/colors';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { Grid } from '@mui/material';
+import { useEffect, useState } from 'react';
 
 function BrokerHeader({ record }) {
   const { darkMode } = selectMuiSettings();
   const colors = darkMode ? dColors : lColors;
+  const [ratingSize, setRatingSize] = useState(37);
+  useEffect(() => {
+    const handleRatingSize = () => {
+      if (window.innerWidth > 1400) {
+        setRatingSize(50);
+      } else if (window.innerWidth > 1200) {
+        setRatingSize(42);
+      } else if (window.innerWidth > 1000) {
+        setRatingSize(28);
+      } else if (window.innerWidth > 700) {
+        setRatingSize(50);
+      } else if (window.innerWidth > 600) {
+        setRatingSize(48);
+      } else {
+        setRatingSize(37);
+      }
+    };
+    window.addEventListener('resize', handleRatingSize);
+    handleRatingSize();
+    return () =>
+      window.removeEventListener(
+        'resize',
+        handleRatingSize,
+      );
+  }, []);
   return (
     <MDBox
       py={2}
@@ -23,7 +49,7 @@ function BrokerHeader({ record }) {
         {`${record.name} Erfahrungen und Test`}
       </MDTypography>
       <Grid spacing={3} alignItems="stretch" container>
-        <Grid md={6} xs={12} item>
+        <Grid lg={6} xs={12} item>
           <ImageView
             value={record.broker_image_broker_detail_logo}
             alt={record.name}
@@ -39,25 +65,17 @@ function BrokerHeader({ record }) {
             }}
           />
         </Grid>
-        <Grid md={6} xs={12} item>
+        <Grid lg={6} xs={12} item>
           <MDBox
             display="flex"
             flexWrap="wrap"
             justifyContent="flex-end"
-            gap={{ xs: 1, lg: 1.5 }}
+            gap={{ xs: 1, lg: 0.6, xl: 0.6 }}
           >
-            <MDBox
-              flexGrow={1}
-              display={{ xs: 'none', lg: 'block' }}
-            >
-              <OverallRating record={record} size={42} />
-            </MDBox>
-            <MDBox
-              flexGrow={1}
-              display={{ xs: 'block', lg: 'none' }}
-            >
-              <OverallRating record={record} size={37} />
-            </MDBox>
+            <OverallRating
+              record={record}
+              size={ratingSize}
+            />
             <MDButton
               variant="contained"
               href={record.meta?.homepage}
