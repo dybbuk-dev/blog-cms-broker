@@ -41,6 +41,8 @@ function Breadcrumb({ items }) {
       flexWrap="wrap"
       gap={1}
       mb={2}
+      custom-vocab="https://schema.org/"
+      custom-typeof="BreadcrumbList"
     >
       {Boolean(navItems.length) &&
         result.map((item, idx, arr) => (
@@ -50,6 +52,8 @@ function Breadcrumb({ items }) {
             flexWrap="wrap"
             alignItems="center"
             gap={1}
+            custom-property="itemListElement"
+            custom-typeof="ListItem"
           >
             {Boolean(idx) && (
               <ArrowRightIcon color="secondary" />
@@ -62,6 +66,8 @@ function Breadcrumb({ items }) {
                   : 'text'
               }
               fontWeight="regular"
+              custom-property="item"
+              custom-typeof="WebPage"
             >
               <MaterialLink
                 component={Link}
@@ -70,10 +76,12 @@ function Breadcrumb({ items }) {
                 sx={{
                   color: 'inherit !important',
                 }}
+                custom-property="name"
               >
                 {item.name}
               </MaterialLink>
             </MDTypography>
+            <meta property="position" content={idx + 1} />
           </MDBox>
         ))}
     </MDBox>
