@@ -46,7 +46,18 @@ function BrokerHeader({ record }) {
             justifyContent="flex-end"
             gap={{ xs: 1, lg: 1.5 }}
           >
-            <OverallRating record={record} size={42} />
+            <MDBox
+              flexGrow={1}
+              display={{ xs: 'none', lg: 'block' }}
+            >
+              <OverallRating record={record} size={42} />
+            </MDBox>
+            <MDBox
+              flexGrow={1}
+              display={{ xs: 'block', lg: 'none' }}
+            >
+              <OverallRating record={record} size={37} />
+            </MDBox>
             <MDButton
               variant="contained"
               href={record.meta?.homepage}

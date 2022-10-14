@@ -14,9 +14,11 @@ function OverallRating({
   return (
     <>
       <MDBox
-        display="inline-flex"
+        display="flex"
         alignItems="center"
         flexWrap="wrap"
+        flexGrow={1}
+        justifyContent="space-between"
         gap={1}
       >
         {!hidePercent && (
@@ -51,6 +53,9 @@ function OverallRating({
           fontSize={size * 0.34}
           color="text"
           fontWeight="regular"
+          flexGrow={1}
+          textAlign="center"
+          mt={{ xs: 1, lg: 1.5 }}
         >
           {i18n(
             'entities.broker.text.rating',
