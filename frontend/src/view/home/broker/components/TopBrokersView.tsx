@@ -97,7 +97,7 @@ function TopBrokersView() {
                       variant="button"
                       color="text"
                       fontWeight="regular"
-                      mt={0.5}
+                      mt={1}
                       lineHeight={1}
                     >
                       <MaterialLink
