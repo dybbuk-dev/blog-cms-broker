@@ -65,12 +65,7 @@ const brokerPostFormActions = {
         });
 
         Message.success(
-          <MDBox
-            color="inherit"
-            width={{
-              md: '500px',
-            }}
-          >
+          <MDBox color="inherit" width="50vw">
             {parse(
               i18n(
                 'entities.brokerPost.create.success',
@@ -78,7 +73,7 @@ const brokerPostFormActions = {
               ),
             )}
           </MDBox>,
-          15000,
+          20000,
         );
 
         fnSuccess && fnSuccess();

@@ -352,7 +352,7 @@ const en = {
           'Um sicherzugehen, dass es sich bei deiner Bewertung nicht um eine Fake Bewertung oder Eigenwerbung eines Brokers handelt und das Bewertungsbild so objektiv wie möglich bleibt, prüfen wir jede Bewertung erst, bevor wir diese veröffentlichen.',
           'Vielen Dank für deine Mithilfe!',
           'Dein Team von broker-bewertungen.de',
-        ].join('<br/>'),
+        ].join('<br/><br/>'),
       },
       update: {
         success: 'Post successfully saved',
