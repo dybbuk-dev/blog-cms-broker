@@ -381,7 +381,13 @@ class BrokerPostRepository {
   ) {
     let whereAnd: Array<any> = [];
 
-    const include = [];
+    const include = [
+      {
+        attributes: ['id', 'name', 'name_normalized'],
+        model: options.database.broker,
+        as: 'broker',
+      },
+    ];
 
     if (filter) {
       if (filter.limit) {

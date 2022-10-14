@@ -268,6 +268,7 @@ class BlogCommentRepository {
     let whereAnd: Array<any> = [];
     const include = [
       {
+        attributes: ['id', 'name', 'name_normalized'],
         model: options.database.blog_entry,
         as: 'blog_entry',
       },

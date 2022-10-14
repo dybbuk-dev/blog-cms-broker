@@ -35,6 +35,7 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import Tooltip from '@mui/material/Tooltip';
+import HtmlView from 'src/view/shared/view/HtmlView';
 
 function BrokerPostListTable(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -251,148 +252,163 @@ function BrokerPostListTable(props) {
             )}
             {!loading &&
               rows.map((row) => (
-                <TableRow key={row.id}>
-                  <DataTableBodyCell padding="checkbox">
-                    <Checkbox
-                      color={sidenavColor}
-                      checked={selectedKeys.includes(
-                        row.id,
-                      )}
-                      onChange={() =>
-                        doToggleOneSelected(row.id)
-                      }
-                      size="small"
-                    />
-                  </DataTableBodyCell>
-                  <DataTableBodyCell align="right">
-                    {row.id}
-                  </DataTableBodyCell>
-                  <DataTableBodyCell>
-                    <MaterialLink
-                      component={Link}
-                      to={
-                        '/erfahrungsberichte/' +
-                        (row.broker?.name_normalized ?? '')
-                      }
-                    >
-                      {row.broker?.name}
-                    </MaterialLink>
-                  </DataTableBodyCell>
-                  <DataTableBodyCell>
-                    {row.name}
-                  </DataTableBodyCell>
-                  <DataTableBodyCell>
-                    {row.email}
-                  </DataTableBodyCell>
-                  <DataTableBodyCell>
-                    {row.rating}
-                  </DataTableBodyCell>
-                  <DataTableBodyCell>
-                    {moment(row.created).format(
-                      DEFAULT_MOMENT_FORMAT,
-                    )}
-                  </DataTableBodyCell>
-                  <DataTableBodyCell>
-                    {[
-                      'deleted',
-                      'spam',
-                      'review_required',
-                    ].map((field) => (
-                      <MDBadgeDot
-                        key={field}
-                        width="max-content"
-                        badgeContent={i18n(
-                          `entities.brokerPost.fields.${field}`,
+                <>
+                  <TableRow key={`info-${row.id}`}>
+                    <DataTableBodyCell padding="checkbox">
+                      <Checkbox
+                        color={sidenavColor}
+                        checked={selectedKeys.includes(
+                          row.id,
                         )}
-                        color={
-                          Boolean(row[field])
-                            ? 'info'
-                            : 'error'
+                        onChange={() =>
+                          doToggleOneSelected(row.id)
                         }
-                        variant="contained"
-                        container
+                        size="small"
                       />
-                    ))}
-                  </DataTableBodyCell>
-                  <DataTableBodyCell>
-                    <MDBox
-                      display="flex"
-                      justifyContent="flex-end"
-                    >
-                      <Tooltip title={i18n('common.view')}>
-                        <IconButton
-                          size="small"
-                          component={Link}
-                          color={sidenavColor}
-                          to={`/admin/broker-post/${row.id}`}
-                        >
-                          <SearchIcon />
-                        </IconButton>
-                      </Tooltip>
-                      {hasPermissionToEdit && (
-                        <>
-                          <Tooltip
-                            title={i18n('common.edit')}
-                          >
-                            <IconButton
-                              size="small"
-                              color={sidenavColor}
-                              component={Link}
-                              to={`/admin/broker-post/${row.id}/edit`}
-                            >
-                              <EditIcon />
-                            </IconButton>
-                          </Tooltip>
-                          <Tooltip
-                            title={i18n('common.spam')}
-                          >
-                            <IconButton
-                              size="small"
-                              color={sidenavColor}
-                              onClick={() =>
-                                doOpenSpamConfirmModal(
-                                  row.id,
-                                )
-                              }
-                            >
-                              <BugReportIcon />
-                            </IconButton>
-                          </Tooltip>
-                          <Tooltip
-                            title={i18n('common.review')}
-                          >
-                            <IconButton
-                              size="small"
-                              color={sidenavColor}
-                              onClick={() =>
-                                doOpenReviewConfirmModal(
-                                  row.id,
-                                )
-                              }
-                            >
-                              <ReviewsIcon />
-                            </IconButton>
-                          </Tooltip>
-                          <Tooltip
-                            title={i18n('common.destroy')}
-                          >
-                            <IconButton
-                              size="small"
-                              color={sidenavColor}
-                              onClick={() =>
-                                doOpenDestroyConfirmModal(
-                                  row.id,
-                                )
-                              }
-                            >
-                              <DeleteIcon />
-                            </IconButton>
-                          </Tooltip>
-                        </>
+                    </DataTableBodyCell>
+                    <DataTableBodyCell align="right">
+                      {row.id}
+                    </DataTableBodyCell>
+                    <DataTableBodyCell>
+                      <MaterialLink
+                        component={Link}
+                        to={
+                          '/erfahrungsberichte/' +
+                          (row.broker?.name_normalized ??
+                            '')
+                        }
+                      >
+                        {row.broker?.name}
+                      </MaterialLink>
+                    </DataTableBodyCell>
+                    <DataTableBodyCell>
+                      {row.name}
+                    </DataTableBodyCell>
+                    <DataTableBodyCell>
+                      {row.email}
+                    </DataTableBodyCell>
+                    <DataTableBodyCell>
+                      {row.rating}
+                    </DataTableBodyCell>
+                    <DataTableBodyCell>
+                      {moment(row.created).format(
+                        DEFAULT_MOMENT_FORMAT,
                       )}
-                    </MDBox>
-                  </DataTableBodyCell>
-                </TableRow>
+                    </DataTableBodyCell>
+                    <DataTableBodyCell>
+                      {[
+                        'deleted',
+                        'spam',
+                        'review_required',
+                      ].map((field) => (
+                        <MDBadgeDot
+                          key={field}
+                          width="max-content"
+                          badgeContent={i18n(
+                            `entities.brokerPost.fields.${field}`,
+                          )}
+                          color={
+                            Boolean(row[field])
+                              ? 'info'
+                              : 'error'
+                          }
+                          variant="contained"
+                          container
+                        />
+                      ))}
+                    </DataTableBodyCell>
+                    <DataTableBodyCell>
+                      <MDBox
+                        display="flex"
+                        justifyContent="flex-end"
+                      >
+                        <Tooltip
+                          title={i18n('common.view')}
+                        >
+                          <IconButton
+                            size="small"
+                            component={Link}
+                            color={sidenavColor}
+                            to={`/admin/broker-post/${row.id}`}
+                          >
+                            <SearchIcon />
+                          </IconButton>
+                        </Tooltip>
+                        {hasPermissionToEdit && (
+                          <>
+                            <Tooltip
+                              title={i18n('common.edit')}
+                            >
+                              <IconButton
+                                size="small"
+                                color={sidenavColor}
+                                component={Link}
+                                to={`/admin/broker-post/${row.id}/edit`}
+                              >
+                                <EditIcon />
+                              </IconButton>
+                            </Tooltip>
+                            <Tooltip
+                              title={i18n('common.spam')}
+                            >
+                              <IconButton
+                                size="small"
+                                color={sidenavColor}
+                                onClick={() =>
+                                  doOpenSpamConfirmModal(
+                                    row.id,
+                                  )
+                                }
+                              >
+                                <BugReportIcon />
+                              </IconButton>
+                            </Tooltip>
+                            <Tooltip
+                              title={i18n('common.review')}
+                            >
+                              <IconButton
+                                size="small"
+                                color={sidenavColor}
+                                onClick={() =>
+                                  doOpenReviewConfirmModal(
+                                    row.id,
+                                  )
+                                }
+                              >
+                                <ReviewsIcon />
+                              </IconButton>
+                            </Tooltip>
+                            <Tooltip
+                              title={i18n('common.destroy')}
+                            >
+                              <IconButton
+                                size="small"
+                                color={sidenavColor}
+                                onClick={() =>
+                                  doOpenDestroyConfirmModal(
+                                    row.id,
+                                  )
+                                }
+                              >
+                                <DeleteIcon />
+                              </IconButton>
+                            </Tooltip>
+                          </>
+                        )}
+                      </MDBox>
+                    </DataTableBodyCell>
+                  </TableRow>
+                  <TableRow key={`content-${row.id}`}>
+                    <DataTableBodyCell> </DataTableBodyCell>
+                    <DataTableBodyCell> </DataTableBodyCell>
+                    <DataTableBodyCell
+                      colSpan={100}
+                      width="auto"
+                    >
+                      <HtmlView value={row.review} />
+                    </DataTableBodyCell>
+                  </TableRow>
+                </>
               ))}
           </TableBody>
         </Table>
