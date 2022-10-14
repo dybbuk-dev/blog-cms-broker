@@ -13,6 +13,7 @@ import helmet from 'helmet';
 import path from 'path';
 import setupSwaggerUI from './apiDocumentation';
 import { handleSEO } from '../seo';
+import { getConfig } from '../config';
 
 const app = express();
 
@@ -161,7 +162,10 @@ app.use(
 );
 
 app.get('*', async (req, res) => {
-  if (!(await handleSEO(req, res))) {
+  if (
+    String(getConfig().SEO_SSR).toLowerCase() === 'false' ||
+    !(await handleSEO(req, res))
+  ) {
     res.sendFile(
       path.resolve(
         __dirname,
