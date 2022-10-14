@@ -2,8 +2,13 @@ import { Helmet } from 'react-helmet';
 import { useRouteMatch } from 'react-router-dom';
 import config from 'src/config';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import authorHomeSelectors from 'src/modules/author/home/authorHomeSelectors';
 
 function Meta({ title, keywords, description, noIndex }) {
+  const author = useSelector(
+    authorHomeSelectors.selectRecord,
+  );
   const match = useRouteMatch();
   return (
     <Helmet>
@@ -50,6 +55,25 @@ function Meta({ title, keywords, description, noIndex }) {
           }),
         }}
       />
+      {Boolean(author) && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'http://schema.org',
+              '@type': 'Article',
+              headline: title || '',
+              author: [
+                {
+                  '@type': 'Person',
+                  name: author.name,
+                  url: author.link,
+                },
+              ],
+            }),
+          }}
+        />
+      )}
     </Helmet>
   );
 }
