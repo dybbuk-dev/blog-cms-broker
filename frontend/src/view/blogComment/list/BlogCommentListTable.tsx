@@ -142,6 +142,124 @@ function BlogCommentListTable(props) {
     dispatch(actions.doToggleOneSelected(id));
   };
 
+  const RenderRow = ({ row }) => (
+    <>
+      <TableRow>
+        <DataTableBodyCell padding="checkbox">
+          <Checkbox
+            color={sidenavColor}
+            checked={selectedKeys.includes(row.id)}
+            onChange={() => doToggleOneSelected(row.id)}
+            size="small"
+          />
+        </DataTableBodyCell>
+        <DataTableBodyCell align="right">
+          {row.id}
+        </DataTableBodyCell>
+        <DataTableBodyCell>
+          <MaterialLink
+            component={Link}
+            to={`/blog/${row.blog_entry?.name_normalized}`}
+          >
+            {row.blog_entry?.name}
+          </MaterialLink>
+        </DataTableBodyCell>
+        <DataTableBodyCell>{row.name}</DataTableBodyCell>
+        <DataTableBodyCell>{row.email}</DataTableBodyCell>
+        <DataTableBodyCell>
+          {moment(row.created).format(
+            DEFAULT_MOMENT_FORMAT,
+          )}
+        </DataTableBodyCell>
+        <DataTableBodyCell>
+          {['deleted', 'spam', 'review_required'].map(
+            (field) => (
+              <MDBadgeDot
+                key={field}
+                width="max-content"
+                badgeContent={i18n(
+                  `entities.blogComment.fields.${field}`,
+                )}
+                color={
+                  Boolean(row[field]) ? 'info' : 'error'
+                }
+                variant="contained"
+              />
+            ),
+          )}
+        </DataTableBodyCell>
+        <DataTableBodyCell>
+          <MDBox display="flex" justifyContent="flex-end">
+            <Tooltip title={i18n('common.view')}>
+              <IconButton
+                size="small"
+                component={Link}
+                color={sidenavColor}
+                to={`/admin/blog-comment/${row.id}`}
+              >
+                <SearchIcon />
+              </IconButton>
+            </Tooltip>
+            {hasPermissionToEdit && (
+              <>
+                <Tooltip title={i18n('common.edit')}>
+                  <IconButton
+                    size="small"
+                    color={sidenavColor}
+                    component={Link}
+                    to={`/admin/blog-comment/${row.id}/edit`}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title={i18n('common.spam')}>
+                  <IconButton
+                    size="small"
+                    color={sidenavColor}
+                    onClick={() =>
+                      doOpenSpamConfirmModal(row.id)
+                    }
+                  >
+                    <BugReportIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title={i18n('common.review')}>
+                  <IconButton
+                    size="small"
+                    color={sidenavColor}
+                    onClick={() =>
+                      doOpenReviewConfirmModal(row.id)
+                    }
+                  >
+                    <ReviewsIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title={i18n('common.destroy')}>
+                  <IconButton
+                    size="small"
+                    color={sidenavColor}
+                    onClick={() =>
+                      doOpenDestroyConfirmModal(row.id)
+                    }
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </Tooltip>
+              </>
+            )}
+          </MDBox>
+        </DataTableBodyCell>
+      </TableRow>
+      <TableRow>
+        <DataTableBodyCell> </DataTableBodyCell>
+        <DataTableBodyCell> </DataTableBodyCell>
+        <DataTableBodyCell colSpan={100} width="auto">
+          <HtmlView value={row.content} />
+        </DataTableBodyCell>
+      </TableRow>
+    </>
+  );
+
   return (
     <>
       <TableContainer sx={{ boxShadow: 'none' }}>
@@ -244,155 +362,7 @@ function BlogCommentListTable(props) {
             )}
             {!loading &&
               rows.map((row) => (
-                <>
-                  <TableRow key={`info-${row.id}`}>
-                    <DataTableBodyCell padding="checkbox">
-                      <Checkbox
-                        color={sidenavColor}
-                        checked={selectedKeys.includes(
-                          row.id,
-                        )}
-                        onChange={() =>
-                          doToggleOneSelected(row.id)
-                        }
-                        size="small"
-                      />
-                    </DataTableBodyCell>
-                    <DataTableBodyCell align="right">
-                      {row.id}
-                    </DataTableBodyCell>
-                    <DataTableBodyCell>
-                      <MaterialLink
-                        component={Link}
-                        to={`/blog/${row.blog_entry?.name_normalized}`}
-                      >
-                        {row.blog_entry?.name}
-                      </MaterialLink>
-                    </DataTableBodyCell>
-                    <DataTableBodyCell>
-                      {row.name}
-                    </DataTableBodyCell>
-                    <DataTableBodyCell>
-                      {row.email}
-                    </DataTableBodyCell>
-                    <DataTableBodyCell>
-                      {moment(row.created).format(
-                        DEFAULT_MOMENT_FORMAT,
-                      )}
-                    </DataTableBodyCell>
-                    <DataTableBodyCell>
-                      {[
-                        'deleted',
-                        'spam',
-                        'review_required',
-                      ].map((field) => (
-                        <MDBadgeDot
-                          key={field}
-                          width="max-content"
-                          badgeContent={i18n(
-                            `entities.blogComment.fields.${field}`,
-                          )}
-                          color={
-                            Boolean(row[field])
-                              ? 'info'
-                              : 'error'
-                          }
-                          variant="contained"
-                        />
-                      ))}
-                    </DataTableBodyCell>
-                    <DataTableBodyCell>
-                      <MDBox
-                        display="flex"
-                        justifyContent="flex-end"
-                      >
-                        <Tooltip
-                          title={i18n('common.view')}
-                        >
-                          <IconButton
-                            size="small"
-                            component={Link}
-                            color={sidenavColor}
-                            to={`/admin/blog-comment/${row.id}`}
-                          >
-                            <SearchIcon />
-                          </IconButton>
-                        </Tooltip>
-                        {hasPermissionToEdit && (
-                          <>
-                            <Tooltip
-                              title={i18n('common.edit')}
-                            >
-                              <IconButton
-                                size="small"
-                                color={sidenavColor}
-                                component={Link}
-                                to={`/admin/blog-comment/${row.id}/edit`}
-                              >
-                                <EditIcon />
-                              </IconButton>
-                            </Tooltip>
-                            <Tooltip
-                              title={i18n('common.spam')}
-                            >
-                              <IconButton
-                                size="small"
-                                color={sidenavColor}
-                                onClick={() =>
-                                  doOpenSpamConfirmModal(
-                                    row.id,
-                                  )
-                                }
-                              >
-                                <BugReportIcon />
-                              </IconButton>
-                            </Tooltip>
-                            <Tooltip
-                              title={i18n('common.review')}
-                            >
-                              <IconButton
-                                size="small"
-                                color={sidenavColor}
-                                onClick={() =>
-                                  doOpenReviewConfirmModal(
-                                    row.id,
-                                  )
-                                }
-                              >
-                                <ReviewsIcon />
-                              </IconButton>
-                            </Tooltip>
-                            <Tooltip
-                              title={i18n('common.destroy')}
-                            >
-                              <IconButton
-                                size="small"
-                                color={sidenavColor}
-                                onClick={() =>
-                                  doOpenDestroyConfirmModal(
-                                    row.id,
-                                  )
-                                }
-                              >
-                                <DeleteIcon />
-                              </IconButton>
-                            </Tooltip>
-                          </>
-                        )}
-                      </MDBox>
-                    </DataTableBodyCell>
-                  </TableRow>
-                  <TableRow key={`content-${row.id}`}>
-                    <DataTableBodyCell> </DataTableBodyCell>
-                    <DataTableBodyCell> </DataTableBodyCell>
-                    <DataTableBodyCell
-                      colSpan={100}
-                      width="auto"
-                    >
-                      <HtmlView value={row.content} />
-                    </DataTableBodyCell>
-                  </TableRow>
-                </>
+                <RenderRow key={row.id} row={row} />
               ))}
           </TableBody>
         </Table>

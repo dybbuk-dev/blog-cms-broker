@@ -130,7 +130,6 @@ function BrokerPostForm(props) {
                   'entities.brokerPost.fields.created',
                 )}
                 variant="standard"
-                showTime
               />
             </Grid>
             <Grid item md={12} xs={12}>
