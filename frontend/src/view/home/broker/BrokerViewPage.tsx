@@ -172,24 +172,48 @@ const BrokerViewPage = () => {
             </MDBox>
             {tabValue !== 1 && (
               <MDBox py={2}>
-                <TabPanel value={tabValue} index={0}>
+                <TabPanel
+                  value={tabValue}
+                  index={0}
+                  hideOnly
+                >
                   <BrokerOverviewView record={record} />
                 </TabPanel>
-                <TabPanel value={tabValue} index={2}>
+                <TabPanel
+                  value={tabValue}
+                  index={2}
+                  hideOnly
+                >
                   <BrokerCharacteristicsView
                     record={record}
                   />
                 </TabPanel>
-                <TabPanel value={tabValue} index={3}>
+                <TabPanel
+                  value={tabValue}
+                  index={3}
+                  hideOnly
+                >
                   <BrokerPlatformView record={record} />
                 </TabPanel>
-                <TabPanel value={tabValue} index={4}>
+                <TabPanel
+                  value={tabValue}
+                  index={4}
+                  hideOnly
+                >
                   <BrokerMarketsView record={record} />
                 </TabPanel>
-                <TabPanel value={tabValue} index={5}>
+                <TabPanel
+                  value={tabValue}
+                  index={5}
+                  hideOnly
+                >
                   <BrokerSpreadsView record={record} />
                 </TabPanel>
-                <TabPanel value={tabValue} index={6}>
+                <TabPanel
+                  value={tabValue}
+                  index={6}
+                  hideOnly
+                >
                   <BrokerServiceView record={record} />
                 </TabPanel>
               </MDBox>

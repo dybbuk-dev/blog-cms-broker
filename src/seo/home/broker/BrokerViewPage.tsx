@@ -1,9 +1,14 @@
 import { i18n } from '../../i18n';
 import AuthorView from '../shared/AuthorView';
 import Box from '@mui/material/Box';
+import BrokerCharacteristicsView from './components/BrokerCharacteristicsView';
 import BrokerHeader from './components/BrokerHeader';
 import BrokerHomepageUrls from './components/BrokerHomepageUrls';
+import BrokerMarketsView from './components/BrokerMarketsView';
 import BrokerOverviewView from './components/BrokerOverviewView';
+import BrokerPlatformView from './components/BrokerPlatformView';
+import BrokerServiceView from './components/BrokerServiceView';
+import BrokerSpreadsView from './components/BrokerSpreadsView';
 import BrokerTabs from './BrokerTabs';
 import HtmlView from '../shared/HtmlView';
 import Layout from '../Layout';
@@ -86,7 +91,26 @@ const BrokerViewPage = ({ record, ...props }) => {
               />
             </Box>
             <Box py={2}>
-              <BrokerOverviewView record={record} />
+              <Box>
+                <BrokerOverviewView record={record} />
+              </Box>
+              <Box display="none">
+                <BrokerCharacteristicsView
+                  record={record}
+                />
+              </Box>
+              <Box display="none">
+                <BrokerPlatformView record={record} />
+              </Box>
+              <Box display="none">
+                <BrokerMarketsView record={record} />
+              </Box>
+              <Box display="none">
+                <BrokerSpreadsView record={record} />
+              </Box>
+              <Box display="none">
+                <BrokerServiceView record={record} />
+              </Box>
             </Box>
             <BrokerHomepageUrls record={record} />
           </>
