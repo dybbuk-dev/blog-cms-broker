@@ -28,7 +28,7 @@ import MDAvatar from 'src/mui/components/MDAvatar';
 import { BrandLogo } from 'src/assets/resources';
 
 const schema = yup.object().shape({
-  email: yupFormSchemas.string(i18n('user.fields.email'), {
+  email: yupFormSchemas.email(i18n('user.fields.email'), {
     required: true,
     max: 255,
   }),

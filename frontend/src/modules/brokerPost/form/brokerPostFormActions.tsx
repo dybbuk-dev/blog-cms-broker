@@ -3,6 +3,8 @@ import Errors from 'src/modules/shared/error/errors';
 import Message from 'src/view/shared/message';
 import { getHistory } from 'src/modules/store';
 import { i18n } from 'src/i18n';
+import parse from 'html-react-parser';
+import MDBox from 'src/mui/components/MDBox';
 
 const prefix = 'BROKER_POST_FORM';
 
@@ -63,10 +65,20 @@ const brokerPostFormActions = {
         });
 
         Message.success(
-          i18n(
-            'entities.brokerPost.create.success',
-            brokerName,
-          ),
+          <MDBox
+            color="inherit"
+            width={{
+              lg: '500px',
+            }}
+          >
+            {parse(
+              i18n(
+                'entities.brokerPost.create.success',
+                brokerName,
+              ),
+            )}
+          </MDBox>,
+          15000,
         );
 
         fnSuccess && fnSuccess();

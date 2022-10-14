@@ -42,7 +42,7 @@ const schema = yup.object().shape({
     min: 1,
     max: 255,
   }),
-  email: yupFormSchemas.string(i18n('common.email'), {
+  email: yupFormSchemas.email(i18n('common.email'), {
     required: true,
     min: 1,
     max: 255,

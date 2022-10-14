@@ -132,7 +132,7 @@ const schema = yup.object().shape({
   // #endregion
 
   // #region Email
-  email: yupFormSchemas.string(
+  email: yupFormSchemas.email(
     i18n('entities.broker.fields.email'),
     {
       min: 0,

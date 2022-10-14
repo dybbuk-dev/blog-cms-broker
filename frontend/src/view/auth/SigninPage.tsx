@@ -24,7 +24,7 @@ import Switch from '@mui/material/Switch';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 
 const schema = yup.object().shape({
-  email: yupFormSchemas.string(i18n('user.fields.email'), {
+  email: yupFormSchemas.email(i18n('user.fields.email'), {
     required: true,
   }),
   password: yupFormSchemas.string(

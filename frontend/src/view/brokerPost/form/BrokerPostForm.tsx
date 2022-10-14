@@ -29,7 +29,7 @@ const schema = yup.object().shape({
       max: 255,
     },
   ),
-  email: yupFormSchemas.string(
+  email: yupFormSchemas.email(
     i18n('entities.brokerPost.fields.email'),
     {
       min: 1,

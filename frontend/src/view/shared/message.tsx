@@ -5,11 +5,17 @@ export default class Message {
     notistakEnqueueSnackbar = instance;
   }
 
-  static success(arg) {
-    notistakEnqueueSnackbar(arg, { variant: 'success' });
+  static success(arg, autoHideDuration = 3000) {
+    notistakEnqueueSnackbar(arg, {
+      variant: 'success',
+      autoHideDuration,
+    });
   }
 
-  static error(arg) {
-    notistakEnqueueSnackbar(arg, { variant: 'error' });
+  static error(arg, autoHideDuration = 3000) {
+    notistakEnqueueSnackbar(arg, {
+      variant: 'error',
+      autoHideDuration,
+    });
   }
 }

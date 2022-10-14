@@ -27,7 +27,7 @@ const schema = yup.object().shape({
       max: 255,
     },
   ),
-  email: yupFormSchemas.string(
+  email: yupFormSchemas.email(
     i18n('entities.blogComment.fields.email'),
     {
       required: true,
