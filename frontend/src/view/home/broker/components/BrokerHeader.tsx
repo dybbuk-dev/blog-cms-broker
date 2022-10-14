@@ -61,14 +61,14 @@ function BrokerHeader({ record }) {
             review: {
               '@type': 'Review',
               reviewBody: record.meta?.teaser || '',
+              author: [
+                {
+                  '@type': 'Person',
+                  name: record.author?.name,
+                  url: record.author?.link,
+                },
+              ],
             },
-            author: [
-              {
-                '@type': 'Person',
-                name: record.author?.name,
-                url: record.author?.link,
-              },
-            ],
             sku: record.name_normalized,
             offers: { '@type': 'Demand' },
             description:
