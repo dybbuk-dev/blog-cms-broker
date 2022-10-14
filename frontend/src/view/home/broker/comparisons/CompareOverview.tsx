@@ -24,6 +24,7 @@ function CompareOverview({ recordA, recordB }) {
               value={
                 recordA.broker_image_broker_detail_logo
               }
+              alt={recordA.name}
             />
           }
           childrenB={
@@ -31,6 +32,7 @@ function CompareOverview({ recordA, recordB }) {
               value={
                 recordB.broker_image_broker_detail_logo
               }
+              alt={recordA.name}
             />
           }
         />
