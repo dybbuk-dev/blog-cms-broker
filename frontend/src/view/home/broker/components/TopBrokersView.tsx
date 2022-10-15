@@ -9,6 +9,7 @@ import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import OverallRating from 'src/view/home/broker/shared/OverallRating';
 import Spinner from 'src/view/shared/Spinner';
+import RatingViewItem from 'src/view/shared/view/RatingViewItem';
 
 function TopBrokersView() {
   const loading = useSelector(
@@ -70,6 +71,7 @@ function TopBrokersView() {
                     value={
                       row.broker_image_broker_regulation_image
                     }
+                    alt={row.name}
                     sx={{
                       display: { xs: 'none', md: 'block' },
                       height: '60px',
@@ -87,11 +89,24 @@ function TopBrokersView() {
                       },
                     }}
                   >
-                    <OverallRating
-                      record={row}
-                      size={32}
-                      hideDescription
-                      hidePercent
+                    <RatingViewItem
+                      value={row.rating?.overall_rating}
+                      precision={0.1}
+                      emptyIcon={
+                        <img
+                          src="/images/star-grey.png"
+                          alt="star-grey"
+                          height="32px"
+                        />
+                      }
+                      icon={
+                        <img
+                          src="/images/star-fill.png"
+                          alt="star-fill"
+                          height="32px"
+                        />
+                      }
+                      size="large"
                     />
                     <MDTypography
                       variant="button"
