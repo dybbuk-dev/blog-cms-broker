@@ -380,15 +380,18 @@ class NavigationRepository {
 
     const where = { [Op.and]: whereAnd };
 
-    return await options.database.navigation.findAll({
-      attributes: ['name', ['link', 'route']],
-      where,
-      include,
-      order: [
-        ['sort', 'ASC'],
-        ['name', 'ASC'],
-      ],
-    });
+    return await this._fillWithRelationsAndFilesForRows(
+      await options.database.navigation.findAll({
+        attributes: ['name', ['link', 'route']],
+        where,
+        include,
+        order: [
+          ['sort', 'ASC'],
+          ['name', 'ASC'],
+        ],
+      }),
+      options,
+    );
   }
 
   static async findAllAutocomplete(
