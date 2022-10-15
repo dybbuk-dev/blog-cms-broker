@@ -53,15 +53,15 @@ function OverallRating({
       {!hideDescription && (
         <MDTypography
           variant="body2"
-          fontSize={size * 0.35}
+          fontSize={size * 0.375}
           color="text"
           fontWeight="regular"
           flexGrow={1}
+          lineHeight={1}
           textAlign={{
             xs: 'center',
             lg: 'right',
           }}
-          mt={{ xs: 1, lg: 0.6, xl: 0.85 }}
         >
           {i18n(
             'entities.broker.text.rating',

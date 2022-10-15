@@ -22,13 +22,13 @@ function BrokerHeader({ record }) {
       } else if (window.innerWidth > 1200) {
         setRatingSize(36);
       } else if (window.innerWidth > 990) {
-        setRatingSize(28);
+        setRatingSize(26);
       } else if (window.innerWidth > 700) {
-        setRatingSize(50);
+        setRatingSize(46);
       } else if (window.innerWidth > 600) {
-        setRatingSize(48);
+        setRatingSize(42);
       } else {
-        setRatingSize(37);
+        setRatingSize(32);
       }
     };
     window.addEventListener('resize', handleRatingSize);
@@ -111,7 +111,7 @@ function BrokerHeader({ record }) {
             display="flex"
             flexWrap="wrap"
             justifyContent="flex-end"
-            gap={{ xs: 1, lg: 0.6, xl: 0.85 }}
+            gap={1.25}
           >
             <OverallRating
               record={record}

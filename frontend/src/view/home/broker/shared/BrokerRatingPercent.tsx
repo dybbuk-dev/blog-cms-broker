@@ -16,13 +16,13 @@ function BrokerRatingPercent({ value, size }) {
           : 'error'
       }
       color="white"
-      fontSize={(size * 2) / 3}
+      fontSize={(size * 5) / 6}
       borderRadius="md"
       alignItems="center"
       fontWeight="bold"
-      height={size}
+      lineHeight={1}
       gap={1}
-      px={1}
+      p={1}
     >
       {percent >= 50 ? <ThumbUpIcon /> : <ThumbDownIcon />}
       {`${percent}%`}
