@@ -348,7 +348,7 @@ const en = {
       },
       create: {
         success: [
-          'Vielen Dank für deine Bewertung von {0} Mit deiner Hilfe können so viele Trader die guten Broker schnell von den schlechteren unterscheiden und sich im besten Fall teures Lehrgeld sparen.',
+          'Vielen Dank für deine Bewertung von {0}. Mit deiner Hilfe können so viele Trader die guten Broker schnell von den schlechteren unterscheiden und sich im besten Fall teures Lehrgeld sparen.',
           'Um sicherzugehen, dass es sich bei deiner Bewertung nicht um eine Fake Bewertung oder Eigenwerbung eines Brokers handelt und das Bewertungsbild so objektiv wie möglich bleibt, prüfen wir jede Bewertung erst, bevor wir diese veröffentlichen.',
           'Vielen Dank für deine Mithilfe!',
           'Dein Team von broker-bewertungen.de',
