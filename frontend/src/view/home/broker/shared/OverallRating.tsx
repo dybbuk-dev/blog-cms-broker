@@ -18,7 +18,10 @@ function OverallRating({
         alignItems="center"
         flexWrap="wrap"
         flexGrow={1}
-        justifyContent="space-between"
+        justifyContent={{
+          xs: 'space-between',
+          lg: 'flex-end',
+        }}
         gap={1}
       >
         {!hidePercent && (
@@ -50,11 +53,14 @@ function OverallRating({
       {!hideDescription && (
         <MDTypography
           variant="body2"
-          fontSize={size * 0.3}
+          fontSize={size * 0.35}
           color="text"
           fontWeight="regular"
           flexGrow={1}
-          textAlign="center"
+          textAlign={{
+            xs: 'center',
+            lg: 'right',
+          }}
           mt={{ xs: 1, lg: 0.6, xl: 0.6 }}
         >
           {i18n(
