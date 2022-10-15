@@ -41,6 +41,7 @@ import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 import lColors from 'src/mui/assets/theme/base/colors';
 import dColors from 'src/mui/assets/theme-dark/base/colors';
 import formActions from 'src/modules/form/formActions';
+import LazyLoad from 'react-lazy-load';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(i18n('common.name'), {
@@ -187,135 +188,142 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
       >
         {hasRows &&
           rows.map((post, idx, arr) => (
-            <MDBox
-              key={post.id}
-              py={2}
-              borderTop={`1px dashed ${colors.inputBorderColor}`}
-            >
+            <LazyLoad key={post.id}>
               <MDBox
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
+                py={2}
+                borderTop={`1px dashed ${colors.inputBorderColor}`}
               >
-                <MDBox>
-                  <MDTypography
-                    variant="h4"
-                    color="warning"
+                <MDBox
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <MDBox>
+                    <MDTypography
+                      variant="h4"
+                      color="warning"
+                    >
+                      {`${name} Erfahrungen von: ${post.name}`}
+                    </MDTypography>
+                    <MDTypography
+                      variant="button"
+                      color="info"
+                      fontWeight="bold"
+                    >
+                      {`Verfasst am: ${moment(
+                        post.modified,
+                      ).format(
+                        DEFAULT_MOMENT_FORMAT_DATE_ONLY,
+                      )}`}
+                    </MDTypography>
+                  </MDBox>
+                  <MDBox
+                    display="inline-flex"
+                    flexWrap="wrap"
+                    justifyContent="flex-end"
+                    gap={1}
                   >
-                    {`${name} Erfahrungen von: ${post.name}`}
-                  </MDTypography>
-                  <MDTypography
-                    variant="button"
-                    color="info"
-                    fontWeight="bold"
-                  >
-                    {`Verfasst am: ${moment(
-                      post.modified,
-                    ).format(
-                      DEFAULT_MOMENT_FORMAT_DATE_ONLY,
-                    )}`}
-                  </MDTypography>
+                    <RatingViewItem
+                      value={post.rating}
+                      precision={0.1}
+                      emptyIcon={
+                        <img
+                          src="/images/star-grey.png"
+                          height="24px"
+                          alt="star-grey"
+                        />
+                      }
+                      icon={
+                        <img
+                          src="/images/star-fill.png"
+                          height="24px"
+                          alt="star-fill"
+                        />
+                      }
+                    />
+                    {hasPermissionToEdit && (
+                      <MDBox>
+                        <Tooltip
+                          title={i18n('common.edit')}
+                        >
+                          <IconButton
+                            size="small"
+                            color={sidenavColor}
+                            component={Link}
+                            to={`/admin/broker-post/${post.id}/edit`}
+                          >
+                            <EditIcon />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip
+                          title={i18n('common.spam')}
+                        >
+                          <IconButton
+                            size="small"
+                            color={sidenavColor}
+                            onClick={() =>
+                              doOpenSpamConfirmModal(
+                                post.id,
+                              )
+                            }
+                          >
+                            <BugReportIcon />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip
+                          title={i18n('common.review')}
+                        >
+                          <IconButton
+                            size="small"
+                            color={sidenavColor}
+                            onClick={() =>
+                              doOpenReviewConfirmModal(
+                                post.id,
+                              )
+                            }
+                          >
+                            <ReviewsIcon />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip
+                          title={i18n('common.destroy')}
+                        >
+                          <IconButton
+                            size="small"
+                            color={sidenavColor}
+                            onClick={() =>
+                              doOpenDestroyConfirmModal(
+                                post.id,
+                              )
+                            }
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </MDBox>
+                    )}
+                  </MDBox>
                 </MDBox>
                 <MDBox
-                  display="inline-flex"
-                  flexWrap="wrap"
-                  justifyContent="flex-end"
-                  gap={1}
+                  color="text"
+                  fontSize="1rem"
+                  fontWeight="regular"
+                  pt={1}
                 >
-                  <RatingViewItem
-                    value={post.rating}
-                    precision={0.1}
-                    emptyIcon={
-                      <img
-                        src="/images/star-grey.png"
-                        height="24px"
-                        alt="star-grey"
-                      />
-                    }
-                    icon={
-                      <img
-                        src="/images/star-fill.png"
-                        height="24px"
-                        alt="star-fill"
-                      />
-                    }
-                  />
-                  {hasPermissionToEdit && (
-                    <MDBox>
-                      <Tooltip title={i18n('common.edit')}>
-                        <IconButton
-                          size="small"
-                          color={sidenavColor}
-                          component={Link}
-                          to={`/admin/broker-post/${post.id}/edit`}
-                        >
-                          <EditIcon />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip title={i18n('common.spam')}>
-                        <IconButton
-                          size="small"
-                          color={sidenavColor}
-                          onClick={() =>
-                            doOpenSpamConfirmModal(post.id)
-                          }
-                        >
-                          <BugReportIcon />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip
-                        title={i18n('common.review')}
-                      >
-                        <IconButton
-                          size="small"
-                          color={sidenavColor}
-                          onClick={() =>
-                            doOpenReviewConfirmModal(
-                              post.id,
-                            )
-                          }
-                        >
-                          <ReviewsIcon />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip
-                        title={i18n('common.destroy')}
-                      >
-                        <IconButton
-                          size="small"
-                          color={sidenavColor}
-                          onClick={() =>
-                            doOpenDestroyConfirmModal(
-                              post.id,
-                            )
-                          }
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </MDBox>
-                  )}
+                  <HtmlView value={post.review} />
                 </MDBox>
+                {idx + 1 ===
+                  Number((arr.length / 2).toFixed(0)) && (
+                  <MDBox
+                    mt={2}
+                    pb={1}
+                    borderTop={`1px dashed ${colors.inputBorderColor}`}
+                  >
+                    {middle}
+                  </MDBox>
+                )}
               </MDBox>
-              <MDBox
-                color="text"
-                fontSize="1rem"
-                fontWeight="regular"
-                pt={1}
-              >
-                <HtmlView value={post.review} />
-              </MDBox>
-              {idx + 1 ===
-                Number((arr.length / 2).toFixed(0)) && (
-                <MDBox
-                  mt={2}
-                  pb={1}
-                  borderTop={`1px dashed ${colors.inputBorderColor}`}
-                >
-                  {middle}
-                </MDBox>
-              )}
-            </MDBox>
+            </LazyLoad>
           ))}
         {!loading && !hasRows && (
           <MDTypography variant="body2">

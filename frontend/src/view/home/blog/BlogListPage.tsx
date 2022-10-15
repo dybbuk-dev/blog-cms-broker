@@ -14,6 +14,7 @@ import selectors from 'src/modules/blog/home/blogHomeSelectors';
 import Spinner from 'src/view/shared/Spinner';
 import Breadcrumb from 'src/view/home/Breadcrumb';
 import ImageView from 'src/view/home/ImageView';
+import LazyLoad from 'react-lazy-load';
 
 const BlogListPage = () => {
   const [dispatched, setDispatched] = useState(false);
@@ -64,39 +65,41 @@ const BlogListPage = () => {
               gap={5}
             >
               {records.map((record) => (
-                <MDBox
-                  key={record.id}
-                  display="flex"
-                  justifyContent="flex-start"
-                  alignItems="start"
-                  gap={5}
-                >
-                  {record.blog_image[0]?.downloadUrl && (
-                    <ImageView
-                      value={record.blog_image}
-                      sx={{
-                        objectFit: 'contain',
-                        width: '150px',
-                      }}
-                    />
-                  )}
+                <LazyLoad>
+                  <MDBox
+                    key={record.id}
+                    display="flex"
+                    justifyContent="flex-start"
+                    alignItems="start"
+                    gap={5}
+                  >
+                    {record.blog_image[0]?.downloadUrl && (
+                      <ImageView
+                        value={record.blog_image}
+                        sx={{
+                          objectFit: 'contain',
+                          width: '150px',
+                        }}
+                      />
+                    )}
 
-                  <MDBox color="text">
-                    <MDTypography
-                      variant="body1"
-                      fontWeight="bold"
-                    >
-                      <MaterialLink
-                        component={Link}
-                        to={`/blog/${record.name_normalized}`}
-                        underline="hover"
+                    <MDBox color="text">
+                      <MDTypography
+                        variant="body1"
+                        fontWeight="bold"
                       >
-                        {record.name}
-                      </MaterialLink>
-                    </MDTypography>
-                    <HtmlView value={record.teaser} />
+                        <MaterialLink
+                          component={Link}
+                          to={`/blog/${record.name_normalized}`}
+                          underline="hover"
+                        >
+                          {record.name}
+                        </MaterialLink>
+                      </MDTypography>
+                      <HtmlView value={record.teaser} />
+                    </MDBox>
                   </MDBox>
-                </MDBox>
+                </LazyLoad>
               ))}
             </MDBox>
           </>

@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
 import MDBox from 'src/mui/components/MDBox';
+import LazyLoad from 'react-lazy-load';
 
 const HtmlStyled = styled('div')(() => ({
   fontSize: '1rem',
@@ -54,9 +55,11 @@ const HtmlStyled = styled('div')(() => ({
 
 export const HtmlViewWrapper = ({ children }) => {
   return (
-    <MDBox color="text">
-      <HtmlStyled>{children}</HtmlStyled>
-    </MDBox>
+    <LazyLoad>
+      <MDBox color="text">
+        <HtmlStyled>{children}</HtmlStyled>
+      </MDBox>
+    </LazyLoad>
   );
 };
 

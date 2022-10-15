@@ -1,6 +1,7 @@
 import Grid from '@mui/material/Grid';
 import PropTypes from 'prop-types';
 import TableCell from '@mui/material/TableCell';
+import LazyLoad from 'react-lazy-load';
 
 function CompareDetail({
   after,
@@ -10,24 +11,26 @@ function CompareDetail({
 }) {
   return (
     <TableCell width="75%">
-      <Grid spacing={2} container>
-        {Boolean(before) && (
-          <Grid xs={12} item>
-            {before}
+      <LazyLoad>
+        <Grid spacing={2} container>
+          {Boolean(before) && (
+            <Grid xs={12} item>
+              {before}
+            </Grid>
+          )}
+          <Grid xs={6} item>
+            {childrenA}
           </Grid>
-        )}
-        <Grid xs={6} item>
-          {childrenA}
-        </Grid>
-        <Grid xs={6} item>
-          {childrenB}
-        </Grid>
-        {Boolean(after) && (
-          <Grid xs={12} item>
-            {after}
+          <Grid xs={6} item>
+            {childrenB}
           </Grid>
-        )}
-      </Grid>
+          {Boolean(after) && (
+            <Grid xs={12} item>
+              {after}
+            </Grid>
+          )}
+        </Grid>
+      </LazyLoad>
     </TableCell>
   );
 }

@@ -1,3 +1,4 @@
+import LazyLoad from 'react-lazy-load';
 import MDBox from 'src/mui/components/MDBox';
 
 interface TabPanelProps {
@@ -18,11 +19,19 @@ function TabPanel(props: TabPanelProps) {
 
   if (value !== index) {
     if (hideOnly) {
-      return <MDBox display="none">{children}</MDBox>;
+      return (
+        <MDBox display="none">
+          <LazyLoad>{children}</LazyLoad>
+        </MDBox>
+      );
     }
     return null;
   }
-  return <MDBox>{children}</MDBox>;
+  return (
+    <MDBox>
+      <LazyLoad>{children}</LazyLoad>
+    </MDBox>
+  );
 }
 
 export default TabPanel;
