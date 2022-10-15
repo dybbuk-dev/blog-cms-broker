@@ -124,6 +124,7 @@ const BrokerViewPage = () => {
       keywords={keywords}
       description={description}
       record={record}
+      noArticle
     >
       {loading && <Spinner />}
       {dispatched && !loading && record && (

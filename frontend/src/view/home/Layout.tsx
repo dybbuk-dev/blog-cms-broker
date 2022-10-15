@@ -22,6 +22,7 @@ function Layout({
   record,
   children,
   noIndex = false,
+  noArticle = false,
 }) {
   const match = useRouteMatch();
   useEffect(() => {
@@ -34,6 +35,7 @@ function Layout({
         keywords={keywords}
         description={description}
         noIndex={noIndex}
+        noArticle={noArticle}
       />
       <Container>
         <Grid spacing={2} container>
@@ -85,6 +87,7 @@ Layout.propTypes = {
   record: PropTypes.any,
   children: PropTypes.any,
   noIndex: PropTypes.bool,
+  noArticle: PropTypes.bool,
 };
 
 export default Layout;

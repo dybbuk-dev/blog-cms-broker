@@ -5,7 +5,13 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import authorHomeSelectors from 'src/modules/author/home/authorHomeSelectors';
 
-function Meta({ title, keywords, description, noIndex }) {
+function Meta({
+  title,
+  keywords,
+  description,
+  noIndex,
+  noArticle,
+}) {
   const author = useSelector(
     authorHomeSelectors.selectRecord,
   );
@@ -52,7 +58,7 @@ function Meta({ title, keywords, description, noIndex }) {
           url: `${config.frontendUrl.protocol}://${config.frontendUrl.host}`,
         })}
       </script>
-      {Boolean(author) && (
+      {!noArticle && Boolean(author) && (
         <script type="application/ld+json">
           {JSON.stringify({
             '@context': 'http://schema.org',
@@ -76,6 +82,7 @@ Meta.defaultProps = {
   keywords: null,
   description: null,
   noIndex: false,
+  noArticle: false,
 };
 
 Meta.propTypes = {
@@ -83,6 +90,7 @@ Meta.propTypes = {
   keywords: PropTypes.arrayOf(PropTypes.string),
   description: PropTypes.string,
   noIndex: PropTypes.bool,
+  noArticle: PropTypes.bool,
 };
 
 export default Meta;
