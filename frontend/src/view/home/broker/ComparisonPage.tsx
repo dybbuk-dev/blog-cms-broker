@@ -41,6 +41,7 @@ const ComparisonPage = () => {
 
   useEffect(() => {
     dispatch(categoryHomeActions.doFind(match.url));
+    dispatch(authorHomeActions.doFind());
     setDispatched(true);
   }, [match.url]);
 
