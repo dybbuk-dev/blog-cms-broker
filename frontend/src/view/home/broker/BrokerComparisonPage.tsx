@@ -37,6 +37,7 @@ import { getHistory } from 'src/modules/store';
 import Layout from 'src/view/home/Layout';
 import Breadcrumb from 'src/view/home/Breadcrumb';
 import MDBox from 'src/mui/components/MDBox';
+import brokerTopSelectors from 'src/modules/broker/top/brokerTopSelectors';
 
 const schema = yup.object().shape({
   brokerA: yupFormSchemas.relationToOne(
@@ -75,6 +76,12 @@ function BrokerComparePage(props) {
   const recordB = useSelector(
     brokerComparisonSelectors.selectRecordB,
   );
+  const hasTopBrokers = useSelector(
+    brokerTopSelectors.selectHasRows,
+  );
+  const topBrokers = useSelector(
+    brokerTopSelectors.selectRows,
+  );
 
   const recordToValue = (record) =>
     record && {
@@ -86,10 +93,12 @@ function BrokerComparePage(props) {
     return {
       brokerA:
         (valueA && { id: valueA }) ||
-        recordToValue(recordA),
+        recordToValue(recordA) ||
+        (hasTopBrokers && topBrokers[0]),
       brokerB:
         (valueB && { id: valueB }) ||
-        recordToValue(recordB),
+        recordToValue(recordB) ||
+        (hasTopBrokers && topBrokers[1]),
     };
   });
 
@@ -109,6 +118,16 @@ function BrokerComparePage(props) {
     if (valueA && valueB) {
       dispatch(
         brokerComparisonActions.doFind(valueA, valueB),
+      );
+    } else if (
+      initialValues.brokerA?.name_normalized &&
+      initialValues.brokerB?.name_normalized
+    ) {
+      dispatch(
+        brokerComparisonActions.doFind(
+          initialValues.brokerA?.name_normalized,
+          initialValues.brokerB?.name_normalized,
+        ),
       );
     }
   }, [valueA, valueB]);

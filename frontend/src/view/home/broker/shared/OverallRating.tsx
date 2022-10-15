@@ -10,6 +10,7 @@ function OverallRating({
   hideDescription,
   hidePercent,
   size,
+  gap,
 }) {
   return (
     <>
@@ -62,6 +63,7 @@ function OverallRating({
             xs: 'center',
             lg: 'right',
           }}
+          mt={gap}
         >
           {i18n(
             'entities.broker.text.rating',
@@ -79,6 +81,7 @@ OverallRating.defaultProps = {
   hideDescription: false,
   hidePercent: false,
   size: 32,
+  gap: 0,
 };
 
 OverallRating.propTypes = {
@@ -86,6 +89,7 @@ OverallRating.propTypes = {
   hideDescription: PropTypes.bool,
   hidePercent: PropTypes.bool,
   size: PropTypes.number,
+  gap: PropTypes.number,
 };
 
 export default OverallRating;

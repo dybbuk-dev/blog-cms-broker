@@ -59,8 +59,20 @@ function CompareOverview({ recordA, recordB }) {
       <TableRow>
         <CompareSection name="overallRating" />
         <CompareDetail
-          childrenA={<OverallRating record={recordA} />}
-          childrenB={<OverallRating record={recordB} />}
+          childrenA={
+            <OverallRating
+              record={recordA}
+              size={30}
+              gap={1}
+            />
+          }
+          childrenB={
+            <OverallRating
+              record={recordB}
+              size={30}
+              gap={1}
+            />
+          }
         />
       </TableRow>
       <TableRow>
