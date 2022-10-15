@@ -6,7 +6,7 @@ import React from 'react';
 
 function BrokerImages({
   records,
-  attrs: { link, image },
+  attrs: { link, image, alt },
   filterFn,
   renderFn,
   noIndent,
@@ -25,7 +25,7 @@ function BrokerImages({
           {renderFn ? (
             renderFn(v)
           ) : (
-            <ImageView value={v[image]} />
+            <ImageView value={v[image]} alt={v[alt]} />
           )}
         </AttachLink>
       ))}
@@ -38,6 +38,7 @@ BrokerImages.defaultProps = {
   attrs: {
     link: 'url',
     image: 'image',
+    alt: 'name',
   },
   filterFn: () => true,
   renderFn: null,
@@ -50,6 +51,7 @@ BrokerImages.propTypes = {
   attrs: PropTypes.shape({
     link: PropTypes.string,
     image: PropTypes.string,
+    alt: PropTypes.string,
   }),
   renderFn: PropTypes.func,
   noIndent: PropTypes.bool,

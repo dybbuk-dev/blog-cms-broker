@@ -77,6 +77,7 @@ function HomeViewPage(props) {
             >
               <img
                 src="/images/home-box-forex.png"
+                alt="home-box-forex"
                 width="115px"
                 height="115px"
               />
@@ -115,6 +116,7 @@ function HomeViewPage(props) {
             >
               <img
                 src="/images/home-box-cfd.png"
+                alt="home-box-cfd"
                 width="115px"
                 height="115px"
               />

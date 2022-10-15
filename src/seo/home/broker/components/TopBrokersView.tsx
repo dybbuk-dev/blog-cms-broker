@@ -37,6 +37,7 @@ function TopBrokersView({ rows = [] }) {
                     value={
                       row.broker_image_broker_detail_logo
                     }
+                    alt={row.name}
                     sx={{
                       height: '70px',
                       objectFit: 'contain',
@@ -47,6 +48,7 @@ function TopBrokersView({ rows = [] }) {
                   value={
                     row.broker_image_broker_regulation_image
                   }
+                  alt={row.name}
                   sx={{
                     display: { xs: 'none', md: 'block' },
                     height: '60px',

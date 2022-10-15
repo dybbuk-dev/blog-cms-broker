@@ -126,7 +126,11 @@ const GeneralPage = ({
               alignItems="center"
               gap={1}
             >
-              <img src="/images/files/pdf.png" />
+              <img
+                src="/images/files/pdf.png"
+                alt={`${page.name} als PDF speichern`}
+                title={`${page.name} als PDF speichern`}
+              />
               <MaterialLink
                 underline="hover"
                 style={{ cursor: 'pointer' }}

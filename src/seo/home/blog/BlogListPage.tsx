@@ -36,6 +36,7 @@ const BlogListPage = ({ records, ...props }) => {
               {record.blog_image[0]?.downloadUrl && (
                 <img
                   src={record.blog_image[0].downloadUrl}
+                  alt="blog-item-image"
                   width="150px"
                 />
               )}

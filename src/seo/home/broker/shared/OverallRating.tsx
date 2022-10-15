@@ -32,12 +32,14 @@ function OverallRating({
           emptyIcon={
             <img
               src="/images/star-grey.png"
+              alt="star-grey"
               height={size}
             />
           }
           icon={
             <img
               src="/images/star-fill.png"
+              alt="star-fill"
               height={size}
             />
           }
