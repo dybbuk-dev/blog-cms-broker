@@ -111,7 +111,7 @@ function BrokerHeader({ record }) {
             display="flex"
             flexWrap="wrap"
             justifyContent="flex-end"
-            gap={{ xs: 1, lg: 0.6, xl: 0.6 }}
+            gap={{ xs: 1, lg: 0.6, xl: 0.85 }}
           >
             <OverallRating
               record={record}

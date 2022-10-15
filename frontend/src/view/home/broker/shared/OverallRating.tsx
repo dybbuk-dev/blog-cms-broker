@@ -61,7 +61,7 @@ function OverallRating({
             xs: 'center',
             lg: 'right',
           }}
-          mt={{ xs: 1, lg: 0.6, xl: 0.6 }}
+          mt={{ xs: 1, lg: 0.6, xl: 0.85 }}
         >
           {i18n(
             'entities.broker.text.rating',
