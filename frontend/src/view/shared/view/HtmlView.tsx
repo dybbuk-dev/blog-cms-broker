@@ -15,7 +15,7 @@ const HtmlStyled = styled('div')(() => ({
   },
   '& h1, h2, h3, h4, h5, h6, u strong': {
     display: 'block',
-    lineHeight: '200%',
+    lineHeight: 1.375,
     marginTop: '1rem',
   },
   '& p': {

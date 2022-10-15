@@ -9,6 +9,7 @@ import {
   ReactNode,
   Fragment,
 } from 'react';
+import { useRouteMatch } from 'react-router-dom';
 import breakpoints from 'src/mui/assets/theme/base/breakpoints';
 import Container from '@mui/material/Container';
 import DefaultNavbarDropdown from 'src/mui/examples/Navbars/DefaultNavbar/DefaultNavbarDropdown';
@@ -90,6 +91,8 @@ function DefaultNavbar({
   const openMobileNavbar = () =>
     setMobileNavbar(!mobileNavbar);
 
+  const closeMobileNavbar = () => setMobileNavbar(false);
+
   useEffect(() => {
     // A function that sets the display state for the DefaultNavbarMobile.
     function displayMobileNavbar() {
@@ -118,6 +121,10 @@ function DefaultNavbar({
         displayMobileNavbar,
       );
   }, []);
+
+  const match = useRouteMatch();
+
+  useEffect(closeMobileNavbar, [match.url]);
 
   const renderNavbarItems = routes.map(
     ({ name, icon, href, route, children }: any) => (
