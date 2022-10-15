@@ -39,6 +39,7 @@ import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import Tooltip from '@mui/material/Tooltip';
 import HtmlView from 'src/view/shared/view/HtmlView';
+import RatingListItem from 'src/view/shared/table/RatingListItem';
 
 function BrokerPostListTable(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -156,9 +157,6 @@ function BrokerPostListTable(props) {
             size="small"
           />
         </DataTableBodyCell>
-        <DataTableBodyCell align="right">
-          {row.id}
-        </DataTableBodyCell>
         <DataTableBodyCell>
           <MaterialLink
             component={Link}
@@ -171,8 +169,9 @@ function BrokerPostListTable(props) {
           </MaterialLink>
         </DataTableBodyCell>
         <DataTableBodyCell>{row.name}</DataTableBodyCell>
-        <DataTableBodyCell>{row.email}</DataTableBodyCell>
-        <DataTableBodyCell>{row.rating}</DataTableBodyCell>
+        <DataTableBodyCell>
+          <RatingListItem value={row.rating} />
+        </DataTableBodyCell>
         <DataTableBodyCell>
           {moment(row.created).format(
             DEFAULT_MOMENT_FORMAT_DATE_ONLY,
@@ -267,7 +266,7 @@ function BrokerPostListTable(props) {
         </DataTableBodyCell>
       </TableRow>
       <TableRow>
-        <DataTableBodyCell colSpan={5}> </DataTableBodyCell>
+        <DataTableBodyCell colSpan={3}> </DataTableBodyCell>
         <DataTableBodyCell colSpan={100} width="auto">
           <HtmlView value={row.review} />
         </DataTableBodyCell>
@@ -295,18 +294,6 @@ function BrokerPostListTable(props) {
                   />
                 )}
               </DataTableHeadCell>
-              <DataTableHeadCell
-                onClick={() => doChangeSort('id')}
-                sorted={
-                  sorter.field === 'id'
-                    ? sorter.order
-                    : 'none'
-                }
-                align="right"
-                width="0"
-              >
-                {i18n('entities.brokerPost.fields.id')}
-              </DataTableHeadCell>
               <DataTableHeadCell sorted={false}>
                 {i18n('entities.brokerPost.fields.broker')}
               </DataTableHeadCell>
@@ -319,16 +306,6 @@ function BrokerPostListTable(props) {
                 }
               >
                 {i18n('entities.brokerPost.fields.name')}
-              </DataTableHeadCell>
-              <DataTableHeadCell
-                onClick={() => doChangeSort('email')}
-                sorted={
-                  sorter.field === 'email'
-                    ? sorter.order
-                    : 'none'
-                }
-              >
-                {i18n('entities.brokerPost.fields.email')}
               </DataTableHeadCell>
               <DataTableHeadCell
                 onClick={() => doChangeSort('rating')}

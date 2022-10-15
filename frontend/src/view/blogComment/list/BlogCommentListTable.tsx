@@ -157,9 +157,6 @@ function BlogCommentListTable(props) {
             size="small"
           />
         </DataTableBodyCell>
-        <DataTableBodyCell align="right">
-          {row.id}
-        </DataTableBodyCell>
         <DataTableBodyCell width="auto">
           <MaterialLink
             component={Link}
@@ -169,7 +166,6 @@ function BlogCommentListTable(props) {
           </MaterialLink>
         </DataTableBodyCell>
         <DataTableBodyCell>{row.name}</DataTableBodyCell>
-        <DataTableBodyCell>{row.email}</DataTableBodyCell>
         <DataTableBodyCell>
           {moment(row.created).format(
             DEFAULT_MOMENT_FORMAT_DATE_ONLY,
@@ -263,7 +259,7 @@ function BlogCommentListTable(props) {
         </DataTableBodyCell>
       </TableRow>
       <TableRow>
-        <DataTableBodyCell colSpan={5}> </DataTableBodyCell>
+        <DataTableBodyCell colSpan={3}> </DataTableBodyCell>
         <DataTableBodyCell colSpan={100} width="auto">
           <HtmlView value={row.content} />
         </DataTableBodyCell>
@@ -291,18 +287,6 @@ function BlogCommentListTable(props) {
                   />
                 )}
               </DataTableHeadCell>
-              <DataTableHeadCell
-                onClick={() => doChangeSort('id')}
-                sorted={
-                  sorter.field === 'id'
-                    ? sorter.order
-                    : 'none'
-                }
-                align="right"
-                width="0"
-              >
-                {i18n('entities.blogComment.fields.id')}
-              </DataTableHeadCell>
               <DataTableHeadCell sorted={false}>
                 {i18n('entities.blogComment.fields.blog')}
               </DataTableHeadCell>
@@ -315,16 +299,6 @@ function BlogCommentListTable(props) {
                 }
               >
                 {i18n('entities.blogComment.fields.name')}
-              </DataTableHeadCell>
-              <DataTableHeadCell
-                onClick={() => doChangeSort('email')}
-                sorted={
-                  sorter.field === 'email'
-                    ? sorter.order
-                    : 'none'
-                }
-              >
-                {i18n('entities.blogComment.fields.email')}
               </DataTableHeadCell>
               <DataTableHeadCell
                 onClick={() => doChangeSort('created')}
