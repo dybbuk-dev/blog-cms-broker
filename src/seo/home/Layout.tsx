@@ -10,6 +10,7 @@ function Layout({
   children,
   url = '',
   noIndex = false,
+  noArticle = false,
 }) {
   return (
     <>
@@ -22,6 +23,7 @@ function Layout({
             author={author}
             url={url}
             noIndex={noIndex}
+            noArticle={noArticle}
           />
         </head>
         <body>{children}</body>
@@ -38,6 +40,7 @@ Layout.propTypes = {
   children: PropTypes.any,
   url: PropTypes.string,
   noIndex: PropTypes.bool,
+  noArticle: PropTypes.bool,
 };
 
 export default Layout;

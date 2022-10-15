@@ -9,6 +9,7 @@ function Meta({
   author,
   url,
   noIndex,
+  noArticle,
 }) {
   return (
     <>
@@ -69,6 +70,25 @@ function Meta({
           }),
         }}
       />
+      {!noArticle && Boolean(author) && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'http://schema.org',
+              '@type': 'Article',
+              headline: title || '',
+              author: [
+                {
+                  '@type': 'Person',
+                  name: author.name,
+                  url: author.link,
+                },
+              ],
+            }),
+          }}
+        />
+      )}
     </>
   );
 }
@@ -76,6 +96,8 @@ function Meta({
 Meta.defaultProps = {
   keywords: null,
   description: null,
+  noIndex: false,
+  noArticle: false,
 };
 
 Meta.propTypes = {
@@ -85,6 +107,7 @@ Meta.propTypes = {
   author: PropTypes.object,
   url: PropTypes.string,
   noIndex: PropTypes.bool,
+  noArticle: PropTypes.bool,
 };
 
 export default Meta;

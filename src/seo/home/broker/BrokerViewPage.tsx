@@ -16,6 +16,7 @@ import moment from 'moment';
 import React from 'react';
 import TopBrokersView from './components/TopBrokersView';
 import Typography from '@mui/material/Typography';
+import Breadcrumb from '../Breadcrumb';
 
 const BrokerViewPage = ({ record, ...props }) => {
   const tabValue = 0;
@@ -68,10 +69,26 @@ const BrokerViewPage = ({ record, ...props }) => {
       description={description}
       author={author}
       url={props.url}
+      noArticle
     >
       {record && (
         <Box display="flex" flexDirection="column" gap={2}>
           <>
+            <Breadcrumb
+              items={[
+                Boolean(record.categories[0]?.category) && {
+                  name: record.categories[0]?.category
+                    ?.name,
+                  route:
+                    record.categories[0]?.category?.link,
+                },
+                {
+                  name: record.name,
+                  route: props.url,
+                },
+              ].filter(Boolean)}
+              {...props}
+            />
             <BrokerHeader record={record} />
             <Box py={2}>
               <BrokerTabs

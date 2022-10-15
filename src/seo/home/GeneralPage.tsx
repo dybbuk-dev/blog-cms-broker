@@ -8,6 +8,7 @@ import moment from 'moment';
 import React from 'react';
 import TopBrokersView from './broker/components/TopBrokersView';
 import Typography from '@mui/material/Typography';
+import Breadcrumb from './Breadcrumb';
 
 const GeneralPage = ({
   category,
@@ -57,6 +58,15 @@ const GeneralPage = ({
     >
       {category && (
         <Box display="flex" flexDirection="column" gap={2}>
+          <Breadcrumb
+            items={[
+              {
+                name: category.name,
+                route: category.link,
+              },
+            ]}
+            {...props}
+          />
           <Typography variant="h2">
             {category.title}
           </Typography>
@@ -75,6 +85,7 @@ const GeneralPage = ({
       )}
       {!category && page && (
         <Box display="flex" flexDirection="column" gap={2}>
+          <Breadcrumb {...props} />
           <HtmlView value={page.body} />
           {Boolean(page.related_links.length) && (
             <Box py={2} my={2}>
@@ -133,6 +144,19 @@ const GeneralPage = ({
       )}
       {!category && !page && brokerArticle && (
         <Box display="flex" flexDirection="column" gap={2}>
+          <Breadcrumb
+            items={[
+              {
+                name: brokerArticle.broker.name,
+                route: `/erfahrungsberichte/${brokerArticle.broker.name_normalized}`,
+              },
+              {
+                name: brokerArticle.name,
+                route: `/${brokerArticle.broker.name_normalized}/${brokerArticle.name_normalized}`,
+              },
+            ]}
+            {...props}
+          />
           <HtmlView value={brokerArticle.content} />
           <AuthorView value={brokerArticle.author} />
           <Typography variant="h3" mb={2}>

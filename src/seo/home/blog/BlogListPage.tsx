@@ -5,10 +5,22 @@ import Layout from '../Layout';
 import MaterialLink from '@mui/material/Link';
 import React from 'react';
 import Typography from '@mui/material/Typography';
+import Breadcrumb from '../Breadcrumb';
 
 const BlogListPage = ({ records, ...props }) => {
   return (
     <Layout title="Broker-Bewertungen Blog" url={props.url}>
+      <Box display="none">
+        <Breadcrumb
+          items={[
+            {
+              name: i18n('entities.blog.title'),
+              route: '/blog',
+            },
+          ]}
+          {...props}
+        />
+      </Box>
       <Typography variant="h1" pb={5}>
         {i18n('entities.blog.title')}
       </Typography>

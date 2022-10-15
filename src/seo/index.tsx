@@ -15,6 +15,7 @@ import isbot from 'isbot';
 import PageService from '../services/pageService';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
+import NavigationService from '../services/navigationService';
 
 const renderToString = (children) =>
   `<!DOCTYPE html>${ReactDOMServer.renderToString(
@@ -36,11 +37,19 @@ export const handleSEO = async (req, res) => {
     orderBy: 'broker_rating.overall_rating_desc',
   });
 
+  const navigationItems = await new NavigationService(
+    req,
+  ).findForHome();
+
+  const author = await new AuthorService(req).first();
+
   const url = req.url.replace(/\/$/, '');
 
   const props = {
+    navigationItems,
     topBrokers,
     url,
+    author,
   };
 
   if (url === '') {
@@ -53,14 +62,9 @@ export const handleSEO = async (req, res) => {
     const category = await new CategoryService(
       req,
     ).findByURL(url);
-    const author = await new AuthorService(req).first();
     return res.send(
       renderToString(
-        <ComparisonPage
-          category={category}
-          author={author}
-          {...props}
-        />,
+        <ComparisonPage category={category} {...props} />,
       ),
     );
   } else if (url === '/forex-cfd-broker-vergleich') {

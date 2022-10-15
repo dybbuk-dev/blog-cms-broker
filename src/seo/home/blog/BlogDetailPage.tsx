@@ -6,6 +6,7 @@ import Layout from '../Layout';
 import React from 'react';
 import TopBrokersView from '../broker/components/TopBrokersView';
 import Typography from '@mui/material/Typography';
+import Breadcrumb from '../Breadcrumb';
 
 const BlogDetailPage = ({ record, ...props }) => {
   return (
@@ -18,14 +19,25 @@ const BlogDetailPage = ({ record, ...props }) => {
     >
       {record && (
         <Box display="flex" flexDirection="column" gap={2}>
-          <>
-            <HtmlView value={record.content} />
-            <AuthorView value={record.author} />
-            <Typography variant="h3">
-              {i18n('entities.home.top_brokers')}
-            </Typography>
-            <TopBrokersView rows={props.topBrokers} />
-          </>
+          <Breadcrumb
+            items={[
+              {
+                name: 'Broker Blog',
+                route: '/blog',
+              },
+              {
+                name: record.name,
+                route: `/blog/${record.name_normalized}`,
+              },
+            ]}
+            {...props}
+          />
+          <HtmlView value={record.content} />
+          <AuthorView value={record.author} />
+          <Typography variant="h3">
+            {i18n('entities.home.top_brokers')}
+          </Typography>
+          <TopBrokersView rows={props.topBrokers} />
         </Box>
       )}
     </Layout>

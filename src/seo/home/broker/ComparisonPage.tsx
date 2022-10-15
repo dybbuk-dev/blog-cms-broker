@@ -7,6 +7,7 @@ import moment from 'moment';
 import React from 'react';
 import TopBrokersView from './components/TopBrokersView';
 import Typography from '@mui/material/Typography';
+import Breadcrumb from '../Breadcrumb';
 
 const ComparisonPage = ({ category, author, ...props }) => {
   return (
@@ -26,6 +27,15 @@ const ComparisonPage = ({ category, author, ...props }) => {
       <Box display="flex" flexDirection="column" gap={2}>
         {category && (
           <>
+            <Breadcrumb
+              items={[
+                {
+                  name: 'Online Broker Vergleich',
+                  route: '/broker-vergleich',
+                },
+              ]}
+              {...props}
+            />
             <Typography variant="h1" pb={2}>
               Broker Vergleich
             </Typography>

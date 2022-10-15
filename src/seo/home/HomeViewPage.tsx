@@ -7,6 +7,7 @@ import Layout from './Layout';
 import React from 'react';
 import TopBrokersView from './broker/components/TopBrokersView';
 import Typography from '@mui/material/Typography';
+import Breadcrumb from './Breadcrumb';
 
 function HomeViewPage(props) {
   return (
@@ -22,7 +23,19 @@ function HomeViewPage(props) {
       ]}
       description="Ihr Bewertungsportal für Forex Broker und CFD Broker ✓Erfahrungen und Bewertungen ✓ Von Tradern für Trader ✓ Alles auf www.broker-bewertungen.de"
       url={props.url}
+      author={props.author}
     >
+      <Box display="none">
+        <Breadcrumb
+          items={[
+            {
+              name: i18n('entities.home.title'),
+              route: '/',
+            },
+          ]}
+          {...props}
+        />
+      </Box>
       <Grid spacing={2} container>
         <Grid xs={12} item>
           <Typography variant="h1">
@@ -47,7 +60,13 @@ function HomeViewPage(props) {
               href={'/forex-broker-vergleich'}
               fullWidth
             >
-              {i18n('entities.home.forex_broker')}
+              <Typography
+                variant="h3"
+                fontSize="inherit"
+                color="inherit"
+              >
+                {i18n('entities.home.forex_broker')}
+              </Typography>
             </Button>
             <Box
               display="flex"
@@ -79,7 +98,13 @@ function HomeViewPage(props) {
               href={'/cfd-broker-vergleich'}
               fullWidth
             >
-              {i18n('entities.home.cfd_broker')}
+              <Typography
+                variant="h3"
+                fontSize="inherit"
+                color="inherit"
+              >
+                {i18n('entities.home.cfd_broker')}
+              </Typography>
             </Button>
             <Box
               display="flex"
