@@ -10,6 +10,47 @@ import Typography from '@mui/material/Typography';
 function BrokerHeader({ record }) {
   return (
     <Box py={2}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org/',
+            '@type': 'Product',
+            name: record.name,
+            brand: record.name,
+            logo: record.broker_image_broker_detail_logo[0]
+              .downloadUrl,
+            image:
+              record.broker_image_broker_detail_logo[0]
+                .downloadUrl,
+            review: {
+              '@type': 'Review',
+              reviewBody: record.meta?.teaser || '',
+              author: [
+                {
+                  '@type': 'Person',
+                  name: record.author?.name,
+                  url: record.author?.link,
+                },
+              ],
+            },
+            sku: record.name_normalized,
+            offers: { '@type': 'Demand' },
+            description:
+              record.meta?.teaser ||
+              `Erfahrungen von ${record.name}`,
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: Number(
+                record.rating?.overall_rating || 0,
+              ).toFixed(2),
+              worstRating: 1,
+              bestRating: 5,
+              ratingCount: record.rating?.overall_reviews,
+            },
+          }),
+        }}
+      />
       <Typography variant="h1" mb={2}>
         {`${record.name} Erfahrungen und Test`}
       </Typography>
