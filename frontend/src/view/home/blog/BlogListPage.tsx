@@ -13,6 +13,7 @@ import Pagination from 'src/view/shared/table/Pagination';
 import selectors from 'src/modules/blog/home/blogHomeSelectors';
 import Spinner from 'src/view/shared/Spinner';
 import Breadcrumb from 'src/view/home/Breadcrumb';
+import ImageView from 'src/view/home/ImageView';
 
 const BlogListPage = () => {
   const [dispatched, setDispatched] = useState(false);
@@ -67,12 +68,16 @@ const BlogListPage = () => {
                   key={record.id}
                   display="flex"
                   justifyContent="flex-start"
+                  alignItems="start"
                   gap={5}
                 >
                   {record.blog_image[0]?.downloadUrl && (
-                    <img
-                      src={record.blog_image[0].downloadUrl}
-                      width="150px"
+                    <ImageView
+                      value={record.blog_image}
+                      sx={{
+                        objectFit: 'contain',
+                        width: '150px',
+                      }}
                     />
                   )}
 
