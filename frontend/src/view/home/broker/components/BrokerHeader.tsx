@@ -18,7 +18,7 @@ function BrokerHeader({ record }) {
   useEffect(() => {
     const handleRatingSize = () => {
       if (window.innerWidth > 1400) {
-        setRatingSize(42);
+        setRatingSize(36);
       } else if (window.innerWidth > 1200) {
         setRatingSize(36);
       } else if (window.innerWidth > 990) {
