@@ -88,11 +88,17 @@ function BrokerComparePage(props) {
       brokerA:
         (valueA && { id: valueA }) ||
         recordToValue(recordA) ||
-        (hasTopBrokers && topBrokers[0]),
+        (hasTopBrokers &&
+          topBrokers[0] && {
+            id: topBrokers[0].name_normalized,
+          }),
       brokerB:
         (valueB && { id: valueB }) ||
         recordToValue(recordB) ||
-        (hasTopBrokers && topBrokers[1]),
+        (hasTopBrokers &&
+          topBrokers[1] && {
+            id: topBrokers[1].name_normalized,
+          }),
     };
   });
 
@@ -114,13 +120,13 @@ function BrokerComparePage(props) {
         brokerComparisonActions.doFind(valueA, valueB),
       );
     } else if (
-      initialValues.brokerA?.name_normalized &&
-      initialValues.brokerB?.name_normalized
+      initialValues.brokerA?.id &&
+      initialValues.brokerB?.id
     ) {
       dispatch(
         brokerComparisonActions.doFind(
-          initialValues.brokerA?.name_normalized,
-          initialValues.brokerB?.name_normalized,
+          initialValues.brokerA?.id,
+          initialValues.brokerB?.id,
         ),
       );
     }
