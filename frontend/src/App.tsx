@@ -53,6 +53,7 @@ import navigationForexSchoolActions from 'src/modules/navigation/forexSchool/nav
 import navigationForexStrategyActions from 'src/modules/navigation/forexStrategy/navigationForexStrategyActions';
 import brokerComparableActions from 'src/modules/broker/comparable/brokerComparableActions';
 import authorHomeActions from 'src/modules/author/home/authorHomeActions';
+import CookieConsentTool from 'src/CookieConsentTool';
 
 const store = configureStore();
 
@@ -227,6 +228,7 @@ function AppWithSnackbar(props) {
       {layout === 'vr' && <Configurator />}
       <RoutesComponent />
       <ScrollTop />
+      <CookieConsentTool darkMode={darkMode} />
     </ConnectedRouter>
   );
 }
