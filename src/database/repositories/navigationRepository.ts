@@ -33,6 +33,12 @@ class NavigationRepository {
     'MOST_READ',
   ];
 
+  static SHOW_PARENT = [
+    'FOREX_SCHOOL',
+    'FOREX_STRATEGY',
+    'DOWNLOADS',
+  ];
+
   static getTypeIndex(type) {
     if (!type) {
       return 0;
@@ -364,7 +370,7 @@ class NavigationRepository {
         },
         order: [
           ['sort', 'ASC'],
-          ['name', 'ASC'],
+          // ['name', 'ASC'],
         ],
         separate: true,
       },
@@ -380,18 +386,32 @@ class NavigationRepository {
 
     const where = { [Op.and]: whereAnd };
 
-    return await this._fillWithRelationsAndFilesForRows(
-      await options.database.navigation.findAll({
-        attributes: ['name', ['link', 'route']],
-        where,
-        include,
-        order: [
-          ['sort', 'ASC'],
-          ['name', 'ASC'],
-        ],
-      }),
-      options,
-    );
+    const records =
+      await this._fillWithRelationsAndFilesForRows(
+        await options.database.navigation.findAll({
+          attributes: ['name', ['link', 'route'], 'type'],
+          where,
+          include,
+          order: [
+            ['sort', 'ASC'],
+            // ['name', 'ASC'],
+          ],
+        }),
+        options,
+      );
+
+    records.forEach((record) => {
+      if (this.SHOW_PARENT.includes(record.type)) {
+        if (!record.children) {
+          record.children = [];
+        }
+        record.children.unshift(
+          lodash.pick(record, ['name', 'route', 'type']),
+        );
+      }
+    });
+
+    return records;
   }
 
   static async findAllAutocomplete(

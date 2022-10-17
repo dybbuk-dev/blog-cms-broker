@@ -30,7 +30,9 @@ function Breadcrumb({ items }) {
       ) === 0
     ) {
       navItems.push(item);
-      (item.children || []).forEach(selectNavigationItemFn);
+      (item.children || [])
+        .filter(({ type }) => !type)
+        .forEach(selectNavigationItemFn);
     }
   };
   navigationItems.forEach(selectNavigationItemFn);
