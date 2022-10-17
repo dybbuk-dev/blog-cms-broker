@@ -12,7 +12,6 @@ import Meta from 'src/view/home/Meta';
 import MostRead from 'src/view/home/sidebar/MostRead';
 import PageLayout from 'src/mui/examples/LayoutContainers/PageLayout';
 import PropTypes from 'prop-types';
-import ScrollTo from 'src/ScrollTo';
 import TopBrokers from 'src/view/home/sidebar/TopBrokers';
 
 function Layout({
@@ -26,7 +25,8 @@ function Layout({
 }) {
   const match = useRouteMatch();
   useEffect(() => {
-    ScrollTo();
+    document.documentElement.scrollTop = 0;
+    document.scrollingElement.scrollTop = 0;
   }, [match.url]);
   return (
     <PageLayout fixedNavBar={false}>
