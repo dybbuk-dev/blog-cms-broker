@@ -21,7 +21,8 @@ function TabPanel(props: TabPanelProps) {
     if (hideOnly) {
       return (
         <MDBox display="none">
-          <LazyLoad>{children}</LazyLoad>
+          {/* <LazyLoad>{children}</LazyLoad> */}
+          {children}
         </MDBox>
       );
     }
@@ -29,7 +30,8 @@ function TabPanel(props: TabPanelProps) {
   }
   return (
     <MDBox>
-      <LazyLoad>{children}</LazyLoad>
+      {/* <LazyLoad>{children}</LazyLoad> */}
+      {children}
     </MDBox>
   );
 }

@@ -54,16 +54,16 @@ function DataTableBodyCell({
       })}
       {...rest}
     >
-      <LazyLoad>
-        <MDBox
-          display="inline-block"
-          width={rest.width || 'max-content'}
-          color="text"
-          sx={{ verticalAlign: 'middle' }}
-        >
-          {children}
-        </MDBox>
-      </LazyLoad>
+      {/* <LazyLoad> */}
+      <MDBox
+        display="inline-block"
+        width={rest.width || 'max-content'}
+        color="text"
+        sx={{ verticalAlign: 'middle' }}
+      >
+        {children}
+      </MDBox>
+      {/* </LazyLoad> */}
     </MDBox>
   );
 }

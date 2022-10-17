@@ -13,27 +13,27 @@ function SingleCheckbox({ record, fields }) {
         const tooltip = i18n(tooltipKey);
 
         return (
-          <LazyLoad>
-            <Grid key={field} container>
-              <BrokerSection
-                tooltip={
-                  tooltip === tooltipKey ? null : (
-                    <>{tooltip}</>
-                  )
-                }
-              >
-                {i18n(
-                  `entities.broker.comparison.checkbox.name.${field.toUpperCase()}`,
-                )}
-              </BrokerSection>
-              <Grid md={8} xs={12} item>
-                <BrokerCheckbox
-                  record={record}
-                  field={field}
-                />
-              </Grid>
+          // <LazyLoad>
+          <Grid key={field} container>
+            <BrokerSection
+              tooltip={
+                tooltip === tooltipKey ? null : (
+                  <>{tooltip}</>
+                )
+              }
+            >
+              {i18n(
+                `entities.broker.comparison.checkbox.name.${field.toUpperCase()}`,
+              )}
+            </BrokerSection>
+            <Grid md={8} xs={12} item>
+              <BrokerCheckbox
+                record={record}
+                field={field}
+              />
             </Grid>
-          </LazyLoad>
+          </Grid>
+          // </LazyLoad>
         );
       })}
     </>

@@ -65,41 +65,41 @@ const BlogListPage = () => {
               gap={5}
             >
               {records.map((record) => (
-                <LazyLoad>
-                  <MDBox
-                    key={record.id}
-                    display="flex"
-                    justifyContent="flex-start"
-                    alignItems="start"
-                    gap={5}
-                  >
-                    {record.blog_image[0]?.downloadUrl && (
-                      <ImageView
-                        value={record.blog_image}
-                        sx={{
-                          objectFit: 'contain',
-                          width: '150px',
-                        }}
-                      />
-                    )}
+                // <LazyLoad key={record.id}>
+                <MDBox
+                  key={record.id}
+                  display="flex"
+                  justifyContent="flex-start"
+                  alignItems="start"
+                  gap={5}
+                >
+                  {record.blog_image[0]?.downloadUrl && (
+                    <ImageView
+                      value={record.blog_image}
+                      sx={{
+                        objectFit: 'contain',
+                        width: '150px',
+                      }}
+                    />
+                  )}
 
-                    <MDBox color="text">
-                      <MDTypography
-                        variant="body1"
-                        fontWeight="bold"
+                  <MDBox color="text">
+                    <MDTypography
+                      variant="body1"
+                      fontWeight="bold"
+                    >
+                      <MaterialLink
+                        component={Link}
+                        to={`/blog/${record.name_normalized}`}
+                        underline="hover"
                       >
-                        <MaterialLink
-                          component={Link}
-                          to={`/blog/${record.name_normalized}`}
-                          underline="hover"
-                        >
-                          {record.name}
-                        </MaterialLink>
-                      </MDTypography>
-                      <HtmlView value={record.teaser} />
-                    </MDBox>
+                        {record.name}
+                      </MaterialLink>
+                    </MDTypography>
+                    <HtmlView value={record.teaser} />
                   </MDBox>
-                </LazyLoad>
+                </MDBox>
+                // </LazyLoad>
               ))}
             </MDBox>
           </>

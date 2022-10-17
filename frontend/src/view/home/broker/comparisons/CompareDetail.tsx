@@ -10,26 +10,26 @@ function CompareDetail({
 }) {
   return (
     <Grid xs={12} lg={9} item>
-      <LazyLoad>
-        <Grid spacing={2} container>
-          {Boolean(before) && (
-            <Grid xs={12} item>
-              {before}
-            </Grid>
-          )}
-          <Grid xs={6} item>
-            {childrenA}
+      {/* <LazyLoad> */}
+      <Grid spacing={2} container>
+        {Boolean(before) && (
+          <Grid xs={12} item>
+            {before}
           </Grid>
-          <Grid xs={6} item>
-            {childrenB}
-          </Grid>
-          {Boolean(after) && (
-            <Grid xs={12} item>
-              {after}
-            </Grid>
-          )}
+        )}
+        <Grid xs={6} item>
+          {childrenA}
         </Grid>
-      </LazyLoad>
+        <Grid xs={6} item>
+          {childrenB}
+        </Grid>
+        {Boolean(after) && (
+          <Grid xs={12} item>
+            {after}
+          </Grid>
+        )}
+      </Grid>
+      {/* </LazyLoad> */}
     </Grid>
   );
 }

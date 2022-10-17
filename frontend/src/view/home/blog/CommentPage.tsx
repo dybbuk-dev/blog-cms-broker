@@ -174,111 +174,107 @@ const CommentPage = ({ record }) => {
         {!loading &&
           hasRows &&
           rows.map((comment) => (
-            <LazyLoad>
+            // <LazyLoad key={comment.id}>
+            <MDBox
+              key={comment.id}
+              display="flex"
+              flexDirection="column"
+              color="text"
+              gap={1}
+            >
               <MDBox
-                key={comment.id}
                 display="flex"
-                flexDirection="column"
-                color="text"
-                gap={1}
+                justifyContent="space-between"
               >
                 <MDBox
                   display="flex"
-                  justifyContent="space-between"
+                  justifyContent="flex-start"
                 >
-                  <MDBox
-                    display="flex"
-                    justifyContent="flex-start"
+                  <MDTypography
+                    variant="body1"
+                    fontWeight="bold"
                   >
-                    <MDTypography
-                      variant="body1"
-                      fontWeight="bold"
-                    >
-                      {`${comment.name} (${moment(
-                        comment.modified,
-                      ).format(
-                        DEFAULT_MOMENT_FORMAT_DATE_ONLY,
-                      )})`}
-                    </MDTypography>
-                  </MDBox>
-                  <MDBox
-                    display="flex"
-                    justifyContent="flex-end"
-                  >
-                    {hasPermissionToEdit && (
-                      <>
-                        <Tooltip
-                          title={i18n('common.edit')}
-                        >
-                          <IconButton
-                            size="small"
-                            color={sidenavColor}
-                            component={Link}
-                            to={`/admin/blog-comment/${comment.id}/edit`}
-                          >
-                            <EditIcon />
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip
-                          title={i18n('common.spam')}
-                        >
-                          <IconButton
-                            size="small"
-                            color={sidenavColor}
-                            onClick={() =>
-                              doOpenSpamConfirmModal(
-                                comment.id,
-                              )
-                            }
-                          >
-                            <BugReportIcon />
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip
-                          title={i18n('common.review')}
-                        >
-                          <IconButton
-                            size="small"
-                            color={sidenavColor}
-                            onClick={() =>
-                              doOpenReviewConfirmModal(
-                                comment.id,
-                              )
-                            }
-                          >
-                            <ReviewsIcon />
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip
-                          title={i18n('common.destroy')}
-                        >
-                          <IconButton
-                            size="small"
-                            color={sidenavColor}
-                            onClick={() =>
-                              doOpenDestroyConfirmModal(
-                                comment.id,
-                              )
-                            }
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </Tooltip>
-                      </>
-                    )}
-                  </MDBox>
+                    {`${comment.name} (${moment(
+                      comment.modified,
+                    ).format(
+                      DEFAULT_MOMENT_FORMAT_DATE_ONLY,
+                    )})`}
+                  </MDTypography>
                 </MDBox>
                 <MDBox
-                  color="text"
-                  fontSize="1rem"
-                  fontWeight="regular"
-                  pt={1}
-                  pl={5}
+                  display="flex"
+                  justifyContent="flex-end"
                 >
-                  <HtmlView value={comment.content} />
+                  {hasPermissionToEdit && (
+                    <>
+                      <Tooltip title={i18n('common.edit')}>
+                        <IconButton
+                          size="small"
+                          color={sidenavColor}
+                          component={Link}
+                          to={`/admin/blog-comment/${comment.id}/edit`}
+                        >
+                          <EditIcon />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title={i18n('common.spam')}>
+                        <IconButton
+                          size="small"
+                          color={sidenavColor}
+                          onClick={() =>
+                            doOpenSpamConfirmModal(
+                              comment.id,
+                            )
+                          }
+                        >
+                          <BugReportIcon />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip
+                        title={i18n('common.review')}
+                      >
+                        <IconButton
+                          size="small"
+                          color={sidenavColor}
+                          onClick={() =>
+                            doOpenReviewConfirmModal(
+                              comment.id,
+                            )
+                          }
+                        >
+                          <ReviewsIcon />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip
+                        title={i18n('common.destroy')}
+                      >
+                        <IconButton
+                          size="small"
+                          color={sidenavColor}
+                          onClick={() =>
+                            doOpenDestroyConfirmModal(
+                              comment.id,
+                            )
+                          }
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </>
+                  )}
                 </MDBox>
               </MDBox>
-            </LazyLoad>
+              <MDBox
+                color="text"
+                fontSize="1rem"
+                fontWeight="regular"
+                pt={1}
+                pl={5}
+              >
+                <HtmlView value={comment.content} />
+              </MDBox>
+            </MDBox>
+            // </LazyLoad>
           ))}
         {!loading && !hasRows && (
           <MDTypography

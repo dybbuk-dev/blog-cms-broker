@@ -55,11 +55,11 @@ const HtmlStyled = styled('div')(() => ({
 
 export const HtmlViewWrapper = ({ children }) => {
   return (
-    <LazyLoad>
-      <MDBox color="text">
-        <HtmlStyled>{children}</HtmlStyled>
-      </MDBox>
-    </LazyLoad>
+    // <LazyLoad>
+    <MDBox color="text">
+      <HtmlStyled>{children}</HtmlStyled>
+    </MDBox>
+    // </LazyLoad>
   );
 };
 
