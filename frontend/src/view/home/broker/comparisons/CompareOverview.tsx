@@ -11,12 +11,12 @@ import MaterialLink from '@mui/material/Link';
 import MDBox from 'src/mui/components/MDBox';
 import OverallRating from 'src/view/home/broker/shared/OverallRating';
 import PropTypes from 'prop-types';
-import TableRow from '@mui/material/TableRow';
+import Grid from '@mui/material/Grid';
 
 function CompareOverview({ recordA, recordB }) {
   return (
     <>
-      <TableRow>
+      <Grid spacing={2} container>
         <CompareSection name="logo" />
         <CompareDetail
           childrenA={
@@ -36,8 +36,8 @@ function CompareOverview({ recordA, recordB }) {
             />
           }
         />
-      </TableRow>
-      <TableRow>
+      </Grid>
+      <Grid spacing={2} container>
         <CompareSection name="brokerType" />
         <CompareDetail
           childrenA={
@@ -55,8 +55,8 @@ function CompareOverview({ recordA, recordB }) {
             </AttrTypography>
           }
         />
-      </TableRow>
-      <TableRow>
+      </Grid>
+      <Grid spacing={2} container>
         <CompareSection name="overallRating" />
         <CompareDetail
           childrenA={
@@ -74,8 +74,8 @@ function CompareOverview({ recordA, recordB }) {
             />
           }
         />
-      </TableRow>
-      <TableRow>
+      </Grid>
+      <Grid spacing={2} container>
         <CompareSection name="customerReviews" />
         <CompareDetail
           childrenA={
@@ -101,15 +101,15 @@ function CompareOverview({ recordA, recordB }) {
             </AttrTypography>
           }
         />
-      </TableRow>
-      <TableRow>
+      </Grid>
+      <Grid spacing={2} container>
         <CompareSection name="links" />
         <CompareDetail
           childrenA={<BrokerLinks record={recordA} />}
           childrenB={<BrokerLinks record={recordB} />}
         />
-      </TableRow>
-      <TableRow>
+      </Grid>
+      <Grid spacing={2} container>
         <CompareSection name="brokerFeature" />
         <CompareDetail
           childrenA={
@@ -131,15 +131,15 @@ function CompareOverview({ recordA, recordB }) {
             />
           }
         />
-      </TableRow>
-      <TableRow>
+      </Grid>
+      <Grid spacing={2} container>
         <CompareSection name="customerReviews" />
         <CompareDetail
           childrenA={<BrokerUpsides record={recordA} />}
           childrenB={<BrokerUpsides record={recordB} />}
         />
-      </TableRow>
-      <TableRow>
+      </Grid>
+      <Grid spacing={2} container>
         <CompareSection name="scalping" />
         <CompareDetail
           childrenA={
@@ -157,7 +157,7 @@ function CompareOverview({ recordA, recordB }) {
             </MDBox>
           }
         />
-      </TableRow>
+      </Grid>
     </>
   );
 }

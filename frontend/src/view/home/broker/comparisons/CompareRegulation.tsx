@@ -2,14 +2,14 @@ import BrokerAttrs from 'src/view/home/broker/shared/BrokerAttrs';
 import CompareDetail from 'src/view/home/broker/comparisons/CompareDetail';
 import CompareRegion from 'src/view/home/broker/comparisons/CompareRegion';
 import CompareSection from 'src/view/home/broker/comparisons/CompareSection';
+import Grid from '@mui/material/Grid';
 import PropTypes from 'prop-types';
-import TableRow from '@mui/material/TableRow';
 
 function CompareRegulation({ recordA, recordB }) {
   return (
     <>
       <CompareRegion name="region.regulationAndDepositInsurance" />
-      <TableRow>
+      <Grid spacing={2} container>
         <CompareSection
           name="regulation"
           tooltip="tooltip.regulation"
@@ -26,8 +26,8 @@ function CompareRegulation({ recordA, recordB }) {
             />
           }
         />
-      </TableRow>
-      <TableRow>
+      </Grid>
+      <Grid spacing={2} container>
         <CompareSection
           name="depositProtection"
           tooltip="tooltip.depositProtection"
@@ -46,7 +46,7 @@ function CompareRegulation({ recordA, recordB }) {
             />
           }
         />
-      </TableRow>
+      </Grid>
     </>
   );
 }

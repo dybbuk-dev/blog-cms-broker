@@ -6,13 +6,13 @@ import CompareSection from 'src/view/home/broker/comparisons/CompareSection';
 import HtmlView from 'src/view/shared/view/HtmlView';
 import MDBox from 'src/mui/components/MDBox';
 import PropTypes from 'prop-types';
-import TableRow from '@mui/material/TableRow';
+import Grid from '@mui/material/Grid';
 
 function CompareProfile({ recordA, recordB }) {
   return (
     <>
       <CompareRegion name="region.profileAndContact" />
-      <TableRow>
+      <Grid spacing={2} container>
         <CompareSection name="profile" />
         <CompareDetail
           childrenA={
@@ -26,21 +26,21 @@ function CompareProfile({ recordA, recordB }) {
             </MDBox>
           }
         />
-      </TableRow>
-      <TableRow>
+      </Grid>
+      <Grid spacing={2} container>
         <CompareSection name="address" />
         <CompareDetail
           childrenA={<BrokerAddress record={recordA} />}
           childrenB={<BrokerAddress record={recordB} />}
         />
-      </TableRow>
-      <TableRow>
+      </Grid>
+      <Grid spacing={2} container>
         <CompareSection name="contact" />
         <CompareDetail
           childrenA={<BrokerContact record={recordA} />}
           childrenB={<BrokerContact record={recordB} />}
         />
-      </TableRow>
+      </Grid>
     </>
   );
 }

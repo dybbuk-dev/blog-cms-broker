@@ -1,10 +1,4 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-} from '@mui/material';
+import { Grid } from '@mui/material';
 
 import { FormProvider, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -164,108 +158,112 @@ function BrokerComparePage(props) {
         <FormWrapper>
           <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-              <TableContainer sx={{ boxShadow: 'none' }}>
-                <Table>
-                  <TableBody
-                    sx={{
-                      '& tr': {
-                        verticalAlign: 'top',
-                      },
-                    }}
-                  >
-                    <TableRow>
-                      <CompareSection name="selectBrokers" />
-                      <CompareDetail
-                        childrenA={
-                          <BrokerAutocompleteFormItem
-                            name="brokerA"
-                            label={i18n(
-                              'entities.broker.comparison.brokerA',
-                            )}
-                            variant="standard"
-                            value={recordToValue(recordA)}
-                            forceValue
-                            disabled={loading}
-                            useLink
-                            required
-                            fullWidth
-                          />
-                        }
-                        childrenB={
-                          <BrokerAutocompleteFormItem
-                            name="brokerB"
-                            label={i18n(
-                              'entities.broker.comparison.brokerB',
-                            )}
-                            variant="standard"
-                            value={recordToValue(recordB)}
-                            forceValue
-                            disabled={loading}
-                            useLink
-                            required
-                            fullWidth
-                          />
-                        }
-                        after={
-                          <MDButton
-                            variant="contained"
-                            disabled={loading}
-                            type="submit"
-                            onClick={form.handleSubmit(
-                              onSubmit,
-                            )}
-                            color={sidenavColor}
-                            fullWidth
-                          >
-                            {i18n(
-                              'entities.broker.comparison.compare',
-                            )}
-                          </MDButton>
-                        }
+              <MDBox
+                sx={{
+                  '& > * + *': {
+                    mt: 2,
+                  },
+                  '& > * + *:before': {
+                    display: 'block',
+                    content: '""',
+                    borderTop:
+                      '1px dotted rgba(128,128,128,.5)',
+                    width: '100%',
+                    ml: 2,
+                  },
+                }}
+              >
+                <Grid spacing={2} container>
+                  <CompareSection name="selectBrokers" />
+                  <CompareDetail
+                    childrenA={
+                      <BrokerAutocompleteFormItem
+                        name="brokerA"
+                        label={i18n(
+                          'entities.broker.comparison.brokerA',
+                        )}
+                        variant="standard"
+                        value={recordToValue(recordA)}
+                        forceValue
+                        disabled={loading}
+                        useLink
+                        required
+                        fullWidth
                       />
-                    </TableRow>
-                    {loading && (
-                      <TableRow>
-                        <TableCell colSpan={100}>
-                          <Spinner />
-                        </TableCell>
-                      </TableRow>
-                    )}
-                    {!loading && recordA && recordB && (
-                      <>
-                        <CompareOverview
-                          recordA={recordA}
-                          recordB={recordB}
-                        />
-                        <CompareRegulation
-                          recordA={recordA}
-                          recordB={recordB}
-                        />
-                        <CompareProfile
-                          recordA={recordA}
-                          recordB={recordB}
-                        />
-                        <CompareTradable
-                          recordA={recordA}
-                          recordB={recordB}
-                        />
-                        <CompareSpreadsAndFees
-                          recordA={recordA}
-                          recordB={recordB}
-                        />
-                        <CompareTradingPlatforms
-                          recordA={recordA}
-                          recordB={recordB}
-                        />
-                        <CompareService
-                          recordA={recordA}
-                          recordB={recordB}
-                        />
-                      </>
-                    )}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+                    }
+                    childrenB={
+                      <BrokerAutocompleteFormItem
+                        name="brokerB"
+                        label={i18n(
+                          'entities.broker.comparison.brokerB',
+                        )}
+                        variant="standard"
+                        value={recordToValue(recordB)}
+                        forceValue
+                        disabled={loading}
+                        useLink
+                        required
+                        fullWidth
+                      />
+                    }
+                    after={
+                      <MDButton
+                        variant="contained"
+                        disabled={loading}
+                        type="submit"
+                        onClick={form.handleSubmit(
+                          onSubmit,
+                        )}
+                        color={sidenavColor}
+                        fullWidth
+                      >
+                        {i18n(
+                          'entities.broker.comparison.compare',
+                        )}
+                      </MDButton>
+                    }
+                  />
+                </Grid>
+                {loading && (
+                  <Grid spacing={2} container>
+                    <Grid xs={12} item>
+                      <Spinner />
+                    </Grid>
+                  </Grid>
+                )}
+                {!loading && recordA && recordB && (
+                  <>
+                    <CompareOverview
+                      recordA={recordA}
+                      recordB={recordB}
+                    />
+                    <CompareRegulation
+                      recordA={recordA}
+                      recordB={recordB}
+                    />
+                    <CompareProfile
+                      recordA={recordA}
+                      recordB={recordB}
+                    />
+                    <CompareTradable
+                      recordA={recordA}
+                      recordB={recordB}
+                    />
+                    <CompareSpreadsAndFees
+                      recordA={recordA}
+                      recordB={recordB}
+                    />
+                    <CompareTradingPlatforms
+                      recordA={recordA}
+                      recordB={recordB}
+                    />
+                    <CompareService
+                      recordA={recordA}
+                      recordB={recordB}
+                    />
+                  </>
+                )}
+              </MDBox>
             </form>
           </FormProvider>
         </FormWrapper>

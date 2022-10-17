@@ -1,14 +1,14 @@
+import { Grid } from '@mui/material';
 import { i18n } from 'src/i18n';
 import Icon from '@mui/material/Icon';
+import LazyLoad from 'react-lazy-load';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
-import TableCell from '@mui/material/TableCell';
 import Tooltip from '@mui/material/Tooltip';
-import LazyLoad from 'react-lazy-load';
 
 function CompareSection({ children, name, tooltip }) {
   return (
-    <TableCell width="25%">
+    <Grid xs={12} lg={3} item>
       <LazyLoad>
         <MDTypography
           variant="body1"
@@ -36,7 +36,7 @@ function CompareSection({ children, name, tooltip }) {
           )}
         </MDTypography>
       </LazyLoad>
-    </TableCell>
+    </Grid>
   );
 }
 

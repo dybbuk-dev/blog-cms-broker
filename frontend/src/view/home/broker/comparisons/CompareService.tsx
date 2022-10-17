@@ -4,8 +4,8 @@ import CompareCheckbox from 'src/view/home/broker/comparisons/CompareCheckbox';
 import CompareDetail from 'src/view/home/broker/comparisons/CompareDetail';
 import CompareRegion from 'src/view/home/broker/comparisons/CompareRegion';
 import CompareSection from 'src/view/home/broker/comparisons/CompareSection';
+import Grid from '@mui/material/Grid';
 import PropTypes from 'prop-types';
-import TableRow from '@mui/material/TableRow';
 
 function CompareService({ recordA, recordB }) {
   return (
@@ -30,7 +30,7 @@ function CompareService({ recordA, recordB }) {
           'KNOWLEDGE_BASE',
         ]}
       />
-      <TableRow>
+      <Grid spacing={2} container>
         <CompareSection name="awards" />
         <CompareDetail
           childrenA={
@@ -40,7 +40,7 @@ function CompareService({ recordA, recordB }) {
             <BrokerImages records={recordB.certificates} />
           }
         />
-      </TableRow>
+      </Grid>
     </>
   );
 }

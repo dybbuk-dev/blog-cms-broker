@@ -2,8 +2,8 @@ import { i18n } from 'src/i18n';
 import BrokerCheckbox from 'src/view/home/broker/shared/BrokerCheckbox';
 import CompareDetail from 'src/view/home/broker/comparisons/CompareDetail';
 import CompareSection from 'src/view/home/broker/comparisons/CompareSection';
+import Grid from '@mui/material/Grid';
 import PropTypes from 'prop-types';
-import TableRow from '@mui/material/TableRow';
 
 function CompareCheckbox({ recordA, recordB, fields }) {
   return (
@@ -13,7 +13,7 @@ function CompareCheckbox({ recordA, recordB, fields }) {
         const tooltip = i18n(tooltipKey);
 
         return (
-          <TableRow key={field}>
+          <Grid key={field} spacing={2} container>
             <CompareSection
               tooltip={
                 tooltip === tooltipKey ? null : (
@@ -39,7 +39,7 @@ function CompareCheckbox({ recordA, recordB, fields }) {
                 />
               }
             />
-          </TableRow>
+          </Grid>
         );
       })}
     </>
