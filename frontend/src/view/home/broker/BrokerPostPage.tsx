@@ -340,11 +340,13 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
       {!loading && hasRows && (
         <MDBox
           borderTop={`1px dashed ${colors.inputBorderColor}`}
+          py={2}
         >
           <Pagination
             onChange={doChangePagination}
             disabled={loading}
             pagination={pagination}
+            noPadding
             entriesPerPage
             showTotalEntries
           />

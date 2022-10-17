@@ -225,13 +225,18 @@ function BrokerListTable(props) {
         </Table>
       </TableContainer>
 
-      <Pagination
-        onChange={doChangePagination}
-        disabled={loading}
-        pagination={pagination}
-        entriesPerPage
-        showTotalEntries
-      />
+      {!loading && hasRows && (
+        <MDBox mt={2}>
+          <Pagination
+            onChange={doChangePagination}
+            disabled={loading}
+            pagination={pagination}
+            noPadding
+            entriesPerPage
+            showTotalEntries
+          />
+        </MDBox>
+      )}
     </MDBox>
   );
 }

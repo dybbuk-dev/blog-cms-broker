@@ -42,7 +42,7 @@ const BlogListPage = () => {
 
   return (
     <Layout title="Broker-Bewertungen Blog">
-      <PageContent>
+      <PageContent id="list-top-4-pagination">
         <MDBox display="none">
           <Breadcrumb
             items={[
@@ -102,15 +102,19 @@ const BlogListPage = () => {
                 // </LazyLoad>
               ))}
             </MDBox>
+
+            <MDBox mt={2}>
+              <Pagination
+                onChange={doChangePagination}
+                disabled={loading}
+                pagination={pagination}
+                noPadding
+                entriesPerPage
+                showTotalEntries
+              />
+            </MDBox>
           </>
         )}
-        <Pagination
-          onChange={doChangePagination}
-          disabled={loading}
-          pagination={pagination}
-          entriesPerPage
-          showTotalEntries
-        />
       </PageContent>
     </Layout>
   );

@@ -7,6 +7,7 @@ import MDPagination from 'src/mui/components/MDPagination';
 import MDTypography from 'src/mui/components/MDTypography';
 import PropTypes from 'prop-types';
 import ScrollTo from 'src/ScrollTo';
+import { useEffect, useState } from 'react';
 
 function Pagination(props) {
   const { entriesPerPage, showTotalEntries, pagination } =
@@ -70,7 +71,28 @@ function Pagination(props) {
   const canPreviousPage = current > 1;
   const canNextPage = current < last;
 
-  const pageOptionsCount = 5;
+  const [pageOptionsCount, setPageOptionsCount] =
+    useState(5);
+
+  useEffect(() => {
+    const handlePageOptionsCount = () => {
+      if (window.innerWidth > 1200) {
+        setPageOptionsCount(5);
+      } else {
+        setPageOptionsCount(3);
+      }
+    };
+    window.addEventListener(
+      'resize',
+      handlePageOptionsCount,
+    );
+    handlePageOptionsCount();
+    return () =>
+      window.removeEventListener(
+        'resize',
+        handlePageOptionsCount,
+      );
+  }, []);
 
   const pageOptionsIndex = Math.ceil(
     current / pageOptionsCount,
@@ -145,7 +167,13 @@ function Pagination(props) {
         flexDirection={{ xs: 'column', md: 'row' }}
         justifyContent="space-between"
         alignItems={{ xs: 'flex-start', md: 'center' }}
-        p={!showTotalEntries && last === 1 ? 0 : 3}
+        p={
+          !showTotalEntries && last === 1
+            ? 0
+            : props.noPadding
+            ? 0
+            : 3
+        }
       >
         {entriesPerPage && (
           <MDBox display="flex" alignItems="center">
@@ -265,6 +293,7 @@ Pagination.propTypes = {
   labelDisplayedRows: PropTypes.func,
   entriesPerPage: PropTypes.any,
   showTotalEntries: PropTypes.bool,
+  noPadding: PropTypes.bool,
 };
 
 export default Pagination;
