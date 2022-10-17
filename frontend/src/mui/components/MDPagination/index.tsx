@@ -100,6 +100,7 @@ const MDPagination: FC<Props | any> = forwardRef(
           <MDBox
             display="flex"
             justifyContent="flex-end"
+            flexWrap="wrap"
             alignItems="center"
             sx={{ listStyle: 'none' }}
           >
