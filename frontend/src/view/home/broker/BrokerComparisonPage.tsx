@@ -138,7 +138,12 @@ function BrokerComparePage(props) {
       keywords={['forex', 'cfd', 'broker', 'vergleich']}
       description="Vergleichen Sie Forex- und CFD-Broker miteinander und finden Sie so den besten Broker für Ihre Bedürfnisse."
     >
-      <PageContent>
+      <PageContent
+        px={{
+          lg: 5,
+          xs: 2,
+        }}
+      >
         <MDBox display="none">
           <Breadcrumb
             items={[

@@ -6,12 +6,12 @@ import BrokerUpsides from 'src/view/home/broker/shared/BrokerUpsides';
 import CheckboxViewItem from 'src/view/shared/view/CheckboxViewItem';
 import CompareDetail from 'src/view/home/broker/comparisons/CompareDetail';
 import CompareSection from 'src/view/home/broker/comparisons/CompareSection';
+import Grid from '@mui/material/Grid';
 import ImageView from 'src/view/home/ImageView';
 import MaterialLink from '@mui/material/Link';
 import MDBox from 'src/mui/components/MDBox';
 import OverallRating from 'src/view/home/broker/shared/OverallRating';
 import PropTypes from 'prop-types';
-import Grid from '@mui/material/Grid';
 
 function CompareOverview({ recordA, recordB }) {
   return (
@@ -64,6 +64,7 @@ function CompareOverview({ recordA, recordB }) {
               record={recordA}
               size={30}
               gap={1}
+              compare
             />
           }
           childrenB={
@@ -71,6 +72,7 @@ function CompareOverview({ recordA, recordB }) {
               record={recordB}
               size={30}
               gap={1}
+              compare
             />
           }
         />
@@ -85,7 +87,9 @@ function CompareOverview({ recordA, recordB }) {
                 target="_blank"
                 underline="hover"
               >
-                {recordA.name}
+                {`${recordA.name
+                  .replace(/\([\w\d\s]+\)/g, '')
+                  .trim()} Erfahrungen`}
               </MaterialLink>
             </AttrTypography>
           }
@@ -96,7 +100,9 @@ function CompareOverview({ recordA, recordB }) {
                 target="_blank"
                 underline="hover"
               >
-                {recordB.name}
+                {`${recordB.name
+                  .replace(/\([\w\d\s]+\)/g, '')
+                  .trim()} Erfahrungen`}
               </MaterialLink>
             </AttrTypography>
           }

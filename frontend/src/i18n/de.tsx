@@ -464,10 +464,10 @@ const en = {
         brokerA: 'Broker A',
         brokerB: 'Broker B',
         brokerType: 'Broker-Typ',
-        overallRating: 'Gesamt-bewertung',
-        customerReviews: 'Kunden-bewertungen',
+        overallRating: 'Gesamtbewertung',
+        customerReviews: 'Kundenbewertungen',
         links: 'Links',
-        brokerFeature: 'Besonder-heiten',
+        brokerFeature: 'Besonderheiten',
         scalping: 'Scalping',
         region: {
           regulationAndDepositInsurance:

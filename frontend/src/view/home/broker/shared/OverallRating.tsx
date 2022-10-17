@@ -11,6 +11,7 @@ function OverallRating({
   hidePercent,
   size,
   gap,
+  compare,
 }) {
   return (
     <>
@@ -19,10 +20,14 @@ function OverallRating({
         alignItems="center"
         flexWrap="wrap"
         flexGrow={1}
-        justifyContent={{
-          xs: 'space-between',
-          lg: 'flex-end',
-        }}
+        justifyContent={
+          compare
+            ? 'center'
+            : {
+                xs: 'space-between',
+                lg: 'flex-end',
+              }
+        }
         gap={1}
       >
         {!hidePercent && (
@@ -59,10 +64,14 @@ function OverallRating({
           fontWeight="regular"
           flexGrow={1}
           lineHeight={1}
-          textAlign={{
-            xs: 'center',
-            lg: 'right',
-          }}
+          textAlign={
+            compare
+              ? 'center'
+              : {
+                  xs: 'center',
+                  lg: 'right',
+                }
+          }
           mt={gap}
         >
           {i18n(
@@ -82,6 +91,7 @@ OverallRating.defaultProps = {
   hidePercent: false,
   size: 32,
   gap: 0,
+  compare: false,
 };
 
 OverallRating.propTypes = {
@@ -90,6 +100,7 @@ OverallRating.propTypes = {
   hidePercent: PropTypes.bool,
   size: PropTypes.number,
   gap: PropTypes.number,
+  compare: PropTypes.bool,
 };
 
 export default OverallRating;

@@ -15,7 +15,10 @@ function CompareSection({ children, name, tooltip }) {
         color="warning"
         fontWeight="bold"
         lineHeight="1.25"
-        my={1}
+        my={{
+          lg: 1,
+          xs: 0,
+        }}
       >
         {Boolean(children) && children}
         {!children &&
