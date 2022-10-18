@@ -25,8 +25,9 @@ function Layout({
 }) {
   const match = useRouteMatch();
   useEffect(() => {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }, 300);
   }, [match.url]);
   return (
     <PageLayout fixedNavBar={false}>
