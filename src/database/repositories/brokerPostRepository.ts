@@ -470,7 +470,7 @@ class BrokerPostRepository {
         as: 'broker',
       },
       {
-        attributes: ['id', 'name', 'review'],
+        attributes: ['id', 'name', 'review', 'deleted'],
         model: options.database.broker_post,
         as: 'children',
         separate: true,

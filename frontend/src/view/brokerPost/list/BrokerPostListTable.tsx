@@ -310,7 +310,28 @@ function BrokerPostListTable(props) {
                     >
                       Kommentar von: {subPost.name}
                     </MDTypography>
-                    <MDBox>
+                    <MDBox
+                      display="flex"
+                      alignItems="center"
+                    >
+                      <MDBox>
+                        {['deleted'].map((field) => (
+                          <MDBadgeDot
+                            key={field}
+                            width="max-content"
+                            badgeContent={i18n(
+                              `entities.brokerPost.fields.${field}`,
+                            )}
+                            color={
+                              Boolean(subPost[field])
+                                ? 'info'
+                                : 'error'
+                            }
+                            variant="contained"
+                            container
+                          />
+                        ))}
+                      </MDBox>
                       {hasPermissionToDestroy && (
                         <Tooltip
                           title={i18n('common.destroy')}
