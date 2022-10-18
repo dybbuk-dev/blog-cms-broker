@@ -152,24 +152,16 @@ const GeneralPage = () => {
               </MDTypography>
               {category.teaser ? (
                 <HtmlView value={category.teaser} />
-              ) : category.link ===
-                '/forex-signale-vergleich' ? (
-                <HtmlViewWrapper>
-                  <p>
-                    Den besten Forex Signale zu finden ist
-                    nicht immer leicht.
-                    <br />
-                    Auf Broker-Bewertungen.de finden Sie
-                    einen Vergleich aller großen Forex
-                    Signale sortiert nach Broker Typ,
-                    Regulierung, Trading Plattform und
-                    Einzahlungsmethoden.
-                    <br />
-                    Dabei finden Sie zu jedem Broker User
-                    Bewertungen von echten Tradern, um ihnen
-                    die Suche zu erleichtern.
-                  </p>
-                </HtmlViewWrapper>
+              ) : [
+                  '/expert-advisors-vergleich',
+                  '/forex-signale-vergleich',
+                ].includes(category.link) ? (
+                <HtmlView
+                  value={i18n(
+                    'entities.category.placeholders.description',
+                    category.name,
+                  )}
+                />
               ) : null}
               <MDTypography
                 display="block"

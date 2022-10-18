@@ -23,6 +23,8 @@ const en = {
     noCommit: 'Keine Kommentare. Sei der Erste!',
     noDataToExport: 'No data to export',
     noRecord: 'No Record',
+    noReviews:
+      'Für {0} wurden noch keine Bewertungen oder Erfahrungen erfasst. Seien Sie der Erste, der seine Erfahrungen über {0} schreibt und bewerten Sie {0} damit andere Benutzer sich ein besseres Bild über {0} machen können.',
     or: 'or',
     pause: 'Pause',
     rating: 'Bewertung',
@@ -1241,7 +1243,10 @@ const en = {
           _blank: 'New Window',
         },
       },
-      placeholders: {},
+      placeholders: {
+        description:
+          '<p> Den besten {0} zu finden ist nicht immer leicht.<br />Auf Broker-Bewertungen.de finden Sie einen Vergleich aller großen {0} sortiert nach Broker Typ, Regulierung, Trading Plattform und Einzahlungsmethoden.<br />Dabei finden Sie zu jedem Broker User Bewertungen von echten Tradern, um ihnen die Suche zu erleichtern.</p>',
+      },
       hints: {},
       new: {
         title: 'New Category',

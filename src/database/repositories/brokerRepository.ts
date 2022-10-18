@@ -54,6 +54,7 @@ class BrokerRepository {
   ];
 
   static FOREX_SIGNALE = '/forex-signale-vergleich';
+  static EXPERT_ADVISOR = '/expert-advisors-vergleich';
 
   static _relatedData(data) {
     return {
@@ -859,6 +860,11 @@ class BrokerRepository {
       output.categories.find(
         (cat) => cat.category.link === this.FOREX_SIGNALE,
       ) || output.navigation.link === this.FOREX_SIGNALE;
+
+    output.expert_advisor =
+      output.categories.find(
+        (cat) => cat.category.link === this.EXPERT_ADVISOR,
+      ) || output.navigation.link === this.EXPERT_ADVISOR;
 
     return output;
   }

@@ -422,8 +422,12 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
             // </LazyLoad>
           ))}
         {!loading && !hasRows && (
-          <MDTypography variant="body2">
-            {i18n('common.noCommit')}
+          <MDTypography
+            variant="body2"
+            fontWeight="regular"
+            mb={2}
+          >
+            {i18n('common.noReviews', name)}
           </MDTypography>
         )}
         {loading && (

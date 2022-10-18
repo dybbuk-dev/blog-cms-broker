@@ -21,6 +21,11 @@ function Breadcrumb({ items }) {
   if (loading) {
     return null;
   }
+  const replaceFn = (item) =>
+    item.route.replace(/\/*$/, '') ===
+    '/expert-advisors-vergleich'
+      ? { name: 'Expert Advisor Vergleich' }
+      : {};
   const navItems = [];
   const currentRoute = match.url;
   const selectNavigationItemFn = (item) => {
@@ -29,7 +34,10 @@ function Breadcrumb({ items }) {
         item.route.replace(/\/*$/, ''),
       ) === 0
     ) {
-      navItems.push(item);
+      navItems.push({
+        ...item,
+        ...replaceFn(item),
+      });
       (item.children || [])
         .filter(({ type }) => !type)
         .forEach(selectNavigationItemFn);
@@ -37,7 +45,10 @@ function Breadcrumb({ items }) {
   };
   navigationItems.forEach(selectNavigationItemFn);
   const result =
-    items || navItems.filter(({ route }) => route !== '/');
+    items?.map((item) => ({
+      ...item,
+      ...replaceFn(item),
+    })) || navItems.filter(({ route }) => route !== '/');
   return (
     <MDBox
       display="inline-flex"

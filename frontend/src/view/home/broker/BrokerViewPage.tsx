@@ -154,7 +154,7 @@ const BrokerViewPage = () => {
               ].filter(Boolean)}
             />
             <BrokerHeader record={record} />
-            {record.forex_signale ? (
+            {record.expert_advisor ? null : record.forex_signale ? (
               <BrokerForexSignaleView record={record} />
             ) : (
               <>

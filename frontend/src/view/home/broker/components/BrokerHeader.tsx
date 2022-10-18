@@ -41,9 +41,14 @@ function BrokerHeader({ record }) {
   }, []);
   return (
     <MDBox
-      py={2}
+      pt={2}
+      pb={record.expert_advisor ? 0 : 2}
       borderTop={`1px dashed ${colors.inputBorderColor}`}
-      borderBottom={`1px dashed ${colors.inputBorderColor}`}
+      borderBottom={
+        record.expert_advisor
+          ? null
+          : `1px dashed ${colors.inputBorderColor}`
+      }
     >
       <script
         type="application/ld+json"
