@@ -132,11 +132,42 @@ function BrokerComparePage(props) {
     }
   }, [valueA, valueB]);
 
+  const [title, setTitle] = useState(
+    i18n('entities.broker.comparison.title'),
+  );
+  const [description, setDescription] = useState(
+    i18n('entities.broker.comparison.metaDescription'),
+  );
+
+  useEffect(() => {
+    setTitle(
+      i18n(
+        'entities.broker.comparison.vsTitle',
+        recordA?.name || '-',
+        recordB?.name || '-',
+      ),
+    );
+    setDescription(
+      i18n(
+        'entities.broker.comparison.metaVsDescription',
+        recordA?.name || '-',
+        recordB?.name || '-',
+      ),
+    );
+  }, [recordA, recordB]);
+
   return (
     <Layout
-      title={i18n('entities.broker.comparison.title')}
-      keywords={['forex', 'cfd', 'broker', 'vergleich']}
-      description="Vergleichen Sie Forex- und CFD-Broker miteinander und finden Sie so den besten Broker für Ihre Bedürfnisse."
+      title={title}
+      keywords={[
+        'forex',
+        'cfd',
+        'broker',
+        'vergleich',
+        recordA?.name_normalized,
+        recordB?.name_normalized,
+      ].filter(Boolean)}
+      description={description}
     >
       <PageContent
         px={{

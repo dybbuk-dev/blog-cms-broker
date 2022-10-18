@@ -38,6 +38,7 @@ const en = {
     spam: 'Spam',
     start: 'Start',
     view: 'View',
+    writeComment: 'Kommentar verfassen',
     writeReview: 'Erfahrungsbericht schreiben',
     yes: 'Ja',
   },
@@ -353,6 +354,7 @@ const en = {
           'Vielen Dank für deine Mithilfe!',
           'Dein Team von broker-bewertungen.de',
         ].join('<br/><br/>'),
+        comment: 'Post successfully saved',
       },
       update: {
         success: 'Post successfully saved',
@@ -456,6 +458,12 @@ const en = {
       },
       comparison: {
         title: 'Tool zum Vergleich von Online Brokern',
+        vsTitle:
+          '{0} vs. {1} im Forex- und CFD-Broker-Vergleich',
+        metaDescription:
+          'Vergleichen Sie Forex- und CFD-Broker miteinander und finden Sie so den besten Broker für Ihre Bedürfnisse.',
+        metaVsDescription:
+          'Vergleichen Sie {0} und {1} miteinander und finden Sie so den besten Broker für Ihre Bedürfnisse.',
         description:
           'Mit unserem Broker Vergleichstool können Sie schnell und einfach alle bei uns gelisteten Forex und CFD Broker in allen Kategorien miteinander vergleichen.und so problemlos den Broker finden der für Sie am besten geeignet ist. Zudem finden Sie zu fast jedem Broker Erfahrungen und Bewertungen von Tradern, um ihnen die Auswahl noch weiter zu erleichtern.',
         selectBrokers: 'Bitte auswählen',

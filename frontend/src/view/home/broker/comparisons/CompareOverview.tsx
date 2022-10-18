@@ -84,7 +84,6 @@ function CompareOverview({ recordA, recordB }) {
             <AttrTypography>
               <MaterialLink
                 href={`/erfahrungsberichte/${recordA.name_normalized}`}
-                target="_blank"
                 underline="hover"
               >
                 {`${recordA.name
@@ -97,7 +96,6 @@ function CompareOverview({ recordA, recordB }) {
             <AttrTypography>
               <MaterialLink
                 href={`/erfahrungsberichte/${recordB.name_normalized}`}
-                target="_blank"
                 underline="hover"
               >
                 {`${recordB.name
