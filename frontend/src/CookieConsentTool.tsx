@@ -1,3 +1,4 @@
+import CloseIcon from '@mui/icons-material/Close';
 import CookieConsent from 'react-cookie-consent';
 import darkColors from 'src/mui/assets/theme-dark/base/colors';
 import dBorders from 'src/mui/assets/theme-dark/base/borders';
@@ -5,9 +6,7 @@ import dBoxShadows from 'src/mui/assets/theme-dark/base/boxShadows';
 import lBorders from 'src/mui/assets/theme/base/borders';
 import lBoxShadows from 'src/mui/assets/theme/base/boxShadows';
 import lightColors from 'src/mui/assets/theme/base/colors';
-import CloseIcon from '@mui/icons-material/Close';
 import PropTypes from 'prop-types';
-import MDBox from 'src/mui/components/MDBox';
 
 function CookieConsentTool({ darkMode }) {
   return (
@@ -36,6 +35,7 @@ function CookieConsentTool({ darkMode }) {
           fontSize: '1rem',
           display: 'block',
           textAlign: 'center',
+          zIndex: '+99999',
         }}
         buttonStyle={{
           background: darkMode
