@@ -9,7 +9,9 @@ import brokerArticleHomeSelectors from 'src/modules/brokerArticle/home/brokerArt
 import BrokerListTable from 'src/view/home/broker/BrokerListTable';
 import categoryHomeActions from 'src/modules/category/home/categoryHomeActions';
 import categoryHomeSelectors from 'src/modules/category/home/categoryHomeSelectors';
-import HtmlView from 'src/view/shared/view/HtmlView';
+import HtmlView, {
+  HtmlViewWrapper,
+} from 'src/view/shared/view/HtmlView';
 import Layout from 'src/view/home/Layout';
 import MaterialLink from '@mui/material/Link';
 import MDBox from 'src/mui/components/MDBox';
@@ -148,9 +150,27 @@ const GeneralPage = () => {
               <MDTypography variant="h2">
                 {category.title}
               </MDTypography>
-              {category.teaser && (
+              {category.teaser ? (
                 <HtmlView value={category.teaser} />
-              )}
+              ) : category.link ===
+                '/forex-signale-vergleich' ? (
+                <HtmlViewWrapper>
+                  <p>
+                    Den besten Forex Signale zu finden ist
+                    nicht immer leicht.
+                    <br />
+                    Auf Broker-Bewertungen.de finden Sie
+                    einen Vergleich aller großen Forex
+                    Signale sortiert nach Broker Typ,
+                    Regulierung, Trading Plattform und
+                    Einzahlungsmethoden.
+                    <br />
+                    Dabei finden Sie zu jedem Broker User
+                    Bewertungen von echten Tradern, um ihnen
+                    die Suche zu erleichtern.
+                  </p>
+                </HtmlViewWrapper>
+              ) : null}
               <MDTypography
                 display="block"
                 variant="h3"
