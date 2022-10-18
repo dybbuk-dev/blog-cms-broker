@@ -1,6 +1,6 @@
 import actions from 'src/modules/broker/home/brokerHomeActions';
 
-const INITIAL_PAGE_SIZE = 10;
+const INITIAL_PAGE_SIZE = null;
 
 const initialData = {
   rows: [] as Array<any>,

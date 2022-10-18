@@ -13,6 +13,11 @@ function Pagination(props) {
   const { entriesPerPage, showTotalEntries, pagination } =
     props;
   const { current, pageSize, total } = pagination;
+
+  if (!pageSize) {
+    return null;
+  }
+
   const { sidenavColor } = selectMuiSettings();
   const defaultPageSize =
     entriesPerPage?.defaultPageSize || 10;

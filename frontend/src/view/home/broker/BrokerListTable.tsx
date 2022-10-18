@@ -2,7 +2,7 @@ import { CardMedia, TableContainer } from '@mui/material';
 import { i18n } from 'src/i18n';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import actions from 'src/modules/broker/home/brokerHomeActions';
 import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
 import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
@@ -10,14 +10,15 @@ import MaterialLink from '@mui/material/Link';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import Pagination from 'src/view/shared/table/Pagination';
+import RatingListItem from 'src/view/shared/table/RatingListItem';
 import selectors from 'src/modules/broker/home/brokerHomeSelectors';
 import Spinner from 'src/view/shared/Spinner';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
-import RatingListItem from 'src/view/shared/table/RatingListItem';
 
 function BrokerListTable(props) {
+  const [dispatched, setDispatched] = useState(false);
   const dispatch = useDispatch();
 
   const findLoading = useSelector(selectors.selectLoading);
@@ -60,6 +61,7 @@ function BrokerListTable(props) {
         false,
       ),
     );
+    setDispatched(true);
   }, [props.category]);
 
   return (
@@ -128,7 +130,7 @@ function BrokerListTable(props) {
             </TableRow>
           </MDBox>
           <TableBody>
-            {loading && (
+            {dispatched && loading && (
               <TableRow>
                 <DataTableBodyCell
                   align="center"
@@ -138,7 +140,7 @@ function BrokerListTable(props) {
                 </DataTableBodyCell>
               </TableRow>
             )}
-            {!loading && !hasRows && (
+            {dispatched && !loading && !hasRows && (
               <TableRow>
                 <DataTableBodyCell
                   align="center"
@@ -150,7 +152,8 @@ function BrokerListTable(props) {
                 </DataTableBodyCell>
               </TableRow>
             )}
-            {!loading &&
+            {dispatched &&
+              !loading &&
               rows.map((row) => (
                 <TableRow key={row.id}>
                   <DataTableBodyCell width="auto" px={1}>
