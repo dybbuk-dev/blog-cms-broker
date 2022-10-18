@@ -11,6 +11,8 @@ import BugReportIcon from '@mui/icons-material/BugReport';
 import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import EmailIcon from '@mui/icons-material/Email';
+import FieldSetViewItem from 'src/view/shared/view/FieldSetViewItem';
 import HtmlView from 'src/view/shared/view/HtmlView';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
@@ -39,8 +41,14 @@ function RecentPosts() {
   const hasRows = useSelector(selectors.selectHasRows);
   const rows = useSelector(selectors.selectRows);
 
+  const hasPermissionToCreate = useSelector(
+    brokerPostSelectors.selectPermissionToCreate,
+  );
   const hasPermissionToEdit = useSelector(
     brokerPostSelectors.selectPermissionToEdit,
+  );
+  const hasPermissionToDestroy = useSelector(
+    brokerPostSelectors.selectPermissionToDestroy,
   );
 
   const doOpenDestroyConfirmModal = (id) => {
@@ -101,7 +109,8 @@ function RecentPosts() {
           {'Broker Posts'}
         </MDTypography>
         {loading && <Spinner />}
-        {!loading &&
+        {dispatched &&
+          !loading &&
           hasRows &&
           rows.map((row) => (
             <MDBox key={row.id}>
@@ -138,29 +147,8 @@ function RecentPosts() {
                     value={row.rating}
                     precision={0.1}
                   />
-                  {hasPermissionToEdit && (
-                    <MDBox>
-                      <Tooltip title={i18n('common.edit')}>
-                        <IconButton
-                          size="small"
-                          color={sidenavColor}
-                          component={Link}
-                          to={`/admin/broker-post/${row.id}/edit`}
-                        >
-                          <EditIcon />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip title={i18n('common.spam')}>
-                        <IconButton
-                          size="small"
-                          color={sidenavColor}
-                          onClick={() =>
-                            doOpenSpamConfirmModal(row.id)
-                          }
-                        >
-                          <BugReportIcon />
-                        </IconButton>
-                      </Tooltip>
+                  <MDBox>
+                    {hasPermissionToEdit && (
                       <Tooltip
                         title={i18n('common.review')}
                       >
@@ -174,6 +162,8 @@ function RecentPosts() {
                           <ReviewsIcon />
                         </IconButton>
                       </Tooltip>
+                    )}
+                    {hasPermissionToDestroy && (
                       <Tooltip
                         title={i18n('common.destroy')}
                       >
@@ -189,8 +179,54 @@ function RecentPosts() {
                           <DeleteIcon />
                         </IconButton>
                       </Tooltip>
-                    </MDBox>
-                  )}
+                    )}
+                    {!Boolean(row.parent_id) &&
+                      hasPermissionToCreate && (
+                        <Tooltip
+                          title={i18n(
+                            'common.writeComment',
+                          )}
+                        >
+                          <IconButton
+                            size="small"
+                            color={sidenavColor}
+                            component={Link}
+                            to={`/admin/broker-post/new/${row.id}`}
+                          >
+                            <EmailIcon />
+                          </IconButton>
+                        </Tooltip>
+                      )}
+                    {hasPermissionToEdit && (
+                      <>
+                        <Tooltip
+                          title={i18n('common.edit')}
+                        >
+                          <IconButton
+                            size="small"
+                            color={sidenavColor}
+                            component={Link}
+                            to={`/admin/broker-post/${row.id}/edit`}
+                          >
+                            <EditIcon />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip
+                          title={i18n('common.spam')}
+                        >
+                          <IconButton
+                            size="small"
+                            color={sidenavColor}
+                            onClick={() =>
+                              doOpenSpamConfirmModal(row.id)
+                            }
+                          >
+                            <BugReportIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </>
+                    )}
+                  </MDBox>
                 </MDBox>
               </MDBox>
               <MDBox
@@ -201,6 +237,74 @@ function RecentPosts() {
                 mb={3}
               >
                 <HtmlView value={row.review} />
+                {row.children && row.children.length > 0 && (
+                  <MDBox
+                    width="100%"
+                    sx={{
+                      '& > * + *': {
+                        mt: 2,
+                      },
+                    }}
+                  >
+                    {row.children.map((subPost) => (
+                      <FieldSetViewItem key={subPost.id}>
+                        <MDBox
+                          mb={2}
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="space-between"
+                        >
+                          <MDTypography
+                            variant="body1"
+                            fontWeight="regular"
+                          >
+                            Kommentar von: {subPost.name}
+                          </MDTypography>
+                          <MDBox>
+                            {hasPermissionToDestroy && (
+                              <Tooltip
+                                title={i18n(
+                                  'common.destroy',
+                                )}
+                              >
+                                <IconButton
+                                  size="small"
+                                  color={sidenavColor}
+                                  onClick={() =>
+                                    doOpenDestroyConfirmModal(
+                                      subPost.id,
+                                    )
+                                  }
+                                >
+                                  <DeleteIcon />
+                                </IconButton>
+                              </Tooltip>
+                            )}
+                            {hasPermissionToEdit && (
+                              <Tooltip
+                                title={i18n('common.edit')}
+                              >
+                                <IconButton
+                                  size="small"
+                                  color={sidenavColor}
+                                  component={Link}
+                                  to={`/admin/broker-post/${subPost.id}/edit`}
+                                >
+                                  <EditIcon />
+                                </IconButton>
+                              </Tooltip>
+                            )}
+                          </MDBox>
+                        </MDBox>
+                        <MDBox>
+                          <HtmlView
+                            value={subPost.review}
+                          />
+                        </MDBox>
+                      </FieldSetViewItem>
+                    ))}
+                  </MDBox>
+                )}
               </MDBox>
             </MDBox>
           ))}

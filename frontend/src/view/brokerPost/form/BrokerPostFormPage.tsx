@@ -5,11 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import actions from 'src/modules/brokerPost/form/brokerPostFormActions';
-import BrokerPostForm from 'src/view/brokerPost/form/BrokerPostForm';
+import BrokerPostEditForm from 'src/view/brokerPost/form/BrokerPostEditForm';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import selectors from 'src/modules/brokerPost/form/brokerPostFormSelectors';
 import Spinner from 'src/view/shared/Spinner';
+import BrokerPostNewForm from 'src/view/brokerPost/form/BrokerPostNewForm';
 
 function BrokerPostFormPage(props) {
   const [dispatched, setDispatched] = useState(false);
@@ -24,13 +25,17 @@ function BrokerPostFormPage(props) {
   );
   const record = useSelector(selectors.selectRecord);
 
-  const isEditing = Boolean(match.params.id);
+  const isEditing = /\/admin\/broker-post\/\d+\/edit/.test(
+    match.url,
+  );
   const title = isEditing
     ? i18n('entities.brokerPost.edit.title')
     : i18n('entities.brokerPost.new.title');
 
   useEffect(() => {
-    dispatch(actions.doInit(match.params.id));
+    if (isEditing) {
+      dispatch(actions.doInit(match.params.id));
+    }
     setDispatched(true);
   }, [dispatch, match.params.id]);
 
@@ -60,16 +65,28 @@ function BrokerPostFormPage(props) {
 
           {dispatched && !initLoading && (
             <MDBox p={3}>
-              <BrokerPostForm
-                saveLoading={saveLoading}
-                initLoading={initLoading}
-                record={record}
-                isEditing={isEditing}
-                onSubmit={doSubmit}
-                onCancel={() =>
-                  getHistory().push('/admin/broker-post')
-                }
-              />
+              {isEditing ? (
+                <BrokerPostEditForm
+                  saveLoading={saveLoading}
+                  initLoading={initLoading}
+                  record={record}
+                  onSubmit={doSubmit}
+                  onCancel={() =>
+                    getHistory().push('/admin/broker-post')
+                  }
+                />
+              ) : (
+                <BrokerPostNewForm
+                  saveLoading={saveLoading}
+                  initLoading={initLoading}
+                  record={record}
+                  onSubmit={doSubmit}
+                  onCancel={() =>
+                    getHistory().push('/admin/broker-post')
+                  }
+                  postId={match.params.id}
+                />
+              )}
             </MDBox>
           )}
         </MDBox>

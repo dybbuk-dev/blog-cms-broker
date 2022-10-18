@@ -64,17 +64,24 @@ const brokerPostFormActions = {
           type: brokerPostFormActions.CREATE_SUCCESS,
         });
 
-        Message.success(
-          <MDBox color="inherit" width="50vw">
-            {parse(
-              i18n(
-                'entities.brokerPost.create.success',
-                brokerName,
-              ),
-            )}
-          </MDBox>,
-          20000,
-        );
+        if (values.parent_id) {
+          Message.success(
+            i18n('entities.brokerPost.create.comment'),
+          );
+          getHistory().push('/admin/broker-post');
+        } else {
+          Message.success(
+            <MDBox color="inherit" width="50vw">
+              {parse(
+                i18n(
+                  'entities.brokerPost.create.success',
+                  brokerName,
+                ),
+              )}
+            </MDBox>,
+            20000,
+          );
+        }
 
         fnSuccess && fnSuccess();
       } catch (error) {

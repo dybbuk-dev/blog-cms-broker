@@ -4,11 +4,19 @@ import ReCaptchaV2Service from '../../services/recaptcha/ReCaptchaV2Service';
 
 export default async (req, res, next) => {
   try {
-    await ReCaptchaV2Service.verify(req);
-
-    const payload = await new BrokerPostService(req).create(
-      req.body.data,
+    const service = new BrokerPostService(req);
+    const parent = await service.findById(
+      req.body.data.parent_id,
     );
+
+    if (!parent) {
+      await ReCaptchaV2Service.verify(req);
+    }
+
+    const payload = await service.create({
+      ...req.body.data,
+      ...(parent ? { broker_id: parent.broker_id } : {}),
+    });
 
     await ApiResponseHandler.success(req, res, payload);
   } catch (error) {

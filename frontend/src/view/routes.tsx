@@ -584,7 +584,7 @@ const privateRoutes = [
     exact: true,
   },
   {
-    path: '/admin/broker-post/new',
+    path: '/admin/broker-post/new/:id',
     collapseName: 'brokerPost',
     i18n: 'entities.brokerPost.new.title',
     parent: '/admin/broker-post',

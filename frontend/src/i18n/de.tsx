@@ -38,6 +38,7 @@ const en = {
     spam: 'Spam',
     start: 'Start',
     view: 'View',
+    writeComment: 'Kommentar verfassen',
     writeReview: 'Erfahrungsbericht schreiben',
     yes: 'Ja',
   },
@@ -353,6 +354,7 @@ const en = {
           'Vielen Dank für deine Mithilfe!',
           'Dein Team von broker-bewertungen.de',
         ].join('<br/><br/>'),
+        comment: 'Post successfully saved',
       },
       update: {
         success: 'Post successfully saved',

@@ -60,6 +60,9 @@ class BrokerPostRepository {
         ],
         where: {
           broker_id: id,
+          parent_id: {
+            [Op.is]: null,
+          },
           deleted: false,
           spam: false,
           review_required: false,
@@ -96,9 +99,10 @@ class BrokerPostRepository {
           ...lodash.pick(data, this.ALL_FIELDS),
           ...this._relatedData(data),
           broker_id: data.broker_id,
+          parent_id: data.parent_id || null,
           email: data.email || '',
           review: data.review || '',
-          review_required: 1,
+          review_required: !Boolean(data.parent_id),
           rating: data.rating || 0,
           created: moment(),
           modified: moment(),
@@ -379,13 +383,11 @@ class BrokerPostRepository {
     { filter, limit = 0, offset = 0, orderBy = '' },
     options: IRepositoryOptions,
   ) {
-    let whereAnd: Array<any> = [];
-
-    const include = [
+    let whereAnd: Array<any> = [
       {
-        attributes: ['id', 'name', 'name_normalized'],
-        model: options.database.broker,
-        as: 'broker',
+        parent_id: {
+          [Op.is]: null,
+        },
       },
     ];
 
@@ -457,7 +459,27 @@ class BrokerPostRepository {
       );
     }
 
-    const where = { [Op.and]: whereAnd };
+    const where = { [Op.and]: [...whereAnd] };
+
+    whereAnd.shift();
+
+    const include = [
+      {
+        attributes: ['id', 'name', 'name_normalized'],
+        model: options.database.broker,
+        as: 'broker',
+      },
+      {
+        attributes: ['id', 'name', 'review'],
+        model: options.database.broker_post,
+        as: 'children',
+        separate: true,
+        where: {
+          [Op.and]: whereAnd,
+        },
+      },
+    ];
+
     let { rows, count } =
       await options.database.broker_post.findAndCountAll({
         where,

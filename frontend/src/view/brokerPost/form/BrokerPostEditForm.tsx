@@ -1,24 +1,24 @@
 import { Grid } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import SaveIcon from '@mui/icons-material/Save';
-import UndoIcon from '@mui/icons-material/Undo';
-import { useState } from 'react';
 import { i18n } from 'src/i18n';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { useDispatch } from 'react-redux';
+import { useForm, FormProvider } from 'react-hook-form';
+import { useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import CloseIcon from '@mui/icons-material/Close';
+import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
+import formActions from 'src/modules/form/formActions';
 import FormWrapper, {
   FormButtons,
 } from 'src/view/shared/styles/FormWrapper';
-import { useForm, FormProvider } from 'react-hook-form';
-import * as yup from 'yup';
-import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
-import { yupResolver } from '@hookform/resolvers/yup';
-import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
-import MDButton from 'src/mui/components/MDButton';
 import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
+import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
-import DatePickerFormItem from 'src/view/shared/form/items/DatePickerFormItem';
-import formActions from 'src/modules/form/formActions';
-import { useDispatch } from 'react-redux';
+import MDButton from 'src/mui/components/MDButton';
+import SaveIcon from '@mui/icons-material/Save';
+import UndoIcon from '@mui/icons-material/Undo';
+import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(

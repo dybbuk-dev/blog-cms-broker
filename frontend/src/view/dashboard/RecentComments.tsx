@@ -42,6 +42,9 @@ function RecentComments() {
   const hasPermissionToEdit = useSelector(
     blogCommentSelectors.selectPermissionToEdit,
   );
+  const hasPermissionToDestroy = useSelector(
+    blogCommentSelectors.selectPermissionToDestroy,
+  );
 
   const doOpenDestroyConfirmModal = (id) => {
     setIdToDestroy(id);
@@ -105,7 +108,8 @@ function RecentComments() {
           {'Blog Comments'}
         </MDTypography>
         {loading && <Spinner />}
-        {!loading &&
+        {dispatched &&
+          !loading &&
           hasRows &&
           rows.map((row) => (
             <MDBox key={row.id}>
@@ -133,29 +137,8 @@ function RecentComments() {
                     )}`}
                   </MDTypography>
                 </MDBox>
-                {hasPermissionToEdit && (
-                  <MDBox>
-                    <Tooltip title={i18n('common.edit')}>
-                      <IconButton
-                        size="small"
-                        color={sidenavColor}
-                        component={Link}
-                        to={`/admin/blog-comment/${row.id}/edit`}
-                      >
-                        <EditIcon />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip title={i18n('common.spam')}>
-                      <IconButton
-                        size="small"
-                        color={sidenavColor}
-                        onClick={() =>
-                          doOpenSpamConfirmModal(row.id)
-                        }
-                      >
-                        <BugReportIcon />
-                      </IconButton>
-                    </Tooltip>
+                <MDBox>
+                  {hasPermissionToEdit && (
                     <Tooltip title={i18n('common.review')}>
                       <IconButton
                         size="small"
@@ -167,6 +150,8 @@ function RecentComments() {
                         <ReviewsIcon />
                       </IconButton>
                     </Tooltip>
+                  )}
+                  {hasPermissionToDestroy && (
                     <Tooltip title={i18n('common.destroy')}>
                       <IconButton
                         size="small"
@@ -178,8 +163,33 @@ function RecentComments() {
                         <DeleteIcon />
                       </IconButton>
                     </Tooltip>
-                  </MDBox>
-                )}
+                  )}
+                  {hasPermissionToEdit && (
+                    <>
+                      <Tooltip title={i18n('common.edit')}>
+                        <IconButton
+                          size="small"
+                          color={sidenavColor}
+                          component={Link}
+                          to={`/admin/blog-comment/${row.id}/edit`}
+                        >
+                          <EditIcon />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title={i18n('common.spam')}>
+                        <IconButton
+                          size="small"
+                          color={sidenavColor}
+                          onClick={() =>
+                            doOpenSpamConfirmModal(row.id)
+                          }
+                        >
+                          <BugReportIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </>
+                  )}
+                </MDBox>
               </MDBox>
               <MDBox
                 color="text"

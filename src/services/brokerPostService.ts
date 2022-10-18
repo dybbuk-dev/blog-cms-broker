@@ -17,6 +17,12 @@ export default class BrokerPostService {
       );
 
     try {
+      data.parent_id =
+        await BrokerPostRepository.filterIdInTenant(
+          data.parent_id,
+          { ...this.options, transaction },
+        );
+
       const record = await BrokerPostRepository.create(
         data,
         {

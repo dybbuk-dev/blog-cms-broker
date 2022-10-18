@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { i18n } from 'src/i18n';
-import BrokerPostForm from 'src/view/brokerPost/form/BrokerPostForm';
+import BrokerPostNewForm from 'src/view/brokerPost/form/BrokerPostNewForm';
 import BrokerPostService from 'src/modules/brokerPost/brokerPostService';
 import Errors from 'src/modules/shared/error/errors';
 import {
@@ -61,7 +61,7 @@ function BrokerPostFormModal(props) {
       </DialogTitle>
       <DialogContent>
         <MDBox p={3}>
-          <BrokerPostForm
+          <BrokerPostNewForm
             saveLoading={saveLoading}
             onSubmit={doSubmit}
             onCancel={doClose}

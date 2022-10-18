@@ -159,6 +159,12 @@ export default function (sequelize) {
       onDelete: 'NO ACTION',
       onUpdate: 'NO ACTION',
     });
+    models.broker_post.hasMany(models.broker_post, {
+      as: 'children',
+      foreignKey: 'parent_id',
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
+    });
   };
 
   return broker_post;
