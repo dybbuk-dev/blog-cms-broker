@@ -222,6 +222,7 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
                   display="inline-flex"
                   flexWrap="wrap"
                   justifyContent="flex-end"
+                  lineHeight={0}
                   gap={1}
                 >
                   <RatingViewItem

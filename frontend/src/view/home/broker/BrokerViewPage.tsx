@@ -27,6 +27,7 @@ import MDTypography from 'src/mui/components/MDTypography';
 import moment from 'moment';
 import ScrollTo from 'src/ScrollTo';
 import urlParse from 'url-parse';
+import BrokerForexSignaleView from 'src/view/home/broker/components/BrokerForexSignaleView';
 
 const BrokerViewPage = () => {
   const [dispatched, setDispatched] = useState(false);
@@ -153,73 +154,79 @@ const BrokerViewPage = () => {
               ].filter(Boolean)}
             />
             <BrokerHeader record={record} />
-            <MDBox py={2}>
-              <BrokerTabs
-                labels={[
-                  'overview',
-                  {
-                    raw: true,
-                    label: `${record.name} Erfahrungen`,
-                  },
-                  'characteristics',
-                  'platform',
-                  'markets',
-                  'spreads',
-                  'service',
-                ]}
-                value={tabValue}
-                onChange={handleSetTabValue}
-              />
-            </MDBox>
-            {tabValue !== 1 && (
-              <MDBox py={2}>
-                <TabPanel
-                  value={tabValue}
-                  index={0}
-                  hideOnly
-                >
-                  <BrokerOverviewView record={record} />
-                </TabPanel>
-                <TabPanel
-                  value={tabValue}
-                  index={2}
-                  hideOnly
-                >
-                  <BrokerCharacteristicsView
-                    record={record}
+            {record.forex_signale ? (
+              <BrokerForexSignaleView record={record} />
+            ) : (
+              <>
+                <MDBox py={2}>
+                  <BrokerTabs
+                    labels={[
+                      'overview',
+                      {
+                        raw: true,
+                        label: `${record.name} Erfahrungen`,
+                      },
+                      'characteristics',
+                      'platform',
+                      'markets',
+                      'spreads',
+                      'service',
+                    ]}
+                    value={tabValue}
+                    onChange={handleSetTabValue}
                   />
-                </TabPanel>
-                <TabPanel
-                  value={tabValue}
-                  index={3}
-                  hideOnly
-                >
-                  <BrokerPlatformView record={record} />
-                </TabPanel>
-                <TabPanel
-                  value={tabValue}
-                  index={4}
-                  hideOnly
-                >
-                  <BrokerMarketsView record={record} />
-                </TabPanel>
-                <TabPanel
-                  value={tabValue}
-                  index={5}
-                  hideOnly
-                >
-                  <BrokerSpreadsView record={record} />
-                </TabPanel>
-                <TabPanel
-                  value={tabValue}
-                  index={6}
-                  hideOnly
-                >
-                  <BrokerServiceView record={record} />
-                </TabPanel>
-              </MDBox>
+                </MDBox>
+                {tabValue !== 1 && (
+                  <MDBox py={2}>
+                    <TabPanel
+                      value={tabValue}
+                      index={0}
+                      hideOnly
+                    >
+                      <BrokerOverviewView record={record} />
+                    </TabPanel>
+                    <TabPanel
+                      value={tabValue}
+                      index={2}
+                      hideOnly
+                    >
+                      <BrokerCharacteristicsView
+                        record={record}
+                      />
+                    </TabPanel>
+                    <TabPanel
+                      value={tabValue}
+                      index={3}
+                      hideOnly
+                    >
+                      <BrokerPlatformView record={record} />
+                    </TabPanel>
+                    <TabPanel
+                      value={tabValue}
+                      index={4}
+                      hideOnly
+                    >
+                      <BrokerMarketsView record={record} />
+                    </TabPanel>
+                    <TabPanel
+                      value={tabValue}
+                      index={5}
+                      hideOnly
+                    >
+                      <BrokerSpreadsView record={record} />
+                    </TabPanel>
+                    <TabPanel
+                      value={tabValue}
+                      index={6}
+                      hideOnly
+                    >
+                      <BrokerServiceView record={record} />
+                    </TabPanel>
+                  </MDBox>
+                )}
+                <BrokerHomepageUrls record={record} />
+              </>
             )}
-            <BrokerHomepageUrls record={record} />
           </PageContent>
           <PageContent pt={4}>
             <BrokerPostPage

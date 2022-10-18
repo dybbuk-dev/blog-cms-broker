@@ -33,6 +33,7 @@ import {
   brokerForexSignalFormPrefix,
 } from 'src/view/broker/form/schemas/BrokerForexSignals';
 import BrokerArticleListPage from 'src/view/brokerArticle/list/BrokerArticleListPage';
+import MDAlert from 'src/mui/components/MDAlert';
 
 function BrokerForm(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -259,11 +260,26 @@ function BrokerForm(props) {
     <FormWrapper>
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
+          {props.record?.forex_signale && (
+            <MDAlert color="success">
+              {i18n(
+                'entities.broker.placeholders.forexSignal',
+              )}
+            </MDAlert>
+          )}
           <MDBox>
             <BrokerTabs
               value={tabValue}
               onChange={handleSetTabValue}
               broker={props.record?.id}
+              labels={
+                props.record?.forex_signale && [
+                  'broker',
+                  'overview',
+                  'forexSignal',
+                  'test',
+                ]
+              }
             />
           </MDBox>
           <MDBox py={3}>
@@ -273,29 +289,42 @@ function BrokerForm(props) {
             <TabPanel value={tabValue} index={1}>
               <BrokerOverviewForm {...props} />
             </TabPanel>
-            <TabPanel value={tabValue} index={2}>
-              <BrokerCharacteristicsForm {...props} />
-            </TabPanel>
-            <TabPanel value={tabValue} index={3}>
-              <BrokerPlatformForm {...props} />
-            </TabPanel>
-            <TabPanel value={tabValue} index={4}>
-              <BrokerMarketsForm {...props} />
-            </TabPanel>
-            <TabPanel value={tabValue} index={5}>
-              <BrokerSpreadsForm {...props} />
-            </TabPanel>
-            <TabPanel value={tabValue} index={6}>
-              <BrokerServiceForm {...props} />
-            </TabPanel>
-            <TabPanel value={tabValue} index={7}>
-              <BrokerTestForm {...props} />
-            </TabPanel>
-            <TabPanel value={tabValue} index={8}>
+            {!props.record?.forex_signale && (
+              <>
+                <TabPanel value={tabValue} index={2}>
+                  <BrokerCharacteristicsForm {...props} />
+                </TabPanel>
+                <TabPanel value={tabValue} index={3}>
+                  <BrokerPlatformForm {...props} />
+                </TabPanel>
+                <TabPanel value={tabValue} index={4}>
+                  <BrokerMarketsForm {...props} />
+                </TabPanel>
+                <TabPanel value={tabValue} index={5}>
+                  <BrokerSpreadsForm {...props} />
+                </TabPanel>
+                <TabPanel value={tabValue} index={6}>
+                  <BrokerServiceForm {...props} />
+                </TabPanel>
+              </>
+            )}
+            <TabPanel
+              value={tabValue}
+              index={props.record?.forex_signale ? 2 : 8}
+            >
               <BrokerOldForm {...props} />
             </TabPanel>
+            <TabPanel
+              value={tabValue}
+              index={props.record?.forex_signale ? 3 : 7}
+            >
+              <BrokerTestForm {...props} />
+            </TabPanel>
             {Boolean(props.record?.id) && (
-              <TabPanel value={tabValue} index={9}>
+              <TabPanel
+                value={tabValue}
+                index={props.record?.forex_signale ? 4 : 9}
+              >
                 <BrokerArticleListPage
                   broker={props.record?.id || null}
                 />

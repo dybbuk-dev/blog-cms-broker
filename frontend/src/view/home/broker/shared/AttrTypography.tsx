@@ -8,6 +8,7 @@ function AttrTypography({ children, noIndent }) {
       fontWeight="regular"
       lineHeight="1.25"
       position="relative"
+      whiteSpace="pre-line"
       my={1}
       pl={noIndent ? 0 : 3}
     >

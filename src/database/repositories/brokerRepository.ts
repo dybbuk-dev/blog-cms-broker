@@ -53,6 +53,8 @@ class BrokerRepository {
     'author_link',
   ];
 
+  static FOREX_SIGNALE = '/forex-signale-vergleich';
+
   static _relatedData(data) {
     return {
       navigation_id: data.navigation || null,
@@ -852,6 +854,11 @@ class BrokerRepository {
         record.author,
         options,
       );
+
+    output.forex_signale =
+      output.categories.find(
+        (cat) => cat.category.link === this.FOREX_SIGNALE,
+      ) || output.navigation.link === this.FOREX_SIGNALE;
 
     return output;
   }

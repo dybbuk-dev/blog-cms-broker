@@ -8,33 +8,55 @@ function BrokerHomepageUrls({ record }) {
   return (
     <>
       <Grid spacing={2} container pt={3}>
-        <Grid md={6} xs={12} item>
-          <MDButton
-            variant="contained"
-            href={record.meta?.homepage}
-            target="_blank"
-            color="warning"
-            startIcon={<SendIcon />}
-            fullWidth
-          >
-            {i18n(
-              'entities.broker.text.nowTo',
-              record.name,
-            )}
-          </MDButton>
-        </Grid>
-        <Grid md={6} xs={12} item>
-          <MDButton
-            variant="contained"
-            target="_blank"
-            href={record.meta?.demo_url}
-            color="info"
-            startIcon={<SendIcon />}
-            fullWidth
-          >
-            {i18n('entities.broker.text.freeDemoAccount')}
-          </MDButton>
-        </Grid>
+        {record.forex_signale ? (
+          <Grid xs={12} item>
+            <MDButton
+              variant="contained"
+              href={record.meta?.homepage}
+              target="_blank"
+              color="warning"
+              startIcon={<SendIcon />}
+              fullWidth
+            >
+              {i18n(
+                'entities.broker.text.nowTo',
+                record.name,
+              )}
+            </MDButton>
+          </Grid>
+        ) : (
+          <>
+            <Grid md={6} xs={12} item>
+              <MDButton
+                variant="contained"
+                href={record.meta?.homepage}
+                target="_blank"
+                color="warning"
+                startIcon={<SendIcon />}
+                fullWidth
+              >
+                {i18n(
+                  'entities.broker.text.nowTo',
+                  record.name,
+                )}
+              </MDButton>
+            </Grid>
+            <Grid md={6} xs={12} item>
+              <MDButton
+                variant="contained"
+                target="_blank"
+                href={record.meta?.demo_url}
+                color="info"
+                startIcon={<SendIcon />}
+                fullWidth
+              >
+                {i18n(
+                  'entities.broker.text.freeDemoAccount',
+                )}
+              </MDButton>
+            </Grid>
+          </>
+        )}
       </Grid>
     </>
   );

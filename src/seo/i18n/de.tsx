@@ -977,6 +977,7 @@ const en = {
         test: 'Test',
         old: 'Old',
         articles: 'Articles',
+        forexSignal: 'Forex Signal',
       },
       enumerators: {
         upside: {
@@ -1040,7 +1041,10 @@ const en = {
           },
         },
       },
-      placeholders: {},
+      placeholders: {
+        forexSignal:
+          'Das Formular ist eingeschränkt, weil dieser Broker nur in der Forex Signal Broker Kategorie ist',
+      },
       hints: {},
       new: {
         title: 'New Broker',
