@@ -5,9 +5,9 @@ import ReCaptchaV2Service from '../../services/recaptcha/ReCaptchaV2Service';
 export default async (req, res, next) => {
   try {
     const service = new BrokerPostService(req);
-    const parent = await service.findById(
-      req.body.data.parent_id,
-    );
+    const parent =
+      req.body.data.parent_id &&
+      (await service.findById(req.body.data.parent_id));
 
     if (!parent) {
       await ReCaptchaV2Service.verify(req);
