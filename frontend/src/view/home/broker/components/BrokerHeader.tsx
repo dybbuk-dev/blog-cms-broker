@@ -1,15 +1,15 @@
+import { Grid } from '@mui/material';
 import { i18n } from 'src/i18n';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
+import { useEffect, useState } from 'react';
+import dColors from 'src/mui/assets/theme-dark/base/colors';
 import ImageView from 'src/view/home/ImageView';
+import lColors from 'src/mui/assets/theme/base/colors';
 import MDBox from 'src/mui/components/MDBox';
 import MDButton from 'src/mui/components/MDButton';
 import MDTypography from 'src/mui/components/MDTypography';
 import OverallRating from 'src/view/home/broker/shared/OverallRating';
 import SendIcon from '@mui/icons-material/Send';
-import lColors from 'src/mui/assets/theme/base/colors';
-import dColors from 'src/mui/assets/theme-dark/base/colors';
-import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
-import { Grid } from '@mui/material';
-import { useEffect, useState } from 'react';
 
 function BrokerHeader({ record }) {
   const { darkMode } = selectMuiSettings();

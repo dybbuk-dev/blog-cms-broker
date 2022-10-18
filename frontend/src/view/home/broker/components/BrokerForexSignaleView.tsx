@@ -1,18 +1,26 @@
 import { Grid } from '@mui/material';
-import { i18n } from 'src/i18n';
-import MDBox from 'src/mui/components/MDBox';
-import MDTypography from 'src/mui/components/MDTypography';
+import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import AttrTypography from 'src/view/home/broker/shared/AttrTypography';
 import BrokerAttrs from 'src/view/home/broker/shared/BrokerAttrs';
 import CheckboxViewItem from 'src/view/shared/view/CheckboxViewItem';
+import dColors from 'src/mui/assets/theme-dark/base/colors';
 import HtmlView from 'src/view/shared/view/HtmlView';
+import lColors from 'src/mui/assets/theme/base/colors';
+import MDBox from 'src/mui/components/MDBox';
+import MDTypography from 'src/mui/components/MDTypography';
 
 function BrokerForexSignaleView({ record }) {
+  const { darkMode } = selectMuiSettings();
+  const colors = darkMode ? dColors : lColors;
   return (
     <>
       <Grid container>
         <Grid xs={12} item>
-          <MDBox py={2}>
+          <MDBox
+            pt={2}
+            pb={1}
+            borderBottom={`1px dashed ${colors.inputBorderColor}`}
+          >
             <HtmlView value={record.meta?.teaser} />
           </MDBox>
         </Grid>
