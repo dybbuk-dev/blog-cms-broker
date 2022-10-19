@@ -107,13 +107,13 @@ const GeneralPage = () => {
       } im Test mit Erfahrungsberichten von Tradern ➔ Jetzt lesen!`;
     }
 
-    if (page) {
+    if (!category && page) {
       title = page.title;
       keywords = [page.meta_keywords];
       description = page.meta_description;
     }
 
-    if (brokerArticle) {
+    if (!category && !page && brokerArticle) {
       title = brokerArticle.pagetitle;
       keywords = [brokerArticle.metakeywords];
       description = brokerArticle.metadescription;

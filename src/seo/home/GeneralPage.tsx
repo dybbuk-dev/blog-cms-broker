@@ -34,14 +34,14 @@ const GeneralPage = ({
     author = category.author;
   }
 
-  if (page) {
+  if (!category && page) {
     title = page.title;
     keywords = [page.meta_keywords];
     description = page.meta_description;
     author = page.author;
   }
 
-  if (brokerArticle) {
+  if (!category && !page && brokerArticle) {
     title = brokerArticle.pagetitle;
     keywords = [brokerArticle.metakeywords];
     description = brokerArticle.metadescription;
