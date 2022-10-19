@@ -8,7 +8,7 @@ function BrokerHomepageUrls({ record }) {
   return (
     <>
       <Grid spacing={2} container pt={3}>
-        {record.forex_signale ? (
+        {record.forex_signale || record.expert_advisor ? (
           <Grid xs={12} item>
             <MDButton
               variant="contained"

@@ -857,14 +857,16 @@ class BrokerRepository {
       );
 
     output.forex_signale =
-      output.categories.find(
-        (cat) => cat.category.link === this.FOREX_SIGNALE,
-      ) || output.navigation.link === this.FOREX_SIGNALE;
+      (output.categories.length === 1 &&
+        output.categories[0].category.link ===
+          this.FOREX_SIGNALE) ||
+      output.navigation.link === this.FOREX_SIGNALE;
 
     output.expert_advisor =
-      output.categories.find(
-        (cat) => cat.category.link === this.EXPERT_ADVISOR,
-      ) || output.navigation.link === this.EXPERT_ADVISOR;
+      (output.categories.length === 1 &&
+        output.categories[0].category.link ===
+          this.EXPERT_ADVISOR) ||
+      output.navigation.link === this.EXPERT_ADVISOR;
 
     return output;
   }
