@@ -34,7 +34,7 @@ function Meta({
       )}
       <meta
         name="google-site-verification"
-        content="YeSUBnOtUX8EGYSKrwgVVgVU6myTY5UPLOrY6PdE464"
+        content="I_jL14WylpufCX7gSmoJDN2qui2xvtoL0UvpB4oV0_A"
       />
       {Boolean(noIndex) && (
         <meta name="robots" content="noindex" />
