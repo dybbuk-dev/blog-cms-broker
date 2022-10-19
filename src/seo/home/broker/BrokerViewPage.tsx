@@ -1,7 +1,9 @@
 import { i18n } from '../../i18n';
 import AuthorView from '../shared/AuthorView';
 import Box from '@mui/material/Box';
+import Breadcrumb from '../Breadcrumb';
 import BrokerCharacteristicsView from './components/BrokerCharacteristicsView';
+import BrokerForexSignaleView from './components/BrokerForexSignaleView';
 import BrokerHeader from './components/BrokerHeader';
 import BrokerHomepageUrls from './components/BrokerHomepageUrls';
 import BrokerMarketsView from './components/BrokerMarketsView';
@@ -16,7 +18,6 @@ import moment from 'moment';
 import React from 'react';
 import TopBrokersView from './components/TopBrokersView';
 import Typography from '@mui/material/Typography';
-import Breadcrumb from '../Breadcrumb';
 
 const BrokerViewPage = ({ record, ...props }) => {
   const tabValue = 0;
@@ -90,46 +91,52 @@ const BrokerViewPage = ({ record, ...props }) => {
               {...props}
             />
             <BrokerHeader record={record} />
-            <Box py={2}>
-              <BrokerTabs
-                labels={[
-                  'overview',
-                  {
-                    raw: true,
-                    label: `${record.name} Erfahrungen`,
-                  },
-                  'characteristics',
-                  'platform',
-                  'markets',
-                  'spreads',
-                  'service',
-                ]}
-                value={tabValue}
-              />
-            </Box>
-            <Box py={2}>
-              <Box>
-                <BrokerOverviewView record={record} />
-              </Box>
-              <Box display="none">
-                <BrokerCharacteristicsView
-                  record={record}
-                />
-              </Box>
-              <Box display="none">
-                <BrokerPlatformView record={record} />
-              </Box>
-              <Box display="none">
-                <BrokerMarketsView record={record} />
-              </Box>
-              <Box display="none">
-                <BrokerSpreadsView record={record} />
-              </Box>
-              <Box display="none">
-                <BrokerServiceView record={record} />
-              </Box>
-            </Box>
-            <BrokerHomepageUrls record={record} />
+            {record.expert_advisor ? null : record.forex_signale ? (
+              <BrokerForexSignaleView record={record} />
+            ) : (
+              <>
+                <Box py={2}>
+                  <BrokerTabs
+                    labels={[
+                      'overview',
+                      {
+                        raw: true,
+                        label: `${record.name} Erfahrungen`,
+                      },
+                      'characteristics',
+                      'platform',
+                      'markets',
+                      'spreads',
+                      'service',
+                    ]}
+                    value={tabValue}
+                  />
+                </Box>
+                <Box py={2}>
+                  <Box>
+                    <BrokerOverviewView record={record} />
+                  </Box>
+                  <Box display="none">
+                    <BrokerCharacteristicsView
+                      record={record}
+                    />
+                  </Box>
+                  <Box display="none">
+                    <BrokerPlatformView record={record} />
+                  </Box>
+                  <Box display="none">
+                    <BrokerMarketsView record={record} />
+                  </Box>
+                  <Box display="none">
+                    <BrokerSpreadsView record={record} />
+                  </Box>
+                  <Box display="none">
+                    <BrokerServiceView record={record} />
+                  </Box>
+                </Box>
+                <BrokerHomepageUrls record={record} />
+              </>
+            )}
           </>
           {Boolean(record.creteria) &&
             Boolean(record.creteria.body) && (
