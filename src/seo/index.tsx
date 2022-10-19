@@ -50,6 +50,8 @@ export const handleSEO = async (req, res) => {
     topBrokers,
     url,
     author,
+    brokers: [],
+    categories: [],
   };
 
   if (url === '') {
@@ -100,6 +102,25 @@ export const handleSEO = async (req, res) => {
     let category = await new CategoryService(req).findByURL(
       url,
     );
+    if (category) {
+      props.brokers = (
+        await new BrokerService(req).findAndCountAll({
+          filter: {
+            activated: true,
+            category: category.id,
+          },
+        })
+      ).rows;
+      props.categories = (
+        await new CategoryService(req).findAndCountAll({
+          filter: {
+            activated: true,
+            show_in_navigation: true,
+          },
+          orderBy: 'sort_asc',
+        })
+      ).rows;
+    }
     let page = category
       ? null
       : await new PageService(req).findByURL(url);

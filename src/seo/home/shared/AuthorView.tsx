@@ -27,7 +27,7 @@ function AuthorView(props) {
               target="_blank"
               underline="hover"
             >
-              {value.name}
+              {`Über ${value.name}`}
             </MaterialLink>
           </Typography>
           <Typography
@@ -36,6 +36,19 @@ function AuthorView(props) {
             fontWeight="regular"
           >
             {value.description}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text"
+            fontWeight="bold"
+          >
+            <MaterialLink
+              href={value.link}
+              target="_blank"
+              underline="hover"
+            >
+              {`Mehr über ${value.name}`}
+            </MaterialLink>
           </Typography>
         </Box>
       </Box>

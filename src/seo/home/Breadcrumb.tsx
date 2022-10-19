@@ -15,6 +15,11 @@ interface BreadcrumbProps {
 }
 
 function Breadcrumb({ items, ...props }: BreadcrumbProps) {
+  const replaceFn = (item) =>
+    item.route.replace(/\/*$/, '') ===
+    '/expert-advisors-vergleich'
+      ? { name: 'Expert Advisor Vergleich' }
+      : {};
   const navItems: any[] = [];
   const currentRoute = props.url;
   const selectNavigationItemFn = (item) => {
@@ -23,13 +28,21 @@ function Breadcrumb({ items, ...props }: BreadcrumbProps) {
         item.route.replace(/\/*$/, ''),
       ) === 0
     ) {
-      navItems.push(item);
-      (item.children || []).forEach(selectNavigationItemFn);
+      navItems.push({
+        ...item,
+        ...replaceFn(item),
+      });
+      (item.children || [])
+        .filter(({ type }) => !type)
+        .forEach(selectNavigationItemFn);
     }
   };
   props.navigationItems.forEach(selectNavigationItemFn);
   const result =
-    items || navItems.filter(({ route }) => route !== '/');
+    items?.map((item: any) => ({
+      ...item,
+      ...replaceFn(item),
+    })) || navItems.filter(({ route }) => route !== '/');
   return (
     <Box
       display="inline-flex"
