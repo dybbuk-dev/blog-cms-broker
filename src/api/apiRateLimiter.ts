@@ -9,6 +9,7 @@ const skipREs: Array<RegExp> = [
   /^\/api\/broker/,
   /^\/api\/category/,
   /^\/api\/comment/,
+  /^\/api\/file\/download/,
   /^\/api\/general-page/,
   /^\/api\/navigation/,
 ];
