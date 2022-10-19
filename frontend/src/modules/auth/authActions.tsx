@@ -60,7 +60,14 @@ const authActions = {
   },
 
   doSendContact:
-    (name, email, subject, content, recaptcha) =>
+    (
+      name,
+      email,
+      subject,
+      content,
+      recaptcha,
+      fnSuccess = null,
+    ) =>
     async (dispatch, getState) => {
       try {
         dispatch({
@@ -77,6 +84,7 @@ const authActions = {
         dispatch({
           type: authActions.CONTACT_SUCCESS,
         });
+        fnSuccess && fnSuccess();
       } catch (error) {
         Errors.handle(error);
         dispatch({

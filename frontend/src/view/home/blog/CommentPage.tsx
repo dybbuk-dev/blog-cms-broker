@@ -5,7 +5,7 @@ import { i18n } from 'src/i18n';
 import { Link } from 'react-router-dom';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useRouteMatch } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -21,9 +21,11 @@ import commentSpamActions from 'src/modules/blogComment/spam/blogCommentSpamActi
 import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import formActions from 'src/modules/form/formActions';
 import HtmlEditorFormItem from 'src/view/shared/form/items/HtmlEditorFormItem';
 import HtmlView from 'src/view/shared/view/HtmlView';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
+import LazyLoad from 'react-lazy-load';
 import MDBox from 'src/mui/components/MDBox';
 import MDButton from 'src/mui/components/MDButton';
 import MDTypography from 'src/mui/components/MDTypography';
@@ -35,7 +37,6 @@ import SaveIcon from '@mui/icons-material/Save';
 import selectors from 'src/modules/blogComment/home/blogCommentHomeSelectors';
 import Spinner from 'src/view/shared/Spinner';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
-import LazyLoad from 'react-lazy-load';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(i18n('common.name'), {
@@ -56,18 +57,24 @@ const schema = yup.object().shape({
     { required: true },
   ),
 });
+
 const CommentPage = ({ record }) => {
   const { sidenavColor } = selectMuiSettings();
   const [dispatched, setDispatched] = useState(false);
-  const [blogRecordIdToDestroy, setBlogRecordIdToDestroy] =
-    useState(null);
-  const [blogRecordIdToSpam, setBlogRecordIdToSpam] =
-    useState(null);
-  const [blogRecordIdToReview, setBlogRecordIdToReview] =
-    useState(null);
+  const [idToDestroy, setIdToDestroy] = useState(null);
+  const [idToSpam, setIdToSpam] = useState(null);
+  const [idToReview, setIdToReview] = useState(null);
+  const [initialValues] = useState({
+    name: '',
+    email: '',
+    content: '',
+    recapture: '',
+  });
+
   const form = useForm({
     resolver: yupResolver(schema),
     mode: 'onSubmit',
+    defaultValues: initialValues as any,
   });
 
   const match = useRouteMatch();
@@ -86,9 +93,20 @@ const CommentPage = ({ record }) => {
     blogFindSelectors.selectPermissionToEdit,
   );
 
+  const recaptchaRef = useRef(null);
+
   const onSubmit = (values) => {
     values.blog_entry_id = record.id;
-    dispatch(blogCommentFormActions.doCreate(values));
+    dispatch(
+      blogCommentFormActions.doCreate(values, () => {
+        Object.keys(initialValues).forEach((key) => {
+          form.register({ name: key });
+          form.setValue(key, initialValues[key]);
+        });
+        dispatch(formActions.doRefresh());
+        recaptchaRef?.current?.reset();
+      }),
+    );
   };
 
   const doChangePagination = (pagination) => {
@@ -96,27 +114,27 @@ const CommentPage = ({ record }) => {
   };
 
   const doOpenDestroyConfirmModal = (id) => {
-    setBlogRecordIdToDestroy(id);
+    setIdToDestroy(id);
   };
 
   const doCloseDestroyConfirmModal = () => {
-    setBlogRecordIdToDestroy(null);
+    setIdToDestroy(null);
   };
 
   const doOpenSpamConfirmModal = (id) => {
-    setBlogRecordIdToSpam(id);
+    setIdToSpam(id);
   };
 
   const doCloseSpamConfirmModal = () => {
-    setBlogRecordIdToSpam(null);
+    setIdToSpam(null);
   };
 
   const doOpenReviewConfirmModal = (id) => {
-    setBlogRecordIdToReview(id);
+    setIdToReview(id);
   };
 
   const doCloseReviewConfirmModal = () => {
-    setBlogRecordIdToReview(null);
+    setIdToReview(null);
   };
 
   const doDestroy = (id) => {
@@ -138,6 +156,7 @@ const CommentPage = ({ record }) => {
     dispatch(commentReviewActions.doReview(id, match.url));
     setDispatched(!dispatched);
   };
+
   useEffect(() => {
     dispatch(
       actions.doFetch(
@@ -308,22 +327,42 @@ const CommentPage = ({ record }) => {
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <Grid spacing={2} container>
             <Grid item md={6} xs={12}>
+              <MDTypography
+                variant="body2"
+                fontWeight="regular"
+              >
+                {i18n('common.name')} *
+              </MDTypography>
               <InputFormItem
                 name="name"
                 variant="standard"
                 label={i18n('common.name')}
                 required={true}
+                hideLabel
               />
             </Grid>
             <Grid item md={6} xs={12}>
+              <MDTypography
+                variant="body2"
+                fontWeight="regular"
+              >
+                {i18n('common.email')} *
+              </MDTypography>
               <InputFormItem
                 name="email"
                 variant="standard"
                 label={i18n('common.email')}
                 required={true}
+                hideLabel
               />
             </Grid>
             <Grid item xs={12}>
+              <MDTypography
+                variant="body2"
+                fontWeight="regular"
+              >
+                {i18n('common.content')} *
+              </MDTypography>
               <HtmlEditorFormItem
                 name="content"
                 required={true}
@@ -339,10 +378,13 @@ const CommentPage = ({ record }) => {
                   },
                   { name: 'colors' },
                 ]}
+                hideLabel
               />
             </Grid>
             <Grid item xs={12} mb={2}>
-              <ReCaptchaV2FormItem />
+              <ReCaptchaV2FormItem
+                recaptchaRef={recaptchaRef}
+              />
             </Grid>
           </Grid>
           <FormButtons>
@@ -360,28 +402,28 @@ const CommentPage = ({ record }) => {
           </FormButtons>
         </form>
       </FormProvider>
-      {blogRecordIdToDestroy && (
+      {idToDestroy && (
         <ConfirmModal
           title={i18n('common.areYouSure')}
-          onConfirm={() => doDestroy(blogRecordIdToDestroy)}
+          onConfirm={() => doDestroy(idToDestroy)}
           onClose={() => doCloseDestroyConfirmModal()}
           okText={i18n('common.yes')}
           cancelText={i18n('common.no')}
         />
       )}
-      {blogRecordIdToSpam && (
+      {idToSpam && (
         <ConfirmModal
           title={i18n('common.areYouSure')}
-          onConfirm={() => doSpam(blogRecordIdToSpam)}
+          onConfirm={() => doSpam(idToSpam)}
           onClose={() => doCloseSpamConfirmModal()}
           okText={i18n('common.yes')}
           cancelText={i18n('common.no')}
         />
       )}
-      {blogRecordIdToReview && (
+      {idToReview && (
         <ConfirmModal
           title={i18n('common.areYouSure')}
-          onConfirm={() => doReview(blogRecordIdToReview)}
+          onConfirm={() => doReview(idToReview)}
           onClose={() => doCloseReviewConfirmModal()}
           okText={i18n('common.yes')}
           cancelText={i18n('common.no')}

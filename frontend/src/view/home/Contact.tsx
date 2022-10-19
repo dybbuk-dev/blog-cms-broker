@@ -3,7 +3,7 @@ import { i18n } from 'src/i18n';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm, FormProvider } from 'react-hook-form';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import authActions from 'src/modules/auth/authActions';
@@ -20,6 +20,7 @@ import PageContent from 'src/view/shared/view/PageContent';
 import ReCaptchaV2FormItem from 'src/view/shared/form/items/ReCaptchaV2FormItem';
 import SaveIcon from '@mui/icons-material/Save';
 import yupFormSchemas from 'src/modules/shared/yup/yupFormSchemas';
+import formActions from 'src/modules/form/formActions';
 
 const schema = yup.object().shape({
   name: yupFormSchemas.string(
@@ -73,6 +74,8 @@ function Contact() {
     authSelectors.selectLoadingContact,
   );
 
+  const recaptchaRef = useRef(null);
+
   const onSubmit = (values) => {
     dispatch(
       authActions.doSendContact(
@@ -81,6 +84,14 @@ function Contact() {
         values.subject,
         values.content,
         values.recaptcha,
+        () => {
+          Object.keys(initialValues).forEach((key) => {
+            form.register({ name: key });
+            form.setValue(key, initialValues[key]);
+          });
+          dispatch(formActions.doRefresh());
+          recaptchaRef?.current?.reset();
+        },
       ),
     );
   };
@@ -111,6 +122,12 @@ function Contact() {
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <Grid spacing={2} container>
                 <Grid item xs={12}>
+                  <MDTypography
+                    variant="body2"
+                    fontWeight="regular"
+                  >
+                    {i18n('entities.contact.fields.name')} *
+                  </MDTypography>
                   <InputFormItem
                     name="name"
                     label={i18n(
@@ -119,18 +136,36 @@ function Contact() {
                     variant="standard"
                     required={true}
                     autoFocus
+                    hideLabel
                   />
                 </Grid>
                 <Grid item xs={12}>
+                  <MDTypography
+                    variant="body2"
+                    fontWeight="regular"
+                  >
+                    {i18n('entities.contact.fields.email')}{' '}
+                    *
+                  </MDTypography>
                   <InputFormItem
                     name="email"
                     label={i18n(
                       'entities.contact.fields.email',
                     )}
                     variant="standard"
+                    hideLabel
                   />
                 </Grid>
                 <Grid item xs={12}>
+                  <MDTypography
+                    variant="body2"
+                    fontWeight="regular"
+                  >
+                    {i18n(
+                      'entities.contact.fields.subject',
+                    )}{' '}
+                    *
+                  </MDTypography>
                   <InputFormItem
                     name="subject"
                     label={i18n(
@@ -138,6 +173,7 @@ function Contact() {
                     )}
                     variant="standard"
                     required={true}
+                    hideLabel
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -157,7 +193,9 @@ function Contact() {
                   />
                 </Grid>
                 <Grid item xs={12} mb={2}>
-                  <ReCaptchaV2FormItem />
+                  <ReCaptchaV2FormItem
+                    recaptchaRef={recaptchaRef}
+                  />
                 </Grid>
               </Grid>
               <FormButtons>

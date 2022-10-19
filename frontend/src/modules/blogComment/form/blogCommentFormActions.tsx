@@ -48,31 +48,35 @@ const blogCommentFormActions = {
     }
   },
 
-  doCreate: (values) => async (dispatch) => {
-    try {
-      dispatch({
-        type: blogCommentFormActions.CREATE_STARTED,
-      });
+  doCreate:
+    (values, fnSuccess = null) =>
+    async (dispatch) => {
+      try {
+        dispatch({
+          type: blogCommentFormActions.CREATE_STARTED,
+        });
 
-      await BlogCommentService.create(values);
+        await BlogCommentService.create(values);
 
-      dispatch({
-        type: blogCommentFormActions.CREATE_SUCCESS,
-      });
+        dispatch({
+          type: blogCommentFormActions.CREATE_SUCCESS,
+        });
 
-      Message.success(
-        i18n('entities.blogComment.create.success'),
-      );
+        Message.success(
+          i18n('entities.blogComment.create.success'),
+        );
 
-      // getHistory().push('/');
-    } catch (error) {
-      Errors.handle(error);
+        fnSuccess && fnSuccess();
 
-      dispatch({
-        type: blogCommentFormActions.CREATE_ERROR,
-      });
-    }
-  },
+        // getHistory().push('/');
+      } catch (error) {
+        Errors.handle(error);
+
+        dispatch({
+          type: blogCommentFormActions.CREATE_ERROR,
+        });
+      }
+    },
 
   doUpdate: (id, values) => async (dispatch, getState) => {
     try {
