@@ -26,6 +26,7 @@ function AutocompleteInMemoryFormItem(props) {
     fullWidth,
     getOptionDisabled,
     groupBy,
+    hideLabel,
     hint,
     isClearable,
     label,
@@ -264,7 +265,7 @@ function AutocompleteInMemoryFormItem(props) {
           InputLabelProps={{
             shrink: shrink,
           }}
-          label={label}
+          label={hideLabel ? undefined : label}
           autoFocus={autoFocus || undefined}
         />
       );
@@ -375,6 +376,7 @@ function AutocompleteInMemoryFormItem(props) {
 
 AutocompleteInMemoryFormItem.defaultProps = {
   createButtonIcon: <AddIcon />,
+  hideLabel: false,
   isClearable: true,
   mode: 'default',
   required: false,
@@ -389,6 +391,7 @@ AutocompleteInMemoryFormItem.propTypes = {
   getOptionDisabled: PropTypes.func,
   groupBy: PropTypes.func,
   hasPermissionToCreate: PropTypes.bool,
+  hideLabel: PropTypes.bool,
   hint: PropTypes.string,
   isClearable: PropTypes.bool,
   label: PropTypes.string,

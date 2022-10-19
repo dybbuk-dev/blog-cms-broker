@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import dColors from 'src/mui/assets/theme-dark/base/colors';
 import ImageView from 'src/view/home/ImageView';
 import lColors from 'src/mui/assets/theme/base/colors';
+import MaterialLink from '@mui/material/Link';
 import MDBox from 'src/mui/components/MDBox';
 import MDButton from 'src/mui/components/MDButton';
 import MDTypography from 'src/mui/components/MDTypography';
@@ -96,20 +97,25 @@ function BrokerHeader({ record }) {
       </MDTypography>
       <Grid spacing={3} alignItems="stretch" container>
         <Grid lg={6} xs={12} item>
-          <ImageView
-            value={record.broker_image_broker_detail_logo}
-            alt={record.name}
-            sx={{
-              width: {
-                xs: '100%',
-                sm: undefined,
-              },
-              height: {
-                xs: undefined,
-                sm: '100%',
-              },
-            }}
-          />
+          <MaterialLink
+            href={record.meta?.homepage}
+            target="_blank"
+          >
+            <ImageView
+              value={record.broker_image_broker_detail_logo}
+              alt={record.name}
+              sx={{
+                width: {
+                  xs: '100%',
+                  sm: undefined,
+                },
+                height: {
+                  xs: undefined,
+                  sm: '100%',
+                },
+              }}
+            />
+          </MaterialLink>
         </Grid>
         <Grid lg={6} xs={12} item>
           <MDBox

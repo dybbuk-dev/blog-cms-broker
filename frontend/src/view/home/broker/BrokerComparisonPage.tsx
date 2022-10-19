@@ -194,6 +194,7 @@ function BrokerComparePage(props) {
           color="text"
           fontWeight="regular"
           variant="body2"
+          mb={2}
         >
           {i18n('entities.broker.comparison.description')}
         </MDTypography>
@@ -228,6 +229,7 @@ function BrokerComparePage(props) {
                         value={recordToValue(recordA)}
                         forceValue
                         disabled={loading}
+                        hideLabel
                         useLink
                         required
                         fullWidth
@@ -243,6 +245,7 @@ function BrokerComparePage(props) {
                         value={recordToValue(recordB)}
                         forceValue
                         disabled={loading}
+                        hideLabel
                         useLink
                         required
                         fullWidth

@@ -16,6 +16,7 @@ function BrokerAutocompleteFormItem(props) {
     name,
     required,
     useLink,
+    hideLabel,
     rerender: parentRerender,
     shrink,
     size,
@@ -112,6 +113,7 @@ function BrokerAutocompleteFormItem(props) {
         onOpenModal={doOpenModal}
         hasPermissionToCreate={hasPermissionToCreate}
         rerender={rerender}
+        hideLabel={hideLabel}
       />
 
       {modalVisible && (
