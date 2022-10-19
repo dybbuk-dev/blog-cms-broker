@@ -5,7 +5,6 @@ import Breadcrumb from './Breadcrumb';
 import BrokerListTable from './broker/BrokerListTable';
 import DefaultCategoryDescription from './DefaultCategoryDescription';
 import HtmlView from './shared/HtmlView';
-import MaterialLink from '@mui/material/Link';
 import React from 'react';
 import TopBrokersView from './broker/components/TopBrokersView';
 
@@ -48,25 +47,6 @@ function CategoryPage({ category, ...props }) {
         </Typography>
         <TopBrokersView />
         <BrokerListTable rows={props.brokers} />
-        <Typography display="block" variant="h3" mt={2}>
-          Broker-Kategorien
-        </Typography>
-        <Box>
-          {props.categories?.map((cat) => (
-            <Typography
-              key={cat.id}
-              variant="body2"
-              fontWeight="regular"
-            >
-              <MaterialLink
-                href={cat.link}
-                underline="hover"
-              >
-                {cat.name}
-              </MaterialLink>
-            </Typography>
-          ))}
-        </Box>
         {category.description ? (
           <HtmlView value={category.description} />
         ) : (
