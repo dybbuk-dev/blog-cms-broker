@@ -759,7 +759,10 @@ function DefaultNavbar({
                 display="block"
                 component="span"
                 color="warning"
-                fontSize="32px"
+                fontSize={{
+                  lg: '32px',
+                  xs: '31px',
+                }}
                 fontWeight="bold"
                 lineHeight={1}
               >
