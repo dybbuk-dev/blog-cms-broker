@@ -20,20 +20,24 @@ function CompareOverview({ recordA, recordB }) {
         <CompareSection name="logo" />
         <CompareDetail
           childrenA={
-            <ImageView
-              value={
-                recordA.broker_image_broker_detail_logo
-              }
-              alt={recordA.name}
-            />
+            <MaterialLink href={recordA.meta.homepage}>
+              <ImageView
+                value={
+                  recordA.broker_image_broker_detail_logo
+                }
+                alt={recordA.name}
+              />
+            </MaterialLink>
           }
           childrenB={
-            <ImageView
-              value={
-                recordB.broker_image_broker_detail_logo
-              }
-              alt={recordA.name}
-            />
+            <MaterialLink href={recordB.meta.homepage}>
+              <ImageView
+                value={
+                  recordB.broker_image_broker_detail_logo
+                }
+                alt={recordA.name}
+              />
+            </MaterialLink>
           }
         />
       </Grid>
