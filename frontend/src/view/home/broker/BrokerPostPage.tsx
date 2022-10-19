@@ -205,12 +205,19 @@ const BrokerPostPage = ({ brokerId, name, middle }) => {
               <MDBox
                 display="flex"
                 justifyContent="space-between"
-                alignItems="center"
+                alignItems={{
+                  md: 'center',
+                  xs: 'flex-start',
+                }}
               >
                 <MDBox>
                   <MDTypography
                     variant="h4"
                     color="warning"
+                    fontSize={{
+                      lg: '1.25rem',
+                      xs: '1rem',
+                    }}
                   >
                     {`${name} Erfahrungen von: ${post.name}`}
                   </MDTypography>
