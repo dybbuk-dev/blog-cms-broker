@@ -319,6 +319,75 @@ class PageRepository {
         let processing = true;
         conversion(
           {
+            paperSize: {
+              format: 'A4',
+              headerHeight: 100,
+              margin: {
+                top: '0cm',
+                left: '1.5cm',
+                right: '1.5cm',
+                bottom: '0.5cm',
+              },
+            },
+            header: [
+              '<!DOCTYPE html>',
+              '<html>',
+              '<head>',
+              '<meta charset="utf-8" />',
+              '<style>',
+              [
+                '* {',
+                [
+                  'font-family: Roboto, Helvetica, Arial, sans-serif',
+                  'line-height: 1.5 !important',
+                  'margin: 0 !important',
+                  'padding: 0 !important',
+                ].join(';'),
+                '}',
+                'a {',
+                [
+                  'color: inherit',
+                  'text-decoration: none',
+                ].join(';'),
+                '}',
+              ].join('\n'),
+              '</style>',
+              '</head>',
+              '<body>',
+              '<div style="top: 0; position: absolute; width: 100%; height: 100px;">',
+              [
+                '<h2 style="color: #fd9e00;">',
+                `<a href="${getConfig().FRONTEND_URL}">`,
+                'Broker-Bewertungen.de',
+                '</a>',
+                '</h2>',
+                '<h3 style="color: #3b6b95;">',
+                `<a href="${
+                  getConfig().FRONTEND_URL
+                }${url}">`,
+                navigation ? navigation.name : record.name,
+                '</a>',
+                '</h3>',
+              ].join(''),
+              '</div>',
+              '</body>',
+              '</html>',
+            ].join(''),
+            footer: [
+              '<style>',
+              [
+                '* {',
+                [
+                  'font-family: Roboto, Helvetica, Arial, sans-serif',
+                  'line-height: 1 !important',
+                  'margin: 0 !important',
+                  'padding: 0 !important',
+                ].join(';'),
+                '}',
+              ].join('\n'),
+              '</style>',
+              '<div style="text-align: center;">Seite {#pageNum} von {#numPages}</div>',
+            ].join(''),
             html: [
               '<!DOCTYPE html>',
               '<html>',
