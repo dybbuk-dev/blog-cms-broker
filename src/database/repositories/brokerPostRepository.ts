@@ -106,6 +106,8 @@ class BrokerPostRepository {
           rating: data.rating || 0,
           created: moment(),
           modified: moment(),
+          user_agent: data.user_agent || '',
+          ip: data.ip || '',
         },
         {
           transaction,

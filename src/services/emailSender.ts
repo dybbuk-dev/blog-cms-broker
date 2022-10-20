@@ -28,6 +28,8 @@ export default class EmailSender {
       PASSWORD_RESET:
         getConfig().SENDGRID_TEMPLATE_PASSWORD_RESET,
       CONTACT: getConfig().SENDGRID_TEMPLATE_CONTACT,
+      REVIEW_NOTIFICATION:
+        getConfig().SENDGRID_TEMPLATE_REVIEW_NOTIFICATION,
     };
   }
 
@@ -36,6 +38,14 @@ export default class EmailSender {
       return null;
     }
     return getConfig().SENDGRID_RECIPIENT_FOR_CONTACT;
+  }
+
+  static get REVIEW_NOTIFICATION_RECIPIENT() {
+    if (!EmailSender.isConfigured) {
+      return null;
+    }
+    return getConfig()
+      .SENDGRID_RECIPIENT_FOR_REVIEW_NOTIFICATION;
   }
 
   async sendTo(recipient) {

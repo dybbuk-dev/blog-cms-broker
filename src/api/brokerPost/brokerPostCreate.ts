@@ -16,6 +16,8 @@ export default async (req, res, next) => {
     const payload = await service.create({
       ...req.body.data,
       ...(parent ? { broker_id: parent.broker_id } : {}),
+      user_agent: req.get('user-agent'),
+      ip: req.ip,
     });
 
     await ApiResponseHandler.success(req, res, payload);

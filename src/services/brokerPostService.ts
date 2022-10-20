@@ -2,6 +2,8 @@ import Error400 from '../errors/Error400';
 import SequelizeRepository from '../database/repositories/sequelizeRepository';
 import { IServiceOptions } from './IServiceOptions';
 import BrokerPostRepository from '../database/repositories/brokerPostRepository';
+import EmailSender from './emailSender';
+import BrokerRepository from '../database/repositories/brokerRepository';
 
 export default class BrokerPostService {
   options: IServiceOptions;
@@ -36,6 +38,25 @@ export default class BrokerPostService {
       );
 
       await this.ratingAll([record.id]);
+
+      if (EmailSender.isConfigured) {
+        const broker = await BrokerRepository.findById(
+          data.broker_id,
+          { ...this.options },
+        );
+        new EmailSender(
+          EmailSender.TEMPLATES.REVIEW_NOTIFICATION,
+          {
+            subject: `Neue Bewertung zu ${broker?.name}`,
+            name: data.name,
+            email: data.email,
+            rating: data.rating,
+            ip: data.ip,
+            userAgent: data.user_agent,
+            review: data.review,
+          },
+        ).sendTo(EmailSender.REVIEW_NOTIFICATION_RECIPIENT);
+      }
 
       return record;
     } catch (error) {
