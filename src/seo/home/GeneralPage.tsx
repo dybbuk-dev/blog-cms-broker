@@ -17,13 +17,13 @@ const GeneralPage = ({
 
   if (category) {
     title = `${
-      category.title
+      category.name
     } Vergleich ${moment().year()} » 100% unabhängiger Test`;
     keywords = [category.name, 'Vergleich', 'Test'];
     description = `100% unabhängiger ${
-      category.title
+      category.name
     } Vergleich ✚✚ Über ${category.count ?? 0} ${
-      category.title
+      category.name
     } im Test mit Erfahrungsberichten von Tradern ➔ Jetzt lesen!`;
   }
 
