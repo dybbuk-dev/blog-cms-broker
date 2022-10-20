@@ -29,7 +29,7 @@ function Promotion() {
               fontWeight="bold"
               lineHeight={1.35}
             >
-              Sponseren
+              Sponsoren
             </MDTypography>
           }
           sx={{ pb: 1, px: 3, pt: 2 }}
