@@ -63,9 +63,7 @@ function PromotionForm(props) {
     const record = props.record || {};
 
     return {
-      link: record.promotion_image
-        ? record.promotion_image[0]?.link
-        : null,
+      link: record.link,
       name: record.name,
       activated: record.activated,
       promotion_image: record.promotion_image || null,

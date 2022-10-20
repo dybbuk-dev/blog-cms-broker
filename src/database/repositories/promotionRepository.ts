@@ -12,7 +12,7 @@ import FileRepository from './fileRepository';
 const Op = Sequelize.Op;
 
 class PromotionRepository {
-  static ALL_FIELDS = ['name', 'activated'];
+  static ALL_FIELDS = ['name', 'activated', 'link'];
 
   static async _replaceRelationFiles(
     record,

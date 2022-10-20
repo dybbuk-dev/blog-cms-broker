@@ -1,13 +1,10 @@
-import Spinner from 'src/view/shared/Spinner';
-import { i18n } from 'src/i18n';
-import TextViewItem from 'src/view/shared/view/TextViewItem';
 import { Grid } from '@mui/material';
+import { i18n } from 'src/i18n';
 import CheckboxViewItem from 'src/view/shared/view/CheckboxViewItem';
-import PromotionViewItem from 'src/view/promotion/view/PromotionViewItem';
-import HtmlViewItem from 'src/view/shared/view/HtmlViewItem';
-import MDBox from 'src/mui/components/MDBox';
-import MDTypography from 'src/mui/components/MDTypography';
 import LogoViewItem from 'src/view/shared/view/LogoViewItem';
+import MDBox from 'src/mui/components/MDBox';
+import Spinner from 'src/view/shared/Spinner';
+import TextViewItem from 'src/view/shared/view/TextViewItem';
 
 function PromotionView(props) {
   const renderView = () => {
@@ -18,13 +15,13 @@ function PromotionView(props) {
           <Grid item md={12} xs={12}>
             <TextViewItem
               label={i18n('entities.promotion.fields.name')}
-              value={record.promotion_image[0].linkTitle}
+              value={record.name}
             />
           </Grid>
           <Grid item md={12} xs={12}>
             <TextViewItem
               label={i18n('entities.promotion.fields.link')}
-              value={record.promotion_image[0].link}
+              value={record.link}
             />
           </Grid>
           <Grid item md={12} xs={12}>
