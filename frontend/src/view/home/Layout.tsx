@@ -10,7 +10,7 @@ import ForexStrategy from 'src/view/home/sidebar/ForexStrategy';
 import Grid from '@mui/material/Grid';
 import Meta from 'src/view/home/Meta';
 import MostRead from 'src/view/home/sidebar/MostRead';
-import PageLayout from 'src/mui/examples/LayoutContainers/PageLayout';
+import PageLayout from 'src/mui/shared/Layouts/PageLayout';
 import Promotion from 'src/view/home/sidebar/Promotion';
 import PropTypes from 'prop-types';
 import TopBrokers from 'src/view/home/sidebar/TopBrokers';

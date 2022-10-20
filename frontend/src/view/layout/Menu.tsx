@@ -25,12 +25,12 @@ import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 
 // Material Dashboard 2 PRO React TS examples components
-import SidenavCollapse from 'src/mui/examples/Sidenav/SidenavCollapse';
-import SidenavList from 'src/mui/examples/Sidenav/SidenavList';
-import SidenavItem from 'src/mui/examples/Sidenav/SidenavItem';
+import SidenavCollapse from 'src/mui/shared/Sidenav/SidenavCollapse';
+import SidenavList from 'src/mui/shared/Sidenav/SidenavList';
+import SidenavItem from 'src/mui/shared/Sidenav/SidenavItem';
 
 // Custom styles for the Sidenav
-import SidenavRoot from 'src/mui/examples/Sidenav/SidenavRoot';
+import SidenavRoot from 'src/mui/shared/Sidenav/SidenavRoot';
 
 // for MUI 2 Dashboard
 import muiActions from 'src/modules/mui/muiActions';

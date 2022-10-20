@@ -14,7 +14,7 @@ import MDBox from 'src/mui/components/MDBox';
 import MDInput from 'src/mui/components/MDInput';
 
 // Material Dashboard 2 PRO React TS examples components
-import Breadcrumbs from 'src/mui/examples/Breadcrumbs';
+import Breadcrumbs from 'src/mui/shared/Breadcrumbs';
 
 // Custom styles for Header
 import {
@@ -24,7 +24,7 @@ import {
   navbarIconButton,
   navbarDesktopMenu,
   navbarMobileMenu,
-} from 'src/mui/examples/Navbars/DashboardNavbar/styles';
+} from 'src/mui/shared/Navbars/DashboardNavbar/styles';
 
 // for MUI 2 Dashboard
 import muiActions from 'src/modules/mui/muiActions';

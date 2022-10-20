@@ -8,10 +8,10 @@ import { i18n } from 'src/i18n';
 import config from 'src/config';
 
 // Custom styles for Header
-import { navbarIconButton } from 'src/mui/examples/Navbars/DashboardNavbar/styles';
+import { navbarIconButton } from 'src/mui/shared/Navbars/DashboardNavbar/styles';
 
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
-import NotificationItem from 'src/mui/examples/Items/NotificationItem';
+import NotificationItem from 'src/mui/shared/Items/NotificationItem';
 
 // Declaring prop types for Header
 interface Props {

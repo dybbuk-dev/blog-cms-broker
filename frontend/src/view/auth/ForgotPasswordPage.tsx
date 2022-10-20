@@ -20,7 +20,7 @@ import MDInput from 'src/mui/components/MDInput';
 import MDButton from 'src/mui/components/MDButton';
 
 // Authentication layout components
-import CoverLayout from 'src/mui/layouts/authentication/components/CoverLayout';
+import CoverLayout from 'src/mui/shared/Layouts/CoverLayout';
 
 // Images
 import bgImage from 'src/mui/assets/images/bg-reset-cover.jpeg';

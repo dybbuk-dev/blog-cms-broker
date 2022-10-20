@@ -34,8 +34,8 @@ import { tenantSubdomain } from 'src/modules/tenant/tenantSubdomain';
 import { red, green } from '@mui/material/colors';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import MDBox from 'src/mui/components/MDBox';
-import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
-import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
+import DataTableHeadCell from 'src/mui/shared/Tables/DataTable/DataTableHeadCell';
+import DataTableBodyCell from 'src/mui/shared/Tables/DataTable/DataTableBodyCell';
 import MDTypography from 'src/mui/components/MDTypography';
 import MDButton from 'src/mui/components/MDButton';
 

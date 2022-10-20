@@ -11,8 +11,8 @@ import { getLanguage, getLanguages } from 'src/i18n';
 import actions from 'src/modules/layout/layoutActions';
 
 // Custom styles for Header
-import { navbarIconButton } from 'src/mui/examples/Navbars/DashboardNavbar/styles';
-import NotificationItem from 'src/mui/examples/Items/NotificationItem';
+import { navbarIconButton } from 'src/mui/shared/Navbars/DashboardNavbar/styles';
+import NotificationItem from 'src/mui/shared/Items/NotificationItem';
 import MDButton from 'src/mui/components/MDButton';
 
 // Declaring prop types for Header

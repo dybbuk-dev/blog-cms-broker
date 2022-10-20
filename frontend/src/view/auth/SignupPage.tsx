@@ -9,7 +9,7 @@ import * as yup from 'yup';
 import actions from 'src/modules/auth/authActions';
 import bgImage from 'src/mui/assets/images/bg-sign-up-cover.jpeg';
 import Card from '@mui/material/Card';
-import CoverLayout from 'src/mui/layouts/authentication/components/CoverLayout';
+import CoverLayout from 'src/mui/shared/Layouts/CoverLayout';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import MDBox from 'src/mui/components/MDBox';
 import MDButton from 'src/mui/components/MDButton';

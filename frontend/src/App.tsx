@@ -35,7 +35,7 @@ import createCache from '@emotion/cache';
 import muiActions from 'src/modules/mui/muiActions';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
 import Menu from 'src/view/layout/Menu';
-import Configurator from 'src/mui/examples/Configurator';
+import Configurator from 'src/mui/shared/Configurator';
 import { Icon } from '@mui/material';
 import { i18n } from 'src/i18n';
 import MDBox from 'src/mui/components/MDBox';

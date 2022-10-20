@@ -7,7 +7,7 @@ import MDButton from 'src/mui/components/MDButton';
 import { Card } from '@mui/material';
 import { BrandLogo } from 'src/assets/resources';
 import MDBox from 'src/mui/components/MDBox';
-import BasicLayout from 'src/mui/layouts/authentication/components/BasicLayout';
+import BasicLayout from 'src/mui/shared/Layouts/BasicLayout';
 import MDTypography from 'src/mui/components/MDTypography';
 import { useSelector } from 'react-redux';
 

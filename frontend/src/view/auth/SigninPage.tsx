@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import actions from 'src/modules/auth/authActions';
-import BasicLayout from 'src/mui/layouts/authentication/components/BasicLayout';
+import BasicLayout from 'src/mui/shared/Layouts/BasicLayout';
 import bgImage from 'src/mui/assets/images/bg-sign-in-basic.jpeg';
 import Card from '@mui/material/Card';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';

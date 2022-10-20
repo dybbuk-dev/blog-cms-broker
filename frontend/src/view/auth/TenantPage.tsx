@@ -14,7 +14,7 @@ import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 
 // Authentication layout components
-import CoverLayout from 'src/mui/layouts/authentication/components/CoverLayout';
+import CoverLayout from 'src/mui/shared/Layouts/CoverLayout';
 
 // Images
 import bgImage from 'src/mui/assets/images/bg-sign-up-cover.jpeg';

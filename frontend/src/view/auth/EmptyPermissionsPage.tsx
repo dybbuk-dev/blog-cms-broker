@@ -6,10 +6,10 @@ import selectors from 'src/modules/auth/authSelectors';
 import MDBox from 'src/mui/components/MDBox';
 import { Card } from '@mui/material';
 import { BrandLogo } from 'src/assets/resources';
-import BasicLayout from 'src/mui/layouts/authentication/components/BasicLayout';
+import BasicLayout from 'src/mui/shared/Layouts/BasicLayout';
 import MDTypography from 'src/mui/components/MDTypography';
 import { Link } from 'react-router-dom';
-import CoverLayout from 'src/mui/layouts/authentication/components/CoverLayout';
+import CoverLayout from 'src/mui/shared/Layouts/CoverLayout';
 
 function EmptyPermissionsPage(props) {
   const dispatch = useDispatch();

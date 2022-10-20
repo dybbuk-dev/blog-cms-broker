@@ -1,7 +1,7 @@
 import Header from 'src/view/layout/Header';
-import DashboardLayout from 'src/mui/examples/LayoutContainers/DashboardLayout';
+import DashboardLayout from 'src/mui/shared/Layouts/DashboardLayout';
 import MDBox from 'src/mui/components/MDBox';
-import Footer from 'src/mui/examples/Footer';
+import Footer from 'src/mui/shared/Footer';
 import React from 'react';
 
 class Layout extends React.Component {

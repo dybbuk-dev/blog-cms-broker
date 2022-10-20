@@ -13,7 +13,7 @@ import selectors from 'src/modules/auth/authSelectors';
 import MDBox from 'src/mui/components/MDBox';
 import { BrandLogo } from 'src/assets/resources';
 import MDTypography from 'src/mui/components/MDTypography';
-import CoverLayout from 'src/mui/layouts/authentication/components/CoverLayout';
+import CoverLayout from 'src/mui/shared/Layouts/CoverLayout';
 import { Link } from 'react-router-dom';
 import MDButton from 'src/mui/components/MDButton';
 

@@ -10,9 +10,9 @@ import {
   TableContainer,
 } from '@mui/material';
 import { selectMuiSettings } from 'src/modules/mui/muiSelectors';
-import DataTableBodyCell from 'src/mui/examples/Tables/DataTable/DataTableBodyCell';
+import DataTableBodyCell from 'src/mui/shared/Tables/DataTable/DataTableBodyCell';
 import MDBox from 'src/mui/components/MDBox';
-import DataTableHeadCell from 'src/mui/examples/Tables/DataTable/DataTableHeadCell';
+import DataTableHeadCell from 'src/mui/shared/Tables/DataTable/DataTableHeadCell';
 
 export default (selectors, actions, fields) => {
   function ImporterList() {
