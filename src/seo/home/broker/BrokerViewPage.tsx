@@ -53,7 +53,7 @@ const BrokerViewPage = ({ record, ...props }) => {
           '',
         )} aus ${
           record.rating?.overall_reviews ?? 0
-        } Bewertungen » Unser Test zu Spreads ✚ Plattform ✚ Orderausführung ✚ Service ➔ Jetzt lesen!`
+        } Bewertungen » Unser Test zu Spreads ✚ Plattform ✚ Service ➔ Jetzt lesen!`
       : `${
           record.name
         } Erfahrungen & Test » Fazit von Tradern: ${stars.join(
