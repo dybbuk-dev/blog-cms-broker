@@ -1,3 +1,4 @@
+import home from 'src/modules/promotion/home/promotionHomeReducers';
 import list from 'src/modules/promotion/list/promotionListReducers';
 import form from 'src/modules/promotion/form/promotionFormReducers';
 import view from 'src/modules/promotion/view/promotionViewReducers';
@@ -6,6 +7,7 @@ import importerReducer from 'src/modules/promotion/importer/promotionImporterRed
 import { combineReducers } from 'redux';
 
 export default combineReducers({
+  home,
   list,
   form,
   view,

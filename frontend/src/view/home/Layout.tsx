@@ -11,6 +11,7 @@ import Grid from '@mui/material/Grid';
 import Meta from 'src/view/home/Meta';
 import MostRead from 'src/view/home/sidebar/MostRead';
 import PageLayout from 'src/mui/examples/LayoutContainers/PageLayout';
+import Promotion from 'src/view/home/sidebar/Promotion';
 import PropTypes from 'prop-types';
 import TopBrokers from 'src/view/home/sidebar/TopBrokers';
 
@@ -45,34 +46,19 @@ function Layout({
           </Grid>
           <Grid xl={3} lg={4} md={12} xs={12} item>
             <Grid spacing={2} container>
-              <Grid xs={12} item>
-                <TopBrokers />
-              </Grid>
+              <TopBrokers />
               {Boolean(record) && (
-                <Grid xs={12} item>
-                  <ComparableBrokers record={record} />
-                </Grid>
+                <ComparableBrokers record={record} />
               )}
-              <Grid xs={12} item>
-                <FeaturedBrokers />
-              </Grid>
+              <FeaturedBrokers />
               {Boolean(record) && (
-                <Grid xs={12} item>
-                  <Advisors record={record} />
-                </Grid>
+                <Advisors record={record} />
               )}
-              <Grid xs={12} item>
-                <Category />
-              </Grid>
-              <Grid xs={12} item>
-                <MostRead />
-              </Grid>
-              <Grid xs={12} item>
-                <ForexSchool />
-              </Grid>
-              <Grid xs={12} item>
-                <ForexStrategy />
-              </Grid>
+              <Category />
+              <MostRead />
+              <ForexSchool />
+              <ForexStrategy />
+              <Promotion />
             </Grid>
           </Grid>
         </Grid>

@@ -95,6 +95,12 @@ export default class PromotionService {
     return response.data;
   }
 
+  static async home() {
+    const response = await authAxios.get('/promotion');
+
+    return response.data;
+  }
+
   static async listAutocomplete(query, limit) {
     const params = {
       query,

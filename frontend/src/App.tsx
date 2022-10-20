@@ -54,6 +54,7 @@ import navigationForexStrategyActions from 'src/modules/navigation/forexStrategy
 import brokerComparableActions from 'src/modules/broker/comparable/brokerComparableActions';
 import authorHomeActions from 'src/modules/author/home/authorHomeActions';
 import CookieConsentTool from 'src/CookieConsentTool';
+import promotionHomeActions from 'src/modules/promotion/home/promotionHomeActions';
 
 const store = configureStore();
 
@@ -92,6 +93,7 @@ function AppWithRedux(props) {
     dispatch(brokerFeaturedActions.doFetch());
     dispatch(brokerTopActions.doFetch());
     dispatch(authorHomeActions.doFind());
+    dispatch(promotionHomeActions.doFetch());
   }, []);
 
   return direction === 'rtl' ? (

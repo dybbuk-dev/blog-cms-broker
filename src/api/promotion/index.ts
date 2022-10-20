@@ -1,4 +1,8 @@
 export default (app) => {
+  // #region front-end APIs
+  app.get('/promotion', require('./promotionHome').default);
+  // #endregion
+  // #region back-end APIs
   app.post(
     `/tenant/:tenantId/promotion`,
     require('./promotionCreate').default,
@@ -27,4 +31,5 @@ export default (app) => {
     `/tenant/:tenantId/promotion/:id`,
     require('./promotionFind').default,
   );
+  // #endregion
 };

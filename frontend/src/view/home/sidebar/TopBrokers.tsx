@@ -9,7 +9,6 @@ import MaterialLink from '@mui/material/Link';
 import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import RatingViewItem from 'src/view/shared/view/RatingViewItem';
-import Spinner from 'src/view/shared/Spinner';
 
 function TopBrokers() {
   const { sidenavColor } = selectMuiSettings();
@@ -20,23 +19,25 @@ function TopBrokers() {
     brokerTopSelectors.selectHasRows,
   );
   const rows = useSelector(brokerTopSelectors.selectRows);
+  if (loading || !hasRows || !rows) {
+    return null;
+  }
   return (
-    <Card>
-      <CardHeader
-        title={
-          <MDTypography
-            variant="body1"
-            fontWeight="bold"
-            lineHeight={1.35}
-          >
-            Von Tradern am besten bewertet
-          </MDTypography>
-        }
-        sx={{ pb: 1, px: 3, pt: 2 }}
-      />
-      <MDBox sx={{ pt: 0, px: 3, pb: 2 }}>
-        {loading && <Spinner />}
-        {!loading && hasRows && (
+    <Grid xs={12} item>
+      <Card>
+        <CardHeader
+          title={
+            <MDTypography
+              variant="body1"
+              fontWeight="bold"
+              lineHeight={1.35}
+            >
+              Von Tradern am besten bewertet
+            </MDTypography>
+          }
+          sx={{ pb: 1, px: 3, pt: 2 }}
+        />
+        <MDBox sx={{ pt: 0, px: 3, pb: 2 }}>
           <Grid spacing={2} container>
             {rows.map((row, idx) => (
               <Grid key={row.id} xs={12} item>
@@ -150,9 +151,9 @@ function TopBrokers() {
               </Grid>
             ))}
           </Grid>
-        )}
-      </MDBox>
-    </Card>
+        </MDBox>
+      </Card>
+    </Grid>
   );
 }
 

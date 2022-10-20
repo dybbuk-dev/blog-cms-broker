@@ -12,6 +12,7 @@ const skipREs: Array<RegExp> = [
   /^\/api\/file\/download/,
   /^\/api\/general-page/,
   /^\/api\/navigation/,
+  /^\/api\/promotion/,
 ];
 
 export function createRateLimiter({
