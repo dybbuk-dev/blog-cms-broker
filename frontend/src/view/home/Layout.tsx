@@ -50,11 +50,11 @@ function Layout({
               {Boolean(record) && (
                 <ComparableBrokers record={record} />
               )}
-              <FeaturedBrokers />
               {Boolean(record) && (
                 <Advisors record={record} />
               )}
               <Category />
+              <FeaturedBrokers />
               <MostRead />
               <ForexSchool />
               <ForexStrategy />
