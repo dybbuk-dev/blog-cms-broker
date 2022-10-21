@@ -10,6 +10,7 @@ import PageContent from 'src/view/shared/view/PageContent';
 import SendIcon from '@mui/icons-material/Send';
 import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
 import Breadcrumb from 'src/view/home/Breadcrumb';
+import DashBorder from 'src/view/home/shared/DashBorder';
 
 function HomeViewPage(props) {
   const { sidenavColor } = selectMuiSettings();
@@ -48,16 +49,18 @@ function HomeViewPage(props) {
             <HtmlViewWrapper>
               <p>{i18n('entities.home.description')}</p>
             </HtmlViewWrapper>
-            <MDTypography
-              display="block"
-              variant="h3"
-              my={2}
-            >
-              {i18n('entities.home.top_brokers')}
-            </MDTypography>
-            <MDBox pb={3}>
-              <TopBrokersView />
-            </MDBox>
+            <DashBorder mb={2} borderTop borderBottom>
+              <MDTypography
+                display="block"
+                variant="h3"
+                my={2}
+              >
+                {i18n('entities.home.top_brokers')}
+              </MDTypography>
+              <MDBox pb={2}>
+                <TopBrokersView />
+              </MDBox>
+            </DashBorder>
             <HtmlViewWrapper>
               <p>
                 {i18n(

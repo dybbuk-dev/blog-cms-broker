@@ -18,6 +18,7 @@ import authorHomeActions from 'src/modules/author/home/authorHomeActions';
 import AuthorView from 'src/view/shared/view/AuthorView';
 import MDBox from 'src/mui/components/MDBox';
 import DefaultCategoryDescription from 'src/view/home/DefaultCategoryDescription';
+import DashBorder from 'src/view/home/shared/DashBorder';
 
 const ComparisonPage = () => {
   const [dispatched, setDispatched] = useState(false);
@@ -80,14 +81,21 @@ const ComparisonPage = () => {
                 )}
               </p>
             </HtmlViewWrapper>
-            <MDTypography
-              display="block"
-              variant="h3"
+            <DashBorder
               my={2}
+              pb={2}
+              borderTop
+              borderBottom
             >
-              {i18n('entities.home.top_brokers')}
-            </MDTypography>
-            <TopBrokersView />
+              <MDTypography
+                display="block"
+                variant="h3"
+                my={2}
+              >
+                {i18n('entities.home.top_brokers')}
+              </MDTypography>
+              <TopBrokersView />
+            </DashBorder>
             <BrokerListTable category={0} />
             <DefaultCategoryDescription />
           </PageContent>

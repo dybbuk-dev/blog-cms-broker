@@ -8,6 +8,7 @@ import MDBox from 'src/mui/components/MDBox';
 import MDTypography from 'src/mui/components/MDTypography';
 import PageContent from 'src/view/shared/view/PageContent';
 import TopBrokersView from 'src/view/home/broker/components/TopBrokersView';
+import DashBorder from 'src/view/home/shared/DashBorder';
 
 function CategoryPage({ category }) {
   return (
@@ -42,10 +43,12 @@ function CategoryPage({ category }) {
             )}
           />
         )}
-        <MDTypography display="block" variant="h3" my={2}>
-          {i18n('entities.home.top_brokers')}
-        </MDTypography>
-        <TopBrokersView />
+        <DashBorder my={2} pb={2} borderTop borderBottom>
+          <MDTypography display="block" variant="h3" my={2}>
+            {i18n('entities.home.top_brokers')}
+          </MDTypography>
+          <TopBrokersView />
+        </DashBorder>
         <BrokerListTable category={category.id} />
         {category.description ? (
           <HtmlView value={category.description} />
