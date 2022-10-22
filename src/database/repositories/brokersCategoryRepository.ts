@@ -120,6 +120,11 @@ class BrokersCategoryRepository {
         },
       );
 
+    rows = await this._fillWithRelationsAndFilesForRows(
+      rows,
+      options,
+    );
+
     return { rows, count };
   }
 
@@ -145,6 +150,37 @@ class BrokersCategoryRepository {
     return records.map(
       (record) => record.id || record.dataValues.id,
     );
+  }
+
+  static async _fillWithRelationsAndFilesForRows(
+    rows,
+    options: IRepositoryOptions,
+  ) {
+    if (!rows) {
+      return rows;
+    }
+
+    return Promise.all(
+      rows.map((record) =>
+        this._fillWithRelationsAndFiles(record, options),
+      ),
+    );
+  }
+
+  static async _fillWithRelationsAndFiles(
+    record,
+    options: IRepositoryOptions,
+  ) {
+    if (!record) {
+      return record;
+    }
+
+    const output = record.get({ plain: true });
+
+    const transaction =
+      SequelizeRepository.getTransaction(options);
+
+    return output;
   }
 }
 

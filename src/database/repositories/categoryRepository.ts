@@ -226,6 +226,32 @@ class CategoryRepository {
       return null;
     }
 
+    const { rows: brokers } =
+      await BrokersCategoryRepository.findAndCountAll(
+        {
+          filter: {
+            category_id: record.id,
+            show_in_top_listings: true,
+          },
+        },
+        options,
+      );
+
+    const { rows: topBrokers } =
+      await BrokerRepository.findAndCountAll(
+        {
+          filter: {
+            ids: brokers.map((broker) => broker.broker_id),
+            activated: true,
+            top_broker: true,
+          },
+          orderBy: 'broker_rating.overall_rating_desc',
+        },
+        options,
+      );
+
+    record.dataValues.topBrokers = topBrokers;
+
     const description_record =
       await options.database.category_description.findOne({
         where: {

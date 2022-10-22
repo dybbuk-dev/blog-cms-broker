@@ -47,7 +47,7 @@ function CategoryPage({ category }) {
           <MDTypography display="block" variant="h3" my={2}>
             {i18n('entities.home.top_brokers')}
           </MDTypography>
-          <TopBrokersView />
+          <TopBrokersView brokers={category.topBrokers} />
         </DashBorder>
         <BrokerListTable category={category.id} />
         {category.description ? (

@@ -470,6 +470,14 @@ class BrokerRepository {
     let include = this.includes(options, true);
 
     if (filter) {
+      if (filter.ids) {
+        whereAnd.push({
+          id: {
+            [Op.in]: filter.ids,
+          },
+        });
+      }
+
       if (filter.idRange) {
         const [start, end] = filter.idRange;
 
