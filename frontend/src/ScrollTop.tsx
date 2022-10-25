@@ -11,7 +11,7 @@ const ScrollTop = () => {
   const [showScroll, setShowScroll] = useState(false);
 
   const scrollTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
   };
 
   useEffect(() => {

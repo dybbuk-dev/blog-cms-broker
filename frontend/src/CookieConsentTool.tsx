@@ -77,8 +77,6 @@ function CookieConsentTool({ darkMode }) {
           Verwendungszwecken zustimmen oder alle ablehnen.
           Weitere Informationen finden Sie in unserer
           Datenschutzerklärung.
-          <br />
-          Analytics
         </MDTypography>
         <MDButton
           onClick={() => setVisible(false)}
@@ -93,7 +91,7 @@ function CookieConsentTool({ darkMode }) {
           <CloseIcon />
         </MDButton>
         <MDBox display="flex">
-          <MDTypography
+          {/* <MDTypography
             variant="body2"
             fontWeight="regular"
             color="info"
@@ -102,13 +100,12 @@ function CookieConsentTool({ darkMode }) {
             }}
           >
             Einzelheiten der Einwilligung
-          </MDTypography>
+          </MDTypography> */}
           <MDTypography
             onClick={() => setModalVisible(true)}
             variant="body2"
             fontWeight="regular"
             color="info"
-            ml={2}
             sx={{
               cursor: 'pointer',
             }}

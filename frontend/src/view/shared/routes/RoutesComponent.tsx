@@ -15,6 +15,30 @@ import EmptyPermissionsRoute from 'src/view/shared/routes/EmptyPermissionsRoute'
 import muiSelectors from 'src/modules/mui/muiSelectors';
 import FrontEndRoute from 'src/view/shared/routes/FrontEndRoute';
 
+const ScrollToTop = ({ history, location }) => {
+  useEffect(() => {
+    if (history.action === 'POP') {
+      return;
+    }
+
+    let { hash, pathname } = location;
+    if (hash) {
+      let element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({
+          block: 'start',
+          behavior: 'smooth',
+        });
+      }
+    } else {
+      document.documentElement.scrollTop = 0;
+      document.scrollingElement.scrollTop = 0;
+    }
+  });
+
+  return null;
+};
+
 function RoutesComponent(props) {
   const isInitialMount = useRef(true);
 
@@ -49,101 +73,104 @@ function RoutesComponent(props) {
   }
 
   return (
-    <Switch>
-      {routes.publicRoutes.map((route) => (
-        <PublicRoute
-          key={route.path}
-          exact={route.exact}
-          path={route.path}
-          currentUser={currentUser}
-          currentTenant={currentTenant}
-          component={CustomLoadable({
-            loader: route.loader,
-          })}
-        />
-      ))}
-
-      {routes.emailUnverifiedRoutes.map((route) => (
-        <EmailUnverifiedRoute
-          key={route.path}
-          exact
-          path={route.path}
-          currentUser={currentUser}
-          currentTenant={currentTenant}
-          component={CustomLoadable({
-            loader: route.loader,
-          })}
-        />
-      ))}
-
-      {routes.emptyTenantRoutes.map((route) => (
-        <EmptyTenantRoute
-          key={route.path}
-          exact
-          path={route.path}
-          currentUser={currentUser}
-          currentTenant={currentTenant}
-          component={CustomLoadable({
-            loader: route.loader,
-          })}
-        />
-      ))}
-
-      {routes.emptyPermissionsRoutes.map((route) => (
-        <EmptyPermissionsRoute
-          key={route.path}
-          exact
-          path={route.path}
-          currentUser={currentUser}
-          currentTenant={currentTenant}
-          component={CustomLoadable({
-            loader: route.loader,
-          })}
-        />
-      ))}
-
-      {routes.privateRoutes
-        .filter((route) => !route.virtual)
-        .map((route) => (
-          <PrivateRoute
+    <>
+      <Route component={ScrollToTop} />
+      <Switch>
+        {routes.publicRoutes.map((route) => (
+          <PublicRoute
             key={route.path}
+            exact={route.exact}
+            path={route.path}
             currentUser={currentUser}
             currentTenant={currentTenant}
-            permissionRequired={route.permissionRequired}
+            component={CustomLoadable({
+              loader: route.loader,
+            })}
+          />
+        ))}
+
+        {routes.emailUnverifiedRoutes.map((route) => (
+          <EmailUnverifiedRoute
+            key={route.path}
+            exact
+            path={route.path}
+            currentUser={currentUser}
+            currentTenant={currentTenant}
+            component={CustomLoadable({
+              loader: route.loader,
+            })}
+          />
+        ))}
+
+        {routes.emptyTenantRoutes.map((route) => (
+          <EmptyTenantRoute
+            key={route.path}
+            exact
+            path={route.path}
+            currentUser={currentUser}
+            currentTenant={currentTenant}
+            component={CustomLoadable({
+              loader: route.loader,
+            })}
+          />
+        ))}
+
+        {routes.emptyPermissionsRoutes.map((route) => (
+          <EmptyPermissionsRoute
+            key={route.path}
+            exact
+            path={route.path}
+            currentUser={currentUser}
+            currentTenant={currentTenant}
+            component={CustomLoadable({
+              loader: route.loader,
+            })}
+          />
+        ))}
+
+        {routes.privateRoutes
+          .filter((route) => !route.virtual)
+          .map((route) => (
+            <PrivateRoute
+              key={route.path}
+              currentUser={currentUser}
+              currentTenant={currentTenant}
+              permissionRequired={route.permissionRequired}
+              path={route.path}
+              component={CustomLoadable({
+                loader: route.loader,
+              })}
+              redirect={route.redirect}
+              virtual={route.virtual}
+              exact={Boolean(route.exact)}
+            />
+          ))}
+
+        {routes.simpleRoutes.map((route) => (
+          <Route
+            key={route.path}
             path={route.path}
             component={CustomLoadable({
               loader: route.loader,
             })}
-            redirect={route.redirect}
-            virtual={route.virtual}
-            exact={Boolean(route.exact)}
+            exact
           />
         ))}
 
-      {routes.simpleRoutes.map((route) => (
-        <Route
-          key={route.path}
-          path={route.path}
-          component={CustomLoadable({
-            loader: route.loader,
-          })}
-          exact
-        />
-      ))}
-
-      {routes.frontEndRoutes.map((route) => (
-        <FrontEndRoute
-          key={route.path}
-          exact={true}
-          path={route.path}
-          currentUser={currentUser}
-          currentTenant={currentTenant}
-          component={CustomLoadable({
-            loader: route.loader,
-          })}
-        />
-      ))}
-    </Switch>
+        {routes.frontEndRoutes.map((route) => (
+          <FrontEndRoute
+            key={route.path}
+            exact={true}
+            path={route.path}
+            currentUser={currentUser}
+            currentTenant={currentTenant}
+            component={CustomLoadable({
+              loader: route.loader,
+            })}
+          />
+        ))}
+      </Switch>
+    </>
   );
 }
 

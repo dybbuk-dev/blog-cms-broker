@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useRouteMatch } from 'react-router-dom';
 import Advisors from 'src/view/home/sidebar/Advisors';
 import Category from 'src/view/home/sidebar/Category';
 import ComparableBrokers from 'src/view/home/sidebar/ComparableBrokers';
@@ -24,12 +23,6 @@ function Layout({
   noIndex = false,
   noArticle = false,
 }) {
-  const match = useRouteMatch();
-  useEffect(() => {
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'auto' });
-    }, 300);
-  }, [match.url]);
   return (
     <PageLayout fixedNavBar={false}>
       <Meta
